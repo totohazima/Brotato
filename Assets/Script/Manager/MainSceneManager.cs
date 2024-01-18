@@ -10,8 +10,8 @@ public class MainSceneManager : MonoBehaviour
     Transform groupTrans;
     public GameObject selectWeapon;
     public GameObject weaponSettingMenu;
-
     public GameObject weaponInfo;
+    public Canvas canvas;
     void Awake()
     {
         instance = this;
@@ -53,5 +53,12 @@ public class MainSceneManager : MonoBehaviour
     {
         selectWeapon = null;
         weaponSettingMenu.SetActive(false);
+    }
+
+    public void GameStartBtn()
+    {
+        canvas.gameObject.SetActive(false);
+        Camera.main.gameObject.SetActive(false);
+        LoadingSceneManager.LoadScene("Stage");
     }
 }
