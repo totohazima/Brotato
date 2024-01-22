@@ -46,6 +46,8 @@ public class MainSceneManager : MonoBehaviour
 
     public void StartBtn()
     {
+        GameObject obj = Resources.Load<GameObject>("Prefabs/Importer");
+        Instantiate(obj);
         weaponSettingMenu.SetActive(true);
     }
 
