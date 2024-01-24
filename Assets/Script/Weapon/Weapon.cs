@@ -7,12 +7,11 @@ public class Weapon : MonoBehaviour
     public enum Weapons
     {
         PISTOL,
-        SHOTGUN,
         DOUBLESHOTGUN,
         SPEAR,
         SHREDDER,
         PUNCH,
-        RENCH,
+        WRENCH,
         DRIVER
     }
 
