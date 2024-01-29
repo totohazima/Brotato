@@ -11,13 +11,15 @@ public class GameManager : MonoBehaviour
     public Text waveLevelUI;
     public Text waveTimerUI;
     public Text MoneyUI;
-    public Text interest; //이자
+    public GameObject interestUI;
+    public Text interestNum;
     [Header("# Variable")]
     public int playerLevel;
     public int curExp;
     public int maxExp;
     public int waveLevel;
     public float[] waveTime;
+    public int interest; //이자
     float timer;
     bool isPause;
     void Awake()
@@ -47,6 +49,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if(interest > 0)
+        {
+            interestUI.SetActive(true);
+        }
+        else if(interest <= 0)
+        {
+            interestUI.SetActive(false);
+        }
     }
 
 

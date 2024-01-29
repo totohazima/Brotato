@@ -274,12 +274,14 @@ MonoBehaviour:
   waveLevelUI: {fileID: 1396338721}
   waveTimerUI: {fileID: 614826160}
   MoneyUI: {fileID: 1283647194}
-  interest: {fileID: 2086841163}
+  interestUI: {fileID: 432919723}
+  interestNum: {fileID: 2086841163}
   playerLevel: 0
   curExp: 0
   maxExp: 0
   waveLevel: 0
   waveTime: []
+  interest: 0
 --- !u!1 &381988917
 GameObject:
   m_ObjectHideFlags: 0
