@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ForSettingWeapon : Weapon
 {
     public Weapons index; //무기 번호
+    public GameObject weaponPrefab;
 
     MainSceneManager main;
     WeaponStatImporter importer;
@@ -36,8 +37,19 @@ public class ForSettingWeapon : Weapon
 
     public void ClickWeapon()
     {
-        main.weaponSettingMenu.SetActive(false);
+        if(main.selectWeapon != null)
+        {
+            Destroy(main.selectedWeapon);
+            main.selectedWeapon = null;
+        }
+
         main.selectWeapon = gameObject;
-        main.weaponSettingMenu.SetActive(true);
+
+        GameObject obj = Instantiate(weaponPrefab);
+        main.selectedWeapon = obj;
+        obj.transform.SetParent(main.weaponSetGroup);
+
+        RectTransform rect = obj.GetComponent<RectTransform>();
+        rect.localScale = new Vector3(1, 1, 1);
     }
 }

@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [Header("# UI")]
+    public Text waveLevelUI;
+    public Text waveTimerUI;
+    public Text MoneyUI;
+    public Text interest; //이자
+    [Header("# Variable")]
     public int playerLevel;
     public int curExp;
     public int maxExp;
-
     public int waveLevel;
     public float[] waveTime;
     float timer;
@@ -39,11 +46,12 @@ public class GameManager : MonoBehaviour
                 LevelUp();
             }
         }
+
     }
 
 
     public void LevelUp()
     {
-
+        Debug.Log("레벨업");
     }
 }

@@ -5,17 +5,27 @@ using UnityEngine;
 public class MainSceneManager : MonoBehaviour
 {
     public static MainSceneManager instance;
+
+    public Transform playerSetGroup;
+    public Transform weaponSetGroup;
+
+    public GameObject selectPlayer; //프리팹
+    public GameObject playerSettingMenu;
+
     public GameObject weaponGroup;
     public GameObject[] weapons;
     Transform groupTrans;
+    public GameObject selectedWeapon;   //프리팹
     public GameObject selectWeapon;
     public GameObject weaponSettingMenu;
-    public GameObject weaponInfo;
     public Canvas canvas;
     void Awake()
     {
         instance = this;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+        GameObject obj = Resources.Load<GameObject>("Prefabs/Importer");
+        Instantiate(obj);
 
         groupTrans = weaponGroup.transform;
         weapons = new GameObject[groupTrans.childCount];
@@ -25,39 +35,49 @@ public class MainSceneManager : MonoBehaviour
         }
     }
 
-    void Update()
+    public void RandomWeapon()//랜덤 무기;
     {
-        if(selectWeapon != null)
-        {
-            weaponInfo.SetActive(true);
-        }
-        else if(selectWeapon == null)
-        {
-            weaponInfo.SetActive(false);
-        }
-    }
-    public void RandomWeapon()
-    {
-        weaponSettingMenu.SetActive(false);
         int i = Random.Range(1, weapons.Length);
         selectWeapon = weapons[i];
-        weaponSettingMenu.SetActive(true);
+        selectWeapon.GetComponent<ForSettingWeapon>().ClickWeapon();
     }
 
-    public void StartBtn()
+    public void StartBtn() //게임 시작
     {
-        GameObject obj = Resources.Load<GameObject>("Prefabs/Importer");
-        Instantiate(obj);
-        weaponSettingMenu.SetActive(true);
+        playerSettingMenu.SetActive(true);
     }
 
-    public void ReturnMenu()
+    public void ReturnMenu() //메뉴 돌아가기
     {
+        Destroy(selectPlayer);
+        selectPlayer = null;
+        playerSettingMenu.SetActive(false);
+    }
+
+    public void ReturnPlayerMenu()
+    {
+        Destroy(selectedWeapon);
+        selectedWeapon = null;
         selectWeapon = null;
+        selectPlayer.transform.SetParent(playerSetGroup);
         weaponSettingMenu.SetActive(false);
+        playerSettingMenu.SetActive(true);
+    }
+    public void GoWeaponMenu() //무기 창 넘어가기
+    {
+        if (selectPlayer == null) //경고 창
+        {
+
+        }
+        else if (selectPlayer != null)
+        {
+            selectPlayer.transform.SetParent(weaponSetGroup);
+            playerSettingMenu.SetActive(false);
+            weaponSettingMenu.SetActive(true);
+        }
     }
 
-    public void GameStartBtn()
+    public void GameStartBtn() //스테이지 시작버튼
     {
         canvas.gameObject.SetActive(false);
         Camera.main.gameObject.SetActive(false);
