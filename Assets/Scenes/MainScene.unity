@@ -1237,13 +1237,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSetGroup: {fileID: 310999220}
   weaponSetGroup: {fileID: 664416162}
+  selectedPlayer: {fileID: 0}
   selectPlayer: {fileID: 0}
   playerSettingMenu: {fileID: 50095662}
-  weaponGroup: {fileID: 220323008}
-  weapons: []
+  playerGroup: {fileID: 626791559}
+  players: []
   selectedWeapon: {fileID: 0}
   selectWeapon: {fileID: 0}
   weaponSettingMenu: {fileID: 1828338340}
+  weaponGroup: {fileID: 220323008}
+  weapons: []
   canvas: {fileID: 1884764971}
 --- !u!4 &517593449
 Transform:
@@ -2497,7 +2500,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 517593448}
         m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: RandomPlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3548,7 +3551,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3d46df5c076da45a9a50d71fc63725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  characterNum: 0
+  characterName: 
   maxHealth: 0
   regeneration: 0
   bloodSucking: 0
@@ -3563,6 +3567,7 @@ MonoBehaviour:
   evasion: 0
   accuracy: 0
   speed: 0
+  index: 0
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
 --- !u!114 &1704410213
 MonoBehaviour:
@@ -3610,7 +3615,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1704410212}
         m_TargetAssemblyTypeName: ForSettingPlayer, Assembly-CSharp
-        m_MethodName: PlayerOn
+        m_MethodName: ClickPlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3983,7 +3988,7 @@ Canvas:
   m_GameObject: {fileID: 1884764968}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 963194227}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

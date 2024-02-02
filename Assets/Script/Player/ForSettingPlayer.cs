@@ -5,31 +5,44 @@ using UnityEngine.UI;
 
 public class ForSettingPlayer : Player
 {
+    public Character index;
     public GameObject playerPrefab;
 
     MainSceneManager main;
     WeaponStatImporter importer;
+    Image image;
     void Awake()
     {
         main = MainSceneManager.instance;
         importer = WeaponStatImporter.instance;
+        image = GetComponent<Image>();
 
+        StatSetting((int)index);
     }
-
 
     void Update()
     {
-        
+        if (main.selectPlayer == gameObject)
+        {
+            image.color = new Color(200 / 255f, 200 / 255f, 200 / 255f);
+        }
+        else if (main.selectPlayer != gameObject)
+        {
+            image.color = new Color(70 / 255f, 70 / 255f, 70 / 255f);
+        }
     }
 
-    public void PlayerOn()
+    public void ClickPlayer()
     {
-        if(main.selectPlayer != null)
+        if(main.selectedPlayer != null)
         {
-            Destroy(main.selectPlayer);
+            Destroy(main.selectedPlayer);
         }
+
+        main.selectPlayer = gameObject;
+
         GameObject obj = Instantiate(playerPrefab);
-        main.selectPlayer = obj;
+        main.selectedPlayer = obj;
         obj.transform.SetParent(main.playerSetGroup);
 
         RectTransform rect = obj.GetComponent<RectTransform>();
