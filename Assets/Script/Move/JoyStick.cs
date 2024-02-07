@@ -25,6 +25,15 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         joyStick.SetActive(false);
     }
 
+    void Update()
+    {
+        if(game.isEnd == true)
+        {
+            stickTrans.position = joyTrans.position;
+            joyStick.SetActive(false);
+            isMove = false;
+        }
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {

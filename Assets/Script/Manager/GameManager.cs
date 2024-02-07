@@ -17,8 +17,12 @@ public class GameManager : MonoBehaviour
     public Text MoneyUI;
     public GameObject interestUI;
     public Text interestNum;
+    public GameObject levelUpUI;
     [Header("# Variable")]
+    public Player playerInfo;
     public int playerLevel; //플레이어 레벨
+    public float curHp; //현재 체력
+    public float maxHp; //최대 체력
     public int curExp;  //현재 경험치
     public int maxExp;  //최대 경험치
     public int levelUpChance; //웨이브 종료 후 레벨 업 할 횟수
@@ -27,14 +31,15 @@ public class GameManager : MonoBehaviour
     public int Money;   //돈
     public int interest; //이자
     float timer; //시간
-    bool isPause; //일시정지
-    bool isEnd; //웨이브 끝
+    public bool isPause; //일시정지
+    public bool isEnd; //웨이브 끝
     [Header("# GameObject")]
     public Camera stageMainCamera;
     public GameObject playerPrefab;
     public GameObject mainPlayer;
     public GameObject poolManager;
     BoxCollider coll;
+    Transform main;
     [HideInInspector]
     public PoolManager pool;
     void Awake()
@@ -47,6 +52,10 @@ public class GameManager : MonoBehaviour
         mainPlayer = Resources.Load<GameObject>("Prefabs/Player");
         Instantiate(mainPlayer);
         mainPlayer = GameObject.FindGameObjectWithTag("Player");
+        main = mainPlayer.transform;
+        playerInfo = mainPlayer.GetComponent<Player>();
+
+        StartCoroutine(StageStart());
     }
 
     void Update()
@@ -62,13 +71,7 @@ public class GameManager : MonoBehaviour
         Vector3 playerPos = mainPlayer.transform.position;
         stageMainCamera.transform.position = new Vector3(playerPos.x, playerPos.y, -10f);
 
-        MoneyUI.text = Money.ToString("F0");
-        interestNum.text = interest.ToString("F0");
-
-        maxExp = 50 + (30 * (playerLevel - 1));
-        ExpBarUI.maxValue = maxExp;
-        ExpBarUI.value = curExp;
-        LevelNum.text = "LV." + playerLevel.ToString("F0");
+        UiVisualize();
 
         if (playerLevel < 20)
         {
@@ -95,30 +98,87 @@ public class GameManager : MonoBehaviour
         if (isEnd == false)
         {
             timer += Time.deltaTime;
+
+            waveTimerUI.gameObject.SetActive(true);
             coll.enabled = true;
         }
         else if(isEnd == true)
         {
+            waveTimerUI.gameObject.SetActive(false);
             coll.enabled = false;
         }
 
-        waveTimerUI.text = timer.ToString("F0");
-        waveLevelUI.text = "WAVE " + (waveLevel + 1).ToString("F0");
+        
 
         if (timer >= waveTime[waveLevel]) //웨이브 클리어 시
         {
             timer = 0;
             waveLevel++;
             isEnd = true;
+            curHp = maxHp;
+            main.position = Vector3.zero;
+
+            ///test
+            ///웨이브 종료 시 레벨 업 1회
+            levelUpChance++;
+
+            if (levelUpChance > 0)
+            {
+                StartCoroutine(LevelUp());
+            }
         }
     }
-
-    public void LevelUp()
+    void UiVisualize()
     {
+        maxHp = playerInfo.maxHealth;
+        HpBarUI.maxValue = maxHp;
+        HpBarUI.value = curHp;
+        HpNum.text = curHp.ToString("F0") + " / " + maxHp.ToString("F0");
 
-        for (int i = 0; i < levelUpChance; i++)
+        MoneyUI.text = Money.ToString("F0");
+        interestNum.text = interest.ToString("F0");
+
+        maxExp = 50 + (30 * (playerLevel - 1));
+        ExpBarUI.maxValue = maxExp;
+        ExpBarUI.value = curExp;
+        LevelNum.text = "LV." + playerLevel.ToString("F0");
+
+        waveTimerUI.text = timer.ToString("F0");
+        waveLevelUI.text = "WAVE " + (waveLevel + 1).ToString("F0");
+    }
+    public IEnumerator LevelUp()
+    {
+        yield return new WaitForSeconds(0.1f);
+        
+        levelUpUI.SetActive(true);
+        StartCoroutine(LevelUpManager.instance.UpgradeSetting());
+    }
+
+    IEnumerator StageStart()
+    {
+        yield return new WaitForSeconds(0f);
+        curHp = playerInfo.maxHealth;
+    }
+
+    public int Judgment(float[] rando)
+    {
+        int count = rando.Length;
+        float max = 0;
+        for (int i = 0; i < count; i++)
+            max += rando[i];
+
+        float range = UnityEngine.Random.Range(0f, (float)max);
+        //0.1, 0.2, 30, 40
+        double chance = 0;
+        for (int i = 0; i < count; i++)
         {
+            chance += rando[i];
+            if (range > chance)
+                continue;
 
+            return i;
         }
+
+        return -1;
     }
 }
