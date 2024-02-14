@@ -1,8 +1,2 @@
-WeaponNum,Name,Damage,Critical,CoolTime,KnockBack,Range,Penetrate,Type
-0,권총,1,1,1,1,1,1,1
-1,2연발 샷건,1,1,1,1,1,1,1
-2,창,1,1,1,1,1,1,0
-3,슈레더,1,1,1,1,1,1,1
-4,주먹,1,1,1,1,1,1,0
-5,렌치,1,1,1,1,1,1,2
-6,드라이버,1,1,1,1,1,1,2
+EnemyName,Health,HealthWave,Damage,DamageWave,CoolTime,Armor,Range,Evasion,Accuracy,MinSpeed,MaxSpeed,MoneyDrop,ConsumDrop,LootDrop
+Basic,3,2.0,1,0.6,0,0,0,0,0,250,350,1,50,50

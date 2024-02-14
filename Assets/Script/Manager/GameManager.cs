@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [Header("# Variable")]
     public Player playerInfo;
     public int playerLevel; //플레이어 레벨
+    public bool isDie; //플레이어 사망
     public float curHp; //현재 체력
     public float maxHp; //최대 체력
     public int curExp;  //현재 경험치
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     public float[] waveTime;    //웨이브 시간
     public int Money;   //돈
     public int interest; //이자
+    public int lootChance; //상자깡 찬스
     float timer; //시간
     public bool isPause; //일시정지
     public bool isEnd; //웨이브 끝
@@ -70,7 +72,10 @@ public class GameManager : MonoBehaviour
         }
         Vector3 playerPos = mainPlayer.transform.position;
         stageMainCamera.transform.position = new Vector3(playerPos.x, playerPos.y, -10f);
-
+        if(curHp > maxHp)
+        {
+            curHp = maxHp;
+        }
         UiVisualize();
 
         if (playerLevel < 20)
@@ -90,6 +95,16 @@ public class GameManager : MonoBehaviour
         else if(interest <= 0)
         {
             interestUI.SetActive(false);
+        }
+
+        if (curHp <= 0)
+        {
+            isDie = true;
+            StartCoroutine(Died());
+        }
+        else
+        {
+            isDie = false;
         }
     }
 
@@ -128,6 +143,11 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    IEnumerator Died()
+    {
+        //isPause = true;
+        yield return new WaitForSeconds(0f);
+    }
     void UiVisualize()
     {
         maxHp = playerInfo.maxHealth;
@@ -158,6 +178,32 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0f);
         curHp = playerInfo.maxHealth;
+    }
+
+    public void HitCalculate(float damage)
+    {
+        float hit, dodge;
+        if(playerInfo.evasion >= 60)
+        {
+            dodge = 60;
+            hit = 100 - dodge;
+        }
+        else
+        {
+            dodge = playerInfo.evasion;
+            hit = 100 - dodge;
+        }
+        float[] chance = { hit, dodge };
+        int index = Judgment(chance);
+        if(index == 0)
+        {
+            //추후 방어구 계산 추가
+            curHp -= damage;
+        }
+        else
+        {
+            Debug.Log("회피");
+        }
     }
 
     public int Judgment(float[] rando)

@@ -6,22 +6,22 @@ public class UpgradeStatImporter : MonoBehaviour
 {
     public static UpgradeStatImporter instance;
 
-    public int[] upgradeNum;
-    public string[] upgradeName;
-    public string[] upgradeEffect;
-    public int[] heart;
-    public int[] lungs;
-    public int[] teeth;
-    public int[] triceps;
-    public int[] forearms;
-    public int[] shoulders;
-    public int[] reflexes;
-    public int[] fingers;
-    public int[] skull;
-    public int[] eyes;
-    public int[] chest;
-    public int[] back;
-    public int[] legs;
+    [HideInInspector] public int[] upgradeNum;
+    [HideInInspector] public string[] upgradeName;
+    [HideInInspector] public string[] upgradeEffect;
+    [HideInInspector] public int[] heart;
+    [HideInInspector] public int[] lungs;
+    [HideInInspector] public int[] teeth;
+    [HideInInspector] public int[] triceps;
+    [HideInInspector] public int[] forearms;
+    [HideInInspector] public int[] shoulders;
+    [HideInInspector] public int[] reflexes;
+    [HideInInspector] public int[] fingers;
+    [HideInInspector] public int[] skull;
+    [HideInInspector] public int[] eyes;
+    [HideInInspector] public int[] chest;
+    [HideInInspector] public int[] back;
+    [HideInInspector] public int[] legs;
 
     void Awake()
     {

@@ -6,15 +6,15 @@ public class WeaponStatImporter : MonoBehaviour
 {
     public static WeaponStatImporter instance;
 
-    public int[] weaponNum;
-    public string[] name;
-    public float[] damage;
-    public float[] criticalChance;
-    public float[] coolTIme;
-    public float[] knockBack;
-    public float[] range;
-    public int[] penetrate;
-    public int[] type;
+    [HideInInspector] public int[] weaponNum;
+    [HideInInspector] public string[] name;
+    [HideInInspector] public float[] damage;
+    [HideInInspector] public float[] criticalChance;
+    [HideInInspector] public float[] coolTIme;
+    [HideInInspector] public float[] knockBack;
+    [HideInInspector] public float[] range;
+    [HideInInspector] public int[] penetrate;
+    [HideInInspector] public int[] type;
 
     void Awake()
     {

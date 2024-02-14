@@ -23,13 +23,39 @@ public class MainPlayer : Player
     }
     void Update()
     {
-        moveSpeed = 0.1f * (1 + (speed / 100));
-    }
-    void FixedUpdate()
-    {
-        if(joy.isMove == true)
+        if(game.isDie == true)
+        {
+            return;
+        }
+
+        moveSpeed = 0.04f * (1 + (speed / 100));
+        if (joy.isMove == true)
         {
             transform.position = Vector3.MoveTowards(transform.position, joy.moveTarget.position, moveSpeed);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Meterial"))
+        {
+            game.Money++;
+            game.curExp++;
+
+            other.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("Consum"))
+        {
+            game.curHp += 3f;
+
+            other.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("Loot"))
+        {
+            game.curHp += 3f;
+            game.lootChance++;
+            other.gameObject.SetActive(false);
+        }
+    }
+
 }

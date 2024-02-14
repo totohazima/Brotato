@@ -6,22 +6,22 @@ public class PlayerStatImporter : MonoBehaviour
 {
     public static PlayerStatImporter instance;
 
-    public int[] characterNum;
-    public string[] characterName;
-    public float[] maxHealth;
-    public float[] regeneration;
-    public float[] bloodSucking;
-    public float[] persentDamage;
-    public float[] meleeDamage;
-    public float[] rangeDamage;
-    public float[] attackSpeed;
-    public float[] criticalChance;
-    public float[] engine;
-    public float[] range;
-    public float[] armor;
-    public float[] evasion;
-    public float[] accuracy;
-    public float[] speed;
+    [HideInInspector] public int[] characterNum;
+    [HideInInspector] public string[] characterName;
+    [HideInInspector] public float[] maxHealth;
+    [HideInInspector] public float[] regeneration;
+    [HideInInspector] public float[] bloodSucking;
+    [HideInInspector] public float[] persentDamage;
+    [HideInInspector] public float[] meleeDamage;
+    [HideInInspector] public float[] rangeDamage;
+    [HideInInspector] public float[] attackSpeed;
+    [HideInInspector] public float[] criticalChance;
+    [HideInInspector] public float[] engine;
+    [HideInInspector] public float[] range;
+    [HideInInspector] public float[] armor;
+    [HideInInspector] public float[] evasion;
+    [HideInInspector] public float[] accuracy;
+    [HideInInspector] public float[] speed;
 
     void Awake()
     {

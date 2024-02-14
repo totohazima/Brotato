@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7797770670752967986}
   - component: {fileID: 1619993944187103713}
   - component: {fileID: -6989976729426883472}
+  - component: {fileID: -7033672418044704631}
   m_Layer: 0
   m_Name: Importer
   m_TagString: Untagged
@@ -98,7 +99,6 @@ MonoBehaviour:
   upgradeNum: 
   upgradeName: []
   upgradeEffect: []
-  stats: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   heart: 
   lungs: 
   teeth: 
@@ -112,3 +112,30 @@ MonoBehaviour:
   chest: 
   back: 
   legs: 
+--- !u!114 &-7033672418044704631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619993944187103712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854ef52e8fdb2c94faec6ac2270661c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: []
+  health: []
+  healthWave: []
+  damage: []
+  damageWave: []
+  coolTime: []
+  armor: []
+  range: []
+  evasion: []
+  accuracy: []
+  minSpeed: []
+  maxSpeed: []
+  moneyDropNum: []
+  consumDropRate: []
+  LootDropRate: []
