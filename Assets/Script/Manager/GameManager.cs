@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     public GameObject interestUI;
     public Text interestNum;
     public GameObject levelUpUI;
+    public GameObject levelUpMarkUi;
+    public GameObject[] levelMarks;
+    public GameObject lootCrateMarkUi;
+    public GameObject[] lootMarks;
     [Header("# Variable")]
     public Player playerInfo;
     public int playerLevel; //플레이어 레벨
@@ -128,11 +132,14 @@ public class GameManager : MonoBehaviour
         if (timer >= waveTime[waveLevel]) //웨이브 클리어 시
         {
             timer = 0;
-            waveLevel++;
             isEnd = true;
             curHp = maxHp;
             main.position = Vector3.zero;
 
+            for (int i = 0; i < SpawnManager.instance.enemys.Count; i++)
+            {
+                SpawnManager.instance.enemys[i].SetActive(false);
+            }
             ///test
             ///웨이브 종료 시 레벨 업 1회
             levelUpChance++;
@@ -165,11 +172,35 @@ public class GameManager : MonoBehaviour
 
         waveTimerUI.text = timer.ToString("F0");
         waveLevelUI.text = "WAVE " + (waveLevel + 1).ToString("F0");
+
+        if(levelUpChance >= 1)
+        {
+            levelUpMarkUi.SetActive(true);
+            for (int i = 0; i < 7; i++)
+            {
+                levelMarks[i].SetActive(false);
+            }
+            for(int i = 0; i < levelUpChance; i++)
+            {
+                levelMarks[i].SetActive(true);
+            }
+        }
+        if(lootChance >= 1)
+        {
+            lootCrateMarkUi.SetActive(true);
+            for (int i = 0; i < 7; i++)
+            {
+                lootMarks[i].SetActive(false);
+            }
+            for (int i = 0; i < lootChance; i++)
+            {
+                lootMarks[i].SetActive(true);
+            }
+        }
     }
     public IEnumerator LevelUp()
     {
-        yield return new WaitForSeconds(0.1f);
-        
+        yield return new WaitForSeconds(0f);
         levelUpUI.SetActive(true);
         StartCoroutine(LevelUpManager.instance.UpgradeSetting());
     }
@@ -178,6 +209,14 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0f);
         curHp = playerInfo.maxHealth;
+    }
+
+    public void nextWave()
+    {
+        curHp = maxHp;
+        waveLevel++;
+        isEnd = false;
+        SpawnManager.instance.WaveSelect(waveLevel + 1);
     }
 
     public void HitCalculate(float damage)

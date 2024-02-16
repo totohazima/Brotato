@@ -21,7 +21,9 @@ public class Player : MonoBehaviour
     public float evasion;
     public float accuracy;
     public float speed;
-
+    [Header("ITEM")]
+    Item[] items;
+    
     public enum Character
     {
         VERSATILE, //다재다능

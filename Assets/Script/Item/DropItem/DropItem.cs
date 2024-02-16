@@ -6,6 +6,7 @@ public class DropItem : MonoBehaviour
 {
     public ItemType type;
     public Transform target;
+
     public enum ItemType
     {
         METERIAL,
@@ -24,6 +25,7 @@ public class DropItem : MonoBehaviour
     {
         target = null;
     }
+   
     void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Magnet")) //플레이어 자석 범위에 닿을 경우

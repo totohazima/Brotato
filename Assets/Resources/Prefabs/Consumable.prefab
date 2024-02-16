@@ -94,8 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6889837792667638918}
   - component: {fileID: 6889837792667638919}
-  - component: {fileID: 6305305149209022371}
   - component: {fileID: 8500683667556300065}
+  - component: {fileID: 6647263080756818830}
   m_Layer: 7
   m_Name: Consumable
   m_TagString: Consum
@@ -135,19 +135,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6305305149209022371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6889837792667639032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c868e27d8f89e044b8718af777bfb591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
 --- !u!136 &8500683667556300065
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -162,3 +149,17 @@ CapsuleCollider:
   m_Height: 0.463058
   m_Direction: 1
   m_Center: {x: -0.013170242, y: -0.04153689, z: 0}
+--- !u!114 &6647263080756818830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6889837792667639032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445c89de77b5ba842be4b7f2de8cc6f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  target: {fileID: 0}

@@ -1,2 +1,2 @@
-EnemyName,Health,HealthWave,Damage,DamageWave,CoolTime,Armor,Range,Evasion,Accuracy,MinSpeed,MaxSpeed,MoneyDrop,ConsumDrop,LootDrop
-Basic,3,2.0,1,0.6,0,0,0,0,0,250,350,1,50,50
+EnemyName,Health,HealthWave,Damage,DamageWave,CoolTime,Armor,Range,Evasion,Accuracy,MinSpeed,MaxSpeed,MoneyDrop,MoneyValue,ExpValue,ConsumDrop,LootDrop
+Basic,3,2.0,1,0.6,0,0,0,0,0,250,350,1,1,1,20,20

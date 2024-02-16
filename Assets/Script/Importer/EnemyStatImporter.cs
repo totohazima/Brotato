@@ -19,6 +19,8 @@ public class EnemyStatImporter : MonoBehaviour
     [HideInInspector] public float[] minSpeed;
     [HideInInspector] public float[] maxSpeed;
     [HideInInspector] public float[] moneyDropNum;
+    [HideInInspector] public int[] moneyValue;
+    [HideInInspector] public int[] expValue;
     [HideInInspector] public float[] consumDropRate;
     [HideInInspector] public float[] LootDropRate;
 
@@ -41,6 +43,8 @@ public class EnemyStatImporter : MonoBehaviour
         minSpeed = new float[data.Count];
         maxSpeed = new float[data.Count];
         moneyDropNum = new float[data.Count];
+        moneyValue = new int[data.Count];
+        expValue = new int[data.Count];
         consumDropRate = new float[data.Count];
         LootDropRate = new float[data.Count];
 
@@ -70,6 +74,10 @@ public class EnemyStatImporter : MonoBehaviour
             maxSpeed[i] = j;
             j = (int)data[i]["MoneyDrop"];
             moneyDropNum[i] = j;
+            j = (int)data[i]["MoneyValue"];
+            moneyValue[i] = j;
+            j = (int)data[i]["ExpValue"];
+            expValue[i] = j;
             j = (int)data[i]["ConsumDrop"];
             consumDropRate[i] = j;
             j = (int)data[i]["LootDrop"];

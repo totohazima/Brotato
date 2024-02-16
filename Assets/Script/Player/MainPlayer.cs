@@ -9,6 +9,7 @@ public class MainPlayer : Player
     GameManager game;
     public Animator anim;
     public CapsuleCollider coll;
+    public SpriteRenderer sprite;
     JoyStick joy;
     float moveSpeed; //캐릭터 이동속도
     void Start()
@@ -32,30 +33,17 @@ public class MainPlayer : Player
         if (joy.isMove == true)
         {
             transform.position = Vector3.MoveTowards(transform.position, joy.moveTarget.position, moveSpeed);
+            if(joy.moveTarget.position.x < transform.position.x)
+            {
+                sprite.flipX = true;
+            }
+            else
+            {
+                sprite.flipX = false;
+            }
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Meterial"))
-        {
-            game.Money++;
-            game.curExp++;
-
-            other.gameObject.SetActive(false);
-        }
-        else if (other.CompareTag("Consum"))
-        {
-            game.curHp += 3f;
-
-            other.gameObject.SetActive(false);
-        }
-        else if (other.CompareTag("Loot"))
-        {
-            game.curHp += 3f;
-            game.lootChance++;
-            other.gameObject.SetActive(false);
-        }
-    }
+    
 
 }

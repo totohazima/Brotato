@@ -177,7 +177,8 @@ public class UpgradeStat : MonoBehaviour
         if(game.levelUpChance <= 0)
         {
             game.levelUpUI.SetActive(false);
-            game.isEnd = false;
+            //여기서 전리품 메뉴로
+            game.nextWave();
         }
         else
         {

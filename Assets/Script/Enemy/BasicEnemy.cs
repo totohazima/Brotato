@@ -6,11 +6,12 @@ public class BasicEnemy : Enemy
 {
     public Animator anim;
     public CapsuleCollider coll;
-    public Rigidbody rigid;
+    public SpriteRenderer sprite;
     Transform target;
     float moveSpeed;
     GameManager game;
     float hitTimer;
+    Rigidbody rigid;
     void Awake()
     {
         game = GameManager.instance;
@@ -19,6 +20,7 @@ public class BasicEnemy : Enemy
     }
     void OnEnable()
     {
+        SpawnManager.instance.enemys.Add(gameObject);
         StatSetting((int)name);
     }
     void Update()
@@ -48,6 +50,14 @@ public class BasicEnemy : Enemy
             }
         }
         Move();
+        if(target.position.x < transform.position.x)
+        {
+            sprite.flipX = true;
+        }
+        else
+        {
+            sprite.flipX = false;
+        }
     }
 
     void Move()
@@ -55,47 +65,13 @@ public class BasicEnemy : Enemy
         float speed = Random.Range(minSpeed, maxSpeed);
         moveSpeed = speed / 30000;
         transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed);
+        //Vector3 dirVec = target.position - rigid.position;
+        //Vector3 nextVec = dirVec.normalized * moveSpeed;
+        //rigid.MovePosition(rigid.position + nextVec);
+        //rigid.velocity = Vector3.zero;
     }
 
-    IEnumerator Died()
-    {
-        float randomX, randomY;
-        for (int i = 0; i < moneyDropRate; i++)
-        {
-            GameObject Meterial = PoolManager.instance.Get(2);
-            randomX = Random.Range(-3f, 3f);
-            randomY = Random.Range(-3f, 3f);
-            Meterial.transform.position = new Vector3(transform.position.x + randomX, transform.position.y + randomY);
-        }
-
-        float consum = consumableDropRate / 100;
-        float loot = lootDropRate / 100;
-        float notDrop = (100 - (consum + loot)) / 100;
-
-        float[] chanceLise = { notDrop, consum, loot };
-        int index = game.Judgment(chanceLise);
-
-        switch(index)
-        {
-            case 0:
-                break;
-            case 1:
-                GameObject consumable = PoolManager.instance.Get(3);
-                randomX = Random.Range(-3f, 3f);
-                randomY = Random.Range(-3f, 3f);
-                consumable.transform.position = new Vector3(transform.position.x + randomX, transform.position.y + randomY);
-                break;
-            case 2:
-                GameObject lootCrate = PoolManager.instance.Get(4);
-                randomX = Random.Range(-3f, 3f);
-                randomY = Random.Range(-3f, 3f);
-                lootCrate.transform.position = new Vector3(transform.position.x + randomX, transform.position.y + randomY);
-                break;
-        }
-
-        gameObject.SetActive(false);
-        yield return 0;
-    }
+    
     IEnumerator KnockBack(float power)
     {
         yield return new WaitForFixedUpdate();
@@ -115,7 +91,7 @@ public class BasicEnemy : Enemy
                 isHit = true;
 
                 //Test
-                float damages = (1 + (game.playerInfo.meleeDamage)) * (1 + game.playerInfo.persentDamage);
+                float damages = 10;
                 curHealth -= damages;
             }
         }

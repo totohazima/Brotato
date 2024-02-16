@@ -84,7 +84,7 @@ MonoBehaviour:
   isHit: 0
   anim: {fileID: 3416201617514675538}
   coll: {fileID: 3416201617400161520}
-  rigid: {fileID: 0}
+  sprite: {fileID: 3416201617514675539}
 --- !u!1 &3416201617400161527
 GameObject:
   m_ObjectHideFlags: 0

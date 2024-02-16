@@ -94,8 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5740757122786554779}
   - component: {fileID: 5740757122786554778}
-  - component: {fileID: 5167365418300727486}
   - component: {fileID: 1957390065123043245}
+  - component: {fileID: 3303566072894052390}
   m_Layer: 7
   m_Name: Meterial
   m_TagString: Meterial
@@ -135,19 +135,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5167365418300727486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5740757122786554853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c868e27d8f89e044b8718af777bfb591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
 --- !u!136 &1957390065123043245
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -162,3 +149,19 @@ CapsuleCollider:
   m_Height: 0.5693816
   m_Direction: 1
   m_Center: {x: 0, y: 0.009361267, z: 0}
+--- !u!114 &3303566072894052390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740757122786554853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76390a3980093246a2afc910c0a5ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  target: {fileID: 0}
+  moneyValue: 0
+  expValue: 0
