@@ -12,6 +12,7 @@ public class BasicEnemy : Enemy
     GameManager game;
     float hitTimer;
     Rigidbody rigid;
+
     void Awake()
     {
         game = GameManager.instance;
@@ -63,7 +64,8 @@ public class BasicEnemy : Enemy
     void Move()
     {
         float speed = Random.Range(minSpeed, maxSpeed);
-        moveSpeed = speed / 30000;
+        moveSpeed = speed / 25000;
+        moveSpeed = moveSpeed - ((moveSpeed / 100) * (ugliyToothSlow * 10));
         transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed);
         //Vector3 dirVec = target.position - rigid.position;
         //Vector3 nextVec = dirVec.normalized * moveSpeed;
@@ -79,7 +81,19 @@ public class BasicEnemy : Enemy
         Vector3 dir = transform.position - playerPos;
         rigid.AddRelativeForce(dir.normalized * power, ForceMode.Impulse);
     }
-
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Bullet"))
+        {
+            if(ItemEffect.instance.IsUglyTooth == true)
+            {
+                if(ugliyToothSlow < 3)
+                {
+                    ugliyToothSlow++;
+                }
+            }
+        }
+    }
     void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Player"))

@@ -8,6 +8,7 @@ public class Stat
     [System.Serializable]
     public enum PlayerStat
     {
+        NONE,
         MAXHEALTH,      //체력, 정수
         REGENERATION,   //재생, 퍼센트
         BLOOD_SUCKING,   //흡혈, 퍼센트
@@ -27,10 +28,36 @@ public class Stat
         MAGNET_RANGE,
         EXP_GAIN,
         PENETRATE,
+        INSTNAT_MAGNET,
+        KNOCK_BACK,
+        EXPLOSIVE_DAMAGE,
+        PENETRTE_DAMAGE,
     }
+    //public static Stat instance;
+    
+    //public float maxHealth;
+    //public float regeneration;
+    //public float bloodSucking;
+    //public float persentDamage;
+    //public float meleeDamage;
+    //public float rangeDamage;
+    //public float attackSpeed;
+    //public float criticalChance;
+    //public float engine;
+    //public float range;
+    //public float armor;
+    //public float evasion;
+    //public float accuracy;
+    //public float speed;
 
-    public class Status
-    {
+    //public int consumableHeal;
+    //public float magnetRange;
+    //public float expGain;
+    //public int penetrate;
+    //public float instantMagnet;
 
-    }
+    //void Awake()
+    //{
+    //    instance = this;
+    //}
 }

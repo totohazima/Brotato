@@ -10,6 +10,9 @@ public class MainPlayer : Player
     public Animator anim;
     public CapsuleCollider coll;
     public SpriteRenderer sprite;
+    public SphereCollider magnet;
+
+    float magnetRanges; //자석 범위
     JoyStick joy;
     float moveSpeed; //캐릭터 이동속도
     void Start()
@@ -17,6 +20,7 @@ public class MainPlayer : Player
         main = MainSceneManager.instance;
         game = GameManager.instance;
         CharacterImport = main.selectPlayer.GetComponent<ForSettingPlayer>();
+        magnetRanges = magnet.radius;
         joy = JoyStick.instance;
         joy.moveTarget.SetParent(transform);
 
@@ -24,16 +28,25 @@ public class MainPlayer : Player
     }
     void Update()
     {
-        if(game.isDie == true)
+        if (game.isDie == true)
+        {
+            return;
+        }
+        StatApply();
+
+    }
+
+    void FixedUpdate()
+    {
+        if (game.isDie == true)
         {
             return;
         }
 
-        moveSpeed = 0.04f * (1 + (speed / 100));
         if (joy.isMove == true)
         {
             transform.position = Vector3.MoveTowards(transform.position, joy.moveTarget.position, moveSpeed);
-            if(joy.moveTarget.position.x < transform.position.x)
+            if (joy.moveTarget.position.x < transform.position.x)
             {
                 sprite.flipX = true;
             }
@@ -44,6 +57,18 @@ public class MainPlayer : Player
         }
     }
 
-    
+    void StatApply()
+    {
+        double regenHp = (0.09 * regeneration) * Time.deltaTime;
+        if(regenHp > 0)
+        {
+            regenHp = 0;
+        }
+        game.curHp += (float)regenHp;
+
+        moveSpeed = 0.2f * (1 + (speed / 100));
+
+        magnet.radius = magnetRanges * (1 + (magnetRange / 100));
+    }
 
 }

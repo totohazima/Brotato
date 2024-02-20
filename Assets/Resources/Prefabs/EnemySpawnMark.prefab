@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5906415028233586998}
   - component: {fileID: 9065431505115638067}
-  - component: {fileID: 7257614302188068253}
   m_Layer: 0
   m_Name: EnemySpawnMark
   m_TagString: Untagged
@@ -85,15 +84,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7257614302188068253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6089865304736802569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd3825caf8e12941b3d7849f4dd4a04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -18,7 +18,9 @@ public class LootCrate : DropItem
         if (other.CompareTag("Player"))
         {
             GameManager.instance.lootChance++;
-            GameManager.instance.curHp += 3f;
+            GameManager.instance.curHp += (3f + GameManager.instance.playerInfo.consumableHeal);
+            GameManager.instance.Money += ItemEffect.instance.Bag();
+
             gameObject.SetActive(false);
         }
     }

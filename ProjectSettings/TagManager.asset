@@ -8,6 +8,9 @@ TagManager:
   - Meterial
   - Consum
   - Loot
+  - Enemy
+  - Wall
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3416201615854339149}
   m_Layer: 6
   m_Name: BasicEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,10 +78,13 @@ MonoBehaviour:
   minSpeed: 0
   maxSpeed: 0
   moneyDropRate: 0
+  moneyValue: 0
+  expValue: 0
   consumableDropRate: 0
   lootDropRate: 0
   isDie: 0
   isHit: 0
+  debuff: {fileID: 0}
   anim: {fileID: 3416201617514675538}
   coll: {fileID: 3416201617400161520}
   sprite: {fileID: 3416201617514675539}
@@ -97,7 +100,7 @@ GameObject:
   - component: {fileID: 3416201617400161520}
   m_Layer: 6
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +147,7 @@ GameObject:
   - component: {fileID: 3416201617514675538}
   m_Layer: 6
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

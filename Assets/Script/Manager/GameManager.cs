@@ -28,8 +28,8 @@ public class GameManager : MonoBehaviour
     public bool isDie; //플레이어 사망
     public float curHp; //현재 체력
     public float maxHp; //최대 체력
-    public int curExp;  //현재 경험치
-    public int maxExp;  //최대 경험치
+    public float curExp;  //현재 경험치
+    public float maxExp;  //최대 경험치
     public int levelUpChance; //웨이브 종료 후 레벨 업 할 횟수
     public int waveLevel;   //웨이브 레벨
     public float[] waveTime;    //웨이브 시간
@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
         mainPlayer = GameObject.FindGameObjectWithTag("Player");
         main = mainPlayer.transform;
         playerInfo = mainPlayer.GetComponent<Player>();
-
         StartCoroutine(StageStart());
     }
 
@@ -135,7 +134,7 @@ public class GameManager : MonoBehaviour
             isEnd = true;
             curHp = maxHp;
             main.position = Vector3.zero;
-
+            FriendlyRemove();
             for (int i = 0; i < SpawnManager.instance.enemys.Count; i++)
             {
                 SpawnManager.instance.enemys[i].SetActive(false);
@@ -154,6 +153,22 @@ public class GameManager : MonoBehaviour
     {
         //isPause = true;
         yield return new WaitForSeconds(0f);
+    }
+    void FriendlyRemove()
+    {
+        SpawnManager spawn = SpawnManager.instance;
+
+        for (int i = 0; i < spawn.mines.Count; i++) //지뢰
+        {
+            spawn.mines[i].SetActive(false);
+        }
+        for (int i = 0; i < spawn.turrets.Count; i++) //터렛
+        {
+            spawn.turrets[i].SetActive(false);
+        }
+
+        spawn.mines.Clear();
+        spawn.turrets.Clear();
     }
     void UiVisualize()
     {
@@ -182,7 +197,10 @@ public class GameManager : MonoBehaviour
             }
             for(int i = 0; i < levelUpChance; i++)
             {
-                levelMarks[i].SetActive(true);
+                if (i <= 6)
+                {
+                    levelMarks[i].SetActive(true);
+                }
             }
         }
         if(lootChance >= 1)
@@ -194,7 +212,10 @@ public class GameManager : MonoBehaviour
             }
             for (int i = 0; i < lootChance; i++)
             {
-                lootMarks[i].SetActive(true);
+                if (i <= 6)
+                {
+                    lootMarks[i].SetActive(true);
+                }
             }
         }
     }
@@ -214,9 +235,20 @@ public class GameManager : MonoBehaviour
     public void nextWave()
     {
         curHp = maxHp;
+        if(ItemEffect.instance.isWeirdGhost == true)
+        {
+            curHp = 1;
+            ItemEffect.instance.isWeirdGhost = false;
+        }
         waveLevel++;
         isEnd = false;
-        SpawnManager.instance.WaveSelect(waveLevel + 1);
+
+        SpawnManager spawn = SpawnManager.instance;
+        spawn.WaveSelect(waveLevel + 1);
+        spawn.enemyLimit *= 1 + (ItemEffect.instance.GentleAlien() / 100);
+        spawn.spawnTime = waveTime[waveLevel] / spawn.enemyLimit;
+
+        StartCoroutine(spawn.TurretSetting());
     }
 
     public void HitCalculate(float damage)

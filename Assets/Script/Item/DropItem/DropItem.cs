@@ -13,6 +13,23 @@ public class DropItem : MonoBehaviour
         CONSUMABLE,
         LOOT,
     }
+    void OnEnable()
+    {
+        if (type == ItemType.METERIAL)
+        {
+            GameManager game = GameManager.instance;
+
+            float instantMagnet = game.playerInfo.instantMagnet / 100;
+            float notInstant = 1 - instantMagnet;
+            float[] chanceLise = { instantMagnet, notInstant };
+            int index = game.Judgment(chanceLise);
+
+            if (index == 0)
+            {
+                target = game.mainPlayer.transform;
+            }
+        }
+    }
     void Update()
     {
         if (target != null)

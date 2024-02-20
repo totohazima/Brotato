@@ -16,7 +16,7 @@ public class Consumable : DropItem
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.curHp += 3f;
+            GameManager.instance.curHp += (3f + GameManager.instance.playerInfo.consumableHeal);
             gameObject.SetActive(false);
         }
     }

@@ -6,7 +6,7 @@ public class Meterial : DropItem
 {
 
     public int moneyValue;
-    public int expValue;
+    public float expValue;
 
 
     void FixedUpdate()
@@ -25,7 +25,17 @@ public class Meterial : DropItem
         if(other.CompareTag("Player"))
         {
             GameManager.instance.Money += moneyValue;
-            GameManager.instance.curExp += expValue;
+            GameManager.instance.curExp += (expValue * (1 + (GameManager.instance.playerInfo.expGain / 100)));
+
+            float monkeyChance = ItemEffect.instance.CuteMonkey();
+            monkeyChance /= 100;
+            float failure = 1 - monkeyChance;
+            float[] chanceLise = { monkeyChance, failure };
+            int index = GameManager.instance.Judgment(chanceLise);
+            if(index == 0)
+            {
+                GameManager.instance.curHp++;
+            }
             gameObject.SetActive(false);
         }
     }
