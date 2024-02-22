@@ -18,6 +18,10 @@ public class ItemStatImporter : MonoBehaviour
     [HideInInspector] public string[] descendStatType;
     [HideInInspector] public float[] descendStats;
 
+    public string[] itemCode2;
+    public int[] infoCount;
+    public string[] infoText;
+
     void Awake()
     {
         instance = this;
@@ -49,8 +53,18 @@ public class ItemStatImporter : MonoBehaviour
             riseStats[i] = j;
             j = (int)data[i]["DescendStats"];
             descendStats[i] = j;
+        }
 
+        List<Dictionary<string, object>> data1 = CSVReaderText.Read("ItemText");
+        itemCode2 = new string[data1.Count];
+        infoCount = new int[data1.Count];
+        infoText = new string[data1.Count];
 
+        for (int i = 0; i < data1.Count; i++)
+        {
+            itemCode2[i] = (string)data1[i]["ItemCode"];
+            infoCount[i] = (int)data1[i]["TextCount"];
+            infoText[i] = (string)data1[i]["Text"];
         }
     }
 }

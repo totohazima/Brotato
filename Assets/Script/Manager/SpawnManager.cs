@@ -56,7 +56,7 @@ public class SpawnManager : MonoBehaviour
             mineTimer = 0f;
         }
     }
-    IEnumerator EnemySpawn()
+    public IEnumerator EnemySpawn()
     {
         GameObject[] mark = new GameObject[spawnCount];
         GameObject[] enemy = new GameObject[spawnCount];
@@ -77,7 +77,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator MineSetting()
+    public IEnumerator MineSetting()
     {
         GameObject[] mark = new GameObject[ItemEffect.instance.LandMines()];
         GameObject[] mine = new GameObject[mark.Length];

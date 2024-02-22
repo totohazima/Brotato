@@ -21,30 +21,24 @@ public class ItemEffect : MonoBehaviour
 
     public void CountCheck()
     {
-        List<Item> item = GameManager.instance.playerInfo.items;
+        List<Item> item = GameManager.instance.playerInfo.itemInventory;
 
-        bagCount = 0;
-        couponCount = 0;
-        monkeyCount = 0;
-        gentleCount = 0;
-        minesCount = 0;
-        turretCount = 0; 
         for (int i = 0; i < item.Count; i++)
         {
             switch(item[i].itemType)
             {
                 case Item.ItemType.BAG:
-                    bagCount++; break;
+                    bagCount = item[i].curCount; break;
                 case Item.ItemType.COUPON:
-                    couponCount++; break;
+                    couponCount = item[i].curCount; break;
                 case Item.ItemType.CUTE_MONKEY:
-                    monkeyCount++; break;
+                    monkeyCount = item[i].curCount; break;
                 case Item.ItemType.GENTLE_ALIEN:
-                    gentleCount++; break;
+                    gentleCount = item[i].curCount; break;
                 case Item.ItemType.LAND_MINES:
-                    minesCount++; break;
+                    minesCount = item[i].curCount; break;
                 case Item.ItemType.TURRET:
-                    turretCount++; break;
+                    turretCount = item[i].curCount; break;
                 case Item.ItemType.UGLY_TOOTH:
                     IsUglyTooth = true; break;
 

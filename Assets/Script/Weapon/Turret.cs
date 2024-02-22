@@ -40,6 +40,6 @@ public class Turret : MonoBehaviour
         Transform bullet = PoolManager.instance.Get(9).transform;
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
-        bullet.GetComponent<Bullet>().Init(damage, penetrate, 100, 0, 0, dir * 50);
+        bullet.GetComponent<Bullet>().Init(damage, penetrate, 100, 0, 0, dir * 100);
     }
 }

@@ -100,7 +100,12 @@ MonoBehaviour:
   itemType: 6
   itemCode: 
   itemName: 
+  curCount: 0
   maxCount: 0
+  isFull: 0
+  itemSprite: {fileID: 6341351214784632787}
+  itemImage: {fileID: 0}
+  itemCount: {fileID: 0}
   riseCount: 0
   riseStat: 
   riseStats: []

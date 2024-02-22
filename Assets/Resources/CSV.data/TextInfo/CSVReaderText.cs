@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-public class CSVReaderGameData
+public class CSVReaderText
 {
     static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
     static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
@@ -13,7 +13,7 @@ public class CSVReaderGameData
     public static List<Dictionary<string, object>> Read(string file)
     {
         var list = new List<Dictionary<string, object>>();
-        TextAsset data = Resources.Load<TextAsset>($"GameData/{file}");
+        TextAsset data = Resources.Load<TextAsset>($"CSV.data/TextInfo/{file}");
         
         var lines = Regex.Split(data.text, LINE_SPLIT_RE);
 

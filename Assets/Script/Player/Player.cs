@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     public float explosiveDamage;
     public float penetrateDamage;
     [Header("ITEM")]
-    public List<Item> items;
+    public List<Item> itemInventory;
     
     public enum Character
     {
@@ -64,8 +64,8 @@ public class Player : MonoBehaviour
     {
         ItemEffect.instance.CountCheck();
 
-        int i = items.Count - 1;
-        Item item = items[i];
+        int i = itemInventory.Count - 1;
+        Item item = itemInventory[i];
 
         if((int)item.itemType == 35)
         {

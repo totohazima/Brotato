@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] levelMarks;
     public GameObject lootCrateMarkUi;
     public GameObject[] lootMarks;
+    public GameObject shopUI;
     [Header("# Variable")]
     public Player playerInfo;
     public int playerLevel; //플레이어 레벨
@@ -203,6 +204,15 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            levelUpMarkUi.SetActive(false);
+            for (int i = 0; i < 7; i++)
+            {
+                levelMarks[i].SetActive(false);
+            }
+        }
+
         if(lootChance >= 1)
         {
             lootCrateMarkUi.SetActive(true);
@@ -218,6 +228,14 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            lootCrateMarkUi.SetActive(true);
+            for (int i = 0; i < 7; i++)
+            {
+                lootMarks[i].SetActive(false);
+            }
+        }
     }
     public IEnumerator LevelUp()
     {
@@ -226,6 +244,12 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LevelUpManager.instance.UpgradeSetting());
     }
 
+    public void ShopOpen()
+    {
+        shopUI.SetActive(true);
+        ShopManager.instance.ShopGoodsSetting();
+        ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1]);
+    }
     IEnumerator StageStart()
     {
         yield return new WaitForSeconds(0f);
@@ -248,6 +272,7 @@ public class GameManager : MonoBehaviour
         spawn.enemyLimit *= 1 + (ItemEffect.instance.GentleAlien() / 100);
         spawn.spawnTime = waveTime[waveLevel] / spawn.enemyLimit;
 
+        StartCoroutine(spawn.MineSetting());
         StartCoroutine(spawn.TurretSetting());
     }
 

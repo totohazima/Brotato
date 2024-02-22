@@ -34,7 +34,7 @@ public class DropItem : MonoBehaviour
     {
         if (target != null)
         {
-            Vector3 pos = Vector3.MoveTowards(transform.position, target.position, 20f * Time.deltaTime);
+            Vector3 pos = Vector3.MoveTowards(transform.position, target.position, 60f * Time.deltaTime);
             transform.position = pos;
         }
     }

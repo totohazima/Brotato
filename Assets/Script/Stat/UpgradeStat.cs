@@ -178,7 +178,7 @@ public class UpgradeStat : MonoBehaviour
         {
             game.levelUpUI.SetActive(false);
             //여기서 전리품 메뉴로
-            game.nextWave();
+            game.ShopOpen();
         }
         else
         {

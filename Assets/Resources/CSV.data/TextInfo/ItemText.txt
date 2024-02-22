@@ -1,0 +1,74 @@
+ItemCode,TextCount,Text
+ALIEN_TONGUE,1,+30% 획득 범위
+ALIEN_WORM,3,+2 HP 재생
+null,0,-1 소모품 HP 회복량
+null,0,+3 최대 HP
+BABY_GECKO,2,재료가 떨어졌을 때 재료를 즉시 끌어당길 확률 +20%
+null,0,+10 범위
+BAG,2,상자를 집을 때 +15 재료
+null,0,-1% 속도
+BEANIE,2,+4% 속도
+null,0,-6 범위
+BOOK,1,+1 엔지니어링
+BOXING_GLOVE,1,+3 넉백
+BROKEN_MOUTH,2,+5 최대 HP
+null,0,-1 HP 재생
+CAKE,2,+3 최대 HP
+null,0,-1% 데미지
+CLAW_TREE,3,+1 근접 데미지
+null,0,+3% 치명타 확률
+null,0,-1 최대 HP
+COFFEE,2,+10% 공격 속도
+null,0,-2% 데미지
+COUPON,1,-5% 가격
+CUTE_MONKEY,2,재료를 주울 때 HP가 회복될 확률 +8%
+null,0,-1 원거리 데미지
+DEFECTIVE_STEROIDS,3,+2 근접 데미지
+null,0,-3% 공격 속도
+null,0,+2 최대 HP
+DUCT_TAPE,3,+1 방어구
+null,0,+1 엔지니어링
+null,0,-2 최대 HP
+DYNAMITE,1,폭발 피해 +15%
+GENTLE_ALIEN,3,+5% 데미지
+null,0,+5% 적
+null,0,+2 최대 HP
+GLASSES,1,+20 범위
+GOAT_SKULL,2,-3 근접 데미지
+null,0,-2% 치명타 확률
+GUMMY_BERSERKER,3,+5% 공격 속도
+null,0,+15 범위
+null,0,-1 방어력
+HEAD_INJURY,2,+6% 데미지
+null,0,-8 범위
+HEDGEHOG,3,+2 근접 데미지
+null,0,+1 원거리 데미지
+null,0,-1 HP 재생
+HELMET,2,+1 방어구
+null,0,-2% 속도
+INJECTION,2,+7% 데미지
+null,0,-2 최대 HP
+INSANITY,2,+6% 치명타 확률
+null,0,-3% 데미지
+LAND_MINES,1,12초마다 지뢰가 생성되어 해당 지역에 10+(100%)의 피해를 줍니다.
+LEMONADE,1,+1 소모품 HP 회복량
+LENS,2,+1 원거리 데미지
+null,0,-5 범위
+PENCIL,3,+2 엔지니어링
+null,0,-1% 공격 속도
+null,0,-1% 치명타 확률
+PLANT,2,+3 HP 재생
+null,0,-1% 생명력 흡수
+SCAR,2,+20% EXP 획득
+null,0,-8 범위
+SHARP_BULLET,3,투사체가 1명의 추가 대상을 관통합니다.
+null,0,-20% 관통 피해
+null,0,-5% 피해
+TURRET,1,0.73초마다 10+(80%) 피해를 주는 총알을 발사하는 포탑을 생성합니다.
+UGLY_TOOTH,2,적을 공격하면 적의 속도가 -10% 감소합니다. 최대:30%
+null,0,-3% 속도
+WEIRD_FOOD,2,+2 소모품 HP 회복량
+null,0,-2% 회피
+WEIRD_GHOST,2,+3 최대 HP
+null,0,1 HP로 다음 웨이브를 시작합니다.
+,,
