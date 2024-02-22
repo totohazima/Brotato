@@ -18,7 +18,8 @@ public class ItemGoods : MonoBehaviour
     public Text[] infoText;
     public Image lockUI;
     public bool isLock;
-    int itemNum; //itemManager에서 아이템을 찾기 위함
+    [HideInInspector]
+    public int itemNum; //itemManager에서 아이템을 찾기 위함
     public List<Text> texts;
     void OnDisable()
     {

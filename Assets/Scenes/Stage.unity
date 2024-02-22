@@ -4338,7 +4338,7 @@ MonoBehaviour:
   levelUpChance: 0
   waveLevel: 0
   waveTime:
-  - 30
+  - 5
   - 33
   - 36
   - 40
