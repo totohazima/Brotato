@@ -21,6 +21,10 @@ public class LoadingSceneManager : MonoBehaviour
         SceneManager.LoadScene("LoadingScene", LoadSceneMode.Additive);
     }
 
+    public static void CloseScene(string sceneName)
+    {
+        SceneManager.UnloadSceneAsync(sceneName);
+    }
     IEnumerator LoadScene()
     {
         yield return null;

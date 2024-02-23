@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     }
     public IEnumerator Died()
     {
+        SpawnManager.instance.enemys.Remove(gameObject);
         float randomX, randomY;
         for (int i = 0; i < moneyDropRate; i++)
         {
@@ -72,7 +73,6 @@ public class Enemy : MonoBehaviour
                 lootCrate.transform.position = new Vector3(transform.position.x + randomX, transform.position.y + randomY);
                 break;
         }
-        SpawnManager.instance.enemys.Remove(gameObject);
         gameObject.SetActive(false);
         yield return new WaitForSeconds(0f);
     }

@@ -20,14 +20,16 @@ public class ItemGoods : MonoBehaviour
     public bool isLock;
     [HideInInspector]
     public int itemNum; //itemManager에서 아이템을 찾기 위함
-    public List<Text> texts;
     void OnDisable()
     {
-        for (int i = 0; i < texts.Count; i++)
+        if (isLock == false) //잠긴 아이템은 상점이 꺼져도 텍스트 삭제X
         {
-            Destroy(texts[i]);
+            for (int i = 0; i < itemInfoUI.childCount; i++)
+            {
+                Destroy(itemInfoUI.GetChild(i).gameObject);
+            }
         }
-        texts.Clear();
+
     }
     public void Init(string code, Sprite image, int index)
     {
@@ -88,14 +90,13 @@ public class ItemGoods : MonoBehaviour
             Text text = Instantiate(infoText[0]);
             text.text = itemInfo[i];
             text.transform.SetParent(itemInfoUI);
-            texts.Add(text);
         }
     }
     
     public void BuyItem()
     {
         ItemManager.instance.ItemObtain(itemNum);
-        ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1]);
+        ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1]);
         UnLockIng();
         ShopManager.instance.goodsList.Remove(gameObject);
         gameObject.SetActive(false);

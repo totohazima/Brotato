@@ -16,7 +16,7 @@ public class Turret : MonoBehaviour
         scan = GetComponent<FriendlyScanner>();
         game = GameManager.instance;
     }
-    void Update()
+    void FixedUpdate()
     {
         damage = 10 + (game.playerInfo.engine * 0.8f);
         penetrate = 0 + (game.playerInfo.penetrate);

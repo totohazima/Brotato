@@ -64,8 +64,11 @@ public class BasicEnemy : Enemy
     void Move()
     {
         float speed = Random.Range(minSpeed, maxSpeed);
-        moveSpeed = speed / 25000;
-        moveSpeed = moveSpeed - ((moveSpeed / 100) * (ugliyToothSlow * 10));
+        moveSpeed = speed / 5000;
+        if (ugliyToothSlow >= 1)
+        {
+            moveSpeed = moveSpeed - ((moveSpeed / 100) * (ugliyToothSlow * 10));
+        }
         transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed);
         //Vector3 dirVec = target.position - rigid.position;
         //Vector3 nextVec = dirVec.normalized * moveSpeed;

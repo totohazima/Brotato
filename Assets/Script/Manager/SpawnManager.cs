@@ -32,7 +32,7 @@ public class SpawnManager : MonoBehaviour
     {
         if(game.isEnd == true)
         {
-            enemys.Clear();
+            enemyClear();
             return;
         }
         enemyCount = enemys.Count;
@@ -55,6 +55,14 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(MineSetting());
             mineTimer = 0f;
         }
+    }
+    void enemyClear()
+    {
+        for (int i = 0; i < enemys.Count; i++)
+        {
+            enemys[i].SetActive(false);
+        }
+        enemys.Clear();
     }
     public IEnumerator EnemySpawn()
     {

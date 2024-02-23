@@ -1235,6 +1235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b64d991e150a34e9d4a163e1d56a78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 963194227}
   playerSetGroup: {fileID: 310999220}
   weaponSetGroup: {fileID: 664416162}
   selectedPlayer: {fileID: 0}
@@ -3572,7 +3573,10 @@ MonoBehaviour:
   expGain: 0
   penetrate: 0
   instantMagnet: 0
-  items: []
+  KnockBack: 0
+  explosiveDamage: 0
+  penetrateDamage: 0
+  itemInventory: []
   index: 0
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
 --- !u!114 &1704410213

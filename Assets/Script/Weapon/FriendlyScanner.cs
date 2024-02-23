@@ -5,32 +5,36 @@ using UnityEngine;
 public class FriendlyScanner : MonoBehaviour
 {
     public float radius; // 적 탐지 거리
-    public Transform target;
+    public Transform target; //실질적 공격 타겟
+    [SerializeField]
+    Transform beforeTarget; //이전 타겟
+    [SerializeField]
     bool isScan;
     float shortDis;
+    public Collider[] colliders;
 
-    void FixedUpdate()
+    void Update()
     {
         if(target != null)
         {
             if(target.parent.gameObject.activeSelf == false)
             {
                 target = null;
+                beforeTarget = null;
             }
         }
-
-        if(isScan == false)
-        {
-            Scan();
-            
-        }
+        Scan();
+        //if (isScan == false)
+        //{
+        //    StartCoroutine(Scan());
+        //}
     }
 
     void Scan()
     {
-        isScan = true;
+        //isScan = true;
         //설정한 범위 내에 몬스터를 감지
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, 1 << 6);
+        colliders = Physics.OverlapSphere(transform.position, radius, 1 << 6);
 
         if (colliders.Length > 0)
         {
@@ -47,7 +51,7 @@ public class FriendlyScanner : MonoBehaviour
                     float dis = Vector3.Distance(transform.position, col.position);
 
                     //현재 타겟을 찾았을 경우 해당 타겟이 범위 밖으로 나가거나 죽기전까지 계속 타격
-                    if (col == target)
+                    if (col == beforeTarget)
                     {
                         target = col;
                         break;
@@ -61,15 +65,19 @@ public class FriendlyScanner : MonoBehaviour
                 }
             }
         }
-        isScan = false;
+        beforeTarget = target;
+        //yield return new WaitForSeconds(0.1f);
+        //isScan = false;
     }
 
     /// <summary>
     /// 범위 확인 용 기즈모
     /// </summary>
+#if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(transform.position, radius);
     }
+#endif
 }

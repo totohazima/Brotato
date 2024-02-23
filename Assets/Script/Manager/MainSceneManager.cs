@@ -6,6 +6,7 @@ public class MainSceneManager : MonoBehaviour
 {
     public static MainSceneManager instance;
 
+    public Camera mainCamera;
     public Transform playerSetGroup;
     public Transform weaponSetGroup;
 
@@ -28,6 +29,8 @@ public class MainSceneManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        Application.targetFrameRate = 60;
+
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
         GameObject obj = Resources.Load<GameObject>("Prefabs/Importer");

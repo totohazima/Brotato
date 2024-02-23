@@ -60,17 +60,16 @@ public class Player : MonoBehaviour
         speed = import.speed[index];
     }
 
-    public void StatCalculate()
+    public void StatCalculate(Item calculateItem)
     {
         ItemEffect.instance.CountCheck();
 
-        int i = itemInventory.Count - 1;
-        Item item = itemInventory[i];
+        Item item = calculateItem;
 
-        if((int)item.itemType == 35)
-        {
-            ItemEffect.instance.isWeirdGhost = true;
-        }
+        //if((int)item.itemType == 35)
+        //{
+        //    ItemEffect.instance.isWeirdGhost = true;
+        //}
 
         for (int j = 0; j < item.riseCount; j++)
         {

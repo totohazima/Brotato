@@ -21,10 +21,7 @@ public class ItemManager : MonoBehaviour
             poolItems[i] = new List<GameObject>();
         }
     }
-    void Update()
-    {
-        
-    }
+
     public void ItemObtain(int index)
     {
         bool isGet = false;
@@ -51,28 +48,37 @@ public class ItemManager : MonoBehaviour
             invenItems.Init(item.itemType, item.GetComponent<SpriteRenderer>().sprite);
             invenItems.curCount++;
             game.playerInfo.itemInventory.Add(invenItems);
-            GameManager.instance.playerInfo.StatCalculate();
+
+            GameManager.instance.playerInfo.StatCalculate(invenItems);
         }
         else if(isGet == true)
         {
             checkItem.curCount++;
+            GameManager.instance.playerInfo.StatCalculate(checkItem);
         }
+        
     }
 
-    public void ItemListUp(Transform trans) 
+    public void ItemListUp(Transform horizontalList, Transform verticalList) 
     {
         
-        for (int i = 0; i < trans.childCount; i++)
+        for (int i = 0; i < horizontalList.childCount; i++)
         {
-            GameObject item = trans.GetChild(i).gameObject;
+            GameObject item = horizontalList.GetChild(i).gameObject;
             Destroy(item);
+
+            GameObject item2 = verticalList.GetChild(i).gameObject;
+            Destroy(item2);
         }
 
         List<Item> inventory = game.playerInfo.itemInventory;
-        for (int i = 0; i < inventory.Count; i++)
+        for (int i = inventory.Count - 1; i >= 0; i--)
         {
             GameObject item = Instantiate(inventory[i].gameObject);
-            item.transform.SetParent(trans);
+            item.transform.SetParent(horizontalList);
+
+            GameObject item2 = Instantiate(inventory[i].gameObject);
+            item2.transform.SetParent(verticalList);
         }
     }
 

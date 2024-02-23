@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject lootCrateMarkUi;
     public GameObject[] lootMarks;
     public GameObject shopUI;
+    public GameObject GameClearUI;
     [Header("# Variable")]
     public Player playerInfo;
     public int playerLevel; //플레이어 레벨
@@ -131,15 +132,20 @@ public class GameManager : MonoBehaviour
 
         if (timer >= waveTime[waveLevel]) //웨이브 클리어 시
         {
+            if(waveLevel == 9)
+            {
+                GameEnd();
+                return;
+            }
             timer = 0;
             isEnd = true;
             curHp = maxHp;
             main.position = Vector3.zero;
             FriendlyRemove();
-            for (int i = 0; i < SpawnManager.instance.enemys.Count; i++)
-            {
-                SpawnManager.instance.enemys[i].SetActive(false);
-            }
+            //for (int i = 0; i < SpawnManager.instance.enemys.Count; i++)
+            //{
+            //    SpawnManager.instance.enemys[i].SetActive(false);
+            //}
             ///test
             ///웨이브 종료 시 레벨 업 1회
             levelUpChance++;
@@ -247,8 +253,9 @@ public class GameManager : MonoBehaviour
     public void ShopOpen()
     {
         shopUI.SetActive(true);
-        ShopManager.instance.ShopGoodsSetting();
-        ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1]);
+        ShopManager.instance.ShopReRoll();
+        //ShopManager.instance.ShopGoodsSetting();
+        ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1]);
     }
     IEnumerator StageStart()
     {
@@ -275,7 +282,27 @@ public class GameManager : MonoBehaviour
         StartCoroutine(spawn.MineSetting());
         StartCoroutine(spawn.TurretSetting());
     }
+    void GameEnd()
+    {
+        GameClearUI.SetActive(true);
+    }
 
+    public void ReturnMainMenu()
+    {
+        MainSceneManager main = MainSceneManager.instance;
+
+        Destroy(main.selectedPlayer);
+        Destroy(main.selectedWeapon);
+        main.selectPlayer = null;
+        main.selectedPlayer = null;
+        main.selectWeapon = null;
+        main.selectedWeapon = null;
+
+        main.weaponSettingMenu.SetActive(false);
+        main.canvas.gameObject.SetActive(true);
+        main.mainCamera.gameObject.SetActive(true);
+        LoadingSceneManager.CloseScene("Stage");
+    }
     public void HitCalculate(float damage)
     {
         float hit, dodge;

@@ -9,10 +9,12 @@ public class ShopManager : MonoBehaviour
     public Text titleWaveUI;
     public Text moneyNumUI;
     public Text nextWaveUI;
+    public Transform selectTab;
     public Transform[] tabs;
     public Image[] tabsImage;
     public Text[] tabsText;
     public Transform[] tabsScroll;
+    public Transform[] verticalTabsScroll;
     public Transform goodsContent;
     public GameObject[] goods;
 

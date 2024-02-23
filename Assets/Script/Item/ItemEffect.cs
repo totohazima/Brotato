@@ -41,7 +41,8 @@ public class ItemEffect : MonoBehaviour
                     turretCount = item[i].curCount; break;
                 case Item.ItemType.UGLY_TOOTH:
                     IsUglyTooth = true; break;
-
+                case Item.ItemType.WEIRD_GHOST:
+                    isWeirdGhost = true; break;
             }
             
         }
@@ -72,14 +73,12 @@ public class ItemEffect : MonoBehaviour
     }
     public int LandMines() // Áö·Ú
     {
-        int effect = 1;
-        effect *= minesCount;
+        int effect = minesCount;
         return effect;
     }
     public int Turret() //ÅÍ·¿
     {
-        int effect = 1;
-        effect *= turretCount;
+        int effect = turretCount;
         return effect;
     }
 }
