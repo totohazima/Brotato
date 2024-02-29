@@ -23,7 +23,7 @@ public class LandMine : MonoBehaviour
             booms.transform.position = transform.position;
 
             Bullet bullet = booms.GetComponent<Bullet>();
-            float damage = 10 + (GameManager.instance.playerInfo.engine * 1);
+            float damage = (10 + (GameManager.instance.playerInfo.engine * 1)) * (1 + (GameManager.instance.playerInfo.explosiveDamage / 100));
             bullet.Init(damage, 10000, 100, 0f, 0f, Vector3.zero);
 
             //bullet.damage = 10 + (GameManager.instance.playerInfo.engine * 1);
