@@ -10,7 +10,6 @@ public class UpgradeStat : MonoBehaviour
 
     public Text name;
     public Text effect;
-    public Text num;
     GameManager game;
     UpgradeStatImporter upgrade;
     public enum LevelUpStat
@@ -51,59 +50,58 @@ public class UpgradeStat : MonoBehaviour
     void Update()
     {
         name.text = upgrade.upgradeName[(int)upgradeType];
-        effect.text = "      " + upgrade.upgradeEffect[(int)upgradeType];
 
         if (upgradeType == LevelUpStat.HP_UP)
         {
-            num.text = "+" + upgrade.heart[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.heart[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.REGEN_UP)
         {
-            num.text = "+" + upgrade.lungs[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.lungs[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.BLOOD_UP)
         {
-            num.text = "+" + upgrade.teeth[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.teeth[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.DAMAGE_UP)
         {
-            num.text = "+" + upgrade.triceps[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.triceps[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.MELEEDM_UP)
         {
-            num.text = "+" + upgrade.forearms[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.forearms[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.RANGEDM_UP)
         {
-            num.text = "+" + upgrade.shoulders[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.shoulders[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.ATKSPEED_UP)
         {
-            num.text = "+" + upgrade.reflexes[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.reflexes[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.CRITICAL_UP)
         {
-            num.text = "+" + upgrade.fingers[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.fingers[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.ENGINE_UP)
         {
-            num.text = "+" + upgrade.skull[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.skull[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.RANGE_UP)
         {
-            num.text = "+" + upgrade.eyes[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.eyes[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.ARMOR_UP)
         {
-            num.text = "+" + upgrade.chest[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.chest[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.EVASION_UP)
         {
-            num.text = "+" + upgrade.back[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.back[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
         else if (upgradeType == LevelUpStat.SPEED_UP)
         {
-            num.text = "+" + upgrade.legs[tier];
+            effect.text = "<color=#4CFF52>+" + upgrade.legs[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
         }
     }
     public void StatUpgrade()
@@ -116,56 +114,56 @@ public class UpgradeStat : MonoBehaviour
 
         if(upgradeType == LevelUpStat.HP_UP)
         {
-            game.playerInfo.maxHealth += float.Parse(num.text);
-            game.curHp += float.Parse(num.text); ;
+            game.playerInfo.maxHealth += upgrade.heart[tier];
+            game.curHp += upgrade.heart[tier]; ;
         }
         else if(upgradeType == LevelUpStat.REGEN_UP)
         {
-            game.playerInfo.regeneration += float.Parse(num.text); 
+            game.playerInfo.regeneration += upgrade.lungs[tier]; 
         }
         else if (upgradeType == LevelUpStat.BLOOD_UP)
         {
-            game.playerInfo.bloodSucking += float.Parse(num.text); 
+            game.playerInfo.bloodSucking += upgrade.teeth[tier]; 
         }
         else if (upgradeType == LevelUpStat.DAMAGE_UP)
         {
-            game.playerInfo.persentDamage += float.Parse(num.text); 
+            game.playerInfo.persentDamage += upgrade.triceps[tier]; 
         }
         else if (upgradeType == LevelUpStat.MELEEDM_UP)
         {
-            game.playerInfo.meleeDamage += float.Parse(num.text);
+            game.playerInfo.meleeDamage += upgrade.forearms[tier];
         }
         else if (upgradeType == LevelUpStat.RANGEDM_UP)
         {
-            game.playerInfo.rangeDamage += float.Parse(num.text); 
+            game.playerInfo.rangeDamage += upgrade.shoulders[tier]; 
         }
         else if (upgradeType == LevelUpStat.ATKSPEED_UP)
         {
-            game.playerInfo.attackSpeed += float.Parse(num.text); 
+            game.playerInfo.attackSpeed += upgrade.reflexes[tier]; 
         }
         else if (upgradeType == LevelUpStat.CRITICAL_UP)
         {
-            game.playerInfo.criticalChance += float.Parse(num.text); 
+            game.playerInfo.criticalChance += upgrade.fingers[tier]; 
         }
         else if (upgradeType == LevelUpStat.ENGINE_UP)
         {
-            game.playerInfo.engine += float.Parse(num.text); 
+            game.playerInfo.engine += upgrade.skull[tier]; 
         }
         else if (upgradeType == LevelUpStat.RANGE_UP)
         {
-            game.playerInfo.range += float.Parse(num.text); 
+            game.playerInfo.range += upgrade.eyes[tier]; 
         }
         else if (upgradeType == LevelUpStat.ARMOR_UP)
         {
-            game.playerInfo.armor += float.Parse(num.text); 
+            game.playerInfo.armor += upgrade.chest[tier]; 
         }
         else if (upgradeType == LevelUpStat.EVASION_UP)
         {
-            game.playerInfo.evasion += float.Parse(num.text); 
+            game.playerInfo.evasion += upgrade.back[tier]; 
         }
         else if (upgradeType == LevelUpStat.SPEED_UP)
         {
-            game.playerInfo.speed += float.Parse(num.text); 
+            game.playerInfo.speed += upgrade.legs[tier]; 
         }
         else
         {

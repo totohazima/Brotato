@@ -34,21 +34,23 @@ public class LevelUpManager : MonoBehaviour
 
     void Update()
     {
-        statNum[0].text = player.maxHealth.ToString("F0");
-        statNum[1].text = player.regeneration.ToString("F0");
-        statNum[2].text = player.bloodSucking.ToString("F0");
-        statNum[3].text = player.persentDamage.ToString("F0");
-        statNum[4].text = player.meleeDamage.ToString("F0");
-        statNum[5].text = player.rangeDamage.ToString("F0");
-        statNum[6].text = player.attackSpeed.ToString("F0");
-        statNum[7].text = player.criticalChance.ToString("F0");
-        statNum[8].text = player.engine.ToString("F0");
-        statNum[9].text = player.range.ToString("F0");
-        statNum[10].text = player.armor.ToString("F0");
-        statNum[11].text = player.evasion.ToString("F0");
-        statNum[12].text = player.speed.ToString("F0");
+        statNum[0].text = GameManager.instance.playerLevel.ToString("F0");
+        statNum[1].text = player.maxHealth.ToString("F0");
+        statNum[2].text = player.regeneration.ToString("F0");
+        statNum[3].text = player.bloodSucking.ToString("F0");
+        statNum[4].text = player.persentDamage.ToString("F0");
+        statNum[5].text = player.meleeDamage.ToString("F0");
+        statNum[6].text = player.rangeDamage.ToString("F0");
+        statNum[7].text = player.attackSpeed.ToString("F0");
+        statNum[8].text = player.criticalChance.ToString("F0");
+        statNum[9].text = player.engine.ToString("F0");
+        statNum[10].text = player.range.ToString("F0");
+        statNum[11].text = player.armor.ToString("F0");
+        statNum[12].text = player.evasion.ToString("F0");
+        statNum[13].text = player.accuracy.ToString("F0");
+        statNum[14].text = player.speed.ToString("F0");
 
-        for (int i = 0; i < statName.Length; i++)
+        for (int i = 1; i < statName.Length; i++) //0인 레벨 스탯은 제외
         {
             if(float.Parse(statNum[i].text) > 0) //0 보다 큰 경우 초록 글씨
             {

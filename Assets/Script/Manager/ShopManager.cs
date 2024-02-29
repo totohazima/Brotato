@@ -46,14 +46,13 @@ public class ShopManager : MonoBehaviour
 
     void UiVisualize()
     {
-        titleWaveUI.text = "웨이브 " + (game.waveLevel + 1).ToString();
+        titleWaveUI.text = "웨이브 " + (game.waveLevel + 1) + "(총 10 물결)";
         moneyNumUI.text = game.Money.ToString();
-        nextWaveUI.text = "이동(웨이브 " + game.waveLevel + 2 + ")";
+        nextWaveUI.text = "이동(웨이브 " + (game.waveLevel + 2) + ")";
 
         tabsText[0].text = "무기(" + tabsScroll[0].childCount + "/6)";
         tabsText[1].text = "아이템(" + tabsScroll[1].childCount + ")";
-        tabsText[2].text = "적(" + tabsScroll[2].childCount + ")";
-        tabsText[3].text = "천부 카드";
+        tabsText[2].text = "천부 카드";
     }
     public void ShopGoodsSetting()
     {

@@ -139,7 +139,7 @@ public class Item : MonoBehaviour
         string[] name2 = new string[descendCount];
 
         int i = 0;
-        while (i <= riseCount - 1)
+        while (i < riseCount)
         {
             name[i] = import.riseStatType[index + i];
             riseStat[i] = (Stat.PlayerStat)Enum.Parse(typeof(Stat.PlayerStat), name[i]);
@@ -147,7 +147,7 @@ public class Item : MonoBehaviour
             i++;
         }
         i = 0;
-        while (i <= descendCount - 1)
+        while (i < descendCount)
         {
             name2[i] = import.descendStatType[index + i];
             descendStat[i] = (Stat.PlayerStat)Enum.Parse(typeof(Stat.PlayerStat), name2[i]);

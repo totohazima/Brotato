@@ -59,13 +59,15 @@ public class MainPlayer : Player
 
     void StatApply()
     {
-        double regenHp = (0.09 * regeneration) * Time.deltaTime;
-        if(regenHp > 0)
+        if (regeneration >= 0)
         {
-            regenHp = 0;
+            double regenHp = (0.09 * regeneration) * Time.deltaTime;
+            if (regenHp > 0)
+            {
+                regenHp = 0;
+            }
+            game.curHp += (float)regenHp;
         }
-        game.curHp += (float)regenHp;
-
         moveSpeed = 0.2f * (1 + (speed / 100));
 
         magnet.radius = magnetRanges * (1 + (magnetRange / 100));

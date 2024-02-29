@@ -12,7 +12,6 @@ public class ItemTab : MonoBehaviour
     {
         WEAPON_TAB,
         ITEM_TAB,
-        ENEMY_TAB,
         GIFTCARD_TAB,
     }
  
@@ -39,12 +38,6 @@ public class ItemTab : MonoBehaviour
                 shop.selectTab = shop.tabs[(int)TabType.ITEM_TAB];
                 shop.tabsImage[(int)TabType.ITEM_TAB].color = new Color((210 / 255f), (210 / 255f), (210 / 255f));
                 shop.tabsText[(int)TabType.ITEM_TAB].color = new Color(0f, 0f, 0f);
-                break;
-            case TabType.ENEMY_TAB:
-                shop.tabs[(int)TabType.ENEMY_TAB].gameObject.SetActive(true);
-                shop.selectTab = shop.tabs[(int)TabType.ENEMY_TAB];
-                shop.tabsImage[(int)TabType.ENEMY_TAB].color = new Color((210 / 255f), (210 / 255f), (210 / 255f));
-                shop.tabsText[(int)TabType.ENEMY_TAB].color = new Color(0f, 0f, 0f);
                 break;
             case TabType.GIFTCARD_TAB:
                 shop.tabs[(int)TabType.GIFTCARD_TAB].gameObject.SetActive(true);

@@ -20,7 +20,7 @@ public class ForSettingWeapon : Weapon
         image = GetComponent<Image>();
         weaponImage = transform.GetChild(0).GetComponent<Image>();
 
-        StatSetting((int)index);
+        StatSetting((int)index, 0);
     }
     void Update()
     {

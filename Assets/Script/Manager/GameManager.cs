@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public float curHp; //현재 체력
     public float maxHp; //최대 체력
     public float curExp;  //현재 경험치
+    float overExp; //레벨업 후 남은 경험치
     public float maxExp;  //최대 경험치
     public int levelUpChance; //웨이브 종료 후 레벨 업 할 횟수
     public int waveLevel;   //웨이브 레벨
@@ -53,7 +54,6 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        playerLevel = 1;
         SceneManager.UnloadSceneAsync("LoadingScene", UnloadSceneOptions.None);
         pool = poolManager.GetComponent<PoolManager>();
         coll = GetComponent<BoxCollider>();
@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
         mainPlayer = GameObject.FindGameObjectWithTag("Player");
         main = mainPlayer.transform;
         playerInfo = mainPlayer.GetComponent<Player>();
+        timer = waveTime[waveLevel];
+
         StartCoroutine(StageStart());
     }
 
@@ -87,8 +89,10 @@ public class GameManager : MonoBehaviour
         {
             if (curExp >= maxExp)
             {
+                overExp = curExp - maxExp;
+                curExp = overExp;
+                overExp = 0;
                 playerLevel++;
-                curExp = 0;
                 levelUpChance++;
             }
         }
@@ -117,7 +121,7 @@ public class GameManager : MonoBehaviour
     {
         if (isEnd == false)
         {
-            timer += Time.deltaTime;
+            timer -= Time.deltaTime;
 
             waveTimerUI.gameObject.SetActive(true);
             coll.enabled = true;
@@ -130,29 +134,31 @@ public class GameManager : MonoBehaviour
 
         
 
-        if (timer >= waveTime[waveLevel]) //웨이브 클리어 시
+        if (timer <= 0) //웨이브 클리어 시
         {
             if(waveLevel == 9)
             {
                 GameEnd();
                 return;
             }
-            timer = 0;
+            timer = waveTime[waveLevel];
             isEnd = true;
             curHp = maxHp;
-            main.position = Vector3.zero;
             FriendlyRemove();
-            //for (int i = 0; i < SpawnManager.instance.enemys.Count; i++)
-            //{
-            //    SpawnManager.instance.enemys[i].SetActive(false);
-            //}
+
             ///test
-            ///웨이브 종료 시 레벨 업 1회
-            levelUpChance++;
+            ///웨이브 종료 시 경험치 제공
+            curExp += 100;
 
             if (levelUpChance > 0)
             {
-                StartCoroutine(LevelUp());
+                main.position = Vector3.zero;
+                LevelUp();
+            }
+            else
+            {
+                main.position = Vector3.zero;
+                ShopOpen();
             }
         }
     }
@@ -187,13 +193,13 @@ public class GameManager : MonoBehaviour
         MoneyUI.text = Money.ToString("F0");
         interestNum.text = interest.ToString("F0");
 
-        maxExp = 50 + (30 * (playerLevel - 1));
+        maxExp = 50 + (30 * (playerLevel));
         ExpBarUI.maxValue = maxExp;
         ExpBarUI.value = curExp;
         LevelNum.text = "LV." + playerLevel.ToString("F0");
 
         waveTimerUI.text = timer.ToString("F0");
-        waveLevelUI.text = "WAVE " + (waveLevel + 1).ToString("F0");
+        waveLevelUI.text = "웨이브 " + (waveLevel + 1).ToString("F0");
 
         if(levelUpChance >= 1)
         {
@@ -243,9 +249,8 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public IEnumerator LevelUp()
+    public void LevelUp()
     {
-        yield return new WaitForSeconds(0f);
         levelUpUI.SetActive(true);
         StartCoroutine(LevelUpManager.instance.UpgradeSetting());
     }
@@ -259,7 +264,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator StageStart()
     {
-        yield return new WaitForSeconds(0f);
+        yield return 0;
         curHp = playerInfo.maxHealth;
     }
 
@@ -272,6 +277,7 @@ public class GameManager : MonoBehaviour
             ItemEffect.instance.isWeirdGhost = false;
         }
         waveLevel++;
+        timer = waveTime[waveLevel];
         isEnd = false;
 
         SpawnManager spawn = SpawnManager.instance;
@@ -285,6 +291,7 @@ public class GameManager : MonoBehaviour
     void GameEnd()
     {
         GameClearUI.SetActive(true);
+        isEnd = true;
     }
 
     public void ReturnMainMenu()

@@ -782,14 +782,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponNum: 0
+  weaponTier: 0
   name: 
   damage: 0
+  multipleDamage: []
   criticalChance: 0
+  criticalDamage: 0
   coolTIme: 0
   knockBack: 0
+  afterKnockBack: 0
   range: 0
   penetrate: 0
+  bloodSucking: 0
   weaponType: 0
+  multipleDamaeCount: 0
+  multipleDamageType: 
+  afterDamage: 0
+  afterCriticalChance: 0
+  afterCriticalDamage: 0
+  afterCoolTime: 0
+  afterRange: 0
+  afterPenetrate: 0
+  afterBloodSucking: 0
   typeText: 
   index: 1
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
@@ -1318,14 +1332,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponNum: 0
+  weaponTier: 0
   name: 
   damage: 0
+  multipleDamage: []
   criticalChance: 0
+  criticalDamage: 0
   coolTIme: 0
   knockBack: 0
+  afterKnockBack: 0
   range: 0
   penetrate: 0
+  bloodSucking: 0
   weaponType: 0
+  multipleDamaeCount: 0
+  multipleDamageType: 
+  afterDamage: 0
+  afterCriticalChance: 0
+  afterCriticalDamage: 0
+  afterCoolTime: 0
+  afterRange: 0
+  afterPenetrate: 0
+  afterBloodSucking: 0
   typeText: 
   index: 2
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
@@ -2091,14 +2119,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponNum: 0
+  weaponTier: 0
   name: 
   damage: 0
+  multipleDamage: []
   criticalChance: 0
+  criticalDamage: 0
   coolTIme: 0
   knockBack: 0
+  afterKnockBack: 0
   range: 0
   penetrate: 0
+  bloodSucking: 0
   weaponType: 0
+  multipleDamaeCount: 0
+  multipleDamageType: 
+  afterDamage: 0
+  afterCriticalChance: 0
+  afterCriticalDamage: 0
+  afterCoolTime: 0
+  afterRange: 0
+  afterPenetrate: 0
+  afterBloodSucking: 0
   typeText: 
   index: 0
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
@@ -2947,14 +2989,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponNum: 0
+  weaponTier: 0
   name: 
   damage: 0
+  multipleDamage: []
   criticalChance: 0
+  criticalDamage: 0
   coolTIme: 0
   knockBack: 0
+  afterKnockBack: 0
   range: 0
   penetrate: 0
+  bloodSucking: 0
   weaponType: 0
+  multipleDamaeCount: 0
+  multipleDamageType: 
+  afterDamage: 0
+  afterCriticalChance: 0
+  afterCriticalDamage: 0
+  afterCoolTime: 0
+  afterRange: 0
+  afterPenetrate: 0
+  afterBloodSucking: 0
   typeText: 
   index: 4
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
@@ -3393,14 +3449,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponNum: 0
+  weaponTier: 0
   name: 
   damage: 0
+  multipleDamage: []
   criticalChance: 0
+  criticalDamage: 0
   coolTIme: 0
   knockBack: 0
+  afterKnockBack: 0
   range: 0
   penetrate: 0
+  bloodSucking: 0
   weaponType: 0
+  multipleDamaeCount: 0
+  multipleDamageType: 
+  afterDamage: 0
+  afterCriticalChance: 0
+  afterCriticalDamage: 0
+  afterCoolTime: 0
+  afterRange: 0
+  afterPenetrate: 0
+  afterBloodSucking: 0
   typeText: 
   index: 5
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
@@ -4006,7 +4076,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -4321,14 +4391,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponNum: 0
+  weaponTier: 0
   name: 
   damage: 0
+  multipleDamage: []
   criticalChance: 0
+  criticalDamage: 0
   coolTIme: 0
   knockBack: 0
+  afterKnockBack: 0
   range: 0
   penetrate: 0
+  bloodSucking: 0
   weaponType: 0
+  multipleDamaeCount: 0
+  multipleDamageType: 
+  afterDamage: 0
+  afterCriticalChance: 0
+  afterCriticalDamage: 0
+  afterCoolTime: 0
+  afterRange: 0
+  afterPenetrate: 0
+  afterBloodSucking: 0
   typeText: 
   index: 3
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
@@ -4561,14 +4645,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponNum: 0
+  weaponTier: 0
   name: 
   damage: 0
+  multipleDamage: []
   criticalChance: 0
+  criticalDamage: 0
   coolTIme: 0
   knockBack: 0
+  afterKnockBack: 0
   range: 0
   penetrate: 0
+  bloodSucking: 0
   weaponType: 0
+  multipleDamaeCount: 0
+  multipleDamageType: 
+  afterDamage: 0
+  afterCriticalChance: 0
+  afterCriticalDamage: 0
+  afterCoolTime: 0
+  afterRange: 0
+  afterPenetrate: 0
+  afterBloodSucking: 0
   typeText: 
   index: 6
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}

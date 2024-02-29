@@ -20,6 +20,7 @@ public class ItemGoods : MonoBehaviour
     public bool isLock;
     [HideInInspector]
     public int itemNum; //itemManager에서 아이템을 찾기 위함
+    public Outline line;
     void OnDisable()
     {
         if (isLock == false) //잠긴 아이템은 상점이 꺼져도 텍스트 삭제X
@@ -117,12 +118,14 @@ public class ItemGoods : MonoBehaviour
     {
         ShopManager.instance.lockList.Add(gameObject);
         isLock = true;
+        line.enabled = true;
         lockUI.color = new Color(255 / 255f, 255 / 255f, 255 / 255f);
     }
     void UnLockIng()
     {
         ShopManager.instance.lockList.Remove(gameObject);
         isLock = false;
+        line.enabled = false;
         lockUI.color = new Color(150 / 255f, 150 / 255f, 150 / 255f);
     }
 }
