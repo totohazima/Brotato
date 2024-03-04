@@ -53,6 +53,7 @@ public class WeaponGoods : Weapon
         
         afterDamage = (damage + temporaryDamage) * (1 + (player.persentDamage / 100));
         afterCriticalChance = criticalChance + player.criticalChance;
+        afterCoolTime = coolTime - (coolTime * (player.attackSpeed / 100));
         afterRange = range + player.range;
         afterKnockBack = knockBack + player.KnockBack;
         afterPenetrate = penetrate + player.penetrate;
@@ -63,8 +64,73 @@ public class WeaponGoods : Weapon
 
     void UiVisualize()
     {
-        
-        damageNumUI.text = afterDamage + " | " + damage + " (" + multipleDamage[0] + "%<sprite=0>";
+        //대미지 UI
+        if (damage == afterDamage)//같은 대미지
+        {
+            damageNumUI.text = damage + "(";
+        }
+        else if(damage > afterDamage)//원본보다 낮을 경우
+        {
+            damageNumUI.text = "<color=red>" + afterDamage + "</color> | " + damage + " (";
+        }
+        else //원본보다 높을 경우
+        {
+            damageNumUI.text = "<color=#4CFF52>" + afterDamage + "</color> | " + damage + " (";
+        }
+
+        for (int i = 0; i < multipleDamaeCount; i++)
+        {
+            if(multipleDamage[i] == 100) //100%는 숫자가 나오지 않음
+            {
+                damageNumUI.text += multipleDamage[i] + "%";
+            }
+
+            switch (multipleDamageType[i])
+            {
+                case DamageType.MELEE:
+                    damageNumUI.text += "<sprite=0>";
+                    break;
+                case DamageType.RANGE:
+                    damageNumUI.text += "<sprite=1>";
+                    break;
+                case DamageType.HEALTH:
+                    damageNumUI.text += "<sprite=2>";
+                    break;
+                case DamageType.ENGINE:
+                    damageNumUI.text += "<sprite=3>";
+                    break;
+            }
+        }
+        damageNumUI.text += ")";
+
+        //크리티컬 UI
+        criticalNumUI.text = "x" + criticalDamage + "(";
+        if(criticalChance == afterCriticalChance)
+        {
+            criticalNumUI.text += afterCriticalChance + "% 확률)";
+        }
+        else if(criticalChance > afterCriticalChance)
+        {
+            criticalNumUI.text += "<color=red>" + afterCriticalChance + "</color>% 확률)";
+        }
+        else if (criticalChance < afterCriticalChance)
+        {
+            criticalNumUI.text += "<color=#4CFF52>" + afterCriticalChance + "</color>% 확률)";
+        }
+
+        //쿨타임 UI
+        if(coolTime == afterCoolTime)
+        {
+            coolDownNumUI.text = afterCoolTime + "s";
+        }
+        else if (coolTime < afterCoolTime)
+        {
+            coolDownNumUI.text = "<color=red>" + afterCoolTime + "</color>s";
+        }
+        else
+        {
+            coolDownNumUI.text = "<color=#4CFF52>" + afterCoolTime + "</color>s";
+        }
 
         if (knockBack <= 0)
         {
@@ -73,6 +139,7 @@ public class WeaponGoods : Weapon
         else
         {
             knockBackUI.gameObject.SetActive(true);
+            knockBackNumUI.text = "<color=#4CFF52>" + afterKnockBack + "</color>";
         }
         if (penetrate <= 0)
         {
@@ -81,6 +148,7 @@ public class WeaponGoods : Weapon
         else
         {
             penetrateUI.gameObject.SetActive(true);
+            penetrateNumUI.text = "<color=#4CFF52>" + afterPenetrate + "</color>";
         }
         if (bloodSucking <= 0)
         {
@@ -89,6 +157,7 @@ public class WeaponGoods : Weapon
         else
         {
             bloodSuckingUI.gameObject.SetActive(true);
+            bloodSuckingNumUI.text = "<color=#4CFF52>" + afterBloodSucking + "</color>%";
         }
 
 

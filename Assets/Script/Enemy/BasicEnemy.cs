@@ -21,7 +21,6 @@ public class BasicEnemy : Enemy
     }
     void OnEnable()
     {
-        SpawnManager.instance.enemys.Add(gameObject);
         StatSetting((int)name);
     }
     void Update()

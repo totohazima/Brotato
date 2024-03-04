@@ -62,7 +62,13 @@ public class GameManager : MonoBehaviour
         mainPlayer = GameObject.FindGameObjectWithTag("Player");
         main = mainPlayer.transform;
         playerInfo = mainPlayer.GetComponent<Player>();
-        timer = waveTime[waveLevel];
+
+        waveTime = new float[WaveStatImporter.instance.waveTime.Length];
+        for(int i = 0; i < WaveStatImporter.instance.waveTime.Length; i++)
+        {
+            waveTime[i] = WaveStatImporter.instance.waveTime[i];
+        }
+        timer = waveTime[0];
 
         StartCoroutine(StageStart());
     }
@@ -281,7 +287,7 @@ public class GameManager : MonoBehaviour
         isEnd = false;
 
         SpawnManager spawn = SpawnManager.instance;
-        spawn.WaveSelect(waveLevel + 1);
+        spawn.WaveSelect(waveLevel);
         spawn.enemyLimit *= 1 + (ItemEffect.instance.GentleAlien() / 100);
         spawn.spawnTime = waveTime[waveLevel] / spawn.enemyLimit;
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6989976729426883472}
   - component: {fileID: -7033672418044704631}
   - component: {fileID: -6213352534418220466}
+  - component: {fileID: -7456421047126889151}
   m_Layer: 0
   m_Name: Importer
   m_TagString: Untagged
@@ -78,13 +79,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponNum: 
   name: []
-  damage: []
-  criticalChance: []
+  damage1: []
+  damage2: []
+  damage3: []
+  damage4: []
+  multipleDamageCount: 
+  multipleDamageType: []
+  multipleDamage1: []
+  multipleDamage2: []
+  multipleDamage3: []
+  multipleDamage4: []
+  criticalChance1: []
+  criticalChance2: []
+  criticalChance3: []
+  criticalChance4: []
+  criticalDamage1: []
+  criticalDamage2: []
+  criticalDamage3: []
+  criticalDamage4: []
   coolTIme: []
   knockBack: []
   range: []
   penetrate: 
+  penetrateDamage: []
   type: 
+  weaponType: []
 --- !u!114 &-6989976729426883472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +175,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: []
   itemName: []
-  riseStat: []
+  maxCount: 
+  riseCount: 
+  riseStatType: []
   riseStats: []
-  descendStat: []
+  descendCount: 
+  descendStatType: []
   descendStats: []
+  itemCode2: []
+  infoCount: 
+  infoText: []
+--- !u!114 &-7456421047126889151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619993944187103712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e24a49dc25da34c893325c92345b49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCount: 
+  enemySpawnCount: 
+  waveTime: []

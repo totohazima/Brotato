@@ -4215,17 +4215,7 @@ MonoBehaviour:
   maxExp: 0
   levelUpChance: 0
   waveLevel: 0
-  waveTime:
-  - 30
-  - 33
-  - 36
-  - 40
-  - 43
-  - 46
-  - 50
-  - 53
-  - 56
-  - 60
+  waveTime: []
   Money: 0
   interest: 0
   lootChance: 0
@@ -4247,7 +4237,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 300, y: 300, z: 10}
+  m_Size: {x: 300, y: 300, z: 100}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &343301554
 Rigidbody:
@@ -15571,10 +15561,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab:
   - {fileID: 3416201615854339148, guid: 6a13eb709e6884d4b984f46fbf3111bb, type: 3}
-  enemys: []
   enemyLimit: 0
   spawnCount: 0
   spawnTime: 0
+  enemys: []
   mines: []
   turrets: []
 --- !u!1 &1290864715

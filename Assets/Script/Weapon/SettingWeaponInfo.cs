@@ -40,7 +40,7 @@ public class SettingWeaponInfo : MonoBehaviour
         infoType = weapon.weaponType;
         infoDamage = weapon.damage;
         infoCriticalChance = weapon.criticalChance;
-        infoCoolTime = weapon.coolTIme;
+        infoCoolTime = weapon.coolTime;
         infoKnockBack = weapon.knockBack;
         infoRange = weapon.range;
         infoPenetrate = weapon.penetrate;

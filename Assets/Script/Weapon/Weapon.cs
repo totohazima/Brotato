@@ -36,7 +36,7 @@ public class Weapon : MonoBehaviour
     public float[] multipleDamage;
     public float criticalChance;
     public float criticalDamage;
-    public float coolTIme;
+    public float coolTime;
     public float knockBack;
     public float afterKnockBack;
     public float range;
@@ -117,7 +117,7 @@ public class Weapon : MonoBehaviour
                 criticalDamage = import.criticalDamage4[index];
                 break;
         }
-        coolTIme = import.coolTIme[index];
+        coolTime = import.coolTIme[index];
         knockBack = import.knockBack[index];
         range = import.range[index];
         penetrate = import.penetrate[index];

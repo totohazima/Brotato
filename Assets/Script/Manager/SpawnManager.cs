@@ -6,7 +6,6 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
     public GameObject[] enemyPrefab;
-    public List<GameObject> enemys;
     int enemyCount; //소환되어있는 몬스터 수
     public int enemyLimit; //한 웨이브에 소환될 몬스터 수
     public int spawnCount; //한 번에 소환되는 몬스터 수
@@ -16,6 +15,7 @@ public class SpawnManager : MonoBehaviour
     float mineTimer;
     float minesCoolTime; //지뢰 생성 쿨타임
 
+    public List<GameObject> enemys;
     public List<GameObject> mines;
     public List<GameObject> turrets;
     void Awake()
@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
         game = GameManager.instance;
         timer = 100f;
         mineTimer = 100f;
-        Wave1();
+        WaveSelect(0);
         spawnTime = game.waveTime[game.waveLevel] / enemyLimit;
     }
 
@@ -67,7 +67,7 @@ public class SpawnManager : MonoBehaviour
     public IEnumerator EnemySpawn()
     {
         GameObject[] mark = new GameObject[spawnCount];
-        GameObject[] enemy = new GameObject[spawnCount];
+        GameObject[] enemy = new GameObject[mark.Length];
 
         for (int i = 0; i < spawnCount; i++)
         {
@@ -128,30 +128,12 @@ public class SpawnManager : MonoBehaviour
     }
     public void WaveSelect(int waveLevel)
     {
-        switch(waveLevel)
-        {
-            case 1:
-                Wave1();
-                break;
-            case 3:
-                Wave2();
-                break;
-            case 5:
-                Wave3();
-                break;
-            case 7:
-                Wave4();
-                break;
-            case 9:
-                Wave5();
-                break;
-            case 10:
-                Wave6();
-                break;
-            default:
-                break;
-        }
+        WaveStatImporter import = WaveStatImporter.instance;
+
+        enemyLimit = import.enemyCount[waveLevel];
+        spawnCount = import.enemySpawnCount[waveLevel];
     }
+
     Vector3 EnemySpawnPosition() //적대적 유닛 소환 위치
     {
         Vector3 spawnPoint;
@@ -183,40 +165,9 @@ public class SpawnManager : MonoBehaviour
         Vector3 playerPos = game.mainPlayer.transform.position;
         Vector3 point = new Vector3(randomX, randomY);
 
-        float distance = Vector3.Distance(playerPos, point);
-            
         spawnPoint = point;
 
         return spawnPoint;
     }
-    void Wave1()
-    {
-        enemyLimit = 20;
-        spawnCount = 1;
-    }
-    void Wave2()
-    {
-        enemyLimit = 40;
-        spawnCount = 1;
-    }
-    void Wave3()
-    {
-        enemyLimit = 60;
-        spawnCount = 1;
-    }
-    void Wave4()
-    {
-        enemyLimit = 80;
-        spawnCount = 1;
-    }
-    void Wave5()
-    {
-        enemyLimit = 90;
-        spawnCount = 1;
-    }
-    void Wave6()
-    {
-        enemyLimit = 100;
-        spawnCount = 1;
-    }
+    
 }
