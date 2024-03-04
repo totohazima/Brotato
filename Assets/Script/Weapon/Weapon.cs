@@ -61,6 +61,8 @@ public class Weapon : MonoBehaviour
     public void StatSetting(int index, int tier)
     {
         WeaponStatImporter import = WeaponStatImporter.instance;
+
+        multipleDamaeCount = import.multipleDamageCount[index];
         multipleDamage = new float[multipleDamaeCount];
         multipleDamageType = new DamageType[multipleDamaeCount];
 

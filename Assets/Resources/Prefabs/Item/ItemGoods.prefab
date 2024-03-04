@@ -491,12 +491,12 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 3
+  m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
+  m_ChildScaleWidth: 1
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!1 &4716037614962161085
@@ -951,7 +951,7 @@ MonoBehaviour:
   itemInfo: []
   itemPrice: {fileID: 7192682131417263048}
   infoText:
-  - {fileID: 3477657197231436116, guid: e3967a6f8bbbefe48be46c7449585823, type: 3}
+  - {fileID: 4212478337585249119, guid: e3967a6f8bbbefe48be46c7449585823, type: 3}
   lockUI: {fileID: 6857540174877465012}
   isLock: 0
   itemNum: 0

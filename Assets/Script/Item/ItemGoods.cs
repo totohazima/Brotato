@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Text.RegularExpressions;
 
 public class ItemGoods : MonoBehaviour
@@ -15,7 +16,7 @@ public class ItemGoods : MonoBehaviour
     public int itemInfoCount;
     public string[] itemInfo; //아이템 텍스트
     public Text itemPrice;
-    public Text[] infoText;
+    public TextMeshProUGUI[] infoText;
     public Image lockUI;
     public bool isLock;
     [HideInInspector]
@@ -88,7 +89,7 @@ public class ItemGoods : MonoBehaviour
 
         for (int i = 0; i < itemInfoCount; i++)
         {
-            Text text = Instantiate(infoText[0]);
+            TextMeshProUGUI text = Instantiate(infoText[0]);
             text.text = itemInfo[i];
             text.transform.SetParent(itemInfoUI);
         }

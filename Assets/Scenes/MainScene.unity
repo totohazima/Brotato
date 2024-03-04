@@ -766,7 +766,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.687}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410.49493, y: -71.09827}
+  m_AnchoredPosition: {x: 410, y: -50}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &296915868
@@ -784,6 +784,7 @@ MonoBehaviour:
   weaponNum: 0
   weaponTier: 0
   name: 
+  weaponType: 0
   damage: 0
   multipleDamage: []
   criticalChance: 0
@@ -793,8 +794,9 @@ MonoBehaviour:
   afterKnockBack: 0
   range: 0
   penetrate: 0
+  penetrateDamage: 0
   bloodSucking: 0
-  weaponType: 0
+  attackType: 0
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -803,6 +805,7 @@ MonoBehaviour:
   afterCoolTime: 0
   afterRange: 0
   afterPenetrate: 0
+  afterPenetrateDamage: 0
   afterBloodSucking: 0
   typeText: 
   index: 1
@@ -1316,7 +1319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.687}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 590.2969, y: -62.658936}
+  m_AnchoredPosition: {x: 590, y: -50}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &607608431
@@ -1334,6 +1337,7 @@ MonoBehaviour:
   weaponNum: 0
   weaponTier: 0
   name: 
+  weaponType: 0
   damage: 0
   multipleDamage: []
   criticalChance: 0
@@ -1343,8 +1347,9 @@ MonoBehaviour:
   afterKnockBack: 0
   range: 0
   penetrate: 0
+  penetrateDamage: 0
   bloodSucking: 0
-  weaponType: 0
+  attackType: 0
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -1353,6 +1358,7 @@ MonoBehaviour:
   afterCoolTime: 0
   afterRange: 0
   afterPenetrate: 0
+  afterPenetrateDamage: 0
   afterBloodSucking: 0
   typeText: 
   index: 2
@@ -2121,6 +2127,7 @@ MonoBehaviour:
   weaponNum: 0
   weaponTier: 0
   name: 
+  weaponType: 0
   damage: 0
   multipleDamage: []
   criticalChance: 0
@@ -2130,8 +2137,9 @@ MonoBehaviour:
   afterKnockBack: 0
   range: 0
   penetrate: 0
+  penetrateDamage: 0
   bloodSucking: 0
-  weaponType: 0
+  attackType: 0
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -2140,6 +2148,7 @@ MonoBehaviour:
   afterCoolTime: 0
   afterRange: 0
   afterPenetrate: 0
+  afterPenetrateDamage: 0
   afterBloodSucking: 0
   typeText: 
   index: 0
@@ -2973,7 +2982,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.687}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 949.901, y: -45.780518}
+  m_AnchoredPosition: {x: 950, y: -50}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1235061617
@@ -2991,6 +3000,7 @@ MonoBehaviour:
   weaponNum: 0
   weaponTier: 0
   name: 
+  weaponType: 0
   damage: 0
   multipleDamage: []
   criticalChance: 0
@@ -3000,8 +3010,9 @@ MonoBehaviour:
   afterKnockBack: 0
   range: 0
   penetrate: 0
+  penetrateDamage: 0
   bloodSucking: 0
-  weaponType: 0
+  attackType: 0
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -3010,6 +3021,7 @@ MonoBehaviour:
   afterCoolTime: 0
   afterRange: 0
   afterPenetrate: 0
+  afterPenetrateDamage: 0
   afterBloodSucking: 0
   typeText: 
   index: 4
@@ -3433,7 +3445,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.687}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1129.7031, y: -37.341187}
+  m_AnchoredPosition: {x: 1130, y: -50}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1606860016
@@ -3451,6 +3463,7 @@ MonoBehaviour:
   weaponNum: 0
   weaponTier: 0
   name: 
+  weaponType: 0
   damage: 0
   multipleDamage: []
   criticalChance: 0
@@ -3460,8 +3473,9 @@ MonoBehaviour:
   afterKnockBack: 0
   range: 0
   penetrate: 0
+  penetrateDamage: 0
   bloodSucking: 0
-  weaponType: 0
+  attackType: 0
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -3470,6 +3484,7 @@ MonoBehaviour:
   afterCoolTime: 0
   afterRange: 0
   afterPenetrate: 0
+  afterPenetrateDamage: 0
   afterBloodSucking: 0
   typeText: 
   index: 5
@@ -4375,7 +4390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.687}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 770.099, y: -54.219727}
+  m_AnchoredPosition: {x: 770, y: -50}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2026067910
@@ -4393,6 +4408,7 @@ MonoBehaviour:
   weaponNum: 0
   weaponTier: 0
   name: 
+  weaponType: 0
   damage: 0
   multipleDamage: []
   criticalChance: 0
@@ -4402,8 +4418,9 @@ MonoBehaviour:
   afterKnockBack: 0
   range: 0
   penetrate: 0
+  penetrateDamage: 0
   bloodSucking: 0
-  weaponType: 0
+  attackType: 0
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -4412,6 +4429,7 @@ MonoBehaviour:
   afterCoolTime: 0
   afterRange: 0
   afterPenetrate: 0
+  afterPenetrateDamage: 0
   afterBloodSucking: 0
   typeText: 
   index: 3
@@ -4629,7 +4647,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.687}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1309.5051, y: -28.901855}
+  m_AnchoredPosition: {x: 1310, y: -50}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2087554179
@@ -4647,6 +4665,7 @@ MonoBehaviour:
   weaponNum: 0
   weaponTier: 0
   name: 
+  weaponType: 0
   damage: 0
   multipleDamage: []
   criticalChance: 0
@@ -4656,8 +4675,9 @@ MonoBehaviour:
   afterKnockBack: 0
   range: 0
   penetrate: 0
+  penetrateDamage: 0
   bloodSucking: 0
-  weaponType: 0
+  attackType: 0
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -4666,6 +4686,7 @@ MonoBehaviour:
   afterCoolTime: 0
   afterRange: 0
   afterPenetrate: 0
+  afterPenetrateDamage: 0
   afterBloodSucking: 0
   typeText: 
   index: 6

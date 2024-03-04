@@ -55,13 +55,32 @@ public class SettingWeaponInfo : MonoBehaviour
     {
         name.text = infoName.ToString();
         weaponType.text = infoType.ToString();
-        damage.text = infoDamage.ToString();
-        //damage.text = infoDamage + "(";
-        //for (int i = 0; i < weapon.multipleDamaeCount; i++)
-        //{
-        //    damage.text += weapon.multipleDamage[i] + "%";
-        //}
-        //damage.text += ")";
+
+        damage.text = infoDamage + "(";
+        for (int i = 0; i < weapon.multipleDamaeCount; i++)
+        {
+            if(weapon.multipleDamage[i] != 100) //100%는 숫자가 나오지 않음
+            {
+                damage.text += weapon.multipleDamage[i] + "%";
+            }
+            
+            switch(weapon.multipleDamageType[i])
+            {
+                case Weapon.DamageType.MELEE:
+                    damage.text += "<sprite=0>";
+                    break;
+                case Weapon.DamageType.RANGE:
+                    damage.text += "<sprite=1>";
+                    break;
+                case Weapon.DamageType.HEALTH:
+                    damage.text += "<sprite=2>";
+                    break;
+                case Weapon.DamageType.ENGINE:
+                    damage.text += "<sprite=3>";
+                    break;
+            }
+        }
+        damage.text += ")";
 
         criticalChance.text = "x" + weapon.criticalDamage + " (" + weapon.criticalChance + "% 확률)";
         coolTime.text = infoCoolTime + "s";
