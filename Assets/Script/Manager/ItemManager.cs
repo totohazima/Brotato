@@ -70,15 +70,12 @@ public class ItemManager : MonoBehaviour
             GameObject item2 = verticalList.GetChild(i).gameObject;
             Destroy(item2);
         }
-
+         
         List<Item> inventory = game.playerInfo.itemInventory;
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
-            GameObject item = Instantiate(inventory[i].gameObject);
-            item.transform.SetParent(horizontalList);
-
-            GameObject item2 = Instantiate(inventory[i].gameObject);
-            item2.transform.SetParent(verticalList);
+            Instantiate(inventory[i].gameObject, horizontalList);
+            Instantiate(inventory[i].gameObject, verticalList);
         }
     }
 

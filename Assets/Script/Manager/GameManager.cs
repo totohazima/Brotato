@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public GameObject playerPrefab;
     public GameObject mainPlayer;
     public GameObject poolManager;
-    private BoxCollider coll;
+    public GameObject joyStickRayCaster;
     private Transform main;
     [HideInInspector]
     public PoolManager pool;
@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         instance = this;
         SceneManager.UnloadSceneAsync("LoadingScene", UnloadSceneOptions.None);
         pool = poolManager.GetComponent<PoolManager>();
-        coll = GetComponent<BoxCollider>();
         mainPlayer = Resources.Load<GameObject>("Prefabs/Player");
         Instantiate(mainPlayer);
         mainPlayer = GameObject.FindGameObjectWithTag("Player");
@@ -96,12 +95,12 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
             timer -= Time.deltaTime;
 
             waveTimerUI.gameObject.SetActive(true);
-            coll.enabled = true;
+            joyStickRayCaster.SetActive(true);
         }
         else if (isEnd == true)
         {
             waveTimerUI.gameObject.SetActive(false);
-            coll.enabled = false;
+            joyStickRayCaster.SetActive(false);
         }
 
         Vector3 playerPos = mainPlayer.transform.position;

@@ -15,11 +15,9 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     Transform joyTrans;
     Transform stickTrans;
     Vector3 startPos, endPos;
-    GameManager game;
     void Awake()
     {
         instance = this;
-        game = GameManager.instance;
         joyTrans = joyStick.transform;
         stickTrans = stick.transform;
         joyStick.SetActive(false);
@@ -31,10 +29,13 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
+        stickTrans.position = joyTrans.position;
+        joyStick.SetActive(false);
+        isMove = false;
     }
     public void CustomUpdate()
     {
-        if(game.isEnd == true)
+        if(GameManager.instance.isEnd == true)
         {
             stickTrans.position = joyTrans.position;
             joyStick.SetActive(false);
@@ -54,7 +55,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         Vector3 dragPosition = new Vector3(eventData.position.x, eventData.position.y, 0);
         stickTrans.position = dragPosition;
 
-        startPos = game.mainPlayer.transform.position;
+        startPos = GameManager.instance.mainPlayer.transform.position;
         endPos = Camera.main.ScreenToWorldPoint(stickTrans.position);
 
         float a = GetAngle(startPos, endPos);
