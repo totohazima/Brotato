@@ -16,7 +16,6 @@ public class Bullet : MonoBehaviour, ICustomUpdateMono
 
     private Vector3 startPos;
 
-
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -49,7 +48,7 @@ public class Bullet : MonoBehaviour, ICustomUpdateMono
         }
 
         float distance = Vector3.Distance(startPos, transform.position);
-        if(distance >= range)
+        if (distance >= range && range != -1000)
         {
             gameObject.SetActive(false);
         }

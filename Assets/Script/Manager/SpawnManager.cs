@@ -146,14 +146,14 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         Vector3 spawnPoint;
         while (true)
         { 
-            float randomX = Random.Range(-25f, 25f);
-            float randomY = Random.Range(-25f, 25f);
+            float randomX = Random.Range(-250f, 250f);
+            float randomY = Random.Range(-250f, 250f);
 
             Vector3 playerPos = game.mainPlayer.transform.position;
             Vector3 point = new Vector3(randomX, randomY);
 
             float distance = Vector3.Distance(playerPos, point);
-            if (distance > 3)
+            if (distance > 30)
             {
                 spawnPoint = point;
                 break;
@@ -166,10 +166,9 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     {
         Vector3 spawnPoint;
         
-        float randomX = Random.Range(-25f, 25f);
-        float randomY = Random.Range(-25f, 25f);
+        float randomX = Random.Range(-250f, 250f);
+        float randomY = Random.Range(-250f, 250f);
 
-        Vector3 playerPos = game.mainPlayer.transform.position;
         Vector3 point = new Vector3(randomX, randomY);
 
         spawnPoint = point;

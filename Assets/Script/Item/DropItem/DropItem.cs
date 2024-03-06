@@ -6,7 +6,7 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
 {
     public ItemType type;
     public Transform target;
-
+    float moveSpeed;
     public enum ItemType
     {
         METERIAL,
@@ -16,6 +16,7 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
+        moveSpeed = 400f;
         if (type == ItemType.METERIAL)
         {
             GameManager game = GameManager.instance;
@@ -46,8 +47,9 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
 
         if (target != null)
         {
-            Vector3 pos = Vector3.MoveTowards(transform.position, target.position, 60f * Time.deltaTime);
+            Vector3 pos = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
             transform.position = pos;
+            moveSpeed += (moveSpeed / 10);
         }
     }
    

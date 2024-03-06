@@ -70,7 +70,7 @@ public class BasicEnemy : Enemy, ICustomUpdateMono, IDamageCalculate
     private void Move()
     {
         float speed = Random.Range(minSpeed, maxSpeed);
-        moveSpeed = speed / 5000;
+        moveSpeed = speed / 500;
         if (ugliyToothSlow >= 1)
         {
             moveSpeed = moveSpeed - ((moveSpeed / 100) * (ugliyToothSlow * 10));

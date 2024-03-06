@@ -78,7 +78,7 @@ public class MainPlayer : Player, ICustomUpdateMono
             }
             game.curHp += (float)regenHp;
         }
-        moveSpeed = 0.2f * (1 + (speed / 100));
+        moveSpeed = 2f * (1 + (speed / 100));
 
         magnet.radius = magnetRanges * (1 + (magnetRange / 100));
     }
