@@ -13,8 +13,8 @@ public class ItemGoods : MonoBehaviour
     public Transform itemInfoUI;
     int maxCount;
     public Text itemCountType; //-100 아이템, 1초과 한계(0), 1 독특한
-    public int itemInfoCount;
-    public string[] itemInfo; //아이템 텍스트
+    int itemInfoCount;
+    string[] itemInfo; //아이템 텍스트
     public Text itemPrice;
     public TextMeshProUGUI[] infoText;
     public Image lockUI;

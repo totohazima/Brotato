@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, ICustomUpdateMono
 {
     public static JoyStick instance;
 
@@ -24,8 +24,15 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         stickTrans = stick.transform;
         joyStick.SetActive(false);
     }
-
-    void Update()
+    void OnEnable()
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
+    public void CustomUpdate()
     {
         if(game.isEnd == true)
         {

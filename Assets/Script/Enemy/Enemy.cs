@@ -29,11 +29,13 @@ public class Enemy : MonoBehaviour
 
     [Header("Debuff")]
     public int ugliyToothSlow; //못생긴 이빨 효과 슬로우 최대 30%
+
     public enum EnemyName
     {
         BASIC,
     }
-    public IEnumerator Died()
+
+    public virtual IEnumerator Died()
     {
         SpawnManager.instance.enemys.Remove(gameObject);
         float randomX, randomY;

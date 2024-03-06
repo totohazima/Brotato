@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropItem : MonoBehaviour
+public class DropItem : MonoBehaviour, ICustomUpdateMono
 {
     public ItemType type;
     public Transform target;
@@ -15,6 +15,7 @@ public class DropItem : MonoBehaviour
     }
     void OnEnable()
     {
+        CustomUpdateManager.customUpdates.Add(this);
         if (type == ItemType.METERIAL)
         {
             GameManager game = GameManager.instance;
@@ -30,18 +31,26 @@ public class DropItem : MonoBehaviour
             }
         }
     }
-    void Update()
+    void OnDisable()
     {
+        CustomUpdateManager.customUpdates.Remove(this);
+        target = null;
+    }
+
+    public void CustomUpdate()
+    {
+        if(GameManager.instance.isEnd == true)
+        {
+            target = GameManager.instance.mainPlayer.transform;
+        }
+
         if (target != null)
         {
             Vector3 pos = Vector3.MoveTowards(transform.position, target.position, 60f * Time.deltaTime);
             transform.position = pos;
         }
     }
-    void OnDisable()
-    {
-        target = null;
-    }
+   
    
     void OnTriggerStay(Collider other)
     {

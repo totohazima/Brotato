@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainPlayer : Player
+public class MainPlayer : Player, ICustomUpdateMono
 {
-    ForSettingPlayer CharacterImport;
-    MainSceneManager main;
-    GameManager game;
+    private ForSettingPlayer CharacterImport;
+    private MainSceneManager main;
+    private GameManager game;
+    private Rigidbody rigid;
     public Animator anim;
     public CapsuleCollider coll;
     public SpriteRenderer sprite;
     public SphereCollider magnet;
 
-    float magnetRanges; //자석 범위
-    JoyStick joy;
-    float moveSpeed; //캐릭터 이동속도
+    private float magnetRanges; //자석 범위
+    private JoyStick joy;
+    private float moveSpeed; //캐릭터 이동속도
     void Start()
     {
         main = MainSceneManager.instance;
         game = GameManager.instance;
+        rigid = GetComponent<Rigidbody>();
         CharacterImport = main.selectPlayer.GetComponent<ForSettingPlayer>();
         magnetRanges = magnet.radius;
         joy = JoyStick.instance;
@@ -26,7 +28,17 @@ public class MainPlayer : Player
 
         StatSetting(CharacterImport.characterNum);
     }
-    void Update()
+
+    void OnEnable()
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
+
+    public void CustomUpdate()
     {
         if (game.isDie == true)
         {
@@ -34,18 +46,10 @@ public class MainPlayer : Player
         }
         StatApply();
 
-    }
-
-    void FixedUpdate()
-    {
-        if (game.isDie == true)
-        {
-            return;
-        }
-
         if (joy.isMove == true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, joy.moveTarget.position, moveSpeed);
+            Move();
+            //transform.position = Vector3.MoveTowards(transform.position, joy.moveTarget.position, moveSpeed);
             if (joy.moveTarget.position.x < transform.position.x)
             {
                 sprite.flipX = true;
@@ -56,7 +60,13 @@ public class MainPlayer : Player
             }
         }
     }
-
+    private void Move()
+    {
+        Vector3 dirVec = joy.moveTarget.position - rigid.position;
+        Vector3 nextVec = dirVec.normalized * moveSpeed;
+        rigid.MovePosition(rigid.position + nextVec);
+        rigid.velocity = Vector3.zero;
+    }
     void StatApply()
     {
         if (regeneration >= 0)

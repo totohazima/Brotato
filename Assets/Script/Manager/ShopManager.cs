@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class ShopManager : MonoBehaviour
+public class ShopManager : MonoBehaviour, ICustomUpdateMono
 {
     public static ShopManager instance;
 
@@ -38,7 +38,16 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    void Update()
+    void OnEnable()
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
+
+    public void CustomUpdate()
     {
         UiVisualize();
     }

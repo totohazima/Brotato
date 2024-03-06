@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour, ICustomUpdateMono
 {
     public static SpawnManager instance;
     public GameObject[] enemyPrefab;
@@ -27,8 +27,15 @@ public class SpawnManager : MonoBehaviour
         WaveSelect(0);
         spawnTime = game.waveTime[game.waveLevel] / enemyLimit;
     }
-
-    void FixedUpdate()
+    void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
+    public void CustomUpdate()
     {
         if(game.isEnd == true)
         {
@@ -64,7 +71,7 @@ public class SpawnManager : MonoBehaviour
         }
         enemys.Clear();
     }
-    public IEnumerator EnemySpawn()
+    IEnumerator EnemySpawn()
     {
         GameObject[] mark = new GameObject[spawnCount];
         GameObject[] enemy = new GameObject[mark.Length];

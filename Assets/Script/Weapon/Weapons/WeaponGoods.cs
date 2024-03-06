@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class WeaponGoods : Weapon
+public class WeaponGoods : Weapon, ICustomUpdateMono
 {
     public Weapons index;
 
@@ -20,12 +20,16 @@ public class WeaponGoods : Weapon
     public Text knockBackNumUI;
     public Text penetrateNumUI;
     public Text bloodSuckingNumUI;
-    public void Init()
+    void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
-        
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
     }
 
-    void Update()
+    public void CustomUpdate()
     {
         Player player = GameManager.instance.playerInfo;
 
@@ -80,7 +84,7 @@ public class WeaponGoods : Weapon
 
         for (int i = 0; i < multipleDamaeCount; i++)
         {
-            if(multipleDamage[i] == 100) //100%는 숫자가 나오지 않음
+            if(multipleDamage[i] != 100) //100%는 숫자가 나오지 않음
             {
                 damageNumUI.text += multipleDamage[i] + "%";
             }

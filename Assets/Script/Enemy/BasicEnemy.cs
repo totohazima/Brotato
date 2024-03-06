@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemy : Enemy
+public class BasicEnemy : Enemy, ICustomUpdateMono, IDamageCalculate
 {
     public Animator anim;
     public CapsuleCollider coll;
     public SpriteRenderer sprite;
-    Transform target;
-    float moveSpeed;
-    GameManager game;
-    float hitTimer;
-    Rigidbody rigid;
+    private Transform target;
+    private float moveSpeed;
+    private GameManager game;
+    private float hitTimer;
+    private Rigidbody rigid;
 
     void Awake()
     {
@@ -21,9 +21,15 @@ public class BasicEnemy : Enemy
     }
     void OnEnable()
     {
+        CustomUpdateManager.customUpdates.Add(this);
         StatSetting((int)name);
     }
-    void Update()
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
+
+    public void CustomUpdate()
     {
         if(curHealth <= 0)
         {
@@ -50,6 +56,7 @@ public class BasicEnemy : Enemy
             }
         }
         Move();
+        
         if(target.position.x < transform.position.x)
         {
             sprite.flipX = true;
@@ -59,8 +66,8 @@ public class BasicEnemy : Enemy
             sprite.flipX = false;
         }
     }
-
-    void Move()
+ 
+    private void Move()
     {
         float speed = Random.Range(minSpeed, maxSpeed);
         moveSpeed = speed / 5000;
@@ -68,48 +75,80 @@ public class BasicEnemy : Enemy
         {
             moveSpeed = moveSpeed - ((moveSpeed / 100) * (ugliyToothSlow * 10));
         }
-        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed);
-        //Vector3 dirVec = target.position - rigid.position;
-        //Vector3 nextVec = dirVec.normalized * moveSpeed;
-        //rigid.MovePosition(rigid.position + nextVec);
-        //rigid.velocity = Vector3.zero;
+        //transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed);
+        Vector3 dirVec = target.position - rigid.position;
+        Vector3 nextVec = dirVec.normalized * moveSpeed;
+        rigid.MovePosition(rigid.position + nextVec);
+        rigid.velocity = Vector3.zero;
     }
 
-    
-    IEnumerator KnockBack(float power)
+    private IEnumerator KnockBack(Vector3 playerPos, float power)
     {
         yield return new WaitForFixedUpdate();
-        Vector3 playerPos = game.mainPlayer.transform.position;
         Vector3 dir = transform.position - playerPos;
         rigid.AddRelativeForce(dir.normalized * power, ForceMode.Impulse);
     }
-    void OnTriggerEnter(Collider other)
+    public void DamageCalculator(float damage, int per, float accuracy, float criticalChance, float criticalDamage, float knockBack, Vector3 bulletPos)
     {
-        if(other.CompareTag("Bullet"))
+        if (ItemEffect.instance.IsUglyTooth == true)
         {
-            if(ItemEffect.instance.IsUglyTooth == true)
+            if (ugliyToothSlow < 3)
             {
-                if(ugliyToothSlow < 3)
-                {
-                    ugliyToothSlow++;
-                }
+                ugliyToothSlow++;
             }
         }
+        float critical = criticalChance;
+        float nonCritical = 100 - critical;
+        float[] chanceLise = { critical, nonCritical };
+        int index = GameManager.instance.Judgment(chanceLise);
+
+        float finalDamage = 0;
+        if (index == 0)
+        {
+            finalDamage = damage * criticalDamage;
+        }
+        else
+        {
+            finalDamage = damage;
+        }
+
+        curHealth -= finalDamage;
+
+        StartCoroutine(KnockBack(bulletPos, 100 * (knockBack / 100)));
     }
-    void OnTriggerStay(Collider other)
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.CompareTag("Bullet"))
+    //    {
+    //        Bullet bulletInfo = other.GetComponent<Bullet>();
+
+    //        if (ItemEffect.instance.IsUglyTooth == true)
+    //        {
+    //            if (ugliyToothSlow < 3)
+    //            {
+    //                ugliyToothSlow++;
+    //            }
+    //        }
+
+    //        StartCoroutine(KnockBack(other.transform.position, 100 * (bulletInfo.knockBack / 100)));
+
+    //    }
+    //}
+    private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Player"))
         {
             if(isHit == false)
             {
                 //game.HitCalculate(damage);
-                StartCoroutine(KnockBack(3f));
                 isHit = true;
 
                 //Test
-                float damages = 10;
-                curHealth -= damages;
+                curHealth -= 10;
             }
         }
     }
+
+
 }

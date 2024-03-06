@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeStat : MonoBehaviour
+public class UpgradeStat : MonoBehaviour, ICustomUpdateMono
 {
     public LevelUpStat upgradeType;
     public int tier;
@@ -37,6 +37,7 @@ public class UpgradeStat : MonoBehaviour
 
     void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
+        CustomUpdateManager.customUpdates.Add(this);
         int tier1 = 1;
         int tier2 = 0;
         int tier3 = 0;
@@ -46,8 +47,12 @@ public class UpgradeStat : MonoBehaviour
         int index = GameManager.instance.Judgment(chanceLise);
         tier = index;
     }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
 
-    void Update()
+    public void CustomUpdate()
     {
         name.text = upgrade.upgradeName[(int)upgradeType];
 
@@ -111,64 +116,53 @@ public class UpgradeStat : MonoBehaviour
             return;
         }
 
+        switch(upgradeType)
+        {
+            case LevelUpStat.HP_UP:
+                game.playerInfo.maxHealth += upgrade.heart[tier];
+                game.curHp += upgrade.heart[tier];
+                break;
+            case LevelUpStat.REGEN_UP:
+                game.playerInfo.regeneration += upgrade.lungs[tier];
+                break;
+            case LevelUpStat.BLOOD_UP:
+                game.playerInfo.bloodSucking += upgrade.teeth[tier];
+                break;
+            case LevelUpStat.DAMAGE_UP:
+                game.playerInfo.persentDamage += upgrade.triceps[tier];
+                break;
+            case LevelUpStat.MELEEDM_UP:
+                game.playerInfo.meleeDamage += upgrade.forearms[tier];
+                break;
+            case LevelUpStat.RANGEDM_UP:
+                game.playerInfo.rangeDamage += upgrade.shoulders[tier];
+                break;
+            case LevelUpStat.ATKSPEED_UP:
+                game.playerInfo.attackSpeed += upgrade.reflexes[tier];
+                break;
+            case LevelUpStat.CRITICAL_UP:
+                game.playerInfo.criticalChance += upgrade.fingers[tier];
+                break;
+            case LevelUpStat.ENGINE_UP:
+                game.playerInfo.engine += upgrade.skull[tier];
+                break;
+            case LevelUpStat.RANGE_UP:
+                game.playerInfo.range += upgrade.eyes[tier];
+                break;
+            case LevelUpStat.ARMOR_UP:
+                game.playerInfo.armor += upgrade.chest[tier];
+                break;
+            case LevelUpStat.EVASION_UP:
+                game.playerInfo.evasion += upgrade.back[tier];
+                break;
+            case LevelUpStat.SPEED_UP:
+                game.playerInfo.speed += upgrade.legs[tier];
+                break;
+            default:
+                Debug.Log("upgradeType 미 설정");
+                break;
+        }
 
-        if(upgradeType == LevelUpStat.HP_UP)
-        {
-            game.playerInfo.maxHealth += upgrade.heart[tier];
-            game.curHp += upgrade.heart[tier]; ;
-        }
-        else if(upgradeType == LevelUpStat.REGEN_UP)
-        {
-            game.playerInfo.regeneration += upgrade.lungs[tier]; 
-        }
-        else if (upgradeType == LevelUpStat.BLOOD_UP)
-        {
-            game.playerInfo.bloodSucking += upgrade.teeth[tier]; 
-        }
-        else if (upgradeType == LevelUpStat.DAMAGE_UP)
-        {
-            game.playerInfo.persentDamage += upgrade.triceps[tier]; 
-        }
-        else if (upgradeType == LevelUpStat.MELEEDM_UP)
-        {
-            game.playerInfo.meleeDamage += upgrade.forearms[tier];
-        }
-        else if (upgradeType == LevelUpStat.RANGEDM_UP)
-        {
-            game.playerInfo.rangeDamage += upgrade.shoulders[tier]; 
-        }
-        else if (upgradeType == LevelUpStat.ATKSPEED_UP)
-        {
-            game.playerInfo.attackSpeed += upgrade.reflexes[tier]; 
-        }
-        else if (upgradeType == LevelUpStat.CRITICAL_UP)
-        {
-            game.playerInfo.criticalChance += upgrade.fingers[tier]; 
-        }
-        else if (upgradeType == LevelUpStat.ENGINE_UP)
-        {
-            game.playerInfo.engine += upgrade.skull[tier]; 
-        }
-        else if (upgradeType == LevelUpStat.RANGE_UP)
-        {
-            game.playerInfo.range += upgrade.eyes[tier]; 
-        }
-        else if (upgradeType == LevelUpStat.ARMOR_UP)
-        {
-            game.playerInfo.armor += upgrade.chest[tier]; 
-        }
-        else if (upgradeType == LevelUpStat.EVASION_UP)
-        {
-            game.playerInfo.evasion += upgrade.back[tier]; 
-        }
-        else if (upgradeType == LevelUpStat.SPEED_UP)
-        {
-            game.playerInfo.speed += upgrade.legs[tier]; 
-        }
-        else
-        {
-            Debug.Log("스탯 설정 필요");
-        }
 
         game.levelUpChance--;
         

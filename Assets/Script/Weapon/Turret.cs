@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Turret : MonoBehaviour, ICustomUpdateMono
 {
     public float damage;
     public int penetrate;
@@ -16,7 +16,16 @@ public class Turret : MonoBehaviour
         scan = GetComponent<FriendlyScanner>();
         game = GameManager.instance;
     }
-    void FixedUpdate()
+
+    void OnEnable()
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
+    public void CustomUpdate()
     {
         damage = 10 + (game.playerInfo.engine * 0.8f);
         penetrate = 0 + (game.playerInfo.penetrate);
@@ -40,6 +49,6 @@ public class Turret : MonoBehaviour
         Transform bullet = PoolManager.instance.Get(9).transform;
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
-        bullet.GetComponent<Bullet>().Init(damage, penetrate, 100, 0, 0, dir * 100);
+        bullet.GetComponent<Bullet>().Init(damage, penetrate, 300, 100, 0, 0, 0, dir * 100);
     }
 }

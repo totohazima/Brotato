@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FriendlyScanner : MonoBehaviour
+public class FriendlyScanner : MonoBehaviour,ICustomUpdateMono
 {
     public float radius; // 적 탐지 거리
     public Transform target; //실질적 공격 타겟
@@ -13,7 +13,15 @@ public class FriendlyScanner : MonoBehaviour
     float shortDis;
     public Collider[] colliders;
 
-    void Update()
+    void OnEnable()
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
+    public void CustomUpdate()
     {
         if(target != null)
         {

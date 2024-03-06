@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ForSettingPlayer : Player
+public class ForSettingPlayer : Player,ICustomUpdateMono
 {
     public Character index;
     public GameObject playerPrefab;
@@ -19,8 +19,16 @@ public class ForSettingPlayer : Player
 
         StatSetting((int)index);
     }
+    void OnEnable()
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
 
-    void Update()
+    public void CustomUpdate()
     {
         if (main.selectPlayer == gameObject)
         {

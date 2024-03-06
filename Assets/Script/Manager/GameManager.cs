@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, ICustomUpdateMono
 {
     public static GameManager instance;
     [Header("# UI")]
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public float curHp; //현재 체력
     public float maxHp; //최대 체력
     public float curExp;  //현재 경험치
-    float overExp; //레벨업 후 남은 경험치
+    private float overExp; //레벨업 후 남은 경험치
     public float maxExp;  //최대 경험치
     public int levelUpChance; //웨이브 종료 후 레벨 업 할 횟수
     public int waveLevel;   //웨이브 레벨
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public int Money;   //돈
     public int interest; //이자
     public int lootChance; //상자깡 찬스
-    float timer; //시간
+    private float timer; //시간
     public bool isPause; //일시정지
     public bool isEnd; //웨이브 끝
     [Header("# GameObject")]
@@ -47,8 +47,8 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject mainPlayer;
     public GameObject poolManager;
-    BoxCollider coll;
-    Transform main;
+    private BoxCollider coll;
+    private Transform main;
     [HideInInspector]
     public PoolManager pool;
     void Awake()
@@ -72,8 +72,15 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(StageStart());
     }
-
-    void Update()
+    void OnEnable()
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
+    public void CustomUpdate()
     {
         if(isPause == true)//일시정지 활성화
         {
@@ -83,6 +90,20 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+
+        if (isEnd == false)
+        {
+            timer -= Time.deltaTime;
+
+            waveTimerUI.gameObject.SetActive(true);
+            coll.enabled = true;
+        }
+        else if (isEnd == true)
+        {
+            waveTimerUI.gameObject.SetActive(false);
+            coll.enabled = false;
+        }
+
         Vector3 playerPos = mainPlayer.transform.position;
         stageMainCamera.transform.position = new Vector3(playerPos.x, playerPos.y, -10f);
         if(curHp > maxHp)
@@ -90,7 +111,6 @@ public class GameManager : MonoBehaviour
             curHp = maxHp;
         }
         UiVisualize();
-
         if (playerLevel < 20)
         {
             if (curExp >= maxExp)
@@ -121,28 +141,10 @@ public class GameManager : MonoBehaviour
         {
             isDie = false;
         }
-    }
-
-    void FixedUpdate()
-    {
-        if (isEnd == false)
-        {
-            timer -= Time.deltaTime;
-
-            waveTimerUI.gameObject.SetActive(true);
-            coll.enabled = true;
-        }
-        else if(isEnd == true)
-        {
-            waveTimerUI.gameObject.SetActive(false);
-            coll.enabled = false;
-        }
-
-        
 
         if (timer <= 0) //웨이브 클리어 시
         {
-            if(waveLevel == 9)
+            if (waveLevel == 9)
             {
                 GameEnd();
                 return;
@@ -156,18 +158,25 @@ public class GameManager : MonoBehaviour
             ///웨이브 종료 시 경험치 제공
             curExp += 100;
 
-            if (levelUpChance > 0)
-            {
-                main.position = Vector3.zero;
-                LevelUp();
-            }
-            else
-            {
-                main.position = Vector3.zero;
-                ShopOpen();
-            }
+            StartCoroutine(DropItemLootingTime());
+            
         }
     }
+    private IEnumerator DropItemLootingTime() //웨이브 종료 시 떨어진 드랍템이 자동으로 들어오는 시간
+    {
+        yield return new WaitForSeconds(1.5f);
+        if (levelUpChance > 0)
+        {
+            main.position = Vector3.zero;
+            LevelUp();
+        }
+        else
+        {
+            main.position = Vector3.zero;
+            ShopOpen();
+        }
+    }
+    
     IEnumerator Died()
     {
         //isPause = true;
@@ -255,10 +264,10 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public void LevelUp()
+    void LevelUp()
     {
         levelUpUI.SetActive(true);
-        StartCoroutine(LevelUpManager.instance.UpgradeSetting());
+        //StartCoroutine(LevelUpManager.instance.UpgradeSetting());
     }
 
     public void ShopOpen()

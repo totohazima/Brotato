@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelUpManager : MonoBehaviour
+public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
 {
     public static LevelUpManager instance;
 
@@ -14,7 +14,7 @@ public class LevelUpManager : MonoBehaviour
     public Transform upgrade;
     public GameObject[] upgrades;
 
-    Player player;
+    private Player player;
     public bool isSetting;
     void Awake()
     {
@@ -31,8 +31,17 @@ public class LevelUpManager : MonoBehaviour
         }
         player = GameManager.instance.mainPlayer.GetComponent<Player>();
     }
+    void OnEnable()
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+        StartCoroutine(UpgradeSetting());
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
 
-    void Update()
+    public void CustomUpdate()
     {
         statNum[0].text = GameManager.instance.playerLevel.ToString("F0");
         statNum[1].text = player.maxHealth.ToString("F0");
@@ -92,8 +101,6 @@ public class LevelUpManager : MonoBehaviour
     }
     public IEnumerator UpgradeSetting()
     {
-        
-
         for (int i = 0; i < upgrades.Length; i++)
         {
             upgrades[i].SetActive(false);

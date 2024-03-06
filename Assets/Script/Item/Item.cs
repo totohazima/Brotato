@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, ICustomUpdateMono
 {
     public ItemType itemType;
     public string itemCode;
@@ -75,7 +75,15 @@ public class Item : MonoBehaviour
         StatSetting(itemType.ToString());
     }
 
-    void Update()
+    void OnEnable()
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
+    public void CustomUpdate()
     {
         if (itemCount != null)
         {

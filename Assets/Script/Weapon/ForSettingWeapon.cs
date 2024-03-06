@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ForSettingWeapon : Weapon
+public class ForSettingWeapon : Weapon, ICustomUpdateMono
 {
     public Weapons index; //무기 번호
     public GameObject weaponPrefab;
@@ -22,7 +22,15 @@ public class ForSettingWeapon : Weapon
 
         StatSetting((int)index, 0);
     }
-    void Update()
+    void OnEnable()
+    {
+        CustomUpdateManager.customUpdates.Add(this);
+    }
+    void OnDisable()
+    {
+        CustomUpdateManager.customUpdates.Remove(this);
+    }
+    public void CustomUpdate()
     {
         if (main.selectWeapon == gameObject)
         {

@@ -5,7 +5,6 @@ using UnityEngine;
 public class LandMine : MonoBehaviour
 {
     //public GameObject boom;
-
     public GameObject target;
     void OnTriggerEnter(Collider other)
     {
@@ -24,7 +23,7 @@ public class LandMine : MonoBehaviour
 
             Bullet bullet = booms.GetComponent<Bullet>();
             float damage = (10 + (GameManager.instance.playerInfo.engine * 1)) * (1 + (GameManager.instance.playerInfo.explosiveDamage / 100));
-            bullet.Init(damage, 10000, 100, 0f, 0f, Vector3.zero);
+            bullet.Init(damage, 10000, 100, 0, 0, 0, 0, Vector3.zero);
 
             //bullet.damage = 10 + (GameManager.instance.playerInfo.engine * 1);
             //bullet.per = 10000;

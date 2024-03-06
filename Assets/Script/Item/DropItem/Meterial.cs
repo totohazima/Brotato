@@ -8,33 +8,45 @@ public class Meterial : DropItem
     public int moneyValue;
     public float expValue;
 
-
-    void FixedUpdate()
-    {
-        if (GameManager.instance.isEnd == true) //웨이브 끝날 시 자동으로 획득
-        {
-            GameManager.instance.interest += moneyValue;
-            GameManager.instance.curExp += expValue;
-            gameObject.SetActive(false);
-            
-        }
-
-    }
     void OnTriggerEnter(Collider other)
     {
+        GameManager game = GameManager.instance;
         if(other.CompareTag("Player"))
         {
-            GameManager.instance.Money += moneyValue;
-            GameManager.instance.curExp += (expValue * (1 + (GameManager.instance.playerInfo.expGain / 100)));
+            if (game.isEnd == false)
+            {
+                game.Money += moneyValue;
+                game.curExp += (expValue * (1 + (game.playerInfo.expGain / 100)));
+                if (game.interest > 0)
+                {
+                    if (game.interest < moneyValue)
+                    {
+                        game.Money += game.interest;
+                        game.interest = 0;
+                    }
+                    else if (game.interest >= moneyValue)
+                    {
+                        game.Money += moneyValue;
+                        game.interest -= moneyValue;
+                    }
+                }
+
+                
+            }
+            else if(game.isEnd == true)
+            {
+                game.interest += moneyValue;
+                game.curExp += (expValue * (1 + (game.playerInfo.expGain / 100)));
+            }
 
             float monkeyChance = ItemEffect.instance.CuteMonkey();
             monkeyChance /= 100;
             float failure = 1 - monkeyChance;
             float[] chanceLise = { monkeyChance, failure };
-            int index = GameManager.instance.Judgment(chanceLise);
-            if(index == 0)
+            int index = game.Judgment(chanceLise);
+            if (index == 0)
             {
-                GameManager.instance.curHp++;
+                game.curHp++;
             }
             gameObject.SetActive(false);
         }

@@ -299,7 +299,9 @@ MonoBehaviour:
   penetrate: 0
   instantMagnet: 0
   KnockBack: 0
-  items: []
+  explosiveDamage: 0
+  penetrateDamage: 0
+  itemInventory: []
   anim: {fileID: 6862303971545493846}
   coll: {fileID: 1246591149491952414}
   sprite: {fileID: 4066215043182616420}
