@@ -60,7 +60,8 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
         float a = GetAngle(startPos, endPos);
         Vector3 moveTargetPos = ConvertAngleToVector(a);
-        moveTarget.position = new Vector3(moveTargetPos.x + startPos.x, moveTargetPos.y + startPos.y, 0f);
+        Transform playerTrans = GameManager.instance.mainPlayer.transform;
+        moveTarget.position = new Vector3(moveTargetPos.x + playerTrans.position.x, moveTargetPos.y + playerTrans.position.y, 0f);
 
         ///<summary>
         ///특정 오브젝트가 좌표에서 원형으로 벗어나지 못하게 하는 코드

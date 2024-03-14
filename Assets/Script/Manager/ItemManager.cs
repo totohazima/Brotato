@@ -14,12 +14,7 @@ public class ItemManager : MonoBehaviour
     {
         instance = this;
         game = GameManager.instance;
-        poolItems = new List<GameObject>[items.Length];
 
-        for (int i = 0; i < poolItems.Length; i++)
-        {
-            poolItems[i] = new List<GameObject>();
-        }
     }
 
     public void ItemObtain(int index)

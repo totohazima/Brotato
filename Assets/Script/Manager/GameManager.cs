@@ -48,20 +48,27 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public GameObject mainPlayer;
     public GameObject poolManager;
     public GameObject joyStickRayCaster;
+    public Transform itemInfoManager;
     private Transform main;
     [HideInInspector]
     public PoolManager pool;
+
+    public Transform[] wallPos; //0 = 위, 1 = 아래, 2 왼쪽, 3 = 오른쪽
+    public float xMin, xMax, yMin, yMax;
     void Awake()
     {
         instance = this;
         SceneManager.UnloadSceneAsync("LoadingScene", UnloadSceneOptions.None);
         pool = poolManager.GetComponent<PoolManager>();
-        mainPlayer = Resources.Load<GameObject>("Prefabs/Player");
-        Instantiate(mainPlayer);
-        mainPlayer = GameObject.FindGameObjectWithTag("Player");
+        mainPlayer = Instantiate(playerPrefab);
         main = mainPlayer.transform;
         playerInfo = mainPlayer.GetComponent<Player>();
 
+        xMin = wallPos[2].position.x;
+        xMax = wallPos[3].position.x;
+        yMin = wallPos[1].position.y;
+        yMax = wallPos[0].position.y;
+;
         waveTime = new float[WaveStatImporter.instance.waveTime.Length];
         for(int i = 0; i < WaveStatImporter.instance.waveTime.Length; i++)
         {
@@ -103,8 +110,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
             joyStickRayCaster.SetActive(false);
         }
 
-        Vector3 playerPos = mainPlayer.transform.position;
-        stageMainCamera.transform.position = new Vector3(playerPos.x, playerPos.y, -10f);
+
         if(curHp > maxHp)
         {
             curHp = maxHp;
@@ -163,7 +169,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     }
     private IEnumerator DropItemLootingTime() //웨이브 종료 시 떨어진 드랍템이 자동으로 들어오는 시간
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         if (levelUpChance > 0)
         {
             main.position = Vector3.zero;

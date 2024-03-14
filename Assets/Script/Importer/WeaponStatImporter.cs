@@ -8,32 +8,15 @@ public class WeaponStatImporter : MonoBehaviour
 
     [HideInInspector] public int[] weaponNum;
     [HideInInspector] public string[] name;
-
-    [HideInInspector] public float[] damage1;
-    public float[] damage2;
-    public float[] damage3;
-    public float[] damage4;
-
-    public int[] multipleDamageCount;
-    public string[] multipleDamageType;
-
-    public float[] multipleDamage1;
-    public float[] multipleDamage2;
-    public float[] multipleDamage3;
-    public float[] multipleDamage4;
-
-    [HideInInspector] public float[] criticalChance1;
-    public float[] criticalChance2;
-    public float[] criticalChance3;
-    public float[] criticalChance4;
-
-    public float[] criticalDamage1;
-    public float[] criticalDamage2;
-    public float[] criticalDamage3;
-    public float[] criticalDamage4;
-    [HideInInspector] public float[] coolTIme;
-    [HideInInspector] public float[] knockBack;
-    [HideInInspector] public float[] range;
+    [HideInInspector] public float[] damage1, damage2, damage3, damage4;
+    [HideInInspector] public int[] multipleDamageCount;
+    [HideInInspector] public string[] multipleDamageType;
+    [HideInInspector] public float[] multipleDamage1, multipleDamage2, multipleDamage3, multipleDamage4;
+    [HideInInspector] public float[] criticalChance1, criticalChance2, criticalChance3, criticalChance4;
+    [HideInInspector] public float[] criticalDamage1, criticalDamage2, criticalDamage3, criticalDamage4;
+    [HideInInspector] public float[] coolTIme1, coolTIme2, coolTIme3, coolTIme4;
+    [HideInInspector] public float[] knockBack1, knockBack2, knockBack3, knockBack4;
+    [HideInInspector] public float[] range1, range2, range3, range4;
     [HideInInspector] public int[] penetrate;
     [HideInInspector] public float[] penetrateDamage;
     [HideInInspector] public int[] type;
@@ -69,9 +52,21 @@ public class WeaponStatImporter : MonoBehaviour
         criticalDamage3 = new float[data.Count];
         criticalDamage4 = new float[data.Count];
 
-        coolTIme = new float[data.Count];
-        knockBack = new float[data.Count];
-        range = new float[data.Count];
+        coolTIme1 = new float[data.Count];
+        coolTIme2 = new float[data.Count];
+        coolTIme3 = new float[data.Count];
+        coolTIme4 = new float[data.Count];
+
+        knockBack1 = new float[data.Count];
+        knockBack2 = new float[data.Count];
+        knockBack3 = new float[data.Count];
+        knockBack4 = new float[data.Count];
+
+        range1 = new float[data.Count];
+        range2 = new float[data.Count];
+        range3 = new float[data.Count];
+        range4 = new float[data.Count];
+
         penetrate = new int[data.Count];
         penetrateDamage = new float[data.Count];
         type = new int[data.Count];
@@ -112,14 +107,21 @@ public class WeaponStatImporter : MonoBehaviour
             criticalDamage2[i] = (float)data[i]["CriticalDamage2"];
             criticalDamage3[i] = (float)data[i]["CriticalDamage3"];
             criticalDamage4[i] = (float)data[i]["CriticalDamage4"];
-            
 
-            j = (int)data[i]["CoolTime"];
-            coolTIme[i] = j;
-            j = (int)data[i]["KnockBack"];
-            knockBack[i] = j;
-            j = (int)data[i]["Range"];
-            range[i] = j;
+            coolTIme1[i] = (float)data[i]["CoolTime1"];
+            coolTIme2[i] = (float)data[i]["CoolTime2"];
+            coolTIme3[i] = (float)data[i]["CoolTime3"];
+            coolTIme4[i] = (float)data[i]["CoolTime4"];
+
+            knockBack1[i] = (int)data[i]["KnockBack1"];
+            knockBack2[i] = (int)data[i]["KnockBack2"];
+            knockBack3[i] = (int)data[i]["KnockBack3"];
+            knockBack4[i] = (int)data[i]["KnockBack4"];
+
+            range1[i] = (int)data[i]["Range1"];
+            range2[i] = (int)data[i]["Range2"];
+            range3[i] = (int)data[i]["Range3"];
+            range4[i] = (int)data[i]["Range4"];
 
             penetrate[i] = (int)data[i]["Penetrate"];
             j = (int)data[i]["PenetrateDamage"];

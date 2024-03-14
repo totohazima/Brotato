@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 public class Item : MonoBehaviour, ICustomUpdateMono
 {
     public ItemType itemType;
@@ -23,6 +25,8 @@ public class Item : MonoBehaviour, ICustomUpdateMono
     public float[] descendStats;
 
     public bool isMax;
+    public Outline frame;
+    public ItemInfo itemInfo;
     public enum ItemType
     {
         ALIEN_TONGUE,
@@ -99,7 +103,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
 
             if (curCount == maxCount)
             {
-                if(isMax == false)
+                if (isMax == false)
                 {
                     ShopManager.instance.maxItemList.Add((int)itemType);
                 }
@@ -114,10 +118,43 @@ public class Item : MonoBehaviour, ICustomUpdateMono
                 isMax = false;
             }
 
-            
+
         }
 
         
+    }
+    ItemInfo infoObj = null;
+
+    public void PointDown()
+    {
+        frame.effectColor = Color.white;
+        ShowItemInfo();
+    }
+    public void PointUp()
+    {
+        Destroy(infoObj.gameObject);
+        frame.effectColor = Color.black;
+    }
+    public void PointClick()
+    {
+        int itemCount = transform.parent.childCount;
+        Outline[] line = new Outline[itemCount];
+        Transform content = transform.parent;
+        for (int i = 0; i < itemCount; i++)
+        {
+            line[i] = content.GetChild(i).GetComponent<Outline>();
+            line[i].effectColor = Color.black;
+        }
+        frame.effectColor = Color.white;
+    }
+    private void ShowItemInfo()//클릭 시 아이템 정보를 보여주는 용도
+    {
+        //클릭 하고 있을 시 아이템의 하얀 테두리가 나온다
+        //클릭 중에는 itemGoods와 동일한 UI가 나타난다(가격, 잠금버튼 없는)
+        //UI는 중심을 기준으로 x가 +면 왼쪽으로 y가 +면 아이템 아래로 생성한다. (반대의 경우엔 정반대로 생성)
+        //클릭 해제 시 하얀 테두리만 남고 UI는 꺼진다.
+        infoObj = Instantiate(itemInfo, GameManager.instance.itemInfoManager);
+        infoObj.Init(itemType.ToString(), itemImage.sprite, (int)itemType, transform.position);
     }
     public void StatSetting(string names)
     {

@@ -9,9 +9,16 @@ public class CustomUpdateManager : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+
         for (int i = 0; i < customUpdates.Count; i++)
         {
             customUpdates[i].CustomUpdate();
         }
     }
+
+
 }

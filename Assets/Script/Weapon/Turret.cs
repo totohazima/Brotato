@@ -7,7 +7,7 @@ public class Turret : MonoBehaviour, ICustomUpdateMono
     public float damage;
     public int penetrate;
     public float coolTime;
-    float timer;
+    public float timer;
 
     FriendlyScanner scan;
     GameManager game;
@@ -49,6 +49,6 @@ public class Turret : MonoBehaviour, ICustomUpdateMono
         Transform bullet = PoolManager.instance.Get(9).transform;
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
-        bullet.GetComponent<Bullet>().Init(damage, penetrate, 300, 100, 0, 0, 0, dir * 1000);
+        bullet.GetComponent<Bullet>().Init(damage, penetrate, 300, 100, 0, 0, 0, dir * 200);
     }
 }

@@ -38,14 +38,13 @@ public class Weapon : MonoBehaviour
     public float criticalDamage;
     public float coolTime;
     public float knockBack;
-    public float afterKnockBack;
     public float range;
     public int penetrate;
     public float penetrateDamage;
     public float bloodSucking;
 
     public int attackType; //0 = 근거리, 1 = 원거리
-    public int multipleDamaeCount; //데미지 계수 종류
+    public int multipleDamaeCount; //데미지 계수 갯수
     public DamageType[] multipleDamageType; //데미지 계수들
 
     public float afterDamage;
@@ -56,6 +55,7 @@ public class Weapon : MonoBehaviour
     public int afterPenetrate;
     public float afterPenetrateDamage;
     public float afterBloodSucking;
+    public float afterKnockBack;
 
     public string typeText;
     public void StatSetting(int index, int tier)
@@ -82,6 +82,9 @@ public class Weapon : MonoBehaviour
                 }
                 criticalChance = import.criticalChance1[index];
                 criticalDamage = import.criticalDamage1[index];
+                coolTime = import.coolTIme1[index];
+                knockBack = import.knockBack1[index];
+                range = import.range1[index];
                 break;
             case 1:
                 damage = import.damage2[index];
@@ -93,6 +96,9 @@ public class Weapon : MonoBehaviour
                 }
                 criticalChance = import.criticalChance2[index];
                 criticalDamage = import.criticalDamage2[index];
+                coolTime = import.coolTIme2[index];
+                knockBack = import.knockBack2[index];
+                range = import.range2[index];
                 break;
             case 2:
                 damage = import.damage3[index];
@@ -104,6 +110,9 @@ public class Weapon : MonoBehaviour
                 }
                 criticalChance = import.criticalChance3[index];
                 criticalDamage = import.criticalDamage3[index];
+                coolTime = import.coolTIme3[index];
+                knockBack = import.knockBack3[index];
+                range = import.range3[index];
                 break;
             case 3:
                 damage = import.damage4[index];
@@ -115,11 +124,11 @@ public class Weapon : MonoBehaviour
                 }
                 criticalChance = import.criticalChance4[index];
                 criticalDamage = import.criticalDamage4[index];
+                coolTime = import.coolTIme4[index];
+                knockBack = import.knockBack4[index];
+                range = import.range4[index];
                 break;
         }
-        coolTime = import.coolTIme[index];
-        knockBack = import.knockBack[index];
-        range = import.range[index];
         penetrate = import.penetrate[index];
         penetrateDamage = import.penetrateDamage[index];
         attackType = import.type[index];
@@ -134,5 +143,51 @@ public class Weapon : MonoBehaviour
         }
 
 
+    }
+
+    public void BulletSetting()
+    {
+        Player player = GameManager.instance.playerInfo;
+
+        afterDamage = damage;
+        for (int i = 0; i < multipleDamaeCount; i++)
+        {
+            switch (multipleDamageType[i])
+            {
+                case DamageType.MELEE:
+                    afterDamage += player.meleeDamage * (multipleDamage[i] / 100);
+                    break;
+                case DamageType.RANGE:
+                    afterDamage += player.rangeDamage * (multipleDamage[i] / 100);
+                    break;
+                case DamageType.HEALTH:
+                    afterDamage += player.maxHealth * (multipleDamage[i] / 100);
+                    break;
+                case DamageType.ENGINE:
+                    afterDamage += player.engine * (multipleDamage[i] / 100);
+                    break;
+            }
+        }
+        afterDamage *= 1 + (player.persentDamage / 100);
+
+        afterPenetrate = penetrate + player.penetrate;
+        afterCriticalChance = criticalChance + player.criticalChance;
+        afterCriticalDamage = criticalDamage;
+        afterCoolTime = coolTime - ((coolTime / 100) * player.attackSpeed);
+        if(afterCoolTime < 0.05f) //최소 공속 0.05초
+        {
+            afterCoolTime = 0.05f;
+        }
+        if(attackType == (int)WeaponType.MELEE)
+        {
+            afterRange = range + player.range / 2;
+        }
+        else
+        {
+            afterRange = range + player.range;
+        }
+        afterPenetrateDamage = -penetrateDamage + player.penetrateDamage;
+        afterBloodSucking = bloodSucking + player.bloodSucking;
+        afterKnockBack = knockBack + player.KnockBack;
     }
 }

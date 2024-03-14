@@ -8,13 +8,14 @@ public class SettingWeaponInfo : MonoBehaviour
 {
     Weapon weapon;
     public Image myImage;
-    Image weaponImage;
+    WeaponScrip weaponScrip;
 
     public Text name;
     public Text weaponType;
     public TextMeshProUGUI damage;
     public Text criticalChance;
     public Text coolTime;
+    public GameObject knockBackUI;
     public Text knockBack;
     public Text range;
     public GameObject penetrateUI;
@@ -33,11 +34,11 @@ public class SettingWeaponInfo : MonoBehaviour
     void OnEnable()
     {
         weapon = MainSceneManager.instance.selectWeapon.GetComponent<Weapon>();
-        weaponImage = MainSceneManager.instance.selectWeapon.GetComponent<ForSettingWeapon>().weaponImage;
+        weaponScrip = MainSceneManager.instance.selectWeapon.GetComponent<ForSettingWeapon>().weaponScrip;
 
-        myImage.sprite = weaponImage.sprite;
-        infoName = weapon.name;
-        infoType = weapon.weaponType;
+        myImage.sprite = weaponScrip.weaponImage;
+        infoName = weaponScrip.weaponName;
+        infoType = weaponScrip.setType;
         infoDamage = weapon.damage;
         infoCriticalChance = weapon.criticalChance;
         infoCoolTime = weapon.coolTime;
@@ -84,7 +85,16 @@ public class SettingWeaponInfo : MonoBehaviour
 
         criticalChance.text = "x" + weapon.criticalDamage + " (" + weapon.criticalChance + "% È®·ü)";
         coolTime.text = infoCoolTime + "s";
-        knockBack.text = infoKnockBack.ToString();
+        if(infoKnockBack > 0)
+        {
+            knockBackUI.SetActive(true);
+            knockBack.text = infoKnockBack.ToString();
+        }
+        else
+        {
+            knockBackUI.SetActive(false);
+        }
+        
         range.text = infoRange.ToString() + " (" + weapon.typeText + ")";
         if (infoPenetrate > 0)
         {

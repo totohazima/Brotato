@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, ICustomUpdateMono
+public class Bullet : MonoBehaviour
 {
     public float damage;
     private int per;
@@ -22,15 +22,11 @@ public class Bullet : MonoBehaviour, ICustomUpdateMono
     }
     void OnEnable()
     {
-        CustomUpdateManager.customUpdates.Add(this);
         startPos = transform.position;
     }
-    void OnDisable()
-    {
-        CustomUpdateManager.customUpdates.Remove(this);
-    }
+
     
-    public void CustomUpdate()
+    public void FixedUpdate()
     {
         if (GameManager.instance.isPause == true)
         {

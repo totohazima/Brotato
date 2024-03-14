@@ -8,10 +8,8 @@ public class FriendlyScanner : MonoBehaviour,ICustomUpdateMono
     public Transform target; //실질적 공격 타겟
     [SerializeField]
     Transform beforeTarget; //이전 타겟
-    [SerializeField]
-    bool isScan;
     float shortDis;
-    public Collider[] colliders;
+    private Collider[] colliders;
 
     void OnEnable()
     {

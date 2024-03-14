@@ -7,18 +7,18 @@ public class ForSettingWeapon : Weapon, ICustomUpdateMono
 {
     public Weapons index; //무기 번호
     public GameObject weaponPrefab;
-
+    public WeaponScrip weaponScrip;
     MainSceneManager main;
     WeaponStatImporter importer;
     Image image;
-    public Image weaponImage;
+    public Sprite weaponImage;
     
     void Awake()
     {
         main = MainSceneManager.instance;
         importer = WeaponStatImporter.instance;
         image = GetComponent<Image>();
-        weaponImage = transform.GetChild(0).GetComponent<Image>();
+        weaponImage = weaponScrip.weaponImage;
 
         StatSetting((int)index, 0);
     }

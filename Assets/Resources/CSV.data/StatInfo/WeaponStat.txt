@@ -1,9 +1,0 @@
-WeaponNum,Name,Damage1,Damage2,Damage3,Damage4,MultipleDamageCount,MultipleDamageType,MultipleDamage1,MultipleDamage2,MultipleDamage3,MultipleDamage4,CriticalChance1,CriticalChance2,CriticalChance3,CriticalChance4,CriticalDamage1,CriticalDamage2,CriticalDamage3,CriticalDamage4,CoolTime,KnockBack,Range,Penetrate,PenetrateDamage,Type,WeaponType
-0,권총,12,20,30,50,1,RANGE,100,100,100,100,3.0,3.0,3.0,3.0,2.0,2.0,2.0,2.0,1,1,1,1,50,1,총
-1,샷건,3,6,9,9,1,RANGE,80,85,90,100,3.0,3.0,3.0,3.0,2.0,2.0,2.0,2.0,1,1,1,2,30,1,총
-2,창,15,25,40,60,1,MELEE,100,100,100,100,3.0,3.0,3.0,3.0,2.0,2.0,2.0,2.0,1,1,1,0,0,0,원시
-3,슈레더,5,10,15,25,1,RANGE,50,50,50,50,3.0,3.0,3.0,3.0,2.0,2.0,2.0,2.0,1,1,1,3,0,1,"총, 폭발성"
-4,주먹,8,16,32,64,1,MELEE,100,100,100,100,1.5,1.5,1.5,1.5,1.0,1.0,1.0,1.0,1,1,1,0,0,0,비무장
-5,렌치,12,16,20,24,1,MELEE,100,100,100,100,3.0,3.0,3.0,3.0,2.0,2.0,2.0,2.0,1,1,1,0,0,0,도구
-6,스크류 드라이버,8,12,16,20,2,MELEE,50,50,50,50,10.0,15.0,20.0,30.0,2.0,2.0,2.0,2.0,1,1,1,0,0,0,도구
-0,null,0,0,0,0,0,ENGINE,50,50,50,50,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0,0,null

@@ -791,7 +791,6 @@ MonoBehaviour:
   criticalDamage: 0
   coolTime: 0
   knockBack: 0
-  afterKnockBack: 0
   range: 0
   penetrate: 0
   penetrateDamage: 0
@@ -807,9 +806,11 @@ MonoBehaviour:
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
+  afterKnockBack: 0
   typeText: 
   index: 1
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
+  weaponScrip: {fileID: 11400000, guid: 5766999e6ee6db3429930a58e8ca7176, type: 2}
   weaponImage: {fileID: 0}
 --- !u!114 &296915869
 MonoBehaviour:
@@ -1388,7 +1389,6 @@ MonoBehaviour:
   criticalDamage: 0
   coolTime: 0
   knockBack: 0
-  afterKnockBack: 0
   range: 0
   penetrate: 0
   penetrateDamage: 0
@@ -1404,9 +1404,11 @@ MonoBehaviour:
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
+  afterKnockBack: 0
   typeText: 
   index: 2
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
+  weaponScrip: {fileID: 11400000, guid: c740f07deb9d35544a605b4eee2ae2cf, type: 2}
   weaponImage: {fileID: 0}
 --- !u!114 &607608432
 MonoBehaviour:
@@ -2178,7 +2180,6 @@ MonoBehaviour:
   criticalDamage: 0
   coolTime: 0
   knockBack: 0
-  afterKnockBack: 0
   range: 0
   penetrate: 0
   penetrateDamage: 0
@@ -2194,9 +2195,11 @@ MonoBehaviour:
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
+  afterKnockBack: 0
   typeText: 
   index: 0
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
+  weaponScrip: {fileID: 11400000, guid: 221d278d900d21f4aa0e1621210a453b, type: 2}
   weaponImage: {fileID: 0}
 --- !u!114 &937640706
 MonoBehaviour:
@@ -3051,7 +3054,6 @@ MonoBehaviour:
   criticalDamage: 0
   coolTime: 0
   knockBack: 0
-  afterKnockBack: 0
   range: 0
   penetrate: 0
   penetrateDamage: 0
@@ -3067,9 +3069,11 @@ MonoBehaviour:
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
+  afterKnockBack: 0
   typeText: 
   index: 4
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
+  weaponScrip: {fileID: 11400000, guid: bd3de5250cdb6cc408b23435f663c403, type: 2}
   weaponImage: {fileID: 0}
 --- !u!114 &1235061618
 MonoBehaviour:
@@ -3514,7 +3518,6 @@ MonoBehaviour:
   criticalDamage: 0
   coolTime: 0
   knockBack: 0
-  afterKnockBack: 0
   range: 0
   penetrate: 0
   penetrateDamage: 0
@@ -3530,9 +3533,11 @@ MonoBehaviour:
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
+  afterKnockBack: 0
   typeText: 
   index: 5
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
+  weaponScrip: {fileID: 11400000, guid: 1c6a77193f876ce4eb17f32b22e9d9b7, type: 2}
   weaponImage: {fileID: 0}
 --- !u!114 &1606860017
 MonoBehaviour:
@@ -4459,7 +4464,6 @@ MonoBehaviour:
   criticalDamage: 0
   coolTime: 0
   knockBack: 0
-  afterKnockBack: 0
   range: 0
   penetrate: 0
   penetrateDamage: 0
@@ -4475,9 +4479,11 @@ MonoBehaviour:
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
+  afterKnockBack: 0
   typeText: 
   index: 3
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
+  weaponScrip: {fileID: 11400000, guid: f5a9bbc26f0671e409ff9104e2f202fe, type: 2}
   weaponImage: {fileID: 0}
 --- !u!114 &2026067911
 MonoBehaviour:
@@ -4716,7 +4722,6 @@ MonoBehaviour:
   criticalDamage: 0
   coolTime: 0
   knockBack: 0
-  afterKnockBack: 0
   range: 0
   penetrate: 0
   penetrateDamage: 0
@@ -4732,9 +4737,11 @@ MonoBehaviour:
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
+  afterKnockBack: 0
   typeText: 
   index: 6
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
+  weaponScrip: {fileID: 11400000, guid: e87c150b61ff9524788cc6b5db20703b, type: 2}
   weaponImage: {fileID: 0}
 --- !u!114 &2087554180
 MonoBehaviour:

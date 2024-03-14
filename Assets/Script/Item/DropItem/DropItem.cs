@@ -49,7 +49,7 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
         {
             Vector3 pos = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
             transform.position = pos;
-            moveSpeed += (moveSpeed / 10);
+            moveSpeed += (moveSpeed / 50);
         }
     }
    

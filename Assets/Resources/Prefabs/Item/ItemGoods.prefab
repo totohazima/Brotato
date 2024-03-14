@@ -947,8 +947,6 @@ MonoBehaviour:
   itemName: {fileID: 4479642166330127356}
   itemInfoUI: {fileID: 2236369168746860647}
   itemCountType: {fileID: 4744738872189078040}
-  itemInfoCount: 0
-  itemInfo: []
   itemPrice: {fileID: 7192682131417263048}
   infoText:
   - {fileID: 4212478337585249119, guid: e3967a6f8bbbefe48be46c7449585823, type: 3}

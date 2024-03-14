@@ -89,9 +89,8 @@ public class ItemGoods : MonoBehaviour
 
         for (int i = 0; i < itemInfoCount; i++)
         {
-            TextMeshProUGUI text = Instantiate(infoText[0]);
+            TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
             text.text = itemInfo[i];
-            text.transform.SetParent(itemInfoUI);
         }
     }
     

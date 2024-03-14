@@ -24,6 +24,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     List<GameObject>[] list;
     GameManager game;
     ItemManager item;
+    public WeaponScrip[] weapon;
     void Awake()
     {
         instance = this;
@@ -67,14 +68,17 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     {
         int index = 0;
         int[] indexes = new int[5];
-        int[] lockIndexed = new int[lockList.Count];
-        ItemGoods[] itemProduct = new ItemGoods[lockList.Count];
+        //int[] lockIndexed = new int[lockList.Count];
+        //ItemGoods[] itemProduct = new ItemGoods[lockList.Count];
 
         for (int i = 0; i < lockList.Count; i++) //잠금 아이템 
         {
             goodsList.Add(lockList[i]);
-            itemProduct[i] = lockList[i].GetComponent<ItemGoods>();
-            lockIndexed[i] = itemProduct[i].itemNum;
+            //if (lockList[i].GetComponent<ItemGoods>() != null)
+            //{
+            //    itemProduct[i] = lockList[i].GetComponent<ItemGoods>();
+            //    lockIndexed[i] = itemProduct[i].itemNum;
+            //}
         }
 
         while (true) 
@@ -93,10 +97,10 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
                 }
             }
 
-            for(int i = 0; i < lockList.Count; i++) //잠긴 아이템 번호 넣기
-            {
-                indexes[i] = lockIndexed[i];
-            }
+            //for(int i = 0; i < lockList.Count; i++) //잠긴 아이템 번호 넣기
+            //{
+            //    indexes[i] = lockIndexed[i];
+            //}
 
 
             for (int i = 0; i < indexes.Length; i++) //5개 번호가 서로 중복 되는지 체크
@@ -121,15 +125,35 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
         for (int i = 0 + lockList.Count; i < 5; i++)
         {
-            Item items = item.items[indexes[i]];
 
-            GameObject product = Get(0);
-            ItemGoods itemGoods = product.GetComponent<ItemGoods>();
-            itemGoods.Init(items.itemType.ToString(), items.itemSprite.sprite, indexes[i]);
+            float itemChance = 0.65f;
+            float weaponChance = 0.35f;
 
-            itemGoods.transform.SetParent(goodsContent);
-            
-            goodsList.Add(itemGoods.gameObject);
+            float[] chanceLise = { itemChance, weaponChance };
+            int chanceIndex = game.Judgment(chanceLise);
+
+            if (chanceIndex == 0)
+            {
+                Item items = item.items[indexes[i]];
+                GameObject product = Get(0);
+                ItemGoods itemGoods = product.GetComponent<ItemGoods>();
+                itemGoods.Init(items.itemType.ToString(), items.itemSprite.sprite, indexes[i]);
+
+                itemGoods.transform.SetParent(goodsContent);
+
+                goodsList.Add(itemGoods.gameObject);
+            }
+            else
+            {
+                int num = Random.Range(0, weapon.Length);
+                GameObject product = Get(1);
+                WeaponGoods weaponGoods = product.GetComponent<WeaponGoods>();
+
+                weaponGoods.Init(weapon[num].weaponName, weapon[num].setType, weapon[num].weaponNickNames, weapon[num].weaponImage);
+                weaponGoods.transform.SetParent(goodsContent);
+
+                goodsList.Add(weaponGoods.gameObject);
+            }
         }
 
         

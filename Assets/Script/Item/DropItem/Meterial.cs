@@ -39,14 +39,20 @@ public class Meterial : DropItem
                 game.curExp += (expValue * (1 + (game.playerInfo.expGain / 100)));
             }
 
-            float monkeyChance = ItemEffect.instance.CuteMonkey();
-            monkeyChance /= 100;
-            float failure = 1 - monkeyChance;
-            float[] chanceLise = { monkeyChance, failure };
-            int index = game.Judgment(chanceLise);
-            if (index == 0)
+            if (game.curHp < game.maxHp)
             {
-                game.curHp++;
+                float monkeyChance = ItemEffect.instance.CuteMonkey();
+                monkeyChance /= 100;
+                float failure = 1 - monkeyChance;
+                float[] chanceLise = { monkeyChance, failure };
+                int index = game.Judgment(chanceLise);
+                if (index == 0)
+                {
+                    game.curHp++;
+                    string healTxt = "<color=#4CFF52>1</color>";
+                    Transform text = DamageTextManager.instance.TextCreate(0, healTxt).transform;
+                    text.position = transform.position;
+                }
             }
             gameObject.SetActive(false);
         }

@@ -6,11 +6,15 @@ using TMPro;
 public class WeaponGoods : Weapon, ICustomUpdateMono
 {
     public Weapons index;
+    public Image weaponImage;
+    public Text weaponName;
+    public Text weaponSetType;
 
     public Text damageUI;
     public Text criticalUI;
     public Text coolDownUI;
     public Text knockBackUI;
+    public Text rangeUI;
     public Text penetrateUI;
     public Text bloodSuckingUI;
 
@@ -18,17 +22,31 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
     public Text criticalNumUI;
     public Text coolDownNumUI;
     public Text knockBackNumUI;
+    public Text rangeNumUI;
     public Text penetrateNumUI;
     public Text bloodSuckingNumUI;
+
+    private bool isLock;
+    public Image lockUI;
+    public Outline line;
     void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
         CustomUpdateManager.customUpdates.Add(this);
+
     }
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
     }
 
+    public void Init(string name, string setName, Weapons code, Sprite image)
+    {
+        weaponName.text = name;
+        weaponSetType.text = setName;
+        index = code;
+        weaponImage.sprite = image;
+        StatSetting((int)index, 0);
+    }
     public void CustomUpdate()
     {
         Player player = GameManager.instance.playerInfo;
@@ -75,11 +93,11 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         }
         else if(damage > afterDamage)//원본보다 낮을 경우
         {
-            damageNumUI.text = "<color=red>" + afterDamage + "</color> | " + damage + " (";
+            damageNumUI.text = "<color=red>" + afterDamage.ToString("F0") + "</color> | " + damage + " (";
         }
         else //원본보다 높을 경우
         {
-            damageNumUI.text = "<color=#4CFF52>" + afterDamage + "</color> | " + damage + " (";
+            damageNumUI.text = "<color=#4CFF52>" + afterDamage.ToString("F0") + "</color> | " + damage + " (";
         }
 
         for (int i = 0; i < multipleDamaeCount; i++)
@@ -127,7 +145,7 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         {
             coolDownNumUI.text = afterCoolTime + "s";
         }
-        else if (coolTime < afterCoolTime)
+        else if (coolTime > afterCoolTime)
         {
             coolDownNumUI.text = "<color=red>" + afterCoolTime + "</color>s";
         }
@@ -136,7 +154,8 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
             coolDownNumUI.text = "<color=#4CFF52>" + afterCoolTime + "</color>s";
         }
 
-        if (knockBack <= 0)
+        //넉백
+        if (afterKnockBack <= 0)
         {
             knockBackUI.gameObject.SetActive(false);
         }
@@ -145,7 +164,24 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
             knockBackUI.gameObject.SetActive(true);
             knockBackNumUI.text = "<color=#4CFF52>" + afterKnockBack + "</color>";
         }
-        if (penetrate <= 0)
+
+        //범위
+        if (range == afterRange)
+        {
+            rangeNumUI.text = afterRange.ToString();
+        }
+        else if (range > afterRange)
+        {
+            rangeNumUI.text = "<color=red>" + afterRange + "</color>|<color=grey>" + range + "</color>";
+        }
+        else
+        {
+            rangeNumUI.text = "<color=#4CFF52>" + afterRange + "</color>|<color=grey>" + range + "</color>";
+        }
+        rangeNumUI.text += "(" + typeText + ")";
+
+        //관통
+        if (afterPenetrate <= 0)
         {
             penetrateUI.gameObject.SetActive(false);
         }
@@ -154,7 +190,9 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
             penetrateUI.gameObject.SetActive(true);
             penetrateNumUI.text = "<color=#4CFF52>" + afterPenetrate + "</color>";
         }
-        if (bloodSucking <= 0)
+
+        //흡혈
+        if (afterBloodSucking <= 0)
         {
             bloodSuckingUI.gameObject.SetActive(false);
         }
@@ -165,5 +203,38 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         }
 
 
+    }
+
+
+    public void BuyWeapon()
+    {
+        UnLockIng();
+        ShopManager.instance.goodsList.Remove(gameObject);
+        gameObject.SetActive(false);
+    }
+    public void Lock()
+    {
+        if (isLock == false)
+        {
+            LockIng();
+        }
+        else
+        {
+            UnLockIng();
+        }
+    }
+    void LockIng()
+    {
+        ShopManager.instance.lockList.Add(gameObject);
+        isLock = true;
+        line.enabled = true;
+        lockUI.color = new Color(255 / 255f, 255 / 255f, 255 / 255f);
+    }
+    void UnLockIng()
+    {
+        ShopManager.instance.lockList.Remove(gameObject);
+        isLock = false;
+        line.enabled = false;
+        lockUI.color = new Color(150 / 255f, 150 / 255f, 150 / 255f);
     }
 }
