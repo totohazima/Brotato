@@ -5,28 +5,24 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float damage;
-    private int per;
-    private float range;
+    public int per;
+    public float range;
     public float accuracy;
     public float criticalChance;
     public float criticalDamage;
     public float knockBack;
-    Rigidbody rigid;
-    Vector3 direction;
+    private float penetrateDamage; //관통 후 데미지가 깍이는 수치(원래 대미지를 넘을 순 없다)
+    [HideInInspector] public Rigidbody rigid;
+    [HideInInspector] public Vector3 direction;
 
-    private Vector3 startPos;
+    [HideInInspector] public Vector3 startPos;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
     }
-    void OnEnable()
-    {
-        startPos = transform.position;
-    }
 
-    
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         if (GameManager.instance.isPause == true)
         {
@@ -49,7 +45,7 @@ public class Bullet : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    public void Init(float damage, int per, float range, float accuracy, float criticalChance, float criticalDamage, float knockBack, Vector3 dir)
+    public virtual void Init(float damage, int per, float range, float accuracy, float criticalChance, float criticalDamage, float knockBack, float penetrateDamage, Vector3 dir)
     {
         this.damage = damage;
         this.per = per;
@@ -58,6 +54,9 @@ public class Bullet : MonoBehaviour
         this.criticalChance = criticalChance;
         this.criticalDamage = criticalDamage;
         this.knockBack = knockBack;
+        this.penetrateDamage = penetrateDamage;
+
+        startPos = transform.position;
         if (per >= 0)
         {
             direction = dir;
@@ -65,7 +64,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider collision)
+    public virtual void OnTriggerEnter(Collider collision)
     {
         if(collision.CompareTag("Wall"))
         {
@@ -89,35 +88,18 @@ public class Bullet : MonoBehaviour
                 }
                 gameObject.SetActive(false);
             }
-
-            //per--;
-            //Enemy enemy = collision.GetComponentInParent<Enemy>();
-
-            //float critical = criticalChance;
-            //float nonCritical = 100 - critical;
-            //float[] chanceLise = { critical, nonCritical };
-            //int index = GameManager.instance.Judgment(chanceLise);
-
-            //float finalDamage = 0;
-            //if (index == 0)
-            //{
-            //    finalDamage = damage * criticalDamage;
-            //}
-            //else
-            //{
-            //    finalDamage = damage;
-            //}
-
-            //enemy.curHealth -= finalDamage;
-
-            //if (per < 0)
-            //{
-            //    if (rigid != null)
-            //    {
-            //        rigid.velocity = Vector3.zero;
-            //    }
-            //    gameObject.SetActive(false);
-            //}
+            else //사라지지 않았을 경우
+            {
+                if(penetrateDamage <= 0)
+                {
+                    damage = damage + (damage * (penetrateDamage / 100));
+                }
+                else
+                {
+                    return;
+                }
+            }
+            
         }
     }
 }

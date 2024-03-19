@@ -1816,7 +1816,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1967387858530367400}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3719368623210460255}
+        m_TargetAssemblyTypeName: WeaponGoods, Assembly-CSharp
+        m_MethodName: BuyWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3719368623210460255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1876,6 +1888,14 @@ MonoBehaviour:
   bloodSuckingNumUI: {fileID: 4720500281935095460}
   lockUI: {fileID: 7954678749359972731}
   line: {fileID: 5140779487758734153}
+  weaponData:
+  - {fileID: 11400000, guid: 221d278d900d21f4aa0e1621210a453b, type: 2}
+  - {fileID: 11400000, guid: 5766999e6ee6db3429930a58e8ca7176, type: 2}
+  - {fileID: 11400000, guid: c740f07deb9d35544a605b4eee2ae2cf, type: 2}
+  - {fileID: 11400000, guid: f5a9bbc26f0671e409ff9104e2f202fe, type: 2}
+  - {fileID: 11400000, guid: bd3de5250cdb6cc408b23435f663c403, type: 2}
+  - {fileID: 11400000, guid: 1c6a77193f876ce4eb17f32b22e9d9b7, type: 2}
+  - {fileID: 11400000, guid: e87c150b61ff9524788cc6b5db20703b, type: 2}
 --- !u!114 &5140779487758734153
 MonoBehaviour:
   m_ObjectHideFlags: 0

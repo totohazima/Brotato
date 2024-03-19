@@ -12,13 +12,14 @@ public class ForSettingWeapon : Weapon, ICustomUpdateMono
     WeaponStatImporter importer;
     Image image;
     public Sprite weaponImage;
-    
+    public GameObject weaponPrefabs;
     void Awake()
     {
         main = MainSceneManager.instance;
         importer = WeaponStatImporter.instance;
         image = GetComponent<Image>();
         weaponImage = weaponScrip.weaponImage;
+        weaponPrefabs = weaponScrip.weaponPrefab;
 
         StatSetting((int)index, 0);
     }

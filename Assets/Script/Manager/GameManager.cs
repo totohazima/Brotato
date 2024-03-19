@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public GameObject shopUI;
     public GameObject GameClearUI;
     [Header("# Variable")]
-    public Player playerInfo;
+    public PlayerAction playerInfo;
     public int playerLevel; //플레이어 레벨
     public bool isDie; //플레이어 사망
     public float curHp; //현재 체력
@@ -62,7 +62,13 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         pool = poolManager.GetComponent<PoolManager>();
         mainPlayer = Instantiate(playerPrefab);
         main = mainPlayer.transform;
-        playerInfo = mainPlayer.GetComponent<Player>();
+        playerInfo = mainPlayer.GetComponent<PlayerAction>();
+
+        GameObject startWeapon = Instantiate(MainSceneManager.instance.selectWeapon.GetComponent<ForSettingWeapon>().weaponPrefabs);
+        startWeapon.transform.SetParent(playerInfo.weaponMainPos);
+        playerInfo.weapons.Add(startWeapon);
+
+
 
         xMin = wallPos[2].position.x;
         xMax = wallPos[3].position.x;

@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public float penetrateDamage;
     [Header("ITEM")]
     public List<Item> itemInventory;
-    
+    public List<GameObject> weapons;
     public enum Character
     {
         VERSATILE, //다재다능

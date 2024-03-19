@@ -29,11 +29,10 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
             }
         }
         timer += Time.deltaTime;
-        if (timer >= 0.1f)
-        {
-            Scan();
-            timer = 0;
-        }
+        
+        Scan();
+        //timer = 0;
+       
         
     }
 
@@ -68,11 +67,11 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
     /// <summary>
     /// 범위 확인 용 기즈모
     /// </summary>
-#if UNITY_EDITOR
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position, radius);
-    }
-#endif
+//#if UNITY_EDITOR
+//    void OnDrawGizmosSelected()
+//    {
+//        Gizmos.color = Color.green;
+//        Gizmos.DrawSphere(transform.position, radius);
+//    }
+//#endif
 }

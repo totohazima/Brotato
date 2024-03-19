@@ -3711,6 +3711,7 @@ MonoBehaviour:
   explosiveDamage: 0
   penetrateDamage: 0
   itemInventory: []
+  weapons: []
   index: 0
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
 --- !u!114 &1704410213

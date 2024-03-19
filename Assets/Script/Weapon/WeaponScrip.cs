@@ -9,5 +9,5 @@ public class WeaponScrip : ScriptableObject
     public string setType;
     public Weapon.Weapons weaponNickNames;
     public Sprite weaponImage;
-
+    public GameObject weaponPrefab;
 }

@@ -145,7 +145,7 @@ public class Weapon : MonoBehaviour
 
     }
 
-    public void BulletSetting()
+    public void AfterStatSetting()
     {
         Player player = GameManager.instance.playerInfo;
 
@@ -178,7 +178,7 @@ public class Weapon : MonoBehaviour
         {
             afterCoolTime = 0.05f;
         }
-        if(attackType == (int)WeaponType.MELEE)
+        if(attackType == (int)WeaponType.MELEE) //근접은 스탯 사거리 효과 절반만 받음
         {
             afterRange = range + player.range / 2;
         }
@@ -186,8 +186,20 @@ public class Weapon : MonoBehaviour
         {
             afterRange = range + player.range;
         }
+        afterRange = afterRange / 15;
         afterPenetrateDamage = -penetrateDamage + player.penetrateDamage;
         afterBloodSucking = bloodSucking + player.bloodSucking;
         afterKnockBack = knockBack + player.KnockBack;
+    }
+    public float GetAngle(Vector2 start, Vector2 end)//각도구하기
+    {
+        Vector2 vectorPos = end - start;
+        return Mathf.Atan2(vectorPos.y, vectorPos.x) * Mathf.Rad2Deg;
+    }
+
+    public Vector3 ConvertAngleToVector(float _deg, float width)//각도로 좌표 구하기
+    {
+        var rad = _deg * Mathf.Deg2Rad;
+        return new Vector3(Mathf.Cos(rad) * width, Mathf.Sin(rad) * width, 2);
     }
 }

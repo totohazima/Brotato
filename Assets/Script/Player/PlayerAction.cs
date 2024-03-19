@@ -11,12 +11,14 @@ public class PlayerAction : Player, ICustomUpdateMono
     public Animator anim;
     public CapsuleCollider coll;
     public SphereCollider magnet;
-
+    public Transform animTrans;
     private float magnetRanges; //자석 범위
     private JoyStick joy;
     private float moveSpeed; //캐릭터 이동속도
     private float timer; //체력 재생 타이머
     private float regenTime; //체력 재생 시간
+    public Transform weaponMainPos;
+    public bool isFullWeapon; //무기가 꽉찬 경우
     void Start()
     {
         main = MainSceneManager.instance;
@@ -41,6 +43,15 @@ public class PlayerAction : Player, ICustomUpdateMono
 
     public void CustomUpdate()
     {
+        if (weapons.Count >= 6)
+        {
+            isFullWeapon = true;
+        }
+        else
+        {
+            isFullWeapon = false;
+        }
+
         if (game.isDie == true || game.isEnd == true)
         {
             anim.SetBool("Move", false);
@@ -51,20 +62,28 @@ public class PlayerAction : Player, ICustomUpdateMono
         if (joy.isMove == true)
         {
             Move();
-            //transform.position = Vector3.MoveTowards(transform.position, joy.moveTarget.position, moveSpeed);
             if (joy.moveTarget.position.x < transform.position.x)
             {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
+                animTrans.rotation = Quaternion.Euler(0, 180, 0);
             }
             else
             {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                animTrans.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
         else
         {
             anim.SetBool("Move", false);
         }
+
+        for (int i = 0; i < weapons.Count; i++)
+        {
+            float deg = 360 * i / weapons.Count;
+            Vector3 pos = ConvertAngleToVector(deg);
+            weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
+        }
+
+        
 
     }
     private void Move()
@@ -104,6 +123,10 @@ public class PlayerAction : Player, ICustomUpdateMono
         magnet.radius = magnetRanges * (1 + (magnetRange / 100));
     }
 
-
+    private Vector3 ConvertAngleToVector(float _deg)//각도로 좌표 구하기
+    {
+        var rad = _deg * Mathf.Deg2Rad;
+        return new Vector3(Mathf.Cos(rad) * 2.5f, Mathf.Sin(rad) * 2.5f, 0);
+    }
 
 }

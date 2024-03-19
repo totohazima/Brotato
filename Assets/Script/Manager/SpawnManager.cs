@@ -146,14 +146,14 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         Vector3 spawnPoint;
         while (true)
         { 
-            float randomX = Random.Range(-250f, 250f);
-            float randomY = Random.Range(-250f, 250f);
+            float randomX = Random.Range(game.xMin, game.xMax);
+            float randomY = Random.Range(game.yMin, game.yMax);
 
             Vector3 playerPos = game.mainPlayer.transform.position;
             Vector3 point = new Vector3(randomX, randomY);
 
             float distance = Vector3.Distance(playerPos, point);
-            if (distance > 30)
+            if (distance > 5)
             {
                 spawnPoint = point;
                 break;
@@ -165,9 +165,9 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     Vector3 FriendlySpawnPosition() //아군 유닛 소환 위치
     {
         Vector3 spawnPoint;
-        
-        float randomX = Random.Range(-250f, 250f);
-        float randomY = Random.Range(-250f, 250f);
+
+        float randomX = Random.Range(game.xMin, game.xMax);
+        float randomY = Random.Range(game.yMin, game.yMax);
 
         Vector3 point = new Vector3(randomX, randomY);
 

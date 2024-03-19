@@ -16,7 +16,7 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
-        moveSpeed = 400f;
+        moveSpeed = 100f;
         if (type == ItemType.METERIAL)
         {
             GameManager game = GameManager.instance;

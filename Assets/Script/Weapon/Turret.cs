@@ -49,6 +49,7 @@ public class Turret : MonoBehaviour, ICustomUpdateMono
         Transform bullet = PoolManager.instance.Get(9).transform;
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
-        bullet.GetComponent<Bullet>().Init(damage, penetrate, 300, 100, 0, 0, 0, dir * 200);
+        float penDamage = -50 + game.playerInfo.penetrateDamage;
+        bullet.GetComponent<Bullet>().Init(damage, penetrate, 300, 100, 0, 0, 0, penDamage,  dir * 200);
     }
 }

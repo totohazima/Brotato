@@ -17976,7 +17976,7 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
+  m_DynamicPixelsPerUnit: 20
   m_PresetInfoIsWorld: 1
 --- !u!223 &450978166
 Canvas:
@@ -55639,6 +55639,7 @@ MonoBehaviour:
   - {fileID: 6089865304736802569, guid: b3c2a66c07a0570469cb1c25fdec73f7, type: 3}
   - {fileID: 2082192901911532096, guid: 7ebf2cd240513c641920380148ab7434, type: 3}
   - {fileID: 6671146981515543302, guid: 1b766dd18f1f8094f954c75fd67fa03c, type: 3}
+  - {fileID: 6671146981515543302, guid: 3e370fc199bf76845ad4435186985ce1, type: 3}
 --- !u!4 &1479623122
 Transform:
   m_ObjectHideFlags: 0
@@ -150109,7 +150110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 982987666773304348}
   m_Layer: 3
-  m_Name: Ground01
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

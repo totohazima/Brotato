@@ -29,6 +29,8 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
     private bool isLock;
     public Image lockUI;
     public Outline line;
+    [SerializeField]
+    WeaponScrip[] weaponData;
     void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
         CustomUpdateManager.customUpdates.Add(this);
@@ -208,9 +210,19 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
 
     public void BuyWeapon()
     {
-        UnLockIng();
-        ShopManager.instance.goodsList.Remove(gameObject);
-        gameObject.SetActive(false);
+        if (GameManager.instance.playerInfo.isFullWeapon == false)
+        {
+            GameObject weapon = Instantiate(weaponData[(int)index].weaponPrefab);
+            weapon.transform.SetParent(GameManager.instance.playerInfo.weaponMainPos);
+            GameManager.instance.playerInfo.weapons.Add(weapon);
+            UnLockIng();
+            ShopManager.instance.goodsList.Remove(gameObject);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            return;
+        }
     }
     public void Lock()
     {
