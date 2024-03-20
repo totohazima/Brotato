@@ -140,8 +140,6 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
                 //game.HitCalculate(damage);
                 isHit = true;
 
-                //Test
-                curHealth -= 10;
             }
         }
     }

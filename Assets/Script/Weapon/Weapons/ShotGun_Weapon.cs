@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotGun_Weapon : Weapon, ICustomUpdateMono
+public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
 {
-    public Weapons index;
     SpriteRenderer sprite;
     float timer;
     public Transform muzzle;
@@ -29,6 +28,7 @@ public class ShotGun_Weapon : Weapon, ICustomUpdateMono
 
     public void CustomUpdate()
     {
+        ResetStat();
         AfterStatSetting();
         scanner.radius = afterRange;
         StartCoroutine(MuzzleMove());
@@ -98,6 +98,7 @@ public class ShotGun_Weapon : Weapon, ICustomUpdateMono
             bullet.position = muzzle.position;
             bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
             bullet.GetComponent<Bullet>().Init(afterDamage, afterPenetrate, afterRange, 100, afterCriticalChance, afterCriticalDamage, afterKnockBack,afterPenetrateDamage, dir * 200);
+            scanner.target = null;
         }
     }
 }

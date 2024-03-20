@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wrench_Weapon : Weapon, ICustomUpdateMono
+public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
 {
-    public Weapons index;
     SpriteRenderer sprite;
     float timer;
     WeaponScanner scanner;
@@ -37,6 +36,7 @@ public class Wrench_Weapon : Weapon, ICustomUpdateMono
 
     public void CustomUpdate()
     {
+        ResetStat();
         AfterStatSetting();
         scanner.radius = afterRange;
 
@@ -107,18 +107,22 @@ public class Wrench_Weapon : Weapon, ICustomUpdateMono
             Vector3 targetPos = scanner.target.position;
             float dis = Vector3.Distance(transform.position, targetPos);
             float angle = GetAngle(transform.position, targetPos);
-            Vector3 firstPos = ConvertAngleToVector(angle + 90, dis);
-            Vector3 secondPos = ConvertAngleToVector(angle + 45, dis);
-            Vector3 thirdPos = ConvertAngleToVector(angle - 25, dis);
-            Vector3 fourPos = ConvertAngleToVector(angle - 50, dis);
-            Vector3 fivePos = ConvertAngleToVector(angle - 75, dis);
-            Vector3 endPos = ConvertAngleToVector(angle - 90, dis);
-            curvePos[0].position = firstPos;
-            curvePos[1].position = secondPos;
-            curvePos[2].position = thirdPos;
-            curvePos[3].position = fourPos;
-            curvePos[4].position = fivePos;
-            curvePos[5].position = endPos;
+            Vector3 pos1 = ConvertAngleToVector(angle + 90, dis);
+            Vector3 pos2 = ConvertAngleToVector(angle + 45, dis);
+            Vector3 pos3 = ConvertAngleToVector(angle - 15, dis);
+            Vector3 pos4 = ConvertAngleToVector(angle - 30, dis);
+            Vector3 pos5 = ConvertAngleToVector(angle - 45, dis);
+            Vector3 pos6 = ConvertAngleToVector(angle - 60, dis);
+            Vector3 pos7 = ConvertAngleToVector(angle - 75, dis);
+            Vector3 pos8 = ConvertAngleToVector(angle - 90, dis);
+            curvePos[0].position = transform.position + pos1;
+            curvePos[1].position = transform.position + pos2;
+            curvePos[2].position = transform.position + pos3;
+            curvePos[3].position = transform.position + pos4;
+            curvePos[4].position = transform.position + pos5;
+            curvePos[5].position = transform.position + pos6;
+            curvePos[6].position = transform.position + pos7;
+            curvePos[7].position = transform.position + pos8;
 
             isFire = true;
             coll.enabled = true;
@@ -128,16 +132,22 @@ public class Wrench_Weapon : Weapon, ICustomUpdateMono
             yield return new WaitForSeconds(0.04f);
             LeanTween.move(baseObj.gameObject, targetPos, 0.15f).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(0.15f);
-            LeanTween.move(baseObj.gameObject, curvePos[2].position, 0.07f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.07f);
-            LeanTween.move(baseObj.gameObject, curvePos[3].position, 0.07f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.07f);
-            LeanTween.move(baseObj.gameObject, curvePos[4].position, 0.07f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.07f);
-            LeanTween.move(baseObj.gameObject, curvePos[5].position, 0.07f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.07f);
-            LeanTween.move(baseObj.gameObject, transform.position, 0.03f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.03f);
+            LeanTween.move(baseObj.gameObject, curvePos[2].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, curvePos[3].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, curvePos[4].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, curvePos[5].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, curvePos[6].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, curvePos[7].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, transform.position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            ReturnWeapon(baseObj);
+            scanner.target = null;
             coll.enabled = false;
             isFire = false;
         }

@@ -78,7 +78,7 @@ public class PlayerAction : Player, ICustomUpdateMono
 
         for (int i = 0; i < weapons.Count; i++)
         {
-            float deg = 360 * i / weapons.Count;
+            float deg = 360 * i / weapons.Count - 90;
             Vector3 pos = ConvertAngleToVector(deg);
             weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
         }

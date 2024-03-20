@@ -221,7 +221,21 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         }
         else
         {
-            return;
+            List<GameObject> weapons = GameManager.instance.playerInfo.weapons;
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                Weapon_Action weapon = weapons[i].GetComponent<Weapon_Action>();
+                if(weapon.index == index)
+                {
+                    if(weapon.weaponTier == weaponTier || weapon.weaponTier >= 3)
+                    {
+                        weapon.weaponTier++;
+                        UnLockIng();
+                        ShopManager.instance.goodsList.Remove(gameObject);
+                        gameObject.SetActive(false);
+                    }
+                }
+            }
         }
     }
     public void Lock()

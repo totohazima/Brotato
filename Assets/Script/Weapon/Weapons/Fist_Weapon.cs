@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fist_Weapon : Weapon, ICustomUpdateMono
+public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
 {
-    public Weapons index;
     SpriteRenderer sprite;
     float timer;
     WeaponScanner scanner;
@@ -35,6 +34,7 @@ public class Fist_Weapon : Weapon, ICustomUpdateMono
 
     public void CustomUpdate()
     {
+        ResetStat();
         AfterStatSetting();
         scanner.radius = afterRange;
 
@@ -172,6 +172,8 @@ public class Fist_Weapon : Weapon, ICustomUpdateMono
             yield return new WaitForSeconds(0.2f);
             LeanTween.move(baseObj.gameObject, transform.position, 0.17f).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(0.18f);
+            ReturnWeapon(baseObj);
+            scanner.target = null;
             coll.enabled = false;
             isFire = false;
         }
