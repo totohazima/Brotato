@@ -567,7 +567,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Dresscostume19_10: 1250905998
+      Dresscostume19_2: -2087361326
       Dresscostume19_4: 1940641223
       Dresscostume19_15: -1441499475
       Dresscostume19_3: -1316553021
@@ -586,8 +586,8 @@ TextureImporter:
       Dresscostume19_0: 2066547132
       Dresscostume19_18: 110146929
       Dresscostume19_20: -205688453
-      Dresscostume19_2: -2087361326
       Dresscostume19_8: -1875027956
+      Dresscostume19_10: 1250905998
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

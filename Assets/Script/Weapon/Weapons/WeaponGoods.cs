@@ -217,6 +217,7 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
             GameManager.instance.playerInfo.weapons.Add(weapon);
             UnLockIng();
             ShopManager.instance.goodsList.Remove(gameObject);
+            ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
             gameObject.SetActive(false);
         }
         else
@@ -227,12 +228,14 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
                 Weapon_Action weapon = weapons[i].GetComponent<Weapon_Action>();
                 if(weapon.index == index)
                 {
-                    if(weapon.weaponTier == weaponTier || weapon.weaponTier >= 3)
+                    if(weapon.weaponTier == weaponTier && weapon.weaponTier < 3)
                     {
                         weapon.weaponTier++;
                         UnLockIng();
                         ShopManager.instance.goodsList.Remove(gameObject);
+                        ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
                         gameObject.SetActive(false);
+                        break;
                     }
                 }
             }

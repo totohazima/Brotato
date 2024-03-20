@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 /// <summary>
-/// 스크롤에 들어있는 아이템들이 RayCastTarget을 통해 스크롤 작동을 막는 것을 해결하는 스크립트
+/// 스크롤에 들어있는 객체들이 RayCastTarget을 통해 스크롤 작동을 막는 것을 해결하는 스크립트
 /// 버튼이 받은 event를 스크롤에게 넘긴다.
 /// </summary>
 public class ScrollLinkage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler

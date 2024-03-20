@@ -26,7 +26,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
 
     public bool isMax;
     public Outline frame;
-    public ItemInfo itemInfo;
+    public Item_Info itemInfo;
     public enum ItemType
     {
         ALIEN_TONGUE,
@@ -66,11 +66,6 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         WEIRD_FOOD,
         WEIRD_GHOST,
     }
-
-    //void OnEnable()
-    //{
-    //    StatSetting(itemType.ToString());
-    //}
 
     public void Init(ItemType type, Sprite itemSprite)
     {
@@ -123,7 +118,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
 
         
     }
-    ItemInfo infoObj = null;
+    Item_Info infoObj = null;
 
     public void PointDown()
     {

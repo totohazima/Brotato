@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ItemInfo : MonoBehaviour
+public class Item_Info : MonoBehaviour
 {
     public string itemCode;
     public Image itemImage;

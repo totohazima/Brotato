@@ -8,6 +8,7 @@ public class ItemManager : MonoBehaviour
     public static ItemManager instance;
     public Item[] items;
     public Item invenItem; //상점 등에서 보여줄 아이템 오브젝트
+    public Weapon_Object invenWeapon; //상점 등에서 보여줄 무기 오브젝트
     List<GameObject>[] poolItems;
     GameManager game;
     void Awake()
@@ -53,7 +54,26 @@ public class ItemManager : MonoBehaviour
         }
         
     }
+    public void WeaponListUp(Transform horizontalList, Transform verticalList)
+    {
+        for (int i = 0; i < horizontalList.childCount; i++)
+        {
+            GameObject item = horizontalList.GetChild(i).gameObject;
+            Destroy(item);
 
+            GameObject item2 = verticalList.GetChild(i).gameObject;
+            Destroy(item2);
+        }
+        
+        List<GameObject> inventory = game.playerInfo.weapons;
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            Weapon_Action info = inventory[i].GetComponent<Weapon_Action>();
+            invenWeapon.weapon_Object = info;
+            Instantiate(invenWeapon.gameObject, horizontalList);
+            Instantiate(invenWeapon.gameObject, verticalList);
+        }
+    }
     public void ItemListUp(Transform horizontalList, Transform verticalList) 
     {
         
