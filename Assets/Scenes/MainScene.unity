@@ -812,6 +812,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
   weaponScrip: {fileID: 11400000, guid: 5766999e6ee6db3429930a58e8ca7176, type: 2}
   weaponImage: {fileID: 0}
+  weaponPrefabs: {fileID: 0}
 --- !u!114 &296915869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1410,6 +1411,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
   weaponScrip: {fileID: 11400000, guid: c740f07deb9d35544a605b4eee2ae2cf, type: 2}
   weaponImage: {fileID: 0}
+  weaponPrefabs: {fileID: 0}
 --- !u!114 &607608432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2201,6 +2203,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
   weaponScrip: {fileID: 11400000, guid: 221d278d900d21f4aa0e1621210a453b, type: 2}
   weaponImage: {fileID: 0}
+  weaponPrefabs: {fileID: 0}
 --- !u!114 &937640706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3075,6 +3078,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
   weaponScrip: {fileID: 11400000, guid: bd3de5250cdb6cc408b23435f663c403, type: 2}
   weaponImage: {fileID: 0}
+  weaponPrefabs: {fileID: 0}
 --- !u!114 &1235061618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3539,6 +3543,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
   weaponScrip: {fileID: 11400000, guid: 1c6a77193f876ce4eb17f32b22e9d9b7, type: 2}
   weaponImage: {fileID: 0}
+  weaponPrefabs: {fileID: 0}
 --- !u!114 &1606860017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3710,6 +3715,9 @@ MonoBehaviour:
   KnockBack: 0
   explosiveDamage: 0
   penetrateDamage: 0
+  explosiveSize: 0
+  chain: 0
+  bossDamage: 0
   itemInventory: []
   weapons: []
   index: 0
@@ -4205,8 +4213,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1.6352, y: 0}
+  m_SizeDelta: {x: -22.8909, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1905451209
 MonoBehaviour:
@@ -4228,7 +4236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 978012912, guid: 99a24620d31e5ce4e823c32d11e17c2c, type: 3}
+  m_Sprite: {fileID: -4993559181853768443, guid: aedca48a51b4bbb47b18074acee1e7bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4486,6 +4494,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
   weaponScrip: {fileID: 11400000, guid: f5a9bbc26f0671e409ff9104e2f202fe, type: 2}
   weaponImage: {fileID: 0}
+  weaponPrefabs: {fileID: 0}
 --- !u!114 &2026067911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4744,6 +4753,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 4520855896889991333, guid: be1f7725785e2a64c971ef244360e2b0, type: 3}
   weaponScrip: {fileID: 11400000, guid: e87c150b61ff9524788cc6b5db20703b, type: 2}
   weaponImage: {fileID: 0}
+  weaponPrefabs: {fileID: 0}
 --- !u!114 &2087554180
 MonoBehaviour:
   m_ObjectHideFlags: 0

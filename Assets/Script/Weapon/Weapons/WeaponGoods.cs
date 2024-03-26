@@ -145,15 +145,15 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         //ÄðÅ¸ÀÓ UI
         if(coolTime == afterCoolTime)
         {
-            coolDownNumUI.text = afterCoolTime + "s";
+            coolDownNumUI.text = afterCoolTime.ToString("F2") + "s";
         }
         else if (coolTime > afterCoolTime)
         {
-            coolDownNumUI.text = "<color=red>" + afterCoolTime + "</color>s";
+            coolDownNumUI.text = "<color=red>" + afterCoolTime.ToString("F2") + "</color>s";
         }
         else
         {
-            coolDownNumUI.text = "<color=#4CFF52>" + afterCoolTime + "</color>s";
+            coolDownNumUI.text = "<color=#4CFF52>" + afterCoolTime.ToString("F2") + "</color>s";
         }
 
         //³Ë¹é

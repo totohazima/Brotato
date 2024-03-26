@@ -7,7 +7,7 @@ public class ItemStatImporter : MonoBehaviour
     public static ItemStatImporter instance;
 
     [HideInInspector] public string[] itemCode;
-    [HideInInspector] public string[] itemName;
+    //[HideInInspector] public string[] itemName;
     [HideInInspector] public int[] maxCount;
 
     [HideInInspector] public int[] riseCount;
@@ -28,7 +28,7 @@ public class ItemStatImporter : MonoBehaviour
 
         List<Dictionary<string, object>> data = CSVReaderStat.Read("ItemStatInfo");
         itemCode = new string[data.Count];
-        itemName = new string[data.Count];
+        //itemName = new string[data.Count];
         maxCount = new int[data.Count];
 
         riseCount = new int[data.Count];
@@ -41,7 +41,7 @@ public class ItemStatImporter : MonoBehaviour
         for (int i = 0; i < data.Count; i++)
         {
             itemCode[i] = (string)data[i]["ItemCode"];
-            itemName[i] = (string)data[i]["ItemName"];
+            //itemName[i] = (string)data[i]["ItemName"];
             maxCount[i] = (int)data[i]["MaxCount"];
 
             riseCount[i] = (int)data[i]["RiseCount"];

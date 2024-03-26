@@ -22,14 +22,17 @@ public class Player : MonoBehaviour
     public float accuracy;
     public float speed;
 
-    public int consumableHeal;
-    public float magnetRange;
-    public float expGain;
-    public int penetrate;
-    public float instantMagnet;
-    public float KnockBack;
-    public float explosiveDamage;
-    public float penetrateDamage;
+    [HideInInspector] public int consumableHeal;
+    [HideInInspector] public float magnetRange;
+    [HideInInspector] public float expGain;
+    [HideInInspector] public int penetrate;
+    [HideInInspector] public float instantMagnet;
+    [HideInInspector] public float KnockBack;
+    [HideInInspector] public float explosiveDamage;
+    [HideInInspector] public float penetrateDamage;
+    [HideInInspector] public float explosiveSize;
+    [HideInInspector] public int chain;
+    [HideInInspector] public float bossDamage;
     [Header("ITEM")]
     public List<Item> itemInventory;
     public List<GameObject> weapons;
@@ -141,6 +144,15 @@ public class Player : MonoBehaviour
                 case 22:
                     penetrateDamage += item.riseStats[j];
                     break;
+                case 23:
+                    explosiveSize += item.riseStats[j];
+                    break;
+                case 24:
+                    chain += (int)item.riseStats[j];
+                    break;
+                case 25:
+                    bossDamage += item.riseStats[j];
+                    break;
             }
         }
         for (int j = 0; j < item.descendCount; j++)
@@ -212,6 +224,15 @@ public class Player : MonoBehaviour
                     break;
                 case 22:
                     penetrateDamage -= item.descendStats[j];
+                    break;
+                case 23:
+                    explosiveSize -= item.riseStats[j];
+                    break;
+                case 24:
+                    chain -= (int)item.riseStats[j];
+                    break;
+                case 25:
+                    bossDamage -= item.riseStats[j];
                     break;
             }
         }

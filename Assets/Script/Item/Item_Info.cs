@@ -16,8 +16,8 @@ public class Item_Info : MonoBehaviour
     public TextMeshProUGUI[] infoText;
     private int maxCount;
     [HideInInspector]
-    public int itemNum; //itemManager에서 아이템을 찾기 위함
-
+    //public int itemNum; //itemManager에서 아이템을 찾기 위함
+    ItemScrip scriptable;
     private RectTransform rectTrans;
     Vector3 itemPos;
     List<TextMeshProUGUI> texts = new List<TextMeshProUGUI>();
@@ -30,11 +30,13 @@ public class Item_Info : MonoBehaviour
         }
         texts.Clear();
     }
-    public void Init(string code, Sprite image, int index, Vector3 pos)
+    public void Init(ItemScrip scrip, Vector3 pos)
     {
-        itemCode = code;
-        itemImage.sprite = image;
-        itemNum = index;
+        scriptable = scrip;
+        itemCode = scriptable.itemCode.ToString();
+        itemName.text = scriptable.itemName;
+        itemImage.sprite = scriptable.itemSprite;
+        //itemNum = index;
         itemPos = pos;
         StartCoroutine(TextSetting(itemCode));
     }
@@ -51,7 +53,7 @@ public class Item_Info : MonoBehaviour
                 index1 = i;
             }
         }
-        itemName.text = import.itemName[index1];
+        //itemName.text = import.itemName[index1];
         maxCount = import.maxCount[index1];
 
         int index2 = 0;
@@ -76,20 +78,20 @@ public class Item_Info : MonoBehaviour
             itemCountType.text = "독특한";
         }
 
-        itemInfoCount = import.infoCount[index2];
+        itemInfoCount = scriptable.infoText.Length;
 
         itemInfo = new string[itemInfoCount];
-        int j = 0;
-        while (j <= itemInfoCount - 1)
-        {
-            itemInfo[j] = import.infoText[index2 + j];
-            j++;
-        }
+        //int j = 0;
+        //while (j <= itemInfoCount - 1)
+        //{
+        //    itemInfo[j] = import.infoText[index2 + j];
+        //    j++;
+        //}
 
         for (int i = 0; i < itemInfoCount; i++)
         {
             TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
-            text.text = itemInfo[i];
+            text.text = scriptable.infoText[i];
             texts.Add(text);
         }
 
@@ -98,20 +100,20 @@ public class Item_Info : MonoBehaviour
         float y = 0;
         if (Camera.main.ScreenToWorldPoint(itemPos).x >= 0)
         {
-            x = itemPos.x - 120;
+            x = itemPos.x - 200;
         }
         else if(Camera.main.ScreenToWorldPoint(itemPos).x < 0)
         {
-            x = itemPos.x + 120;
+            x = itemPos.x + 200;
         }
 
         if (Camera.main.ScreenToWorldPoint(itemPos).y >= 0)
         {
-            y = itemPos.y - 160 - rectTrans.rect.height;
+            y = itemPos.y - 200 - rectTrans.rect.height;
         }
         else if (Camera.main.ScreenToWorldPoint(itemPos).y < 0)
         {
-            y = itemPos.y + 160 + rectTrans.rect.height;
+            y = itemPos.y + 200 + rectTrans.rect.height;
             
         }
         transform.position = new Vector3(x, y);

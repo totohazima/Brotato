@@ -20,7 +20,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
     public List<GameObject> lockList; //잠긴 아이템(가격은 고정된채로 가장 앞 열로 이동)
     public List<GameObject> goodsList;
-    public List<int> maxItemList;
+    public List<Item.ItemType> maxItemList;
     List<GameObject>[] list;
     GameManager game;
     ItemManager item;
@@ -42,6 +42,8 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
+        ItemManager.instance.WeaponListUp(tabsScroll[0], verticalTabsScroll[0]);
+        ItemManager.instance.ItemListUp(tabsScroll[1], verticalTabsScroll[1]);
     }
     void OnDisable()
     {
@@ -68,40 +70,32 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     {
         int index = 0;
         int[] indexes = new int[5];
-        //int[] lockIndexed = new int[lockList.Count];
-        //ItemGoods[] itemProduct = new ItemGoods[lockList.Count];
 
         for (int i = 0; i < lockList.Count; i++) //잠금 아이템 
         {
             goodsList.Add(lockList[i]);
-            //if (lockList[i].GetComponent<ItemGoods>() != null)
-            //{
-            //    itemProduct[i] = lockList[i].GetComponent<ItemGoods>();
-            //    lockIndexed[i] = itemProduct[i].itemNum;
-            //}
         }
 
         while (true) 
         {
             bool isNot = false;
-            for (int i = 0; i < indexes.Length; i++) //번호를 뽑고 해당 번호 아이템이 리스트에 들어간 경우 다시 뽑는다.(아이템 최대치 이기때문)
+            for (int i = 0; i < indexes.Length; i++) //번호 뽑기
             {
                 index = Random.Range(0, item.items.Length);
                 indexes[i] = index;
+            }
+
+            for (int i = 0; i < indexes.Length; i++) //5개 번호 중에 최대 수량에 도달한 아이템이 있는지 체크
+            {
+                Item.ItemType type = ItemManager.instance.items[indexes[i]].itemCode;
                 for (int j = 0; j < maxItemList.Count; j++)
                 {
-                    if (maxItemList[j] == index)
+                    if (maxItemList[j] == type)
                     {
                         isNot = true;
                     }
                 }
             }
-
-            //for(int i = 0; i < lockList.Count; i++) //잠긴 아이템 번호 넣기
-            //{
-            //    indexes[i] = lockIndexed[i];
-            //}
-
 
             for (int i = 0; i < indexes.Length; i++) //5개 번호가 서로 중복 되는지 체크
             {
@@ -134,10 +128,10 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
             if (chanceIndex == 0)
             {
-                Item items = item.items[indexes[i]];
+                ItemScrip items = item.items[indexes[i]];
                 GameObject product = Get(0);
                 ItemGoods itemGoods = product.GetComponent<ItemGoods>();
-                itemGoods.Init(items.itemType.ToString(), items.itemSprite.sprite, indexes[i]);
+                itemGoods.Init(items, indexes[i]);
 
                 itemGoods.transform.SetParent(goodsContent);
 
@@ -161,7 +155,6 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
     public void ShopReRoll()
     {
-        
         List<GameObject> locks = new List<GameObject>();
         List<GameObject> unLocks = new List<GameObject>();
 

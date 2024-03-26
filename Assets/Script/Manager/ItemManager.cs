@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
-    public Item[] items;
+    public ItemScrip[] items;
     public Item invenItem; //상점 등에서 보여줄 아이템 오브젝트
     public Weapon_Object invenWeapon; //상점 등에서 보여줄 무기 오브젝트
     List<GameObject>[] poolItems;
@@ -21,13 +21,13 @@ public class ItemManager : MonoBehaviour
     public void ItemObtain(int index)
     {
         bool isGet = false;
-        Item getItem = items[index];
+        ItemScrip getItem = items[index];
         Item checkItem = null;
 
         for (int i = 0; i < game.playerInfo.itemInventory.Count; i++)
         {
             Item Item = game.playerInfo.itemInventory[i];
-            if (getItem.itemType == Item.itemType)
+            if (getItem.itemCode == Item.itemType)
             {
                 checkItem = Item;
                 isGet = true;
@@ -37,11 +37,11 @@ public class ItemManager : MonoBehaviour
         
         if (isGet == false)
         {
-            Item item = items[index];
+            ItemScrip item = items[index];
             GameObject objItem = Instantiate(invenItem.gameObject);
             objItem.transform.SetParent(transform);
             Item invenItems = objItem.GetComponent<Item>();
-            invenItems.Init(item.itemType, item.GetComponent<SpriteRenderer>().sprite);
+            invenItems.Init(item);
             invenItems.curCount++;
             game.playerInfo.itemInventory.Add(invenItems);
 
@@ -66,7 +66,7 @@ public class ItemManager : MonoBehaviour
         }
         
         List<GameObject> inventory = game.playerInfo.weapons;
-        for (int i = 0; i < inventory.Count; i++)
+        for (int i = inventory.Count - 1; i >= 0; i--)
         {
             Weapon_Action info = inventory[i].GetComponent<Weapon_Action>();
             invenWeapon.weapon_Object = info;

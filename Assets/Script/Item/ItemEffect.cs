@@ -12,6 +12,7 @@ public class ItemEffect : MonoBehaviour
     int gentleCount;
     int minesCount;
     int turretCount;
+    int treeCount;
     public bool IsUglyTooth; //못생긴 이빨 구매 시 적 타격 시마다 스피드 -10% (3회 중첩)
     public bool isWeirdGhost; // 이상한 유령 구매 시 true가 되며 웨이브 시작 시 체력이 1이됨
     void Awake()
@@ -39,6 +40,8 @@ public class ItemEffect : MonoBehaviour
                     minesCount = item[i].curCount; break;
                 case Item.ItemType.TURRET:
                     turretCount = item[i].curCount; break;
+                case Item.ItemType.TREE:
+                    treeCount = item[i].curCount; break;
                 case Item.ItemType.UGLY_TOOTH:
                     IsUglyTooth = true; break;
                 case Item.ItemType.WEIRD_GHOST:
@@ -55,7 +58,7 @@ public class ItemEffect : MonoBehaviour
     }
     public float Coupon() //상점 가격 5% 할인
     {
-        float effect = 5;
+        float effect = -5;
         effect *= couponCount;
         return effect;
     }
@@ -79,6 +82,11 @@ public class ItemEffect : MonoBehaviour
     public int Turret() //터렛
     {
         int effect = turretCount;
+        return effect;
+    }
+    public int Tree()
+    {
+        int effect = treeCount;
         return effect;
     }
 }

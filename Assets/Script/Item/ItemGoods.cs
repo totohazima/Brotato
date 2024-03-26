@@ -13,15 +13,16 @@ public class ItemGoods : MonoBehaviour
     public Transform itemInfoUI;
     int maxCount;
     public Text itemCountType; //-100 아이템, 1초과 한계(0), 1 독특한
-    int itemInfoCount;
+    int itemInfoCount; //텍스트 갯수
     string[] itemInfo; //아이템 텍스트
     public Text itemPrice;
-    public TextMeshProUGUI[] infoText;
+    public TextMeshProUGUI[] infoText; //텍스트 오브젝트
     public Image lockUI;
     public bool isLock;
     [HideInInspector]
     public int itemNum; //itemManager에서 아이템을 찾기 위함
     public Outline line;
+    ItemScrip scriptable;
     void OnDisable()
     {
         if (isLock == false) //잠긴 아이템은 상점이 꺼져도 텍스트 삭제X
@@ -33,10 +34,11 @@ public class ItemGoods : MonoBehaviour
         }
 
     }
-    public void Init(string code, Sprite image, int index)
+    public void Init(ItemScrip scrip, int index)
     {
-        itemCode = code;
-        itemImage.sprite = image;
+        scriptable = scrip;
+        itemCode = scriptable.itemCode.ToString();
+        itemImage.sprite = scriptable.itemSprite;
         itemNum = index;
         TextSetting(itemCode);
     }
@@ -52,17 +54,17 @@ public class ItemGoods : MonoBehaviour
                 index1 = i;
             }
         }
-        itemName.text = import.itemName[index1];
+        itemName.text = scriptable.itemName;
         maxCount = import.maxCount[index1];
 
-        int index2 = 0;
-        for (int i = 0; i < import.itemCode2.Length; i++)
-        {
-            if (code == import.itemCode2[i])
-            {
-                index2 = i;
-            }
-        }
+        //int index2 = 0;
+        //for (int i = 0; i < import.itemCode2.Length; i++)
+        //{
+        //    if (code == import.itemCode2[i])
+        //    {
+        //        index2 = i;
+        //    }
+        //}
         
         if(maxCount == -100)
         {
@@ -77,19 +79,20 @@ public class ItemGoods : MonoBehaviour
             itemCountType.text = "독특한";
         }
 
-        itemInfoCount = import.infoCount[index2];
+        itemInfoCount = scriptable.infoText.Length;
 
         itemInfo = new string[itemInfoCount];
-        int j = 0;
-        while (j <= itemInfoCount - 1)
-        {
-            itemInfo[j] = import.infoText[index2 + j];
-            j++;
-        }
+        //int j = 0;
+        //while (j <= itemInfoCount - 1)
+        //{
+        //    itemInfo[j] = import.infoText[index2 + j];
+        //    j++;
+        //}
 
         for (int i = 0; i < itemInfoCount; i++)
         {
             TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
+            itemInfo[i] = scriptable.infoText[i];
             text.text = itemInfo[i];
         }
     }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68269a9379ca5bb4480731bbc60492d0, type: 3}
+  m_Name: Evasion
+  m_EditorClassIdentifier: 
+  statName: "% \uD68C\uD53C"
+  statImage: {fileID: 21300000, guid: 5f065ac5681a5744eb0e827a604e8a5c, type: 3}
+  statPlusText:
+  - "% \uD655\uB960\uB85C \uACF5\uACA9\uC744 \uD68C\uD53C\uD569\uB2C8\uB2E4."
+  - "\uCD5C\uB300\uCE58: 60%"
+  statMinusText:
+  - "0% \uD655\uB960\uB85C \uACF5\uACA9\uC744 \uD68C\uD53C\uD569\uB2C8\uB2E4."
+  - "\uCD5C\uB300\uCE58: 60%"

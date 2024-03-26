@@ -27,6 +27,9 @@ public class Item : MonoBehaviour, ICustomUpdateMono
     public bool isMax;
     public Outline frame;
     public Item_Info itemInfo;
+
+    [SerializeField]
+    ItemScrip scriptable;
     public enum ItemType
     {
         ALIEN_TONGUE,
@@ -61,16 +64,18 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         PLANT,
         SCAR,
         SHARP_BULLET,
+        TREE,
         TURRET,
         UGLY_TOOTH,
         WEIRD_FOOD,
         WEIRD_GHOST,
     }
 
-    public void Init(ItemType type, Sprite itemSprite)
+    public void Init(ItemScrip scrip)
     {
-        itemType = type;
-        itemImage.sprite = itemSprite;
+        scriptable = scrip;
+        itemType = scrip.itemCode;
+        itemImage.sprite = scrip.itemSprite;
         StatSetting(itemType.ToString());
     }
 
@@ -96,23 +101,27 @@ public class Item : MonoBehaviour, ICustomUpdateMono
                 itemCount.gameObject.SetActive(true);
             }
 
-            if (curCount == maxCount)
+            if (maxCount != -100)
             {
-                if (isMax == false)
+                if (curCount >= maxCount)
                 {
-                    ShopManager.instance.maxItemList.Add((int)itemType);
+                    if (isMax == false)
+                    {
+                        ShopManager.instance.maxItemList.Add(itemType);
+                        isMax = true;
+                    }
+                    
                 }
-                isMax = true;
-            }
-            else
-            {
-                if (isMax == true)
+                else
                 {
-                    ShopManager.instance.maxItemList.Remove((int)itemType);
+                    if (isMax == true)
+                    {
+                        ShopManager.instance.maxItemList.Remove(itemType);
+                        isMax = false;
+                    }
+                    
                 }
-                isMax = false;
             }
-
 
         }
 
@@ -149,7 +158,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         //UI는 중심을 기준으로 x가 +면 왼쪽으로 y가 +면 아이템 아래로 생성한다. (반대의 경우엔 정반대로 생성)
         //클릭 해제 시 하얀 테두리만 남고 UI는 꺼진다.
         infoObj = Instantiate(itemInfo, GameManager.instance.itemInfoManager);
-        infoObj.Init(itemType.ToString(), itemImage.sprite, (int)itemType, transform.position);
+        infoObj.Init(scriptable, transform.position);
     }
     public void StatSetting(string names)
     {
@@ -164,7 +173,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         }
 
         itemCode = import.itemCode[index];
-        itemName = import.itemName[index];
+        //itemName = import.itemName[index];
         maxCount = import.maxCount[index];
 
         riseCount = import.riseCount[index];

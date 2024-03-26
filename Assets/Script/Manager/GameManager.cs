@@ -222,9 +222,18 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         maxExp = 50 + (30 * (playerLevel));
         ExpBarUI.maxValue = maxExp;
         ExpBarUI.value = curExp;
-        LevelNum.text = "LV." + playerLevel.ToString("F0");
+        LevelNum.text = "LV." + playerLevel + 1;
 
+        if (timer < 5)
+        {
+            waveTimerUI.color = Color.red;
+        }
+        else
+        {
+            waveTimerUI.color = Color.white;
+        }
         waveTimerUI.text = timer.ToString("F0");
+        
         waveLevelUI.text = "¿þÀÌºê " + (waveLevel + 1).ToString("F0");
 
         if(levelUpChance >= 1)

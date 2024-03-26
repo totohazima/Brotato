@@ -102,8 +102,38 @@ public class PlayerAction : Player, ICustomUpdateMono
     void StatApply()
     {
         float regenHp = (float)(0.09 * regeneration);
-        regenTime = 1 / regenHp;
-        if (regenHp > 0)
+        if (regenHp > 1)
+        {
+            float i = 1;
+            while (true)
+            {
+                if (regenHp * i < 1)
+                {
+                    i += 0.01f;
+                    regenTime = i;
+                    break;
+                }
+                i -= 0.01f;
+            }
+        }
+        else if(regenHp < 1)
+        {
+            float i = 1;
+            while (true)
+            {
+                if (regenHp * i < 1)
+                {
+                    regenTime = i;
+                    break;
+                }
+                i += 0.01f;
+            }
+        }
+        else
+        {
+            regenTime = 99f;
+        }
+        if (regenHp > 0) 
         {
             timer += Time.deltaTime;
             if (game.curHp < game.maxHp)
