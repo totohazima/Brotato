@@ -114,8 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1adb15582834c4d4eb8f826e94dd19f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
+  radius: 25
   target: {fileID: 0}
   beforeTarget: {fileID: 0}
-  isScan: 0
-  colliders: []

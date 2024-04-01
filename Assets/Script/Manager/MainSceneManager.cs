@@ -9,6 +9,7 @@ public class MainSceneManager : MonoBehaviour
     public Camera mainCamera;
     public Transform playerSetGroup;
     public Transform weaponSetGroup;
+    public Transform difficultSetGroup;
 
     [Header("# Player")]
     public GameObject selectedPlayer; //프리팹
@@ -24,6 +25,13 @@ public class MainSceneManager : MonoBehaviour
     public GameObject weaponGroup;
     public GameObject[] weapons;
     Transform weaponTrans;
+    [Header("# Difficult")]
+    public GameObject selectedDifficult; //프리팹
+    public GameObject selectDifficult;
+    public GameObject difficultSettingMenu;
+    public GameObject difficultGroup;
+    public GameObject[] difficults;
+    Transform difficultTrans;
 
     public Canvas canvas;
     void Awake()
@@ -48,6 +56,13 @@ public class MainSceneManager : MonoBehaviour
         for(int i = 0; i < weapons.Length; i++)
         {
             weapons[i] = weaponTrans.GetChild(i).gameObject;
+        }
+
+        difficultTrans = difficultGroup.transform;
+        difficults = new GameObject[difficultTrans.childCount];
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            difficults[i] = difficultTrans.GetChild(i).gameObject;
         }
     }
 
@@ -100,13 +115,28 @@ public class MainSceneManager : MonoBehaviour
         }
     }
 
-    public void GameStartBtn() //스테이지 시작버튼
+    public void GoDifficultMenu()
     {
-        if (selectedWeapon == null)
+        if (selectedWeapon == null) //경고 창
         {
             Debug.Log("무기 선택 필요");
         }
         else if (selectedWeapon != null)
+        {
+            selectedPlayer.transform.SetParent(difficultSetGroup);
+            selectedWeapon.transform.SetParent(difficultSetGroup);
+            weaponSettingMenu.SetActive(false);
+            difficultSettingMenu.SetActive(true);
+        }
+    }
+
+    public void GameStartBtn() //스테이지 시작버튼
+    {
+        if (selectedDifficult == null)
+        {
+            Debug.Log("난이도 선택 필요");
+        }
+        else if (selectedDifficult != null)
         {
             canvas.gameObject.SetActive(false);
             Camera.main.gameObject.SetActive(false);

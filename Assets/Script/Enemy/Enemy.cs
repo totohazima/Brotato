@@ -33,11 +33,16 @@ public class Enemy : MonoBehaviour
     public enum EnemyName
     {
         BASIC,
+        RANGER,
+        CHARGER,
+        TANKER,
+        BOSS,
     }
 
     public virtual IEnumerator Died()
     {
         SpawnManager.instance.enemys.Remove(gameObject);
+        ugliyToothSlow = 0;
         float randomX, randomY;
         for (int i = 0; i < moneyDropRate; i++)
         {

@@ -8,11 +8,11 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     public CapsuleCollider coll;
     public SpriteRenderer sprite;
     public Transform textPopUpPos;
-    private Transform target;
-    private float moveSpeed;
-    private GameManager game;
-    private float hitTimer;
-    private Rigidbody rigid;
+    [HideInInspector] public Transform target;
+    [HideInInspector] public float moveSpeed;
+    [HideInInspector] public GameManager game;
+    [HideInInspector] public float hitTimer;
+    [HideInInspector] public Rigidbody rigid;
 
     void Awake()
     {
@@ -20,7 +20,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         rigid = GetComponent<Rigidbody>();
         target = game.mainPlayer.transform;
     }
-    void OnEnable()
+    public virtual void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
         StatSetting((int)name);
@@ -30,7 +30,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         CustomUpdateManager.customUpdates.Remove(this);
     }
 
-    public void CustomUpdate()
+    public virtual void CustomUpdate()
     {
         if(curHealth <= 0)
         {
@@ -81,8 +81,8 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         //transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed);
         Vector3 dirVec = target.position - rigid.position;
         Vector3 nextVec = dirVec.normalized * moveSpeed;
-        rigid.MovePosition(rigid.position + nextVec);
-        rigid.velocity = Vector3.zero;
+        rigid.MovePosition(rigid.position + nextVec); //-nextVec 반대로 감
+        //rigid.velocity = Vector3.zero;
 
         ///이동 제한
         float x = Mathf.Clamp(transform.position.x, game.xMin, game.xMax);
@@ -92,9 +92,9 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
 
     private IEnumerator KnockBack(Vector3 playerPos, float power)
     {
-        yield return new WaitForFixedUpdate();
         Vector3 dir = transform.position - playerPos;
-        rigid.AddRelativeForce(dir.normalized * power, ForceMode.Impulse);
+        rigid.AddForce(dir.normalized * power, ForceMode.Impulse);
+        yield return 0;
     }
     public void DamageCalculator(float damage, int per, float accuracy, float criticalChance, float criticalDamage, float knockBack, Vector3 bulletPos)
     {
@@ -127,7 +127,8 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         text.position = textPopUpPos.position;
 
         curHealth -= finalDamage;
-        StartCoroutine(KnockBack(bulletPos, 100 * (knockBack / 100)));
+        //StartCoroutine(KnockBack(bulletPos, 100 * (knockBack / 100)));
+        StartCoroutine(KnockBack(bulletPos, knockBack * 10));
     }
 
   
@@ -137,9 +138,8 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         {
             if(isHit == false)
             {
-                //game.HitCalculate(damage);
+                game.HitCalculate(damage);
                 isHit = true;
-
             }
         }
     }

@@ -170,7 +170,14 @@ public class UpgradeStat : MonoBehaviour, ICustomUpdateMono
         {
             game.levelUpUI.SetActive(false);
             //여기서 전리품 메뉴로
-            game.ShopOpen();
+            if (game.lootChance > 0)
+            {
+                game.LootMenuOpen();
+            }
+            else
+            {
+                game.ShopOpen();
+            }
         }
         else
         {

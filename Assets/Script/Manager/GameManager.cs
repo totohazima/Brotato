@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public GameObject levelUpUI;
     public GameObject levelUpMarkUi;
     public GameObject[] levelMarks;
+    public GameObject lootOpenUI;
     public GameObject lootCrateMarkUi;
     public GameObject[] lootMarks;
     public GameObject shopUI;
@@ -42,6 +43,11 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     private float timer; //시간
     public bool isPause; //일시정지
     public bool isEnd; //웨이브 끝
+    public bool isSpecialEnemySpawn; //새로운 적의 출현
+    public int eliteEnemyWave; //엘리트와 무리가 등장 0 = 등장X, 1 = 한 라운드만
+    public float enemyRiseDamage; //적 데미지 증가치 %
+    public float enemyRiseHealth; //적 체력 증가치 %
+    public bool doubleBoss; //보스가 2마리 (한 마리는 체력이 25% 감소)
     [Header("# GameObject")]
     public Camera stageMainCamera;
     public GameObject playerPrefab;
@@ -167,7 +173,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
 
             ///test
             ///웨이브 종료 시 경험치 제공
-            curExp += 100;
+            //curExp += 100;
 
             StartCoroutine(DropItemLootingTime());
             
@@ -176,14 +182,17 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     private IEnumerator DropItemLootingTime() //웨이브 종료 시 떨어진 드랍템이 자동으로 들어오는 시간
     {
         yield return new WaitForSeconds(1f);
+        main.position = Vector3.zero;
         if (levelUpChance > 0)
-        {
-            main.position = Vector3.zero;
+        {  
             LevelUp();
+        }
+        else if (lootChance > 0)
+        {
+            LootMenuOpen();
         }
         else
         {
-            main.position = Vector3.zero;
             ShopOpen();
         }
     }
@@ -287,9 +296,11 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     void LevelUp()
     {
         levelUpUI.SetActive(true);
-        //StartCoroutine(LevelUpManager.instance.UpgradeSetting());
     }
-
+    public void LootMenuOpen()
+    {
+        lootOpenUI.SetActive(true);
+    }
     public void ShopOpen()
     {
         shopUI.SetActive(true);
@@ -339,8 +350,10 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         main.selectedPlayer = null;
         main.selectWeapon = null;
         main.selectedWeapon = null;
+        main.selectDifficult = null;
+        main.selectedDifficult = null;
 
-        main.weaponSettingMenu.SetActive(false);
+        main.difficultSettingMenu.SetActive(false);
         main.canvas.gameObject.SetActive(true);
         main.mainCamera.gameObject.SetActive(true);
         LoadingSceneManager.CloseScene("Stage");

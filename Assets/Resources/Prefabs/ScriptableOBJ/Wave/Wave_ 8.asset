@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd1860f0d55c8244a89cfa3c07cf78a2, type: 3}
+  m_Name: Wave_ 8
+  m_EditorClassIdentifier: 
+  spawnEnemys:
+  - {fileID: 3416201615854339148, guid: 6a13eb709e6884d4b984f46fbf3111bb, type: 3}
+  - {fileID: 3416201615854339148, guid: e34ad15e911052746acbc8f0382001b6, type: 3}
+  - {fileID: 3416201615854339148, guid: c6a7b6ee2a01f434d925a3693d660ef9, type: 3}
+  - {fileID: 3416201615854339148, guid: 4693b54f36cd9bf46a3a420a6f3cb48f, type: 3}
+  enemyPersentage:
+  - 20
+  - 30
+  - 30
+  - 20
+  isBossSpawn: 0

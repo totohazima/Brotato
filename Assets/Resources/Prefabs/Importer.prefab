@@ -97,9 +97,18 @@ MonoBehaviour:
   criticalDamage2: []
   criticalDamage3: []
   criticalDamage4: []
-  coolTIme: []
-  knockBack: []
-  range: []
+  coolTIme1: []
+  coolTIme2: []
+  coolTIme3: []
+  coolTIme4: []
+  knockBack1: []
+  knockBack2: []
+  knockBack3: []
+  knockBack4: []
+  range1: []
+  range2: []
+  range3: []
+  range4: []
   penetrate: 
   penetrateDamage: []
   type: 
@@ -174,7 +183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCode: []
-  itemName: []
   maxCount: 
   riseCount: 
   riseStatType: []
@@ -200,3 +208,14 @@ MonoBehaviour:
   enemyCount: 
   enemySpawnCount: 
   waveTime: []
+  wave_Scriptables:
+  - {fileID: 11400000, guid: 88178f4d67577e54bad45611f13a1101, type: 2}
+  - {fileID: 11400000, guid: fa4d322e96e3e0c499da130f45a930fa, type: 2}
+  - {fileID: 11400000, guid: c3805271ae0c2bb448af5447abc56679, type: 2}
+  - {fileID: 11400000, guid: 4e45e23aaa6a0fa43b6f8fca19df845b, type: 2}
+  - {fileID: 11400000, guid: 2b1355504704c984e997c79c9d6396c5, type: 2}
+  - {fileID: 11400000, guid: 4796714aca37e2645a3f2337ec67cb1d, type: 2}
+  - {fileID: 11400000, guid: 0d727f1729b20e74d96d898a307d5398, type: 2}
+  - {fileID: 11400000, guid: 6bc4fef2468adc54f894fc31e1a297f9, type: 2}
+  - {fileID: 11400000, guid: 728b72867d78d14409f07e88cba79f0d, type: 2}
+  - {fileID: 11400000, guid: 83b241446a0e7d34aa30fc6d3792c090, type: 2}

@@ -6,6 +6,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
 {
     public static SpawnManager instance;
     public GameObject[] enemyPrefab;
+    [SerializeField] Wave_Scriptable[] scrip;
     int enemyCount; //소환되어있는 몬스터 수
     public int enemyLimit; //한 웨이브에 소환될 몬스터 수
     public int spawnCount; //한 번에 소환되는 몬스터 수
@@ -18,14 +19,27 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     public List<GameObject> enemys;
     public List<GameObject> mines;
     public List<GameObject> turrets;
+    private List<GameObject>[] pools;
     void Awake()
     {
         instance = this;
         game = GameManager.instance;
-        timer = 100f;
-        mineTimer = 100f;
+        //timer = 100f;
+        //mineTimer = 100f;
         WaveSelect(0);
         spawnTime = game.waveTime[game.waveLevel] / enemyLimit;
+
+        scrip = new Wave_Scriptable[WaveStatImporter.instance.wave_Scriptables.Length];
+        for (int i = 0; i < scrip.Length; i++)
+        {
+            scrip[i] = WaveStatImporter.instance.wave_Scriptables[i];
+        }
+
+        pools = new List<GameObject>[enemyPrefab.Length];
+        for (int i = 0; i < pools.Length; i++)
+        {
+            pools[i] = new List<GameObject>();
+        }
     }
     void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
@@ -85,7 +99,19 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < spawnCount; i++)
         {
-            enemy[i] = PoolManager.instance.Get(1);
+            float[] enemyChance = new float[scrip[game.waveLevel].spawnEnemys.Length];
+            for (int j = 0; j < enemyChance.Length; j++)
+            {
+                enemyChance[i] = scrip[game.waveLevel].enemyPersentage[i];
+            }
+            int index = GameManager.instance.Judgment(enemyChance);
+            for (int k = 0; k < enemyChance.Length; k++)
+            {
+                if(enemyPrefab[k].gameObject == enemyPrefab[index].gameObject)
+                {
+                    enemy[i] = PoolManager.instance.Get(k);
+                }
+            }
             enemy[i].transform.position = mark[i].transform.position;
             enemys.Add(enemy[i]);
             mark[i].SetActive(false);
@@ -153,7 +179,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             Vector3 point = new Vector3(randomX, randomY);
 
             float distance = Vector3.Distance(playerPos, point);
-            if (distance > 2)
+            if (distance > 10)
             {
                 spawnPoint = point;
                 break;
@@ -175,5 +201,50 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
 
         return spawnPoint;
     }
-    
+    private GameObject Spawn(int index)
+    {
+        GameObject select = null;
+
+        //선택한 풀의 놀고있는(비활성화 된) 게임오브젝트 접근
+
+        foreach (GameObject item in pools[index])
+        {
+            if (!item.activeSelf)
+            {
+                //발견하면 select 변수에 할당
+                select = item;
+                select.SetActive(true);
+                break;
+            }
+        }
+        //못 찾았으면
+        if (!select)
+        {
+            //새롭게 생성하고 select에 할당
+            select = Instantiate(enemyPrefab[index], transform);
+            pools[index].Add(select);
+        }
+        return select;
+    }
+    private int Judgment(float[] rando)
+    {
+        int count = rando.Length;
+        float max = 0;
+        for (int i = 0; i < count; i++)
+            max += rando[i];
+
+        float range = UnityEngine.Random.Range(0f, (float)max);
+        //0.1, 0.2, 30, 40
+        double chance = 0;
+        for (int i = 0; i < count; i++)
+        {
+            chance += rando[i];
+            if (range > chance)
+                continue;
+
+            return i;
+        }
+
+        return -1;
+    }
 }
