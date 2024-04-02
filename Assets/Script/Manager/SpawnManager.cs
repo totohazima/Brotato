@@ -108,7 +108,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             {
                 if(enemyPrefab[k].gameObject == enemyPrefab[index].gameObject)
                 {
-                    enemy[i] = PoolManager.instance.Get(k);
+                    enemy[i] = Spawn(k);
                 }
             }
             enemy[i].transform.position = mark[i].transform.position;

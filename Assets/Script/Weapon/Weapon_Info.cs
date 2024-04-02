@@ -44,6 +44,8 @@ public class Weapon_Info : MonoBehaviour
 
         weaponCode = weaponScrip.weaponNickNames;
         weaponImage.sprite = weaponScrip.weaponImage;
+        weaponName.text = weaponScrip.weaponName;
+        weaponType.text = weaponScrip.setType;
         itemPos = pos;
         if(Combined == true)
         {
