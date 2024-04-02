@@ -60,7 +60,7 @@ public class MainSceneManager : MonoBehaviour
 
         difficultTrans = difficultGroup.transform;
         difficults = new GameObject[difficultTrans.childCount];
-        for (int i = 0; i < weapons.Length; i++)
+        for (int i = 0; i < difficults.Length; i++)
         {
             difficults[i] = difficultTrans.GetChild(i).gameObject;
         }

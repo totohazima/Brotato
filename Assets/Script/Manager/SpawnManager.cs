@@ -93,8 +93,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         for (int i = 0; i < spawnCount; i++)
         {
             mark[i] = PoolManager.instance.Get(0);
-            Vector3 pos = EnemySpawnPosition();
-            mark[i].transform.position = pos;
+            mark[i].transform.position = EnemySpawnPosition();
         }
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < spawnCount; i++)
@@ -104,7 +103,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             {
                 enemyChance[i] = scrip[game.waveLevel].enemyPersentage[i];
             }
-            int index = GameManager.instance.Judgment(enemyChance);
+            int index = Judgment(enemyChance);
             for (int k = 0; k < enemyChance.Length; k++)
             {
                 if(enemyPrefab[k].gameObject == enemyPrefab[index].gameObject)
