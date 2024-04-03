@@ -336,7 +336,10 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         spawn.WaveSelect(waveLevel);
         spawn.enemyLimit *= 1 + (ItemEffect.instance.GentleAlien() / 100);
         spawn.spawnTime = waveTime[waveLevel] / spawn.enemyLimit;
-
+        if(spawn.scrip[waveLevel].isBossSpawn == true)
+        {
+            StartCoroutine(spawn.BossSpawn(1));
+        }
         StartCoroutine(spawn.MineSetting());
         StartCoroutine(spawn.TurretSetting());
 

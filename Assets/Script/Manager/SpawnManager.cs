@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
 {
     public static SpawnManager instance;
     public GameObject[] enemyPrefab;
-    [SerializeField] Wave_Scriptable[] scrip;
+    public Wave_Scriptable[] scrip;
     int enemyCount; //소환되어있는 몬스터 수
     public int enemyLimit; //한 웨이브에 소환될 몬스터 수
     public int spawnCount; //한 번에 소환되는 몬스터 수
@@ -101,7 +101,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             float[] enemyChance = new float[scrip[game.waveLevel].spawnEnemys.Length];
             for (int j = 0; j < enemyChance.Length; j++)
             {
-                enemyChance[i] = scrip[game.waveLevel].enemyPersentage[i];
+                enemyChance[j] = scrip[game.waveLevel].enemyPersentage[j];
             }
             int index = Judgment(enemyChance);
             for (int k = 0; k < enemyChance.Length; k++)
@@ -117,6 +117,25 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         }
     }
 
+    public IEnumerator BossSpawn(int index)
+    {
+        GameObject[] mark = new GameObject[index];
+        GameObject[] enemy = new GameObject[mark.Length];
+
+        for (int i = 0; i < mark.Length; i++)
+        {
+            mark[i] = PoolManager.instance.Get(0);
+            mark[i].transform.position = EnemySpawnPosition();
+        }
+        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < mark.Length; i++)
+        {
+            enemy[i] = Spawn(4);
+            enemy[i].transform.position = mark[i].transform.position;
+            enemys.Add(enemy[i]);
+            mark[i].SetActive(false);
+        }
+    }
     public IEnumerator MineSetting()
     {
         GameObject[] mark = new GameObject[ItemEffect.instance.LandMines()];
