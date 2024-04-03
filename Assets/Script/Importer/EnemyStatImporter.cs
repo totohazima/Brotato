@@ -49,39 +49,89 @@ public class EnemyStatImporter : MonoBehaviour
         LootDropRate = new float[data.Count];
 
         for (int i = 0; i < data.Count; i++)
-        {
+        { 
             enemyName[i] = (string)data[i]["EnemyName"];
 
-            int j = (int)data[i]["Health"];
-            health[i] = j;
-            healthWave[i] = (float)data[i]["HealthWave"];
-            j = (int)data[i]["Damage"];
-            damage[i] = j;
-            damageWave[i] = (float)data[i]["DamageWave"];
-            j = (int)data[i]["CoolTime"];
-            coolTime[i] = j;
-            j = (int)data[i]["Armor"];
-            armor[i] = j;
-            j = (int)data[i]["Range"];
-            range[i] = j;
-            j = (int)data[i]["Evasion"];
-            evasion[i] = j;
-            j = (int)data[i]["Accuracy"];
-            accuracy[i] = j;
-            j = (int)data[i]["MinSpeed"];
-            minSpeed[i] = j;
-            j = (int)data[i]["MaxSpeed"];
-            maxSpeed[i] = j;
-            j = (int)data[i]["MoneyDrop"];
-            moneyDropNum[i] = j;
-            j = (int)data[i]["MoneyValue"];
-            moneyValue[i] = j;
-            j = (int)data[i]["ExpValue"];
-            expValue[i] = j;
-            j = (int)data[i]["ConsumDrop"];
-            consumDropRate[i] = j;
-            j = (int)data[i]["LootDrop"];
-            LootDropRate[i] = j;
+            // 각 열의 데이터를 적절한 형식으로 변환하여 저장
+            if (float.TryParse(data[i]["Health"].ToString(), out float healthValue))
+            {
+                health[i] = healthValue;
+            }
+
+            if (float.TryParse(data[i]["HealthWave"].ToString(), out float healthWaveValue))
+            {
+                healthWave[i] = healthWaveValue;
+            }
+
+            if (float.TryParse(data[i]["Damage"].ToString(), out float damageValue))
+            {
+                damage[i] = damageValue;
+            }
+
+            if (float.TryParse(data[i]["DamageWave"].ToString(), out float damageWaveValue))
+            {
+                damageWave[i] = damageWaveValue;
+            }
+
+            if (float.TryParse(data[i]["CoolTime"].ToString(), out float coolTimeValue))
+            {
+                coolTime[i] = coolTimeValue;
+            }
+
+            if (float.TryParse(data[i]["Armor"].ToString(), out float armorValue))
+            {
+                armor[i] = armorValue;
+            }
+
+            if (float.TryParse(data[i]["Range"].ToString(), out float rangeValue))
+            {
+                range[i] = rangeValue;
+            }
+
+            if (float.TryParse(data[i]["Evasion"].ToString(), out float evasionValue))
+            {
+                evasion[i] = evasionValue;
+            }
+
+            if (float.TryParse(data[i]["Accuracy"].ToString(), out float accuracyValue))
+            {
+                accuracy[i] = accuracyValue;
+            }
+
+            if (float.TryParse(data[i]["MinSpeed"].ToString(), out float minSpeedValue))
+            {
+                minSpeed[i] = minSpeedValue;
+            }
+
+            if (float.TryParse(data[i]["MaxSpeed"].ToString(), out float maxSpeedValue))
+            {
+                maxSpeed[i] = maxSpeedValue;
+            }
+
+            if (float.TryParse(data[i]["MoneyDrop"].ToString(), out float moneyDropNumValue))
+            {
+                moneyDropNum[i] = moneyDropNumValue;
+            }
+
+            if (int.TryParse(data[i]["MoneyValue"].ToString(), out int moneyValueValue))
+            {
+                moneyValue[i] = moneyValueValue;
+            }
+
+            if (int.TryParse(data[i]["ExpValue"].ToString(), out int expValueValue))
+            {
+                expValue[i] = expValueValue;
+            }
+
+            if (float.TryParse(data[i]["ConsumDrop"].ToString(), out float consumDropRateValue))
+            {
+                consumDropRate[i] = consumDropRateValue;
+            }
+
+            if (float.TryParse(data[i]["LootDrop"].ToString(), out float LootDropRateValue))
+            {
+                LootDropRate[i] = LootDropRateValue;
+            }
         }
     }
 }

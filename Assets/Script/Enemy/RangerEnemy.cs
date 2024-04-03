@@ -54,7 +54,7 @@ public class RangerEnemy : EnemyAction
             rigid.MovePosition(rigid.position + -nextVec); //-nextVec 반대로 감
             isReady = false;
         }
-        //rigid.velocity = Vector3.zero;
+        rigid.velocity = Vector3.zero;
 
         ///이동 제한
         float x = Mathf.Clamp(transform.position.x, game.xMin, game.xMax);

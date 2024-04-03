@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3416201615854339151}
   - component: {fileID: 3416201615854339150}
+  - component: {fileID: 7290830683213432847}
   m_Layer: 6
   m_Name: Boss1
   m_TagString: Enemy
@@ -51,6 +52,49 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7290830683213432847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3416201615854339148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37743b50c8ce52044bc670152a42ec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 4
+  level: 0
+  maxHealth: 0
+  curHealth: 0
+  healthPerWave: 0
+  damage: 0
+  damagePerWave: 0
+  coolTime: 0
+  armor: 0
+  range: 0
+  evasion: 0
+  accuracy: 0
+  minSpeed: 0
+  maxSpeed: 0
+  moneyDropRate: 0
+  moneyValue: 0
+  expValue: 0
+  consumableDropRate: 0
+  lootDropRate: 0
+  isDie: 0
+  isHit: 0
+  ugliyToothSlow: 0
+  anim: {fileID: 3416201617514675538}
+  coll: {fileID: 3416201617400161520}
+  sprite: {fileID: 3416201617514675539}
+  textPopUpPos: {fileID: 7184403329434434130}
+  target: {fileID: 0}
+  moveSpeed: 0
+  game: {fileID: 0}
+  hitTimer: 0
+  rigid: {fileID: 0}
 --- !u!1 &3416201617400161527
 GameObject:
   m_ObjectHideFlags: 0

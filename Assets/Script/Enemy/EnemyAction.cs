@@ -78,11 +78,11 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         {
             moveSpeed = moveSpeed - ((moveSpeed / 100) * (ugliyToothSlow * 10));
         }
-        //transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed);
+
         Vector3 dirVec = target.position - rigid.position;
         Vector3 nextVec = dirVec.normalized * moveSpeed;
         rigid.MovePosition(rigid.position + nextVec); //-nextVec 반대로 감
-        //rigid.velocity = Vector3.zero;
+        rigid.velocity = Vector3.zero;
 
         ///이동 제한
         float x = Mathf.Clamp(transform.position.x, game.xMin, game.xMax);
@@ -127,7 +127,6 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         text.position = textPopUpPos.position;
 
         curHealth -= finalDamage;
-        //StartCoroutine(KnockBack(bulletPos, 100 * (knockBack / 100)));
         StartCoroutine(KnockBack(bulletPos, knockBack * 10));
     }
 

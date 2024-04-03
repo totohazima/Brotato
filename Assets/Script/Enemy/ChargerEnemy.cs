@@ -104,7 +104,7 @@ public class ChargerEnemy : EnemyAction
         Vector3 nextVec = dirVec.normalized * moveSpeed;
 
         rigid.MovePosition(rigid.position + nextVec);
-        //rigid.velocity = Vector3.zero;
+        rigid.velocity = Vector3.zero;
 
         ///이동 제한
         float x = Mathf.Clamp(transform.position.x, game.xMin, game.xMax);
@@ -136,7 +136,7 @@ public class ChargerEnemy : EnemyAction
         }
 
         rigid.MovePosition(rigid.position + dashVec);
-        //rigid.velocity = Vector3.zero;
+        rigid.velocity = Vector3.zero;
 
         ///이동 제한
         float x = Mathf.Clamp(transform.position.x, game.xMin, game.xMax);

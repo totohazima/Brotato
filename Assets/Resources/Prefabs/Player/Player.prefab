@@ -1628,7 +1628,6 @@ GameObject:
   - component: {fileID: 6588216693158818100}
   - component: {fileID: 7987080202225562965}
   - component: {fileID: 5553451650402829405}
-  - component: {fileID: 3830831762438620836}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1705,6 +1704,9 @@ MonoBehaviour:
   KnockBack: 0
   explosiveDamage: 0
   penetrateDamage: 0
+  explosiveSize: 0
+  chain: 0
+  bossDamage: 0
   itemInventory: []
   weapons: []
   anim: {fileID: 2566686891921379930}
@@ -1713,15 +1715,3 @@ MonoBehaviour:
   animTrans: {fileID: 4277072844136297428}
   weaponMainPos: {fileID: 814681150070084302}
   isFullWeapon: 0
---- !u!114 &3830831762438620836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8567391312352320930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c8fa71a8548a77469af2c60b38f2d70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -51,34 +51,75 @@ public class PlayerStatImporter : MonoBehaviour
             characterNum[i] = (int)data[i]["PlayerNum"];
             characterName[i] = (string)data[i]["Name"];
 
-            int j = (int)data[i]["Health"];
-            maxHealth[i] = j;
-            j = (int)data[i]["Regeneration"];
-            regeneration[i] = j;
-            j = (int)data[i]["BloodSucking"];
-            bloodSucking[i] = j;
-            j = (int)data[i]["PersentDamage"];
-            persentDamage[i] = j;
-            j = (int)data[i]["MeleeDamage"];
-            meleeDamage[i] = j;
-            j = (int)data[i]["RangeDamage"];
-            rangeDamage[i] = j;
-            j = (int)data[i]["AttackSpeed"];
-            attackSpeed[i] = j;
-            j = (int)data[i]["CriticalChance"];
-            criticalChance[i] = j;
-            j = (int)data[i]["Engine"];
-            engine[i] = j;
-            j = (int)data[i]["Range"];
-            range[i] = j;
-            j = (int)data[i]["Armor"];
-            armor[i] = j;
-            j = (int)data[i]["Evasion"];
-            evasion[i] = j;
-            j = (int)data[i]["Accuracy"];
-            accuracy[i] = j;
-            j = (int)data[i]["Speed"];
-            speed[i] = j;
+            if (float.TryParse(data[i]["Health"].ToString(), out float healthValue))
+            {
+                maxHealth[i] = healthValue;
+            }
+
+            if (float.TryParse(data[i]["Regeneration"].ToString(), out float regenerationValue))
+            {
+                regeneration[i] = regenerationValue;
+            }
+
+            if (float.TryParse(data[i]["BloodSucking"].ToString(), out float bloodSuckingValue))
+            {
+                bloodSucking[i] = bloodSuckingValue;
+            }
+
+            if (float.TryParse(data[i]["PersentDamage"].ToString(), out float persentDamageValue))
+            {
+                persentDamage[i] = persentDamageValue;
+            }
+
+            if (float.TryParse(data[i]["MeleeDamage"].ToString(), out float meleeDamageValue))
+            {
+                meleeDamage[i] = meleeDamageValue;
+            }
+
+            if (float.TryParse(data[i]["RangeDamage"].ToString(), out float rangeDamageValue))
+            {
+                rangeDamage[i] = rangeDamageValue;
+            }
+
+            if (float.TryParse(data[i]["AttackSpeed"].ToString(), out float attackSpeedValue))
+            {
+                attackSpeed[i] = attackSpeedValue;
+            }
+
+            if (float.TryParse(data[i]["CriticalChance"].ToString(), out float criticalChanceValue))
+            {
+                criticalChance[i] = criticalChanceValue;
+            }
+
+            if (float.TryParse(data[i]["Engine"].ToString(), out float engineValue))
+            {
+                engine[i] = engineValue;
+            }
+
+            if (float.TryParse(data[i]["Range"].ToString(), out float rangeValue))
+            {
+                range[i] = rangeValue;
+            }
+
+            if (float.TryParse(data[i]["Armor"].ToString(), out float armorValue))
+            {
+                armor[i] = armorValue;
+            }
+
+            if (float.TryParse(data[i]["Evasion"].ToString(), out float evasionValue))
+            {
+                evasion[i] = evasionValue;
+            }
+
+            if (float.TryParse(data[i]["Accuracy"].ToString(), out float accuracyValue))
+            {
+                accuracy[i] = accuracyValue;
+            }
+
+            if (float.TryParse(data[i]["Speed"].ToString(), out float speedValue))
+            {
+                speed[i] = speedValue;
+            }
         }
     }
 }

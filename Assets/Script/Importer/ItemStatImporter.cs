@@ -7,7 +7,6 @@ public class ItemStatImporter : MonoBehaviour
     public static ItemStatImporter instance;
 
     [HideInInspector] public string[] itemCode;
-    //[HideInInspector] public string[] itemName;
     [HideInInspector] public int[] maxCount;
 
     [HideInInspector] public int[] riseCount;
@@ -28,7 +27,6 @@ public class ItemStatImporter : MonoBehaviour
 
         List<Dictionary<string, object>> data = CSVReaderStat.Read("ItemStatInfo");
         itemCode = new string[data.Count];
-        //itemName = new string[data.Count];
         maxCount = new int[data.Count];
 
         riseCount = new int[data.Count];
@@ -40,19 +38,34 @@ public class ItemStatImporter : MonoBehaviour
 
         for (int i = 0; i < data.Count; i++)
         {
-            itemCode[i] = (string)data[i]["ItemCode"];
-            //itemName[i] = (string)data[i]["ItemName"];
-            maxCount[i] = (int)data[i]["MaxCount"];
 
-            riseCount[i] = (int)data[i]["RiseCount"];
-            descendCount[i] = (int)data[i]["DescendCount"];
+            // 각 열의 데이터를 적절한 형식으로 변환하여 저장
+            itemCode[i] = (string)data[i]["ItemCode"];
+            if (int.TryParse(data[i]["MaxCount"].ToString(), out int maxCountValue))
+            {
+                maxCount[i] = maxCountValue;
+            }
+
+            if (int.TryParse(data[i]["RiseCount"].ToString(), out int riseCountValue))
+            {
+                riseCount[i] = riseCountValue;
+            }
             riseStatType[i] = (string)data[i]["RiseStatType"];
+            if (int.TryParse(data[i]["DescendCount"].ToString(), out int descendCountValue))
+            {
+                descendCount[i] = descendCountValue;
+            }
             descendStatType[i] = (string)data[i]["DescendStatType"];
 
-            int j = (int)data[i]["RiseStats"];
-            riseStats[i] = j;
-            j = (int)data[i]["DescendStats"];
-            descendStats[i] = j;
+            if (float.TryParse(data[i]["RiseStats"].ToString(), out float riseStatsValue))
+            {
+                riseStats[i] = riseStatsValue;
+            }
+
+            if (float.TryParse(data[i]["DescendStats"].ToString(), out float descendStatsValue))
+            {
+                descendStats[i] = descendStatsValue;
+            }
         }
 
         List<Dictionary<string, object>> data1 = CSVReaderText.Read("ItemText");
