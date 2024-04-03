@@ -36,6 +36,7 @@ public class Weapon_Info : MonoBehaviour
     public Text penetrateNumUI;
     public Text bloodSuckingNumUI;
     public TextMeshProUGUI recycle_NumUI;
+    public GameObject[] settOptionUI;
     private Vector3 itemPos;
     public void Init(WeaponScrip scrip, Weapon_Action weapon_Action, Vector3 pos, bool Combined)
     {
@@ -54,6 +55,35 @@ public class Weapon_Info : MonoBehaviour
         else
         {
             combine_ButtonUI.SetActive(false);
+        }
+
+        for (int i = 0; i < settOptionUI.Length; i++)
+        {
+            settOptionUI[i].SetActive(false);
+        }
+        for (int i = 0; i < weaponScrip.weaponSetType.Length; i++)
+        {
+            switch (weaponScrip.weaponSetType[i])
+            {
+                case Weapon.SettType.UNARMED:
+                    settOptionUI[0].SetActive(true);
+                    break;
+                case Weapon.SettType.TOOL:
+                    settOptionUI[1].SetActive(true);
+                    break;
+                case Weapon.SettType.GUN:
+                    settOptionUI[2].SetActive(true);
+                    break;
+                case Weapon.SettType.EXPLOSIVE:
+                    settOptionUI[3].SetActive(true);
+                    break;
+                case Weapon.SettType.PRECISION:
+                    settOptionUI[4].SetActive(true);
+                    break;
+                case Weapon.SettType.NATIVE:
+                    settOptionUI[5].SetActive(true);
+                    break;
+            }
         }
         StartCoroutine(WeaponInfoSetting());
     }
@@ -242,6 +272,7 @@ public class Weapon_Info : MonoBehaviour
                     GameManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
                     Destroy(weaponInfo.gameObject);
                     ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
+                    WeaponManager.instance.WeaponSetSearch();
                     Destroy(gameObject);
                     break;
                 }
@@ -254,6 +285,7 @@ public class Weapon_Info : MonoBehaviour
         GameManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
         Destroy(weaponInfo.gameObject);
         ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
+        WeaponManager.instance.WeaponSetSearch();
         Destroy(gameObject);
     }
 

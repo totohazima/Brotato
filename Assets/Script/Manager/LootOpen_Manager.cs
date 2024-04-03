@@ -72,15 +72,15 @@ public class LootOpen_Manager : MonoBehaviour
     {
         ItemScrip items = ItemManager.instance.items[itemIndex[checkIndex]];
         GameObject product = Get(0);
-        ItemGoods itemGoods = product.GetComponent<ItemGoods>();
-        itemGoods.Init(items, itemIndex[checkIndex]);
+        Loot_In_Item lootItem = product.GetComponent<Loot_In_Item>();
+        lootItem.Init(items, itemIndex[checkIndex]);
 
-        itemGoods.transform.SetParent(itemPos);
-        RectTransform rects = itemGoods.GetComponent<RectTransform>();
+        lootItem.transform.SetParent(itemPos);
+        RectTransform rects = lootItem.GetComponent<RectTransform>();
         rects.anchorMin = new Vector2(0.5f, 0.5f);
         rects.anchorMax = new Vector2(0.5f, 0.5f);
         rects.anchoredPosition = Vector3.zero;
-        item = itemGoods.gameObject;
+        item = lootItem.gameObject;
 
         checkIndex++;
     }

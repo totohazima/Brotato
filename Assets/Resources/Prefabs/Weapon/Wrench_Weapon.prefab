@@ -237,6 +237,7 @@ MonoBehaviour:
   afterKnockBack: 0
   typeText: 
   index: 5
+  setTypes: 01000000
   baseObj: {fileID: 4245991934153760112}
   coll: {fileID: 4245991934039231394}
   curvePos:

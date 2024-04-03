@@ -127,6 +127,7 @@ MonoBehaviour:
   afterKnockBack: 0
   typeText: 
   index: 0
+  setTypes: 02000000
   muzzle: {fileID: 5063616641854856422}
 --- !u!114 &4302201892538831772
 MonoBehaviour:

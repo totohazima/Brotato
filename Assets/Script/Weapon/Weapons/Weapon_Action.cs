@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon_Action : Weapon
 {
     public Weapons index;
-
+    public SettType[] setTypes;
     public virtual void ReturnWeapon(Transform baseObject) //근접 전용
     {
         baseObject.localPosition = Vector3.zero;

@@ -15,5 +15,6 @@ MonoBehaviour:
   weaponName: "\uC288\uB808\uB354"
   setType: "\uCD1D, \uD3ED\uBC1C\uBB3C"
   weaponNickNames: 3
+  weaponSetType: 0200000003000000
   weaponImage: {fileID: 21300000, guid: 54100ae52e0b5164ca66b9d584896f2d, type: 3}
   weaponPrefab: {fileID: 8547711840563967469, guid: 4facb9b5b1b33744eabca76c92ee66cd, type: 3}

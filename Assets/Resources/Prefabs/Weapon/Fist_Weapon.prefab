@@ -74,6 +74,7 @@ MonoBehaviour:
   afterKnockBack: 0
   typeText: 
   index: 4
+  setTypes: 00000000
   baseObj: {fileID: 230209932599530955}
   coll: {fileID: 230209932486574873}
 --- !u!114 &230209931617475310

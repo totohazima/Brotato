@@ -28,6 +28,16 @@ public class Weapon : MonoBehaviour
         HEALTH,
         ENGINE,
     }
+
+    public enum SettType
+    {
+        UNARMED,
+        TOOL,
+        GUN,
+        EXPLOSIVE,
+        PRECISION,
+        NATIVE,
+    }
     public int weaponNum;
     public int weaponTier;
     public string name;
@@ -47,15 +57,15 @@ public class Weapon : MonoBehaviour
     public int multipleDamaeCount; //데미지 계수 갯수
     public DamageType[] multipleDamageType; //데미지 계수들
 
-    public float afterDamage;
-    public float afterCriticalChance;
-    public float afterCriticalDamage;
-    public float afterCoolTime;
-    public float afterRange;
-    public int afterPenetrate;
-    public float afterPenetrateDamage;
-    public float afterBloodSucking;
-    public float afterKnockBack;
+    [HideInInspector] public float afterDamage;
+    [HideInInspector] public float afterCriticalChance;
+    [HideInInspector] public float afterCriticalDamage;
+    [HideInInspector] public float afterCoolTime;
+    [HideInInspector] public float afterRange;
+    [HideInInspector] public int afterPenetrate;
+    [HideInInspector] public float afterPenetrateDamage;
+    [HideInInspector] public float afterBloodSucking;
+    [HideInInspector] public float afterKnockBack;
 
     public string typeText;
     public void StatSetting(int index, int tier)

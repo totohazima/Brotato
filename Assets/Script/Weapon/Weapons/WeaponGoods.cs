@@ -218,6 +218,7 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
             UnLockIng();
             ShopManager.instance.goodsList.Remove(gameObject);
             ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
+            WeaponManager.instance.WeaponSetSearch();
             gameObject.SetActive(false);
         }
         else
@@ -234,6 +235,7 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
                         UnLockIng();
                         ShopManager.instance.goodsList.Remove(gameObject);
                         ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
+                        WeaponManager.instance.WeaponSetSearch();
                         gameObject.SetActive(false);
                         break;
                     }
