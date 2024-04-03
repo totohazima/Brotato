@@ -10,6 +10,8 @@ public class FriendlyScanner : MonoBehaviour,ICustomUpdateMono
     Transform beforeTarget; //이전 타겟
     float shortDis;
     private Collider[] colliders;
+    float timeInterval = 0.2f;
+    float timer = 0;
 
     void OnEnable()
     {
@@ -21,24 +23,16 @@ public class FriendlyScanner : MonoBehaviour,ICustomUpdateMono
     }
     public void CustomUpdate()
     {
-        if(target != null)
+        timer += Time.deltaTime;
+        if (timer >= timeInterval)
         {
-            if(target.parent.gameObject.activeSelf == false)
-            {
-                target = null;
-                beforeTarget = null;
-            }
+            Scan();
+            timer = 0;
         }
-        Scan();
-        //if (isScan == false)
-        //{
-        //    StartCoroutine(Scan());
-        //}
     }
 
     void Scan()
     {
-        //isScan = true;
         //설정한 범위 내에 몬스터를 감지
         colliders = Physics.OverlapSphere(transform.position, radius, 1 << 6);
 
@@ -71,9 +65,14 @@ public class FriendlyScanner : MonoBehaviour,ICustomUpdateMono
                 }
             }
         }
+        else
+        {
+            target = null;
+            beforeTarget = null;
+        }
+
+        //
         beforeTarget = target;
-        //yield return new WaitForSeconds(0.1f);
-        //isScan = false;
     }
 
     /// <summary>
