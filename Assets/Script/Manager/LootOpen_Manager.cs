@@ -29,32 +29,45 @@ public class LootOpen_Manager : MonoBehaviour
     }
     private void LootSetting()
     {
-        bool sameIndex = false;
+        bool isNot = false;
 
         int count = GameManager.instance.lootChance;
-        int[] index = new int[count];
+        int index;
+        int[] indexes = new int[count];
         while (true)
         {
             for (int i = 0; i < count; i++)
             {
-                index[i] = Random.Range(0, ItemManager.instance.items.Length);
+                index = Random.Range(0, ItemManager.instance.items.Length);
+                indexes[i] = index;
             }
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < indexes.Length; i++) //5개 번호 중에 최대 수량에 도달한 아이템이 있는지 체크
+            {
+                Item.ItemType type = ItemManager.instance.items[indexes[i]].itemCode;
+                for (int j = 0; j < ItemManager.instance.maxItemList.Count; j++)
+                {
+                    if (ItemManager.instance.maxItemList[j] == type)
+                    {
+                        isNot = true;
+                    }
+                }
+            }
+            for (int i = 0; i < count; i++) //5개 번호가 서로 중복 되는지 체크
             {
                 for (int j = 0; j < count; j++)
                 {
                     if(i != j)
                     {
-                        if(index[i] == index[j])
+                        if(indexes[i] == indexes[j])
                         {
-                            sameIndex = true;
+                            isNot = true;
                         }
                     }
                 }
             }
 
-            if(sameIndex == false)
+            if(isNot == false)
             {
                 break;
             }
@@ -63,7 +76,7 @@ public class LootOpen_Manager : MonoBehaviour
         itemIndex = new int[count];
         for (int i = 0; i < count; i++)
         {
-            itemIndex[i] = index[i];
+            itemIndex[i] = indexes[i];
         }
         LootOpen();
     }

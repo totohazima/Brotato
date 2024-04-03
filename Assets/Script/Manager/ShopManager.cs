@@ -20,7 +20,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
     public List<GameObject> lockList; //잠긴 아이템(가격은 고정된채로 가장 앞 열로 이동)
     public List<GameObject> goodsList;
-    public List<Item.ItemType> maxItemList;
+
     List<GameObject>[] list;
     GameManager game;
     ItemManager item;
@@ -68,7 +68,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     }
     public void ShopGoodsSetting()
     {
-        int index = 0;
+        int index;
         int[] indexes = new int[5];
 
         for (int i = 0; i < lockList.Count; i++) //잠금 아이템 
@@ -88,9 +88,9 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
             for (int i = 0; i < indexes.Length; i++) //5개 번호 중에 최대 수량에 도달한 아이템이 있는지 체크
             {
                 Item.ItemType type = ItemManager.instance.items[indexes[i]].itemCode;
-                for (int j = 0; j < maxItemList.Count; j++)
+                for (int j = 0; j < ItemManager.instance.maxItemList.Count; j++)
                 {
-                    if (maxItemList[j] == type)
+                    if (ItemManager.instance.maxItemList[j] == type)
                     {
                         isNot = true;
                     }

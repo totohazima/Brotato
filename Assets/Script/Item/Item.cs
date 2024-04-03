@@ -107,7 +107,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
                 {
                     if (isMax == false)
                     {
-                        ShopManager.instance.maxItemList.Add(itemType);
+                        ItemManager.instance.maxItemList.Add(itemType);
                         isMax = true;
                     }
                     
@@ -116,7 +116,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
                 {
                     if (isMax == true)
                     {
-                        ShopManager.instance.maxItemList.Remove(itemType);
+                        ItemManager.instance.maxItemList.Remove(itemType);
                         isMax = false;
                     }
                     

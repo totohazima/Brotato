@@ -9,7 +9,9 @@ public class ItemManager : MonoBehaviour
     public ItemScrip[] items;
     public Item invenItem; //상점 등에서 보여줄 아이템 오브젝트
     public Weapon_Object invenWeapon; //상점 등에서 보여줄 무기 오브젝트
+    public List<Item.ItemType> maxItemList;
     List<GameObject>[] poolItems;
+
     GameManager game;
     void Awake()
     {
