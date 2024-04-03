@@ -15,6 +15,31 @@ MonoBehaviour:
   weaponName: "\uC288\uB808\uB354"
   setType: "\uCD1D, \uD3ED\uBC1C\uBB3C"
   weaponNickNames: 3
+  attackType: 1
   weaponSetType: 0200000003000000
   weaponImage: {fileID: 21300000, guid: 54100ae52e0b5164ca66b9d584896f2d, type: 3}
   weaponPrefab: {fileID: 8547711840563967469, guid: 4facb9b5b1b33744eabca76c92ee66cd, type: 3}
+  tier1_Info:
+  - "\uBC1C\uC0AC\uCCB4\uB294"
+  - "\uD655\uB960\uB85C \uD0C0\uACA9 \uC2DC \uD3ED\uBC1C\uD568"
+  tier1_InfoStat:
+  - 50
+  - 0
+  tier2_Info:
+  - "\uBC1C\uC0AC\uCCB4\uB294"
+  - "\uD655\uB960\uB85C \uD0C0\uACA9 \uC2DC \uD3ED\uBC1C\uD568"
+  tier2_InfoStat:
+  - 65
+  - 0
+  tier3_Info:
+  - "\uBC1C\uC0AC\uCCB4\uB294"
+  - "\uD655\uB960\uB85C \uD0C0\uACA9 \uC2DC \uD3ED\uBC1C\uD568"
+  tier3_InfoStat:
+  - 80
+  - 0
+  tier4_Info:
+  - "\uBC1C\uC0AC\uCCB4\uB294 \uD0C0\uACA9 \uC2DC \uD3ED\uBC1C\uD568"
+  - 
+  tier4_InfoStat:
+  - 100
+  - 0

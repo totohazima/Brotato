@@ -6,6 +6,7 @@ using TMPro;
 public class WeaponGoods : Weapon, ICustomUpdateMono
 {
     public Weapons index;
+    public WeaponType atkType;
     public Image weaponImage;
     public Text weaponName;
     public Text weaponSetType;
@@ -25,10 +26,12 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
     public Text rangeNumUI;
     public Text penetrateNumUI;
     public Text bloodSuckingNumUI;
+    public TextMeshProUGUI infoUI;
 
     private bool isLock;
     public Image lockUI;
     public Outline line;
+    WeaponScrip scriptable;
     [SerializeField]
     WeaponScrip[] weaponData;
     void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
@@ -41,12 +44,14 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         CustomUpdateManager.customUpdates.Remove(this);
     }
 
-    public void Init(string name, string setName, Weapons code, Sprite image)
+    public void Init(WeaponScrip scrip/*string name, string setName, Weapons code, Sprite image, WeaponType type*/)
     {
-        weaponName.text = name;
-        weaponSetType.text = setName;
-        index = code;
-        weaponImage.sprite = image;
+        scriptable = scrip;
+        weaponName.text = scrip.weaponName;
+        weaponSetType.text = scrip.setType;
+        index = scrip.weaponNickNames;
+        weaponImage.sprite = scrip.weaponImage;
+        atkType = scrip.attackType;
         StatSetting((int)index, 0);
     }
     public void CustomUpdate()
@@ -183,14 +188,21 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         rangeNumUI.text += "(" + typeText + ")";
 
         //관통
-        if (afterPenetrate <= 0)
+        if (atkType == WeaponType.MELEE)
         {
             penetrateUI.gameObject.SetActive(false);
         }
         else
         {
-            penetrateUI.gameObject.SetActive(true);
-            penetrateNumUI.text = "<color=#4CFF52>" + afterPenetrate + "</color>";
+            if (afterPenetrate <= 0)
+            {
+                penetrateUI.gameObject.SetActive(false);
+            }
+            else
+            {
+                penetrateUI.gameObject.SetActive(true);
+                penetrateNumUI.text = "<color=#4CFF52>" + afterPenetrate + "</color>";
+            }
         }
 
         //흡혈
@@ -204,7 +216,28 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
             bloodSuckingNumUI.text = "<color=#4CFF52>" + afterBloodSucking + "</color>%";
         }
 
+        //무기 설명
+        if (scriptable.tier1_Info[0] != "") //설명이 있을 경우
+        {
+            infoUI.gameObject.SetActive(true);
+            switch (index)
+            {
+                case Weapon.Weapons.SHREDDER:
+                    infoUI.text = scriptable.tier1_Info[0] + " <color=#4CFF52>" + scriptable.tier1_InfoStat[0] + "</color>" + scriptable.tier1_Info[1];
+                    break;
+                case Weapon.Weapons.WRENCH:
+                    infoUI.text = scriptable.tier1_InfoStat[0] + "(" + scriptable.tier1_InfoStat[1] + "<sprite=3>) " + scriptable.tier1_Info[0];
+                    break;
+                case Weapon.Weapons.DRIVER:
+                    infoUI.text = scriptable.tier1_Info[0] + " <color=#4CFF52>" + scriptable.tier1_InfoStat[0].ToString("F2") + "</color>" + scriptable.tier1_Info[1];
+                    break;
+            }
 
+        }
+        else
+        {
+            infoUI.gameObject.SetActive(false);
+        }
     }
 
 

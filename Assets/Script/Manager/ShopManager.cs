@@ -143,7 +143,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
                 GameObject product = Get(1);
                 WeaponGoods weaponGoods = product.GetComponent<WeaponGoods>();
 
-                weaponGoods.Init(weapon[num].weaponName, weapon[num].setType, weapon[num].weaponNickNames, weapon[num].weaponImage);
+                weaponGoods.Init(weapon[num]/*weapon[num].weaponName, weapon[num].setType, weapon[num].weaponNickNames, weapon[num].weaponImage, weapon[num].attackType*/);
                 weaponGoods.transform.SetParent(goodsContent);
 
                 goodsList.Add(weaponGoods.gameObject);

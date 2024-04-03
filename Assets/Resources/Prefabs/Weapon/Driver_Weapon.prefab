@@ -200,6 +200,7 @@ MonoBehaviour:
   typeText: 
   index: 6
   setTypes: 0100000004000000
+  scrip: {fileID: 11400000, guid: e87c150b61ff9524788cc6b5db20703b, type: 2}
   baseObj: {fileID: 6184014379064390399}
   coll: {fileID: 6184014379273246851}
 --- !u!114 &6184014379107007704

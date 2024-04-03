@@ -15,6 +15,35 @@ MonoBehaviour:
   weaponName: "\uB4DC\uB77C\uC774\uBC84"
   setType: "\uB3C4\uAD6C, \uC815\uD655"
   weaponNickNames: 6
+  attackType: 0
   weaponSetType: 0100000004000000
   weaponImage: {fileID: 21300000, guid: 86a218aade95a164fbfc147ae72477f2, type: 3}
   weaponPrefab: {fileID: 6184014379107007705, guid: 4dfb07668f67d8e429ad3fd4e2ee05c7, type: 3}
+  tier1_Info:
+  - "\uC9C0\uB8B0\uB294"
+  - "\uCD08\uB9C8\uB2E4 \uC0DD\uC131\uB418\uC5B4 \uC9C0\uC5ED\uC5D0 10(<sprite=3>)\uC758
+    \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  tier1_InfoStat:
+  - 12
+  - 0
+  tier2_Info:
+  - "\uC9C0\uB8B0\uB294"
+  - "\uCD08\uB9C8\uB2E4 \uC0DD\uC131\uB418\uC5B4 \uC9C0\uC5ED\uC5D0 10(<sprite=3>)\uC758
+    \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  tier2_InfoStat:
+  - 9
+  - 0
+  tier3_Info:
+  - "\uC9C0\uB8B0\uB294"
+  - "\uCD08\uB9C8\uB2E4 \uC0DD\uC131\uB418\uC5B4 \uC9C0\uC5ED\uC5D0 10(<sprite=3>)\uC758
+    \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  tier3_InfoStat:
+  - 6
+  - 0
+  tier4_Info:
+  - "\uC9C0\uB8B0\uB294"
+  - "\uCD08\uB9C8\uB2E4 \uC0DD\uC131\uB418\uC5B4 \uC9C0\uC5ED\uC5D0 10(<sprite=3>)\uC758
+    \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  tier4_InfoStat:
+  - 3
+  - 0

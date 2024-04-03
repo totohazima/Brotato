@@ -238,6 +238,7 @@ MonoBehaviour:
   typeText: 
   index: 5
   setTypes: 01000000
+  scrip: {fileID: 11400000, guid: 1c6a77193f876ce4eb17f32b22e9d9b7, type: 2}
   baseObj: {fileID: 4245991934153760112}
   coll: {fileID: 4245991934039231394}
   curvePos:

@@ -6,7 +6,8 @@ using TMPro;
 
 public class Weapon_Info : MonoBehaviour
 {
-    public Weapon.Weapons weaponCode;   
+    public Weapon.Weapons weaponCode;
+    public Weapon.WeaponType atkType;
     public Transform weaponInfoUI;
     public Transform buttons;
     private WeaponScrip weaponScrip;
@@ -35,6 +36,7 @@ public class Weapon_Info : MonoBehaviour
     public Text rangeNumUI;
     public Text penetrateNumUI;
     public Text bloodSuckingNumUI;
+    public TextMeshProUGUI infoUI;
     public TextMeshProUGUI recycle_NumUI;
     public GameObject[] settOptionUI;
     private Vector3 itemPos;
@@ -44,6 +46,7 @@ public class Weapon_Info : MonoBehaviour
         weaponInfo = weapon_Action;
 
         weaponCode = weaponScrip.weaponNickNames;
+        atkType = weaponScrip.attackType;
         weaponImage.sprite = weaponScrip.weaponImage;
         weaponName.text = weaponScrip.weaponName;
         weaponType.text = weaponScrip.setType;
@@ -210,14 +213,21 @@ public class Weapon_Info : MonoBehaviour
         rangeNumUI.text += "(" + weaponInfo.typeText + ")";
 
         //관통
-        if (weaponInfo.afterPenetrate <= 0)
+        if (atkType == Weapon.WeaponType.MELEE)
         {
             penetrateUI.gameObject.SetActive(false);
         }
         else
         {
-            penetrateUI.gameObject.SetActive(true);
-            penetrateNumUI.text = "<color=#4CFF52>" + weaponInfo.afterPenetrate + "</color>";
+            if (weaponInfo.afterPenetrate <= 0)
+            {
+                penetrateUI.gameObject.SetActive(false);
+            }
+            else
+            {
+                penetrateUI.gameObject.SetActive(true);
+                penetrateNumUI.text = "<color=#4CFF52>" + weaponInfo.afterPenetrate + "</color>";
+            }
         }
 
         //흡혈
@@ -229,6 +239,71 @@ public class Weapon_Info : MonoBehaviour
         {
             bloodSuckingUI.gameObject.SetActive(true);
             bloodSuckingNumUI.text = "<color=#4CFF52>" + weaponInfo.afterBloodSucking + "</color>%";
+        }
+
+        //무기 설명
+        if (weaponScrip.tier1_Info[0] != "") //설명이 있을 경우
+        {
+            infoUI.gameObject.SetActive(true);
+            switch (weaponCode)
+            {
+                case Weapon.Weapons.SHREDDER:
+                    switch(weaponInfo.weaponTier)
+                    {
+                        case (0):
+                            infoUI.text = weaponScrip.tier1_Info[0] + " <color=#4CFF52>" + weaponScrip.tier1_InfoStat[0] + "</color>" + weaponScrip.tier1_Info[1];
+                            break;
+                        case (1):
+                            infoUI.text = weaponScrip.tier2_Info[0] + " <color=#4CFF52>" + weaponScrip.tier2_InfoStat[0] + "</color>" + weaponScrip.tier2_Info[1];
+                            break;
+                        case (2):
+                            infoUI.text = weaponScrip.tier3_Info[0] + " <color=#4CFF52>" + weaponScrip.tier3_InfoStat[0] + "</color>" + weaponScrip.tier3_Info[1];
+                            break;
+                        case (3):
+                            infoUI.text = weaponScrip.tier4_Info[0];
+                            break;
+                    }
+                    break;
+                case Weapon.Weapons.WRENCH:
+                    switch (weaponInfo.weaponTier)
+                    {
+                        case (0):
+                            infoUI.text = weaponScrip.tier1_InfoStat[0] + "(" + weaponScrip.tier1_InfoStat[1] + "<sprite=3>) " + weaponScrip.tier1_Info[0];
+                            break;
+                        case (1):
+                            infoUI.text = weaponScrip.tier2_InfoStat[0] + "(" + weaponScrip.tier2_InfoStat[1] + "<sprite=3>) " + weaponScrip.tier2_Info[0] + " " + weaponScrip.tier2_InfoStat[2] + weaponScrip.tier2_Info[1];
+                            break;
+                        case (2):
+                            infoUI.text = weaponScrip.tier3_InfoStat[0] + "(" + weaponScrip.tier3_InfoStat[1] + "<sprite=3>) " + weaponScrip.tier3_Info[0] + " " + weaponScrip.tier3_InfoStat[2] + weaponScrip.tier3_Info[1];
+                            break;
+                        case (3):
+                            infoUI.text = weaponScrip.tier4_InfoStat[0] + "(" + weaponScrip.tier4_InfoStat[1] + "<sprite=3>) " + weaponScrip.tier4_Info[0] + " " + weaponScrip.tier4_InfoStat[2] + weaponScrip.tier4_Info[1];
+                            break;
+                    }
+                    break;
+                case Weapon.Weapons.DRIVER:
+                    switch (weaponInfo.weaponTier)
+                    {
+                        case (0):
+                            infoUI.text = weaponScrip.tier1_Info[0] + " <color=#4CFF52>" + weaponScrip.tier1_InfoStat[0].ToString("F2") + "</color>" + weaponScrip.tier1_Info[1];
+                            break;
+                        case (1):
+                            infoUI.text = weaponScrip.tier2_Info[0] + " <color=#4CFF52>" + weaponScrip.tier2_InfoStat[0].ToString("F2") + "</color>" + weaponScrip.tier2_Info[1];
+                            break;
+                        case (2):
+                            infoUI.text = weaponScrip.tier3_Info[0] + " <color=#4CFF52>" + weaponScrip.tier3_InfoStat[0].ToString("F2") + "</color>" + weaponScrip.tier3_Info[1];
+                            break;
+                        case (3):
+                            infoUI.text = weaponScrip.tier4_Info[0] + " <color=#4CFF52>" + weaponScrip.tier4_InfoStat[0].ToString("F2") + "</color>" + weaponScrip.tier4_Info[1];
+                            break;
+                    }
+                    break;
+            }
+            
+        }
+        else
+        {
+            infoUI.gameObject.SetActive(false);
         }
 
         rectTrans = weaponInfoUI.GetComponent<RectTransform>();

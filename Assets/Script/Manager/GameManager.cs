@@ -312,6 +312,13 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     {
         yield return 0;
         curHp = playerInfo.maxHealth;
+        for (int i = 0; i < playerInfo.weapons.Count; i++)
+        {
+            if (playerInfo.weapons[i].GetComponent<Weapon_Action>().index == Weapon.Weapons.WRENCH)
+            {
+                StartCoroutine(playerInfo.weapons[i].GetComponent<Wrench_Weapon>().SpawnTurret());
+            }
+        }
     }
 
     public void nextWave()
@@ -333,6 +340,14 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
 
         StartCoroutine(spawn.MineSetting());
         StartCoroutine(spawn.TurretSetting());
+
+        for (int i = 0; i < playerInfo.weapons.Count; i++)
+        {
+            if(playerInfo.weapons[i].GetComponent<Weapon_Action>().index == Weapon.Weapons.WRENCH)
+            {
+                StartCoroutine(playerInfo.weapons[i].GetComponent<Wrench_Weapon>().SpawnTurret());
+            }
+        }
     }
     void GameEnd()
     {

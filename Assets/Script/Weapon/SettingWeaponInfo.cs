@@ -20,6 +20,7 @@ public class SettingWeaponInfo : MonoBehaviour
     public Text range;
     public GameObject penetrateUI;
     public Text penetrateNum;
+    public TextMeshProUGUI infoUI;
 
     string infoName;
     string infoType;
@@ -104,6 +105,29 @@ public class SettingWeaponInfo : MonoBehaviour
         else
         {
             penetrateUI.SetActive(false);
+        }
+
+        //무기 설명
+        if (weaponScrip.tier1_Info[0] != "") //설명이 있을 경우
+        {
+            infoUI.gameObject.SetActive(true);
+            switch (weaponScrip.weaponNickNames)
+            {
+                case Weapon.Weapons.SHREDDER:
+                    infoUI.text = weaponScrip.tier1_Info[0] + " <color=#4CFF52>" + weaponScrip.tier1_InfoStat[0] + "</color>" + weaponScrip.tier1_Info[1];
+                    break;
+                case Weapon.Weapons.WRENCH:
+                    infoUI.text = weaponScrip.tier1_InfoStat[0] + "(" + weaponScrip.tier1_InfoStat[1] + "<sprite=3>) " + weaponScrip.tier1_Info[0];
+                    break;
+                case Weapon.Weapons.DRIVER:
+                    infoUI.text = weaponScrip.tier1_Info[0] + " <color=#4CFF52>" + weaponScrip.tier1_InfoStat[0].ToString("F2") + "</color>" + weaponScrip.tier1_Info[1];
+                    break;
+            }
+
+        }
+        else
+        {
+            infoUI.gameObject.SetActive(false);
         }
     }
 }

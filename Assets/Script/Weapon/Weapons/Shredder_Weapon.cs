@@ -50,16 +50,16 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
         switch(weaponTier)
         {
             case 0:
-                boomChance = 50;
+                boomChance = scrip.tier1_InfoStat[0];
                 break;
             case 1:
-                boomChance = 65;
+                boomChance = scrip.tier1_InfoStat[1];
                 break;
             case 2:
-                boomChance = 80;
+                boomChance = scrip.tier1_InfoStat[2];
                 break;
             case 3:
-                boomChance = 100;
+                boomChance = scrip.tier1_InfoStat[3];
                 break;
         }
         StatSetting((int)index, weaponTier);

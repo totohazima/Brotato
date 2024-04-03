@@ -159,6 +159,7 @@ MonoBehaviour:
   typeText: 
   index: 3
   setTypes: 0200000003000000
+  scrip: {fileID: 11400000, guid: f5a9bbc26f0671e409ff9104e2f202fe, type: 2}
   muzzle: {fileID: 2598441851401752912}
 --- !u!114 &6484739582671117866
 MonoBehaviour:

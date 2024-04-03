@@ -137,7 +137,26 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             mark[i].SetActive(false);
         }
     }
+    public IEnumerator MineSpawn(int index)
+    {
+        GameObject[] mark = new GameObject[index];
+        GameObject[] mine = new GameObject[mark.Length];
 
+        for (int i = 0; i < mark.Length; i++)
+        {
+            mark[i] = PoolManager.instance.Get(7);
+            Vector3 pos = FriendlySpawnPosition();
+            mark[i].transform.position = pos;
+        }
+        yield return new WaitForSeconds(0.6f);
+        for (int i = 0; i < mark.Length; i++)
+        {
+            mine[i] = PoolManager.instance.Get(5);
+            mine[i].transform.position = mark[i].transform.position;
+            mines.Add(mine[i]);
+            mark[i].SetActive(false);
+        }
+    }
     public IEnumerator TurretSetting()
     {
         GameObject[] mark = new GameObject[ItemEffect.instance.Turret()];
@@ -158,6 +177,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             mark[i].SetActive(false);
         }
     }
+
     public void WaveSelect(int waveLevel)
     {
         WaveStatImporter import = WaveStatImporter.instance;
@@ -187,7 +207,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         
         return spawnPoint;
     }
-    Vector3 FriendlySpawnPosition() //아군 유닛 소환 위치
+    public Vector3 FriendlySpawnPosition() //아군 유닛 소환 위치
     {
         Vector3 spawnPoint;
 

@@ -15,6 +15,31 @@ MonoBehaviour:
   weaponName: "\uAD8C\uCD1D"
   setType: "\uCD1D"
   weaponNickNames: 0
+  attackType: 1
   weaponSetType: 02000000
   weaponImage: {fileID: 21300000, guid: 0fd2f7a8917db6c43ba7b9cd8f95652f, type: 3}
   weaponPrefab: {fileID: 1501250330191181915, guid: c86736a3b5a95bd4ea9e5c0e10829e8e, type: 3}
+  tier1_Info:
+  - 
+  - 
+  tier1_InfoStat:
+  - 0
+  - 0
+  tier2_Info:
+  - 
+  - 
+  tier2_InfoStat:
+  - 0
+  - 0
+  tier3_Info:
+  - 
+  - 
+  tier3_InfoStat:
+  - 0
+  - 0
+  tier4_Info:
+  - 
+  - 
+  tier4_InfoStat:
+  - 0
+  - 0

@@ -8,7 +8,8 @@ public class Turret : MonoBehaviour, ICustomUpdateMono
     public int penetrate;
     public float coolTime;
     public float timer;
-
+    public float basicDamage;
+    public float plusDamage;
     FriendlyScanner scan;
     GameManager game;
     void Awake()
@@ -16,18 +17,24 @@ public class Turret : MonoBehaviour, ICustomUpdateMono
         scan = GetComponent<FriendlyScanner>();
         game = GameManager.instance;
     }
-
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
+        basicDamage = 10;
+        plusDamage = 0.8f;
     }
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
     }
+    public void Init(float basicDamage, float plusDamage)
+    {
+        this.basicDamage = basicDamage;
+        this.plusDamage = plusDamage;
+    }
     public void CustomUpdate()
     {
-        damage = 10 + (game.playerInfo.engine * 0.8f);
+        damage = basicDamage + (game.playerInfo.engine * plusDamage);
         penetrate = 0 + (game.playerInfo.penetrate);
         coolTime = 0.73f;// - ((0.73f / 100) * game.playerInfo.attackSpeed);
 
