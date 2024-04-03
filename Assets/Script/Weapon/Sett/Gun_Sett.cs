@@ -6,29 +6,32 @@ public class Gun_Sett : Weapon_Set
 {
     public override void CustomUpdate()
     {
-        switch (weaponManager.gun_Set)
+        if (weaponManager.gun_Set == 2)
         {
-            case 2:
-                texts[0].color = Color.white;
-                break;
-            case 3:
-                texts[1].color = Color.white;
-                break;
-            case 4:
-                texts[2].color = Color.white;
-                break;
-            case 5:
-                texts[3].color = Color.white;
-                break;
-            case 6:
-                texts[4].color = Color.white;
-                break;
-            default:
-                for (int i = 0; i < texts.Length; i++)
-                {
-                    texts[i].color = Color.gray;
-                }
-                break;
+            texts[0].color = Color.white;
+        }
+        else if (weaponManager.gun_Set == 3)
+        {
+            texts[1].color = Color.white;
+        }
+        else if (weaponManager.gun_Set == 4)
+        {
+            texts[2].color = Color.white;
+        }
+        else if (weaponManager.gun_Set == 5)
+        {
+            texts[3].color = Color.white;
+        }
+        else if (weaponManager.gun_Set >= 6)
+        {
+            texts[4].color = Color.white;
+        }
+        else
+        {
+            for (int i = 0; i < texts.Length; i++)
+            {
+                texts[i].color = Color.gray;
+            }
         }
     }
 }

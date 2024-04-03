@@ -74,8 +74,6 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         startWeapon.transform.SetParent(playerInfo.weaponMainPos);
         playerInfo.weapons.Add(startWeapon);
 
-
-
         xMin = wallPos[2].position.x;
         xMax = wallPos[3].position.x;
         yMin = wallPos[1].position.y;
@@ -311,7 +309,8 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     IEnumerator StageStart()
     {
         yield return 0;
-        curHp = playerInfo.maxHealth;
+        //playerInfo.StatCalculate();
+        curHp = playerInfo.maxHealth_Origin;
         for (int i = 0; i < playerInfo.weapons.Count; i++)
         {
             if (playerInfo.weapons[i].GetComponent<Weapon_Action>().index == Weapon.Weapons.WRENCH)

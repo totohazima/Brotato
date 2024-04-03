@@ -47,12 +47,12 @@ public class ItemManager : MonoBehaviour
             invenItems.curCount++;
             game.playerInfo.itemInventory.Add(invenItems);
 
-            GameManager.instance.playerInfo.StatCalculate(invenItems);
+            GameManager.instance.playerInfo.StatCalculate();
         }
         else if(isGet == true)
         {
             checkItem.curCount++;
-            GameManager.instance.playerInfo.StatCalculate(checkItem);
+            GameManager.instance.playerInfo.StatCalculate();
         }
         
     }

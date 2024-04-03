@@ -348,6 +348,7 @@ public class Weapon_Info : MonoBehaviour
                     Destroy(weaponInfo.gameObject);
                     ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
                     WeaponManager.instance.WeaponSetSearch();
+                    GameManager.instance.playerInfo.StatCalculate();
                     Destroy(gameObject);
                     break;
                 }
@@ -361,6 +362,7 @@ public class Weapon_Info : MonoBehaviour
         Destroy(weaponInfo.gameObject);
         ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
         WeaponManager.instance.WeaponSetSearch();
+        GameManager.instance.playerInfo.StatCalculate();
         Destroy(gameObject);
     }
 

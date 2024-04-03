@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("STAT")]
+
     public int characterNum;
     public string characterName;
+    [Header("Stat")]
     public float maxHealth;
     public float regeneration;
     public float bloodSucking;
@@ -33,6 +34,35 @@ public class Player : MonoBehaviour
     [HideInInspector] public float explosiveSize;
     [HideInInspector] public int chain;
     [HideInInspector] public float bossDamage;
+
+    [Header("OriginStat")]
+    public float maxHealth_Origin;
+    public float regeneration_Origin;
+    public float bloodSucking_Origin;
+    public float persentDamage_Origin;
+    public float meleeDamage_Origin;
+    public float rangeDamage_Origin;
+    public float attackSpeed_Origin;
+    public float criticalChance_Origin;
+    public float engine_Origin;
+    public float range_Origin;
+    public float armor_Origin;
+    public float evasion_Origin;
+    public float accuracy_Origin;
+    public float speed_Origin;
+
+    [HideInInspector] public int consumableHeal_Origin;
+    [HideInInspector] public float magnetRange_Origin;
+    [HideInInspector] public float expGain_Origin;
+    [HideInInspector] public int penetrate_Origin;
+    [HideInInspector] public float instantMagnet_Origin;
+    [HideInInspector] public float KnockBack_Origin;
+    [HideInInspector] public float explosiveDamage_Origin;
+    [HideInInspector] public float penetrateDamage_Origin;
+    [HideInInspector] public float explosiveSize_Origin;
+    [HideInInspector] public int chain_Origin;
+    [HideInInspector] public float bossDamage_Origin;
+
     [Header("ITEM")]
     public List<Item> itemInventory;
     public List<GameObject> weapons;
@@ -47,194 +77,365 @@ public class Player : MonoBehaviour
 
         characterNum = import.characterNum[index];
         characterName = import.characterName[index];
+        maxHealth_Origin = import.maxHealth[index];
+        regeneration_Origin = import.regeneration[index];
+        bloodSucking_Origin = import.bloodSucking[index];
+        persentDamage_Origin = import.persentDamage[index];
+        meleeDamage_Origin = import.meleeDamage[index];
+        rangeDamage_Origin = import.rangeDamage[index];
+        attackSpeed_Origin = import.attackSpeed[index];
+        criticalChance_Origin = import.criticalChance[index];
+        engine_Origin = import.engine[index];
+        range_Origin = import.range[index];
+        armor_Origin = import.armor[index];
+        evasion_Origin = import.evasion[index];
+        accuracy_Origin = import.accuracy[index];
+        speed_Origin = import.speed[index];
+
         maxHealth = import.maxHealth[index];
-        regeneration = import.regeneration[index];
-        bloodSucking = import.bloodSucking[index];
-        persentDamage = import.persentDamage[index];
-        meleeDamage = import.meleeDamage[index];
-        rangeDamage = import.rangeDamage[index];
-        attackSpeed = import.attackSpeed[index];
-        criticalChance = import.criticalChance[index];
-        engine = import.engine[index];
-        range = import.range[index];
-        armor = import.armor[index];
-        evasion = import.evasion[index];
-        accuracy = import.accuracy[index];
-        speed = import.speed[index];
     }
 
-    public void StatCalculate(Item calculateItem)
+    public void StatCalculate()
     {
         ItemEffect.instance.CountCheck();
 
-        Item item = calculateItem;
-
-        //if((int)item.itemType == 35)
-        //{
-        //    ItemEffect.instance.isWeirdGhost = true;
-        //}
-
-        for (int j = 0; j < item.riseCount; j++)
+        //스탯 초기화
+        StatReset();
+        void StatReset()
         {
-            switch ((int)item.riseStat[j])
+            maxHealth = maxHealth_Origin;
+            regeneration = regeneration_Origin;
+            bloodSucking = bloodSucking_Origin;
+            persentDamage = persentDamage_Origin;
+            meleeDamage = meleeDamage_Origin;
+            rangeDamage = rangeDamage_Origin;
+            attackSpeed = attackSpeed_Origin;
+            criticalChance = criticalChance_Origin;
+            engine = engine_Origin;
+            range = range_Origin;
+            armor = armor_Origin;
+            evasion = evasion_Origin;
+            accuracy = accuracy_Origin;
+            speed = speed_Origin;
+            consumableHeal = consumableHeal_Origin;
+            magnetRange = magnetRange_Origin;
+            expGain = expGain_Origin;
+            penetrate = penetrate_Origin;
+            instantMagnet = instantMagnet_Origin;
+            KnockBack = KnockBack_Origin;
+            explosiveDamage = explosiveDamage_Origin;
+            penetrateDamage = penetrateDamage_Origin;
+            explosiveSize = explosiveSize_Origin;
+            chain = chain_Origin;
+            bossDamage = bossDamage_Origin;
+        }
+
+        //아이템 스탯 계산
+        for (int i = 0; i < itemInventory.Count; i++)
+        {
+            for (int j = 0; j < itemInventory[i].riseCount; j++)
             {
-                case 1:
-                    maxHealth += item.riseStats[j];
-                    break;
-                case 2:
-                    regeneration += item.riseStats[j];
-                    break;
-                case 3:
-                    bloodSucking += item.riseStats[j];
-                    break;
-                case 4:
-                    persentDamage += item.riseStats[j];
-                    break;
-                case 5:
-                    meleeDamage += item.riseStats[j];
-                    break;
-                case 6:
-                    rangeDamage += item.riseStats[j];
-                    break;
-                case 7:
-                    attackSpeed += item.riseStats[j];
-                    break;
-                case 8:
-                    criticalChance += item.riseStats[j];
-                    break;
-                case 9:
-                    engine += item.riseStats[j];
-                    break;
-                case 10:
-                    range += item.riseStats[j];
-                    break;
-                case 11:
-                    armor += item.riseStats[j];
-                    break;
-                case 12:
-                    evasion += item.riseStats[j];
-                    break;
-                case 13:
-                    accuracy += item.riseStats[j];
-                    break;
-                case 14:
-                    speed += item.riseStats[j];
-                    break;
-                case 15:
-                    consumableHeal += (int)item.riseStats[j];
-                    break;
-                case 16:
-                    magnetRange += item.riseStats[j];
-                    break;
-                case 17:
-                    expGain += item.riseStats[j];
-                    break;
-                case 18:
-                    penetrate += (int)item.riseStats[j];
-                    break;
-                case 19:
-                    instantMagnet += item.riseStats[j];
-                    break;
-                case 20:
-                    KnockBack += item.riseStats[j];
-                    break;
-                case 21:
-                    explosiveDamage += item.riseStats[j];
-                    break;
-                case 22:
-                    penetrateDamage += item.riseStats[j];
-                    break;
-                case 23:
-                    explosiveSize += item.riseStats[j];
-                    break;
-                case 24:
-                    chain += (int)item.riseStats[j];
-                    break;
-                case 25:
-                    bossDamage += item.riseStats[j];
-                    break;
+                switch (itemInventory[i].riseStat[j])
+                {
+                    case Stat.PlayerStat.MAXHEALTH:
+                        maxHealth += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.REGENERATION:
+                        regeneration += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.BLOOD_SUCKING:
+                        bloodSucking += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.PERSENT_DAMAGE:
+                        persentDamage += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.MELEE_DAMAGE:
+                        meleeDamage += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.RANGE_DAMAGE:
+                        rangeDamage += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.ATTACK_SPEED:
+                        attackSpeed += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.CRITICAL_CHANCE:
+                        criticalChance += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.ENGINE:
+                        engine += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.RANGE:
+                        range += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.ARMOR:
+                        armor += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.EVASION:
+                        evasion += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.ACCURACY:
+                        accuracy += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.SPEED:
+                        speed += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.CONSUMABLE_HEAL:
+                        consumableHeal += (int)itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.MAGNET_RANGE:
+                        magnetRange += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.EXP_GAIN:
+                        expGain += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.PENETRATE:
+                        penetrate += (int)itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.INSTNAT_MAGNET:
+                        instantMagnet += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.KNOCK_BACK:
+                        KnockBack += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.EXPLOSIVE_DAMAGE:
+                        explosiveDamage += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.PENETRTE_DAMAGE:
+                        penetrateDamage += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.EXPLOSIVE_SIZE:
+                        explosiveSize += itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.CHAIN:
+                        chain += (int)itemInventory[i].riseStats[j];
+                        break;
+                    case Stat.PlayerStat.BOSS_DAMAGE:
+                        bossDamage += itemInventory[i].riseStats[j];
+                        break;
+                }
+            }
+            for (int j = 0; j < itemInventory[i].descendCount; j++)
+            {
+                switch (itemInventory[i].descendStat[j])
+                {
+                    case Stat.PlayerStat.MAXHEALTH:
+                        maxHealth -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.REGENERATION:
+                        regeneration -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.BLOOD_SUCKING:
+                        bloodSucking -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.PERSENT_DAMAGE:
+                        persentDamage -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.MELEE_DAMAGE:
+                        meleeDamage -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.RANGE_DAMAGE:
+                        rangeDamage -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.ATTACK_SPEED:
+                        attackSpeed -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.CRITICAL_CHANCE:
+                        criticalChance -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.ENGINE:
+                        engine -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.RANGE:
+                        range -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.ARMOR:
+                        armor -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.EVASION:
+                        evasion -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.ACCURACY:
+                        accuracy -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.SPEED:
+                        speed -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.CONSUMABLE_HEAL:
+                        consumableHeal -= (int)itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.MAGNET_RANGE:
+                        magnetRange -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.EXP_GAIN:
+                        expGain -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.PENETRATE:
+                        penetrate -= (int)itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.INSTNAT_MAGNET:
+                        instantMagnet -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.KNOCK_BACK:
+                        KnockBack -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.EXPLOSIVE_DAMAGE:
+                        explosiveDamage -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.PENETRTE_DAMAGE:
+                        penetrateDamage -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.EXPLOSIVE_SIZE:
+                        explosiveSize -= itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.CHAIN:
+                        chain -= (int)itemInventory[i].descendStats[j];
+                        break;
+                    case Stat.PlayerStat.BOSS_DAMAGE:
+                        bossDamage -= itemInventory[i].descendStats[j];
+                        break;
+                }
             }
         }
-        for (int j = 0; j < item.descendCount; j++)
+
+        //무기 세트 스탯 계산
+        SettCalculate();
+        void SettCalculate()
         {
-            switch ((int)item.descendStat[j])
+            WeaponManager sett = WeaponManager.instance;
+            //비무장 = 회피
+            if (sett.unArmed_Set == 2)
             {
-                case 1:
-                    maxHealth -= item.descendStats[j];
-                    break;
-                case 2:
-                    regeneration -= item.descendStats[j];
-                    break;
-                case 3:
-                    bloodSucking -= item.descendStats[j];
-                    break;
-                case 4:
-                    persentDamage -= item.descendStats[j];
-                    break;
-                case 5:
-                    meleeDamage -= item.descendStats[j];
-                    break;
-                case 6:
-                    rangeDamage -= item.descendStats[j];
-                    break;
-                case 7:
-                    attackSpeed -= item.descendStats[j];
-                    break;
-                case 8:
-                    criticalChance -= item.descendStats[j];
-                    break;
-                case 9:
-                    engine -= item.descendStats[j];
-                    break;
-                case 10:
-                    range -= item.descendStats[j];
-                    break;
-                case 11:
-                    armor -= item.descendStats[j];
-                    break;
-                case 12:
-                    evasion -= item.descendStats[j];
-                    break;
-                case 13:
-                    accuracy -= item.descendStats[j];
-                    break;
-                case 14:
-                    speed -= item.descendStats[j];
-                    break;
-                case 15:
-                    consumableHeal -= (int)item.descendStats[j];
-                    break;
-                case 16:
-                    magnetRange -= item.descendStats[j];
-                    break;
-                case 17:
-                    expGain -= item.descendStats[j];
-                    break;
-                case 18:
-                    penetrate -= (int)item.descendStats[j];
-                    break;
-                case 19:
-                    instantMagnet -= item.descendStats[j];
-                    break;
-                case 20:
-                    KnockBack -= item.descendStats[j];
-                    break;
-                case 21:
-                    explosiveDamage -= item.descendStats[j];
-                    break;
-                case 22:
-                    penetrateDamage -= item.descendStats[j];
-                    break;
-                case 23:
-                    explosiveSize -= item.riseStats[j];
-                    break;
-                case 24:
-                    chain -= (int)item.riseStats[j];
-                    break;
-                case 25:
-                    bossDamage -= item.riseStats[j];
-                    break;
+                evasion += 3;
             }
+            else if (sett.unArmed_Set == 3)
+            {
+                evasion += 6;
+            }
+            else if (sett.unArmed_Set == 4)
+            {
+                evasion += 9;
+            }
+            else if (sett.unArmed_Set == 5)
+            {
+                evasion += 12;
+            }
+            else if (sett.unArmed_Set >= 6)
+            {
+                evasion += 15;
+            }
+
+            //도구 = 엔지니어링
+            if (sett.tool_Set == 2)
+            {
+                engine += 1;
+            }
+            else if (sett.tool_Set == 3)
+            {
+                engine += 2;
+            }
+            else if (sett.tool_Set == 4)
+            {
+                engine += 3;
+            }
+            else if (sett.tool_Set == 5)
+            {
+                engine += 4;
+            }
+            else if (sett.tool_Set >= 6)
+            {
+                engine += 5;
+            }
+
+            //총 = 범위
+            if (sett.gun_Set == 2)
+            {
+                range += 10;
+            }
+            else if (sett.gun_Set == 3)
+            {
+                range += 20;
+            }
+            else if (sett.gun_Set == 4)
+            {
+                range += 30;
+            }
+            else if (sett.gun_Set == 5)
+            {
+                range += 40;
+            }
+            else if (sett.gun_Set >= 6)
+            {
+                range += 50;
+            }
+
+            //폭발물 = 폭발 크기
+            if (sett.explosive_Set == 2)
+            {
+                explosiveSize += 5;
+            }
+            else if (sett.explosive_Set == 3)
+            {
+                explosiveSize += 10;
+            }
+            else if (sett.explosive_Set == 4)
+            {
+                explosiveSize += 15;
+            }
+            else if (sett.explosive_Set == 5)
+            {
+                explosiveSize += 20;
+            }
+            else if (sett.explosive_Set >= 6)
+            {
+                explosiveSize += 25;
+            }
+
+            //정확 = 치명타율
+            if (sett.precision_Set == 2)
+            {
+                criticalChance += 3;
+            }
+            else if (sett.precision_Set == 3)
+            {
+                criticalChance += 6;
+            }
+            else if (sett.precision_Set == 4)
+            {
+                criticalChance += 9;
+
+            }
+            else if (sett.precision_Set == 5)
+            {
+                criticalChance += 12;
+            }
+            else if (sett.precision_Set >= 6)
+            {
+                criticalChance += 15;
+            }
+
+            //원시 = 체력
+            if (sett.native_Set == 2)
+            {
+                maxHealth += 3;
+            }
+            else if (sett.native_Set == 3)
+            {
+                maxHealth += 6;
+            }
+            else if (sett.native_Set == 4)
+            {
+                maxHealth += 9;
+            }
+            else if (sett.native_Set == 5)
+            {
+                maxHealth += 12;
+            }
+            else if (sett.native_Set >= 6)
+            {
+                maxHealth += 15;
+            }
+
         }
+
     }
 }

@@ -119,44 +119,44 @@ public class UpgradeStat : MonoBehaviour, ICustomUpdateMono
         switch(upgradeType)
         {
             case LevelUpStat.HP_UP:
-                game.playerInfo.maxHealth += upgrade.heart[tier];
+                game.playerInfo.maxHealth_Origin += upgrade.heart[tier];
                 game.curHp += upgrade.heart[tier];
                 break;
             case LevelUpStat.REGEN_UP:
-                game.playerInfo.regeneration += upgrade.lungs[tier];
+                game.playerInfo.regeneration_Origin += upgrade.lungs[tier];
                 break;
             case LevelUpStat.BLOOD_UP:
-                game.playerInfo.bloodSucking += upgrade.teeth[tier];
+                game.playerInfo.bloodSucking_Origin += upgrade.teeth[tier];
                 break;
             case LevelUpStat.DAMAGE_UP:
-                game.playerInfo.persentDamage += upgrade.triceps[tier];
+                game.playerInfo.persentDamage_Origin += upgrade.triceps[tier];
                 break;
             case LevelUpStat.MELEEDM_UP:
-                game.playerInfo.meleeDamage += upgrade.forearms[tier];
+                game.playerInfo.meleeDamage_Origin += upgrade.forearms[tier];
                 break;
             case LevelUpStat.RANGEDM_UP:
-                game.playerInfo.rangeDamage += upgrade.shoulders[tier];
+                game.playerInfo.rangeDamage_Origin += upgrade.shoulders[tier];
                 break;
             case LevelUpStat.ATKSPEED_UP:
-                game.playerInfo.attackSpeed += upgrade.reflexes[tier];
+                game.playerInfo.attackSpeed_Origin += upgrade.reflexes[tier];
                 break;
             case LevelUpStat.CRITICAL_UP:
-                game.playerInfo.criticalChance += upgrade.fingers[tier];
+                game.playerInfo.criticalChance_Origin += upgrade.fingers[tier];
                 break;
             case LevelUpStat.ENGINE_UP:
-                game.playerInfo.engine += upgrade.skull[tier];
+                game.playerInfo.engine_Origin += upgrade.skull[tier];
                 break;
             case LevelUpStat.RANGE_UP:
-                game.playerInfo.range += upgrade.eyes[tier];
+                game.playerInfo.range_Origin += upgrade.eyes[tier];
                 break;
             case LevelUpStat.ARMOR_UP:
-                game.playerInfo.armor += upgrade.chest[tier];
+                game.playerInfo.armor_Origin += upgrade.chest[tier];
                 break;
             case LevelUpStat.EVASION_UP:
-                game.playerInfo.evasion += upgrade.back[tier];
+                game.playerInfo.evasion_Origin += upgrade.back[tier];
                 break;
             case LevelUpStat.SPEED_UP:
-                game.playerInfo.speed += upgrade.legs[tier];
+                game.playerInfo.speed_Origin += upgrade.legs[tier];
                 break;
             default:
                 Debug.Log("upgradeType ¹Ì ¼³Á¤");

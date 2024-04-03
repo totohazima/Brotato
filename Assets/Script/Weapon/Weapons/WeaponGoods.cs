@@ -252,6 +252,7 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
             ShopManager.instance.goodsList.Remove(gameObject);
             ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
             WeaponManager.instance.WeaponSetSearch();
+            GameManager.instance.playerInfo.StatCalculate();
             gameObject.SetActive(false);
         }
         else
@@ -269,6 +270,7 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
                         ShopManager.instance.goodsList.Remove(gameObject);
                         ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
                         WeaponManager.instance.WeaponSetSearch();
+                        GameManager.instance.playerInfo.StatCalculate();
                         gameObject.SetActive(false);
                         break;
                     }
