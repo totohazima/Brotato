@@ -35,21 +35,21 @@ public class Player : MonoBehaviour
     [HideInInspector] public int chain;
     [HideInInspector] public float bossDamage;
 
-    [Header("OriginStat")]
-    public float maxHealth_Origin;
-    public float regeneration_Origin;
-    public float bloodSucking_Origin;
-    public float persentDamage_Origin;
-    public float meleeDamage_Origin;
-    public float rangeDamage_Origin;
-    public float attackSpeed_Origin;
-    public float criticalChance_Origin;
-    public float engine_Origin;
-    public float range_Origin;
-    public float armor_Origin;
-    public float evasion_Origin;
-    public float accuracy_Origin;
-    public float speed_Origin;
+
+    [HideInInspector] public float maxHealth_Origin;
+    [HideInInspector] public float regeneration_Origin;
+    [HideInInspector] public float bloodSucking_Origin;
+    [HideInInspector] public float persentDamage_Origin;
+    [HideInInspector] public float meleeDamage_Origin;
+    [HideInInspector] public float rangeDamage_Origin;
+    [HideInInspector] public float attackSpeed_Origin;
+    [HideInInspector] public float criticalChance_Origin;
+    [HideInInspector] public float engine_Origin;
+    [HideInInspector] public float range_Origin;
+    [HideInInspector] public float armor_Origin;
+    [HideInInspector] public float evasion_Origin;
+    [HideInInspector] public float accuracy_Origin;
+    [HideInInspector] public float speed_Origin;
 
     [HideInInspector] public int consumableHeal_Origin;
     [HideInInspector] public float magnetRange_Origin;
@@ -133,166 +133,169 @@ public class Player : MonoBehaviour
         //아이템 스탯 계산
         for (int i = 0; i < itemInventory.Count; i++)
         {
-            for (int j = 0; j < itemInventory[i].riseCount; j++)
+            for (int k = 0; k < itemInventory[i].curCount; k++)
             {
-                switch (itemInventory[i].riseStat[j])
+                for (int j = 0; j < itemInventory[i].riseCount; j++)
                 {
-                    case Stat.PlayerStat.MAXHEALTH:
-                        maxHealth += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.REGENERATION:
-                        regeneration += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.BLOOD_SUCKING:
-                        bloodSucking += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.PERSENT_DAMAGE:
-                        persentDamage += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.MELEE_DAMAGE:
-                        meleeDamage += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.RANGE_DAMAGE:
-                        rangeDamage += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.ATTACK_SPEED:
-                        attackSpeed += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.CRITICAL_CHANCE:
-                        criticalChance += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.ENGINE:
-                        engine += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.RANGE:
-                        range += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.ARMOR:
-                        armor += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.EVASION:
-                        evasion += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.ACCURACY:
-                        accuracy += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.SPEED:
-                        speed += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.CONSUMABLE_HEAL:
-                        consumableHeal += (int)itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.MAGNET_RANGE:
-                        magnetRange += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.EXP_GAIN:
-                        expGain += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.PENETRATE:
-                        penetrate += (int)itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.INSTNAT_MAGNET:
-                        instantMagnet += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.KNOCK_BACK:
-                        KnockBack += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.EXPLOSIVE_DAMAGE:
-                        explosiveDamage += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.PENETRTE_DAMAGE:
-                        penetrateDamage += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.EXPLOSIVE_SIZE:
-                        explosiveSize += itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.CHAIN:
-                        chain += (int)itemInventory[i].riseStats[j];
-                        break;
-                    case Stat.PlayerStat.BOSS_DAMAGE:
-                        bossDamage += itemInventory[i].riseStats[j];
-                        break;
+                    switch (itemInventory[i].riseStat[j])
+                    {
+                        case Stat.PlayerStat.MAXHEALTH:
+                            maxHealth += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.REGENERATION:
+                            regeneration += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.BLOOD_SUCKING:
+                            bloodSucking += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.PERSENT_DAMAGE:
+                            persentDamage += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.MELEE_DAMAGE:
+                            meleeDamage += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.RANGE_DAMAGE:
+                            rangeDamage += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.ATTACK_SPEED:
+                            attackSpeed += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.CRITICAL_CHANCE:
+                            criticalChance += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.ENGINE:
+                            engine += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.RANGE:
+                            range += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.ARMOR:
+                            armor += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.EVASION:
+                            evasion += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.ACCURACY:
+                            accuracy += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.SPEED:
+                            speed += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.CONSUMABLE_HEAL:
+                            consumableHeal += (int)itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.MAGNET_RANGE:
+                            magnetRange += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.EXP_GAIN:
+                            expGain += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.PENETRATE:
+                            penetrate += (int)itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.INSTNAT_MAGNET:
+                            instantMagnet += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.KNOCK_BACK:
+                            KnockBack += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.EXPLOSIVE_DAMAGE:
+                            explosiveDamage += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.PENETRTE_DAMAGE:
+                            penetrateDamage += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.EXPLOSIVE_SIZE:
+                            explosiveSize += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.CHAIN:
+                            chain += (int)itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.BOSS_DAMAGE:
+                            bossDamage += itemInventory[i].riseStats[j];
+                            break;
+                    }
                 }
-            }
-            for (int j = 0; j < itemInventory[i].descendCount; j++)
-            {
-                switch (itemInventory[i].descendStat[j])
+                for (int j = 0; j < itemInventory[i].descendCount; j++)
                 {
-                    case Stat.PlayerStat.MAXHEALTH:
-                        maxHealth -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.REGENERATION:
-                        regeneration -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.BLOOD_SUCKING:
-                        bloodSucking -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.PERSENT_DAMAGE:
-                        persentDamage -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.MELEE_DAMAGE:
-                        meleeDamage -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.RANGE_DAMAGE:
-                        rangeDamage -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.ATTACK_SPEED:
-                        attackSpeed -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.CRITICAL_CHANCE:
-                        criticalChance -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.ENGINE:
-                        engine -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.RANGE:
-                        range -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.ARMOR:
-                        armor -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.EVASION:
-                        evasion -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.ACCURACY:
-                        accuracy -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.SPEED:
-                        speed -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.CONSUMABLE_HEAL:
-                        consumableHeal -= (int)itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.MAGNET_RANGE:
-                        magnetRange -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.EXP_GAIN:
-                        expGain -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.PENETRATE:
-                        penetrate -= (int)itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.INSTNAT_MAGNET:
-                        instantMagnet -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.KNOCK_BACK:
-                        KnockBack -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.EXPLOSIVE_DAMAGE:
-                        explosiveDamage -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.PENETRTE_DAMAGE:
-                        penetrateDamage -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.EXPLOSIVE_SIZE:
-                        explosiveSize -= itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.CHAIN:
-                        chain -= (int)itemInventory[i].descendStats[j];
-                        break;
-                    case Stat.PlayerStat.BOSS_DAMAGE:
-                        bossDamage -= itemInventory[i].descendStats[j];
-                        break;
+                    switch (itemInventory[i].descendStat[j])
+                    {
+                        case Stat.PlayerStat.MAXHEALTH:
+                            maxHealth -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.REGENERATION:
+                            regeneration -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.BLOOD_SUCKING:
+                            bloodSucking -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.PERSENT_DAMAGE:
+                            persentDamage -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.MELEE_DAMAGE:
+                            meleeDamage -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.RANGE_DAMAGE:
+                            rangeDamage -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.ATTACK_SPEED:
+                            attackSpeed -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.CRITICAL_CHANCE:
+                            criticalChance -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.ENGINE:
+                            engine -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.RANGE:
+                            range -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.ARMOR:
+                            armor -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.EVASION:
+                            evasion -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.ACCURACY:
+                            accuracy -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.SPEED:
+                            speed -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.CONSUMABLE_HEAL:
+                            consumableHeal -= (int)itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.MAGNET_RANGE:
+                            magnetRange -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.EXP_GAIN:
+                            expGain -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.PENETRATE:
+                            penetrate -= (int)itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.INSTNAT_MAGNET:
+                            instantMagnet -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.KNOCK_BACK:
+                            KnockBack -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.EXPLOSIVE_DAMAGE:
+                            explosiveDamage -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.PENETRTE_DAMAGE:
+                            penetrateDamage -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.EXPLOSIVE_SIZE:
+                            explosiveSize -= itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.CHAIN:
+                            chain -= (int)itemInventory[i].descendStats[j];
+                            break;
+                        case Stat.PlayerStat.BOSS_DAMAGE:
+                            bossDamage -= itemInventory[i].descendStats[j];
+                            break;
+                    }
                 }
             }
         }

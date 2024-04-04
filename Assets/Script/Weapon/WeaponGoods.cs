@@ -152,7 +152,7 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         {
             coolDownNumUI.text = afterCoolTime.ToString("F2") + "s";
         }
-        else if (coolTime > afterCoolTime)
+        else if (coolTime < afterCoolTime)
         {
             coolDownNumUI.text = "<color=red>" + afterCoolTime.ToString("F2") + "</color>s";
         }

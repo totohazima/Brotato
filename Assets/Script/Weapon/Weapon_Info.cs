@@ -176,7 +176,7 @@ public class Weapon_Info : MonoBehaviour
         {
             coolDownNumUI.text = weaponInfo.afterCoolTime.ToString("F2") + "s";
         }
-        else if (weaponInfo.coolTime > weaponInfo.afterCoolTime)
+        else if (weaponInfo.coolTime < weaponInfo.afterCoolTime)
         {
             coolDownNumUI.text = "<color=red>" + weaponInfo.afterCoolTime.ToString("F2") + "</color>s";
         }

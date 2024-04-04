@@ -55,14 +55,22 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
             {
                 if (weapon_Object.index == weapon.index && weapon_Object.weaponTier == weapon.weaponTier && weapon_Object.weaponTier < 3)
                 {
-                    combined_Mark.SetActive(true);
+                    //combined_Mark.SetActive(true);
                     isCombined = true;
                     break;
                 }
             }
-
-            combined_Mark.SetActive(false);
+            //combined_Mark.SetActive(false);
             isCombined = false;
+        }
+
+        if(isCombined == true)
+        {
+            combined_Mark.SetActive(true);
+        }
+        else
+        {
+            combined_Mark.SetActive(false);
         }
     }
     Weapon_Info infoObj = null;

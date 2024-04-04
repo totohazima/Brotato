@@ -9,9 +9,9 @@ public class Enemy : MonoBehaviour
     public int level;
     public float maxHealth;
     public float curHealth;
-    public float healthPerWave; //웨이브 당 체력 증가치
+    [HideInInspector] public float healthPerWave; //웨이브 당 체력 증가치
     public float damage;
-    public float damagePerWave;//웨이브 당 데미지 증가치 
+    [HideInInspector] public float damagePerWave;//웨이브 당 데미지 증가치 
     public float coolTime;
     public float armor;
     public float range;
@@ -19,11 +19,11 @@ public class Enemy : MonoBehaviour
     public float accuracy;
     public float minSpeed;
     public float maxSpeed;
-    public float moneyDropRate; //재화 드랍 개수
-    public int moneyValue;
-    public int expValue; 
-    public float consumableDropRate; //소모품 드랍 확률;
-    public float lootDropRate; //전리품 드랍 확률;
+    [HideInInspector] public float moneyDropRate; //재화 드랍 개수
+    [HideInInspector] public int moneyValue;
+    [HideInInspector] public int expValue;
+    [HideInInspector] public float consumableDropRate; //소모품 드랍 확률;
+    [HideInInspector] public float lootDropRate; //전리품 드랍 확률;
     public bool isDie;
     public bool isHit; //플레이어와 부딫힐 경우 1초 동안 플레이어와 피격판정이 되지 않음
 
@@ -85,24 +85,38 @@ public class Enemy : MonoBehaviour
     }
     public void StatSetting(int index)
     {
-        EnemyStatImporter enemy = EnemyStatImporter.instance;
+        StatReset();
+        void StatReset()
+        {
+            EnemyStatImporter enemy = EnemyStatImporter.instance;
 
-        maxHealth = enemy.health[index];
+            maxHealth = enemy.health[index];
+            healthPerWave = enemy.healthWave[index];
+            damage = enemy.damage[index];
+            damagePerWave = enemy.damageWave[index];
+            coolTime = enemy.coolTime[index];
+            armor = enemy.armor[index];
+            range = enemy.range[index];
+            evasion = enemy.evasion[index];
+            accuracy = enemy.accuracy[index];
+            minSpeed = enemy.minSpeed[index];
+            maxSpeed = enemy.maxSpeed[index];
+            moneyDropRate = enemy.moneyDropNum[index];
+            moneyValue = enemy.moneyValue[index];
+            expValue = enemy.expValue[index];
+            consumableDropRate = enemy.consumDropRate[index];
+            lootDropRate = enemy.LootDropRate[index];
+        }
+
+        WaveStat();
+        void WaveStat()
+        {
+            int wave = GameManager.instance.waveLevel;
+
+            maxHealth += healthPerWave * wave;
+            damage += damagePerWave * wave;
+        }
+
         curHealth = maxHealth;
-        healthPerWave = enemy.healthWave[index];
-        damage = enemy.damage[index];
-        damagePerWave = enemy.damageWave[index];
-        coolTime = enemy.coolTime[index];
-        armor = enemy.armor[index];
-        range = enemy.range[index];
-        evasion = enemy.evasion[index];
-        accuracy = enemy.accuracy[index];
-        minSpeed = enemy.minSpeed[index];
-        maxSpeed = enemy.maxSpeed[index];
-        moneyDropRate = enemy.moneyDropNum[index];
-        moneyValue = enemy.moneyValue[index];
-        expValue = enemy.expValue[index];
-        consumableDropRate = enemy.consumDropRate[index];
-        lootDropRate = enemy.LootDropRate[index];
     }
 }
