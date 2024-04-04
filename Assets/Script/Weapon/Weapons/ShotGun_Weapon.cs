@@ -86,7 +86,7 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
     private void Fire()
     {
         Vector3 targetPos = scanner.target.position;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < bulletCount; i++)
         {
             float x = Random.Range(-7f, 7f);
             targetPos.x += x;

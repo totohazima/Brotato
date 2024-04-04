@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public GameObject lootCrateMarkUi;
     public GameObject[] lootMarks;
     public GameObject shopUI;
+    public RectTransform statUI;
     public GameObject GameClearUI;
     [Header("# Variable")]
     public PlayerAction playerInfo;
@@ -362,6 +363,12 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         isEnd = true;
     }
 
+    public void GamePause()
+    {
+        isPause = true;
+        statUI.anchoredPosition = new Vector3(100, 0, 0);
+
+    }
     public void ReturnMainMenu()
     {
         MainSceneManager main = MainSceneManager.instance;

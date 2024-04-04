@@ -43,6 +43,7 @@ public class Weapon : MonoBehaviour
     public string name;
     public string weaponType;
     public float damage;
+    public int bulletCount;
     public float[] multipleDamage;
     public float criticalChance;
     public float criticalDamage;
@@ -58,6 +59,7 @@ public class Weapon : MonoBehaviour
     public DamageType[] multipleDamageType; //데미지 계수들
 
     [HideInInspector] public float afterDamage;
+    [HideInInspector] public int afterBulletCount;
     [HideInInspector] public float afterCriticalChance;
     [HideInInspector] public float afterCriticalDamage;
     [HideInInspector] public float afterCoolTime;
@@ -84,6 +86,7 @@ public class Weapon : MonoBehaviour
         {
             case 0:
                 damage = import.damage1[index];
+                bulletCount = import.bulletCount1[index];
                 while (i < multipleDamaeCount)
                 {
                     multipleDamage[i] = import.multipleDamage1[index + i];
@@ -98,6 +101,7 @@ public class Weapon : MonoBehaviour
                 break;
             case 1:
                 damage = import.damage2[index];
+                bulletCount = import.bulletCount2[index];
                 while (i < multipleDamaeCount)
                 {
                     multipleDamage[i] = import.multipleDamage2[index + i];
@@ -112,6 +116,7 @@ public class Weapon : MonoBehaviour
                 break;
             case 2:
                 damage = import.damage3[index];
+                bulletCount = import.bulletCount3[index];
                 while (i < multipleDamaeCount)
                 {
                     multipleDamage[i] = import.multipleDamage3[index + i];
@@ -126,6 +131,7 @@ public class Weapon : MonoBehaviour
                 break;
             case 3:
                 damage = import.damage4[index];
+                bulletCount = import.bulletCount4[index];
                 while (i < multipleDamaeCount)
                 {
                     multipleDamage[i] = import.multipleDamage4[index + i];
@@ -180,6 +186,7 @@ public class Weapon : MonoBehaviour
         }
         afterDamage *= 1 + (player.persentDamage / 100);
 
+        afterBulletCount = bulletCount;
         afterPenetrate = penetrate + player.penetrate;
         afterCriticalChance = criticalChance + player.criticalChance;
         afterCriticalDamage = criticalDamage;

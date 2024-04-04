@@ -96,15 +96,36 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         //대미지 UI
         if (damage == afterDamage)//같은 대미지
         {
-            damageNumUI.text = damage + "(";
+            if (bulletCount > 1)
+            {
+                damageNumUI.text = damage + "x" + bulletCount + "(";
+            }
+            else
+            {
+                damageNumUI.text = damage + "(";
+            }
         }
         else if(damage > afterDamage)//원본보다 낮을 경우
         {
-            damageNumUI.text = "<color=red>" + afterDamage.ToString("F0") + "</color> | " + damage + " (";
+            if (bulletCount > 1)
+            {
+                damageNumUI.text = "<color=red>" + afterDamage.ToString("F0") + "x" + bulletCount + "</color> | " + damage + "x" + bulletCount + " (";
+            }
+            else
+            {
+                damageNumUI.text = "<color=red>" + afterDamage.ToString("F0") + "</color> | " + damage + " (";
+            }    
         }
         else //원본보다 높을 경우
         {
-            damageNumUI.text = "<color=#4CFF52>" + afterDamage.ToString("F0") + "</color> | " + damage + " (";
+            if (bulletCount > 1)
+            {
+                damageNumUI.text = "<color=#4CFF52>" + afterDamage.ToString("F0") + "x" + bulletCount + "</color> | " + damage + "x" + bulletCount + " (";
+            }
+            else
+            {
+                damageNumUI.text = "<color=#4CFF52>" + afterDamage.ToString("F0") + "</color> | " + damage + " (";
+            }
         }
 
         for (int i = 0; i < multipleDamaeCount; i++)

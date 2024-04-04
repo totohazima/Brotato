@@ -58,7 +58,14 @@ public class SettingWeaponInfo : MonoBehaviour
         name.text = infoName.ToString();
         weaponType.text = infoType.ToString();
 
-        damage.text = infoDamage + "(";
+        if (weapon.bulletCount > 1)
+        {
+            damage.text = infoDamage + "x" + weapon.bulletCount + "(";
+        }
+        else
+        {
+            damage.text = infoDamage + "(";
+        }
         for (int i = 0; i < weapon.multipleDamaeCount; i++)
         {
             if(weapon.multipleDamage[i] != 100) //100%는 숫자가 나오지 않음

@@ -120,15 +120,36 @@ public class Weapon_Info : MonoBehaviour
         //대미지 UI
         if (weaponInfo.damage == weaponInfo.afterDamage)//같은 대미지
         {
-            damageNumUI.text = weaponInfo.damage + "(";
+            if (weaponInfo.afterBulletCount > 1)
+            {
+                damageNumUI.text = weaponInfo.damage + "x" + weaponInfo.afterBulletCount + "(";
+            }
+            else
+            {
+                damageNumUI.text = weaponInfo.damage + "(";
+            }
         }
         else if (weaponInfo.damage > weaponInfo.afterDamage)//원본보다 낮을 경우
         {
-            damageNumUI.text = "<color=red>" + weaponInfo.afterDamage.ToString("F0") + "</color> | " + weaponInfo.damage + " (";
+            if (weaponInfo.afterBulletCount > 1)
+            {
+                damageNumUI.text = "<color=red>" + weaponInfo.afterDamage.ToString("F0") + "x" + weaponInfo.afterBulletCount + "</color> | " + weaponInfo.damage + "x" + weaponInfo.afterBulletCount + " (";
+            }
+            else
+            {
+                damageNumUI.text = "<color=red>" + weaponInfo.afterDamage.ToString("F0") + "</color> | " + weaponInfo.damage + " (";
+            }
         }
         else //원본보다 높을 경우
         {
-            damageNumUI.text = "<color=#4CFF52>" + weaponInfo.afterDamage.ToString("F0") + "</color> | " + weaponInfo.damage + " (";
+            if (weaponInfo.afterBulletCount > 1)
+            {
+                damageNumUI.text = "<color=#4CFF52>" + weaponInfo.afterDamage.ToString("F0") + "x" + weaponInfo.afterBulletCount + "</color> | " + weaponInfo.damage + "x" + weaponInfo.afterBulletCount + " (";
+            }
+            else
+            {
+                damageNumUI.text = "<color=#4CFF52>" + weaponInfo.afterDamage.ToString("F0") + "</color> | " + weaponInfo.damage + " (";
+            }
         }
 
         for (int i = 0; i < weaponInfo.multipleDamaeCount; i++)

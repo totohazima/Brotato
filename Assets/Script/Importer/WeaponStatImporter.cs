@@ -9,6 +9,7 @@ public class WeaponStatImporter : MonoBehaviour
     [HideInInspector] public int[] weaponNum;
     [HideInInspector] public string[] name;
     [HideInInspector] public float[] damage1, damage2, damage3, damage4;
+    [HideInInspector] public int[] bulletCount1, bulletCount2, bulletCount3, bulletCount4;
     [HideInInspector] public int[] multipleDamageCount;
     [HideInInspector] public string[] multipleDamageType;
     [HideInInspector] public float[] multipleDamage1, multipleDamage2, multipleDamage3, multipleDamage4;
@@ -33,6 +34,11 @@ public class WeaponStatImporter : MonoBehaviour
         damage2 = new float[data.Count];
         damage3 = new float[data.Count];
         damage4 = new float[data.Count];
+
+        bulletCount1 = new int[data.Count];
+        bulletCount2 = new int[data.Count];
+        bulletCount3 = new int[data.Count];
+        bulletCount4 = new int[data.Count];
 
         multipleDamageCount = new int[data.Count];
         multipleDamageType = new string[data.Count];
@@ -97,6 +103,11 @@ public class WeaponStatImporter : MonoBehaviour
             {
                 damage4[i] = damage4Value;
             }
+
+            bulletCount1[i] = (int)data[i]["BulletCount1"];
+            bulletCount2[i] = (int)data[i]["BulletCount2"];
+            bulletCount3[i] = (int)data[i]["BulletCount3"];
+            bulletCount4[i] = (int)data[i]["BulletCount4"];
 
             multipleDamageCount[i] = (int)data[i]["MultipleDamageCount"];
             multipleDamageType[i] = (string)data[i]["MultipleDamageType"];
