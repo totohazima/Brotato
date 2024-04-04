@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
         CHARGER,
         TANKER,
         BOSS,
+        TREE,
     }
 
     public virtual IEnumerator Died()

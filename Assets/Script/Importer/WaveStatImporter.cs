@@ -9,7 +9,7 @@ public class WaveStatImporter : MonoBehaviour
     public int[] enemyCount;
     public int[] enemySpawnCount;
     public float[] waveTime;
-    public int[] treeCount;
+    public float[] treeCount;
     public Wave_Scriptable[] wave_Scriptables;
     void Awake()
     {
@@ -19,7 +19,7 @@ public class WaveStatImporter : MonoBehaviour
         enemyCount = new int[data.Count];
         enemySpawnCount = new int[data.Count];
         waveTime = new float[data.Count];
-        treeCount = new int[data.Count];
+        treeCount = new float[data.Count];
         for (int i = 0; i < data.Count; i++)
         {
             if (int.TryParse(data[i]["EnemyCount"].ToString(), out int enemyCountValue))
@@ -34,7 +34,7 @@ public class WaveStatImporter : MonoBehaviour
             {
                 waveTime[i] = waveTimeValue;
             }
-            if (int.TryParse(data[i]["TreeCount"].ToString(), out int treeCountValue))
+            if (float.TryParse(data[i]["TreeCount"].ToString(), out float treeCountValue))
             {
                 treeCount[i] = treeCountValue;
             }

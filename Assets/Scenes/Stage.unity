@@ -26694,6 +26694,7 @@ MonoBehaviour:
   enemys: []
   mines: []
   turrets: []
+  trees: []
 --- !u!1 &1290864715
 GameObject:
   m_ObjectHideFlags: 0
@@ -31899,6 +31900,8 @@ MonoBehaviour:
   - {fileID: 6671146981515543302, guid: 1b766dd18f1f8094f954c75fd67fa03c, type: 3}
   - {fileID: 6671146981515543302, guid: 3e370fc199bf76845ad4435186985ce1, type: 3}
   - {fileID: 6322314760531660955, guid: 0b35801d5790aa449bb3a10829fc7eff, type: 3}
+  - {fileID: 840120006600240025, guid: b7e31f0573b2b6349b7a2e06a600ea72, type: 3}
+  - {fileID: 5843693155662958422, guid: 8779742bb5e266e468178418357919ed, type: 3}
 --- !u!4 &1479623122
 Transform:
   m_ObjectHideFlags: 0

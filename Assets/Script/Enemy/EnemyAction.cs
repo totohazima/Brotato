@@ -96,7 +96,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         rigid.AddForce(dir.normalized * power, ForceMode.Impulse);
         yield return 0;
     }
-    public void DamageCalculator(float damage, int per, float accuracy, float criticalChance, float criticalDamage, float knockBack, Vector3 bulletPos)
+    public virtual void DamageCalculator(float damage, int per, float accuracy, float criticalChance, float criticalDamage, float knockBack, Vector3 bulletPos)
     {
         if (ItemEffect.instance.IsUglyTooth == true)
         {

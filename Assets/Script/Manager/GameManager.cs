@@ -212,9 +212,14 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         {
             spawn.turrets[i].SetActive(false);
         }
+        for(int i = 0; i < spawn.trees.Count; i++) //³ª¹«
+        {
+            spawn.trees[i].SetActive(false);
+        }
 
         spawn.mines.Clear();
         spawn.turrets.Clear();
+        spawn.trees.Clear();
     }
     void UiVisualize()
     {

@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     public int enemyLimit; //한 웨이브에 소환될 몬스터 수
     public int spawnCount; //한 번에 소환되는 몬스터 수
     float timer;
+    float treeTimer;
     public float spawnTime; //스폰 시간
     GameManager game;
     float mineTimer;
@@ -19,13 +20,14 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     public List<GameObject> enemys;
     public List<GameObject> mines;
     public List<GameObject> turrets;
+    public List<GameObject> trees;
     private List<GameObject>[] pools;
     void Awake()
     {
         instance = this;
         game = GameManager.instance;
-        //timer = 100f;
-        //mineTimer = 100f;
+        timer = 100f;
+        mineTimer = 100f;
         WaveSelect(0);
         spawnTime = game.waveTime[game.waveLevel] / enemyLimit;
 
@@ -53,6 +55,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     {
         if(game.isEnd == true)
         {
+            treeTimer = 0;
             enemyClear();
             return;
         }
@@ -75,6 +78,13 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         {
             StartCoroutine(MineSetting());
             mineTimer = 0f;
+        }
+
+        treeTimer += Time.deltaTime;
+        if(treeTimer >= 10)
+        {
+            StartCoroutine(TreeSpawn());
+            treeTimer = 0;
         }
     }
     void enemyClear()
@@ -196,7 +206,55 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             mark[i].SetActive(false);
         }
     }
+    public IEnumerator TreeSpawn()
+    {
+        float treeNum = WaveStatImporter.instance.treeCount[game.waveLevel];
+        float a = (treeNum + ItemEffect.instance.Tree()) * 0.33f;
+        float b = (float)System.Math.Truncate(a);
+        float c = (a - b) * 100;
 
+        float someTree = 0;
+        float noneTree = 0;
+        if(c > 50f)
+        {
+            someTree = c;
+            noneTree = 100 - someTree;
+        }
+        else if(c <= 50f)
+        {
+            someTree = 100 - c;
+            noneTree = someTree;
+        }
+        float[] chanceLise = { someTree, noneTree };
+        int index = GameManager.instance.Judgment(chanceLise);
+        int treeCount;
+        if (index == 0)
+        {
+            treeCount = (int)(b + 1);
+        }
+        else
+        {
+            treeCount = (int)(b);
+        }
+
+        GameObject[] mark = new GameObject[treeCount];
+        GameObject[] tree = new GameObject[mark.Length];
+
+        for (int i = 0; i < mark.Length; i++)
+        {
+            mark[i] = PoolManager.instance.Get(12);
+            Vector3 pos = FriendlySpawnPosition();
+            mark[i].transform.position = pos;
+        }
+        yield return new WaitForSeconds(0.6f);
+        for (int i = 0; i < mark.Length; i++)
+        {
+            tree[i] = PoolManager.instance.Get(13);
+            tree[i].transform.position = mark[i].transform.position;
+            trees.Add(tree[i]);
+            mark[i].SetActive(false);
+        }
+    }
     public void WaveSelect(int waveLevel)
     {
         WaveStatImporter import = WaveStatImporter.instance;
