@@ -235,7 +235,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         maxExp = 50 + (30 * (playerLevel));
         ExpBarUI.maxValue = maxExp;
         ExpBarUI.value = curExp;
-        LevelNum.text = "LV." + playerLevel + 1;
+        LevelNum.text = "LV." + (playerLevel + 1);
 
         if (timer < 5)
         {
@@ -363,12 +363,6 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         isEnd = true;
     }
 
-    public void GamePause()
-    {
-        isPause = true;
-        statUI.anchoredPosition = new Vector3(100, 0, 0);
-
-    }
     public void ReturnMainMenu()
     {
         MainSceneManager main = MainSceneManager.instance;

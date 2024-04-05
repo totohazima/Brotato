@@ -275,7 +275,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             Vector3 point = new Vector3(randomX, randomY);
 
             float distance = Vector3.Distance(playerPos, point);
-            if (distance > 10)
+            if (distance > 25)
             {
                 spawnPoint = point;
                 break;

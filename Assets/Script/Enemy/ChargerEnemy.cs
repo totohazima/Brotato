@@ -33,15 +33,7 @@ public class ChargerEnemy : EnemyAction
             return;
         }
 
-        if (isHit == true)
-        {
-            hitTimer += Time.deltaTime;
-            if (hitTimer >= 1f)
-            {
-                isHit = false;
-                hitTimer = 0f;
-            }
-        }
+      
         float dis = Vector3.Distance(transform.position, target.position);
 
         timer += Time.deltaTime;

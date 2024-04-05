@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public float consumableDropRate; //소모품 드랍 확률;
     [HideInInspector] public float lootDropRate; //전리품 드랍 확률;
     public bool isDie;
-    public bool isHit; //플레이어와 부딫힐 경우 1초 동안 플레이어와 피격판정이 되지 않음
 
     [Header("Debuff")]
     public int ugliyToothSlow; //못생긴 이빨 효과 슬로우 최대 30%

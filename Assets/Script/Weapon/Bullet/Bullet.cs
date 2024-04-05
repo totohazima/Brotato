@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     public float accuracy;
     public float criticalChance;
     public float criticalDamage;
+    public bool isCritical;
     public float knockBack;
     private float penetrateDamage; //관통 후 데미지가 깍이는 수치(원래 대미지를 넘을 순 없다)
     [HideInInspector] public Rigidbody rigid;
@@ -56,6 +57,20 @@ public class Bullet : MonoBehaviour
         this.knockBack = knockBack;
         this.penetrateDamage = penetrateDamage;
 
+        float critical = criticalChance;
+        float nonCritical = 100 - critical;
+        float[] chanceLise = { critical, nonCritical };
+        int index = GameManager.instance.Judgment(chanceLise);
+
+        if(index == 0)
+        {
+            isCritical = true;
+        }
+        else
+        {
+            isCritical = false;
+        }
+
         startPos = transform.position;
         if (per >= 0)
         {
@@ -76,7 +91,7 @@ public class Bullet : MonoBehaviour
             IDamageCalculate damageCal = collision.GetComponentInParent<IDamageCalculate>();
             if(damageCal != null)
             {
-                damageCal.DamageCalculator(damage, per, accuracy, criticalChance, criticalDamage, knockBack, transform.position);
+                damageCal.DamageCalculator(damage, per, accuracy, isCritical, criticalDamage, knockBack, transform.position);
             }
 
             per--;

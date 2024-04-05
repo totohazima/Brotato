@@ -1464,7 +1464,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7842546618989634712}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.08602251
   m_Height: 0.23311628
@@ -1707,6 +1707,31 @@ MonoBehaviour:
   explosiveSize: 0
   chain: 0
   bossDamage: 0
+  maxHealth_Origin: 0
+  regeneration_Origin: 0
+  bloodSucking_Origin: 0
+  persentDamage_Origin: 0
+  meleeDamage_Origin: 0
+  rangeDamage_Origin: 0
+  attackSpeed_Origin: 0
+  criticalChance_Origin: 0
+  engine_Origin: 0
+  range_Origin: 0
+  armor_Origin: 0
+  evasion_Origin: 0
+  accuracy_Origin: 0
+  speed_Origin: 0
+  consumableHeal_Origin: 0
+  magnetRange_Origin: 0
+  expGain_Origin: 0
+  penetrate_Origin: 0
+  instantMagnet_Origin: 0
+  KnockBack_Origin: 0
+  explosiveDamage_Origin: 0
+  penetrateDamage_Origin: 0
+  explosiveSize_Origin: 0
+  chain_Origin: 0
+  bossDamage_Origin: 0
   itemInventory: []
   weapons: []
   anim: {fileID: 2566686891921379930}
@@ -1715,3 +1740,4 @@ MonoBehaviour:
   animTrans: {fileID: 4277072844136297428}
   weaponMainPos: {fileID: 814681150070084302}
   isFullWeapon: 0
+  isHit: 0

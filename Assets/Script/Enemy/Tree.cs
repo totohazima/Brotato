@@ -23,7 +23,7 @@ public class Tree : EnemyAction
 
     }
 
-    public override void DamageCalculator(float damage, int per, float accuracy, float criticalChance, float criticalDamage, float knockBack, Vector3 bulletPos)
+    public override void DamageCalculator(float damage, int per, float accuracy, bool isCrutical, float criticalDamage, float knockBack, Vector3 bulletPos)
     {
         curHealth--;
     }

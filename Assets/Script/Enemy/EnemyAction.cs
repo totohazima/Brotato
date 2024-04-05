@@ -47,15 +47,6 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
             return;
         }
 
-        if(isHit == true)
-        {
-            hitTimer += Time.deltaTime;
-            if(hitTimer >= 1f)
-            {
-                isHit = false;
-                hitTimer = 0f;
-            }
-        }
         Move();
         
         if(target.position.x < transform.position.x)
@@ -96,7 +87,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         rigid.AddForce(dir.normalized * power, ForceMode.Impulse);
         yield return 0;
     }
-    public virtual void DamageCalculator(float damage, int per, float accuracy, float criticalChance, float criticalDamage, float knockBack, Vector3 bulletPos)
+    public virtual void DamageCalculator(float damage, int per, float accuracy, bool isCritical, float criticalDamage, float knockBack, Vector3 bulletPos)
     {
         if (ItemEffect.instance.IsUglyTooth == true)
         {
@@ -105,14 +96,11 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
                 ugliyToothSlow++;
             }
         }
-        float critical = criticalChance;
-        float nonCritical = 100 - critical;
-        float[] chanceLise = { critical, nonCritical };
-        int index = GameManager.instance.Judgment(chanceLise);
+       
 
         float finalDamage = 0;
         string damageText = null;
-        if (index == 0)
+        if (isCritical == true)
         {
             finalDamage = damage * criticalDamage;
             damageText = "<color=yellow>" + finalDamage.ToString("F0") + "</color>";
@@ -135,10 +123,9 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     {
         if(other.CompareTag("Player"))
         {
-            if(isHit == false)
+            if (game.playerInfo.isHit == false)
             {
                 game.HitCalculate(damage);
-                isHit = true;
             }
         }
     }

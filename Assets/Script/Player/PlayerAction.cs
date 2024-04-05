@@ -19,6 +19,9 @@ public class PlayerAction : Player, ICustomUpdateMono
     private float regenTime; //체력 재생 시간
     public Transform weaponMainPos;
     public bool isFullWeapon; //무기가 꽉찬 경우
+    public bool isHit; //피격 시 true가 되며 true일 경우 피격 판정이 일어나지 않는다.
+    private float hitTImer;
+    private float invincibleTime = 0.5f; //피격 후 무적 시간
     void Start()
     {
         main = MainSceneManager.instance;
@@ -83,7 +86,24 @@ public class PlayerAction : Player, ICustomUpdateMono
             weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
         }
 
-        
+        if (isHit == true)
+        {
+            hitTImer += Time.deltaTime;
+            if (hitTImer >= invincibleTime)
+            {
+                isHit = false;
+                hitTImer = 0;
+            }
+        }
+
+        if(isHit == true)
+        {
+            coll.enabled = false;
+        }
+        else
+        {
+            coll.enabled = true;
+        }
 
     }
     private void Move()
@@ -158,5 +178,11 @@ public class PlayerAction : Player, ICustomUpdateMono
         var rad = _deg * Mathf.Deg2Rad;
         return new Vector3(Mathf.Cos(rad) * 2.5f, Mathf.Sin(rad) * 2.5f, 0);
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Enemy") && isHit == false)
+        {
+            isHit = true;
+        }
+    }
 }
