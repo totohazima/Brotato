@@ -36251,6 +36251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab71f692fca917740a894fc7d9dac50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseUI: {fileID: 1623960958}
   statUI: {fileID: 253017532}
 --- !u!1 &1626077326
 GameObject:

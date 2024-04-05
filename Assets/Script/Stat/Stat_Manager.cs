@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Stat_Manager : MonoBehaviour, ICustomUpdateMono
+public class Stat_Manager : MonoBehaviour, UI_Upadte
 {
     public static Stat_Manager instance;
     public RectTransform rect;
@@ -55,13 +55,13 @@ public class Stat_Manager : MonoBehaviour, ICustomUpdateMono
 
     void OnEnable()
     {
-        CustomUpdateManager.customUpdates.Add(this);
+        UIUpdateManager.uiUpdates.Add(this);
     }
     void OnDisable()
     {
-        CustomUpdateManager.customUpdates.Remove(this);
+        UIUpdateManager.uiUpdates.Remove(this);
     }
-    public void CustomUpdate()
+    public void UI_Update()
     {
         if (isShowInfo == true)
         {

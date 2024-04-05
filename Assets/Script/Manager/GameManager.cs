@@ -97,16 +97,19 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     {
         CustomUpdateManager.customUpdates.Remove(this);
     }
-    public void CustomUpdate()
+    public void LateUpdate()
     {
-        if(isPause == true)//일시정지 활성화
+        if (isPause == true)//일시정지 활성화
         {
             Time.timeScale = 0;
         }
-        else if(isPause == false)//일시정지 비활성화
+        else if (isPause == false)//일시정지 비활성화
         {
             Time.timeScale = 1;
         }
+    }
+    public void CustomUpdate()
+    {
 
         if (isEnd == false)
         {
@@ -366,9 +369,12 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public void ReturnMainMenu()
     {
         MainSceneManager main = MainSceneManager.instance;
+        isPause = false;
 
         Destroy(main.selectedPlayer);
         Destroy(main.selectedWeapon);
+        Destroy(main.selectedDifficult);
+
         main.selectPlayer = null;
         main.selectedPlayer = null;
         main.selectWeapon = null;
