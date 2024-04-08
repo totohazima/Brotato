@@ -42,8 +42,10 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
-        ItemManager.instance.WeaponListUp(tabsScroll[0], verticalTabsScroll[0]);
-        ItemManager.instance.ItemListUp(tabsScroll[1], verticalTabsScroll[1]);
+        ItemManager.instance.WeaponListUp();
+        ItemManager.instance.ItemListUp();
+        //ItemManager.instance.WeaponListUp(tabsScroll[0], verticalTabsScroll[0], PauseUI_Manager.instance.scrollContents[0]);
+        //ItemManager.instance.ItemListUp(tabsScroll[1], verticalTabsScroll[1], PauseUI_Manager.instance.scrollContents[1]);
     }
     void OnDisable()
     {

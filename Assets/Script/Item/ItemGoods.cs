@@ -100,7 +100,8 @@ public class ItemGoods : MonoBehaviour
     public void BuyItem()
     {
         ItemManager.instance.ItemObtain(itemNum);
-        ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1]);
+        ItemManager.instance.ItemListUp();
+        //ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1], PauseUI_Manager.instance.scrollContents[1]);
         UnLockIng();
         ShopManager.instance.goodsList.Remove(gameObject);
         gameObject.SetActive(false);

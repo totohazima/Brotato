@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 1489077009659032496}
   - component: {fileID: 5192326425561237597}
   - component: {fileID: 9151978163700684549}
+  - component: {fileID: -4719192964261769682}
   m_Layer: 5
   m_Name: Diffcult_1
   m_TagString: Untagged
@@ -480,6 +481,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0.58708096, b: 1, a: 1}
   m_EffectDistance: {x: 7, y: 7}
   m_UseGraphicAlpha: 1
+--- !u!114 &-4719192964261769682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6655552111371035369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b05169ee14fe64e8483296e47ff935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficultLevel: 1
 --- !u!1 &7774144614677297643
 GameObject:
   m_ObjectHideFlags: 0

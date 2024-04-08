@@ -18,7 +18,7 @@ public class Item_Info : MonoBehaviour
     [HideInInspector]
     //public int itemNum; //itemManager에서 아이템을 찾기 위함
     ItemScrip scriptable;
-    private RectTransform rectTrans;
+    public RectTransform itemInfoUI_Rect;
     Vector3 itemPos;
     List<TextMeshProUGUI> texts = new List<TextMeshProUGUI>();
 
@@ -38,12 +38,12 @@ public class Item_Info : MonoBehaviour
         itemImage.sprite = scriptable.itemSprite;
         //itemNum = index;
         itemPos = pos;
-        StartCoroutine(TextSetting(itemCode));
+        TextSetting(itemCode);
+        //StartCoroutine(TextSetting(itemCode));
     }
 
-    public IEnumerator TextSetting(string code)
+    public void TextSetting(string code)
     {
-        rectTrans = itemInfoUI.GetComponent<RectTransform>();
         ItemStatImporter import = ItemStatImporter.instance;
         int index1 = 0;
         for (int i = 0; i < import.itemCode.Length; i++)
@@ -81,13 +81,7 @@ public class Item_Info : MonoBehaviour
         itemInfoCount = scriptable.infoText.Length;
 
         itemInfo = new string[itemInfoCount];
-        //int j = 0;
-        //while (j <= itemInfoCount - 1)
-        //{
-        //    itemInfo[j] = import.infoText[index2 + j];
-        //    j++;
-        //}
-
+         
         for (int i = 0; i < itemInfoCount; i++)
         {
             TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
@@ -95,7 +89,8 @@ public class Item_Info : MonoBehaviour
             texts.Add(text);
         }
 
-        yield return new WaitForSeconds(0.01f);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(itemInfoUI_Rect);
+        float textHeight = itemInfoUI_Rect.rect.height;
         float x = 0;
         float y = 0;
         if (Camera.main.ScreenToWorldPoint(itemPos).x >= 0)
@@ -109,11 +104,11 @@ public class Item_Info : MonoBehaviour
 
         if (Camera.main.ScreenToWorldPoint(itemPos).y >= 0)
         {
-            y = itemPos.y - 200 - rectTrans.rect.height;
+            y = itemPos.y - 200 - textHeight;
         }
         else if (Camera.main.ScreenToWorldPoint(itemPos).y < 0)
         {
-            y = itemPos.y + 200 + rectTrans.rect.height;
+            y = itemPos.y + 200 + textHeight;
             
         }
         transform.position = new Vector3(x, y);

@@ -28,8 +28,8 @@ public class Item : MonoBehaviour, ICustomUpdateMono
     public Outline frame;
     public Item_Info itemInfo;
 
-    [SerializeField]
-    ItemScrip scriptable;
+    [HideInInspector]
+    public ItemScrip scriptable;
     public enum ItemType
     {
         ALIEN_TONGUE,
@@ -79,15 +79,15 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         StatSetting(itemType.ToString());
     }
 
-    void OnEnable()
+    public virtual void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
     }
-    void OnDisable()
+    public virtual void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
     }
-    public void CustomUpdate()
+    public virtual void CustomUpdate()
     {
         if (itemCount != null)
         {
@@ -151,7 +151,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         }
         frame.effectColor = Color.white;
     }
-    private void ShowItemInfo()//클릭 시 아이템 정보를 보여주는 용도
+    public virtual void ShowItemInfo()//클릭 시 아이템 정보를 보여주는 용도
     {
         //클릭 하고 있을 시 아이템의 하얀 테두리가 나온다
         //클릭 중에는 itemGoods와 동일한 UI가 나타난다(가격, 잠금버튼 없는)

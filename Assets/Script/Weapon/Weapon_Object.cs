@@ -9,14 +9,13 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
     public Image backGround;
     public Image weapon_Image;
     public GameObject combined_Mark;
-    [SerializeField]
-    WeaponScrip[] weaponData;
+    public WeaponScrip[] weaponData;
     [SerializeField]
     Outline frame;
     List<Weapon_Action> weaponList = new List<Weapon_Action>();
     public Weapon_Info weapon_Info;
     bool isCombined;
-    void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
+    public virtual void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
         CustomUpdateManager.customUpdates.Add(this);
         for (int i = 0; i < GameManager.instance.playerInfo.weapons.Count; i++)
@@ -24,12 +23,12 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
             weaponList.Add(GameManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>());
         }
     }
-    void OnDisable()
+    public virtual void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
     }
 
-    public void CustomUpdate()
+    public virtual void CustomUpdate()
     {
         switch(weapon_Object.weaponTier)
         {
@@ -96,7 +95,7 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
         }
         frame.effectColor = Color.white;
     }
-    private void ShowItemInfo()//클릭 시 아이템 정보를 보여주는 용도
+    public virtual void ShowItemInfo()//클릭 시 아이템 정보를 보여주는 용도
     {
         //클릭 하고 있을 시 아이템의 하얀 테두리가 나온다
         //클릭 중에는 itemGoods와 동일한 UI가 나타난다(가격, 잠금버튼 없는)

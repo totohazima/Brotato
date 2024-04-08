@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public GameObject[] lootMarks;
     public GameObject shopUI;
     public RectTransform statUI;
+    public GameObject pauseUI;
+    public GameObject pauseIcon;
+    public GameObject returnMainMenu_UI;
     public GameObject GameClearUI;
     [Header("# Variable")]
     public PlayerAction playerInfo;
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     private float timer; //시간
     public bool isPause; //일시정지
     public bool isEnd; //웨이브 끝
+    public int difficult; //난이도
     public bool isSpecialEnemySpawn; //새로운 적의 출현
     public int eliteEnemyWave; //엘리트와 무리가 등장 0 = 등장X, 1 = 한 라운드만
     public float enemyRiseDamage; //적 데미지 증가치 %
@@ -72,6 +76,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         playerInfo = mainPlayer.GetComponent<PlayerAction>();
 
         GameObject startWeapon = Instantiate(MainSceneManager.instance.selectWeapon.GetComponent<ForSettingWeapon>().weaponPrefabs);
+        difficult = MainSceneManager.instance.selectedDifficult.GetComponent<Difficult>().difficultLevel;
         startWeapon.transform.SetParent(playerInfo.weaponMainPos);
         playerInfo.weapons.Add(startWeapon);
 
@@ -106,6 +111,15 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         else if (isPause == false)//일시정지 비활성화
         {
             Time.timeScale = 1;
+        }
+
+        if(isEnd == true)
+        {
+            pauseIcon.SetActive(false);
+        }
+        else
+        {
+            pauseIcon.SetActive(true);
         }
     }
     public void CustomUpdate()
@@ -312,8 +326,9 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     {
         shopUI.SetActive(true);
         ShopManager.instance.ShopReRoll();
+        ItemManager.instance.ItemListUp();
         //ShopManager.instance.ShopGoodsSetting();
-        ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1]);
+        //ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1], PauseUI_Manager.instance.scrollContents[1]);
     }
     IEnumerator StageStart()
     {
@@ -359,6 +374,18 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
                 StartCoroutine(playerInfo.weapons[i].GetComponent<Wrench_Weapon>().SpawnTurret());
             }
         }
+    }
+    public void ReturnUI_On()
+    {
+        returnMainMenu_UI.SetActive(true);
+        pauseUI.SetActive(false);
+        statUI.anchoredPosition = new Vector3(-100, 0, 0);
+    }
+    public void ReturnUI_Off()
+    {
+        returnMainMenu_UI.SetActive(false);
+        pauseUI.SetActive(true);
+        statUI.anchoredPosition = new Vector3(100, 0, 0);
     }
     void GameEnd()
     {

@@ -12,8 +12,7 @@ public class Weapon_Info : MonoBehaviour
     public Transform buttons;
     private WeaponScrip weaponScrip;
     private Weapon_Action weaponInfo;
-    private RectTransform rectTrans;
-    private RectTransform rectTrans2;
+    public RectTransform bgRect;
 
     public Image backGround;
     public Outline Frame;
@@ -39,8 +38,12 @@ public class Weapon_Info : MonoBehaviour
     public TextMeshProUGUI infoUI;
     public TextMeshProUGUI recycle_NumUI;
     public GameObject[] settOptionUI;
+    public GameObject settUI;
+    public GameObject btnGroups;
+    public GameObject closeBG;
     private Vector3 itemPos;
-    public void Init(WeaponScrip scrip, Weapon_Action weapon_Action, Vector3 pos, bool Combined)
+    bool isCombined;
+    public void Init(WeaponScrip scrip, Weapon_Action weapon_Action, Vector3 pos, bool combined)
     {
         weaponScrip = scrip;
         weaponInfo = weapon_Action;
@@ -51,49 +54,64 @@ public class Weapon_Info : MonoBehaviour
         weaponName.text = weaponScrip.weaponName;
         weaponType.text = weaponScrip.setType;
         itemPos = pos;
-        if(Combined == true)
+        if (GameManager.instance.isPause == false)
         {
-            combine_ButtonUI.SetActive(true);
-        }
-        else
-        {
-            combine_ButtonUI.SetActive(false);
-        }
+            settUI.SetActive(true);
+            btnGroups.SetActive(true);
+            closeBG.SetActive(true);
 
-        for (int i = 0; i < settOptionUI.Length; i++)
-        {
-            settOptionUI[i].SetActive(false);
-        }
-        for (int i = 0; i < weaponScrip.weaponSetType.Length; i++)
-        {
-            switch (weaponScrip.weaponSetType[i])
+            isCombined = combined;
+            if (isCombined == true)
             {
-                case Weapon.SettType.UNARMED:
-                    settOptionUI[0].SetActive(true);
-                    break;
-                case Weapon.SettType.TOOL:
-                    settOptionUI[1].SetActive(true);
-                    break;
-                case Weapon.SettType.GUN:
-                    settOptionUI[2].SetActive(true);
-                    break;
-                case Weapon.SettType.EXPLOSIVE:
-                    settOptionUI[3].SetActive(true);
-                    break;
-                case Weapon.SettType.PRECISION:
-                    settOptionUI[4].SetActive(true);
-                    break;
-                case Weapon.SettType.NATIVE:
-                    settOptionUI[5].SetActive(true);
-                    break;
+                combine_ButtonUI.SetActive(true);
+            }
+            else
+            {
+                combine_ButtonUI.SetActive(false);
+            }
+
+            for (int i = 0; i < settOptionUI.Length; i++)
+            {
+                settOptionUI[i].SetActive(false);
+            }
+            for (int i = 0; i < weaponScrip.weaponSetType.Length; i++)
+            {
+                switch (weaponScrip.weaponSetType[i])
+                {
+                    case Weapon.SettType.UNARMED:
+                        settOptionUI[0].SetActive(true);
+                        break;
+                    case Weapon.SettType.TOOL:
+                        settOptionUI[1].SetActive(true);
+                        break;
+                    case Weapon.SettType.GUN:
+                        settOptionUI[2].SetActive(true);
+                        break;
+                    case Weapon.SettType.EXPLOSIVE:
+                        settOptionUI[3].SetActive(true);
+                        break;
+                    case Weapon.SettType.PRECISION:
+                        settOptionUI[4].SetActive(true);
+                        break;
+                    case Weapon.SettType.NATIVE:
+                        settOptionUI[5].SetActive(true);
+                        break;
+                }
             }
         }
-        StartCoroutine(WeaponInfoSetting());
+        else if(GameManager.instance.isPause == true)
+        {
+            settUI.SetActive(false);
+            btnGroups.SetActive(false);
+            closeBG.SetActive(false);
+        }
+        WeaponInfoSetting();
+        //StartCoroutine(WeaponInfoSetting());
     }
 
-    public IEnumerator WeaponInfoSetting()
+    public void WeaponInfoSetting()
     {
-        switch(weaponInfo.weaponTier)
+        switch (weaponInfo.weaponTier)
         {
             case 0:
                 backGround.color = Color.black;
@@ -269,7 +287,7 @@ public class Weapon_Info : MonoBehaviour
             switch (weaponCode)
             {
                 case Weapon.Weapons.SHREDDER:
-                    switch(weaponInfo.weaponTier)
+                    switch (weaponInfo.weaponTier)
                     {
                         case (0):
                             infoUI.text = weaponScrip.tier1_Info[0] + " <color=#4CFF52>" + weaponScrip.tier1_InfoStat[0] + "</color>" + weaponScrip.tier1_Info[1];
@@ -320,17 +338,15 @@ public class Weapon_Info : MonoBehaviour
                     }
                     break;
             }
-            
+
         }
         else
         {
             infoUI.gameObject.SetActive(false);
         }
 
-        rectTrans = weaponInfoUI.GetComponent<RectTransform>();
-        rectTrans2 = buttons.GetComponent<RectTransform>();
-        
-        yield return new WaitForSeconds(0.01f);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(bgRect);
+        float textHeight = bgRect.rect.height;
         float x = 0;
         float y = 0;
         if (Camera.main.ScreenToWorldPoint(itemPos).x >= 0)
@@ -339,20 +355,28 @@ public class Weapon_Info : MonoBehaviour
         }
         else if (Camera.main.ScreenToWorldPoint(itemPos).x < 0)
         {
-            x = itemPos.x + 200;
+            x = itemPos.x + 230;
         }
 
         if (Camera.main.ScreenToWorldPoint(itemPos).y >= 0)
         {
-            y = itemPos.y - 200 - (rectTrans.rect.height + rectTrans2.rect.height * 2);
+            y = itemPos.y - textHeight * 9;
         }
         else if (Camera.main.ScreenToWorldPoint(itemPos).y < 0)
         {
-            y = itemPos.y + 200 + (rectTrans.rect.height + rectTrans2.rect.height * 2);
+            if (isCombined == true)
+            {
+                y = itemPos.y + textHeight * 8.5f;
+            }
+            else
+            {
+                y = itemPos.y + textHeight * 6f;
+            }
 
         }
         transform.position = new Vector3(x, y);
     }
+    
 
     public void Combine()
     {
@@ -367,7 +391,7 @@ public class Weapon_Info : MonoBehaviour
                     weapon.weaponTier++;
                     GameManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
                     Destroy(weaponInfo.gameObject);
-                    ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
+                    ItemManager.instance.WeaponListUp();
                     WeaponManager.instance.WeaponSetSearch();
                     GameManager.instance.playerInfo.StatCalculate();
                     Destroy(gameObject);
@@ -381,7 +405,7 @@ public class Weapon_Info : MonoBehaviour
     {
         GameManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
         Destroy(weaponInfo.gameObject);
-        ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0]);
+        ItemManager.instance.WeaponListUp();
         WeaponManager.instance.WeaponSetSearch();
         GameManager.instance.playerInfo.StatCalculate();
         Destroy(gameObject);

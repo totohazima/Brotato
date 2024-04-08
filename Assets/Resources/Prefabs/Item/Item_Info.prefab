@@ -484,6 +484,7 @@ MonoBehaviour:
   itemCountType: {fileID: 4744738872189078040}
   infoText:
   - {fileID: 4212478337585249119, guid: e3967a6f8bbbefe48be46c7449585823, type: 3}
+  itemInfoUI_Rect: {fileID: 2236369168746860647}
 --- !u!1 &7099267757764295707
 GameObject:
   m_ObjectHideFlags: 0
