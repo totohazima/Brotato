@@ -32,7 +32,17 @@ public class Pistol_Weapon : Weapon_Action, ICustomUpdateMono
         AfterStatSetting();
         scanner.radius = afterRange;
         StartCoroutine(MuzzleMove());
-
+        for (int i = 0; i < tierOutline.Length; i++)
+        {
+            if (i == weaponTier)
+            {
+                tierOutline[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                tierOutline[i].gameObject.SetActive(false);
+            }
+        }
         if (scanner.target != null)
         {
             
@@ -57,10 +67,18 @@ public class Pistol_Weapon : Weapon_Action, ICustomUpdateMono
             if (target.x < transform.position.x)
             {
                 sprite.flipY = true;
+                for (int i = 1; i < tierOutline.Length; i++)
+                {
+                    tierOutline[i].flipX = true;
+                }
             }
             else
             {
                 sprite.flipY = false;
+                for (int i = 1; i < tierOutline.Length; i++)
+                {
+                    tierOutline[i].flipX = false;
+                }
             }
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -72,10 +90,18 @@ public class Pistol_Weapon : Weapon_Action, ICustomUpdateMono
             if (target.x < transform.position.x)
             {
                 sprite.flipY = true;
+                for (int i = 1; i < tierOutline.Length; i++)
+                {
+                    tierOutline[i].flipX = true;
+                }
             }
             else
             {
                 sprite.flipY = false;
+                for (int i = 1; i < tierOutline.Length; i++)
+                {
+                    tierOutline[i].flipX = false;
+                }
             }
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;

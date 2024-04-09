@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler, UI_Upadte
 {
     public GameObject selectImage;
-    Item_Info infoObj;
+    Item_Info infoObj_Pause;
     public override void OnEnable()
     {
         base.OnEnable();
@@ -37,9 +37,9 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
 
         if(PauseUI_Manager.instance.selectObj_Item == null)
         {
-            if(infoObj != null)
+            if(infoObj_Pause != null)
             {
-                Destroy(infoObj.gameObject);
+                Destroy(infoObj_Pause.gameObject);
             }
             if (selectImage != null)
             {
@@ -79,13 +79,13 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
         if (PauseUI_Manager.instance.selectObj_Item != null)
         {
             selectImage.SetActive(false);
-            Destroy(infoObj.gameObject);
+            Destroy(infoObj_Pause.gameObject);
         }
     }
 
     public override void ShowItemInfo()
     {
-        infoObj = Instantiate(itemInfo, GameManager.instance.itemInfoManager);
-        infoObj.Init(scriptable, transform.position);
+        infoObj_Pause = Instantiate(itemInfo, GameManager.instance.itemInfoManager);
+        infoObj_Pause.Init(scriptable, transform.position);
     }
 }

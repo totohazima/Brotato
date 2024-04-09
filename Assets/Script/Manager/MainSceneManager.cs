@@ -32,17 +32,23 @@ public class MainSceneManager : MonoBehaviour
     public GameObject difficultGroup;
     public GameObject[] difficults;
     Transform difficultTrans;
-
+    public GameObject option;
     public Canvas canvas;
+
+    [Header("ÇÁ¸®ÆÕ")]
+    public GameObject prefab_UpdateManager;
+    public GameObject importer;
+    public GameObject prefab_Option;
     void Awake()
     {
         instance = this;
         Application.targetFrameRate = 60;
 
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
-        GameObject obj = Resources.Load<GameObject>("Prefabs/Importer");
-        Instantiate(obj);
+        GameObject obj1 = Instantiate(prefab_UpdateManager);
+        GameObject obj2 = Instantiate(importer);
+        GameObject obj3 = Instantiate(prefab_Option);
+        option = obj3;
 
         playerTrans = playerGroup.transform;
         players = new GameObject[playerTrans.childCount];

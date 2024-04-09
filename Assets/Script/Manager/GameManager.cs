@@ -62,9 +62,10 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public GameObject joyStickRayCaster;
     public Transform itemInfoManager;
     private Transform main;
+    public Transform ui_Canvas;
     [HideInInspector]
     public PoolManager pool;
-
+    private GameObject optionUI;
     public Transform[] wallPos; //0 = 위, 1 = 아래, 2 왼쪽, 3 = 오른쪽
     public float xMin, xMax, yMin, yMax;
     void Awake()
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         mainPlayer = Instantiate(playerPrefab);
         main = mainPlayer.transform;
         playerInfo = mainPlayer.GetComponent<PlayerAction>();
-
+        optionUI = MainSceneManager.instance.option;
         GameObject startWeapon = Instantiate(MainSceneManager.instance.selectWeapon.GetComponent<ForSettingWeapon>().weaponPrefabs);
         difficult = MainSceneManager.instance.selectedDifficult.GetComponent<Difficult>().difficultLevel;
         startWeapon.transform.SetParent(playerInfo.weaponMainPos);
@@ -400,6 +401,16 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         restartUI.SetActive(false);
         pauseUI.SetActive(true);
         statUI.anchoredPosition = new Vector3(100, 0, 0);
+    }
+
+    public void Option_On()
+    {
+        optionUI.transform.SetParent(ui_Canvas);
+        optionUI.transform.localScale = new Vector3(1, 1, 1);
+        RectTransform rect = optionUI.GetComponent<RectTransform>();
+        rect.offsetMax = Vector3.zero;
+        rect.offsetMin = Vector3.zero;
+        optionUI.SetActive(true);
     }
     void GameEnd()
     {
