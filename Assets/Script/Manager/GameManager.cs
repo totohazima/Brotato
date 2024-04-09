@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public GameObject pauseUI;
     public GameObject pauseIcon;
     public GameObject returnMainMenu_UI;
+    public GameObject restartUI;
     public GameObject GameClearUI;
     [Header("# Variable")]
     public PlayerAction playerInfo;
@@ -387,12 +388,29 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         pauseUI.SetActive(true);
         statUI.anchoredPosition = new Vector3(100, 0, 0);
     }
+
+    public void ReStartUI_On()
+    {
+        restartUI.SetActive(true);
+        pauseUI.SetActive(false);
+        statUI.anchoredPosition = new Vector3(-100, 0, 0);
+    }
+    public void ReStartUI_Off()
+    {
+        restartUI.SetActive(false);
+        pauseUI.SetActive(true);
+        statUI.anchoredPosition = new Vector3(100, 0, 0);
+    }
     void GameEnd()
     {
         GameClearUI.SetActive(true);
         isEnd = true;
     }
-
+    public void GameReStart()
+    {
+        LoadingSceneManager.CloseScene("Stage");
+        LoadingSceneManager.LoadScene("Stage");
+    }
     public void ReturnMainMenu()
     {
         MainSceneManager main = MainSceneManager.instance;
