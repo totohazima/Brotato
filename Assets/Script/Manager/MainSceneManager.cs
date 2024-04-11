@@ -107,6 +107,17 @@ public class MainSceneManager : MonoBehaviour
         weaponSettingMenu.SetActive(false);
         playerSettingMenu.SetActive(true);
     }
+    public void ReturnWeaponMenu()
+    {
+        Destroy(selectedDifficult);
+        selectedDifficult = null;
+        selectDifficult = null;
+        selectedPlayer.transform.SetParent(weaponSetGroup);
+        selectedWeapon.transform.SetParent(weaponSetGroup);
+
+        difficultSettingMenu.SetActive(false);
+        weaponSettingMenu.SetActive(true);
+    }
     public void GoWeaponMenu() //무기 창 넘어가기
     {
         if (selectedPlayer == null) //경고 창
