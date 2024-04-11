@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour, UI_Upadte
     [Header("#SFX")]
     public AudioClip[] sfxClips;
     public float sfxVolume;
-    public int channels;
+    //public int channels;
     AudioSource[] sfxPlayers;
     int channelIndex;
     public enum Bgm
@@ -52,6 +52,7 @@ public class AudioManager : MonoBehaviour, UI_Upadte
     void Init()
     {
         //배경음 플레이어 초기화
+        bgmPlayer = new AudioSource[bgmClip.Length];
         for (int i = 0; i < bgmPlayer.Length; i++)
         {
             bgmPlayer[i].playOnAwake = false;
@@ -59,9 +60,8 @@ public class AudioManager : MonoBehaviour, UI_Upadte
             bgmPlayer[i].clip = bgmClip[i];
         }
         bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();
-        
-
         //효과음 플레이어 초기화
+        sfxPlayers = new AudioSource[sfxClips.Length];
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
             sfxPlayers[i].playOnAwake = false;
