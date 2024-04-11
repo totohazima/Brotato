@@ -84,7 +84,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
                 sprite.flipY = true;
                 for (int i = 1; i < tierOutline.Length; i++)
                 {
-                    tierOutline[i].flipX = true;
+                    tierOutline[i].flipY = true;
                 }
             }
             else
@@ -92,7 +92,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
                 sprite.flipY = false;
                 for (int i = 1; i < tierOutline.Length; i++)
                 {
-                    tierOutline[i].flipX = false;
+                    tierOutline[i].flipY = false;
                 }
             }
             Vector3 dir = target - transform.position;
@@ -107,7 +107,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
                 sprite.flipY = true;
                 for (int i = 1; i < tierOutline.Length; i++)
                 {
-                    tierOutline[i].flipX = true;
+                    tierOutline[i].flipY = true;
                 }
             }
             else
@@ -115,7 +115,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
                 sprite.flipY = false;
                 for (int i = 1; i < tierOutline.Length; i++)
                 {
-                    tierOutline[i].flipX = false;
+                    tierOutline[i].flipY = false;
                 }
             }
             Vector3 dir = target - transform.position;

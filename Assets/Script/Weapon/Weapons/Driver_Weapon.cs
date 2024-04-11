@@ -65,37 +65,40 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
             StartCoroutine(MuzzleMove());
         }
 
-        mineTimer += Time.deltaTime;
-        switch (weaponTier)
+        if (game.isEnd == false)
         {
-            case (0):
-                if(mineTimer >= scrip.tier1_InfoStat[0])
-                {
-                    StartCoroutine(SpawnManager.instance.MineSpawn(1));
-                    mineTimer = 0;
-                }
-                break;
-            case (1):
-                if (mineTimer >= scrip.tier2_InfoStat[0])
-                {
-                    StartCoroutine(SpawnManager.instance.MineSpawn(1));
-                    mineTimer = 0;
-                }
-                break;
-            case (2):
-                if (mineTimer >= scrip.tier3_InfoStat[0])
-                {
-                    StartCoroutine(SpawnManager.instance.MineSpawn(1));
-                    mineTimer = 0;
-                }
-                break;
-            case (3):
-                if (mineTimer >= scrip.tier4_InfoStat[0])
-                {
-                    StartCoroutine(SpawnManager.instance.MineSpawn(1));
-                    mineTimer = 0;
-                }
-                break;
+            mineTimer += Time.deltaTime;
+            switch (weaponTier)
+            {
+                case (0):
+                    if (mineTimer >= scrip.tier1_InfoStat[0])
+                    {
+                        StartCoroutine(SpawnManager.instance.MineSpawn(1));
+                        mineTimer = 0;
+                    }
+                    break;
+                case (1):
+                    if (mineTimer >= scrip.tier2_InfoStat[0])
+                    {
+                        StartCoroutine(SpawnManager.instance.MineSpawn(1));
+                        mineTimer = 0;
+                    }
+                    break;
+                case (2):
+                    if (mineTimer >= scrip.tier3_InfoStat[0])
+                    {
+                        StartCoroutine(SpawnManager.instance.MineSpawn(1));
+                        mineTimer = 0;
+                    }
+                    break;
+                case (3):
+                    if (mineTimer >= scrip.tier4_InfoStat[0])
+                    {
+                        StartCoroutine(SpawnManager.instance.MineSpawn(1));
+                        mineTimer = 0;
+                    }
+                    break;
+            }
         }
         if (scanner.target != null)
         {
