@@ -30,7 +30,7 @@ public class Turret : MonoBehaviour, ICustomUpdateMono
     public void Init(float basicDamage, float plusDamage)
     {
         this.basicDamage = basicDamage;
-        this.plusDamage = plusDamage;
+        this.plusDamage = plusDamage / 100;
     }
     public void CustomUpdate()
     {
