@@ -125,6 +125,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         {
             if (game.playerInfo.isHit == false)
             {
+                game.playerInfo.isHit = true;
                 game.HitCalculate(damage);
             }
         }

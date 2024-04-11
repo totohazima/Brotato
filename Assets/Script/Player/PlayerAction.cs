@@ -20,7 +20,7 @@ public class PlayerAction : Player, ICustomUpdateMono
     public Transform weaponMainPos;
     public bool isFullWeapon; //무기가 꽉찬 경우
     public bool isHit; //피격 시 true가 되며 true일 경우 피격 판정이 일어나지 않는다.
-    private float hitTImer;
+    [SerializeField] private float hitTImer;
     private float invincibleTime = 0.5f; //피격 후 무적 시간
     void Start()
     {
@@ -178,11 +178,12 @@ public class PlayerAction : Player, ICustomUpdateMono
         var rad = _deg * Mathf.Deg2Rad;
         return new Vector3(Mathf.Cos(rad) * 3f, Mathf.Sin(rad) * 3f, 0);
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Enemy") && isHit == false)
-        {
-            isHit = true;
-        }
-    }
+
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.transform.CompareTag("Enemy") && isHit == false)
+    //    {
+    //        isHit = true;
+    //    }
+    //}
 }
