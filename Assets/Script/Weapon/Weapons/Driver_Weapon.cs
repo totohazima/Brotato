@@ -124,22 +124,22 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
         if (scanner.target == null)
         {
             Vector3 target = JoyStick.instance.moveTarget.position;
-            if (target.x < transform.position.x)
-            {
-                sprite.flipX = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = true;
-                }
-            }
-            else
-            {
-                sprite.flipX = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = false;
-                }
-            }
+            //if (target.x < transform.position.x)
+            //{
+            //    sprite.flipX = true;
+            //    for (int i = 1; i < tierOutline.Length; i++)
+            //    {
+            //        tierOutline[i].flipX = true;
+            //    }
+            //}
+            //else
+            //{
+            //    sprite.flipX = false;
+            //    for (int i = 1; i < tierOutline.Length; i++)
+            //    {
+            //        tierOutline[i].flipX = false;
+            //    }
+            //}
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
@@ -147,22 +147,22 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
         else
         {
             Vector3 target = scanner.target.position;
-            if (target.x < transform.position.x)
-            {
-                sprite.flipX = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = true;
-                }
-            }
-            else
-            {
-                sprite.flipX = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = false;
-                }
-            }
+            //if (target.x < transform.position.x)
+            //{
+            //    sprite.flipX = true;
+            //    for (int i = 1; i < tierOutline.Length; i++)
+            //    {
+            //        tierOutline[i].flipX = true;
+            //    }
+            //}
+            //else
+            //{
+            //    sprite.flipX = false;
+            //    for (int i = 1; i < tierOutline.Length; i++)
+            //    {
+            //        tierOutline[i].flipX = false;
+            //    }
+            //}
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
