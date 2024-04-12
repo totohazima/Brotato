@@ -23,7 +23,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     public virtual void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
-        StatSetting((int)name);
+        StatSetting((int)name, name);
     }
     void OnDisable()
     {

@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
         yield return new WaitForSeconds(0f);
     }
-    public void StatSetting(int index)
+    public void StatSetting(int index, EnemyName type)
     {
         StatReset();
         void StatReset()
@@ -115,6 +115,15 @@ public class Enemy : MonoBehaviour
 
             maxHealth += healthPerWave * wave;
             damage += damagePerWave * wave;
+
+            maxHealth += maxHealth * (GameManager.instance.enemyRiseHealth / 100);
+            damage += damage * (GameManager.instance.enemyRiseDamage / 100);
+
+            //보스 2마리 소환 시 체력 25% 감소
+            if(type == EnemyName.BOSS && GameManager.instance.doubleBoss == true)
+            {
+                maxHealth = maxHealth * 0.75f;
+            }
         }
 
         curHealth = maxHealth;

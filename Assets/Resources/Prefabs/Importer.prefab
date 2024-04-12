@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -7033672418044704631}
   - component: {fileID: -6213352534418220466}
   - component: {fileID: -7456421047126889151}
+  - component: {fileID: 3824005941118449603}
   - component: {fileID: 888371404365744458}
   m_Layer: 0
   m_Name: Importer
@@ -225,6 +226,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6bc4fef2468adc54f894fc31e1a297f9, type: 2}
   - {fileID: 11400000, guid: 728b72867d78d14409f07e88cba79f0d, type: 2}
   - {fileID: 11400000, guid: 83b241446a0e7d34aa30fc6d3792c090, type: 2}
+--- !u!114 &3824005941118449603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619993944187103712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ac94aba81fc0d4aa3baae4b1c2cc6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSpecialEnemy: 
+  isEliteSpawn: 
+  isEliteWaveCount: 
+  enemyRiseDamage: []
+  enemyRiseHealth: []
+  doubleBoss: 
 --- !u!114 &888371404365744458
 MonoBehaviour:
   m_ObjectHideFlags: 0

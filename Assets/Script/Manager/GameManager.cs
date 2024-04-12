@@ -51,7 +51,8 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public bool isEnd; //웨이브 끝
     public int difficult; //난이도
     public bool isSpecialEnemySpawn; //새로운 적의 출현
-    public int eliteEnemyWave; //엘리트와 무리가 등장 0 = 등장X, 1 = 한 라운드만
+    public bool isEliteSpawn; //엘리트와 무리가 등장
+    public int eliteEnemyWave; //엘리트와 무리가 등장하는 웨이브 수
     public float enemyRiseDamage; //적 데미지 증가치 %
     public float enemyRiseHealth; //적 체력 증가치 %
     public bool doubleBoss; //보스가 2마리 (한 마리는 체력이 25% 감소)
@@ -80,7 +81,15 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         playerInfo = mainPlayer.GetComponent<PlayerAction>();
         optionUI = MainSceneManager.instance.option;
         GameObject startWeapon = Instantiate(MainSceneManager.instance.selectWeapon.GetComponent<ForSettingWeapon>().weaponPrefabs);
+
         difficult = MainSceneManager.instance.selectedDifficult.GetComponent<Difficult>().difficultLevel;
+        isSpecialEnemySpawn = DifficultImporter.instance.isSpecialEnemy[difficult];
+        isEliteSpawn = DifficultImporter.instance.isEliteSpawn[difficult];
+        eliteEnemyWave = DifficultImporter.instance.isEliteWaveCount[difficult];
+        enemyRiseDamage = DifficultImporter.instance.enemyRiseDamage[difficult];
+        enemyRiseHealth = DifficultImporter.instance.enemyRiseHealth[difficult];
+        doubleBoss = DifficultImporter.instance.doubleBoss[difficult];
+
         startWeapon.transform.SetParent(playerInfo.weaponMainPos);
         playerInfo.weapons.Add(startWeapon);
 
@@ -372,7 +381,14 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         spawn.spawnTime = waveTime[waveLevel] / spawn.enemyLimit;
         if(spawn.scrip[waveLevel].isBossSpawn == true)
         {
-            StartCoroutine(spawn.BossSpawn(1));
+            if (doubleBoss == true)
+            {
+                StartCoroutine(spawn.BossSpawn(2));
+            }
+            else
+            {
+                StartCoroutine(spawn.BossSpawn(1));
+            }
         }
         StartCoroutine(spawn.MineSetting());
         StartCoroutine(spawn.TurretSetting());
