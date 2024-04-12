@@ -56,57 +56,48 @@ public class UpgradeStat : MonoBehaviour, ICustomUpdateMono
     {
         name.text = upgrade.upgradeName[(int)upgradeType];
 
-        if (upgradeType == LevelUpStat.HP_UP)
+        switch(upgradeType)
         {
-            effect.text = "<color=#4CFF52>+" + upgrade.heart[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.REGEN_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.lungs[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.BLOOD_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.teeth[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.DAMAGE_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.triceps[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.MELEEDM_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.forearms[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.RANGEDM_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.shoulders[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.ATKSPEED_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.reflexes[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.CRITICAL_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.fingers[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.ENGINE_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.skull[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.RANGE_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.eyes[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.ARMOR_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.chest[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.EVASION_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.back[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        }
-        else if (upgradeType == LevelUpStat.SPEED_UP)
-        {
-            effect.text = "<color=#4CFF52>+" + upgrade.legs[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
+            case LevelUpStat.HP_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.heart[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.REGEN_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.lungs[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.BLOOD_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.teeth[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.DAMAGE_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.triceps[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.MELEEDM_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.forearms[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.RANGEDM_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.shoulders[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.ATKSPEED_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.reflexes[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.CRITICAL_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.fingers[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.ENGINE_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.skull[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.RANGE_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.eyes[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.ARMOR_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.chest[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.EVASION_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.back[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+            case LevelUpStat.SPEED_UP:
+                effect.text = "<color=#4CFF52>+" + upgrade.legs[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
+                break;
+
         }
     }
     public void StatUpgrade()

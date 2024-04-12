@@ -17,7 +17,7 @@ MonoBehaviour:
   weaponNickNames: 4
   attackType: 0
   weaponSetType: 00000000
-  weaponImage: {fileID: 21300000, guid: aa6f691e618a6224f98c79c57d19542c, type: 3}
+  weaponImage: {fileID: 21300000, guid: 508d48f4b974e954083902de30a19e90, type: 3}
   weaponPrefab: {fileID: 230209931617475309, guid: 841a3445002d7ba48b2a9cc5f20b8fe0, type: 3}
   tier1_Info:
   - 

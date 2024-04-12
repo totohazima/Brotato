@@ -64,13 +64,13 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
                 boomChance = scrip.tier1_InfoStat[0];
                 break;
             case 1:
-                boomChance = scrip.tier1_InfoStat[1];
+                boomChance = scrip.tier2_InfoStat[0];
                 break;
             case 2:
-                boomChance = scrip.tier1_InfoStat[2];
+                boomChance = scrip.tier3_InfoStat[0];
                 break;
             case 3:
-                boomChance = scrip.tier1_InfoStat[3];
+                boomChance = scrip.tier4_InfoStat[0];
                 break;
         }
         StatSetting((int)index, weaponTier);

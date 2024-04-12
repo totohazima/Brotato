@@ -8,13 +8,13 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
 {
     public static GameManager instance;
     [Header("# UI")]
-    public Slider HpBarUI;
-    public Text HpNum;
-    public Slider ExpBarUI;
-    public Text LevelNum;
+    public Slider hpBarUI;
+    public Text hpNum;
+    public Slider expBarUI;
+    public Text levelNum;
     public Text waveLevelUI;
     public Text waveTimerUI;
-    public Text MoneyUI;
+    public Text moneyUI;
     public GameObject interestUI;
     public Text interestNum;
     public GameObject levelUpUI;
@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public GameObject pauseIcon;
     public GameObject returnMainMenu_UI;
     public GameObject restartUI;
-    public GameObject GameClearUI;
+    public GameObject gameClearUI;
+    public GameObject gameOverUI;
     [Header("# Variable")]
     public PlayerAction playerInfo;
     public int playerLevel; //플레이어 레벨
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public float enemyRiseDamage; //적 데미지 증가치 %
     public float enemyRiseHealth; //적 체력 증가치 %
     public bool doubleBoss; //보스가 2마리 (한 마리는 체력이 25% 감소)
+    private bool isStart; //게임이 처음 시작할 때
     [Header("# GameObject")]
     public Camera stageMainCamera;
     public GameObject playerPrefab;
@@ -167,14 +169,17 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
             interestUI.SetActive(false);
         }
 
-        if (curHp <= 0)
+        if (isStart == true)
         {
-            isDie = true;
-            StartCoroutine(Died());
-        }
-        else
-        {
-            isDie = false;
+            if (curHp <= 0)
+            {
+                isDie = true;
+                StartCoroutine(Died());
+            }
+            else
+            {
+                isDie = false;
+            }
         }
 
         if (timer <= 0) //웨이브 클리어 시
@@ -196,6 +201,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
             StartCoroutine(DropItemLootingTime());
             
         }
+
     }
     private IEnumerator DropItemLootingTime() //웨이브 종료 시 떨어진 드랍템이 자동으로 들어오는 시간
     {
@@ -217,8 +223,9 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     
     IEnumerator Died()
     {
-        //isPause = true;
-        yield return new WaitForSeconds(0f);
+        isEnd = true;
+        gameOverUI.SetActive(true);
+        yield return 0;
     }
     void FriendlyRemove()
     {
@@ -244,17 +251,17 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     void UiVisualize()
     {
         maxHp = playerInfo.maxHealth;
-        HpBarUI.maxValue = maxHp;
-        HpBarUI.value = curHp;
-        HpNum.text = curHp.ToString("F0") + " / " + maxHp.ToString("F0");
+        hpBarUI.maxValue = maxHp;
+        hpBarUI.value = curHp;
+        hpNum.text = curHp.ToString("F0") + " / " + maxHp.ToString("F0");
 
-        MoneyUI.text = Money.ToString("F0");
+        moneyUI.text = Money.ToString("F0");
         interestNum.text = interest.ToString("F0");
 
         maxExp = 50 + (30 * (playerLevel));
-        ExpBarUI.maxValue = maxExp;
-        ExpBarUI.value = curExp;
-        LevelNum.text = "LV." + (playerLevel + 1);
+        expBarUI.maxValue = maxExp;
+        expBarUI.value = curExp;
+        levelNum.text = "LV." + (playerLevel + 1);
 
         if (timer < 5)
         {
@@ -336,6 +343,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     {
         yield return 0;
         //playerInfo.StatCalculate();
+        isStart = true;
         curHp = playerInfo.maxHealth_Origin;
         for (int i = 0; i < playerInfo.weapons.Count; i++)
         {
@@ -414,7 +422,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     }
     void GameEnd()
     {
-        GameClearUI.SetActive(true);
+        gameClearUI.SetActive(true);
         isEnd = true;
     }
     public void GameReStart()

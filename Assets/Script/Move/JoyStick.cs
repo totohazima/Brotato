@@ -35,7 +35,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     }
     public void CustomUpdate()
     {
-        if(GameManager.instance.isEnd == true)
+        if(GameManager.instance.isEnd == true )
         {
             stickTrans.position = joyTrans.position;
             joyStick.SetActive(false);
