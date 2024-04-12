@@ -21,12 +21,14 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
         bullet = baseObj.GetComponent<Melee_Bullet>();
         game = GameManager.instance;
     }
+
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
         coll.enabled = false;
         ResetStat();
     }
+
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
@@ -55,10 +57,9 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
             StartCoroutine(MuzzleMove());
         }
 
+        timer += Time.deltaTime;
         if (scanner.target != null)
         {
-
-            timer += Time.deltaTime;
             if (timer >= afterCoolTime)
             {
                 if (isFire == false)
@@ -74,27 +75,12 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
     {
         StatSetting((int)index, weaponTier);
     }
-    private IEnumerator MuzzleMove() //근접 무기는 공격이 끝나기 전까지 회전하면 안됨
+
+    private IEnumerator MuzzleMove()
     {
         if (scanner.target == null)
         {
             Vector3 target = JoyStick.instance.moveTarget.position;
-            //if (target.x < transform.position.x)
-            //{
-            //    sprite.flipY = true;
-            //    for (int i = 1; i < tierOutline.Length; i++)
-            //    {
-            //        tierOutline[i].flipY = true;
-            //    }
-            //}
-            //else
-            //{
-            //    sprite.flipY = false;
-            //    for (int i = 1; i < tierOutline.Length; i++)
-            //    {
-            //        tierOutline[i].flipY = false;
-            //    }
-            //}
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
@@ -102,106 +88,59 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
         else
         {
             Vector3 target = scanner.target.position;
-            //if (target.x < transform.position.x)
-            //{
-            //    sprite.flipY = true;
-            //    for (int i = 1; i < tierOutline.Length; i++)
-            //    {
-            //        tierOutline[i].flipY = true;
-            //    }
-            //}
-            //else
-            //{
-            //    sprite.flipY = false;
-            //    for (int i = 1; i < tierOutline.Length; i++)
-            //    {
-            //        tierOutline[i].flipY = false;
-            //    }
-            //}
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
         }
-        yield return 0;
+        yield return null;
     }
+
     private IEnumerator Fire()
     {
         bullet.Init(afterDamage, afterPenetrate, afterRange, 100, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
 
         if (scanner.target != null)
         {
-            float backX = scanner.target.position.x;
-            float backY = scanner.target.position.y;
+            Vector3 targetPos = scanner.target.position;
+            Vector3 originalPos = transform.position;
 
-            if(backX > 0f)
-            {
-                backX = -3f;
-            }
-            else if(backX < 0f)
-            {
-                backX = 3f;
-            }
-            if (backY > 0f)
-            {
-                backY = -3f;
-            }
-            else if (backY < 0f)
-            {
-                backY = 3f;
-            }
-            backX = baseObj.position.x + backX;
-            backY = baseObj.position.y + backY;
-            Vector3 backPos = new Vector3(backX, backY, 0);
-            
-            Vector3 targetPos = Vector3.zero;
-            float i = 0;
-            while (true)
-            {
-                float radius = afterRange;
-                Vector3 centerPosition = transform.position;
+            Vector3 moveDir = (targetPos - originalPos).normalized;
+            Vector3 destination = originalPos + moveDir * afterRange;
 
-                float x = 0;
-                float y = 0;
-                if (scanner.target.position.x > transform.position.x)
-                {
-                    x = scanner.target.position.x + i;
-                }
-                else
-                {
-                    x = scanner.target.position.x - i;
-                }
-                if (scanner.target.position.y > transform.position.y)
-                {
-                    y = scanner.target.position.y + i;
-                }
-                else
-                {
-                    y = scanner.target.position.y - i;
-                }
+            float moveSpeed = 100f; // 이동 속도
+            float moveDuration = afterRange / moveSpeed;
 
-                Vector3 meleePos = new Vector3(x, y, 0);
-                float distance = Vector3.Distance(meleePos, centerPosition);
-                if (distance < radius)
-                {
-                    i += 0.5f;
-                }
-                else if (distance >= radius)
-                {
-                    targetPos = meleePos;
-                    break;
-                }
-            }
+            // 타겟 반대 방향으로 일정 거리 이동
+            float backDistance = 20f; // 타겟 반대 방향으로 이동할 거리
+            Vector3 backDestination = targetPos + (-moveDir) * backDistance;
 
             isFire = true;
-            LeanTween.move(baseObj.gameObject, backPos, 0.04f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.04f);
+
+            //타겟 방향으로 회전
+            Vector3 target = scanner.target.position;
+            Vector3 dir = target - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.1f);
+
+            // 타겟 반대 방향으로 이동
+            LeanTween.move(baseObj.gameObject, backDestination, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+
+            LeanTween.move(baseObj.gameObject, destination, moveDuration).setEase(LeanTweenType.easeInOutQuad);
             coll.enabled = true;
-            LeanTween.move(baseObj.gameObject, targetPos, 0.17f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.2f);
-            LeanTween.move(baseObj.gameObject, transform.position, 0.17f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.18f);
-            ReturnWeapon(baseObj);
-            scanner.target = null;
+
+            // 목표 지점까지 이동
+            yield return new WaitForSeconds(moveDuration);
+
+            // 공격 지속 시간 (이 부분을 필요에 맞게 조정하세요)
+            yield return new WaitForSeconds(0.03f);
+
+            // 원래 위치로 돌아오기
+            LeanTween.moveLocal(baseObj.gameObject, Vector3.zero, moveDuration).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(moveDuration);
+
+            // 원래 위치로 돌아온 후 처리
             coll.enabled = false;
             isFire = false;
         }

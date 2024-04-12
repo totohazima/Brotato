@@ -43,10 +43,11 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
                 tierOutline[i].gameObject.SetActive(false);
             }
         }
+
+
+        timer += Time.deltaTime;
         if (scanner.target != null)
         {
-
-            timer += Time.deltaTime;
             if (timer >= afterCoolTime)
             {
                 Fire();

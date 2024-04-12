@@ -195,15 +195,16 @@ public class Weapon : MonoBehaviour
         {
             afterCoolTime = 0.05f;
         }
+        float preRange;
         if(attackType == (int)WeaponType.MELEE) //근접은 스탯 사거리 효과 절반만 받음
         {
-            afterRange = range + player.range / 2;
+            preRange = range + player.range / 2;
         }
         else
         {
-            afterRange = range + player.range;
+            preRange = range + player.range;
         }
-        afterRange = afterRange / 15;
+        afterRange = preRange / 10;
         afterPenetrateDamage = -penetrateDamage + player.penetrateDamage;
         afterBloodSucking = bloodSucking + player.bloodSucking;
         afterKnockBack = knockBack + player.KnockBack;
