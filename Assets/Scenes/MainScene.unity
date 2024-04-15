@@ -1885,9 +1885,7 @@ MonoBehaviour:
   difficults: []
   option: {fileID: 0}
   canvas: {fileID: 1884764971}
-  prefab_UpdateManager: {fileID: 2461938766170005417, guid: 45441de04637a2d4b826892f9c03782d, type: 3}
-  importer: {fileID: 1619993944187103712, guid: cf172a5c155e9e0478f5c32ad46b9d98, type: 3}
-  prefab_Option: {fileID: 378695828208778472, guid: 624e5ad6665d9e3498217a3bd789bba8, type: 3}
+  dontDestoryOBJ: {fileID: 4892910015604989830, guid: 1721fe1606b16cc4f85d146a252464d2, type: 3}
 --- !u!4 &517593449
 Transform:
   m_ObjectHideFlags: 0
