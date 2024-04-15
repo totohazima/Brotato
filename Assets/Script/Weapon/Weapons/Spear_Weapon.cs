@@ -124,8 +124,8 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
             yield return new WaitForSeconds(0.1f);
 
             // 타겟 반대 방향으로 이동
-            LeanTween.move(baseObj.gameObject, backDestination, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.02f);
+            //LeanTween.move(baseObj.gameObject, backDestination, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            //yield return new WaitForSeconds(0.02f);
 
             LeanTween.move(baseObj.gameObject, destination, moveDuration).setEase(LeanTweenType.easeInOutQuad);
             coll.enabled = true;

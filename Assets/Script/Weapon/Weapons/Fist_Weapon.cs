@@ -135,7 +135,7 @@ public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
             Vector3 moveDir = (targetPos - originalPos).normalized;
             Vector3 destination = originalPos + moveDir * afterRange;
 
-            float moveSpeed = 80f; // 이동 속도
+            float moveSpeed = 100f; // 이동 속도
             float moveDuration = afterRange / moveSpeed;
 
             // 타겟 반대 방향으로 일정 거리 이동
@@ -152,8 +152,8 @@ public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
             yield return new WaitForSeconds(0.1f);
 
             // 타겟 반대 방향으로 이동
-            LeanTween.move(baseObj.gameObject, backDestination, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.02f);
+            //LeanTween.move(baseObj.gameObject, backDestination, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            //yield return new WaitForSeconds(0.02f);
 
             LeanTween.move(baseObj.gameObject, destination, moveDuration).setEase(LeanTweenType.easeInOutQuad);
             coll.enabled = true;
