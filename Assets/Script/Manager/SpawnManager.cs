@@ -126,25 +126,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             mark[i].SetActive(false);
         }
     }
-    //public IEnumerator EliteSpawn(int index)
-    //{
-    //    GameObject[] mark = new GameObject[index];
-    //    GameObject[] enemy = new GameObject[mark.Length];
 
-    //    for (int i = 0; i < mark.Length; i++)
-    //    {
-    //        mark[i] = PoolManager.instance.Get(0);
-    //        mark[i].transform.position = EnemySpawnPosition();
-    //    }
-    //    yield return new WaitForSeconds(1f);
-    //    for (int i = 0; i < mark.Length; i++)
-    //    {
-    //        enemy[i] = Spawn(5);
-    //        enemy[i].transform.position = mark[i].transform.position;
-    //        enemys.Add(enemy[i]);
-    //        mark[i].SetActive(false);
-    //    }
-    //}
     public IEnumerator BossSpawn(int index)
     {
         GameObject[] mark = new GameObject[index];

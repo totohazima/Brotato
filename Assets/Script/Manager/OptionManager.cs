@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class OptionManager : MonoBehaviour, UI_Upadte
 {
     public static OptionManager instance;
-    private Transform dontDestroyOBJ;
     public GameObject mainCategory;
     public GameObject basicOption;
     public GameObject backBtn;
@@ -20,7 +19,6 @@ public class OptionManager : MonoBehaviour, UI_Upadte
     void Awake()
     {
         instance = this;
-        dontDestroyOBJ = transform.parent;
     }
     void OnEnable()
     {
@@ -48,7 +46,7 @@ public class OptionManager : MonoBehaviour, UI_Upadte
     }
     public void mainToClose() //옵션UI 메인에서 끄는 경우
     {
-        transform.SetParent(dontDestroyOBJ);
+        DontDestroyOnLoad(gameObject);
         gameObject.SetActive(false);
     }
 

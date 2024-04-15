@@ -36,22 +36,19 @@ public class MainSceneManager : MonoBehaviour
     public Canvas canvas;
 
     [Header("ÇÁ¸®ÆÕ")]
-    public GameObject obj;
-    //public GameObject prefab_UpdateManager;
-    //public GameObject importer;
-    //public GameObject prefab_Option;
+    public GameObject prefab_UpdateManager;
+    public GameObject importer;
+    public GameObject prefab_Option;
     void Awake()
     {
         instance = this;
         Application.targetFrameRate = 60;
 
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        GameObject objs = Instantiate(obj);
-        option = objs.transform.GetChild(2).gameObject;
-        //GameObject obj1 = Instantiate(prefab_UpdateManager);
-        //GameObject obj2 = Instantiate(importer);
-        //GameObject obj3 = Instantiate(prefab_Option);
-        //option = obj3;
+        GameObject obj1 = Instantiate(prefab_UpdateManager);
+        GameObject obj2 = Instantiate(importer);
+        GameObject obj3 = Instantiate(prefab_Option);
+        option = obj3;
 
         playerTrans = playerGroup.transform;
         players = new GameObject[playerTrans.childCount];

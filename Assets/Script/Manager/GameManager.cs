@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public float enemyRiseDamage; //적 데미지 증가치 %
     public float enemyRiseHealth; //적 체력 증가치 %
     public bool doubleBoss; //보스가 2마리 (한 마리는 체력이 25% 감소)
-    private int[] eliteWaveNum;
     private bool isStart; //게임이 처음 시작할 때
     [Header("# GameObject")]
     public Camera stageMainCamera;
@@ -69,7 +68,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public Transform ui_Canvas;
     [HideInInspector]
     public PoolManager pool;
-    [SerializeField] private GameObject optionUI;
+    private GameObject optionUI;
     public Transform[] wallPos; //0 = 위, 1 = 아래, 2 왼쪽, 3 = 오른쪽
     public float xMin, xMax, yMin, yMax;
     void Awake()
@@ -91,7 +90,6 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         enemyRiseHealth = DifficultImporter.instance.enemyRiseHealth[difficult];
         doubleBoss = DifficultImporter.instance.doubleBoss[difficult];
 
-        eliteWaveNum = new int[eliteEnemyWave];
         startWeapon.transform.SetParent(playerInfo.weaponMainPos);
         playerInfo.weapons.Add(startWeapon);
 
@@ -108,37 +106,6 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         timer = waveTime[0];
 
         StartCoroutine(StageStart());
-    }
-    void Start()
-    {
-        while (true)
-        {
-            bool isSame = false;
-            for (int i = 0; i < eliteEnemyWave; i++)
-            {
-                eliteWaveNum[i] = Random.Range(5, 9);
-            }
-
-            for (int i = 0; i < eliteEnemyWave; i++)
-            {
-                for (int j = 0; j < eliteEnemyWave; j++)
-                {
-                    if (i == j)
-                    {
-                    }
-                    else if (eliteWaveNum[i] == eliteWaveNum[j])
-                    {
-                        isSame = true;
-                    }
-                }
-            }
-
-            if (isSame == false)
-            {
-                break;
-            }
-        }
-        System.Array.Sort(eliteWaveNum);
     }
     void OnEnable()
     {
@@ -412,17 +379,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         spawn.WaveSelect(waveLevel);
         spawn.enemyLimit *= 1 + (ItemEffect.instance.GentleAlien() / 100);
         spawn.spawnTime = waveTime[waveLevel] / spawn.enemyLimit;
-
-        ///엘리트 몹 스폰 나중에
-        //for (int i = 0; i < eliteWaveNum.Length; i++)
-        //{
-        //    if (waveLevel == eliteWaveNum[i])
-        //    {
-        //        StartCoroutine(spawn.EliteSpawn(1));
-        //    }
-
-        //}
-        if(waveLevel == 9)
+        if(spawn.scrip[waveLevel].isBossSpawn == true)
         {
             if (doubleBoss == true)
             {
@@ -493,6 +450,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     {
         MainSceneManager main = MainSceneManager.instance;
         isPause = false;
+
         Destroy(main.selectedPlayer);
         Destroy(main.selectedWeapon);
         Destroy(main.selectedDifficult);
