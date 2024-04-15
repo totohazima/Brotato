@@ -7994,6 +7994,7 @@ MonoBehaviour:
   isEnd: 0
   difficult: 0
   isSpecialEnemySpawn: 0
+  isEliteSpawn: 0
   eliteEnemyWave: 0
   enemyRiseDamage: 0
   enemyRiseHealth: 0
@@ -8006,6 +8007,7 @@ MonoBehaviour:
   itemInfoManager: {fileID: 847628565}
   ui_Canvas: {fileID: 304249513}
   pool: {fileID: 0}
+  optionUI: {fileID: 0}
   wallPos:
   - {fileID: 992369001}
   - {fileID: 2052896861}
@@ -28812,6 +28814,8 @@ MonoBehaviour:
   - {fileID: 3416201615854339148, guid: c6a7b6ee2a01f434d925a3693d660ef9, type: 3}
   - {fileID: 3416201615854339148, guid: 4693b54f36cd9bf46a3a420a6f3cb48f, type: 3}
   - {fileID: 3416201615854339148, guid: a0b7bc019b229a24692106de80b02ba3, type: 3}
+  - {fileID: 6221141639079899467, guid: 258d1b7783899fb41852f78eb10aa359, type: 3}
+  - {fileID: 86485320519981105, guid: 279dbb3afa235064d94e53d7e5ec1a09, type: 3}
   scrip: []
   enemyLimit: 0
   spawnCount: 0

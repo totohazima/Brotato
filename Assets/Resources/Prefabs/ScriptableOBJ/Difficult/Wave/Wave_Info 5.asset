@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd1860f0d55c8244a89cfa3c07cf78a2, type: 3}
-  m_Name: Wave_ 2
+  m_Name: Wave_Info 5
   m_EditorClassIdentifier: 
   spawnEnemys:
   - {fileID: 3416201615854339148, guid: 6a13eb709e6884d4b984f46fbf3111bb, type: 3}
@@ -18,8 +18,7 @@ MonoBehaviour:
   - {fileID: 3416201615854339148, guid: c6a7b6ee2a01f434d925a3693d660ef9, type: 3}
   - {fileID: 3416201615854339148, guid: 4693b54f36cd9bf46a3a420a6f3cb48f, type: 3}
   enemyPersentage:
-  - 90
-  - 10
+  - 40
+  - 30
+  - 30
   - 0
-  - 0
-  isBossSpawn: 0
