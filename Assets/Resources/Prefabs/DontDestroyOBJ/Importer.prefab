@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1619993944187103713}
   - component: {fileID: -6989976729426883472}
   - component: {fileID: -7033672418044704631}
+  - component: {fileID: 6400279275810572573}
   - component: {fileID: -6213352534418220466}
   - component: {fileID: -7456421047126889151}
   - component: {fileID: 3824005941118449603}
@@ -161,9 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: []
   health: []
-  healthWave: []
   damage: []
-  damageWave: []
   coolTime: []
   armor: []
   range: []
@@ -176,6 +175,20 @@ MonoBehaviour:
   expValue: 
   consumDropRate: []
   LootDropRate: []
+--- !u!114 &6400279275810572573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619993944187103712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f2e5cbb895e8b4489a9c112dc50d10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grow_Health: []
+  grow_Damage: []
 --- !u!114 &-6213352534418220466
 MonoBehaviour:
   m_ObjectHideFlags: 0

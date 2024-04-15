@@ -6,10 +6,10 @@ public class WaveStatImporter : MonoBehaviour
 {
     public static WaveStatImporter instance;
 
-    public int[] enemyCount;
-    public int[] enemySpawnCount;
-    public float[] waveTime;
-    public float[] treeCount;
+    [HideInInspector] public int[] enemyCount;
+    [HideInInspector] public int[] enemySpawnCount;
+    [HideInInspector] public float[] waveTime;
+    [HideInInspector] public float[] treeCount;
     public Wave_Scriptable[] wave_Scriptables;
     void Awake()
     {

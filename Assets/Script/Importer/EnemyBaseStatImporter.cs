@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStatImporter : MonoBehaviour
+public class EnemyBaseStatImporter : MonoBehaviour
 {
-    public static EnemyStatImporter instance;
+    public static EnemyBaseStatImporter instance;
 
     [HideInInspector] public string[] enemyName;
     [HideInInspector] public float[] health;
-    [HideInInspector] public float[] healthWave;
     [HideInInspector] public float[] damage;
-    [HideInInspector] public float[] damageWave;
     [HideInInspector] public float[] coolTime;
     [HideInInspector] public float[] armor;
     [HideInInspector] public float[] range;
@@ -28,13 +26,11 @@ public class EnemyStatImporter : MonoBehaviour
     {
         instance = this;
 
-        List<Dictionary<string, object>> data = CSVReaderStat.Read("EnemyStat");
+        List<Dictionary<int, object>> data = CSVReaderStat.ReadNumericColumns("EnemyBaseStat");
 
         enemyName = new string[data.Count];
         health = new float[data.Count];
-        healthWave = new float[data.Count];
         damage = new float[data.Count];
-        damageWave = new float[data.Count];
         coolTime = new float[data.Count];
         armor = new float[data.Count];
         range = new float[data.Count];
@@ -50,85 +46,75 @@ public class EnemyStatImporter : MonoBehaviour
 
         for (int i = 0; i < data.Count; i++)
         { 
-            enemyName[i] = (string)data[i]["EnemyName"];
+            enemyName[i] = (string)data[i][0];
 
             // 각 열의 데이터를 적절한 형식으로 변환하여 저장
-            if (float.TryParse(data[i]["Health"].ToString(), out float healthValue))
+            if (float.TryParse(data[i][1].ToString(), out float healthValue))
             {
                 health[i] = healthValue;
             }
 
-            if (float.TryParse(data[i]["HealthWave"].ToString(), out float healthWaveValue))
-            {
-                healthWave[i] = healthWaveValue;
-            }
-
-            if (float.TryParse(data[i]["Damage"].ToString(), out float damageValue))
+            if (float.TryParse(data[i][2].ToString(), out float damageValue))
             {
                 damage[i] = damageValue;
             }
 
-            if (float.TryParse(data[i]["DamageWave"].ToString(), out float damageWaveValue))
-            {
-                damageWave[i] = damageWaveValue;
-            }
-
-            if (float.TryParse(data[i]["CoolTime"].ToString(), out float coolTimeValue))
+            if (float.TryParse(data[i][3].ToString(), out float coolTimeValue))
             {
                 coolTime[i] = coolTimeValue;
             }
 
-            if (float.TryParse(data[i]["Armor"].ToString(), out float armorValue))
+            if (float.TryParse(data[i][4].ToString(), out float armorValue))
             {
                 armor[i] = armorValue;
             }
 
-            if (float.TryParse(data[i]["Range"].ToString(), out float rangeValue))
+            if (float.TryParse(data[i][5].ToString(), out float rangeValue))
             {
                 range[i] = rangeValue;
             }
 
-            if (float.TryParse(data[i]["Evasion"].ToString(), out float evasionValue))
+            if (float.TryParse(data[i][6].ToString(), out float evasionValue))
             {
                 evasion[i] = evasionValue;
             }
 
-            if (float.TryParse(data[i]["Accuracy"].ToString(), out float accuracyValue))
+            if (float.TryParse(data[i][7].ToString(), out float accuracyValue))
             {
                 accuracy[i] = accuracyValue;
             }
 
-            if (float.TryParse(data[i]["MinSpeed"].ToString(), out float minSpeedValue))
+            if (float.TryParse(data[i][8].ToString(), out float minSpeedValue))
             {
                 minSpeed[i] = minSpeedValue;
             }
 
-            if (float.TryParse(data[i]["MaxSpeed"].ToString(), out float maxSpeedValue))
+            if (float.TryParse(data[i][9].ToString(), out float maxSpeedValue))
             {
                 maxSpeed[i] = maxSpeedValue;
             }
 
-            if (float.TryParse(data[i]["MoneyDrop"].ToString(), out float moneyDropNumValue))
+            if (float.TryParse(data[i][10].ToString(), out float moneyDropNumValue))
             {
                 moneyDropNum[i] = moneyDropNumValue;
             }
 
-            if (int.TryParse(data[i]["MoneyValue"].ToString(), out int moneyValueValue))
+            if (int.TryParse(data[i][11].ToString(), out int moneyValueValue))
             {
                 moneyValue[i] = moneyValueValue;
             }
 
-            if (int.TryParse(data[i]["ExpValue"].ToString(), out int expValueValue))
+            if (int.TryParse(data[i][12].ToString(), out int expValueValue))
             {
                 expValue[i] = expValueValue;
             }
 
-            if (float.TryParse(data[i]["ConsumDrop"].ToString(), out float consumDropRateValue))
+            if (float.TryParse(data[i][13].ToString(), out float consumDropRateValue))
             {
                 consumDropRate[i] = consumDropRateValue;
             }
 
-            if (float.TryParse(data[i]["LootDrop"].ToString(), out float LootDropRateValue))
+            if (float.TryParse(data[i][14].ToString(), out float LootDropRateValue))
             {
                 LootDropRate[i] = LootDropRateValue;
             }

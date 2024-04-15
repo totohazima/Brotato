@@ -6,12 +6,12 @@ public class DifficultImporter : MonoBehaviour
 {
     public static DifficultImporter instance;
 
-    public bool[] isSpecialEnemy;//새로운 적의 출현
-    public bool[] isEliteSpawn; //엘리트와 무리가 등장
-    public int[] isEliteWaveCount; //엘리트와 무리가 등장하는 웨이브 수(6라운드 부터 등장)
-    public float[] enemyRiseDamage; //적 데미지 증가치 %
-    public float[] enemyRiseHealth; //적 체력 증가치 %
-    public bool[] doubleBoss; //보스가 2마리 (체력은 25% 감소)
+    [HideInInspector] public bool[] isSpecialEnemy;//새로운 적의 출현
+    [HideInInspector] public bool[] isEliteSpawn; //엘리트와 무리가 등장
+    [HideInInspector] public int[] isEliteWaveCount; //엘리트와 무리가 등장하는 웨이브 수(6라운드 부터 등장)
+    [HideInInspector] public float[] enemyRiseDamage; //적 데미지 증가치 %
+    [HideInInspector] public float[] enemyRiseHealth; //적 체력 증가치 %
+    [HideInInspector] public bool[] doubleBoss; //보스가 2마리 (체력은 25% 감소)
     void Awake()
     {
         instance = this;

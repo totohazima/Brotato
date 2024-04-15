@@ -88,12 +88,11 @@ public class Enemy : MonoBehaviour
         StatReset();
         void StatReset()
         {
-            EnemyStatImporter enemy = EnemyStatImporter.instance;
+            EnemyBaseStatImporter enemy = EnemyBaseStatImporter.instance;
+            EnemyGrowthStatImporter grow = EnemyGrowthStatImporter.instance;
 
             maxHealth = enemy.health[index];
-            healthPerWave = enemy.healthWave[index];
             damage = enemy.damage[index];
-            damagePerWave = enemy.damageWave[index];
             coolTime = enemy.coolTime[index];
             armor = enemy.armor[index];
             range = enemy.range[index];
@@ -106,6 +105,9 @@ public class Enemy : MonoBehaviour
             expValue = enemy.expValue[index];
             consumableDropRate = enemy.consumDropRate[index];
             lootDropRate = enemy.LootDropRate[index];
+
+            healthPerWave = grow.grow_Health[index];
+            damagePerWave = grow.grow_Damage[index];
         }
 
         WaveStat();
@@ -113,8 +115,8 @@ public class Enemy : MonoBehaviour
         {
             int wave = GameManager.instance.waveLevel;
 
-            maxHealth += healthPerWave * wave;
-            damage += damagePerWave * wave;
+            maxHealth = maxHealth * (1 + ((healthPerWave / 100) * wave));
+            damage = damage * (1 + ((damagePerWave / 100) * wave));
 
             maxHealth += maxHealth * (GameManager.instance.enemyRiseHealth / 100);
             damage += damage * (GameManager.instance.enemyRiseDamage / 100);

@@ -101,7 +101,35 @@ public class Weapon_Info : MonoBehaviour
         }
         else if(GameManager.instance.isPause == true)
         {
-            settUI.SetActive(false);
+            settUI.SetActive(true);
+            for (int i = 0; i < settOptionUI.Length; i++)
+            {
+                settOptionUI[i].SetActive(false);
+            }
+            for (int i = 0; i < weaponScrip.weaponSetType.Length; i++)
+            {
+                switch (weaponScrip.weaponSetType[i])
+                {
+                    case Weapon.SettType.UNARMED:
+                        settOptionUI[0].SetActive(true);
+                        break;
+                    case Weapon.SettType.TOOL:
+                        settOptionUI[1].SetActive(true);
+                        break;
+                    case Weapon.SettType.GUN:
+                        settOptionUI[2].SetActive(true);
+                        break;
+                    case Weapon.SettType.EXPLOSIVE:
+                        settOptionUI[3].SetActive(true);
+                        break;
+                    case Weapon.SettType.PRECISION:
+                        settOptionUI[4].SetActive(true);
+                        break;
+                    case Weapon.SettType.NATIVE:
+                        settOptionUI[5].SetActive(true);
+                        break;
+                }
+            }
             btnGroups.SetActive(false);
             closeBG.SetActive(false);
         }
