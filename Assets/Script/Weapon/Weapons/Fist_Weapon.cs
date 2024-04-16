@@ -160,11 +160,12 @@ public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
 
             // 목표 지점까지 이동
             yield return new WaitForSeconds(moveDuration);
-
+            bullet.knockBack = 0;
             // 공격 지속 시간 (이 부분을 필요에 맞게 조정하세요)
             yield return new WaitForSeconds(0.03f);
 
             // 원래 위치로 돌아오기
+            
             LeanTween.moveLocal(baseObj.gameObject, Vector3.zero, moveDuration).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(moveDuration);
 

@@ -84,7 +84,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     private IEnumerator KnockBack(Vector3 playerPos, float power)
     {
         Vector3 dir = transform.position - playerPos;
-        rigid.AddForce(dir.normalized * -(power), ForceMode.Impulse); //power가 양수일시 플레이어 방향으로 넉백됨
+        rigid.AddForce(dir.normalized * (power), ForceMode.Impulse); //power가 양수일시 플레이어 방향으로 넉백됨
         yield return 0;
     }
     public virtual void DamageCalculator(float damage, int per, float accuracy, bool isCritical, float criticalDamage, float knockBack, Vector3 bulletPos)
@@ -115,7 +115,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         text.position = textPopUpPos.position;
 
         curHealth -= finalDamage;
-        StartCoroutine(KnockBack(bulletPos, knockBack * 10));
+        StartCoroutine(KnockBack(game.playerInfo.transform.position, knockBack * 10));
     }
 
   
