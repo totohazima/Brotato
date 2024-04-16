@@ -9,62 +9,103 @@ public class UpgradeStatImporter : MonoBehaviour
     [HideInInspector] public int[] upgradeNum;
     [HideInInspector] public string[] upgradeName;
     [HideInInspector] public string[] upgradeEffect;
-    [HideInInspector] public int[] heart;
-    [HideInInspector] public int[] lungs;
-    [HideInInspector] public int[] teeth;
-    [HideInInspector] public int[] triceps;
-    [HideInInspector] public int[] forearms;
-    [HideInInspector] public int[] shoulders;
-    [HideInInspector] public int[] reflexes;
-    [HideInInspector] public int[] fingers;
-    [HideInInspector] public int[] skull;
-    [HideInInspector] public int[] eyes;
-    [HideInInspector] public int[] chest;
-    [HideInInspector] public int[] back;
-    [HideInInspector] public int[] legs;
+    [HideInInspector] public float[] heart;
+    [HideInInspector] public float[] lungs;
+    [HideInInspector] public float[] teeth;
+    [HideInInspector] public float[] triceps;
+    [HideInInspector] public float[] forearms;
+    [HideInInspector] public float[] shoulders;
+    [HideInInspector] public float[] reflexes;
+    [HideInInspector] public float[] fingers;
+    [HideInInspector] public float[] skull;
+    [HideInInspector] public float[] eyes;
+    [HideInInspector] public float[] chest;
+    [HideInInspector] public float[] back;
+    [HideInInspector] public float[] legs;
 
     void Awake()
     {
         instance = this;
-        List<Dictionary<string, object>> data = CSVReaderStat.Read("UpgradeStat");
+        string filePath = "Assets/Resources/CSV.data/StatInfo/UpgradeStat.xlsx";
+        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
         upgradeNum = new int[data.Count];
         upgradeName = new string[data.Count];
         upgradeEffect = new string[data.Count];
-        heart = new int[4];
-        lungs = new int[4];
-        teeth = new int[4];
-        triceps = new int[4];
-        forearms = new int[4];
-        shoulders = new int[4];
-        reflexes = new int[4];
-        fingers = new int[4];
-        skull = new int[4];
-        eyes = new int[4];
-        chest = new int[4];
-        back = new int[4];
-        legs = new int[4];
+        heart = new float[4];
+        lungs = new float[4];
+        teeth = new float[4];
+        triceps = new float[4];
+        forearms = new float[4];
+        shoulders = new float[4];
+        reflexes = new float[4];
+        fingers = new float[4];
+        skull = new float[4];
+        eyes = new float[4];
+        chest = new float[4];
+        back = new float[4];
+        legs = new float[4];
 
         for (int i = 0; i < data.Count; i++)
         {
-            upgradeNum[i] = (int)data[i]["UpgradeNum"];
-            upgradeName[i] = (string)data[i]["UpgradeName"];
-            upgradeEffect[i] = (string)data[i]["StatEffect"];
+            upgradeNum[i] = (int)data[i][0];
+            upgradeName[i] = (string)data[i][1];
+            upgradeEffect[i] = (string)data[i][2];
         }
-        for (int i = 1; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
-            heart[i - 1] = (int)data[0]["Tier" + i.ToString("F0")];
-            lungs[i - 1] = (int)data[1]["Tier" + i.ToString("F0")];
-            teeth[i - 1] = (int)data[2]["Tier" + i.ToString("F0")];
-            triceps[i - 1] = (int)data[3]["Tier" + i.ToString("F0")];
-            forearms[i - 1] = (int)data[4]["Tier" + i.ToString("F0")];
-            shoulders[i - 1] = (int)data[5]["Tier" + i.ToString("F0")];
-            reflexes[i - 1] = (int)data[6]["Tier" + i.ToString("F0")];
-            fingers[i - 1] = (int)data[7]["Tier" + i.ToString("F0")];
-            skull[i - 1] = (int)data[8]["Tier" + i.ToString("F0")];
-            eyes[i - 1] = (int)data[9]["Tier" + i.ToString("F0")];
-            chest[i - 1] = (int)data[10]["Tier" + i.ToString("F0")];
-            back[i - 1] = (int)data[11]["Tier" + i.ToString("F0")];
-            legs[i - 1] = (int)data[12]["Tier" + i.ToString("F0")];
+            if (float.TryParse(data[0][i + 3].ToString(), out float heartValue))
+            {
+                heart[i] = heartValue;
+            }
+            if (float.TryParse(data[1][i + 3].ToString(), out float lungsValue))
+            {
+                lungs[i] = lungsValue;
+            }
+            if (float.TryParse(data[2][i + 3].ToString(), out float teethtValue))
+            {
+                teeth[i] = teethtValue;
+            }
+            if (float.TryParse(data[3][i + 3].ToString(), out float tricepsValue))
+            {
+                triceps[i] = tricepsValue;
+            }
+            if (float.TryParse(data[4][i + 3].ToString(), out float forearmsValue))
+            {
+                forearms[i] = forearmsValue;
+            }
+            if (float.TryParse(data[5][i + 3].ToString(), out float shouldersValue))
+            {
+                shoulders[i] = shouldersValue;
+            }
+            if (float.TryParse(data[6][i + 3].ToString(), out float reflexesValue))
+            {
+                reflexes[i] = reflexesValue;
+            }
+            if (float.TryParse(data[7][i + 3].ToString(), out float fingersValue))
+            {
+                fingers[i] = fingersValue;
+            }
+            if (float.TryParse(data[8][i + 3].ToString(), out float skullValue))
+            {
+                skull[i] = skullValue;
+            }
+            if (float.TryParse(data[9][i + 3].ToString(), out float eyesValue))
+            {
+                eyes[i] = eyesValue;
+            }
+            if (float.TryParse(data[10][i + 3].ToString(), out float chestValue))
+            {
+                chest[i] = chestValue;
+            }
+            if (float.TryParse(data[11][i + 3].ToString(), out float backValue))
+            {
+                back[i] = backValue;
+            }
+            if (float.TryParse(data[12][i + 3].ToString(), out float legsValue))
+            {
+                legs[i] = legsValue;
+            }
         }
     }
+    
 }

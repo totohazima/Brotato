@@ -14,27 +14,27 @@ public class WaveStatImporter : MonoBehaviour
     void Awake()
     {
         instance = this;
-
-        List<Dictionary<string, object>> data = CSVReaderStat.Read("WaveStat");
+        string filePath = "Assets/Resources/CSV.data/StatInfo/WaveStat.xlsx";
+        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
         enemyCount = new int[data.Count];
         enemySpawnCount = new int[data.Count];
         waveTime = new float[data.Count];
         treeCount = new float[data.Count];
         for (int i = 0; i < data.Count; i++)
         {
-            if (int.TryParse(data[i]["EnemyCount"].ToString(), out int enemyCountValue))
+            if (int.TryParse(data[i][0].ToString(), out int enemyCountValue))
             {
                 enemyCount[i] = enemyCountValue;
             }
-            if (int.TryParse(data[i]["EnemySpawnCount"].ToString(), out int enemySpawnCountValue))
+            if (int.TryParse(data[i][1].ToString(), out int enemySpawnCountValue))
             {
                 enemySpawnCount[i] = enemySpawnCountValue;
             }
-            if (float.TryParse(data[i]["WaveTime"].ToString(), out float waveTimeValue))
+            if (float.TryParse(data[i][2].ToString(), out float waveTimeValue))
             {
                 waveTime[i] = waveTimeValue;
             }
-            if (float.TryParse(data[i]["TreeCount"].ToString(), out float treeCountValue))
+            if (float.TryParse(data[i][3].ToString(), out float treeCountValue))
             {
                 treeCount[i] = treeCountValue;
             }

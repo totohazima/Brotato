@@ -6,12 +6,13 @@ public class EnemyGrowthStatImporter : MonoBehaviour
 {
     public static EnemyGrowthStatImporter instance;
 
-    public float[] grow_Health;
-    public float[] grow_Damage;
+    [HideInInspector] public float[] grow_Health;
+    [HideInInspector] public float[] grow_Damage;
     void Awake()
     {
         instance = this;
-        List<Dictionary<int, object>> data = CSVReaderStat.ReadNumericColumns("EnemyGrowthStat");
+        string filePath = "Assets/Resources/CSV.data/StatInfo/EnemyGrowthStat.xlsx";
+        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
         grow_Health = new float[data.Count];
         grow_Damage = new float[data.Count];
         for (int i = 0; i < data.Count; i++)

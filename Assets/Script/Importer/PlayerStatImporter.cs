@@ -26,8 +26,8 @@ public class PlayerStatImporter : MonoBehaviour
     void Awake()
     {
         instance = this;
-
-        List<Dictionary<string, object>> data = CSVReaderStat.Read("PlayerStat");
+        string filePath = "Assets/Resources/CSV.data/StatInfo/PlayerStat.xlsx";
+        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
 
         characterNum = new int[data.Count];
         characterName = new string[data.Count];
@@ -48,75 +48,75 @@ public class PlayerStatImporter : MonoBehaviour
 
         for (int i = 0; i < data.Count; i++)
         {
-            characterNum[i] = (int)data[i]["PlayerNum"];
-            characterName[i] = (string)data[i]["Name"];
+            characterNum[i] = (int)data[i][0];
+            characterName[i] = (string)data[i][1];
 
-            if (float.TryParse(data[i]["Health"].ToString(), out float healthValue))
+            if (float.TryParse(data[i][2].ToString(), out float healthValue))
             {
                 maxHealth[i] = healthValue;
             }
 
-            if (float.TryParse(data[i]["Regeneration"].ToString(), out float regenerationValue))
+            if (float.TryParse(data[i][3].ToString(), out float regenerationValue))
             {
                 regeneration[i] = regenerationValue;
             }
 
-            if (float.TryParse(data[i]["BloodSucking"].ToString(), out float bloodSuckingValue))
+            if (float.TryParse(data[i][4].ToString(), out float bloodSuckingValue))
             {
                 bloodSucking[i] = bloodSuckingValue;
             }
 
-            if (float.TryParse(data[i]["PersentDamage"].ToString(), out float persentDamageValue))
+            if (float.TryParse(data[i][5].ToString(), out float persentDamageValue))
             {
                 persentDamage[i] = persentDamageValue;
             }
 
-            if (float.TryParse(data[i]["MeleeDamage"].ToString(), out float meleeDamageValue))
+            if (float.TryParse(data[i][6].ToString(), out float meleeDamageValue))
             {
                 meleeDamage[i] = meleeDamageValue;
             }
 
-            if (float.TryParse(data[i]["RangeDamage"].ToString(), out float rangeDamageValue))
+            if (float.TryParse(data[i][7].ToString(), out float rangeDamageValue))
             {
                 rangeDamage[i] = rangeDamageValue;
             }
 
-            if (float.TryParse(data[i]["AttackSpeed"].ToString(), out float attackSpeedValue))
+            if (float.TryParse(data[i][8].ToString(), out float attackSpeedValue))
             {
                 attackSpeed[i] = attackSpeedValue;
             }
 
-            if (float.TryParse(data[i]["CriticalChance"].ToString(), out float criticalChanceValue))
+            if (float.TryParse(data[i][9].ToString(), out float criticalChanceValue))
             {
                 criticalChance[i] = criticalChanceValue;
             }
 
-            if (float.TryParse(data[i]["Engine"].ToString(), out float engineValue))
+            if (float.TryParse(data[i][10].ToString(), out float engineValue))
             {
                 engine[i] = engineValue;
             }
 
-            if (float.TryParse(data[i]["Range"].ToString(), out float rangeValue))
+            if (float.TryParse(data[i][11].ToString(), out float rangeValue))
             {
                 range[i] = rangeValue;
             }
 
-            if (float.TryParse(data[i]["Armor"].ToString(), out float armorValue))
+            if (float.TryParse(data[i][12].ToString(), out float armorValue))
             {
                 armor[i] = armorValue;
             }
 
-            if (float.TryParse(data[i]["Evasion"].ToString(), out float evasionValue))
+            if (float.TryParse(data[i][13].ToString(), out float evasionValue))
             {
                 evasion[i] = evasionValue;
             }
 
-            if (float.TryParse(data[i]["Accuracy"].ToString(), out float accuracyValue))
+            if (float.TryParse(data[i][14].ToString(), out float accuracyValue))
             {
                 accuracy[i] = accuracyValue;
             }
 
-            if (float.TryParse(data[i]["Speed"].ToString(), out float speedValue))
+            if (float.TryParse(data[i][15].ToString(), out float speedValue))
             {
                 speed[i] = speedValue;
             }

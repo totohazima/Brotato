@@ -24,8 +24,8 @@ public class ItemStatImporter : MonoBehaviour
     void Awake()
     {
         instance = this;
-
-        List<Dictionary<string, object>> data = CSVReaderStat.Read("ItemStatInfo");
+        string filePath = "Assets/Resources/CSV.data/StatInfo/ItemStat.xlsx";
+        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
         itemCode = new string[data.Count];
         maxCount = new int[data.Count];
 
@@ -40,29 +40,30 @@ public class ItemStatImporter : MonoBehaviour
         {
 
             // 각 열의 데이터를 적절한 형식으로 변환하여 저장
-            itemCode[i] = (string)data[i]["ItemCode"];
-            if (int.TryParse(data[i]["MaxCount"].ToString(), out int maxCountValue))
+            itemCode[i] = (string)data[i][0];
+            if (int.TryParse(data[i][1].ToString(), out int maxCountValue))
             {
                 maxCount[i] = maxCountValue;
             }
 
-            if (int.TryParse(data[i]["RiseCount"].ToString(), out int riseCountValue))
+            if (int.TryParse(data[i][2].ToString(), out int riseCountValue))
             {
                 riseCount[i] = riseCountValue;
             }
-            riseStatType[i] = (string)data[i]["RiseStatType"];
-            if (int.TryParse(data[i]["DescendCount"].ToString(), out int descendCountValue))
+            riseStatType[i] = (string)data[i][4];
+
+            if (int.TryParse(data[i][3].ToString(), out int descendCountValue))
             {
                 descendCount[i] = descendCountValue;
             }
-            descendStatType[i] = (string)data[i]["DescendStatType"];
+            descendStatType[i] = (string)data[i][6];
 
-            if (float.TryParse(data[i]["RiseStats"].ToString(), out float riseStatsValue))
+            if (float.TryParse(data[i][5].ToString(), out float riseStatsValue))
             {
                 riseStats[i] = riseStatsValue;
             }
 
-            if (float.TryParse(data[i]["DescendStats"].ToString(), out float descendStatsValue))
+            if (float.TryParse(data[i][7].ToString(), out float descendStatsValue))
             {
                 descendStats[i] = descendStatsValue;
             }

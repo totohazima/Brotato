@@ -15,8 +15,8 @@ public class DifficultImporter : MonoBehaviour
     void Awake()
     {
         instance = this;
-
-        List<Dictionary<string, object>> data = CSVReaderStat.Read("DifficultStat");
+        string filePath = "Assets/Resources/CSV.data/StatInfo/DifficultStat.xlsx";
+        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
 
         isSpecialEnemy = new bool[data.Count];
         isEliteSpawn = new bool[data.Count];
@@ -27,27 +27,27 @@ public class DifficultImporter : MonoBehaviour
 
         for(int i = 0; i < data.Count; i++)
         {
-            if (bool.TryParse(data[i]["SpecialEnemy"].ToString(), out bool specialValue))
+            if (bool.TryParse(data[i][1].ToString(), out bool specialValue))
             {
                 isSpecialEnemy[i] = specialValue;
             }
-            if (bool.TryParse(data[i]["EliteEnemy"].ToString(), out bool eliteValue))
+            if (bool.TryParse(data[i][2].ToString(), out bool eliteValue))
             {
                 isEliteSpawn[i] = eliteValue;
             }
-            if (int.TryParse(data[i]["EliteWaveCount"].ToString(), out int countValue))
+            if (int.TryParse(data[i][3].ToString(), out int countValue))
             {
                 isEliteWaveCount[i] = countValue;
             }
-            if (float.TryParse(data[i]["EnemyRiseDM"].ToString(), out float riseDamageValue))
+            if (float.TryParse(data[i][4].ToString(), out float riseDamageValue))
             {
                 enemyRiseDamage[i] = riseDamageValue;
             }
-            if (float.TryParse(data[i]["EnemyRiseHp"].ToString(), out float riseHealthValue))
+            if (float.TryParse(data[i][5].ToString(), out float riseHealthValue))
             {
                 enemyRiseHealth[i] = riseHealthValue;
             }
-            if (bool.TryParse(data[i]["DoubleBoss"].ToString(), out bool doubleBossValue))
+            if (bool.TryParse(data[i][6].ToString(), out bool doubleBossValue))
             {
                 doubleBoss[i] = doubleBossValue;
             }

@@ -26,6 +26,7 @@ public class WeaponStatImporter : MonoBehaviour
     void Awake()
     {
         instance = this;
+        string filePath = "Assets/Resources/CSV.data/StatInfo/WeaponStat.xlsx";
         List<Dictionary<string, object>> data = CSVReaderStat.Read("WeaponStat");
         weaponNum = new int[data.Count];
         name = new string[data.Count];

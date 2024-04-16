@@ -25,8 +25,8 @@ public class EnemyBaseStatImporter : MonoBehaviour
     void Awake()
     {
         instance = this;
-
-        List<Dictionary<int, object>> data = CSVReaderStat.ReadNumericColumns("EnemyBaseStat");
+        string filePath = "Assets/Resources/CSV.data/StatInfo/EnemyBaseStat.xlsx";
+        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
 
         enemyName = new string[data.Count];
         health = new float[data.Count];
