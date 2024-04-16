@@ -280,6 +280,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
                 spawnPoint = point;
                 break;
             }
+            InfiniteLoopDetector.Run();
         }
         
         return spawnPoint;

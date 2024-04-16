@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeStat : MonoBehaviour, ICustomUpdateMono
+public class UpgradeStat : MonoBehaviour
 {
     public LevelUpStat upgradeType;
     public int tier;
@@ -37,7 +37,6 @@ public class UpgradeStat : MonoBehaviour, ICustomUpdateMono
 
     void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
-        CustomUpdateManager.customUpdates.Add(this);
         int tier1 = 1;
         int tier2 = 0;
         int tier3 = 0;
@@ -46,17 +45,10 @@ public class UpgradeStat : MonoBehaviour, ICustomUpdateMono
         float[] chanceLise = { tier1, tier2, tier3, tier4 };
         int index = GameManager.instance.Judgment(chanceLise);
         tier = index;
-    }
-    void OnDisable()
-    {
-        CustomUpdateManager.customUpdates.Remove(this);
-    }
 
-    public void CustomUpdate()
-    {
         name.text = upgrade.upgradeName[(int)upgradeType];
 
-        switch(upgradeType)
+        switch (upgradeType)
         {
             case LevelUpStat.HP_UP:
                 effect.text = "<color=#4CFF52>+" + upgrade.heart[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
@@ -100,79 +92,77 @@ public class UpgradeStat : MonoBehaviour, ICustomUpdateMono
 
         }
     }
+
+
     public void StatUpgrade()
     {
-        if(LevelUpManager.instance.isSetting == true)
+        if (LevelUpManager.instance.isSetting == false)
         {
-            return;
-        }
-
-        switch(upgradeType)
-        {
-            case LevelUpStat.HP_UP:
-                game.playerInfo.maxHealth_Origin += upgrade.heart[tier];
-                game.curHp += upgrade.heart[tier];
-                break;
-            case LevelUpStat.REGEN_UP:
-                game.playerInfo.regeneration_Origin += upgrade.lungs[tier];
-                break;
-            case LevelUpStat.BLOOD_UP:
-                game.playerInfo.bloodSucking_Origin += upgrade.teeth[tier];
-                break;
-            case LevelUpStat.DAMAGE_UP:
-                game.playerInfo.persentDamage_Origin += upgrade.triceps[tier];
-                break;
-            case LevelUpStat.MELEEDM_UP:
-                game.playerInfo.meleeDamage_Origin += upgrade.forearms[tier];
-                break;
-            case LevelUpStat.RANGEDM_UP:
-                game.playerInfo.rangeDamage_Origin += upgrade.shoulders[tier];
-                break;
-            case LevelUpStat.ATKSPEED_UP:
-                game.playerInfo.attackSpeed_Origin += upgrade.reflexes[tier];
-                break;
-            case LevelUpStat.CRITICAL_UP:
-                game.playerInfo.criticalChance_Origin += upgrade.fingers[tier];
-                break;
-            case LevelUpStat.ENGINE_UP:
-                game.playerInfo.engine_Origin += upgrade.skull[tier];
-                break;
-            case LevelUpStat.RANGE_UP:
-                game.playerInfo.range_Origin += upgrade.eyes[tier];
-                break;
-            case LevelUpStat.ARMOR_UP:
-                game.playerInfo.armor_Origin += upgrade.chest[tier];
-                break;
-            case LevelUpStat.EVASION_UP:
-                game.playerInfo.evasion_Origin += upgrade.back[tier];
-                break;
-            case LevelUpStat.SPEED_UP:
-                game.playerInfo.speed_Origin += upgrade.legs[tier];
-                break;
-            default:
-                Debug.Log("upgradeType 미 설정");
-                break;
-        }
-
-
-        game.levelUpChance--;
-        
-        if(game.levelUpChance <= 0)
-        {
-            game.levelUpUI.SetActive(false);
-            //여기서 전리품 메뉴로
-            if (game.lootChance > 0)
+            switch (upgradeType)
             {
-                game.LootMenuOpen();
+                case LevelUpStat.HP_UP:
+                    game.playerInfo.maxHealth_Origin += upgrade.heart[tier];
+                    game.curHp += upgrade.heart[tier];
+                    break;
+                case LevelUpStat.REGEN_UP:
+                    game.playerInfo.regeneration_Origin += upgrade.lungs[tier];
+                    break;
+                case LevelUpStat.BLOOD_UP:
+                    game.playerInfo.bloodSucking_Origin += upgrade.teeth[tier];
+                    break;
+                case LevelUpStat.DAMAGE_UP:
+                    game.playerInfo.persentDamage_Origin += upgrade.triceps[tier];
+                    break;
+                case LevelUpStat.MELEEDM_UP:
+                    game.playerInfo.meleeDamage_Origin += upgrade.forearms[tier];
+                    break;
+                case LevelUpStat.RANGEDM_UP:
+                    game.playerInfo.rangeDamage_Origin += upgrade.shoulders[tier];
+                    break;
+                case LevelUpStat.ATKSPEED_UP:
+                    game.playerInfo.attackSpeed_Origin += upgrade.reflexes[tier];
+                    break;
+                case LevelUpStat.CRITICAL_UP:
+                    game.playerInfo.criticalChance_Origin += upgrade.fingers[tier];
+                    break;
+                case LevelUpStat.ENGINE_UP:
+                    game.playerInfo.engine_Origin += upgrade.skull[tier];
+                    break;
+                case LevelUpStat.RANGE_UP:
+                    game.playerInfo.range_Origin += upgrade.eyes[tier];
+                    break;
+                case LevelUpStat.ARMOR_UP:
+                    game.playerInfo.armor_Origin += upgrade.chest[tier];
+                    break;
+                case LevelUpStat.EVASION_UP:
+                    game.playerInfo.evasion_Origin += upgrade.back[tier];
+                    break;
+                case LevelUpStat.SPEED_UP:
+                    game.playerInfo.speed_Origin += upgrade.legs[tier];
+                    break;
+            }
+
+            game.playerInfo.StatCalculate();
+
+            game.levelUpChance--;
+
+            if (game.levelUpChance <= 0)
+            {
+                //여기서 전리품 메뉴로
+                if (game.lootChance > 0)
+                {
+                    game.LootMenuOpen();
+                }
+                else
+                {
+                    game.ShopOpen();
+                }
+                game.levelUpUI.SetActive(false);
             }
             else
             {
-                game.ShopOpen();
+                LevelUpManager.instance.NextSelect();
             }
-        }
-        else
-        {
-            LevelUpManager.instance.NextSelect();
         }
     }
 }

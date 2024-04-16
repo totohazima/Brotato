@@ -7994,6 +7994,7 @@ MonoBehaviour:
   isEnd: 0
   difficult: 0
   isSpecialEnemySpawn: 0
+  isEliteSpawn: 0
   eliteEnemyWave: 0
   enemyRiseDamage: 0
   enemyRiseHealth: 0

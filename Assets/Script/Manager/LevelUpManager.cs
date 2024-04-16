@@ -84,10 +84,10 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
     }
     public void ReRoll() //°ñµå·Î ÃÊ±âÈ­
     {
-        //if(isSetting == true) ½ºÅÈ ¾Ö´Ï¸ÞÀÌ¼Ç ¾ø¾Ú
-        //{
-        //    return;
-        //}
+        if(isSetting == true)
+        {
+            return;
+        }
 
         if (GameManager.instance.Money >= 1)
         {
@@ -125,11 +125,11 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
 
         for(int i = 0; i < 4; i++)
         {
-            //isSetting = true;
-            //yield return new WaitForSeconds(0.1f);
+            isSetting = true;
+            yield return new WaitForSeconds(0.1f);
             chooseUpgrades[i].SetActive(true);
         }
-        //isSetting = false;
-        yield return 0;
+        yield return new WaitForSeconds(0.05f);
+        isSetting = false;
     }
 }

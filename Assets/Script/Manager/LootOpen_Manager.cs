@@ -29,49 +29,44 @@ public class LootOpen_Manager : MonoBehaviour
     }
     private void LootSetting()
     {
-        bool isNot = false;
-
         int count = GameManager.instance.lootChance;
-        int index;
         int[] indexes = new int[count];
-        while (true)
+        List<ItemScrip> unBanList = new List<ItemScrip>();
+
+        for (int i = 0; i < ItemManager.instance.items.Length; i++) //뽑을 아이템에 최대 수량에 도달한 아이템이 있는지 체크
         {
-            for (int i = 0; i < count; i++)
-            {
-                index = Random.Range(0, ItemManager.instance.items.Length);
-                indexes[i] = index;
-            }
+            unBanList.Add(ItemManager.instance.items[i]);
+            Item.ItemType type = ItemManager.instance.items[i].itemCode;
+        }
 
-            for (int i = 0; i < indexes.Length; i++) //5개 번호 중에 최대 수량에 도달한 아이템이 있는지 체크
+        for (int i = 0; i < unBanList.Count; i++)
+        {
+            for (int j = 0; j < ItemManager.instance.maxItemList.Count; j++)
             {
-                Item.ItemType type = ItemManager.instance.items[indexes[i]].itemCode;
-                for (int j = 0; j < ItemManager.instance.maxItemList.Count; j++)
+                if (unBanList[i].itemCode == ItemManager.instance.maxItemList[j])
                 {
-                    if (ItemManager.instance.maxItemList[j] == type)
-                    {
-                        isNot = true;
-                    }
+                    unBanList.Remove(unBanList[i]);
                 }
-            }
-            for (int i = 0; i < count; i++) //5개 번호가 서로 중복 되는지 체크
-            {
-                for (int j = 0; j < count; j++)
-                {
-                    if(i != j)
-                    {
-                        if(indexes[i] == indexes[j])
-                        {
-                            isNot = true;
-                        }
-                    }
-                }
-            }
-
-            if(isNot == false)
-            {
-                break;
             }
         }
+
+        ShuffleList(unBanList);
+        ItemScrip[] itemList = new ItemScrip[count];
+        for (int i = 0; i < count; i++)
+        {
+            itemList[i] = unBanList[i];
+        }
+        for (int j = 0; j < count; j++)
+        {
+            for (int i = 0; i < ItemManager.instance.items.Length; i++)
+            {
+                if (ItemManager.instance.items[i] == itemList[j])
+                {
+                    indexes[j] = i;
+                }
+        }
+        }
+
 
         itemIndex = new int[count];
         for (int i = 0; i < count; i++)
@@ -80,7 +75,23 @@ public class LootOpen_Manager : MonoBehaviour
         }
         LootOpen();
     }
+    private List<T> ShuffleList<T>(List<T> list)
+    {
+        int random1, random2;
+        T temp;
 
+        for (int i = 0; i < list.Count; ++i)
+        {
+            random1 = Random.Range(0, list.Count);
+            random2 = Random.Range(0, list.Count);
+
+            temp = list[random1];
+            list[random1] = list[random2];
+            list[random2] = temp;
+        }
+
+        return list;
+    }
     private void LootOpen()
     {
         ItemScrip items = ItemManager.instance.items[itemIndex[checkIndex]];
