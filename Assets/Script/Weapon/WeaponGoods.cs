@@ -31,6 +31,7 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
     private bool isLock;
     public Image lockUI;
     public Outline line;
+    public Text priceText;
     WeaponScrip scriptable;
     [SerializeField]
     WeaponScrip[] weaponData;
@@ -259,13 +260,30 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         {
             infoUI.gameObject.SetActive(false);
         }
+
+        //가격 설정
+        ShopBasePriceImporter priceImporter = ShopBasePriceImporter.instance;
+        for (int z = 0; z < priceImporter.weaponCode.Length; z++)
+        {
+            if (weaponCode == priceImporter.weaponCode[z])
+            {
+                weaponBasePrice = priceImporter.weaponBasePrice[z];
+                break;
+            }
+        }
+        int wave = GameManager.instance.waveLevel + 1;
+        weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
+        weaponPrice = weaponPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
+        weaponPrice = System.MathF.Round(weaponPrice);
+        priceText.text = weaponPrice.ToString("F0");
     }
 
 
     public void BuyWeapon()
     {
-        if (GameManager.instance.playerInfo.isFullWeapon == false)
+        if (GameManager.instance.playerInfo.isFullWeapon == false && GameManager.instance.money >= weaponPrice)
         {
+            GameManager.instance.money -= (int)weaponPrice;
             GameObject weapon = Instantiate(weaponData[(int)index].weaponPrefab);
             weapon.transform.SetParent(GameManager.instance.playerInfo.weaponMainPos);
             GameManager.instance.playerInfo.weapons.Add(weapon);
@@ -277,7 +295,7 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
             GameManager.instance.playerInfo.StatCalculate();
             gameObject.SetActive(false);
         }
-        else
+        else if(GameManager.instance.money >= weaponPrice)
         {
             List<GameObject> weapons = GameManager.instance.playerInfo.weapons;
             for (int i = 0; i < weapons.Count; i++)
@@ -287,11 +305,11 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
                 {
                     if(weapon.weaponTier == weaponTier && weapon.weaponTier < 3)
                     {
+                        GameManager.instance.money -= (int)weaponPrice;
                         weapon.weaponTier++;
                         UnLockIng();
                         ShopManager.instance.goodsList.Remove(gameObject);
                         ItemManager.instance.WeaponListUp();
-                        //ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0], PauseUI_Manager.instance.scrollContents[0]);
                         WeaponManager.instance.WeaponSetSearch();
                         GameManager.instance.playerInfo.StatCalculate();
                         gameObject.SetActive(false);
@@ -299,6 +317,10 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
                     }
                 }
             }
+        }
+        else
+        {
+            return;
         }
     }
     public void Lock()

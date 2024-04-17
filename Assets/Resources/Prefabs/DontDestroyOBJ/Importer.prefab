@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -6213352534418220466}
   - component: {fileID: -7456421047126889151}
   - component: {fileID: 3824005941118449603}
+  - component: {fileID: 3681797850040777062}
   - component: {fileID: 888371404365744458}
   m_Layer: 0
   m_Name: Importer
@@ -135,19 +136,19 @@ MonoBehaviour:
   upgradeNum: 
   upgradeName: []
   upgradeEffect: []
-  heart: 
-  lungs: 
-  teeth: 
-  triceps: 
-  forearms: 
-  shoulders: 
-  reflexes: 
-  fingers: 
-  skull: 
-  eyes: 
-  chest: 
-  back: 
-  legs: 
+  heart: []
+  lungs: []
+  teeth: []
+  triceps: []
+  forearms: []
+  shoulders: []
+  reflexes: []
+  fingers: []
+  skull: []
+  eyes: []
+  chest: []
+  back: []
+  legs: []
 --- !u!114 &-7033672418044704631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +258,22 @@ MonoBehaviour:
   enemyRiseDamage: []
   enemyRiseHealth: []
   doubleBoss: 
+--- !u!114 &3681797850040777062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619993944187103712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898e08a00d8803640b170e0ba94b5ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemCode: []
+  itemBasePrice: []
+  weaponCode: []
+  weaponBasePrice: []
 --- !u!114 &888371404365744458
 MonoBehaviour:
   m_ObjectHideFlags: 0

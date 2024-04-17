@@ -15,18 +15,18 @@ public class Meterial : DropItem
         {
             if (game.isEnd == false)
             {
-                game.Money += moneyValue;
+                game.money += moneyValue;
                 game.curExp += (expValue * (1 + (game.playerInfo.expGain / 100)));
                 if (game.interest > 0)
                 {
                     if (game.interest < moneyValue)
                     {
-                        game.Money += game.interest;
+                        game.money += game.interest;
                         game.interest = 0;
                     }
                     else if (game.interest >= moneyValue)
                     {
-                        game.Money += moneyValue;
+                        game.money += moneyValue;
                         game.interest -= moneyValue;
                     }
                 }

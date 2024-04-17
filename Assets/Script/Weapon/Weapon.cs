@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Weapon : MonoBehaviour
 {
     public enum Weapons
@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour
     }
     public int weaponNum;
     public int weaponTier;
-    public string name;
+    public string weaponCode;
     public string weaponType;
     public float damage;
     public int bulletCount;
@@ -69,6 +69,8 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float afterBloodSucking;
     [HideInInspector] public float afterKnockBack;
 
+    [HideInInspector] public float weaponBasePrice;
+    [HideInInspector] public float weaponPrice;
     public string typeText;
     public void StatSetting(int index, int tier)
     {
@@ -79,7 +81,7 @@ public class Weapon : MonoBehaviour
         multipleDamageType = new DamageType[multipleDamaeCount];
 
         weaponNum = import.weaponNum[index];
-        name = import.name[index];
+        weaponCode = import.name[index];
         weaponType = import.weaponType[index];
         int i = 0;
         switch (tier)
@@ -157,7 +159,7 @@ public class Weapon : MonoBehaviour
         {
             typeText = "원거리";
         }
-
+        
 
     }
 
@@ -208,6 +210,21 @@ public class Weapon : MonoBehaviour
         afterPenetrateDamage = -penetrateDamage + player.penetrateDamage;
         afterBloodSucking = bloodSucking + player.bloodSucking;
         afterKnockBack = knockBack + player.KnockBack;
+
+        //가격 설정
+        ShopBasePriceImporter priceImporter = ShopBasePriceImporter.instance;
+        for (int z = 0; z < priceImporter.weaponCode.Length; z++)
+        {
+            if (weaponCode == priceImporter.weaponCode[z])
+            {
+                weaponBasePrice = priceImporter.weaponBasePrice[z];
+                break;
+            }
+        }
+        int wave = GameManager.instance.waveLevel + 1;
+        weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
+        weaponPrice = weaponPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
+        weaponPrice = MathF.Round(weaponPrice);
     }
     public float GetAngle(Vector2 start, Vector2 end)//각도구하기
     {

@@ -10,6 +10,8 @@ public class Item : MonoBehaviour, ICustomUpdateMono
     public ItemType itemType;
     public string itemCode;
     public string itemName;
+    private float itemBasePrice;
+    public float itemPrice;
     public int curCount;
     public int maxCount;
     public bool isFull; //정해진 수량을 전부 먹었을 경우 true
@@ -124,7 +126,9 @@ public class Item : MonoBehaviour, ICustomUpdateMono
             }
 
         }
-
+        int wave = GameManager.instance.waveLevel + 1;
+        itemPrice = (itemBasePrice + (wave) + (itemBasePrice * 0.1f * wave)) * 1;
+        itemPrice = MathF.Round(itemPrice);
         
     }
     Item_Info infoObj = null;
@@ -204,19 +208,15 @@ public class Item : MonoBehaviour, ICustomUpdateMono
             i++;
         }
 
-        ///for문 방식으로 할 시 데이터가 온전히 불러와지지 않음
-        //for (int i = 0; i < riseCount - 1; i++) 
-        //{
-        //    name[i] = Import.riseStatType[index + i];
-        //    riseStat[i] = (Stat.PlayerStat)Enum.Parse(typeof(Stat.PlayerStat), name[i]);
-        //    riseStats[i] = Import.riseStats[index + i];
-        //}
+        ShopBasePriceImporter priceImporter = ShopBasePriceImporter.instance;
 
-        //for (int i = 0; i < descendCount - 1; i++)        
-        //{
-        //    name2[i] = Import.descendStatType[index + i];
-        //    descendStat[i] = (Stat.PlayerStat)Enum.Parse(typeof(Stat.PlayerStat), name2[i]);
-        //    descendStats[i] = Import.descendStats[index + i];
-        //}
+        for (int z = 0; z < priceImporter.itemCode.Length; z++)
+        {
+            if(itemType.ToString() == priceImporter.itemCode[z])
+            {
+                itemBasePrice = priceImporter.itemBasePrice[z];
+                break;
+            }
+        }
     }  
 }

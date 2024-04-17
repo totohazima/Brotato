@@ -2005,6 +2005,8 @@ MonoBehaviour:
   afterPenetrateDamage: 0
   afterBloodSucking: 0
   afterKnockBack: 0
+  weaponBasePrice: 0
+  weaponPrice: 0
   typeText: 
   index: 0
   atkType: 0
@@ -2028,6 +2030,7 @@ MonoBehaviour:
   infoUI: {fileID: 1737031962212629972}
   lockUI: {fileID: 7954678749359972731}
   line: {fileID: 5140779487758734153}
+  priceText: {fileID: 5953714811879904007}
   weaponData:
   - {fileID: 11400000, guid: 221d278d900d21f4aa0e1621210a453b, type: 2}
   - {fileID: 11400000, guid: 5766999e6ee6db3429930a58e8ca7176, type: 2}

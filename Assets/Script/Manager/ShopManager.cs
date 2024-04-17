@@ -61,7 +61,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     void UiVisualize()
     {
         titleWaveUI.text = "웨이브 " + (game.waveLevel + 1) + "(총 10 물결)";
-        moneyNumUI.text = game.Money.ToString();
+        moneyNumUI.text = game.money.ToString();
         nextWaveUI.text = "이동(웨이브 " + (game.waveLevel + 2) + ")";
 
         tabsText[0].text = "무기(" + tabsScroll[0].childCount + "/6)";

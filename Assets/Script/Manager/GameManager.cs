@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     public int levelUpChance; //웨이브 종료 후 레벨 업 할 횟수
     public int waveLevel;   //웨이브 레벨
     public float[] waveTime;    //웨이브 시간
-    public int Money;   //돈
+    public int money;   //돈
     public int interest; //이자
     public int lootChance; //상자깡 찬스
     private float timer; //시간
@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
     void Awake()
     {
         instance = this;
+        money = 30;
         SceneManager.UnloadSceneAsync("LoadingScene", UnloadSceneOptions.None);
         pool = poolManager.GetComponent<PoolManager>();
         mainPlayer = Instantiate(playerPrefab);
@@ -264,7 +265,7 @@ public class GameManager : MonoBehaviour, ICustomUpdateMono
         hpBarUI.value = curHp;
         hpNum.text = curHp.ToString("F0") + " / " + maxHp.ToString("F0");
 
-        moneyUI.text = Money.ToString("F0");
+        moneyUI.text = money.ToString("F0");
         interestNum.text = interest.ToString("F0");
 
         maxExp = 50 + (30 * (playerLevel));

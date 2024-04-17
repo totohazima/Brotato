@@ -18,7 +18,7 @@ public class LootCrate : DropItem
                 Transform text = DamageTextManager.instance.TextCreate(0, healTxt).transform;
                 text.position = transform.position;
             }
-            GameManager.instance.Money += ItemEffect.instance.Bag();
+            GameManager.instance.money += ItemEffect.instance.Bag();
 
             gameObject.SetActive(false);
         }

@@ -89,9 +89,9 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
             return;
         }
 
-        if (GameManager.instance.Money >= 1)
+        if (GameManager.instance.money >= 1)
         {
-            GameManager.instance.Money -= 1;
+            GameManager.instance.money -= 1;
             StartCoroutine(UpgradeSetting());
         }
         else

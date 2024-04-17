@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 using System.Text.RegularExpressions;
 
-public class ItemGoods : MonoBehaviour
+public class ItemGoods : MonoBehaviour, UI_Upadte
 {
     public string itemCode;
     public Image itemImage;
@@ -15,7 +16,9 @@ public class ItemGoods : MonoBehaviour
     public Text itemCountType; //-100 아이템, 1초과 한계(0), 1 독특한
     int itemInfoCount; //텍스트 갯수
     string[] itemInfo; //아이템 텍스트
-    public Text itemPrice;
+    private float itemBasePrice;
+    private float itemPrice;
+    public Text itemPriceText;
     public TextMeshProUGUI[] infoText; //텍스트 오브젝트
     public Image lockUI;
     public bool isLock;
@@ -23,8 +26,13 @@ public class ItemGoods : MonoBehaviour
     public int itemNum; //itemManager에서 아이템을 찾기 위함
     public Outline line;
     ItemScrip scriptable;
+    void OnEnable()
+    {
+        UIUpdateManager.uiUpdates.Add(this);
+    }
     void OnDisable()
     {
+        UIUpdateManager.uiUpdates.Remove(this);
         if (isLock == false) //잠긴 아이템은 상점이 꺼져도 텍스트 삭제X
         {
             for (int i = 0; i < itemInfoUI.childCount; i++)
@@ -40,9 +48,28 @@ public class ItemGoods : MonoBehaviour
         itemCode = scriptable.itemCode.ToString();
         itemImage.sprite = scriptable.itemSprite;
         itemNum = index;
+
+        
         TextSetting(itemCode);
     }
 
+    public void UI_Update()
+    {
+        ShopBasePriceImporter priceImporter = ShopBasePriceImporter.instance;
+        for (int z = 0; z < priceImporter.itemCode.Length; z++)
+        {
+            if (itemCode.ToString() == priceImporter.itemCode[z])
+            {
+                itemBasePrice = priceImporter.itemBasePrice[z];
+                break;
+            }
+        }
+        int wave = GameManager.instance.waveLevel + 1;
+        itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
+        itemPrice = itemPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
+        itemPrice = MathF.Round(itemPrice);
+        itemPriceText.text = itemPrice.ToString("F0");
+    }
     public void TextSetting(string code)
     {
         ItemStatImporter import = ItemStatImporter.instance;
@@ -56,15 +83,7 @@ public class ItemGoods : MonoBehaviour
         }
         itemName.text = scriptable.itemName;
         maxCount = import.maxCount[index1];
-
-        //int index2 = 0;
-        //for (int i = 0; i < import.itemCode2.Length; i++)
-        //{
-        //    if (code == import.itemCode2[i])
-        //    {
-        //        index2 = i;
-        //    }
-        //}
+        itemPriceText.text = itemPrice.ToString("F0");
         
         if(maxCount == -100)
         {
@@ -82,12 +101,6 @@ public class ItemGoods : MonoBehaviour
         itemInfoCount = scriptable.infoText.Length;
 
         itemInfo = new string[itemInfoCount];
-        //int j = 0;
-        //while (j <= itemInfoCount - 1)
-        //{
-        //    itemInfo[j] = import.infoText[index2 + j];
-        //    j++;
-        //}
 
         for (int i = 0; i < itemInfoCount; i++)
         {
@@ -99,12 +112,20 @@ public class ItemGoods : MonoBehaviour
     
     public void BuyItem()
     {
-        ItemManager.instance.ItemObtain(itemNum);
-        ItemManager.instance.ItemListUp();
-        //ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1], PauseUI_Manager.instance.scrollContents[1]);
-        UnLockIng();
-        ShopManager.instance.goodsList.Remove(gameObject);
-        gameObject.SetActive(false);
+        if (GameManager.instance.money >= itemPrice)
+        {
+            GameManager.instance.money -= (int)itemPrice;
+            ItemManager.instance.ItemObtain(itemNum);
+            ItemManager.instance.ItemListUp();
+            //ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1], PauseUI_Manager.instance.scrollContents[1]);
+            UnLockIng();
+            ShopManager.instance.goodsList.Remove(gameObject);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void Lock()

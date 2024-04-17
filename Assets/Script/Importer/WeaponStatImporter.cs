@@ -82,7 +82,7 @@ public class WeaponStatImporter : MonoBehaviour
         for(int i = 0; i < data.Count; i++)
         {
             weaponNum[i] = (int)data[i]["WeaponNum"];
-            name[i] = (string)data[i]["Name"];
+            name[i] = (string)data[i]["WeaponCode"];
 
             // TryParse를 사용하여 각 열의 데이터를 적절한 형식으로 변환하여 저장
             if (float.TryParse(data[i]["Damage1"].ToString(), out float damage1Value))
