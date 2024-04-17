@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class WeaponGoods : Weapon, ICustomUpdateMono
+public class WeaponGoods : Weapon, UI_Upadte
 {
     public Weapons index;
     public WeaponType atkType;
@@ -37,12 +37,12 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
     WeaponScrip[] weaponData;
     void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
-        CustomUpdateManager.customUpdates.Add(this);
+        UIUpdateManager.uiUpdates.Add(this);
 
     }
     void OnDisable()
     {
-        CustomUpdateManager.customUpdates.Remove(this);
+        UIUpdateManager.uiUpdates.Remove(this);
     }
 
     public void Init(WeaponScrip scrip/*string name, string setName, Weapons code, Sprite image, WeaponType type*/)
@@ -55,7 +55,7 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         atkType = scrip.attackType;
         StatSetting((int)index, 0);
     }
-    public void CustomUpdate()
+    public void UI_Update()
     {
         Player player = GameManager.instance.playerInfo;
 
@@ -275,7 +275,14 @@ public class WeaponGoods : Weapon, ICustomUpdateMono
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
         weaponPrice = weaponPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
         weaponPrice = System.MathF.Round(weaponPrice);
-        priceText.text = weaponPrice.ToString("F0");
+        if (weaponPrice > GameManager.instance.money)
+        {
+            priceText.text = "<color=red>" + weaponPrice.ToString("F0") + "</color>";
+        }
+        else
+        {
+            priceText.text = weaponPrice.ToString("F0");
+        }
     }
 
 

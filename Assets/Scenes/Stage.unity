@@ -7987,7 +7987,7 @@ MonoBehaviour:
   levelUpChance: 0
   waveLevel: 0
   waveTime: []
-  Money: 0
+  money: 0
   interest: 0
   lootChance: 0
   isPause: 0
@@ -12649,7 +12649,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 83.625, y: -8.715593}
+  m_AnchoredPosition: {x: 83.625, y: -8.715576}
   m_SizeDelta: {x: 147.25, y: 35.2902}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &595305102
@@ -28652,6 +28652,7 @@ MonoBehaviour:
   titleWaveUI: {fileID: 1065729202}
   moneyNumUI: {fileID: 323474344}
   nextWaveUI: {fileID: 1741377656}
+  rerollPrice_Text: {fileID: 726417778}
   selectTab: {fileID: 0}
   tabs:
   - {fileID: 1095781415}

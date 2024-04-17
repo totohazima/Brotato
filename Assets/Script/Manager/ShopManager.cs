@@ -9,6 +9,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     public Text titleWaveUI;
     public Text moneyNumUI;
     public Text nextWaveUI;
+    public Text rerollPrice_Text;
     public Transform selectTab;
     public Transform[] tabs;
     public Image[] tabsImage;
@@ -17,7 +18,9 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     public Transform[] verticalTabsScroll;
     public Transform goodsContent;
     public GameObject[] goods;
-
+    private int rerollCount; //리롤을 누른 횟수 (매 상점마다 0으로 초기화)
+    private float rerollPrice; //리롤 가격
+    private float rerollPrice_Add; //리롤을 누를때마다 증가할 수치
     public List<GameObject> lockList; //잠긴 아이템(가격은 고정된채로 가장 앞 열로 이동)
     public List<GameObject> goodsList;
 
@@ -44,6 +47,22 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
         CustomUpdateManager.customUpdates.Add(this);
         ItemManager.instance.WeaponListUp();
         ItemManager.instance.ItemListUp();
+        rerollCount = 0;
+
+        int wave = game.waveLevel + 1;
+        if (wave < 2)
+        {
+            rerollPrice = wave + (wave / 2);
+            rerollPrice = Mathf.Ceil(rerollPrice); //올림
+            rerollPrice_Add = Mathf.Ceil(rerollPrice / 3);
+        }
+        else
+        {
+            rerollPrice = wave + (wave / 2);
+            rerollPrice = Mathf.Floor(rerollPrice); //내림
+            rerollPrice_Add = Mathf.Floor(rerollPrice / 3);
+        }
+
         //ItemManager.instance.WeaponListUp(tabsScroll[0], verticalTabsScroll[0], PauseUI_Manager.instance.scrollContents[0]);
         //ItemManager.instance.ItemListUp(tabsScroll[1], verticalTabsScroll[1], PauseUI_Manager.instance.scrollContents[1]);
     }
@@ -67,6 +86,9 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
         tabsText[0].text = "무기(" + tabsScroll[0].childCount + "/6)";
         tabsText[1].text = "아이템(" + tabsScroll[1].childCount + ")";
         tabsText[2].text = "천부 카드";
+
+        float price = rerollPrice + (rerollPrice_Add * rerollCount);
+        rerollPrice_Text.text = price.ToString("F0");
     }
     public void ShopGoodsSetting()
     {
@@ -157,48 +179,58 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
     public void ShopReRoll()
     {
-        List<GameObject> locks = new List<GameObject>();
-        List<GameObject> unLocks = new List<GameObject>();
+        float price = rerollPrice + (rerollPrice_Add * rerollCount);
+        if (price <= game.money)
+        {
+            List<GameObject> locks = new List<GameObject>();
+            List<GameObject> unLocks = new List<GameObject>();
 
-        for (int i = 0; i < lockList.Count; i++) //잠금 아이템 위치 조정(맨 왼쪽으로)
-        {
-            lockList[i].transform.SetSiblingIndex(i);
-            locks.Add(lockList[i]);
-        }
-        for (int i = 0; i < goodsList.Count; i++)
-        {
-            bool isLock = false;
-            for (int j = 0; j < lockList.Count; j++)
+            for (int i = 0; i < lockList.Count; i++) //잠금 아이템 위치 조정(맨 왼쪽으로)
             {
-                if (goodsList[i].gameObject == lockList[j].gameObject)
+                lockList[i].transform.SetSiblingIndex(i);
+                locks.Add(lockList[i]);
+            }
+            for (int i = 0; i < goodsList.Count; i++)
+            {
+                bool isLock = false;
+                for (int j = 0; j < lockList.Count; j++)
                 {
-                    isLock = true;
+                    if (goodsList[i].gameObject == lockList[j].gameObject)
+                    {
+                        isLock = true;
+                    }
+                }
+                if (isLock == false)
+                {
+                    unLocks.Add(goodsList[i]);
                 }
             }
-            if (isLock == false)
+            goodsList.Clear();
+
+            //잠긴 아이템과 아닌 아이템 분류 후 순서대로 넣어주기
+            for (int i = 0; i < locks.Count; i++)
             {
-                unLocks.Add(goodsList[i]);
+                goodsList.Add(locks[i]);
             }
-        }
-        goodsList.Clear();
+            for (int i = 0; i < unLocks.Count; i++)
+            {
+                goodsList.Add(unLocks[i]);
+            }
 
-        //잠긴 아이템과 아닌 아이템 분류 후 순서대로 넣어주기
-        for (int i = 0; i < locks.Count; i++)
-        {
-            goodsList.Add(locks[i]);
+            for (int i = locks.Count; i < goodsList.Count; i++)//잠긴 아이템이 아니면 오브젝트 꺼주기
+            {
+                goodsList[i].SetActive(false);
+            }
+            goodsList.Clear();
+            ShopGoodsSetting();
+            
+            game.money -= (int)price;
+            rerollCount++;
         }
-        for (int i = 0; i < unLocks.Count; i++)
+        else
         {
-            goodsList.Add(unLocks[i]);
+            return;
         }
-
-        for (int i = locks.Count; i < goodsList.Count; i++)//잠긴 아이템이 아니면 오브젝트 꺼주기
-        {
-            goodsList[i].SetActive(false);
-        }
-        goodsList.Clear();
-        ShopGoodsSetting();
-
     }
 
 

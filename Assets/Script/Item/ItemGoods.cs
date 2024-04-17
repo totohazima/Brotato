@@ -68,7 +68,14 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
         itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
         itemPrice = itemPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
         itemPrice = MathF.Round(itemPrice);
-        itemPriceText.text = itemPrice.ToString("F0");
+        if (itemPrice > GameManager.instance.money)
+        {
+            itemPriceText.text = "<color=red>" + itemPrice.ToString("F0") + "</color>";
+        }
+        else
+        {
+            itemPriceText.text = itemPrice.ToString("F0");
+        }
     }
     public void TextSetting(string code)
     {
