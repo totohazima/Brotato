@@ -9,13 +9,13 @@ public class AtkSpeed_Info : Stat_Info
         icon.sprite = scriptable.statImage;
         title.text = scriptable.statName;
 
-        if (GameManager.instance.playerInfo.attackSpeed >= 0)
+        if (StageManager.instance.playerInfo.attackSpeed >= 0)
         {
-            infoText.text = GameManager.instance.playerInfo.attackSpeed.ToString("F0") + scriptable.statPlusText[0] + " " + scriptable.statPlusText[1];
+            infoText.text = StageManager.instance.playerInfo.attackSpeed.ToString("F0") + scriptable.statPlusText[0] + " " + scriptable.statPlusText[1];
         }
         else
         {
-            infoText.text = GameManager.instance.playerInfo.attackSpeed.ToString("F0") + scriptable.statMinusText[0] + " " + scriptable.statMinusText[1];
+            infoText.text = StageManager.instance.playerInfo.attackSpeed.ToString("F0") + scriptable.statMinusText[0] + " " + scriptable.statMinusText[1];
         }
     }
 }

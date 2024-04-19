@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     float timer;
     float treeTimer;
     public float spawnTime; //스폰 시간
-    GameManager game;
+    StageManager game;
     float mineTimer;
     float minesCoolTime; //지뢰 생성 쿨타임
 
@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     void Awake()
     {
         instance = this;
-        game = GameManager.instance;
+        game = StageManager.instance;
         timer = 100f;
         mineTimer = 100f;
         WaveSelect(0);
@@ -226,7 +226,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             noneTree = someTree;
         }
         float[] chanceLise = { someTree, noneTree };
-        int index = GameManager.instance.Judgment(chanceLise);
+        int index = StageManager.instance.Judgment(chanceLise);
         int treeCount;
         if (index == 0)
         {

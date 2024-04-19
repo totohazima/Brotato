@@ -7,11 +7,11 @@ public class StageCameraManager : MonoBehaviour, ICustomUpdateMono
     float halfWidth;
     float halfHeight;
     Vector3 offset = new Vector3(0, 1);
-    GameManager game;
+    StageManager game;
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
-        game = GameManager.instance;
+        game = StageManager.instance;
         halfWidth = Camera.main.aspect * Camera.main.orthographicSize;
         halfHeight = Camera.main.orthographicSize;
     }

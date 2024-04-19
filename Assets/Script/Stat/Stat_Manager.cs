@@ -102,9 +102,9 @@ public class Stat_Manager : MonoBehaviour, UI_Upadte
     }
     private void ViewBasicStats()
     {
-        player = GameManager.instance.playerInfo;
+        player = StageManager.instance.playerInfo;
 
-        basic_Status_Num[0].text = (GameManager.instance.playerLevel + 1).ToString("F0");
+        basic_Status_Num[0].text = (StageManager.instance.playerLevel + 1).ToString("F0");
         basic_Status_Num[1].text = player.maxHealth.ToString("F0");
         basic_Status_Num[2].text = player.regeneration.ToString("F0");
         basic_Status_Num[3].text = player.bloodSucking.ToString("F0");
@@ -142,7 +142,7 @@ public class Stat_Manager : MonoBehaviour, UI_Upadte
     }
     private void ViewDetailStats()
     {
-        player = GameManager.instance.playerInfo;
+        player = StageManager.instance.playerInfo;
         ItemEffect effect = ItemEffect.instance;
 
         detail_Status_Num[0].text = player.consumableHeal.ToString("F0");

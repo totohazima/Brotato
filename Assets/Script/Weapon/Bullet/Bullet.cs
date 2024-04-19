@@ -25,14 +25,14 @@ public class Bullet : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
-        if (GameManager.instance.isPause == true)
+        if (StageManager.instance.isPause == true)
         {
             if (rigid != null)
             {
                 rigid.velocity = Vector3.zero;
             }
         }
-        else if (GameManager.instance.isPause == false)
+        else if (StageManager.instance.isPause == false)
         {
             if (rigid != null)
             {
@@ -60,7 +60,7 @@ public class Bullet : MonoBehaviour
         float critical = criticalChance;
         float nonCritical = 100 - critical;
         float[] chanceLise = { critical, nonCritical };
-        int index = GameManager.instance.Judgment(chanceLise);
+        int index = StageManager.instance.Judgment(chanceLise);
 
         if(index == 0)
         {

@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
         float notDrop = (100 - (consum + loot)) / 100;
 
         float[] chanceLise = { notDrop, consum, loot };
-        int index = GameManager.instance.Judgment(chanceLise);
+        int index = StageManager.instance.Judgment(chanceLise);
 
         switch (index)
         {
@@ -113,16 +113,27 @@ public class Enemy : MonoBehaviour
         WaveStat();
         void WaveStat()
         {
-            int wave = GameManager.instance.waveLevel;
+            int wave = StageManager.instance.waveLevel;
 
-            maxHealth = maxHealth * (1 + ((healthPerWave / 100) * wave));
-            damage = damage * (1 + ((damagePerWave / 100) * wave));
+            float num = maxHealth;
+            for (int i = 0; i < wave; i++)
+            {
+                num *= 1 + (healthPerWave / 100);
+            }
+            maxHealth = num;
 
-            maxHealth += maxHealth * (GameManager.instance.enemyRiseHealth / 100);
-            damage += damage * (GameManager.instance.enemyRiseDamage / 100);
+            float num2 = damage;
+            for (int i = 0; i < wave; i++)
+            {
+                num2 *= 1 + (damagePerWave / 100);
+            }
+            damage = num2;
+
+            maxHealth += maxHealth * (StageManager.instance.enemyRiseHealth / 100);
+            damage += damage * (StageManager.instance.enemyRiseDamage / 100);
 
             //보스 2마리 소환 시 체력 25% 감소
-            if(type == EnemyName.BOSS && GameManager.instance.doubleBoss == true)
+            if(type == EnemyName.BOSS && StageManager.instance.doubleBoss == true)
             {
                 maxHealth = maxHealth * 0.75f;
             }

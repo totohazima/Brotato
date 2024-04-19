@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class ItemStatImporter : MonoBehaviour
 {
     public static ItemStatImporter instance;
@@ -17,15 +17,22 @@ public class ItemStatImporter : MonoBehaviour
     [HideInInspector] public string[] descendStatType;
     [HideInInspector] public float[] descendStats;
 
-    public string[] itemCode2;
-    public int[] infoCount;
-    public string[] infoText;
+    [HideInInspector] public string[] itemCode2;
+    [HideInInspector] public int[] infoCount;
+    [HideInInspector] public string[] infoText;
 
     void Awake()
     {
         instance = this;
-        string filePath = "Assets/Resources/CSV.data/StatInfo/ItemStat.xlsx";
-        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
+        string filePath;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "ItemStat.xlsx");
+#elif UNITY_IOS && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "ItemStat.xlsx");
+#else
+        filePath = "Assets/Resources/CSV.data/StatInfo/ItemStat.xlsx";
+#endif
+        List<Dictionary<int, object>> data = CSVReaderStat.ReadNumericColumns("ItemStat");
         itemCode = new string[data.Count];
         maxCount = new int[data.Count];
 

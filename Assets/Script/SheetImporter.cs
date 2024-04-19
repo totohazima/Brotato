@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DontDestroyOnLoad : MonoBehaviour
+public class SheetImporter : MonoBehaviour
 {
-    private void Awake()
+    public TextAsset[] sheets;
+    void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }

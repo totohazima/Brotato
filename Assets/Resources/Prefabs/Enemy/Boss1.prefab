@@ -84,7 +84,6 @@ MonoBehaviour:
   consumableDropRate: 0
   lootDropRate: 0
   isDie: 0
-  isHit: 0
   ugliyToothSlow: 0
   anim: {fileID: 3416201617514675538}
   coll: {fileID: 3416201617400161520}
@@ -215,7 +214,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 1f7ee38409ca9ed41ae1b5a5e8c6d382, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3d4b258857a83b94e95d5bb98392b11e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -6,7 +6,7 @@ public class PlayerAction : Player, ICustomUpdateMono
 {
     private ForSettingPlayer CharacterImport;
     private MainSceneManager main;
-    private GameManager game;
+    private StageManager game;
     private Rigidbody rigid;
     public Animator anim;
     public CapsuleCollider coll;
@@ -14,7 +14,7 @@ public class PlayerAction : Player, ICustomUpdateMono
     public Transform animTrans;
     private float magnetRanges; //자석 범위
     private JoyStick joy;
-    private float moveSpeed; //캐릭터 이동속도
+    [SerializeField] private float moveSpeed; //캐릭터 이동속도
     private float timer; //체력 재생 타이머
     private float regenTime; //체력 재생 시간
     public Transform weaponMainPos;
@@ -22,16 +22,18 @@ public class PlayerAction : Player, ICustomUpdateMono
     public bool isHit; //피격 시 true가 되며 true일 경우 피격 판정이 일어나지 않는다.
     [SerializeField] private float hitTImer;
     private float invincibleTime = 0.5f; //피격 후 무적 시간
+    public JoyStick joyStick;
+
     void Start()
     {
         main = MainSceneManager.instance;
-        game = GameManager.instance;
+        game = StageManager.instance;
         rigid = GetComponent<Rigidbody>();
         CharacterImport = main.selectPlayer.GetComponent<ForSettingPlayer>();
         magnetRanges = magnet.radius;
         joy = JoyStick.instance;
         //joy.moveTarget.SetParent(transform);
-
+        joyStick = StageManager.instance.joystick;
         StatSetting(CharacterImport.characterNum);
     }
 
@@ -64,12 +66,17 @@ public class PlayerAction : Player, ICustomUpdateMono
 
         if (joy.isMove == true)
         {
-            Move();
-            if (joy.moveTarget.position.x < transform.position.x)
+            Vector3 dir = new Vector3(joyStick.Horizontal, joyStick.Vertical, 0);
+            // Vector의 방향은 유지하지만 크기를 1로 줄인다. 길이가 정규화 되지 않을시 0으로 설정.
+            dir.Normalize();
+            // 오브젝트의 위치를 dir 방향으로 이동시킨다.
+            Move(dir);
+
+            if(dir.x < 0) //왼쪽
             {
                 animTrans.rotation = Quaternion.Euler(0, 180, 0);
             }
-            else
+            else //오른 쪽
             {
                 animTrans.rotation = Quaternion.Euler(0, 0, 0);
             }
@@ -78,6 +85,8 @@ public class PlayerAction : Player, ICustomUpdateMono
         {
             anim.SetBool("Move", false);
         }
+       
+ 
 
         for (int i = 0; i < weapons.Count; i++)
         {
@@ -96,7 +105,7 @@ public class PlayerAction : Player, ICustomUpdateMono
             }
         }
 
-        if(isHit == true)
+        if(isHit == true || game.isEnd == true)
         {
             coll.enabled = false;
         }
@@ -106,11 +115,11 @@ public class PlayerAction : Player, ICustomUpdateMono
         }
 
     }
-    private void Move()
+    private void Move(Vector3 dir)
     {
         anim.SetBool("Move", true);
-        Vector3 dirVec = joy.moveTarget.position - rigid.position;
-        Vector3 nextVec = dirVec.normalized * moveSpeed;
+        //Vector3 dirVec = joy.moveTarget.position - rigid.position;
+        Vector3 nextVec = dir.normalized * moveSpeed;
         rigid.MovePosition(rigid.position + nextVec);
         rigid.velocity = Vector3.zero;
 

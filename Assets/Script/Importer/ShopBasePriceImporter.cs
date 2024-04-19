@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class ShopBasePriceImporter : MonoBehaviour
 {
     public static ShopBasePriceImporter instance;
@@ -14,8 +14,15 @@ public class ShopBasePriceImporter : MonoBehaviour
     void Awake()
     {
         instance = this;
-        string filePath = "Assets/Resources/CSV.data/StatInfo/ItemBasePrice.xlsx";
-        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
+        string filePath;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "ItemBasePrice.xlsx");
+#elif UNITY_IOS && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "ItemBasePrice.xlsx");
+#else
+        filePath = "Assets/Resources/CSV.data/StatInfo/ItemBasePrice.xlsx";
+#endif
+        List<Dictionary<int, object>> data = CSVReaderStat.ReadNumericColumns("ItemBasePrice");
 
         itemCode = new string[data.Count];
         itemBasePrice = new float[data.Count];
@@ -30,8 +37,15 @@ public class ShopBasePriceImporter : MonoBehaviour
         }
 
 
-        string filePath1 = "Assets/Resources/CSV.data/StatInfo/WeaponBasePrice.xlsx";
-        List<Dictionary<int, object>> data1 = ExcelReader.ReadNumericColumns(filePath1);
+        string filePath1;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            filePath1 = Path.Combine(Application.streamingAssetsPath, "CSV.data/StatInfo/WeaponBasePrice.xlsx");
+#elif UNITY_IOS && !UNITY_EDITOR
+            filePath1 = Path.Combine(Application.streamingAssetsPath, "CSV.data/StatInfo/WeaponBasePrice.xlsx");
+#else
+        filePath1 = "Assets/Resources/CSV.data/StatInfo/WeaponBasePrice.xlsx";
+#endif
+        List<Dictionary<int, object>> data1 = CSVReaderStat.ReadNumericColumns("WeaponBasePrice");
 
         weaponCode = new string[data1.Count];
         weaponBasePrice = new float[data1.Count];

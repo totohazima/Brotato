@@ -10,7 +10,7 @@ public class Meterial : DropItem
 
     void OnTriggerEnter(Collider other)
     {
-        GameManager game = GameManager.instance;
+        StageManager game = StageManager.instance;
         if(other.CompareTag("Player"))
         {
             if (game.isEnd == false)

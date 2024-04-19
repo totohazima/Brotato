@@ -9,6 +9,6 @@ public class Health_Info : Stat_Info
         icon.sprite = scriptable.statImage;
         title.text = scriptable.statName;
 
-        infoText.text = scriptable.statPlusText[0] + GameManager.instance.maxHp.ToString("F0") + " " + scriptable.statPlusText[1];
+        infoText.text = scriptable.statPlusText[0] + StageManager.instance.maxHp.ToString("F0") + " " + scriptable.statPlusText[1];
     }
 }

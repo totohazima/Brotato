@@ -18,7 +18,7 @@ public class Shredder_Bullet : Bullet
         {
             float notBoom = 100 - boomChance;
             float[] chanceLise = { notBoom, boomChance };
-            int index = GameManager.instance.Judgment(chanceLise);
+            int index = StageManager.instance.Judgment(chanceLise);
 
             if (index == 0)
             {
@@ -30,7 +30,7 @@ public class Shredder_Bullet : Bullet
                 booms.transform.position = transform.position;
 
                 Bullet bullet = booms.GetComponent<Bullet>();
-                float damages = damage * (1 + (GameManager.instance.playerInfo.explosiveDamage / 100));
+                float damages = damage * (1 + (StageManager.instance.playerInfo.explosiveDamage / 100));
                 bullet.Init(damages, 10000, -1000, 100, 0, 0, 0, 0, Vector3.zero);
             }
         }

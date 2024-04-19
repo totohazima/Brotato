@@ -8,13 +8,13 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
     float timer;
     public Transform muzzle;
     WeaponScanner scanner;
-    GameManager game;
+    StageManager game;
     float boomChance;
     void Awake()
     {
         scanner = GetComponent<WeaponScanner>();
         sprite = GetComponent<SpriteRenderer>();
-        game = GameManager.instance;
+        game = StageManager.instance;
     }
     void OnEnable()
     {

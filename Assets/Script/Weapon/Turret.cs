@@ -11,11 +11,11 @@ public class Turret : MonoBehaviour, ICustomUpdateMono
     public float basicDamage;
     public float plusDamage;
     FriendlyScanner scan;
-    GameManager game;
+    StageManager game;
     void Awake()
     {
         scan = GetComponent<FriendlyScanner>();
-        game = GameManager.instance;
+        game = StageManager.instance;
     }
     void OnEnable()
     {

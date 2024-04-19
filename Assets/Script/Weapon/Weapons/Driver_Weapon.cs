@@ -8,7 +8,7 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
     float timer;
     float mineTimer;
     WeaponScanner scanner;
-    GameManager game;
+    StageManager game;
     [SerializeField]
     private Transform baseObj;
     Melee_Bullet bullet;
@@ -21,7 +21,7 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
         scanner = GetComponent<WeaponScanner>();
         sprite = baseObj.GetComponent<SpriteRenderer>();
         bullet = baseObj.GetComponent<Melee_Bullet>();
-        game = GameManager.instance;
+        game = StageManager.instance;
     }
     void OnEnable()
     {

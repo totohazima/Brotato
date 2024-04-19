@@ -1,0 +1,7 @@
+몬스터 이름,체력 증가치 %,공격력 증가치 %
+BASIC,40,5
+RANGER,40,5
+CHARGER,40,5
+TANKER,45,5
+BOSS,0,0
+TREE,0,0

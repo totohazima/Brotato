@@ -10,7 +10,7 @@ public class UpgradeStat : MonoBehaviour
 
     public Text name;
     public Text effect;
-    GameManager game;
+    StageManager game;
     UpgradeStatImporter upgrade;
     public enum LevelUpStat
     {
@@ -31,7 +31,7 @@ public class UpgradeStat : MonoBehaviour
 
     void Awake()
     {
-        game = GameManager.instance;
+        game = StageManager.instance;
         upgrade = UpgradeStatImporter.instance;
     }
 
@@ -43,10 +43,10 @@ public class UpgradeStat : MonoBehaviour
         int tier4 = 0;
 
         float[] chanceLise = { tier1, tier2, tier3, tier4 };
-        int index = GameManager.instance.Judgment(chanceLise);
+        int index = StageManager.instance.Judgment(chanceLise);
         tier = index;
 
-        name.text = upgrade.upgradeName[(int)upgradeType];
+        //name.text = upgrade.upgradeName[(int)upgradeType];
 
         switch (upgradeType)
         {

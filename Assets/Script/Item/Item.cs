@@ -126,7 +126,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
             }
 
         }
-        int wave = GameManager.instance.waveLevel + 1;
+        int wave = StageManager.instance.waveLevel + 1;
         itemPrice = (itemBasePrice + (wave) + (itemBasePrice * 0.1f * wave)) * 1;
         itemPrice = MathF.Round(itemPrice);
         
@@ -161,7 +161,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         //클릭 중에는 itemGoods와 동일한 UI가 나타난다(가격, 잠금버튼 없는)
         //UI는 중심을 기준으로 x가 +면 왼쪽으로 y가 +면 아이템 아래로 생성한다. (반대의 경우엔 정반대로 생성)
         //클릭 해제 시 하얀 테두리만 남고 UI는 꺼진다.
-        infoObj = Instantiate(itemInfo, GameManager.instance.itemInfoManager);
+        infoObj = Instantiate(itemInfo, StageManager.instance.itemInfoManager);
         infoObj.Init(scriptable, transform.position);
     }
     public void StatSetting(string names)

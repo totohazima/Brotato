@@ -29,7 +29,7 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
         {
             upgrades[i] = upgrade.GetChild(i).gameObject;
         }
-        player = GameManager.instance.mainPlayer.GetComponent<Player>();
+        player = StageManager.instance.mainPlayer.GetComponent<Player>();
     }
     void OnEnable()
     {
@@ -43,7 +43,7 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-        statNum[0].text = GameManager.instance.playerLevel.ToString("F0");
+        statNum[0].text = StageManager.instance.playerLevel.ToString("F0");
         statNum[1].text = player.maxHealth.ToString("F0");
         statNum[2].text = player.regeneration.ToString("F0");
         statNum[3].text = player.bloodSucking.ToString("F0");
@@ -89,9 +89,9 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
             return;
         }
 
-        if (GameManager.instance.money >= 1)
+        if (StageManager.instance.money >= 1)
         {
-            GameManager.instance.money -= 1;
+            StageManager.instance.money -= 1;
             StartCoroutine(UpgradeSetting());
         }
         else
@@ -117,7 +117,7 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
         for (int i = 0; i < 4; i++)
         {
             float[] chanceLise = percent;
-            int index = GameManager.instance.Judgment(chanceLise);
+            int index = StageManager.instance.Judgment(chanceLise);
 
             chooseUpgrades[i] = upgrades[index];
             percent[index] = 0f;

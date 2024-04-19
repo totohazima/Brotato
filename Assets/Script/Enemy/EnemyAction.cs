@@ -9,14 +9,14 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     public SpriteRenderer sprite;
     public Transform textPopUpPos;
     [HideInInspector] public Transform target;
-    [HideInInspector] public float moveSpeed;
-    [HideInInspector] public GameManager game;
+    public float moveSpeed;
+    [HideInInspector] public StageManager game;
     [HideInInspector] public float hitTimer;
     [HideInInspector] public Rigidbody rigid;
 
     void Awake()
     {
-        game = GameManager.instance;
+        game = StageManager.instance;
         rigid = GetComponent<Rigidbody>();
         target = game.mainPlayer.transform;
     }

@@ -86,7 +86,7 @@ public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerU
 
     public override void ShowItemInfo()
     {
-        infoObj_Pause = Instantiate(weapon_Info, GameManager.instance.itemInfoManager);
+        infoObj_Pause = Instantiate(weapon_Info, StageManager.instance.itemInfoManager);
         infoObj_Pause.Init(weaponData[(int)weapon_Object.index], weapon_Object, transform.position, false);
     }
 }

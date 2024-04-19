@@ -6,14 +6,14 @@ public class EnemyBullet : Bullet
 {
     public override void FixedUpdate()
     {
-        if (GameManager.instance.isPause == true)
+        if (StageManager.instance.isPause == true)
         {
             if (rigid != null)
             {
                 rigid.velocity = Vector3.zero;
             }
         }
-        else if (GameManager.instance.isPause == false)
+        else if (StageManager.instance.isPause == false)
         {
             if (rigid != null)
             {
@@ -43,7 +43,7 @@ public class EnemyBullet : Bullet
 
         if (collision.CompareTag("Player"))
         {
-            PlayerAction player = GameManager.instance.playerInfo;
+            PlayerAction player = StageManager.instance.playerInfo;
 
             float evasion = player.evasion;
             if (player.evasion > 60)
@@ -53,7 +53,7 @@ public class EnemyBullet : Bullet
             
             float nonEvasion = 100 - evasion;
             float[] chanceLise = { evasion, nonEvasion };
-            int index = GameManager.instance.Judgment(chanceLise);
+            int index = StageManager.instance.Judgment(chanceLise);
 
             if(index == 0)
             {
@@ -63,7 +63,7 @@ public class EnemyBullet : Bullet
             }
             else if(index == 1)
             {
-                GameManager.instance.curHp -= damage;
+                StageManager.instance.curHp -= damage;
             }
 
             per--;

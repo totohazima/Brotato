@@ -54,7 +54,7 @@ public class Weapon_Info : MonoBehaviour
         weaponName.text = weaponScrip.weaponName;
         weaponType.text = weaponScrip.setType;
         itemPos = pos;
-        if (GameManager.instance.isPause == false)
+        if (StageManager.instance.isPause == false)
         {
             settUI.SetActive(true);
             btnGroups.SetActive(true);
@@ -99,7 +99,7 @@ public class Weapon_Info : MonoBehaviour
                 }
             }
         }
-        else if(GameManager.instance.isPause == true)
+        else if(StageManager.instance.isPause == true)
         {
             settUI.SetActive(true);
             for (int i = 0; i < settOptionUI.Length; i++)
@@ -408,7 +408,7 @@ public class Weapon_Info : MonoBehaviour
 
     public void Combine()
     {
-        List<GameObject> weapons = GameManager.instance.playerInfo.weapons;
+        List<GameObject> weapons = StageManager.instance.playerInfo.weapons;
         for (int i = 0; i < weapons.Count; i++)
         {
             Weapon_Action weapon = weapons[i].GetComponent<Weapon_Action>();
@@ -417,11 +417,11 @@ public class Weapon_Info : MonoBehaviour
                 if (weapon.weaponTier == weaponInfo.weaponTier && weapon.index == weaponInfo.index)
                 {
                     weapon.weaponTier++;
-                    GameManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
+                    StageManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
                     Destroy(weaponInfo.gameObject);
                     ItemManager.instance.WeaponListUp();
                     WeaponManager.instance.WeaponSetSearch();
-                    GameManager.instance.playerInfo.StatCalculate();
+                    StageManager.instance.playerInfo.StatCalculate();
                     Destroy(gameObject);
                     break;
                 }
@@ -431,11 +431,11 @@ public class Weapon_Info : MonoBehaviour
     }
     public void ReCycle()
     {
-        GameManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
+        StageManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
         Destroy(weaponInfo.gameObject);
         ItemManager.instance.WeaponListUp();
         WeaponManager.instance.WeaponSetSearch();
-        GameManager.instance.playerInfo.StatCalculate();
+        StageManager.instance.playerInfo.StatCalculate();
         Destroy(gameObject);
     }
 

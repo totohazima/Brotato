@@ -18,9 +18,9 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
     public virtual void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
         CustomUpdateManager.customUpdates.Add(this);
-        for (int i = 0; i < GameManager.instance.playerInfo.weapons.Count; i++)
+        for (int i = 0; i < StageManager.instance.playerInfo.weapons.Count; i++)
         {
-            weaponList.Add(GameManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>());
+            weaponList.Add(StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>());
         }
     }
     public virtual void OnDisable()
@@ -101,7 +101,7 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
         //클릭 중에는 itemGoods와 동일한 UI가 나타난다(가격, 잠금버튼 없는)
         //UI는 중심을 기준으로 x가 +면 왼쪽으로 y가 +면 아이템 아래로 생성한다. (반대의 경우엔 정반대로 생성)
         //클릭 해제 시 하얀 테두리만 남고 UI는 꺼진다.
-        infoObj = Instantiate(weapon_Info, GameManager.instance.itemInfoManager);
+        infoObj = Instantiate(weapon_Info, StageManager.instance.itemInfoManager);
         infoObj.Init(weaponData[(int)weapon_Object.index], weapon_Object, transform.position, isCombined);
     }
 }

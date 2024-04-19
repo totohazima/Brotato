@@ -18,11 +18,11 @@ public class ItemManager : MonoBehaviour
 
     List<GameObject>[] poolItems;
 
-    GameManager game;
+    StageManager game;
     void Awake()
     {
         instance = this;
-        game = GameManager.instance;
+        game = StageManager.instance;
 
     }
 
@@ -53,12 +53,12 @@ public class ItemManager : MonoBehaviour
             invenItems.curCount++;
             game.playerInfo.itemInventory.Add(invenItems);
 
-            GameManager.instance.playerInfo.StatCalculate();
+            StageManager.instance.playerInfo.StatCalculate();
         }
         else if(isGet == true)
         {
             checkItem.curCount++;
-            GameManager.instance.playerInfo.StatCalculate();
+            StageManager.instance.playerInfo.StatCalculate();
         }
         
     }

@@ -25,7 +25,7 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
     [HideInInspector]
     public int itemNum; //itemManager에서 아이템을 찾기 위함
     public Outline line;
-    ItemScrip scriptable;
+    public ItemScrip scriptable;
     void OnEnable()
     {
         UIUpdateManager.uiUpdates.Add(this);
@@ -64,11 +64,11 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
                 break;
             }
         }
-        int wave = GameManager.instance.waveLevel + 1;
+        int wave = StageManager.instance.waveLevel + 1;
         itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
         itemPrice = itemPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
         itemPrice = MathF.Round(itemPrice);
-        if (itemPrice > GameManager.instance.money)
+        if (itemPrice > StageManager.instance.money)
         {
             itemPriceText.text = "<color=red>" + itemPrice.ToString("F0") + "</color>";
         }
@@ -119,9 +119,9 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
     
     public void BuyItem()
     {
-        if (GameManager.instance.money >= itemPrice)
+        if (StageManager.instance.money >= itemPrice)
         {
-            GameManager.instance.money -= (int)itemPrice;
+            StageManager.instance.money -= (int)itemPrice;
             ItemManager.instance.ItemObtain(itemNum);
             ItemManager.instance.ItemListUp();
             //ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1], PauseUI_Manager.instance.scrollContents[1]);

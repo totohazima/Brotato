@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class DifficultImporter : MonoBehaviour
 {
     public static DifficultImporter instance;
@@ -15,8 +15,15 @@ public class DifficultImporter : MonoBehaviour
     void Awake()
     {
         instance = this;
-        string filePath = "Assets/Resources/CSV.data/StatInfo/DifficultStat.xlsx";
-        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
+        string filePath;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "DifficultStat.xlsx");
+#elif UNITY_IOS && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "DifficultStat.xlsx");
+#else
+        filePath = "Assets/Resources/CSV.data/StatInfo/DifficultStat.xlsx";
+#endif
+        List<Dictionary<int, object>> data = CSVReaderStat.ReadNumericColumns("DifficultStat");
 
         isSpecialEnemy = new bool[data.Count];
         isEliteSpawn = new bool[data.Count];

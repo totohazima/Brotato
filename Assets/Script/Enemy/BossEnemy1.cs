@@ -32,9 +32,17 @@ public class BossEnemy1 : EnemyAction
         }
     }
 
+    public override IEnumerator Died()
+    {
+        for (int i = 0; i < bullet.Length; i++)
+        {
+            bullet[i].gameObject.SetActive(false);
+        }
+        return base.Died();
+    }
     private Vector3 ConvertAngleToVector(float _deg)//각도로 좌표 구하기
     {
         var rad = _deg * Mathf.Deg2Rad;
-        return new Vector3(Mathf.Cos(rad) * 20f, Mathf.Sin(rad) * 20f, 0);
+        return new Vector3(Mathf.Cos(rad) * 40f, Mathf.Sin(rad) * 40f, 0);
     }
 }

@@ -57,7 +57,7 @@ public class WeaponGoods : Weapon, UI_Upadte
     }
     public void UI_Update()
     {
-        Player player = GameManager.instance.playerInfo;
+        Player player = StageManager.instance.playerInfo;
 
         float[] multiple = new float[multipleDamaeCount];
         float temporaryDamage = 0;
@@ -271,11 +271,11 @@ public class WeaponGoods : Weapon, UI_Upadte
                 break;
             }
         }
-        int wave = GameManager.instance.waveLevel + 1;
+        int wave = StageManager.instance.waveLevel + 1;
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
         weaponPrice = weaponPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
         weaponPrice = System.MathF.Round(weaponPrice);
-        if (weaponPrice > GameManager.instance.money)
+        if (weaponPrice > StageManager.instance.money)
         {
             priceText.text = "<color=red>" + weaponPrice.ToString("F0") + "</color>";
         }
@@ -288,23 +288,23 @@ public class WeaponGoods : Weapon, UI_Upadte
 
     public void BuyWeapon()
     {
-        if (GameManager.instance.playerInfo.isFullWeapon == false && GameManager.instance.money >= weaponPrice)
+        if (StageManager.instance.playerInfo.isFullWeapon == false && StageManager.instance.money >= weaponPrice)
         {
-            GameManager.instance.money -= (int)weaponPrice;
+            StageManager.instance.money -= (int)weaponPrice;
             GameObject weapon = Instantiate(weaponData[(int)index].weaponPrefab);
-            weapon.transform.SetParent(GameManager.instance.playerInfo.weaponMainPos);
-            GameManager.instance.playerInfo.weapons.Add(weapon);
+            weapon.transform.SetParent(StageManager.instance.playerInfo.weaponMainPos);
+            StageManager.instance.playerInfo.weapons.Add(weapon);
             UnLockIng();
             ShopManager.instance.goodsList.Remove(gameObject);
             ItemManager.instance.WeaponListUp();
             //ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0], PauseUI_Manager.instance.scrollContents[0]);
             WeaponManager.instance.WeaponSetSearch();
-            GameManager.instance.playerInfo.StatCalculate();
+            StageManager.instance.playerInfo.StatCalculate();
             gameObject.SetActive(false);
         }
-        else if(GameManager.instance.money >= weaponPrice)
+        else if(StageManager.instance.money >= weaponPrice)
         {
-            List<GameObject> weapons = GameManager.instance.playerInfo.weapons;
+            List<GameObject> weapons = StageManager.instance.playerInfo.weapons;
             for (int i = 0; i < weapons.Count; i++)
             {
                 Weapon_Action weapon = weapons[i].GetComponent<Weapon_Action>();
@@ -312,13 +312,13 @@ public class WeaponGoods : Weapon, UI_Upadte
                 {
                     if(weapon.weaponTier == weaponTier && weapon.weaponTier < 3)
                     {
-                        GameManager.instance.money -= (int)weaponPrice;
+                        StageManager.instance.money -= (int)weaponPrice;
                         weapon.weaponTier++;
                         UnLockIng();
                         ShopManager.instance.goodsList.Remove(gameObject);
                         ItemManager.instance.WeaponListUp();
                         WeaponManager.instance.WeaponSetSearch();
-                        GameManager.instance.playerInfo.StatCalculate();
+                        StageManager.instance.playerInfo.StatCalculate();
                         gameObject.SetActive(false);
                         break;
                     }

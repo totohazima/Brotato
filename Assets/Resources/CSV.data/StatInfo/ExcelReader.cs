@@ -2,9 +2,12 @@ using System.Collections.Generic;
 using System.IO;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-
+using System.Text.RegularExpressions;
+using UnityEngine;
 public class ExcelReader
 {
+    //static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
+    //static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
     static char[] TRIM_CHARS = { '\"' };
 
     //열을 텍스트로
@@ -12,7 +15,7 @@ public class ExcelReader
     {
         List<Dictionary<string, object>> list = new List<Dictionary<string, object>>();
 
-        using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+        using (FileStream fileStream = new FileStream("CSV.data/StatInfo" + filePath, FileMode.Open, FileAccess.Read))
         {
             IWorkbook workbook = new XSSFWorkbook(fileStream);
             ISheet sheet = workbook.GetSheetAt(0); // 첫 번째 시트를 가져옴
@@ -72,7 +75,7 @@ public class ExcelReader
     public static List<Dictionary<int, object>> ReadNumericColumns(string filePath)
     {
         List<Dictionary<int, object>> list = new List<Dictionary<int, object>>();
-
+        
         using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
         {
             IWorkbook workbook = new XSSFWorkbook(fileStream);

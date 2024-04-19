@@ -85,7 +85,7 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
 
     public override void ShowItemInfo()
     {
-        infoObj_Pause = Instantiate(itemInfo, GameManager.instance.itemInfoManager);
+        infoObj_Pause = Instantiate(itemInfo, StageManager.instance.itemInfoManager);
         infoObj_Pause.Init(scriptable, transform.position);
     }
 }

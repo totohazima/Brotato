@@ -22,7 +22,7 @@ public class ItemEffect : MonoBehaviour
 
     public void CountCheck()
     {
-        List<Item> item = GameManager.instance.playerInfo.itemInventory;
+        List<Item> item = StageManager.instance.playerInfo.itemInventory;
 
         for (int i = 0; i < item.Count; i++)
         {

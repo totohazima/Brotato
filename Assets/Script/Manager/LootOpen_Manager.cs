@@ -29,7 +29,7 @@ public class LootOpen_Manager : MonoBehaviour
     }
     private void LootSetting()
     {
-        int count = GameManager.instance.lootChance;
+        int count = StageManager.instance.lootChance;
         int[] indexes = new int[count];
         List<ItemScrip> unBanList = new List<ItemScrip>();
 
@@ -115,9 +115,9 @@ public class LootOpen_Manager : MonoBehaviour
         ItemManager.instance.ItemObtain(itemIndex[i]);
         //ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1]);
         item.SetActive(false);
-        GameManager.instance.lootChance--;
+        StageManager.instance.lootChance--;
 
-        if (GameManager.instance.lootChance > 0)
+        if (StageManager.instance.lootChance > 0)
         {
             LootOpen();
         }
@@ -125,15 +125,15 @@ public class LootOpen_Manager : MonoBehaviour
         {
             stats.anchoredPosition = new Vector3(-100, 0, 0);
             gameObject.SetActive(false);
-            GameManager.instance.ShopOpen();
+            StageManager.instance.ShopOpen();
         }
     }
     public void SellItem()
     {
         item.SetActive(false);
-        GameManager.instance.lootChance--;
+        StageManager.instance.lootChance--;
 
-        if (GameManager.instance.lootChance > 0)
+        if (StageManager.instance.lootChance > 0)
         {
             LootOpen();
         }
@@ -141,7 +141,7 @@ public class LootOpen_Manager : MonoBehaviour
         {
             stats.anchoredPosition = new Vector3(-100, 0, 0);
             gameObject.SetActive(false);
-            GameManager.instance.ShopOpen();
+            StageManager.instance.ShopOpen();
         }
     }
     public void AdMob()

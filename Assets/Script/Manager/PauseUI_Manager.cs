@@ -67,7 +67,7 @@ public class PauseUI_Manager : MonoBehaviour, UI_Upadte
 
     void UIVisualize()
     {
-        title.text = "위험 " + GameManager.instance.difficult;
+        title.text = "위험 " + StageManager.instance.difficult;
         tabTitles[0].text = "무기(" + scrollContents[0].childCount + "/6)";
         tabTitles[1].text = "아이템(" + scrollContents[1].childCount + ")";
     }
@@ -87,14 +87,14 @@ public class PauseUI_Manager : MonoBehaviour, UI_Upadte
     public void GamePause()
     {
         pauseUI.SetActive(true);
-        GameManager.instance.isPause = true;
+        StageManager.instance.isPause = true;
         statUI.anchoredPosition = new Vector3(100, 0, 0);
     }
 
     public void GameProgress()
     {
         pauseUI.SetActive(false);
-        GameManager.instance.isPause = false;
+        StageManager.instance.isPause = false;
         statUI.anchoredPosition = new Vector3(-100, 0, 0);
     }
 

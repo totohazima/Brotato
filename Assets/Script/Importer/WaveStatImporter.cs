@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class WaveStatImporter : MonoBehaviour
 {
     public static WaveStatImporter instance;
@@ -13,9 +13,18 @@ public class WaveStatImporter : MonoBehaviour
     public Wave_Scriptable[] wave_Scriptables;
     void Awake()
     {
+        
         instance = this;
-        string filePath = "Assets/Resources/CSV.data/StatInfo/WaveStat.xlsx";
-        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
+        string filePath;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath + "WaveStat.xlsx");
+#elif UNITY_IOS && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath+ "WaveStat.xlsx");
+#else
+        filePath = "Assets/Resources/CSV.data/StatInfo/WaveStat.xlsx";
+#endif
+
+        List<Dictionary<int, object>> data = CSVReaderStat.ReadNumericColumns("WaveStat");
         enemyCount = new int[data.Count];
         enemySpawnCount = new int[data.Count];
         waveTime = new float[data.Count];

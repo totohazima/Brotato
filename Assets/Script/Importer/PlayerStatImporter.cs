@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class PlayerStatImporter : MonoBehaviour
 {
     public static PlayerStatImporter instance;
@@ -21,13 +21,20 @@ public class PlayerStatImporter : MonoBehaviour
     [HideInInspector] public float[] armor;
     [HideInInspector] public float[] evasion;
     [HideInInspector] public float[] accuracy;
-    [HideInInspector] public float[] speed;
+    public float[] speed;
 
     void Awake()
     {
         instance = this;
-        string filePath = "Assets/Resources/CSV.data/StatInfo/PlayerStat.xlsx";
-        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
+        string filePath;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "PlayerStat.xlsx");
+#elif UNITY_IOS && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "PlayerStat.xlsx");
+#else
+        filePath = "Assets/Resources/CSV.data/StatInfo/PlayerStat.xlsx";
+#endif
+        List<Dictionary<int, object>> data = CSVReaderStat.ReadNumericColumns("PlayerStat");
 
         characterNum = new int[data.Count];
         characterName = new string[data.Count];

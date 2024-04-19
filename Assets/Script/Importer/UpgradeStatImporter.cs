@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class UpgradeStatImporter : MonoBehaviour
 {
     public static UpgradeStatImporter instance;
@@ -26,8 +26,15 @@ public class UpgradeStatImporter : MonoBehaviour
     void Awake()
     {
         instance = this;
-        string filePath = "Assets/Resources/CSV.data/StatInfo/UpgradeStat.xlsx";
-        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
+        string filePath;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "UpgradeStat.xlsx");
+#elif UNITY_IOS && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "UpgradeStat.xlsx");
+#else
+        filePath = "Assets/Resources/CSV.data/StatInfo/UpgradeStat.xlsx";
+#endif
+        List<Dictionary<int, object>> data = CSVReaderStat.ReadNumericColumns("UpgradeStat");
         upgradeNum = new int[data.Count];
         upgradeName = new string[data.Count];
         upgradeEffect = new string[data.Count];

@@ -93,6 +93,8 @@ public class Player : MonoBehaviour
         speed_Origin = import.speed[index];
 
         maxHealth = import.maxHealth[index];
+
+        StatCalculate();
     }
 
     public void StatCalculate()

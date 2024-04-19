@@ -18,20 +18,20 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     public Transform[] verticalTabsScroll;
     public Transform goodsContent;
     public GameObject[] goods;
-    private int rerollCount; //리롤을 누른 횟수 (매 상점마다 0으로 초기화)
+    [SerializeField] private int rerollCount; //리롤을 누른 횟수 (매 상점마다 0으로 초기화)
     private float rerollPrice; //리롤 가격
     private float rerollPrice_Add; //리롤을 누를때마다 증가할 수치
     public List<GameObject> lockList; //잠긴 아이템(가격은 고정된채로 가장 앞 열로 이동)
     public List<GameObject> goodsList;
 
     List<GameObject>[] list;
-    GameManager game;
+    StageManager game;
     ItemManager item;
     public WeaponScrip[] weapon;
     void Awake()
     {
         instance = this;
-        game = GameManager.instance;
+        game = StageManager.instance;
         item = ItemManager.instance;
 
         list = new List<GameObject>[goods.Length];
@@ -134,6 +134,31 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
                     }
                 }
             }
+            //잠긴 아이템 중 
+            int[] lockNum = new int[lockList.Count];
+            for (int j = 0; j < lockList.Count; j++)
+            {
+                for (int i = 0; i < ItemManager.instance.items.Length; i++)
+                {
+                    if (lockList[j].GetComponent<ItemGoods>() != null)
+                    {
+                        if (lockList[j].GetComponent<ItemGoods>().scriptable == ItemManager.instance.items[i])
+                        {
+                            lockNum[j] = i;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < lockNum.Length; i++)
+            {
+                for (int j = 0; j < indexes.Length; j++)
+                {
+                    if(lockNum[i] == indexes[j])
+                    {
+                        isNot = true;
+                    }
+                }
+            }
 
             if (isNot == false)
             {
@@ -176,61 +201,61 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
         
     }
-
-    public void ShopReRoll()
+    public void RerollButton()
     {
         float price = rerollPrice + (rerollPrice_Add * rerollCount);
         if (price <= game.money)
         {
-            List<GameObject> locks = new List<GameObject>();
-            List<GameObject> unLocks = new List<GameObject>();
-
-            for (int i = 0; i < lockList.Count; i++) //잠금 아이템 위치 조정(맨 왼쪽으로)
-            {
-                lockList[i].transform.SetSiblingIndex(i);
-                locks.Add(lockList[i]);
-            }
-            for (int i = 0; i < goodsList.Count; i++)
-            {
-                bool isLock = false;
-                for (int j = 0; j < lockList.Count; j++)
-                {
-                    if (goodsList[i].gameObject == lockList[j].gameObject)
-                    {
-                        isLock = true;
-                    }
-                }
-                if (isLock == false)
-                {
-                    unLocks.Add(goodsList[i]);
-                }
-            }
-            goodsList.Clear();
-
-            //잠긴 아이템과 아닌 아이템 분류 후 순서대로 넣어주기
-            for (int i = 0; i < locks.Count; i++)
-            {
-                goodsList.Add(locks[i]);
-            }
-            for (int i = 0; i < unLocks.Count; i++)
-            {
-                goodsList.Add(unLocks[i]);
-            }
-
-            for (int i = locks.Count; i < goodsList.Count; i++)//잠긴 아이템이 아니면 오브젝트 꺼주기
-            {
-                goodsList[i].SetActive(false);
-            }
-            goodsList.Clear();
-            ShopGoodsSetting();
-            
             game.money -= (int)price;
             rerollCount++;
+            ShopReRoll();
         }
-        else
+
+    }
+    public void ShopReRoll()
+    {
+
+        List<GameObject> locks = new List<GameObject>();
+        List<GameObject> unLocks = new List<GameObject>();
+
+        for (int i = 0; i < lockList.Count; i++) //잠금 아이템 위치 조정(맨 왼쪽으로)
         {
-            return;
+            lockList[i].transform.SetSiblingIndex(i);
+            locks.Add(lockList[i]);
         }
+        for (int i = 0; i < goodsList.Count; i++)
+        {
+            bool isLock = false;
+            for (int j = 0; j < lockList.Count; j++)
+            {
+                if (goodsList[i].gameObject == lockList[j].gameObject)
+                {
+                    isLock = true;
+                }
+            }
+            if (isLock == false)
+            {
+                unLocks.Add(goodsList[i]);
+            }
+        }
+        goodsList.Clear();
+
+        //잠긴 아이템과 아닌 아이템 분류 후 순서대로 넣어주기
+        for (int i = 0; i < locks.Count; i++)
+        {
+            goodsList.Add(locks[i]);
+        }
+        for (int i = 0; i < unLocks.Count; i++)
+        {
+            goodsList.Add(unLocks[i]);
+        }
+
+        for (int i = locks.Count; i < goodsList.Count; i++)//잠긴 아이템이 아니면 오브젝트 꺼주기
+        {
+            goodsList[i].SetActive(false);
+        }
+        goodsList.Clear();
+        ShopGoodsSetting();
     }
 
 

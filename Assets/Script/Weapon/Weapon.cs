@@ -165,7 +165,7 @@ public class Weapon : MonoBehaviour
 
     public void AfterStatSetting()
     {
-        Player player = GameManager.instance.playerInfo;
+        Player player = StageManager.instance.playerInfo;
 
         afterDamage = damage;
         for (int i = 0; i < multipleDamaeCount; i++)
@@ -221,7 +221,7 @@ public class Weapon : MonoBehaviour
                 break;
             }
         }
-        int wave = GameManager.instance.waveLevel + 1;
+        int wave = StageManager.instance.waveLevel + 1;
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
         weaponPrice = weaponPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
         weaponPrice = MathF.Round(weaponPrice);

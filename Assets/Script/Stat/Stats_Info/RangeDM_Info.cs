@@ -9,13 +9,13 @@ public class RangeDM_Info : Stat_Info
         icon.sprite = scriptable.statImage;
         title.text = scriptable.statName;
 
-        if (GameManager.instance.playerInfo.rangeDamage >= 0)
+        if (StageManager.instance.playerInfo.rangeDamage >= 0)
         {
-            infoText.text = scriptable.statPlusText[0] + " " + GameManager.instance.playerInfo.rangeDamage.ToString("F0") + scriptable.statPlusText[1];
+            infoText.text = scriptable.statPlusText[0] + " " + StageManager.instance.playerInfo.rangeDamage.ToString("F0") + scriptable.statPlusText[1];
         }
         else
         {
-            infoText.text = scriptable.statMinusText[0] + " " + GameManager.instance.playerInfo.rangeDamage.ToString("F0") + scriptable.statMinusText[1];
+            infoText.text = scriptable.statMinusText[0] + " " + StageManager.instance.playerInfo.rangeDamage.ToString("F0") + scriptable.statMinusText[1];
         }
     }
 }

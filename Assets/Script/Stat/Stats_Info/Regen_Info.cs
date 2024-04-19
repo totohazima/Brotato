@@ -9,7 +9,7 @@ public class Regen_Info : Stat_Info
         icon.sprite = scriptable.statImage;
         title.text = scriptable.statName;
 
-        float regen = GameManager.instance.playerInfo.regeneration;
+        float regen = StageManager.instance.playerInfo.regeneration;
         float regenPer = 0.09f * regen;
         float regenSecond = 0;
 

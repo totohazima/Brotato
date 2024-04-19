@@ -7,14 +7,17 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 {
     public static JoyStick instance;
 
+    private Vector3 DeathArea;
+    [SerializeField] private RectTransform CenterReference;
     public Transform moveTarget;
     public GameObject joyStick;
     public GameObject stick;
     public bool isMove;
 
+    float radio = 120;
     Transform joyTrans;
     Transform stickTrans;
-    Vector3 startPos, endPos;
+    [SerializeField] RectTransform stickRect;
     void Awake()
     {
         instance = this;
@@ -35,12 +38,13 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     }
     public void CustomUpdate()
     {
-        if(GameManager.instance.isEnd == true )
+        if(StageManager.instance.isEnd == true )
         {
             stickTrans.position = joyTrans.position;
             joyStick.SetActive(false);
             isMove = false;
         }
+        DeathArea = CenterReference.position;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -54,19 +58,10 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     {
         Vector3 dragPosition = new Vector3(eventData.position.x, eventData.position.y, 0);
         stickTrans.position = dragPosition;
-
-        startPos = GameManager.instance.mainPlayer.transform.position;
-        endPos = Camera.main.ScreenToWorldPoint(stickTrans.position);
-
-        float a = GetAngle(startPos, endPos);
-        Vector3 moveTargetPos = ConvertAngleToVector(a);
-        Transform playerTrans = GameManager.instance.mainPlayer.transform;
-        moveTarget.position = new Vector3(moveTargetPos.x + playerTrans.position.x, moveTargetPos.y + playerTrans.position.y, 0f);
-
         ///<summary>
         ///특정 오브젝트가 좌표에서 원형으로 벗어나지 못하게 하는 코드
         ///</summary>
-        float radius = 100f;
+        float radius = radio;
         Vector3 centerPosition = joyTrans.position;
         float distance = Vector3.Distance(stickTrans.position, centerPosition);
         if (distance > radius)
@@ -84,16 +79,24 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         joyStick.SetActive(false);
         isMove = false;
     }
-
-    float GetAngle(Vector2 start, Vector2 end)//각도구하기
+    public float Horizontal
     {
-        Vector2 vectorPos = end - start;
-        return Mathf.Atan2(vectorPos.y, vectorPos.x) * Mathf.Rad2Deg;
+        get
+        {
+            return (stickRect.position.x - DeathArea.x) / radio;
+        }
     }
 
-    Vector3 ConvertAngleToVector(float _deg)//각도로 좌표 구하기
+    /// <summary>
+    /// Value Vertical of the Joystick
+    /// Get this for get the vertical value of joystick
+    /// </summary>
+    public float Vertical
     {
-        var rad = _deg * Mathf.Deg2Rad;
-        return new Vector3(Mathf.Cos(rad) * 100f, Mathf.Sin(rad) * 100f, 2);
+        get
+        {
+            return (stickRect.position.y - DeathArea.y) / radio;
+        }
     }
+
 }

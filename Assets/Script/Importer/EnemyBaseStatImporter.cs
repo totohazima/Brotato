@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class EnemyBaseStatImporter : MonoBehaviour
 {
     public static EnemyBaseStatImporter instance;
@@ -25,8 +25,18 @@ public class EnemyBaseStatImporter : MonoBehaviour
     void Awake()
     {
         instance = this;
-        string filePath = "Assets/Resources/CSV.data/StatInfo/EnemyBaseStat.xlsx";
-        List<Dictionary<int, object>> data = ExcelReader.ReadNumericColumns(filePath);
+
+        string filePath;
+        //filePath = "Assets/Resources/CSV.data/StatInfo/EnemyBaseStat.xlsx";
+#if UNITY_ANDROID && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "EnemyBaseStat.xlsx");
+#elif UNITY_IOS && !UNITY_EDITOR
+            filePath = Path.Combine(Application.persistentDataPath, "EnemyBaseStat.xlsx");
+#else
+        filePath = "Assets/Resources/CSV.data/StatInfo/EnemyBaseStat.xlsx";
+#endif
+
+        List<Dictionary<int, object>> data = CSVReaderStat.ReadNumericColumns("EnemyBaseStat");
 
         enemyName = new string[data.Count];
         health = new float[data.Count];

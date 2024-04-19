@@ -42,10 +42,10 @@ public class WeaponManager : MonoBehaviour, ICustomUpdateMono
         precision_Set = 0;
         native_Set = 0;
 
-        weapon = new Weapon_Action[GameManager.instance.playerInfo.weapons.Count];
+        weapon = new Weapon_Action[StageManager.instance.playerInfo.weapons.Count];
         for (int i = 0; i < weapon.Length; i++)
         {
-            weapon[i] = GameManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>();
+            weapon[i] = StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>();
         }
 
         for (int i = 0; i < weapon.Length; i++)

@@ -19,7 +19,7 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
         moveSpeed = 100f;
         if (type == ItemType.METERIAL)
         {
-            GameManager game = GameManager.instance;
+            StageManager game = StageManager.instance;
 
             float instantMagnet = game.playerInfo.instantMagnet / 100;
             float notInstant = 1 - instantMagnet;
@@ -40,9 +40,9 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-        if(GameManager.instance.isEnd == true)
+        if(StageManager.instance.isEnd == true)
         {
-            target = GameManager.instance.mainPlayer.transform;
+            target = StageManager.instance.mainPlayer.transform;
         }
 
         if (target != null)
@@ -60,7 +60,7 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
         {
             if(type == ItemType.CONSUMABLE || type == ItemType.LOOT) //소모품이나 상자는 체력이 최대일 때 끌려오지 않음
             {
-                if(GameManager.instance.curHp < GameManager.instance.maxHp)
+                if(StageManager.instance.curHp < StageManager.instance.maxHp)
                 {
                     target = other.transform;
                 }
