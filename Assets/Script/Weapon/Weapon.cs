@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Only1Games.GDBA;
 public class Weapon : MonoBehaviour
 {
     public enum Weapons
@@ -54,7 +55,7 @@ public class Weapon : MonoBehaviour
     public float penetrateDamage;
     public float bloodSucking;
 
-    public int attackType; //0 = 근거리, 1 = 원거리
+    public string attackType; 
     public int multipleDamaeCount; //데미지 계수 갯수
     public DamageType[] multipleDamageType; //데미지 계수들
 
@@ -74,92 +75,92 @@ public class Weapon : MonoBehaviour
     public string typeText;
     public void StatSetting(int index, int tier)
     {
-        WeaponStatImporter import = WeaponStatImporter.instance;
-
-        multipleDamaeCount = import.multipleDamageCount[index];
+        WeaponStatInfoTable.Data import = GameManager.instance.gameDataBase.weaponStatInfoTable.table[index];
+        
+        multipleDamaeCount = import.riseDamageCount;
         multipleDamage = new float[multipleDamaeCount];
         multipleDamageType = new DamageType[multipleDamaeCount];
 
-        weaponNum = import.weaponNum[index];
-        weaponCode = import.name[index];
-        weaponType = import.weaponType[index];
+        weaponNum = import.weaponNum;
+        weaponCode = import.weaponCode;
+        weaponType = import.weaponType;
         int i = 0;
         switch (tier)
         {
             case 0:
-                damage = import.damage1[index];
-                bulletCount = import.bulletCount1[index];
+                damage = import.weaponBaseDamage[0];
+                bulletCount = import.weaponBaseBulletCount[0];
                 while (i < multipleDamaeCount)
                 {
-                    multipleDamage[i] = import.multipleDamage1[index + i];
-                    multipleDamageType[i] = (DamageType)System.Enum.Parse(typeof(DamageType),import.multipleDamageType[index + i]);
+                    multipleDamage[i] = import.riseDamage1[i];
+                    multipleDamageType[i] = (DamageType)Enum.Parse(typeof(DamageType), import.riseDamageType[i]);
                     i++;
                 }
-                criticalChance = import.criticalChance1[index];
-                criticalDamage = import.criticalDamage1[index];
-                coolTime = import.coolTIme1[index];
-                knockBack = import.knockBack1[index];
-                range = import.range1[index];
+                criticalChance = import.baseCriticalChance[0];
+                criticalDamage = import.baseCriticalDamage[0];
+                coolTime = import.baseCoolTime[0];
+                knockBack = import.baseKnockback[0];
+                range = import.baseRange[0];
                 break;
             case 1:
-                damage = import.damage2[index];
-                bulletCount = import.bulletCount2[index];
+                damage = import.weaponBaseDamage[1];
+                bulletCount = import.weaponBaseBulletCount[1];
                 while (i < multipleDamaeCount)
                 {
-                    multipleDamage[i] = import.multipleDamage2[index + i];
-                    multipleDamageType[i] = (DamageType)System.Enum.Parse(typeof(DamageType), import.multipleDamageType[index + i]);
+                    multipleDamage[i] = import.riseDamage2[i];
+                    multipleDamageType[i] = (DamageType)Enum.Parse(typeof(DamageType), import.riseDamageType[i]);
                     i++;
                 }
-                criticalChance = import.criticalChance2[index];
-                criticalDamage = import.criticalDamage2[index];
-                coolTime = import.coolTIme2[index];
-                knockBack = import.knockBack2[index];
-                range = import.range2[index];
+                criticalChance = import.baseCriticalChance[1];
+                criticalDamage = import.baseCriticalDamage[1];
+                coolTime = import.baseCoolTime[1];
+                knockBack = import.baseKnockback[1];
+                range = import.baseRange[1];
                 break;
             case 2:
-                damage = import.damage3[index];
-                bulletCount = import.bulletCount3[index];
+                damage = import.weaponBaseDamage[2];
+                bulletCount = import.weaponBaseBulletCount[2];
                 while (i < multipleDamaeCount)
                 {
-                    multipleDamage[i] = import.multipleDamage3[index + i];
-                    multipleDamageType[i] = (DamageType)System.Enum.Parse(typeof(DamageType), import.multipleDamageType[index + i]);
+                    multipleDamage[i] = import.riseDamage3[i];
+                    multipleDamageType[i] = (DamageType)Enum.Parse(typeof(DamageType), import.riseDamageType[i]);
                     i++;
                 }
-                criticalChance = import.criticalChance3[index];
-                criticalDamage = import.criticalDamage3[index];
-                coolTime = import.coolTIme3[index];
-                knockBack = import.knockBack3[index];
-                range = import.range3[index];
+                criticalChance = import.baseCriticalChance[2];
+                criticalDamage = import.baseCriticalDamage[2];
+                coolTime = import.baseCoolTime[2];
+                knockBack = import.baseKnockback[2];
+                range = import.baseRange[2];
                 break;
             case 3:
-                damage = import.damage4[index];
-                bulletCount = import.bulletCount4[index];
+                damage = import.weaponBaseDamage[3];
+                bulletCount = import.weaponBaseBulletCount[3];
                 while (i < multipleDamaeCount)
                 {
-                    multipleDamage[i] = import.multipleDamage4[index + i];
-                    multipleDamageType[i] = (DamageType)System.Enum.Parse(typeof(DamageType), import.multipleDamageType[index + i]);
+                    multipleDamage[i] = import.riseDamage4[i];
+                    multipleDamageType[i] = (DamageType)Enum.Parse(typeof(DamageType), import.riseDamageType[i]);
                     i++;
                 }
-                criticalChance = import.criticalChance4[index];
-                criticalDamage = import.criticalDamage4[index];
-                coolTime = import.coolTIme4[index];
-                knockBack = import.knockBack4[index];
-                range = import.range4[index];
+                criticalChance = import.baseCriticalChance[3];
+                criticalDamage = import.baseCriticalDamage[3];
+                coolTime = import.baseCoolTime[3];
+                knockBack = import.baseKnockback[3];
+                range = import.baseRange[3];
                 break;
         }
-        penetrate = import.penetrate[index];
-        penetrateDamage = import.penetrateDamage[index];
-        attackType = import.type[index];
-        
-        if(attackType == (int)WeaponType.MELEE)
+        penetrate = import.penetration;
+        penetrateDamage = import.penetrationDamage;
+        attackType = import.attackType;
+
+        if (attackType == WeaponType.MELEE.ToString())
         {
             typeText = "근거리";
         }
-        else if (attackType == (int)WeaponType.RANGE)
+        else if (attackType == WeaponType.RANGE.ToString())
         {
             typeText = "원거리";
         }
-        
+
 
     }
 
@@ -198,7 +199,7 @@ public class Weapon : MonoBehaviour
             afterCoolTime = 0.05f;
         }
         float preRange;
-        if(attackType == (int)WeaponType.MELEE) //근접은 스탯 사거리 효과 절반만 받음
+        if(attackType == WeaponType.MELEE.ToString()) //근접은 스탯 사거리 효과 절반만 받음
         {
             preRange = range + player.range / 2;
         }
@@ -212,15 +213,17 @@ public class Weapon : MonoBehaviour
         afterKnockBack = knockBack + player.KnockBack;
 
         //가격 설정
-        ShopBasePriceImporter priceImporter = ShopBasePriceImporter.instance;
-        for (int z = 0; z < priceImporter.weaponCode.Length; z++)
-        {
-            if (weaponCode == priceImporter.weaponCode[z])
-            {
-                weaponBasePrice = priceImporter.weaponBasePrice[z];
-                break;
-            }
-        }
+        WeaponBasePriceInfoTable.Data priceImporter = GameManager.instance.gameDataBase.weaponBasePriceInfoTable.table[weaponNum];
+
+        //for (int z = 0; z < priceImporter.weaponCode.Length; z++)
+        //{
+        //    if (weaponCode == priceImporter.weaponCode[z])
+        //    {
+        //        weaponBasePrice = priceImporter.weaponBasePrice[z];
+        //        break;
+        //    }
+        //}
+        weaponBasePrice = priceImporter.weaponBasePrice;
         int wave = StageManager.instance.waveLevel + 1;
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
         weaponPrice = weaponPrice * ((100 + ItemEffect.instance.Coupon()) / 100);

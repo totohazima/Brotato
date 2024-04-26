@@ -212,53 +212,53 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
 
     public IEnumerator SpawnTurret()
     {
-        int index = 0;
-        switch(weaponTier)
-        {
-            case (0):
-                index = (int)scrip.tier1_InfoStat[2];
-                break;
-            case (1):
-                index = (int)scrip.tier2_InfoStat[2];
-                break;
-            case (2):
-                index = (int)scrip.tier3_InfoStat[2];
-                break;
-            case (3):
-                index = (int)scrip.tier4_InfoStat[2];
-                break;
-        }
-        GameObject[] mark = new GameObject[index];
-        GameObject[] turret = new GameObject[mark.Length];
+        //int index = 0;
+        //switch(weaponTier)
+        //{
+        //    case (0):
+        //        index = (int)scrip.tier1_InfoStat[2];
+        //        break;
+        //    case (1):
+        //        index = (int)scrip.tier2_InfoStat[2];
+        //        break;
+        //    case (2):
+        //        index = (int)scrip.tier3_InfoStat[2];
+        //        break;
+        //    case (3):
+        //        index = (int)scrip.tier4_InfoStat[2];
+        //        break;
+        //}
+        //GameObject[] mark = new GameObject[index];
+        //GameObject[] turret = new GameObject[mark.Length];
 
-        for (int i = 0; i < mark.Length; i++)
-        {
-            mark[i] = PoolManager.instance.Get(7);
-            Vector3 pos = SpawnManager.instance.FriendlySpawnPosition();
-            mark[i].transform.position = pos;
-        }
+        //for (int i = 0; i < mark.Length; i++)
+        //{
+        //    mark[i] = PoolManager.instance.Get(7);
+        //    Vector3 pos = SpawnManager.instance.FriendlySpawnPosition();
+        //    mark[i].transform.position = pos;
+        //}
         yield return new WaitForSeconds(0.6f);
-        for (int i = 0; i < mark.Length; i++)
-        {
-            turret[i] = PoolManager.instance.Get(8);
-            turret[i].transform.position = mark[i].transform.position;
-            switch (weaponTier)
-            {
-                case (0):
-                    turret[i].GetComponent<Turret>().Init(scrip.tier1_InfoStat[0], scrip.tier1_InfoStat[1]);
-                    break;
-                case (1):
-                    turret[i].GetComponent<Turret>().Init(scrip.tier2_InfoStat[0], scrip.tier2_InfoStat[1]);
-                    break;
-                case (2):
-                    turret[i].GetComponent<Turret>().Init(scrip.tier3_InfoStat[0], scrip.tier3_InfoStat[1]);
-                    break;
-                case (3):
-                    turret[i].GetComponent<Turret>().Init(scrip.tier4_InfoStat[0], scrip.tier4_InfoStat[1]);
-                    break;
-            }
-            SpawnManager.instance.turrets.Add(turret[i]);
-            mark[i].SetActive(false);
-        }
+        //for (int i = 0; i < mark.Length; i++)
+        //{
+        //    turret[i] = PoolManager.instance.Get(8);
+        //    turret[i].transform.position = mark[i].transform.position;
+        //    switch (weaponTier)
+        //    {
+        //        case (0):
+        //            turret[i].GetComponent<Turret>().Init(scrip.tier1_InfoStat[0], scrip.tier1_InfoStat[1]);
+        //            break;
+        //        case (1):
+        //            turret[i].GetComponent<Turret>().Init(scrip.tier2_InfoStat[0], scrip.tier2_InfoStat[1]);
+        //            break;
+        //        case (2):
+        //            turret[i].GetComponent<Turret>().Init(scrip.tier3_InfoStat[0], scrip.tier3_InfoStat[1]);
+        //            break;
+        //        case (3):
+        //            turret[i].GetComponent<Turret>().Init(scrip.tier4_InfoStat[0], scrip.tier4_InfoStat[1]);
+        //            break;
+        //    }
+        //    SpawnManager.instance.turrets.Add(turret[i]);
+        //    mark[i].SetActive(false);
+        //}
     }
 }

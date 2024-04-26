@@ -72,6 +72,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public Transform[] wallPos; //0 = 위, 1 = 아래, 2 왼쪽, 3 = 오른쪽
     public JoyStick joystick;
     public float xMin, xMax, yMin, yMax;
+    public WaveStatInfoTable waveStat;
     void Awake()
     {
         instance = this;
@@ -84,13 +85,14 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         optionUI = MainSceneManager.instance.option;
         GameObject startWeapon = Instantiate(MainSceneManager.instance.selectWeapon.GetComponent<ForSettingWeapon>().weaponPrefabs);
 
+        waveStat = GameManager.instance.gameDataBase.waveStatInfoTable;
         difficult = MainSceneManager.instance.selectedDifficult.GetComponent<Difficult>().difficultLevel;
-        isSpecialEnemySpawn = DifficultImporter.instance.isSpecialEnemy[difficult];
-        isEliteSpawn = DifficultImporter.instance.isEliteSpawn[difficult];
-        eliteEnemyWave = DifficultImporter.instance.isEliteWaveCount[difficult];
-        enemyRiseDamage = DifficultImporter.instance.enemyRiseDamage[difficult];
-        enemyRiseHealth = DifficultImporter.instance.enemyRiseHealth[difficult];
-        doubleBoss = DifficultImporter.instance.doubleBoss[difficult];
+        //isSpecialEnemySpawn = DifficultImporter.instance.isSpecialEnemy[difficult];
+        //isEliteSpawn = DifficultImporter.instance.isEliteSpawn[difficult];
+        //eliteEnemyWave = DifficultImporter.instance.isEliteWaveCount[difficult];
+        //enemyRiseDamage = DifficultImporter.instance.enemyRiseDamage[difficult];
+        //enemyRiseHealth = DifficultImporter.instance.enemyRiseHealth[difficult];
+        //doubleBoss = DifficultImporter.instance.doubleBoss[difficult];
 
         startWeapon.transform.SetParent(playerInfo.weaponMainPos);
         playerInfo.weapons.Add(startWeapon);
@@ -100,10 +102,10 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         yMin = wallPos[1].position.y;
         yMax = wallPos[0].position.y;
 ;
-        waveTime = new float[WaveStatImporter.instance.waveTime.Length];
-        for(int i = 0; i < WaveStatImporter.instance.waveTime.Length; i++)
+        waveTime = new float[waveStat.table.Length];
+        for (int i = 0; i < waveTime.Length; i++)
         {
-            waveTime[i] = WaveStatImporter.instance.waveTime[i];
+            waveTime[i] = waveStat.table[i].waveTime;
         }
         timer = waveTime[0];
 
@@ -250,7 +252,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         {
             spawn.turrets[i].SetActive(false);
         }
-        for(int i = 0; i < spawn.trees.Count; i++) //나무
+        for (int i = 0; i < spawn.trees.Count; i++) //나무
         {
             spawn.trees[i].SetActive(false);
         }
@@ -366,9 +368,9 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
 
         SpawnManager spawn = SpawnManager.instance;
         spawn.WaveSelect(waveLevel);
-        spawn.enemyLimit *= 1 + (ItemEffect.instance.GentleAlien() / 100);
-        spawn.spawnTime = waveTime[waveLevel] / spawn.enemyLimit;
-        if(spawn.scrip[waveLevel].isBossSpawn == true)
+        //spawn.enemyLimit *= 1 + (ItemEffect.instance.GentleAlien() / 100);
+        //spawn.spawnTime = waveTime[waveLevel] / spawn.enemyLimit;
+        if (spawn.scrip[waveLevel].isBossSpawn == true)
         {
             if (doubleBoss == true)
             {

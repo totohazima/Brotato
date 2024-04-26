@@ -8,17 +8,18 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     public CapsuleCollider coll;
     public SpriteRenderer sprite;
     public Transform textPopUpPos;
+    public WhiteFlash whiteFlash;
     [HideInInspector] public Transform target;
     public float moveSpeed;
-    [HideInInspector] public StageManager game;
+    [HideInInspector] public StageManager stage;
     [HideInInspector] public float hitTimer;
     [HideInInspector] public Rigidbody rigid;
 
     void Awake()
     {
-        game = StageManager.instance;
+        stage = StageManager.instance;
         rigid = GetComponent<Rigidbody>();
-        target = game.mainPlayer.transform;
+        target = stage.mainPlayer.transform;
     }
     public virtual void OnEnable()
     {
@@ -76,8 +77,8 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         rigid.velocity = Vector3.zero;
 
         ///이동 제한
-        float x = Mathf.Clamp(transform.position.x, game.xMin, game.xMax);
-        float y = Mathf.Clamp(transform.position.y, game.yMin, game.yMax);
+        float x = Mathf.Clamp(transform.position.x, stage.xMin, stage.xMax);
+        float y = Mathf.Clamp(transform.position.y, stage.yMin, stage.yMax);
         transform.position = new Vector3(x, y, transform.position.z);
     }
 
@@ -115,7 +116,11 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         text.position = textPopUpPos.position;
 
         curHealth -= finalDamage;
-        StartCoroutine(KnockBack(game.playerInfo.transform.position, knockBack * 10));
+
+        if (whiteFlash != null)
+            whiteFlash.PlayFlash();
+
+        StartCoroutine(KnockBack(stage.playerInfo.transform.position, knockBack * 10));
     }
 
   
@@ -123,10 +128,15 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     {
         if(other.CompareTag("Player"))
         {
-            if (game.playerInfo.isHit == false)
+            if (stage.playerInfo.isHit == false)
             {
-                game.playerInfo.isHit = true;
-                game.HitCalculate(damage);
+                stage.playerInfo.isHit = true;
+                if (stage.playerInfo.whiteFlash != null && name != EnemyName.TREE)
+                {
+                    stage.playerInfo.whiteFlash.PlayFlash();
+                    stage.HitCalculate(damage);
+                }
+                
             }
         }
     }

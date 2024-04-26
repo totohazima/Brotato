@@ -22,7 +22,6 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
     public TextMeshProUGUI[] infoText; //텍스트 오브젝트
     public Image lockUI;
     public bool isLock;
-    [HideInInspector]
     public int itemNum; //itemManager에서 아이템을 찾기 위함
     public Outline line;
     public ItemScrip scriptable;
@@ -55,15 +54,16 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
 
     public void UI_Update()
     {
-        ShopBasePriceImporter priceImporter = ShopBasePriceImporter.instance;
-        for (int z = 0; z < priceImporter.itemCode.Length; z++)
-        {
-            if (itemCode.ToString() == priceImporter.itemCode[z])
-            {
-                itemBasePrice = priceImporter.itemBasePrice[z];
-                break;
-            }
-        }
+        ItemBasePriceInfoTable.Data priceImport = GameManager.instance.gameDataBase.itemBasePriceInfoTable.table[itemNum];
+        itemBasePrice = priceImport.itemBasePrice;
+        //for (int z = 0; z < priceImporter.itemCode.Length; z++)
+        //{
+        //    if (itemCode.ToString() == priceImporter.itemCode[z])
+        //    {
+        //        itemBasePrice = priceImporter.itemBasePrice[z];
+        //        break;
+        //    }
+        //}
         int wave = StageManager.instance.waveLevel + 1;
         itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
         itemPrice = itemPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
@@ -79,28 +79,29 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
     }
     public void TextSetting(string code)
     {
-        ItemStatImporter import = ItemStatImporter.instance;
-        int index1 = 0;
-        for (int i = 0; i < import.itemCode.Length; i++)
-        {
-            if (code == import.itemCode[i])
-            {
-                index1 = i;
-            }
-        }
+        ItemStatInfoTable.Data import = GameManager.instance.gameDataBase.itemStatInfoTable.table[itemNum];
+
+        //int index1 = 0;
+        //for (int i = 0; i < import.itemCode.Length; i++)
+        //{
+        //    if (code == import.itemCode[i])
+        //    {
+        //        index1 = i;
+        //    }
+        //}
         itemName.text = scriptable.itemName;
-        maxCount = import.maxCount[index1];
+        maxCount = import.itemMaxCount;
         itemPriceText.text = itemPrice.ToString("F0");
-        
-        if(maxCount == -100)
+
+        if (maxCount == -100)
         {
             itemCountType.text = "아이템";
         }
-        else if(maxCount > 1)
+        else if (maxCount > 1)
         {
             itemCountType.text = "한계(" + maxCount + ")";
         }
-        else if(maxCount == 1)
+        else if (maxCount == 1)
         {
             itemCountType.text = "독특한";
         }

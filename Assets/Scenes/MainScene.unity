@@ -1176,7 +1176,7 @@ MonoBehaviour:
   penetrate: 0
   penetrateDamage: 0
   bloodSucking: 0
-  attackType: 0
+  attackType: 
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -2019,6 +2019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e806324c977054c8248f4b41411d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sheets: []
 --- !u!1 &517593447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,7 +2154,7 @@ MonoBehaviour:
   penetrate: 0
   penetrateDamage: 0
   bloodSucking: 0
-  attackType: 0
+  attackType: 
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -3198,7 +3199,7 @@ MonoBehaviour:
   penetrate: 0
   penetrateDamage: 0
   bloodSucking: 0
-  attackType: 0
+  attackType: 
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -4489,7 +4490,7 @@ MonoBehaviour:
   penetrate: 0
   penetrateDamage: 0
   bloodSucking: 0
-  attackType: 0
+  attackType: 
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -5684,7 +5685,7 @@ MonoBehaviour:
   penetrate: 0
   penetrateDamage: 0
   bloodSucking: 0
-  attackType: 0
+  attackType: 
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -6774,7 +6775,7 @@ MonoBehaviour:
   penetrate: 0
   penetrateDamage: 0
   bloodSucking: 0
-  attackType: 0
+  attackType: 
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -7037,7 +7038,7 @@ MonoBehaviour:
   penetrate: 0
   penetrateDamage: 0
   bloodSucking: 0
-  attackType: 0
+  attackType: 
   multipleDamaeCount: 0
   multipleDamageType: 
   afterDamage: 0
@@ -7330,3 +7331,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0bd111269c1ea458b45960c46c4ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameDataBase: {fileID: 11400000, guid: 800da2e1e41733a4ab55adec33f820a2, type: 2}
+  wave_Scriptables:
+  - {fileID: 11400000, guid: 88178f4d67577e54bad45611f13a1101, type: 2}
+  - {fileID: 11400000, guid: fa4d322e96e3e0c499da130f45a930fa, type: 2}
+  - {fileID: 11400000, guid: c3805271ae0c2bb448af5447abc56679, type: 2}
+  - {fileID: 11400000, guid: 4e45e23aaa6a0fa43b6f8fca19df845b, type: 2}
+  - {fileID: 11400000, guid: 2b1355504704c984e997c79c9d6396c5, type: 2}
+  - {fileID: 11400000, guid: 4796714aca37e2645a3f2337ec67cb1d, type: 2}
+  - {fileID: 11400000, guid: 0d727f1729b20e74d96d898a307d5398, type: 2}
+  - {fileID: 11400000, guid: 6bc4fef2468adc54f894fc31e1a297f9, type: 2}
+  - {fileID: 11400000, guid: 728b72867d78d14409f07e88cba79f0d, type: 2}
+  - {fileID: 11400000, guid: 83b241446a0e7d34aa30fc6d3792c090, type: 2}
+  isStart: 0

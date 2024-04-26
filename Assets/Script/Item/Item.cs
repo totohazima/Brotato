@@ -22,9 +22,9 @@ public class Item : MonoBehaviour, ICustomUpdateMono
     public Stat.PlayerStat[] riseStat;
     public float[] riseStats;
 
-    public int descendCount;
-    public Stat.PlayerStat[] descendStat;
-    public float[] descendStats;
+    public int decreaseCount;
+    public Stat.PlayerStat[] decreaseStat;
+    public float[] decreaseStats;
 
     public bool isMax;
     public Outline frame;
@@ -78,7 +78,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         scriptable = scrip;
         itemType = scrip.itemCode;
         itemImage.sprite = scrip.itemSprite;
-        StatSetting(itemType.ToString());
+        StatSetting((int)itemType);
     }
 
     public virtual void OnEnable()
@@ -164,59 +164,51 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         infoObj = Instantiate(itemInfo, StageManager.instance.itemInfoManager);
         infoObj.Init(scriptable, transform.position);
     }
-    public void StatSetting(string names)
+    public void StatSetting(int index)
     {
-        ItemStatImporter import = ItemStatImporter.instance;
-        int index = 0;
-        for (int z = 0; z < import.itemCode.Length; z++)
-        {
-            if(names == import.itemCode[z])
-            {
-                index = z;
-            }
-        }
+        ItemStatInfoTable.Data import = GameManager.instance.gameDataBase.itemStatInfoTable.table[index];
 
-        itemCode = import.itemCode[index];
-        //itemName = import.itemName[index];
-        maxCount = import.maxCount[index];
+        itemCode = import.itemCode;
+        maxCount = import.itemMaxCount;
 
-        riseCount = import.riseCount[index];
-        descendCount = import.descendCount[index];
+        riseCount = import.statRiseCount;
+        decreaseCount = import.statDecreaseCount;
 
         riseStat = new Stat.PlayerStat[riseCount];
         riseStats = new float[riseCount];
-        descendStat = new Stat.PlayerStat[descendCount];
-        descendStats = new float[descendCount];
+        decreaseStat = new Stat.PlayerStat[decreaseCount];
+        decreaseStats = new float[decreaseCount];
 
-        string[] name = new string[riseCount];
-        string[] name2 = new string[descendCount];
+        string[] name1 = new string[riseCount];
+        string[] name2 = new string[decreaseCount];
 
         int i = 0;
         while (i < riseCount)
         {
-            name[i] = import.riseStatType[index + i];
-            riseStat[i] = (Stat.PlayerStat)Enum.Parse(typeof(Stat.PlayerStat), name[i]);
-            riseStats[i] = import.riseStats[index + i];
+            name1[i] = import.riseStatCode[i];
+            riseStat[i] = (Stat.PlayerStat)Enum.Parse(typeof(Stat.PlayerStat), name1[i]);
+            riseStats[i] = import.riseNum[i];
             i++;
         }
         i = 0;
-        while (i < descendCount)
+        while (i < decreaseCount)
         {
-            name2[i] = import.descendStatType[index + i];
-            descendStat[i] = (Stat.PlayerStat)Enum.Parse(typeof(Stat.PlayerStat), name2[i]);
-            descendStats[i] = import.descendStats[index + i];
+            name2[i] = import.decreaseStatCode[i];
+            decreaseStat[i] = (Stat.PlayerStat)Enum.Parse(typeof(Stat.PlayerStat), name2[i]);
+            decreaseStats[i] = import.decreaseNum[ i];
             i++;
         }
 
-        ShopBasePriceImporter priceImporter = ShopBasePriceImporter.instance;
+        ItemBasePriceInfoTable.Data priceImport = GameManager.instance.gameDataBase.itemBasePriceInfoTable.table[index];
 
-        for (int z = 0; z < priceImporter.itemCode.Length; z++)
-        {
-            if(itemType.ToString() == priceImporter.itemCode[z])
-            {
-                itemBasePrice = priceImporter.itemBasePrice[z];
-                break;
-            }
-        }
+        itemBasePrice = priceImport.itemBasePrice;
+        //for (int z = 0; z < priceImport.itemCode.Length; z++)
+        //{
+        //    if (itemType.ToString() == priceImport.itemCode[z])
+        //    {
+        //        itemBasePrice = priceImport.itemBasePrice[z];
+        //        break;
+        //    }
+        //}
     }  
 }

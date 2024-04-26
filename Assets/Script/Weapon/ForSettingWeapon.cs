@@ -16,7 +16,7 @@ public class ForSettingWeapon : Weapon, ICustomUpdateMono
     void Awake()
     {
         main = MainSceneManager.instance;
-        importer = WeaponStatImporter.instance;
+        //importer = WeaponStatImporter.instance;
         image = GetComponent<Image>();
         weaponImage = weaponScrip.weaponImage;
         weaponPrefabs = weaponScrip.weaponPrefab;

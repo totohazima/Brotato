@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1318494c1b2373c4aa7b7434fcb9cb38, type: 3}
+  m_Name: UpgradeStat
+  m_EditorClassIdentifier: 
+  table:
+  - upgradeCode: HP_UP
+    upgradeName: "\uC2EC\uC7A5"
+    upgradeEffect: "\uCD5C\uB300 HP"
+    tierEffect:
+    - 3
+    - 6
+    - 9
+    - 12
+  - upgradeCode: REGEN_UP
+    upgradeName: "\uD3D0"
+    upgradeEffect: "HP \uC7AC\uC0DD"
+    tierEffect:
+    - 2
+    - 3
+    - 4
+    - 5
+  - upgradeCode: BLOOD_UP
+    upgradeName: "\uC774\uBE68"
+    upgradeEffect: "\uD761\uD608"
+    tierEffect:
+    - 1
+    - 2
+    - 3
+    - 4
+  - upgradeCode: DAMAGE_UP
+    upgradeName: "\uC0BC\uB450\uADFC"
+    upgradeEffect: "\uB300\uBBF8\uC9C0"
+    tierEffect:
+    - 5
+    - 8
+    - 12
+    - 16
+  - upgradeCode: MELEEDM_UP
+    upgradeName: "\uD314\uB69D"
+    upgradeEffect: "\uADFC\uAC70\uB9AC \uB300\uBBF8\uC9C0"
+    tierEffect:
+    - 2
+    - 4
+    - 6
+    - 8
+  - upgradeCode: RANGEDM_UP
+    upgradeName: "\uC5B4\uAE68"
+    upgradeEffect: "\uC6D0\uAC70\uB9AC \uB300\uBBF8\uC9C0"
+    tierEffect:
+    - 1
+    - 2
+    - 3
+    - 4
+  - upgradeCode: ATKSPEED_UP
+    upgradeName: "\uBC18\uC0AC \uC2E0\uACBD"
+    upgradeEffect: "\uACF5\uACA9 \uC18D\uB3C4"
+    tierEffect:
+    - 5
+    - 10
+    - 15
+    - 20
+  - upgradeCode: CRITICAL_UP
+    upgradeName: "\uC190\uAC00\uB77D"
+    upgradeEffect: "\uCE58\uBA85\uD0C0\uC728"
+    tierEffect:
+    - 3
+    - 5
+    - 7
+    - 9
+  - upgradeCode: ENGINE_UP
+    upgradeName: "\uD574\uACE8"
+    upgradeEffect: "\uC5D4\uC9C0\uB2C8\uC5B4\uB9C1"
+    tierEffect:
+    - 2
+    - 3
+    - 4
+    - 5
+  - upgradeCode: RANGE_UP
+    upgradeName: "\uB208"
+    upgradeEffect: "\uBC94\uC704"
+    tierEffect:
+    - 15
+    - 30
+    - 45
+    - 60
+  - upgradeCode: ARMOR_UP
+    upgradeName: "\uAC00\uC2B4"
+    upgradeEffect: "\uBC29\uC5B4\uAD6C"
+    tierEffect:
+    - 1
+    - 2
+    - 3
+    - 4
+  - upgradeCode: EVASION_UP
+    upgradeName: "\uB4F1"
+    upgradeEffect: "\uD68C\uD53C"
+    tierEffect:
+    - 3
+    - 6
+    - 9
+    - 12
+  - upgradeCode: SPEED_UP
+    upgradeName: "\uB2E4\uB9AC"
+    upgradeEffect: "\uC18D\uB3C4"
+    tierEffect:
+    - 3
+    - 6
+    - 9
+    - 12

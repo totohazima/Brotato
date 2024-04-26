@@ -14,7 +14,7 @@ public class ForSettingPlayer : Player,ICustomUpdateMono
     void Awake()
     {
         main = MainSceneManager.instance;
-        importer = WeaponStatImporter.instance;
+        //importer = WeaponStatImporter.instance;
         image = GetComponent<Image>();
 
         StatSetting((int)index);

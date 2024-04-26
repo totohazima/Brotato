@@ -26,7 +26,7 @@ public class LandMine : MonoBehaviour
             bullet.Init(damage, 10000, -1000, 100, 0, 0, 0, 0, Vector3.zero);
             //booms.SetActive(true);
 
-            SpawnManager.instance.mines.Remove(gameObject);
+            //SpawnManager.instance.mines.Remove(gameObject);
             gameObject.SetActive(false);
         }
     }

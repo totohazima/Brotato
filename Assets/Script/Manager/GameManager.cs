@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Only1Games.GDBA;
 public class GameManager : MonoBehaviour, UI_Upadte
 {
     public static GameManager instance;
+    public GameDataBase gameDataBase;
+    public Wave_Scriptable[] wave_Scriptables = new Wave_Scriptable[10];
     public bool isStart;
     void Awake()
     {

@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15bf144b9bc5c154a8477a7c10bbdb4f, type: 3}
+  m_Name: WaveStat
+  m_EditorClassIdentifier: 
+  table:
+  - maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.85
+    waveTime: 45
+    waveTreeStat: 1.5
+  - maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.85
+    waveTime: 45
+    waveTreeStat: 1.5
+  - maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.7
+    waveTime: 55
+    waveTreeStat: 1.5
+  - maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.7
+    waveTime: 55
+    waveTreeStat: 1.5
+  - maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.7
+    waveTime: 55
+    waveTreeStat: 1.5
+  - maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.65
+    waveTime: 65
+    waveTreeStat: 1.5
+  - maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.65
+    waveTime: 65
+    waveTreeStat: 1.5
+  - maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.65
+    waveTime: 65
+    waveTreeStat: 1.5
+  - maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5

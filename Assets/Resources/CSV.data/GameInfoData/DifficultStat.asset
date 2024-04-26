@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82545d59e2ea1d343ab61511843e192b, type: 3}
+  m_Name: DifficultStat
+  m_EditorClassIdentifier: 
+  table:
+  - difficultName: "0\uB2E8\uACC4"
+    specialEnemySpawn: 0
+    eliteEnemySpawn: 0
+    eliteEnemySpawnCount: 0
+    enemyDamageRise: 0
+    enemyHpRise: 0
+    twinBoss: 0
+  - difficultName: "1\uB2E8\uACC4"
+    specialEnemySpawn: 1
+    eliteEnemySpawn: 0
+    eliteEnemySpawnCount: 0
+    enemyDamageRise: 0
+    enemyHpRise: 0
+    twinBoss: 0
+  - difficultName: "2\uB2E8\uACC4"
+    specialEnemySpawn: 1
+    eliteEnemySpawn: 1
+    eliteEnemySpawnCount: 1
+    enemyDamageRise: 0
+    enemyHpRise: 0
+    twinBoss: 0
+  - difficultName: "3\uB2E8\uACC4"
+    specialEnemySpawn: 1
+    eliteEnemySpawn: 1
+    eliteEnemySpawnCount: 1
+    enemyDamageRise: 12
+    enemyHpRise: 6
+    twinBoss: 0
+  - difficultName: "4\uB2E8\uACC4"
+    specialEnemySpawn: 1
+    eliteEnemySpawn: 1
+    eliteEnemySpawnCount: 3
+    enemyDamageRise: 15
+    enemyHpRise: 7
+    twinBoss: 0
+  - difficultName: "5\uB2E8\uACC4"
+    specialEnemySpawn: 1
+    eliteEnemySpawn: 1
+    eliteEnemySpawnCount: 3
+    enemyDamageRise: 20
+    enemyHpRise: 10
+    twinBoss: 1

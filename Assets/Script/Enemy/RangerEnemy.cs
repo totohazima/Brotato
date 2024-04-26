@@ -57,14 +57,14 @@ public class RangerEnemy : EnemyAction
         rigid.velocity = Vector3.zero;
 
         ///이동 제한
-        float x = Mathf.Clamp(transform.position.x, game.xMin, game.xMax);
-        float y = Mathf.Clamp(transform.position.y, game.yMin, game.yMax);
+        float x = Mathf.Clamp(transform.position.x, stage.xMin, stage.xMax);
+        float y = Mathf.Clamp(transform.position.y, stage.yMin, stage.yMax);
         transform.position = new Vector3(x, y, transform.position.z);
     }
 
     private void Fire()
     {
-        Vector3 dir = game.mainPlayer.transform.position - transform.position;
+        Vector3 dir = stage.mainPlayer.transform.position - transform.position;
         dir = dir.normalized;
         Transform bullet = PoolManager.instance.Get(11).transform;
         bullet.position = transform.position;

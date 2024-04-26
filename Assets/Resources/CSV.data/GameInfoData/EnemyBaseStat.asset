@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e8a9c1bea342249a8eea63952df23d, type: 3}
+  m_Name: EnemyBaseStat
+  m_EditorClassIdentifier: 
+  table:
+  - monsterCode: BASIC
+    baseHp: 10
+    baseDamage: 1
+    baseCoolTime: 0
+    baseArmor: 0
+    baseRange: 0
+    baseEvasion: 0
+    baseAccuracy: 100
+    baseMinSpeed: 250
+    baseMaxSpeed: 350
+    baseMoneyDropCount: 1
+    baseMoneyValue: 1
+    baseExp: 1
+    baseConsumableDropPersent: 1
+    baseLootDropPersent: 1
+  - monsterCode: RANGER
+    baseHp: 9
+    baseDamage: 1
+    baseCoolTime: 10
+    baseArmor: 0
+    baseRange: 10
+    baseEvasion: 0
+    baseAccuracy: 100
+    baseMinSpeed: 200
+    baseMaxSpeed: 200
+    baseMoneyDropCount: 1
+    baseMoneyValue: 1
+    baseExp: 1
+    baseConsumableDropPersent: 3
+    baseLootDropPersent: 10
+  - monsterCode: CHARGER
+    baseHp: 10
+    baseDamage: 1
+    baseCoolTime: 15
+    baseArmor: 0
+    baseRange: 10
+    baseEvasion: 0
+    baseAccuracy: 100
+    baseMinSpeed: 400
+    baseMaxSpeed: 400
+    baseMoneyDropCount: 1
+    baseMoneyValue: 1
+    baseExp: 1
+    baseConsumableDropPersent: 1
+    baseLootDropPersent: 1
+  - monsterCode: TANKER
+    baseHp: 15
+    baseDamage: 2
+    baseCoolTime: 0
+    baseArmor: 0
+    baseRange: 0
+    baseEvasion: 0
+    baseAccuracy: 100
+    baseMinSpeed: 300
+    baseMaxSpeed: 300
+    baseMoneyDropCount: 3
+    baseMoneyValue: 1
+    baseExp: 1
+    baseConsumableDropPersent: 3
+    baseLootDropPersent: 3
+  - monsterCode: BOSS
+    baseHp: 29250
+    baseDamage: 30
+    baseCoolTime: 0
+    baseArmor: 0
+    baseRange: 0
+    baseEvasion: 0
+    baseAccuracy: 100
+    baseMinSpeed: 300
+    baseMaxSpeed: 300
+    baseMoneyDropCount: 10
+    baseMoneyValue: 1
+    baseExp: 1
+    baseConsumableDropPersent: 100
+    baseLootDropPersent: 100
+  - monsterCode: TREE
+    baseHp: 8
+    baseDamage: 0
+    baseCoolTime: 0
+    baseArmor: 0
+    baseRange: 0
+    baseEvasion: 0
+    baseAccuracy: 0
+    baseMinSpeed: 0
+    baseMaxSpeed: 0
+    baseMoneyDropCount: 3
+    baseMoneyValue: 1
+    baseExp: 1
+    baseConsumableDropPersent: 100
+    baseLootDropPersent: 20

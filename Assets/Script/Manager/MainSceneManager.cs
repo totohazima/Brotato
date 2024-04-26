@@ -47,7 +47,7 @@ public class MainSceneManager : MonoBehaviour
 
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         GameObject obj = Instantiate(dontDestoryOBJ);
-        option = obj.transform.GetChild(2).gameObject;
+        option = obj.transform.GetChild(1).gameObject;
         //GameObject obj1 = Instantiate(prefab_UpdateManager);
         //GameObject obj2 = Instantiate(importer);
         //GameObject obj3 = Instantiate(prefab_Option);

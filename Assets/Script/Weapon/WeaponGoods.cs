@@ -262,15 +262,8 @@ public class WeaponGoods : Weapon, UI_Upadte
         }
 
         //가격 설정
-        ShopBasePriceImporter priceImporter = ShopBasePriceImporter.instance;
-        for (int z = 0; z < priceImporter.weaponCode.Length; z++)
-        {
-            if (weaponCode == priceImporter.weaponCode[z])
-            {
-                weaponBasePrice = priceImporter.weaponBasePrice[z];
-                break;
-            }
-        }
+        WeaponBasePriceInfoTable.Data priceInfoTable = GameManager.instance.gameDataBase.weaponBasePriceInfoTable.table[weaponNum];
+        weaponBasePrice = priceInfoTable.weaponBasePrice;
         int wave = StageManager.instance.waveLevel + 1;
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
         weaponPrice = weaponPrice * ((100 + ItemEffect.instance.Coupon()) / 100);

@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     float timer;
     float treeTimer;
     public float spawnTime; //스폰 시간
-    StageManager game;
+    StageManager stage;
     float mineTimer;
     float minesCoolTime; //지뢰 생성 쿨타임
 
@@ -25,16 +25,15 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     void Awake()
     {
         instance = this;
-        game = StageManager.instance;
+        stage = StageManager.instance;
         timer = 100f;
         mineTimer = 100f;
         WaveSelect(0);
-        spawnTime = game.waveTime[game.waveLevel] / enemyLimit;
 
-        scrip = new Wave_Scriptable[WaveStatImporter.instance.wave_Scriptables.Length];
+        scrip = new Wave_Scriptable[GameManager.instance.wave_Scriptables.Length];
         for (int i = 0; i < scrip.Length; i++)
         {
-            scrip[i] = WaveStatImporter.instance.wave_Scriptables[i];
+            scrip[i] = GameManager.instance.wave_Scriptables[i];
         }
 
         pools = new List<GameObject>[enemyPrefab.Length];
@@ -53,7 +52,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     }
     public void CustomUpdate()
     {
-        if(game.isEnd == true)
+        if (stage.isEnd == true)
         {
             treeTimer = 0;
             enemyClear();
@@ -66,7 +65,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             if (timer >= spawnTime)
             {
                 StartCoroutine(EnemySpawn());
-                
+
                 timer = 0f;
             }
         }
@@ -81,7 +80,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         }
 
         treeTimer += Time.deltaTime;
-        if(treeTimer >= 10)
+        if (treeTimer >= 10)
         {
             StartCoroutine(TreeSpawn());
             treeTimer = 0;
@@ -108,15 +107,15 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < spawnCount; i++)
         {
-            float[] enemyChance = new float[scrip[game.waveLevel].spawnEnemys.Length];
+            float[] enemyChance = new float[scrip[stage.waveLevel].spawnEnemys.Length];
             for (int j = 0; j < enemyChance.Length; j++)
             {
-                enemyChance[j] = scrip[game.waveLevel].enemyPersentage[j];
+                enemyChance[j] = scrip[stage.waveLevel].enemyPersentage[j];
             }
             int index = Judgment(enemyChance);
             for (int k = 0; k < enemyChance.Length; k++)
             {
-                if(enemyPrefab[k].gameObject == enemyPrefab[index].gameObject)
+                if (enemyPrefab[k].gameObject == enemyPrefab[index].gameObject)
                 {
                     enemy[i] = Spawn(k);
                 }
@@ -158,7 +157,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             mark[i].transform.position = pos;
         }
         yield return new WaitForSeconds(0.6f);
-        for(int i = 0; i < mark.Length; i++)
+        for (int i = 0; i < mark.Length; i++)
         {
             mine[i] = PoolManager.instance.Get(5);
             mine[i].transform.position = mark[i].transform.position;
@@ -208,19 +207,19 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     }
     public IEnumerator TreeSpawn()
     {
-        float treeNum = WaveStatImporter.instance.treeCount[game.waveLevel];
+        float treeNum = stage.waveStat.table[stage.waveLevel].waveTreeStat;
         float a = (treeNum + ItemEffect.instance.Tree()) * 0.33f;
         float b = (float)System.Math.Truncate(a);
         float c = (a - b) * 100;
 
         float someTree = 0;
         float noneTree = 0;
-        if(c > 50f)
+        if (c > 50f)
         {
             someTree = c;
             noneTree = 100 - someTree;
         }
-        else if(c <= 50f)
+        else if (c <= 50f)
         {
             someTree = 100 - c;
             noneTree = someTree;
@@ -257,21 +256,22 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     }
     public void WaveSelect(int waveLevel)
     {
-        WaveStatImporter import = WaveStatImporter.instance;
+        WaveStatInfoTable.Data import = stage.waveStat.table[waveLevel];
 
-        enemyLimit = import.enemyCount[waveLevel];
-        spawnCount = import.enemySpawnCount[waveLevel];
+        enemyLimit = (int)import.maxEnemySpawn;
+        spawnTime = import.enemySpawnTime;
+        spawnCount = (int)import.enemySpawnCount;
     }
 
     Vector3 EnemySpawnPosition() //적대적 유닛 소환 위치
     {
         Vector3 spawnPoint;
         while (true)
-        { 
-            float randomX = Random.Range(game.xMin, game.xMax);
-            float randomY = Random.Range(game.yMin, game.yMax);
+        {
+            float randomX = Random.Range(stage.xMin, stage.xMax);
+            float randomY = Random.Range(stage.yMin, stage.yMax);
 
-            Vector3 playerPos = game.mainPlayer.transform.position;
+            Vector3 playerPos = stage.mainPlayer.transform.position;
             Vector3 point = new Vector3(randomX, randomY);
 
             float distance = Vector3.Distance(playerPos, point);
@@ -282,15 +282,15 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             }
             InfiniteLoopDetector.Run();
         }
-        
+
         return spawnPoint;
     }
     public Vector3 FriendlySpawnPosition() //아군 유닛 소환 위치
     {
         Vector3 spawnPoint;
 
-        float randomX = Random.Range(game.xMin, game.xMax);
-        float randomY = Random.Range(game.yMin, game.yMax);
+        float randomX = Random.Range(stage.xMin, stage.xMax);
+        float randomY = Random.Range(stage.yMin, stage.yMax);
 
         Vector3 point = new Vector3(randomX, randomY);
 

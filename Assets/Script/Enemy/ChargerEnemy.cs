@@ -99,14 +99,14 @@ public class ChargerEnemy : EnemyAction
         rigid.velocity = Vector3.zero;
 
         ///이동 제한
-        float x = Mathf.Clamp(transform.position.x, game.xMin, game.xMax);
-        float y = Mathf.Clamp(transform.position.y, game.yMin, game.yMax);
+        float x = Mathf.Clamp(transform.position.x, stage.xMin, stage.xMax);
+        float y = Mathf.Clamp(transform.position.y, stage.yMin, stage.yMax);
         transform.position = new Vector3(x, y, transform.position.z);
     }
 
     private IEnumerator ChargeVec()
     {
-        float speed = Random.Range(3000, 3000);
+        float speed = Random.Range(4000, 4000);
         moveSpeed = speed / 2500;
 
         Vector3 dirVec = target.position - rigid.position;
@@ -122,17 +122,12 @@ public class ChargerEnemy : EnemyAction
 
     private void Charge()
     {
-        if (ugliyToothSlow >= 1)
-        {
-            moveSpeed = moveSpeed - ((moveSpeed / 100) * (ugliyToothSlow * 10));
-        }
-
         rigid.MovePosition(rigid.position + dashVec);
         rigid.velocity = Vector3.zero;
 
         ///이동 제한
-        float x = Mathf.Clamp(transform.position.x, game.xMin, game.xMax);
-        float y = Mathf.Clamp(transform.position.y, game.yMin, game.yMax);
+        float x = Mathf.Clamp(transform.position.x, stage.xMin, stage.xMax);
+        float y = Mathf.Clamp(transform.position.y, stage.yMin, stage.yMax);
         transform.position = new Vector3(x, y, transform.position.z);
     }
 

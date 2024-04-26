@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     public int characterNum;
+    public string characterCode;
     public string characterName;
     [Header("Stat")]
     public float maxHealth;
@@ -73,33 +74,37 @@ public class Player : MonoBehaviour
 
     public void StatSetting(int index)
     {
-        PlayerStatImporter import = PlayerStatImporter.instance;
+        PlayerStatInfoTable.Data import = GameManager.instance.gameDataBase.playerStatInfoTable.table[index];
 
-        characterNum = import.characterNum[index];
-        characterName = import.characterName[index];
-        maxHealth_Origin = import.maxHealth[index];
-        regeneration_Origin = import.regeneration[index];
-        bloodSucking_Origin = import.bloodSucking[index];
-        persentDamage_Origin = import.persentDamage[index];
-        meleeDamage_Origin = import.meleeDamage[index];
-        rangeDamage_Origin = import.rangeDamage[index];
-        attackSpeed_Origin = import.attackSpeed[index];
-        criticalChance_Origin = import.criticalChance[index];
-        engine_Origin = import.engine[index];
-        range_Origin = import.range[index];
-        armor_Origin = import.armor[index];
-        evasion_Origin = import.evasion[index];
-        accuracy_Origin = import.accuracy[index];
-        speed_Origin = import.speed[index];
+        characterNum = index;
+        characterCode = import.playerCode;
+        characterName = import.name;
+        maxHealth_Origin = import.health;
+        regeneration_Origin = import.hpRegen;
+        bloodSucking_Origin = import.bloodSucking;
+        persentDamage_Origin = import.persentDamage;
+        meleeDamage_Origin = import.meleeDamage;
+        rangeDamage_Origin = import.rangeDamage;
+        attackSpeed_Origin = import.attackSpeed;
+        criticalChance_Origin = import.criticalChance;
+        engine_Origin = import.engine;
+        range_Origin = import.range;
+        armor_Origin = import.armor;
+        evasion_Origin = import.evasion;
+        accuracy_Origin = import.accuracy;
+        speed_Origin = import.speed;
 
-        maxHealth = import.maxHealth[index];
+        maxHealth = import.health;
 
         StatCalculate();
     }
 
     public void StatCalculate()
     {
-        ItemEffect.instance.CountCheck();
+        if (ItemEffect.instance != null)
+        {
+            ItemEffect.instance.CountCheck();
+        }
 
         //스탯 초기화
         StatReset();
@@ -218,84 +223,84 @@ public class Player : MonoBehaviour
                             break;
                     }
                 }
-                for (int j = 0; j < itemInventory[i].descendCount; j++)
+                for (int j = 0; j < itemInventory[i].decreaseCount; j++)
                 {
-                    switch (itemInventory[i].descendStat[j])
+                    switch (itemInventory[i].decreaseStat[j])
                     {
                         case Stat.PlayerStat.MAXHEALTH:
-                            maxHealth -= itemInventory[i].descendStats[j];
+                            maxHealth -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.REGENERATION:
-                            regeneration -= itemInventory[i].descendStats[j];
+                            regeneration -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.BLOOD_SUCKING:
-                            bloodSucking -= itemInventory[i].descendStats[j];
+                            bloodSucking -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.PERSENT_DAMAGE:
-                            persentDamage -= itemInventory[i].descendStats[j];
+                            persentDamage -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.MELEE_DAMAGE:
-                            meleeDamage -= itemInventory[i].descendStats[j];
+                            meleeDamage -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.RANGE_DAMAGE:
-                            rangeDamage -= itemInventory[i].descendStats[j];
+                            rangeDamage -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.ATTACK_SPEED:
-                            attackSpeed -= itemInventory[i].descendStats[j];
+                            attackSpeed -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.CRITICAL_CHANCE:
-                            criticalChance -= itemInventory[i].descendStats[j];
+                            criticalChance -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.ENGINE:
-                            engine -= itemInventory[i].descendStats[j];
+                            engine -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.RANGE:
-                            range -= itemInventory[i].descendStats[j];
+                            range -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.ARMOR:
-                            armor -= itemInventory[i].descendStats[j];
+                            armor -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.EVASION:
-                            evasion -= itemInventory[i].descendStats[j];
+                            evasion -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.ACCURACY:
-                            accuracy -= itemInventory[i].descendStats[j];
+                            accuracy -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.SPEED:
-                            speed -= itemInventory[i].descendStats[j];
+                            speed -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.CONSUMABLE_HEAL:
-                            consumableHeal -= (int)itemInventory[i].descendStats[j];
+                            consumableHeal -= (int)itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.MAGNET_RANGE:
-                            magnetRange -= itemInventory[i].descendStats[j];
+                            magnetRange -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.EXP_GAIN:
-                            expGain -= itemInventory[i].descendStats[j];
+                            expGain -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.PENETRATE:
-                            penetrate -= (int)itemInventory[i].descendStats[j];
+                            penetrate -= (int)itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.INSTNAT_MAGNET:
-                            instantMagnet -= itemInventory[i].descendStats[j];
+                            instantMagnet -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.KNOCK_BACK:
-                            KnockBack -= itemInventory[i].descendStats[j];
+                            KnockBack -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.EXPLOSIVE_DAMAGE:
-                            explosiveDamage -= itemInventory[i].descendStats[j];
+                            explosiveDamage -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.PENETRTE_DAMAGE:
-                            penetrateDamage -= itemInventory[i].descendStats[j];
+                            penetrateDamage -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.EXPLOSIVE_SIZE:
-                            explosiveSize -= itemInventory[i].descendStats[j];
+                            explosiveSize -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.CHAIN:
-                            chain -= (int)itemInventory[i].descendStats[j];
+                            chain -= (int)itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.BOSS_DAMAGE:
-                            bossDamage -= itemInventory[i].descendStats[j];
+                            bossDamage -= itemInventory[i].decreaseStats[j];
                             break;
                     }
                 }
@@ -306,140 +311,143 @@ public class Player : MonoBehaviour
         SettCalculate();
         void SettCalculate()
         {
-            WeaponManager sett = WeaponManager.instance;
-            //비무장 = 회피
-            if (sett.unArmed_Set == 2)
+            if (WeaponManager.instance != null)
             {
-                evasion += 3;
-            }
-            else if (sett.unArmed_Set == 3)
-            {
-                evasion += 6;
-            }
-            else if (sett.unArmed_Set == 4)
-            {
-                evasion += 9;
-            }
-            else if (sett.unArmed_Set == 5)
-            {
-                evasion += 12;
-            }
-            else if (sett.unArmed_Set >= 6)
-            {
-                evasion += 15;
-            }
+                WeaponManager sett = WeaponManager.instance;
 
-            //도구 = 엔지니어링
-            if (sett.tool_Set == 2)
-            {
-                engine += 1;
-            }
-            else if (sett.tool_Set == 3)
-            {
-                engine += 2;
-            }
-            else if (sett.tool_Set == 4)
-            {
-                engine += 3;
-            }
-            else if (sett.tool_Set == 5)
-            {
-                engine += 4;
-            }
-            else if (sett.tool_Set >= 6)
-            {
-                engine += 5;
-            }
+                //비무장 = 회피
+                if (sett.unArmed_Set == 2)
+                {
+                    evasion += 3;
+                }
+                else if (sett.unArmed_Set == 3)
+                {
+                    evasion += 6;
+                }
+                else if (sett.unArmed_Set == 4)
+                {
+                    evasion += 9;
+                }
+                else if (sett.unArmed_Set == 5)
+                {
+                    evasion += 12;
+                }
+                else if (sett.unArmed_Set >= 6)
+                {
+                    evasion += 15;
+                }
 
-            //총 = 범위
-            if (sett.gun_Set == 2)
-            {
-                range += 10;
-            }
-            else if (sett.gun_Set == 3)
-            {
-                range += 20;
-            }
-            else if (sett.gun_Set == 4)
-            {
-                range += 30;
-            }
-            else if (sett.gun_Set == 5)
-            {
-                range += 40;
-            }
-            else if (sett.gun_Set >= 6)
-            {
-                range += 50;
-            }
+                //도구 = 엔지니어링
+                if (sett.tool_Set == 2)
+                {
+                    engine += 1;
+                }
+                else if (sett.tool_Set == 3)
+                {
+                    engine += 2;
+                }
+                else if (sett.tool_Set == 4)
+                {
+                    engine += 3;
+                }
+                else if (sett.tool_Set == 5)
+                {
+                    engine += 4;
+                }
+                else if (sett.tool_Set >= 6)
+                {
+                    engine += 5;
+                }
 
-            //폭발물 = 폭발 크기
-            if (sett.explosive_Set == 2)
-            {
-                explosiveSize += 5;
-            }
-            else if (sett.explosive_Set == 3)
-            {
-                explosiveSize += 10;
-            }
-            else if (sett.explosive_Set == 4)
-            {
-                explosiveSize += 15;
-            }
-            else if (sett.explosive_Set == 5)
-            {
-                explosiveSize += 20;
-            }
-            else if (sett.explosive_Set >= 6)
-            {
-                explosiveSize += 25;
-            }
+                //총 = 범위
+                if (sett.gun_Set == 2)
+                {
+                    range += 10;
+                }
+                else if (sett.gun_Set == 3)
+                {
+                    range += 20;
+                }
+                else if (sett.gun_Set == 4)
+                {
+                    range += 30;
+                }
+                else if (sett.gun_Set == 5)
+                {
+                    range += 40;
+                }
+                else if (sett.gun_Set >= 6)
+                {
+                    range += 50;
+                }
 
-            //정확 = 치명타율
-            if (sett.precision_Set == 2)
-            {
-                criticalChance += 3;
-            }
-            else if (sett.precision_Set == 3)
-            {
-                criticalChance += 6;
-            }
-            else if (sett.precision_Set == 4)
-            {
-                criticalChance += 9;
+                //폭발물 = 폭발 크기
+                if (sett.explosive_Set == 2)
+                {
+                    explosiveSize += 5;
+                }
+                else if (sett.explosive_Set == 3)
+                {
+                    explosiveSize += 10;
+                }
+                else if (sett.explosive_Set == 4)
+                {
+                    explosiveSize += 15;
+                }
+                else if (sett.explosive_Set == 5)
+                {
+                    explosiveSize += 20;
+                }
+                else if (sett.explosive_Set >= 6)
+                {
+                    explosiveSize += 25;
+                }
 
-            }
-            else if (sett.precision_Set == 5)
-            {
-                criticalChance += 12;
-            }
-            else if (sett.precision_Set >= 6)
-            {
-                criticalChance += 15;
-            }
+                //정확 = 치명타율
+                if (sett.precision_Set == 2)
+                {
+                    criticalChance += 3;
+                }
+                else if (sett.precision_Set == 3)
+                {
+                    criticalChance += 6;
+                }
+                else if (sett.precision_Set == 4)
+                {
+                    criticalChance += 9;
 
-            //원시 = 체력
-            if (sett.native_Set == 2)
-            {
-                maxHealth += 3;
-            }
-            else if (sett.native_Set == 3)
-            {
-                maxHealth += 6;
-            }
-            else if (sett.native_Set == 4)
-            {
-                maxHealth += 9;
-            }
-            else if (sett.native_Set == 5)
-            {
-                maxHealth += 12;
-            }
-            else if (sett.native_Set >= 6)
-            {
-                maxHealth += 15;
-            }
+                }
+                else if (sett.precision_Set == 5)
+                {
+                    criticalChance += 12;
+                }
+                else if (sett.precision_Set >= 6)
+                {
+                    criticalChance += 15;
+                }
 
+                //원시 = 체력
+                if (sett.native_Set == 2)
+                {
+                    maxHealth += 3;
+                }
+                else if (sett.native_Set == 3)
+                {
+                    maxHealth += 6;
+                }
+                else if (sett.native_Set == 4)
+                {
+                    maxHealth += 9;
+                }
+                else if (sett.native_Set == 5)
+                {
+                    maxHealth += 12;
+                }
+                else if (sett.native_Set >= 6)
+                {
+                    maxHealth += 15;
+                }
+            }
         }
 
     }

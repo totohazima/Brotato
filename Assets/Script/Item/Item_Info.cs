@@ -44,26 +44,28 @@ public class Item_Info : MonoBehaviour
 
     public void TextSetting(string code)
     {
-        ItemStatImporter import = ItemStatImporter.instance;
-        int index1 = 0;
-        for (int i = 0; i < import.itemCode.Length; i++)
-        {
-            if (code == import.itemCode[i])
-            {
-                index1 = i;
-            }
-        }
-        //itemName.text = import.itemName[index1];
-        maxCount = import.maxCount[index1];
+        ItemStatInfoTable.Data import = GameManager.instance.gameDataBase.itemStatInfoTable.table[(int)scriptable.itemCode];
 
-        int index2 = 0;
-        for (int i = 0; i < import.itemCode2.Length; i++)
-        {
-            if (code == import.itemCode2[i])
-            {
-                index2 = i;
-            }
-        }
+        //int index1 = 0;
+        //for (int i = 0; i < import.itemCode.Length; i++)
+        //{
+        //    if (code == import.itemCode[i])
+        //    {
+        //        index1 = i;
+        //    }
+        //}
+        //itemName.text = import.itemName[index1];
+
+        maxCount = import.itemMaxCount;
+
+        //int index2 = 0;
+        //for (int i = 0; i < import.itemCode2.Length; i++)
+        //{
+        //    if (code == import.itemCode2[i])
+        //    {
+        //        index2 = i;
+        //    }
+        //}
 
         if (maxCount == -100)
         {
@@ -81,7 +83,7 @@ public class Item_Info : MonoBehaviour
         itemInfoCount = scriptable.infoText.Length;
 
         itemInfo = new string[itemInfoCount];
-         
+
         for (int i = 0; i < itemInfoCount; i++)
         {
             TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
@@ -97,7 +99,7 @@ public class Item_Info : MonoBehaviour
         {
             x = itemPos.x - 200;
         }
-        else if(Camera.main.ScreenToWorldPoint(itemPos).x < 0)
+        else if (Camera.main.ScreenToWorldPoint(itemPos).x < 0)
         {
             x = itemPos.x + 200;
         }
@@ -109,7 +111,7 @@ public class Item_Info : MonoBehaviour
         else if (Camera.main.ScreenToWorldPoint(itemPos).y < 0)
         {
             y = itemPos.y + 200 + textHeight;
-            
+
         }
         transform.position = new Vector3(x, y);
     }

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e09e968155fe9e47ac75bcd8dd03dd7, type: 3}
+  m_Name: EnemyGrowthStat
+  m_EditorClassIdentifier: 
+  table:
+  - monsterCode: BASIC
+    hpRisePer: 38
+    attackRisePer: 1
+  - monsterCode: RANGER
+    hpRisePer: 38
+    attackRisePer: 1
+  - monsterCode: CHARGER
+    hpRisePer: 38
+    attackRisePer: 1
+  - monsterCode: TANKER
+    hpRisePer: 38
+    attackRisePer: 1
+  - monsterCode: BOSS
+    hpRisePer: 0
+    attackRisePer: 1
+  - monsterCode: TREE
+    hpRisePer: 0
+    attackRisePer: 0

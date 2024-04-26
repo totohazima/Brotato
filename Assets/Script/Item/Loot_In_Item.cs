@@ -37,17 +37,18 @@ public class Loot_In_Item : MonoBehaviour
 
     public void TextSetting(string code)
     {
-        ItemStatImporter import = ItemStatImporter.instance;
-        int index1 = 0;
-        for (int i = 0; i < import.itemCode.Length; i++)
-        {
-            if (code == import.itemCode[i])
-            {
-                index1 = i;
-            }
-        }
+        ItemStatInfoTable.Data import = GameManager.instance.gameDataBase.itemStatInfoTable.table[itemNum];
+
+        //int index1 = 0;
+        //for (int i = 0; i < import.itemCode.Length; i++)
+        //{
+        //    if (code == import.itemCode)
+        //    {
+        //        index1 = i;
+        //    }
+        //}
         itemName.text = scriptable.itemName;
-        maxCount = import.maxCount[index1];
+        maxCount = import.itemMaxCount;
 
         if (maxCount == -100)
         {

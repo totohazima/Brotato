@@ -23,6 +23,7 @@ public class PlayerAction : Player, ICustomUpdateMono
     [SerializeField] private float hitTImer;
     private float invincibleTime = 0.5f; //피격 후 무적 시간
     public JoyStick joyStick;
+    public WhiteFlash whiteFlash;
 
     void Start()
     {

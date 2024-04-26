@@ -25,13 +25,13 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     public List<GameObject> goodsList;
 
     List<GameObject>[] list;
-    StageManager game;
+    StageManager stage;
     ItemManager item;
     public WeaponScrip[] weapon;
     void Awake()
     {
         instance = this;
-        game = StageManager.instance;
+        stage = StageManager.instance;
         item = ItemManager.instance;
 
         list = new List<GameObject>[goods.Length];
@@ -49,7 +49,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
         ItemManager.instance.ItemListUp();
         rerollCount = 0;
 
-        int wave = game.waveLevel + 1;
+        int wave = stage.waveLevel + 1;
         if (wave < 2)
         {
             rerollPrice = wave + (wave / 2);
@@ -79,9 +79,9 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
     void UiVisualize()
     {
-        titleWaveUI.text = "웨이브 " + (game.waveLevel + 1) + "(총 10 물결)";
-        moneyNumUI.text = game.money.ToString();
-        nextWaveUI.text = "이동(웨이브 " + (game.waveLevel + 2) + ")";
+        titleWaveUI.text = "웨이브 " + (stage.waveLevel + 1) + "(총 10 물결)";
+        moneyNumUI.text = stage.money.ToString();
+        nextWaveUI.text = "이동(웨이브 " + (stage.waveLevel + 2) + ")";
 
         tabsText[0].text = "무기(" + tabsScroll[0].childCount + "/6)";
         tabsText[1].text = "아이템(" + tabsScroll[1].childCount + ")";
@@ -173,7 +173,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
             float weaponChance = 0.35f;
 
             float[] chanceLise = { itemChance, weaponChance };
-            int chanceIndex = game.Judgment(chanceLise);
+            int chanceIndex = stage.Judgment(chanceLise);
 
             if (chanceIndex == 0)
             {
@@ -188,10 +188,39 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
             }
             else
             {
+                //float sameWeaponPool, sameClassWeaponPool, allWeaponPool;
+                //int num = 0;
+                ////무기가 없는 경우
+                //if (stage.playerInfo.weapons.Count == 0)
+                //{
+                //    num = Random.Range(0, weapon.Length);
+                //}
+                //else
+                //{
+                //    sameWeaponPool = 0.2f;
+                //    sameClassWeaponPool = 0.15f;
+                //    allWeaponPool = 0.65f;
+
+                //    float[] chanceLise2 = { sameWeaponPool, sameClassWeaponPool, allWeaponPool };
+                //    int weaponIndex = stage.Judgment(chanceLise2);
+
+                //    if(weaponIndex == 0)
+                //    {
+                //        int z = stage.playerInfo.weapons[0].GetComponent<Weapon>().weaponNum;
+                //    }
+                //    else if(weaponIndex == 1)
+                //    {
+
+                //    }
+                //    else if(weaponIndex == 2)
+                //    {
+                //        num = Random.Range(0, weapon.Length);
+                //    }
+                //}
+
                 int num = Random.Range(0, weapon.Length);
                 GameObject product = Get(1);
                 WeaponGoods weaponGoods = product.GetComponent<WeaponGoods>();
-
                 weaponGoods.Init(weapon[num]/*weapon[num].weaponName, weapon[num].setType, weapon[num].weaponNickNames, weapon[num].weaponImage, weapon[num].attackType*/);
                 weaponGoods.transform.SetParent(goodsContent);
 
@@ -204,9 +233,9 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     public void RerollButton()
     {
         float price = rerollPrice + (rerollPrice_Add * rerollCount);
-        if (price <= game.money)
+        if (price <= stage.money)
         {
-            game.money -= (int)price;
+            stage.money -= (int)price;
             rerollCount++;
             ShopReRoll();
         }
@@ -261,7 +290,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
     public void ShopClose()
     {
-        game.nextWave();
+        stage.nextWave();
         gameObject.SetActive(false);
     }
 

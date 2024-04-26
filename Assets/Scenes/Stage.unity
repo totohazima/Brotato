@@ -8053,6 +8053,7 @@ MonoBehaviour:
   xMax: 0
   yMin: 0
   yMax: 0
+  waveStat: {fileID: 0}
 --- !u!1 &350994613
 GameObject:
   m_ObjectHideFlags: 0
@@ -30816,7 +30817,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf55178ce3229a14ea37526f5a3d6ebc, type: 2}
   - {fileID: 11400000, guid: f5a667cf13d135c489c07b310f7a6c50, type: 2}
   - {fileID: 11400000, guid: e34ee05948d631f4894371605c257fb2, type: 2}
-  - {fileID: 11400000, guid: cadde439433d4ef468fa412bd1eec7c6, type: 2}
   - {fileID: 11400000, guid: cbe22d9007031f14ba4a4db2c119cb63, type: 2}
   - {fileID: 11400000, guid: 07ab5738a05e84545b79e0bedfe36068, type: 2}
   - {fileID: 11400000, guid: d81ad8591d56b8e43bcf19f187ec0764, type: 2}

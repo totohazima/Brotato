@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3416201615854339151}
   - component: {fileID: 3416201615854339150}
   - component: {fileID: 3416201615854339149}
+  - component: {fileID: 7068406046230333320}
   m_Layer: 6
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -84,17 +85,31 @@ MonoBehaviour:
   consumableDropRate: 0
   lootDropRate: 0
   isDie: 0
-  isHit: 0
   ugliyToothSlow: 0
   anim: {fileID: 3416201617514675538}
   coll: {fileID: 3416201617400161520}
   sprite: {fileID: 3416201617514675539}
   textPopUpPos: {fileID: 7184403329434434130}
+  whiteFlash: {fileID: 7068406046230333320}
   target: {fileID: 0}
   moveSpeed: 0
   game: {fileID: 0}
   hitTimer: 0
   rigid: {fileID: 0}
+--- !u!114 &7068406046230333320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3416201615854339148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c446d61b3ff9cb4f965ba59825aed26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDurationTime: 0.5
+  tweenType: 18
 --- !u!1 &3416201617400161527
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +209,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 40725a492123c0c48a15816545b28156, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -256,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184403329434434130}
   m_Layer: 6
-  m_Name: PopUp
+  m_Name: DamageTextPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

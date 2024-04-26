@@ -45,6 +45,9 @@ public class EnemyBullet : Bullet
         {
             PlayerAction player = StageManager.instance.playerInfo;
 
+            if (player.whiteFlash != null)
+                player.whiteFlash.PlayFlash();
+
             float evasion = player.evasion;
             if (player.evasion > 60)
             {

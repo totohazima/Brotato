@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
 
     public virtual IEnumerator Died()
     {
-        SpawnManager.instance.enemys.Remove(gameObject);
+        //SpawnManager.instance.enemys.Remove(gameObject);
         ugliyToothSlow = 0;
         float randomX, randomY;
         for (int i = 0; i < moneyDropRate; i++)
@@ -88,26 +88,26 @@ public class Enemy : MonoBehaviour
         StatReset();
         void StatReset()
         {
-            EnemyBaseStatImporter enemy = EnemyBaseStatImporter.instance;
-            EnemyGrowthStatImporter grow = EnemyGrowthStatImporter.instance;
+            EnemyBaseStatInfoTable.Data enemy = GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[index];
+            EnemyGrowthStatInfoTable.Data grow = GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[index];
 
-            maxHealth = enemy.health[index];
-            damage = enemy.damage[index];
-            coolTime = enemy.coolTime[index];
-            armor = enemy.armor[index];
-            range = enemy.range[index];
-            evasion = enemy.evasion[index];
-            accuracy = enemy.accuracy[index];
-            minSpeed = enemy.minSpeed[index];
-            maxSpeed = enemy.maxSpeed[index];
-            moneyDropRate = enemy.moneyDropNum[index];
-            moneyValue = enemy.moneyValue[index];
-            expValue = enemy.expValue[index];
-            consumableDropRate = enemy.consumDropRate[index];
-            lootDropRate = enemy.LootDropRate[index];
+            maxHealth = enemy.baseHp;
+            damage = enemy.baseDamage;
+            coolTime = enemy.baseCoolTime;
+            armor = enemy.baseArmor;
+            range = enemy.baseRange;
+            evasion = enemy.baseEvasion;
+            accuracy = enemy.baseAccuracy;
+            minSpeed = enemy.baseMinSpeed;
+            maxSpeed = enemy.baseMaxSpeed;
+            moneyDropRate = enemy.baseMoneyDropCount;
+            moneyValue = (int)enemy.baseMoneyValue;
+            expValue = (int)enemy.baseExp;
+            consumableDropRate = enemy.baseConsumableDropPersent;
+            lootDropRate = enemy.baseLootDropPersent;
 
-            healthPerWave = grow.grow_Health[index];
-            damagePerWave = grow.grow_Damage[index];
+            healthPerWave = grow.hpRisePer;
+            damagePerWave = grow.attackRisePer;
         }
 
         WaveStat();
