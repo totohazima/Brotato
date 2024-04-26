@@ -11,6 +11,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     public WhiteFlash whiteFlash;
     [HideInInspector] public Transform target;
     public float moveSpeed;
+    public bool isDontPush; //true일 경우 넉백 미작동
     [HideInInspector] public StageManager stage;
     [HideInInspector] public float hitTimer;
     [HideInInspector] public Rigidbody rigid;
@@ -120,7 +121,8 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         if (whiteFlash != null)
             whiteFlash.PlayFlash();
 
-        StartCoroutine(KnockBack(stage.playerInfo.transform.position, knockBack * 10));
+        if(isDontPush == false)
+            StartCoroutine(KnockBack(stage.playerInfo.transform.position, knockBack * 10));
     }
 
   

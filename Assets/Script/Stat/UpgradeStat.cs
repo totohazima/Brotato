@@ -10,8 +10,7 @@ public class UpgradeStat : MonoBehaviour
 
     public Text name;
     public Text effect;
-    StageManager game;
-    UpgradeStatImporter upgrade;
+    StageManager stage;
     public enum LevelUpStat
     {
         HP_UP,
@@ -31,12 +30,12 @@ public class UpgradeStat : MonoBehaviour
 
     void Awake()
     {
-        game = StageManager.instance;
-        //upgrade = UpgradeStatImporter.instance;
+        stage = StageManager.instance;
     }
 
     void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
+        UpgradeStatInfoTable.Data import = GameManager.instance.gameDataBase.upgradeStatInfoTable.table[(int)upgradeType];
         int tier1 = 1;
         int tier2 = 0;
         int tier3 = 0;
@@ -46,8 +45,8 @@ public class UpgradeStat : MonoBehaviour
         int index = StageManager.instance.Judgment(chanceLise);
         tier = index;
 
-        //name.text = upgrade.upgradeName[(int)upgradeType];
-
+        name.text = import.upgradeName;
+        effect.text = "<color=#4CFF52>+" + import.tierEffect[tier] + "</color> " + import.upgradeEffect;
         //switch (upgradeType)
         //{
         //    case LevelUpStat.HP_UP:
@@ -94,75 +93,77 @@ public class UpgradeStat : MonoBehaviour
     }
 
 
-    //public void StatUpgrade()
-    //{
-    //    if (LevelUpManager.instance.isSetting == false)
-    //    {
-    //        switch (upgradeType)
-    //        {
-    //            case LevelUpStat.HP_UP:
-    //                game.playerInfo.maxHealth_Origin += upgrade.heart[tier];
-    //                game.curHp += upgrade.heart[tier];
-    //                break;
-    //            case LevelUpStat.REGEN_UP:
-    //                game.playerInfo.regeneration_Origin += upgrade.lungs[tier];
-    //                break;
-    //            case LevelUpStat.BLOOD_UP:
-    //                game.playerInfo.bloodSucking_Origin += upgrade.teeth[tier];
-    //                break;
-    //            case LevelUpStat.DAMAGE_UP:
-    //                game.playerInfo.persentDamage_Origin += upgrade.triceps[tier];
-    //                break;
-    //            case LevelUpStat.MELEEDM_UP:
-    //                game.playerInfo.meleeDamage_Origin += upgrade.forearms[tier];
-    //                break;
-    //            case LevelUpStat.RANGEDM_UP:
-    //                game.playerInfo.rangeDamage_Origin += upgrade.shoulders[tier];
-    //                break;
-    //            case LevelUpStat.ATKSPEED_UP:
-    //                game.playerInfo.attackSpeed_Origin += upgrade.reflexes[tier];
-    //                break;
-    //            case LevelUpStat.CRITICAL_UP:
-    //                game.playerInfo.criticalChance_Origin += upgrade.fingers[tier];
-    //                break;
-    //            case LevelUpStat.ENGINE_UP:
-    //                game.playerInfo.engine_Origin += upgrade.skull[tier];
-    //                break;
-    //            case LevelUpStat.RANGE_UP:
-    //                game.playerInfo.range_Origin += upgrade.eyes[tier];
-    //                break;
-    //            case LevelUpStat.ARMOR_UP:
-    //                game.playerInfo.armor_Origin += upgrade.chest[tier];
-    //                break;
-    //            case LevelUpStat.EVASION_UP:
-    //                game.playerInfo.evasion_Origin += upgrade.back[tier];
-    //                break;
-    //            case LevelUpStat.SPEED_UP:
-    //                game.playerInfo.speed_Origin += upgrade.legs[tier];
-    //                break;
-    //        }
+    public void StatUpgrade()
+    {
+        UpgradeStatInfoTable import = GameManager.instance.gameDataBase.upgradeStatInfoTable;
 
-    //        game.playerInfo.StatCalculate();
+        if (LevelUpManager.instance.isSetting == false)
+        {
+            switch (upgradeType)
+            {
+                case LevelUpStat.HP_UP:
+                    stage.playerInfo.maxHealth_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    stage.curHp += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.REGEN_UP:
+                    stage.playerInfo.regeneration_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.BLOOD_UP:
+                    stage.playerInfo.bloodSucking_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.DAMAGE_UP:
+                    stage.playerInfo.persentDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.MELEEDM_UP:
+                    stage.playerInfo.meleeDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.RANGEDM_UP:
+                    stage.playerInfo.rangeDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.ATKSPEED_UP:
+                    stage.playerInfo.attackSpeed_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.CRITICAL_UP:
+                    stage.playerInfo.criticalChance_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.ENGINE_UP:
+                    stage.playerInfo.engine_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.RANGE_UP:
+                    stage.playerInfo.range_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.ARMOR_UP:
+                    stage.playerInfo.armor_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.EVASION_UP:
+                    stage.playerInfo.evasion_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.SPEED_UP:
+                    stage.playerInfo.speed_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+            }
 
-    //        game.levelUpChance--;
+            stage.playerInfo.StatCalculate();
 
-    //        if (game.levelUpChance <= 0)
-    //        {
-    //            //여기서 전리품 메뉴로
-    //            if (game.lootChance > 0)
-    //            {
-    //                game.LootMenuOpen();
-    //            }
-    //            else
-    //            {
-    //                game.ShopOpen();
-    //            }
-    //            game.levelUpUI.SetActive(false);
-    //        }
-    //        else
-    //        {
-    //            LevelUpManager.instance.NextSelect();
-    //        }
-    //    }
-    //}
+            stage.levelUpChance--;
+
+            if (stage.levelUpChance <= 0)
+            {
+                //여기서 전리품 메뉴로
+                if (stage.lootChance > 0)
+                {
+                    stage.LootMenuOpen();
+                }
+                else
+                {
+                    stage.ShopOpen();
+                }
+                stage.levelUpUI.SetActive(false);
+            }
+            else
+            {
+                LevelUpManager.instance.NextSelect();
+            }
+        }
+    }
 }

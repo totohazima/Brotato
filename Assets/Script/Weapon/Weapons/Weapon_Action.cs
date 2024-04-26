@@ -13,4 +13,11 @@ public class Weapon_Action : Weapon
     {
         baseObject.localPosition = Vector3.zero;
     }
+
+#if UNITY_EDITOR
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, afterRange);
+    }
+#endif
 }

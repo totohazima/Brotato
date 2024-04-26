@@ -114,7 +114,7 @@ public class ChargerEnemy : EnemyAction
 
         yield return new WaitForSeconds(0.5f);
         isCharge = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         timer = 0;
         isCharge = false;
         dashVec = Vector3.zero;
