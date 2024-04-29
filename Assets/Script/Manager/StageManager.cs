@@ -476,8 +476,24 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         int index = Judgment(chance);
         if(index == 0)
         {
-            //추후 방어구 계산 추가
-            curHp -= damage;
+            //방어력이 0 초과
+            if(playerInfo.armor > 0)
+            {
+                float enduce = playerInfo.armor / 100;
+                damage -= (damage * enduce);
+                curHp -= damage;
+            }
+            //방어력이 0 미만
+            else if(playerInfo.armor < 0)
+            {
+                float enduce = playerInfo.armor / 100;
+                damage -= (damage * enduce);
+                curHp -= damage;
+            }
+            else
+            {
+                curHp -= damage;
+            }
         }
         else
         {

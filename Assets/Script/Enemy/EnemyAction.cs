@@ -119,10 +119,14 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         curHealth -= finalDamage;
 
         if (whiteFlash != null)
+        {
             whiteFlash.PlayFlash();
+        }
 
-        if(isDontPush == false)
+        if (isDontPush == false)
+        {
             StartCoroutine(KnockBack(stage.playerInfo.transform.position, knockBack * 10));
+        }
     }
 
   
