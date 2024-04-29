@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class LootOpen_Manager : MonoBehaviour
 {
     public RectTransform stats;
     public Transform itemPos;
     public GameObject[] goods;
+    public TextMeshProUGUI recycle_NumUI;
+    private Loot_In_Item loot_In_Item;
     List<GameObject>[] list;
     int[] itemIndex;
     int checkIndex;
@@ -97,6 +100,7 @@ public class LootOpen_Manager : MonoBehaviour
         ItemScrip items = ItemManager.instance.items[itemIndex[checkIndex]];
         GameObject product = Get(0);
         Loot_In_Item lootItem = product.GetComponent<Loot_In_Item>();
+        loot_In_Item = lootItem;
         lootItem.Init(items, itemIndex[checkIndex]);
 
         lootItem.transform.SetParent(itemPos);
@@ -106,6 +110,7 @@ public class LootOpen_Manager : MonoBehaviour
         rects.anchoredPosition = Vector3.zero;
         item = lootItem.gameObject;
 
+        recycle_NumUI.text = "<sprite=0>+" + lootItem.recyclePrice.ToString("F0") + " ÀçÈ°¿ë";
         checkIndex++;
     }
 
@@ -131,8 +136,9 @@ public class LootOpen_Manager : MonoBehaviour
     public void SellItem()
     {
         item.SetActive(false);
-        StageManager.instance.lootChance--;
+        StageManager.instance.money += (int)loot_In_Item.recyclePrice;
 
+        StageManager.instance.lootChance--;
         if (StageManager.instance.lootChance > 0)
         {
             LootOpen();

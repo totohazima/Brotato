@@ -42,6 +42,7 @@ public class Weapon_Info : MonoBehaviour
     public GameObject btnGroups;
     public GameObject closeBG;
     private Vector3 itemPos;
+    private float price;
     bool isCombined;
     public void Init(WeaponScrip scrip, Weapon_Action weapon_Action, Vector3 pos, bool combined)
     {
@@ -53,7 +54,11 @@ public class Weapon_Info : MonoBehaviour
         weaponImage.sprite = weaponScrip.weaponImage;
         weaponName.text = weaponScrip.weaponName;
         weaponType.text = weaponScrip.setType;
-        itemPos = pos;
+        price = weapon_Action.weaponPrice;
+        float recyclePrice = (price * 0.25f);
+        recyclePrice = Mathf.Round(recyclePrice);
+        recycle_NumUI.text = "<sprite=0>+" + recyclePrice.ToString("F0") + "   ÀçÈ°¿ë";
+             itemPos = pos;
         if (StageManager.instance.isPause == false)
         {
             settUI.SetActive(true);
@@ -436,6 +441,9 @@ public class Weapon_Info : MonoBehaviour
         ItemManager.instance.WeaponListUp();
         WeaponManager.instance.WeaponSetSearch();
         StageManager.instance.playerInfo.StatCalculate();
+        float recyclePrice = (price / 0.25f);
+        recyclePrice = Mathf.Ceil(recyclePrice);
+        StageManager.instance.money += (int)recyclePrice;
         Destroy(gameObject);
     }
 

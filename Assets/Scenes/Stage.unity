@@ -3382,7 +3382,7 @@ GameObject:
   - component: {fileID: 144534008}
   - component: {fileID: 144534007}
   m_Layer: 5
-  m_Name: Sell_Button
+  m_Name: Recycle_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25249,6 +25249,7 @@ MonoBehaviour:
   itemPos: {fileID: 1105631872}
   goods:
   - {fileID: 6820285913131370388, guid: 5d7e62f7ae19e8444a845ee238971fc6, type: 3}
+  recycle_NumUI: {fileID: 1513514370}
 --- !u!1 &1156723016
 GameObject:
   m_ObjectHideFlags: 0
@@ -28728,6 +28729,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bd3de5250cdb6cc408b23435f663c403, type: 2}
   - {fileID: 11400000, guid: 1c6a77193f876ce4eb17f32b22e9d9b7, type: 2}
   - {fileID: 11400000, guid: e87c150b61ff9524788cc6b5db20703b, type: 2}
+  sameWeapon: []
+  sameClassWeapon: []
+  allWeapon: []
 --- !u!1 &1289116447
 GameObject:
   m_ObjectHideFlags: 0

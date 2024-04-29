@@ -215,18 +215,9 @@ public class Weapon : MonoBehaviour
         //가격 설정
         WeaponBasePriceInfoTable.Data priceImporter = GameManager.instance.gameDataBase.weaponBasePriceInfoTable.table[weaponNum];
 
-        //for (int z = 0; z < priceImporter.weaponCode.Length; z++)
-        //{
-        //    if (weaponCode == priceImporter.weaponCode[z])
-        //    {
-        //        weaponBasePrice = priceImporter.weaponBasePrice[z];
-        //        break;
-        //    }
-        //}
         weaponBasePrice = priceImporter.weaponBasePrice;
         int wave = StageManager.instance.waveLevel + 1;
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
-        weaponPrice = weaponPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
         weaponPrice = MathF.Round(weaponPrice);
     }
     public float GetAngle(Vector2 start, Vector2 end)//각도구하기

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 public class ShopManager : MonoBehaviour, ICustomUpdateMono
 {
     public static ShopManager instance;
@@ -23,11 +24,15 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     private float rerollPrice_Add; //리롤을 누를때마다 증가할 수치
     public List<GameObject> lockList; //잠긴 아이템(가격은 고정된채로 가장 앞 열로 이동)
     public List<GameObject> goodsList;
-
     List<GameObject>[] list;
     StageManager stage;
     ItemManager item;
     public WeaponScrip[] weapon;
+
+    [Header("# 무기 확률 체크")]
+    [SerializeField] List<GameObject> sameWeapon;
+    [SerializeField] List<GameObject> sameClassWeapon;
+    [SerializeField] List<GameObject> allWeapon;
     void Awake()
     {
         instance = this;
@@ -165,10 +170,55 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
                 break;
             }
         }
+        sameWeapon.Clear();
+        sameClassWeapon.Clear();
+        allWeapon.Clear();
+        ///중복 무기와 같은 클래스의 무기를 찾는 코드
+        List<Weapon.Weapons> weaponTypes = new List<Weapon.Weapons>();
+        List<Weapon.SettType> weaponClasses = new List<Weapon.SettType>();
+
+        for (int j = 0; j < stage.playerInfo.weapons.Count; j++)
+        {
+            Weapon_Action weapon = stage.playerInfo.weapons[j].GetComponent<Weapon_Action>();
+            bool isSameType = false;
+            bool isSameClass = false;
+            ///같은 무기 구분
+            Weapon.Weapons type = (Weapon.Weapons)System.Enum.Parse(typeof(Weapon.Weapons), weapon.weaponCode);
+            for (int z = 0; z < weaponTypes.Count; z++)
+            {
+                if (weaponTypes[z] == type)
+                {
+                    isSameType = true;
+                }
+            }
+            if (isSameType == false)
+            {
+                weaponTypes.Add(type);
+            }
+
+            //동일 클래스 구분
+            for (int k = 0; k < weapon.setTypes.Length; k++)
+            {
+                Weapon.SettType weaponClass = weapon.setTypes[k];
+                for (int z = 0; z < weaponClasses.Count; z++)
+                {
+                    if (weaponClasses[z] == weaponClass)
+                    {
+                        isSameClass = true;
+                    }
+                }
+
+                if (isSameClass == false)
+                {
+                    weaponClasses.Add(weaponClass);
+                }
+            } 
+        }
+        weaponTypes = weaponTypes.Distinct().ToList();
+        weaponClasses = weaponClasses.Distinct().ToList();
 
         for (int i = 0 + lockList.Count; i < 5; i++)
         {
-
             float itemChance = 0.65f;
             float weaponChance = 0.35f;
 
@@ -188,43 +238,94 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
             }
             else
             {
-                //float sameWeaponPool, sameClassWeaponPool, allWeaponPool;
-                //int num = 0;
-                ////무기가 없는 경우
-                //if (stage.playerInfo.weapons.Count == 0)
-                //{
-                //    num = Random.Range(0, weapon.Length);
-                //}
-                //else
-                //{
-                //    sameWeaponPool = 0.2f;
-                //    sameClassWeaponPool = 0.15f;
-                //    allWeaponPool = 0.65f;
+                float sameWeaponPool, sameClassWeaponPool, allWeaponPool;
+                int nums = 0;
+                //무기가 없는 경우
+                if (stage.playerInfo.weapons.Count == 0)
+                {
+                    nums = Random.Range(0, weapon.Length);
 
-                //    float[] chanceLise2 = { sameWeaponPool, sameClassWeaponPool, allWeaponPool };
-                //    int weaponIndex = stage.Judgment(chanceLise2);
+                    GameObject product = Get(1);
+                    WeaponGoods weaponGoods = product.GetComponent<WeaponGoods>();
+                    weaponGoods.Init(weapon[nums]);
+                    weaponGoods.transform.SetParent(goodsContent);
+                    goodsList.Add(weaponGoods.gameObject);
+                }
+                else
+                {
+                    sameWeaponPool = 0.2f;
+                    sameClassWeaponPool = 0.15f;
+                    allWeaponPool = 0.65f;
 
-                //    if(weaponIndex == 0)
-                //    {
-                //        int z = stage.playerInfo.weapons[0].GetComponent<Weapon>().weaponNum;
-                //    }
-                //    else if(weaponIndex == 1)
-                //    {
+                    float[] chanceLise2 = { sameWeaponPool, sameClassWeaponPool, allWeaponPool };
+                    int weaponIndex = stage.Judgment(chanceLise2);
 
-                //    }
-                //    else if(weaponIndex == 2)
-                //    {
-                //        num = Random.Range(0, weapon.Length);
-                //    }
-                //}
+                    if (weaponIndex == 0)
+                    {
+                        int num = Random.Range(0, weaponTypes.Count);
+                        nums = (int)weaponTypes[num];
 
-                int num = Random.Range(0, weapon.Length);
-                GameObject product = Get(1);
-                WeaponGoods weaponGoods = product.GetComponent<WeaponGoods>();
-                weaponGoods.Init(weapon[num]/*weapon[num].weaponName, weapon[num].setType, weapon[num].weaponNickNames, weapon[num].weaponImage, weapon[num].attackType*/);
-                weaponGoods.transform.SetParent(goodsContent);
+                        GameObject product = Get(1);
+                        WeaponGoods weaponGoods = product.GetComponent<WeaponGoods>();
+                        weaponGoods.Init(weapon[nums]);
+                        weaponGoods.transform.SetParent(goodsContent);
+                        goodsList.Add(weaponGoods.gameObject);
 
-                goodsList.Add(weaponGoods.gameObject);
+                        sameWeapon.Add(weaponGoods.gameObject);
+                        Debug.Log("같은 무기 (20%) " + weapon[nums].weaponName.ToString());
+                    }
+                    else if (weaponIndex == 1)
+                    {
+                        List<WeaponScrip> weaponScrips = new List<WeaponScrip>();
+                        for (int j = 0; j < weaponClasses.Count; j++)
+                        {
+                            for (int k = 0; k < weapon.Length; k++)
+                            {
+                                for (int l = 0; l < weapon[k].weaponSetType.Length; l++)
+                                {
+                                    if(weaponClasses[j] == weapon[k].weaponSetType[l])
+                                    {
+                                        weaponScrips.Add(weapon[k]);
+                                    }
+                                }
+                            }
+                        }
+                        weaponScrips = weaponScrips.Distinct().ToList();
+                        int num = Random.Range(0, weaponScrips.Count);
+                        for (int j = 0; j < weapon.Length; j++)
+                        {
+                            if(weaponScrips[num] == weapon[j])
+                            {
+                                nums = j;
+                            }
+                        }
+                        GameObject product = Get(1);
+                        WeaponGoods weaponGoods = product.GetComponent<WeaponGoods>();
+                        weaponGoods.Init(weapon[nums]);
+                        weaponGoods.transform.SetParent(goodsContent);
+                        goodsList.Add(weaponGoods.gameObject);
+
+                        sameClassWeapon.Add(weaponGoods.gameObject);
+                        Debug.Log("같은 클래스의 무기 (15%) " + weapon[nums].weaponName.ToString());
+                    }
+                    else
+                    {
+                        
+                        nums = Random.Range(0, weapon.Length);
+
+                        GameObject product = Get(1);
+                        WeaponGoods weaponGoods = product.GetComponent<WeaponGoods>();
+                        weaponGoods.Init(weapon[nums]/*weapon[num].weaponName, weapon[num].setType, weapon[num].weaponNickNames, weapon[num].weaponImage, weapon[num].attackType*/);
+                        weaponGoods.transform.SetParent(goodsContent);
+                        goodsList.Add(weaponGoods.gameObject);
+
+                        allWeapon.Add(weaponGoods.gameObject);
+                        Debug.Log("모든 무기 (65%) " + weapon[nums].weaponName.ToString());
+                    }
+                }
+
+                //int num = Random.Range(0, weapon.Length);
+                
             }
         }
 

@@ -11,6 +11,8 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
     StageManager game;
     [SerializeField]
     private Transform baseObj;
+    [SerializeField]
+    private Transform meleeMuzzle;
     Melee_Bullet bullet;
     bool isFire;
     bool isTimerReset;
@@ -176,12 +178,14 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
         {
             Vector3 targetPos = scanner.target.position;
             Vector3 originalPos = transform.position;
+            float realRange = afterRange - (Vector3.Distance(baseObj.position, meleeMuzzle.position));
 
             Vector3 moveDir = (targetPos - originalPos).normalized;
-            Vector3 destination = originalPos + moveDir * afterRange;
+            Vector3 destination = originalPos + moveDir * realRange;
 
             float moveSpeed = 100f; // 이동 속도
-            float moveDuration = afterRange / moveSpeed;
+            float moveDuration = 0.2f;
+            //float moveDuration = realRange / moveSpeed;
 
             // 타겟 반대 방향으로 일정 거리 이동
             float backDistance = 10f; // 타겟 반대 방향으로 이동할 거리

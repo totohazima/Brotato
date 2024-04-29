@@ -19,6 +19,8 @@ public class Loot_In_Item : MonoBehaviour
     [HideInInspector]
     public int itemNum; //itemManager에서 아이템을 찾기 위함
     ItemScrip scriptable;
+    float itemBasePrice;
+    public float recyclePrice;
     void OnDisable()
     {
         for (int i = 0; i < itemInfoUI.childCount; i++)
@@ -39,14 +41,6 @@ public class Loot_In_Item : MonoBehaviour
     {
         ItemStatInfoTable.Data import = GameManager.instance.gameDataBase.itemStatInfoTable.table[itemNum];
 
-        //int index1 = 0;
-        //for (int i = 0; i < import.itemCode.Length; i++)
-        //{
-        //    if (code == import.itemCode)
-        //    {
-        //        index1 = i;
-        //    }
-        //}
         itemName.text = scriptable.itemName;
         maxCount = import.itemMaxCount;
 
@@ -73,6 +67,15 @@ public class Loot_In_Item : MonoBehaviour
             itemInfo[i] = scriptable.infoText[i];
             text.text = itemInfo[i];
         }
+
+        ItemBasePriceInfoTable.Data priceImporter = GameManager.instance.gameDataBase.itemBasePriceInfoTable.table[itemNum];
+
+        int wave = StageManager.instance.waveLevel + 1;
+        itemBasePrice = priceImporter.itemBasePrice;
+        float itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
+        itemPrice = Mathf.Round(itemPrice);
+        recyclePrice = (itemPrice * 0.25f);
+        recyclePrice = Mathf.Round(recyclePrice);
     }
 
 

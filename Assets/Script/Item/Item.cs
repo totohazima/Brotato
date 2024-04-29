@@ -201,14 +201,9 @@ public class Item : MonoBehaviour, ICustomUpdateMono
 
         ItemBasePriceInfoTable.Data priceImport = GameManager.instance.gameDataBase.itemBasePriceInfoTable.table[index];
 
+        int wave = StageManager.instance.waveLevel + 1;
         itemBasePrice = priceImport.itemBasePrice;
-        //for (int z = 0; z < priceImport.itemCode.Length; z++)
-        //{
-        //    if (itemType.ToString() == priceImport.itemCode[z])
-        //    {
-        //        itemBasePrice = priceImport.itemBasePrice[z];
-        //        break;
-        //    }
-        //}
+        itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
+        itemPrice = MathF.Round(itemPrice);
     }  
 }
