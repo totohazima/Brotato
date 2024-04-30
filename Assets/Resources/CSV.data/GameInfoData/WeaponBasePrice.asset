@@ -14,16 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   table:
   - weaponCode: PISTOL
-    weaponBasePrice: 15
+    weaponBasePrice:
+    - 10
+    - 22
+    - 45
+    - 91
   - weaponCode: DOUBLESHOTGUN
-    weaponBasePrice: 20
+    weaponBasePrice:
+    - 20
+    - 39
+    - 74
+    - 149
   - weaponCode: SPEAR
-    weaponBasePrice: 20
+    weaponBasePrice:
+    - 20
+    - 39
+    - 74
+    - 149
   - weaponCode: SHREDDER
-    weaponBasePrice: 15
+    weaponBasePrice:
+    - 15
+    - 31
+    - 61
+    - 122
   - weaponCode: PUNCH
-    weaponBasePrice: 10
+    weaponBasePrice:
+    - 10
+    - 22
+    - 45
+    - 91
   - weaponCode: WRENCH
-    weaponBasePrice: 20
+    weaponBasePrice:
+    - 20
+    - 39
+    - 74
+    - 149
   - weaponCode: DRIVER
-    weaponBasePrice: 20
+    weaponBasePrice:
+    - 10
+    - 22
+    - 45
+    - 91

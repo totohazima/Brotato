@@ -215,7 +215,7 @@ public class Weapon : MonoBehaviour
         //가격 설정
         WeaponBasePriceInfoTable.Data priceImporter = GameManager.instance.gameDataBase.weaponBasePriceInfoTable.table[weaponNum];
 
-        weaponBasePrice = priceImporter.weaponBasePrice;
+        weaponBasePrice = priceImporter.weaponBasePrice[weaponTier];
         int wave = StageManager.instance.waveLevel + 1;
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
         weaponPrice = MathF.Round(weaponPrice);

@@ -8,6 +8,6 @@ public class WeaponBasePriceInfoTable : GameDataTable<WeaponBasePriceInfoTable.D
     public class Data : GameData
     {
         public string weaponCode;
-        public float weaponBasePrice;
+        public float[] weaponBasePrice;
     }
 }

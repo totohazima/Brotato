@@ -26,7 +26,12 @@ public class WeaponBasePiceImporter : CustomExcelDataImportBase
             data = InfoTable.table[i - 1];
 
             cell = row.GetCell(0); data.weaponCode = (cell == null ? "" : cell.StringCellValue);
-            cell = row.GetCell(1); data.weaponBasePrice = (float)(cell == null ? 0 : cell.NumericCellValue);
+
+            data.weaponBasePrice = new float[4];
+            for (int j = 0; j < 4; j++)
+            {
+                cell = row.GetCell(1 + j); data.weaponBasePrice[j] = (float)(cell == null ? 0 : cell.NumericCellValue);
+            }
 
         }
         EditorUtility.SetDirty(InfoTable);

@@ -263,7 +263,7 @@ public class WeaponGoods : Weapon, UI_Upadte
 
         //가격 설정
         WeaponBasePriceInfoTable.Data priceInfoTable = GameManager.instance.gameDataBase.weaponBasePriceInfoTable.table[weaponNum];
-        weaponBasePrice = priceInfoTable.weaponBasePrice;
+        weaponBasePrice = priceInfoTable.weaponBasePrice[weaponTier];
         int wave = StageManager.instance.waveLevel + 1;
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
         weaponPrice = weaponPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
