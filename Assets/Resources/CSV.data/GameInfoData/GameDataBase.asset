@@ -22,4 +22,4 @@ MonoBehaviour:
   difficultInfoTable: {fileID: 11400000, guid: 9d377e96885e4dc4eba81309512b63e1, type: 2}
   waveStatInfoTable: {fileID: 11400000, guid: f13925d55ae673b439f8ec2502f74b14, type: 2}
   weaponStatInfoTable: {fileID: 11400000, guid: 60a7424595538de4dbba4febfe9802f9, type: 2}
-  ItemTextInfoTable: {fileID: 11400000, guid: 2cfce25b7bba8ac4aa924d1a71c147b0, type: 2}
+  ItemTextInfoTable: {fileID: 0}

@@ -8,13 +8,14 @@ public class Player : MonoBehaviour
     public int characterNum;
     public string characterCode;
     public string characterName;
-    [Header("Stat")]
+    [Header("Basic_Stat")]
     public float maxHealth;
     public float regeneration;
     public float bloodSucking;
     public float persentDamage;
     public float meleeDamage;
     public float rangeDamage;
+    public float elementalDamage;
     public float attackSpeed;
     public float criticalChance;
     public float engine;
@@ -24,18 +25,26 @@ public class Player : MonoBehaviour
     public float accuracy;
     public float speed;
 
-    [HideInInspector] public int consumableHeal;
-    [HideInInspector] public float magnetRange;
-    [HideInInspector] public float expGain;
-    [HideInInspector] public int penetrate;
-    [HideInInspector] public float instantMagnet;
-    [HideInInspector] public float KnockBack;
-    [HideInInspector] public float explosiveDamage;
-    [HideInInspector] public float penetrateDamage;
-    [HideInInspector] public float explosiveSize;
-    [HideInInspector] public int chain;
-    [HideInInspector] public float bossDamage;
-
+    [Header("Detail_Stat")]
+    public float consumableHeal;
+    public float meterialHeal;
+    public float expGain;
+    public float magnetRange;
+    public float priceSale;
+    public float explosiveDamage;
+    public float explosiveSize;
+    public int chain;
+    public int penetrate;
+    public float penetrateDamage;
+    public float bossDamage;
+    public float knockBack;
+    public float doubleMeterial;
+    public float lootInMeterial;
+    public float freeReroll;
+    public float tree;
+    public float enemyAmount;
+    public float enemySpeed;
+    public float instantMagnet;
 
     [HideInInspector] public float maxHealth_Origin;
     [HideInInspector] public float regeneration_Origin;
@@ -43,6 +52,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public float persentDamage_Origin;
     [HideInInspector] public float meleeDamage_Origin;
     [HideInInspector] public float rangeDamage_Origin;
+    [HideInInspector] public float elementalDamage_Origin;
     [HideInInspector] public float attackSpeed_Origin;
     [HideInInspector] public float criticalChance_Origin;
     [HideInInspector] public float engine_Origin;
@@ -52,17 +62,25 @@ public class Player : MonoBehaviour
     [HideInInspector] public float accuracy_Origin;
     [HideInInspector] public float speed_Origin;
 
-    [HideInInspector] public int consumableHeal_Origin;
-    [HideInInspector] public float magnetRange_Origin;
+    [HideInInspector] public float consumableHeal_Origin;
+    [HideInInspector] public float meterialHeal_Origin;
     [HideInInspector] public float expGain_Origin;
-    [HideInInspector] public int penetrate_Origin;
-    [HideInInspector] public float instantMagnet_Origin;
-    [HideInInspector] public float KnockBack_Origin;
+    [HideInInspector] public float magnetRange_Origin;
+    [HideInInspector] public float priceSale_Origin;
     [HideInInspector] public float explosiveDamage_Origin;
-    [HideInInspector] public float penetrateDamage_Origin;
     [HideInInspector] public float explosiveSize_Origin;
     [HideInInspector] public int chain_Origin;
+    [HideInInspector] public int penetrate_Origin;
+    [HideInInspector] public float penetrateDamage_Origin;
     [HideInInspector] public float bossDamage_Origin;
+    [HideInInspector] public float knockBack_Origin;
+    [HideInInspector] public float doubleMeterial_Origin;
+    [HideInInspector] public float lootInMeterial_Origin;
+    [HideInInspector] public float freeReroll_Origin;
+    [HideInInspector] public float tree_Origin;
+    [HideInInspector] public float enemyAmount_Origin;
+    [HideInInspector] public float enemySpeed_Origin;
+    [HideInInspector] public float instantMagnet_Origin;
 
     [Header("ITEM")]
     public List<Item> itemInventory;
@@ -70,6 +88,13 @@ public class Player : MonoBehaviour
     public enum Character
     {
         VERSATILE, //다재다능
+        RANGER, //레인저
+        PACIFIST, //평화주의자
+        MULTITASKER, //멀티태스커
+        GLADIATOR, //검투사
+        ENGINEER, //엔지니어
+        BULL, //황소
+        SOLDIER, //군인
     }
 
     public void StatSetting(int index)
@@ -85,6 +110,7 @@ public class Player : MonoBehaviour
         persentDamage_Origin = import.persentDamage;
         meleeDamage_Origin = import.meleeDamage;
         rangeDamage_Origin = import.rangeDamage;
+        elementalDamage_Origin = import.elementalDamage;
         attackSpeed_Origin = import.attackSpeed;
         criticalChance_Origin = import.criticalChance;
         engine_Origin = import.engine;
@@ -95,6 +121,26 @@ public class Player : MonoBehaviour
         speed_Origin = import.speed;
 
         maxHealth = import.health;
+
+        consumableHeal_Origin = import.consumableHeal;
+        meterialHeal_Origin = import.meterialHeal;
+        expGain_Origin = import.expGain;
+        magnetRange_Origin = import.magnetRange;
+        priceSale_Origin = import.priceSale;
+        explosiveDamage_Origin = import.explosiveDamage;
+        explosiveSize_Origin = import.explosiveSize;
+        chain_Origin = import.chain;
+        penetrate_Origin = import.penetrate;
+        penetrateDamage_Origin = import.penetrateDamage;
+        bossDamage_Origin = import.bossDamage;
+        knockBack_Origin = import.knockBack;
+        doubleMeterial_Origin = import.doubleMeterial;
+        lootInMeterial_Origin = import.lootInMeterial;
+        freeReroll_Origin = import.freeReroll;
+        tree_Origin = import.tree;
+        enemyAmount_Origin = import.enemyAmount;
+        enemySpeed_Origin = import.enemySpeed;
+        instantMagnet_Origin = import.instantMagnet;
 
         StatCalculate();
     }
@@ -116,6 +162,7 @@ public class Player : MonoBehaviour
             persentDamage = persentDamage_Origin;
             meleeDamage = meleeDamage_Origin;
             rangeDamage = rangeDamage_Origin;
+            elementalDamage = elementalDamage_Origin;
             attackSpeed = attackSpeed_Origin;
             criticalChance = criticalChance_Origin;
             engine = engine_Origin;
@@ -124,17 +171,26 @@ public class Player : MonoBehaviour
             evasion = evasion_Origin;
             accuracy = accuracy_Origin;
             speed = speed_Origin;
+
             consumableHeal = consumableHeal_Origin;
-            magnetRange = magnetRange_Origin;
+            meterialHeal = meterialHeal_Origin;
             expGain = expGain_Origin;
-            penetrate = penetrate_Origin;
-            instantMagnet = instantMagnet_Origin;
-            KnockBack = KnockBack_Origin;
+            magnetRange = magnetRange_Origin;
+            priceSale = priceSale_Origin;
             explosiveDamage = explosiveDamage_Origin;
-            penetrateDamage = penetrateDamage_Origin;
             explosiveSize = explosiveSize_Origin;
             chain = chain_Origin;
+            penetrate = penetrate_Origin;
+            penetrateDamage = penetrateDamage_Origin;
             bossDamage = bossDamage_Origin;
+            knockBack = knockBack_Origin;
+            doubleMeterial = doubleMeterial_Origin;
+            lootInMeterial = lootInMeterial_Origin;
+            freeReroll = freeReroll_Origin;
+            tree = tree_Origin;
+            enemyAmount = enemyAmount_Origin;
+            enemySpeed = enemySpeed_Origin;
+            instantMagnet = instantMagnet_Origin;
         }
 
         //아이템 스탯 계산
@@ -164,6 +220,9 @@ public class Player : MonoBehaviour
                         case Stat.PlayerStat.RANGE_DAMAGE:
                             rangeDamage += itemInventory[i].riseStats[j];
                             break;
+                        case Stat.PlayerStat.ELEMENTAL_DAMAGE:
+                            elementalDamage += itemInventory[i].riseStats[j];
+                            break;
                         case Stat.PlayerStat.ATTACK_SPEED:
                             attackSpeed += itemInventory[i].riseStats[j];
                             break;
@@ -189,28 +248,22 @@ public class Player : MonoBehaviour
                             speed += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.CONSUMABLE_HEAL:
-                            consumableHeal += (int)itemInventory[i].riseStats[j];
+                            consumableHeal += itemInventory[i].riseStats[j];
                             break;
-                        case Stat.PlayerStat.MAGNET_RANGE:
-                            magnetRange += itemInventory[i].riseStats[j];
+                        case Stat.PlayerStat.METERIAL_HEAL:
+                            meterialHeal += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.EXP_GAIN:
                             expGain += itemInventory[i].riseStats[j];
                             break;
-                        case Stat.PlayerStat.PENETRATE:
-                            penetrate += (int)itemInventory[i].riseStats[j];
+                        case Stat.PlayerStat.MAGNET_RANGE:
+                            magnetRange += itemInventory[i].riseStats[j];
                             break;
-                        case Stat.PlayerStat.INSTNAT_MAGNET:
-                            instantMagnet += itemInventory[i].riseStats[j];
-                            break;
-                        case Stat.PlayerStat.KNOCK_BACK:
-                            KnockBack += itemInventory[i].riseStats[j];
+                        case Stat.PlayerStat.PRICE_SALE:
+                            priceSale += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.EXPLOSIVE_DAMAGE:
                             explosiveDamage += itemInventory[i].riseStats[j];
-                            break;
-                        case Stat.PlayerStat.PENETRTE_DAMAGE:
-                            penetrateDamage += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.EXPLOSIVE_SIZE:
                             explosiveSize += itemInventory[i].riseStats[j];
@@ -218,8 +271,38 @@ public class Player : MonoBehaviour
                         case Stat.PlayerStat.CHAIN:
                             chain += (int)itemInventory[i].riseStats[j];
                             break;
+                        case Stat.PlayerStat.PENETRATE:
+                            penetrate += (int)itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.PENETRTE_DAMAGE:
+                            penetrateDamage += itemInventory[i].riseStats[j];
+                            break;
                         case Stat.PlayerStat.BOSS_DAMAGE:
                             bossDamage += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.KNOCK_BACK:
+                            knockBack += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.DOUBLE_METERIAL:
+                            doubleMeterial += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.LOOT_IN_METERIAL:
+                            lootInMeterial += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.FREE_REROLL:
+                            freeReroll += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.TREE:
+                            tree += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.ENEMY_AMOUNT:
+                            enemyAmount += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.ENEMY_SPEED:
+                            enemySpeed += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.INSTNAT_MAGNET:
+                            instantMagnet += itemInventory[i].riseStats[j];
                             break;
                     }
                 }
@@ -244,6 +327,9 @@ public class Player : MonoBehaviour
                             break;
                         case Stat.PlayerStat.RANGE_DAMAGE:
                             rangeDamage -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.ELEMENTAL_DAMAGE:
+                            elementalDamage -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.ATTACK_SPEED:
                             attackSpeed -= itemInventory[i].decreaseStats[j];
@@ -270,28 +356,22 @@ public class Player : MonoBehaviour
                             speed -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.CONSUMABLE_HEAL:
-                            consumableHeal -= (int)itemInventory[i].decreaseStats[j];
+                            consumableHeal -= itemInventory[i].decreaseStats[j];
                             break;
-                        case Stat.PlayerStat.MAGNET_RANGE:
-                            magnetRange -= itemInventory[i].decreaseStats[j];
+                        case Stat.PlayerStat.METERIAL_HEAL:
+                            meterialHeal -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.EXP_GAIN:
                             expGain -= itemInventory[i].decreaseStats[j];
                             break;
-                        case Stat.PlayerStat.PENETRATE:
-                            penetrate -= (int)itemInventory[i].decreaseStats[j];
+                        case Stat.PlayerStat.MAGNET_RANGE:
+                            magnetRange -= itemInventory[i].decreaseStats[j];
                             break;
-                        case Stat.PlayerStat.INSTNAT_MAGNET:
-                            instantMagnet -= itemInventory[i].decreaseStats[j];
-                            break;
-                        case Stat.PlayerStat.KNOCK_BACK:
-                            KnockBack -= itemInventory[i].decreaseStats[j];
+                        case Stat.PlayerStat.PRICE_SALE:
+                            priceSale -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.EXPLOSIVE_DAMAGE:
                             explosiveDamage -= itemInventory[i].decreaseStats[j];
-                            break;
-                        case Stat.PlayerStat.PENETRTE_DAMAGE:
-                            penetrateDamage -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.EXPLOSIVE_SIZE:
                             explosiveSize -= itemInventory[i].decreaseStats[j];
@@ -299,8 +379,38 @@ public class Player : MonoBehaviour
                         case Stat.PlayerStat.CHAIN:
                             chain -= (int)itemInventory[i].decreaseStats[j];
                             break;
+                        case Stat.PlayerStat.PENETRATE:
+                            penetrate -= (int)itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.PENETRTE_DAMAGE:
+                            penetrateDamage -= itemInventory[i].decreaseStats[j];
+                            break;
                         case Stat.PlayerStat.BOSS_DAMAGE:
                             bossDamage -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.KNOCK_BACK:
+                            knockBack -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.DOUBLE_METERIAL:
+                            doubleMeterial -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.LOOT_IN_METERIAL:
+                            lootInMeterial -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.FREE_REROLL:
+                            freeReroll -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.TREE:
+                            tree -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.ENEMY_AMOUNT:
+                            enemyAmount -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.ENEMY_SPEED:
+                            enemySpeed -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.INSTNAT_MAGNET:
+                            instantMagnet -= itemInventory[i].decreaseStats[j];
                             break;
                     }
                 }

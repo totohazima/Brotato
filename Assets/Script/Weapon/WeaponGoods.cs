@@ -85,7 +85,7 @@ public class WeaponGoods : Weapon, UI_Upadte
         afterCriticalChance = criticalChance + player.criticalChance;
         afterCoolTime = coolTime - (coolTime * (player.attackSpeed / 100));
         afterRange = range + player.range;
-        afterKnockBack = knockBack + player.KnockBack;
+        afterKnockBack = knockBack + player.knockBack;
         afterPenetrate = penetrate + player.penetrate;
         afterBloodSucking = bloodSucking + player.bloodSucking;
 
@@ -266,7 +266,7 @@ public class WeaponGoods : Weapon, UI_Upadte
         weaponBasePrice = priceInfoTable.weaponBasePrice[weaponTier];
         int wave = StageManager.instance.waveLevel + 1;
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
-        weaponPrice = weaponPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
+        weaponPrice = weaponPrice * ((100 + StageManager.instance.playerInfo.priceSale) / 100);
         weaponPrice = System.MathF.Round(weaponPrice);
         if (weaponPrice > StageManager.instance.money)
         {

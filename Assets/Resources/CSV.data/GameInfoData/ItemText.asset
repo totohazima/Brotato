@@ -16,7 +16,7 @@ MonoBehaviour:
   - itemCode: 0
     textCount: 1
     text:
-    - "<color=#4CFF52>+30%</color> \uD68D\uB4DD \uBC94\uC704"
+    - "<color=#4CFF52>+3%</color> \uD68D\uB4DD \uBC94\uC704"
   - itemCode: 1
     textCount: 3
     text:
@@ -27,8 +27,8 @@ MonoBehaviour:
     textCount: 2
     text:
     - "\uC7AC\uB8CC\uAC00 \uB5A8\uC5B4\uC84C\uC744 \uB54C \uC7AC\uB8CC\uB97C \uC989\uC2DC
-      \uB04C\uC5B4\uB2F9\uAE38 \uD655\uB960 <color=#4CFF52>+20%</color>"
-    - "<color=#4CFF52>+10</color> \uBC94\uC704"
+      \uB04C\uC5B4\uB2F9\uAE38 \uD655\uB960 <color=#4CFF52>+2%</color>"
+    - "<color=#4CFF52>+1</color> \uBC94\uC704"
   - itemCode: 3
     textCount: 2
     text:
@@ -66,7 +66,7 @@ MonoBehaviour:
   - itemCode: 10
     textCount: 2
     text:
-    - "<color=#4CFF52>+10%</color> \uACF5\uACA9 \uC18D\uB3C4"
+    - "<color=#4CFF52>+1%</color> \uACF5\uACA9 \uC18D\uB3C4"
     - "<color=red>-2%</color> \uB370\uBBF8\uC9C0"
   - itemCode: 11
     textCount: 1
@@ -103,7 +103,7 @@ MonoBehaviour:
   - itemCode: 17
     textCount: 1
     text:
-    - "<color=#4CFF52>+20</color> \uBC94\uC704"
+    - "<color=#4CFF52>+2</color> \uBC94\uC704"
   - itemCode: 18
     textCount: 2
     text:
@@ -145,7 +145,7 @@ MonoBehaviour:
     textCount: 1
     text:
     - "12\uCD08\uB9C8\uB2E4 \uC9C0\uB8B0\uAC00 \uC0DD\uC131\uB418\uC5B4 \uD574\uB2F9
-      \uC9C0\uC5ED\uC5D0 10+(100%<sprite=3>)\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+      \uC9C0\uC5ED\uC5D0 1+(1%<sprite=3>)\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   - itemCode: 26
     textCount: 1
     text:
@@ -169,25 +169,29 @@ MonoBehaviour:
   - itemCode: 30
     textCount: 2
     text:
-    - "<color=#4CFF52>+20%</color> EXP \uD68D\uB4DD"
+    - "<color=#4CFF52>+2%</color> EXP \uD68D\uB4DD"
     - "<color=red>-8</color> \uBC94\uC704"
   - itemCode: 31
     textCount: 3
     text:
     - "\uD22C\uC0AC\uCCB4\uAC00 <color=#4CFF52>1</color>\uBA85\uC758 \uCD94\uAC00
       \uB300\uC0C1\uC744 \uAD00\uD1B5\uD569\uB2C8\uB2E4."
-    - "<color=red>-20%</color> \uAD00\uD1B5 \uD53C\uD574"
+    - "<color=red>-2%</color> \uAD00\uD1B5 \uD53C\uD574"
     - "<color=red>-5%</color> \uB370\uBBF8\uC9C0"
+  - itemCode: 32
+    textCount: 1
+    text:
+    - "\uB354 \uB9CE\uC740 \uB098\uBB34\uAC00 \uC0DD\uC131\uB429\uB2C8\uB2E4."
   - itemCode: 33
     textCount: 1
     text:
-    - "0.73\uCD08\uB9C8\uB2E4 10+(80%<sprite=3>) \uD53C\uD574\uB97C \uC8FC\uB294
-      \uCD1D\uC54C\uC744 \uBC1C\uC0AC\uD558\uB294 \uD3EC\uD0D1\uC744 \uC0DD\uC131\uD569\uB2C8\uB2E4."
+    - ".73\uCD08\uB9C8\uB2E4 1+(8%<sprite=3>) \uD53C\uD574\uB97C \uC8FC\uB294 \uCD1D\uC54C\uC744
+      \uBC1C\uC0AC\uD558\uB294 \uD3EC\uD0D1\uC744 \uC0DD\uC131\uD569\uB2C8\uB2E4."
   - itemCode: 34
     textCount: 2
     text:
-    - "\uC801\uC744 \uACF5\uACA9\uD558\uBA74 \uC801\uC758 \uC18D\uB3C4\uAC00 <color=red>+10%</color>
-      \uAC10\uC18C\uD569\uB2C8\uB2E4. \uCD5C\uB300:<color=#4CFF52>30%</color>"
+    - "\uC801\uC744 \uACF5\uACA9\uD558\uBA74 \uC801\uC758 \uC18D\uB3C4\uAC00 <color=red>+1%</color>
+      \uAC10\uC18C\uD569\uB2C8\uB2E4. \uCD5C\uB300:<color=#4CFF52>3%</color>"
     - "<color=red>-3%</color> \uC18D\uB3C4"
   - itemCode: 35
     textCount: 2

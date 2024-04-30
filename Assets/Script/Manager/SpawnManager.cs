@@ -208,7 +208,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     public IEnumerator TreeSpawn()
     {
         float treeNum = stage.waveStat.table[stage.waveLevel].waveTreeStat;
-        float a = (treeNum + ItemEffect.instance.Tree()) * 0.33f;
+        float a = (treeNum + stage.playerInfo.tree) * 0.33f;
         float b = (float)System.Math.Truncate(a);
         float c = (a - b) * 100;
 

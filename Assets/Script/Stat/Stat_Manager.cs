@@ -143,26 +143,26 @@ public class Stat_Manager : MonoBehaviour, UI_Upadte
     private void ViewDetailStats()
     {
         player = StageManager.instance.playerInfo;
-        ItemEffect effect = ItemEffect.instance;
+        //ItemEffect effect = ItemEffect.instance;
 
         detail_Status_Num[0].text = player.consumableHeal.ToString("F0");
-        detail_Status_Num[1].text = effect.CuteMonkey().ToString("F0");
+        detail_Status_Num[1].text = player.meterialHeal.ToString("F0");
         detail_Status_Num[2].text = player.expGain.ToString("F0");
         detail_Status_Num[3].text = player.magnetRange.ToString("F0");
-        detail_Status_Num[4].text = effect.Coupon().ToString("F0");
+        detail_Status_Num[4].text = player.priceSale.ToString("F0");
         detail_Status_Num[5].text = player.explosiveDamage.ToString("F0");
         detail_Status_Num[6].text = player.explosiveSize.ToString("F0");
         detail_Status_Num[7].text = player.chain.ToString("F0");
         detail_Status_Num[8].text = player.penetrate.ToString("F0");
         detail_Status_Num[9].text = player.penetrateDamage.ToString("F0");
         detail_Status_Num[10].text = player.bossDamage.ToString("F0");
-        detail_Status_Num[11].text = player.KnockBack.ToString("F0");
-        detail_Status_Num[12].text = "0";
-        detail_Status_Num[13].text = effect.Bag().ToString("F0");
-        detail_Status_Num[14].text = "0";
-        detail_Status_Num[15].text = effect.Tree().ToString("F0");
-        detail_Status_Num[16].text = effect.GentleAlien().ToString("F0");
-        detail_Status_Num[17].text = "0";
+        detail_Status_Num[11].text = player.knockBack.ToString("F0");
+        detail_Status_Num[12].text = player.doubleMeterial.ToString("F0");
+        detail_Status_Num[13].text = player.lootInMeterial.ToString("F0");
+        detail_Status_Num[14].text = player.freeReroll.ToString("F0");
+        detail_Status_Num[15].text = player.tree.ToString("F0");
+        detail_Status_Num[16].text = player.enemyAmount.ToString("F0");
+        detail_Status_Num[17].text = player.enemySpeed.ToString("F0");
 
         for (int i = 0; i < detail_Status.Length; i++)
         {

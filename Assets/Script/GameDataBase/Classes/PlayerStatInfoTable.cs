@@ -15,6 +15,7 @@ public class PlayerStatInfoTable : GameDataTable<PlayerStatInfoTable.Data>
         public float persentDamage;
         public float meleeDamage;
         public float rangeDamage;
+        public float elementalDamage;
         public float attackSpeed;
         public float criticalChance;
         public float engine;
@@ -23,5 +24,25 @@ public class PlayerStatInfoTable : GameDataTable<PlayerStatInfoTable.Data>
         public float evasion;
         public float accuracy;
         public float speed;
+
+        public float consumableHeal;
+        public float meterialHeal;
+        public float expGain;
+        public float magnetRange;
+        public float priceSale;
+        public float explosiveDamage;
+        public float explosiveSize;
+        public int chain;
+        public int penetrate;
+        public float penetrateDamage;
+        public float bossDamage;
+        public float knockBack;
+        public float doubleMeterial;
+        public float lootInMeterial;
+        public float freeReroll;
+        public float tree;
+        public float enemyAmount;
+        public float enemySpeed;
+        public float instantMagnet;
     }
 }

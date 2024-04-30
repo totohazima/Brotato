@@ -13,427 +13,368 @@ MonoBehaviour:
   m_Name: ItemStat
   m_EditorClassIdentifier: 
   table:
-  - itemCode: ALIEN_TONGUE
+  - itemCode: 0
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode:
-    - MAGNET_RANGE
+    riseStatCode: 13000000
     riseNum:
     - 30
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: ALIEN_WORM
+  - itemCode: 1
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
-    riseStatCode:
-    - REGENERATION
-    - MAXHEALTH
+    riseStatCode: 0200000001000000
     riseNum:
     - 2
     - 3
-    decreaseStatCode:
-    - CONSUMABLE_HEAL
+    decreaseStatCode: 10000000
     decreaseNum:
     - 1
-  - itemCode: BABY_GECKO
+  - itemCode: 2
     itemMaxCount: 5
     statRiseCount: 2
     statDecreaseCount: 0
-    riseStatCode:
-    - INSTNAT_MAGNET
-    - RANGE
+    riseStatCode: 220000000b000000
     riseNum:
     - 20
     - 10
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: BAG
+  - itemCode: 3
     itemMaxCount: 3
-    statRiseCount: 0
+    statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode: []
-    riseNum: []
-    decreaseStatCode:
-    - SPEED
+    riseStatCode: 1d000000
+    riseNum:
+    - 15
+    decreaseStatCode: 0f000000
     decreaseNum:
     - 1
-  - itemCode: BEANIE
+  - itemCode: 4
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - SPEED
+    riseStatCode: 0f000000
     riseNum:
     - 4
-    decreaseStatCode:
-    - RANGE
+    decreaseStatCode: 0b000000
     decreaseNum:
     - 6
-  - itemCode: BOOK
+  - itemCode: 5
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode:
-    - ENGINE
+    riseStatCode: 0a000000
     riseNum:
     - 1
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: BOXING_GLOVE
+  - itemCode: 6
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode:
-    - KNOCK_BACK
+    riseStatCode: 1b000000
     riseNum:
     - 3
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: BROKEN_MOUTH
+  - itemCode: 7
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - MAXHEALTH
+    riseStatCode: 01000000
     riseNum:
     - 5
-    decreaseStatCode:
-    - REGENERATION
+    decreaseStatCode: 02000000
     decreaseNum:
     - 1
-  - itemCode: CAKE
+  - itemCode: 8
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - MAXHEALTH
+    riseStatCode: 01000000
     riseNum:
     - 3
-    decreaseStatCode:
-    - PERSENT_DAMAGE
+    decreaseStatCode: 04000000
     decreaseNum:
     - 1
-  - itemCode: CLAW_TREE
+  - itemCode: 9
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
-    riseStatCode:
-    - MELEE_DAMAGE
-    - CRITICAL_CHANCE
+    riseStatCode: 0500000009000000
     riseNum:
     - 1
     - 3
-    decreaseStatCode:
-    - MAXHEALTH
+    decreaseStatCode: 01000000
     decreaseNum:
     - 1
-  - itemCode: COFFEE
+  - itemCode: 10
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - ATTACK_SPEED
+    riseStatCode: 08000000
     riseNum:
     - 10
-    decreaseStatCode:
-    - PERSENT_DAMAGE
+    decreaseStatCode: 04000000
     decreaseNum:
     - 2
-  - itemCode: COUPON
+  - itemCode: 11
     itemMaxCount: 5
-    statRiseCount: 0
+    statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode: []
-    riseNum: []
-    decreaseStatCode: []
+    riseStatCode: 14000000
+    riseNum:
+    - -5
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: CUTE_MONKEY
+  - itemCode: 12
     itemMaxCount: 13
-    statRiseCount: 0
+    statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode: []
-    riseNum: []
-    decreaseStatCode:
-    - RANGE_DAMAGE
+    riseStatCode: 11000000
+    riseNum:
+    - 8
+    decreaseStatCode: 06000000
     decreaseNum:
     - 1
-  - itemCode: DEFECTIVE_STEROIDS
+  - itemCode: 13
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
-    riseStatCode:
-    - MELEE_DAMAGE
-    - MAXHEALTH
+    riseStatCode: 0500000001000000
     riseNum:
     - 2
     - 2
-    decreaseStatCode:
-    - ATTACK_SPEED
+    decreaseStatCode: 08000000
     decreaseNum:
     - 3
-  - itemCode: DUCT_TAPE
+  - itemCode: 14
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
-    riseStatCode:
-    - ARMOR
-    - ENGINE
+    riseStatCode: 0c0000000a000000
     riseNum:
     - 1
     - 1
-    decreaseStatCode:
-    - MAXHEALTH
+    decreaseStatCode: 01000000
     decreaseNum:
     - 2
-  - itemCode: DYNAMITE
+  - itemCode: 15
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode:
-    - EXPLOSIVE_DAMAGE
+    riseStatCode: 15000000
     riseNum:
     - 15
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: GENTLE_ALIEN
+  - itemCode: 16
     itemMaxCount: 10
-    statRiseCount: 2
+    statRiseCount: 3
     statDecreaseCount: 0
-    riseStatCode:
-    - PERSENT_DAMAGE
-    - MAXHEALTH
+    riseStatCode: 040000002000000001000000
     riseNum:
     - 5
+    - 5
     - 2
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: GLASSES
+  - itemCode: 17
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode:
-    - RANGE
+    riseStatCode: 0b000000
     riseNum:
     - 20
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: GOAT_SKULL
+  - itemCode: 18
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - MELEE_DAMAGE
+    riseStatCode: 05000000
     riseNum:
     - 3
-    decreaseStatCode:
-    - CRITICAL_CHANCE
+    decreaseStatCode: 09000000
     decreaseNum:
     - 2
-  - itemCode: GUMMY_BERSERKER
+  - itemCode: 19
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
-    riseStatCode:
-    - ATTACK_SPEED
-    - RANGE
+    riseStatCode: 080000000b000000
     riseNum:
     - 5
     - 15
-    decreaseStatCode:
-    - ARMOR
+    decreaseStatCode: 0c000000
     decreaseNum:
     - 1
-  - itemCode: HEAD_INJURY
+  - itemCode: 20
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - PERSENT_DAMAGE
+    riseStatCode: 04000000
     riseNum:
     - 6
-    decreaseStatCode:
-    - RANGE
+    decreaseStatCode: 0b000000
     decreaseNum:
     - 8
-  - itemCode: HEDGEHOG
+  - itemCode: 21
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
-    riseStatCode:
-    - MELEE_DAMAGE
-    - RANGE_DAMAGE
+    riseStatCode: 0500000006000000
     riseNum:
     - 2
     - 1
-    decreaseStatCode:
-    - REGENERATION
+    decreaseStatCode: 02000000
     decreaseNum:
     - 1
-  - itemCode: HELMET
+  - itemCode: 22
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - ARMOR
+    riseStatCode: 0c000000
     riseNum:
     - 1
-    decreaseStatCode:
-    - SPEED
+    decreaseStatCode: 0f000000
     decreaseNum:
     - 2
-  - itemCode: INJECTION
+  - itemCode: 23
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - PERSENT_DAMAGE
+    riseStatCode: 04000000
     riseNum:
     - 7
-    decreaseStatCode:
-    - MAXHEALTH
+    decreaseStatCode: 01000000
     decreaseNum:
     - 2
-  - itemCode: INSANITY
+  - itemCode: 24
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - CRITICAL_CHANCE
+    riseStatCode: 09000000
     riseNum:
     - 6
-    decreaseStatCode:
-    - PERSENT_DAMAGE
+    decreaseStatCode: 04000000
     decreaseNum:
     - 3
-  - itemCode: LAND_MINES
+  - itemCode: 25
     itemMaxCount: -100
     statRiseCount: 0
     statDecreaseCount: 0
-    riseStatCode: []
+    riseStatCode: 
     riseNum: []
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: LEMONADE
+  - itemCode: 26
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode:
-    - CONSUMABLE_HEAL
+    riseStatCode: 10000000
     riseNum:
     - 1
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: LENS
+  - itemCode: 27
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - RANGE_DAMAGE
+    riseStatCode: 06000000
     riseNum:
     - 1
-    decreaseStatCode:
-    - RANGE
+    decreaseStatCode: 0b000000
     decreaseNum:
     - 5
-  - itemCode: PENCIL
+  - itemCode: 28
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 2
-    riseStatCode:
-    - ENGINE
+    riseStatCode: 0a000000
     riseNum:
     - 2
-    decreaseStatCode:
-    - ATTACK_SPEED
-    - CRITICAL_CHANCE
+    decreaseStatCode: 0800000009000000
     decreaseNum:
     - 1
     - 1
-  - itemCode: PLANT
+  - itemCode: 29
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - REGENERATION
+    riseStatCode: 02000000
     riseNum:
     - 3
-    decreaseStatCode:
-    - BLOOD_SUCKING
+    decreaseStatCode: 03000000
     decreaseNum:
     - 1
-  - itemCode: SCAR
+  - itemCode: 30
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - EXP_GAIN
+    riseStatCode: 12000000
     riseNum:
     - 20
-    decreaseStatCode:
-    - RANGE
+    decreaseStatCode: 0b000000
     decreaseNum:
     - 8
-  - itemCode: SHARP_BULLET
+  - itemCode: 31
     itemMaxCount: 1
     statRiseCount: 1
     statDecreaseCount: 2
-    riseStatCode:
-    - PENETRATE
+    riseStatCode: 18000000
     riseNum:
     - 1
-    decreaseStatCode:
-    - PENETRTE_DAMAGE
-    - PERSENT_DAMAGE
+    decreaseStatCode: 1900000004000000
     decreaseNum:
     - 20
     - 5
-  - itemCode: TREE
+  - itemCode: 32
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 0
+    riseStatCode: 1f000000
+    riseNum:
+    - 1
+    decreaseStatCode: 
+    decreaseNum: []
+  - itemCode: 33
     itemMaxCount: -100
     statRiseCount: 0
     statDecreaseCount: 0
-    riseStatCode: []
+    riseStatCode: 
     riseNum: []
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []
-  - itemCode: TURRET
-    itemMaxCount: -100
-    statRiseCount: 0
-    statDecreaseCount: 0
-    riseStatCode: []
-    riseNum: []
-    decreaseStatCode: []
-    decreaseNum: []
-  - itemCode: UGLY_TOOTH
+  - itemCode: 34
     itemMaxCount: 1
     statRiseCount: 0
     statDecreaseCount: 1
-    riseStatCode: []
+    riseStatCode: 
     riseNum: []
-    decreaseStatCode:
-    - SPEED
+    decreaseStatCode: 0f000000
     decreaseNum:
     - 3
-  - itemCode: WEIRD_FOOD
+  - itemCode: 35
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode:
-    - CONSUMABLE_HEAL
+    riseStatCode: 10000000
     riseNum:
     - 2
-    decreaseStatCode:
-    - EVASION
+    decreaseStatCode: 0d000000
     decreaseNum:
     - 2
-  - itemCode: WEIRD_GHOST
+  - itemCode: 36
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode:
-    - MAXHEALTH
+    riseStatCode: 01000000
     riseNum:
     - 3
-    decreaseStatCode: []
+    decreaseStatCode: 
     decreaseNum: []

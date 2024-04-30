@@ -15,6 +15,7 @@ public class Stat
         PERSENT_DAMAGE,  //퍼뎀, 퍼센트
         MELEE_DAMAGE,    //근뎀, 정수
         RANGE_DAMAGE,    //원뎀, 정수
+        ELEMENTAL_DAMAGE, //원소대미지, 정수
         ATTACK_SPEED,    //공속, 퍼센트
         CRITICAL_CHANCE, //치확, 퍼센트
         ENGINE,         //엔진, 퍼센트
@@ -25,16 +26,24 @@ public class Stat
         SPEED,          //이속, 퍼센트
 
         CONSUMABLE_HEAL,
-        MAGNET_RANGE,
+        METERIAL_HEAL,
         EXP_GAIN,
-        PENETRATE,
-        INSTNAT_MAGNET,
-        KNOCK_BACK,
+        MAGNET_RANGE,
+        PRICE_SALE,
         EXPLOSIVE_DAMAGE,
-        PENETRTE_DAMAGE,
         EXPLOSIVE_SIZE,
         CHAIN,
+        PENETRATE,
+        PENETRTE_DAMAGE,
         BOSS_DAMAGE,
+        KNOCK_BACK,
+        DOUBLE_METERIAL,
+        LOOT_IN_METERIAL,
+        FREE_REROLL,
+        TREE,
+        ENEMY_AMOUNT,
+        ENEMY_SPEED,
+        INSTNAT_MAGNET,
     }
     
 }

@@ -11,9 +11,9 @@ public class ItemStatInfoTable : GameDataTable<ItemStatInfoTable.Data>
         public int itemMaxCount;
         public int statRiseCount;
         public int statDecreaseCount;
-        public string[] riseStatCode;
+        public Stat.PlayerStat[] riseStatCode;
         public float[] riseNum;
-        public string[] decreaseStatCode;
+        public Stat.PlayerStat[] decreaseStatCode;
         public float[] decreaseNum;
     }
 }

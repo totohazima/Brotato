@@ -179,14 +179,14 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         decreaseStat = new Stat.PlayerStat[decreaseCount];
         decreaseStats = new float[decreaseCount];
 
-        string[] name1 = new string[riseCount];
-        string[] name2 = new string[decreaseCount];
+        Stat.PlayerStat[] name1 = new Stat.PlayerStat[riseCount];
+        Stat.PlayerStat[] name2 = new Stat.PlayerStat[decreaseCount];
 
         int i = 0;
         while (i < riseCount)
         {
             name1[i] = import.riseStatCode[i];
-            riseStat[i] = (Stat.PlayerStat)Enum.Parse(typeof(Stat.PlayerStat), name1[i]);
+            riseStat[i] = name1[i];
             riseStats[i] = import.riseNum[i];
             i++;
         }
@@ -194,7 +194,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         while (i < decreaseCount)
         {
             name2[i] = import.decreaseStatCode[i];
-            decreaseStat[i] = (Stat.PlayerStat)Enum.Parse(typeof(Stat.PlayerStat), name2[i]);
+            decreaseStat[i] = name2[i];
             decreaseStats[i] = import.decreaseNum[ i];
             i++;
         }

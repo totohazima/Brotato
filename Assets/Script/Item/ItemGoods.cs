@@ -66,7 +66,7 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
         //}
         int wave = StageManager.instance.waveLevel + 1;
         itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
-        itemPrice = itemPrice * ((100 + ItemEffect.instance.Coupon()) / 100);
+        itemPrice = itemPrice * ((100 + StageManager.instance.playerInfo.priceSale) / 100);
         itemPrice = MathF.Round(itemPrice);
         if (itemPrice > StageManager.instance.money)
         {

@@ -32,14 +32,35 @@ public class PlayerStatImporter : CustomExcelDataImportBase
             cell = row.GetCell(5); data.persentDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
             cell = row.GetCell(6); data.meleeDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
             cell = row.GetCell(7); data.rangeDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(8); data.attackSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(9); data.criticalChance = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(10); data.engine = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(11); data.range = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(12); data.armor = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(13); data.evasion = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(14); data.accuracy = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(15); data.speed = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(8); data.elementalDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(9); data.attackSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(10); data.criticalChance = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(11); data.engine = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(12); data.range = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(13); data.armor = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(14); data.evasion = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(15); data.accuracy = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(16); data.speed = (float)(cell == null ? 0 : cell.NumericCellValue);
+
+            cell = row.GetCell(17); data.consumableHeal = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(18); data.meterialHeal = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(19); data.expGain = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(20); data.magnetRange = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(22); data.priceSale = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(22); data.explosiveDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(23); data.explosiveSize = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(24); data.chain = (int)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(25); data.penetrate = (int)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(26); data.penetrateDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(27); data.bossDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(28); data.knockBack = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(29); data.doubleMeterial = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(30); data.lootInMeterial = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(31); data.freeReroll = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(32); data.tree = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(33); data.enemyAmount = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(34); data.enemySpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(35); data.instantMagnet = (float)(cell == null ? 0 : cell.NumericCellValue);
         }
         EditorUtility.SetDirty(InfoTable);
     }

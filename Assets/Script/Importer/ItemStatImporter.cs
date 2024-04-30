@@ -26,22 +26,22 @@ public class ItemStatImporter : CustomExcelDataImportBase
                 data.statRiseCount = (int)(row.GetCell(2)?.NumericCellValue ?? 0);
                 data.statDecreaseCount = (int)(row.GetCell(3)?.NumericCellValue ?? 0);
 
-                data.riseStatCode = new string[data.statRiseCount];
+                data.riseStatCode = new Stat.PlayerStat[data.statRiseCount];
                 data.riseNum = new float[data.statRiseCount];
-                data.decreaseStatCode = new string[data.statDecreaseCount];
+                data.decreaseStatCode = new Stat.PlayerStat[data.statDecreaseCount];
                 data.decreaseNum = new float[data.statDecreaseCount];
 
                 for (int j = 0; j < data.statRiseCount; j++)
                 {
                     IRow riseRow = sheet.GetRow(i + j);
-                    data.riseStatCode[j] = (riseRow.GetCell(4)?.StringCellValue ?? "");
+                    data.riseStatCode[j] = (Stat.PlayerStat)System.Enum.Parse(typeof(Stat.PlayerStat), (riseRow.GetCell(4)?.StringCellValue ?? ""));
                     data.riseNum[j] = (float)(riseRow.GetCell(5)?.NumericCellValue ?? 0);
                 }
 
                 for (int j = 0; j < data.statDecreaseCount; j++)
                 {
                     IRow decreaseRow = sheet.GetRow(i + j);
-                    data.decreaseStatCode[j] = (decreaseRow.GetCell(6)?.StringCellValue ?? "");
+                    data.decreaseStatCode[j] = (Stat.PlayerStat)System.Enum.Parse(typeof(Stat.PlayerStat), (decreaseRow.GetCell(6)?.StringCellValue ?? ""));
                     data.decreaseNum[j] = (float)(decreaseRow.GetCell(7)?.NumericCellValue ?? 0);
                 }
 

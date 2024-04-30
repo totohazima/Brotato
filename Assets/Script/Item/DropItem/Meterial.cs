@@ -41,8 +41,7 @@ public class Meterial : DropItem
 
             if (game.curHp < game.maxHp)
             {
-                float monkeyChance = ItemEffect.instance.CuteMonkey();
-                monkeyChance /= 100;
+                float monkeyChance = (StageManager.instance.playerInfo.meterialHeal / 100);
                 float failure = 1 - monkeyChance;
                 float[] chanceLise = { monkeyChance, failure };
                 int index = game.Judgment(chanceLise);

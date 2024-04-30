@@ -210,7 +210,7 @@ public class Weapon : MonoBehaviour
         afterRange = preRange / 10;
         afterPenetrateDamage = -penetrateDamage + player.penetrateDamage;
         afterBloodSucking = bloodSucking + player.bloodSucking;
-        afterKnockBack = knockBack + player.KnockBack;
+        afterKnockBack = knockBack + player.knockBack;
 
         //가격 설정
         WeaponBasePriceInfoTable.Data priceImporter = GameManager.instance.gameDataBase.weaponBasePriceInfoTable.table[weaponNum];
