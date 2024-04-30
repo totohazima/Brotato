@@ -10,16 +10,6 @@ public class ItemStatImporter : CustomExcelDataImportBase
 
     public override void ImporteExcel(string _excelName, ISheet sheet)
     {
-        //int sheetIndex = 0;
-        //for (int i = 0; i <= sheet.LastRowNum; i++)
-        //{
-        //    IRow rows = sheet.GetRow(i);
-        //    if (rows.GetCell(0).StringCellValue != "null")
-        //    {
-        //        sheetIndex++;
-        //    }
-        //}
-
         ItemStatInfoTable InfoTable = ExcelDataImporter.LoadOrCreateAsset<ItemStatInfoTable>("Assets/Resources/CSV.data/GameInfoData/", _excelName, HideFlags.None);
         List<ItemStatInfoTable.Data> dataList = new List<ItemStatInfoTable.Data>();
 
@@ -28,10 +18,10 @@ public class ItemStatImporter : CustomExcelDataImportBase
             IRow row = sheet.GetRow(i);
             string itemName = row.GetCell(0).StringCellValue;
 
-            if (!string.IsNullOrEmpty(itemName) && itemName != "null")
+            if (!string.IsNullOrEmpty(itemName) && itemName != ".")
             {
                 ItemStatInfoTable.Data data = new ItemStatInfoTable.Data();
-                data.itemCode = itemName;
+                data.itemCode = (Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), itemName);
                 data.itemMaxCount = (int)(row.GetCell(1)?.NumericCellValue ?? 0);
                 data.statRiseCount = (int)(row.GetCell(2)?.NumericCellValue ?? 0);
                 data.statDecreaseCount = (int)(row.GetCell(3)?.NumericCellValue ?? 0);

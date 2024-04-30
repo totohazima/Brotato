@@ -23,6 +23,10 @@ namespace Only1Games.GDBA
         public DifficultInfoTable difficultInfoTable = null;
         public WaveStatInfoTable waveStatInfoTable = null;
         public WeaponStatInfoTable weaponStatInfoTable = null;
+
+
+        [Header("(TextTable)")]
+        public ItemTextInfoTable ItemTextInfoTable = null;
     }
 
 

@@ -518,6 +518,8 @@ namespace Only1Games.GDBA
                     return true;
                 case "WeaponStat":
                     return true;
+                case "ItemText":
+                    return true;
             }
             //...
             return true;
@@ -549,6 +551,8 @@ namespace Only1Games.GDBA
                     return new WaveStatImporter(filePath);
                 case "WeaponStat":
                     return new WeaponStatImporter(filePath);
+                case "ItemText":
+                    return new ItemTextImporter(filePath);
             }
 
 

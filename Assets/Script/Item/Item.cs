@@ -168,7 +168,7 @@ public class Item : MonoBehaviour, ICustomUpdateMono
     {
         ItemStatInfoTable.Data import = GameManager.instance.gameDataBase.itemStatInfoTable.table[index];
 
-        itemCode = import.itemCode;
+        itemCode = import.itemCode.ToString();
         maxCount = import.itemMaxCount;
 
         riseCount = import.statRiseCount;

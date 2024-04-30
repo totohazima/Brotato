@@ -39,7 +39,6 @@ public class Item_Info : MonoBehaviour
         //itemNum = index;
         itemPos = pos;
         TextSetting(itemCode);
-        //StartCoroutine(TextSetting(itemCode));
     }
 
     public void TextSetting(string code)
@@ -80,16 +79,24 @@ public class Item_Info : MonoBehaviour
             itemCountType.text = "µ¶Æ¯ÇÑ";
         }
 
-        itemInfoCount = scriptable.infoText.Length;
-
+        ItemTextInfoTable.Data textImporter = GameManager.instance.gameDataBase.ItemTextInfoTable.table[(int)scriptable.itemCode];
+        itemInfoCount = textImporter.textCount;
         itemInfo = new string[itemInfoCount];
-
         for (int i = 0; i < itemInfoCount; i++)
         {
             TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
-            text.text = scriptable.infoText[i];
+            text.text = textImporter.text[i];
             texts.Add(text);
         }
+
+        //itemInfoCount = scriptable.infoText.Length;
+        //itemInfo = new string[itemInfoCount];
+        //for (int i = 0; i < itemInfoCount; i++)
+        //{
+        //    TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
+        //    text.text = scriptable.infoText[i];
+        //    texts.Add(text);
+        //}
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(itemInfoUI_Rect);
         float textHeight = itemInfoUI_Rect.rect.height;

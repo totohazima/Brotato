@@ -7,7 +7,7 @@ public class ItemStatInfoTable : GameDataTable<ItemStatInfoTable.Data>
     [System.Serializable]
     public class Data : GameData
     {
-        public string itemCode;
+        public Item.ItemType itemCode;
         public int itemMaxCount;
         public int statRiseCount;
         public int statDecreaseCount;

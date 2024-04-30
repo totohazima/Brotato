@@ -106,18 +106,26 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
             itemCountType.text = "µ¶Æ¯ÇÑ";
         }
 
-        itemInfoCount = scriptable.infoText.Length;
-
+        ItemTextInfoTable.Data textImporter = GameManager.instance.gameDataBase.ItemTextInfoTable.table[itemNum];
+        itemInfoCount = textImporter.textCount;
         itemInfo = new string[itemInfoCount];
-
         for (int i = 0; i < itemInfoCount; i++)
         {
             TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
-            itemInfo[i] = scriptable.infoText[i];
+            itemInfo[i] = textImporter.text[i];
             text.text = itemInfo[i];
         }
+
+        //itemInfoCount = scriptable.infoText.Length;
+        //itemInfo = new string[itemInfoCount];
+        //for (int i = 0; i < itemInfoCount; i++)
+        //{
+        //    TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
+        //    itemInfo[i] = scriptable.infoText[i];
+        //    text.text = itemInfo[i];
+        //}
     }
-    
+
     public void BuyItem()
     {
         if (StageManager.instance.money >= itemPrice)
