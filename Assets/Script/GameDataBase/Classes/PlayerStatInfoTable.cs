@@ -23,6 +23,8 @@ public class PlayerStatInfoTable : GameDataTable<PlayerStatInfoTable.Data>
         public float armor;
         public float evasion;
         public float accuracy;
+        public float lucky;
+        public float harvest;
         public float speed;
 
         public float consumableHeal;
@@ -44,5 +46,6 @@ public class PlayerStatInfoTable : GameDataTable<PlayerStatInfoTable.Data>
         public float enemyAmount;
         public float enemySpeed;
         public float instantMagnet;
+        public Stat.ItemTag[] itemTags;
     }
 }

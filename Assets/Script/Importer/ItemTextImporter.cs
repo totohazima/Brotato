@@ -4,7 +4,6 @@ using Only1Games.GDBA;
 using NPOI.SS.UserModel;
 using UnityEditor;
 using UnityEngine;
-
 public class ItemTextImporter : CustomExcelDataImportBase
 {
     public ItemTextImporter(string _OutPath) : base(_OutPath) { }
@@ -14,7 +13,8 @@ public class ItemTextImporter : CustomExcelDataImportBase
         ItemTextInfoTable InfoTable = ExcelDataImporter.LoadOrCreateAsset<ItemTextInfoTable>("Assets/Resources/CSV.data/GameInfoData/", _excelName, HideFlags.None);
         List<ItemTextInfoTable.Data> dataList = new List<ItemTextInfoTable.Data>();
 
-        for (int i = 1; i <= sheet.LastRowNum; i++)
+        int sheetLastRow = 106;
+        for (int i = 1; i <= sheetLastRow; i++)
         {
             IRow row = sheet.GetRow(i);
             string itemName = row.GetCell(0).StringCellValue;

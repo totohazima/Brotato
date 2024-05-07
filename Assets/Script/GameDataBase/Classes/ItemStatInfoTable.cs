@@ -8,6 +8,7 @@ public class ItemStatInfoTable : GameDataTable<ItemStatInfoTable.Data>
     public class Data : GameData
     {
         public Item.ItemType itemCode;
+        public string itemName;
         public int itemMaxCount;
         public int statRiseCount;
         public int statDecreaseCount;

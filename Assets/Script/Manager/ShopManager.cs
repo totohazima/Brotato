@@ -110,13 +110,22 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
             bool isNot = false;
             for (int i = 0; i < indexes.Length; i++) //번호 뽑기
             {
-                index = Random.Range(0, item.items.Length);
+                index = Random.Range(0, GameManager.instance.itemGroup_Scriptable.items.Length);
                 indexes[i] = index;
             }
 
             for (int i = 0; i < indexes.Length; i++) //5개 번호 중에 최대 수량에 도달한 아이템이 있는지 체크
             {
-                Item.ItemType type = ItemManager.instance.items[indexes[i]].itemCode;
+                //Item.ItemType type = ItemManager.instance.items[indexes[i]].itemCode;
+                //for (int j = 0; j < ItemManager.instance.maxItemList.Count; j++)
+                //{
+                //    if (ItemManager.instance.maxItemList[j] == type)
+                //    {
+                //        isNot = true;
+                //    }
+                //}
+
+                Item.ItemType type = GameManager.instance.itemGroup_Scriptable.items[indexes[i]].itemCode;
                 for (int j = 0; j < ItemManager.instance.maxItemList.Count; j++)
                 {
                     if (ItemManager.instance.maxItemList[j] == type)
@@ -143,11 +152,12 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
             int[] lockNum = new int[lockList.Count];
             for (int j = 0; j < lockList.Count; j++)
             {
-                for (int i = 0; i < ItemManager.instance.items.Length; i++)
+                ItemGoods goods = lockList[j].GetComponent<ItemGoods>();
+                for (int i = 0; i < GameManager.instance.itemGroup_Scriptable.items.Length; i++)
                 {
-                    if (lockList[j].GetComponent<ItemGoods>() != null)
+                    if (goods != null)
                     {
-                        if (lockList[j].GetComponent<ItemGoods>().scriptable == ItemManager.instance.items[i])
+                        if (goods.scriptable == GameManager.instance.itemGroup_Scriptable.items[i])
                         {
                             lockNum[j] = i;
                         }
@@ -227,7 +237,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
             if (chanceIndex == 0)
             {
-                ItemScrip items = item.items[indexes[i]];
+                ItemScrip items = GameManager.instance.itemGroup_Scriptable.items[indexes[i]];
                 GameObject product = Get(0);
                 ItemGoods itemGoods = product.GetComponent<ItemGoods>();
                 itemGoods.Init(items, indexes[i]);

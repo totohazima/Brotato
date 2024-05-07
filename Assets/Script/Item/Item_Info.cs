@@ -33,38 +33,21 @@ public class Item_Info : MonoBehaviour
     public void Init(ItemScrip scrip, Vector3 pos)
     {
         scriptable = scrip;
-        itemCode = scriptable.itemCode.ToString();
-        itemName.text = scriptable.itemName;
+        //itemCode = scriptable.itemCode.ToString();
+        //itemName.text = scriptable.itemName;
         itemImage.sprite = scriptable.itemSprite;
         //itemNum = index;
         itemPos = pos;
-        TextSetting(itemCode);
+        TextSetting();
     }
 
-    public void TextSetting(string code)
+    public void TextSetting()
     {
         ItemStatInfoTable.Data import = GameManager.instance.gameDataBase.itemStatInfoTable.table[(int)scriptable.itemCode];
 
-        //int index1 = 0;
-        //for (int i = 0; i < import.itemCode.Length; i++)
-        //{
-        //    if (code == import.itemCode[i])
-        //    {
-        //        index1 = i;
-        //    }
-        //}
-        //itemName.text = import.itemName[index1];
-
+        itemName.text = import.itemName;
         maxCount = import.itemMaxCount;
 
-        //int index2 = 0;
-        //for (int i = 0; i < import.itemCode2.Length; i++)
-        //{
-        //    if (code == import.itemCode2[i])
-        //    {
-        //        index2 = i;
-        //    }
-        //}
 
         if (maxCount == -100)
         {

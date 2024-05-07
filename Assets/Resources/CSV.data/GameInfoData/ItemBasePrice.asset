@@ -17,20 +17,30 @@ MonoBehaviour:
     itemBasePrice: 25
   - itemCode: ALIEN_WORM
     itemBasePrice: 15
+  - itemCode: BABY_ELEPHANT
+    itemBasePrice: 25
   - itemCode: BABY_GECKO
     itemBasePrice: 18
   - itemCode: BAG
     itemBasePrice: 15
+  - itemCode: BAT
+    itemBasePrice: 20
   - itemCode: BEANIE
     itemBasePrice: 20
+  - itemCode: BOILING_WATER
+    itemBasePrice: 30
   - itemCode: BOOK
     itemBasePrice: 8
   - itemCode: BOXING_GLOVE
     itemBasePrice: 15
   - itemCode: BROKEN_MOUTH
     itemBasePrice: 25
+  - itemCode: BUTTERFLY
+    itemBasePrice: 30
   - itemCode: CAKE
     itemBasePrice: 15
+  - itemCode: CHARCOAL
+    itemBasePrice: 20
   - itemCode: CLAW_TREE
     itemBasePrice: 20
   - itemCode: COFFEE
@@ -45,6 +55,8 @@ MonoBehaviour:
     itemBasePrice: 20
   - itemCode: DYNAMITE
     itemBasePrice: 20
+  - itemCode: FERTILIZER
+    itemBasePrice: 15
   - itemCode: GENTLE_ALIEN
     itemBasePrice: 30
   - itemCode: GLASSES
@@ -69,14 +81,34 @@ MonoBehaviour:
     itemBasePrice: 15
   - itemCode: LENS
     itemBasePrice: 20
+  - itemCode: LOST_DUCK
+    itemBasePrice: 25
+  - itemCode: LUMBERJACK_SHIRT
+    itemBasePrice: 15
+  - itemCode: MUSHROOM
+    itemBasePrice: 25
+  - itemCode: MUTATION
+    itemBasePrice: 25
+  - itemCode: PEACEFUL_BEE
+    itemBasePrice: 18
   - itemCode: PENCIL
     itemBasePrice: 15
   - itemCode: PLANT
     itemBasePrice: 10
+  - itemCode: PROPELLER_HAT
+    itemBasePrice: 28
   - itemCode: SCAR
     itemBasePrice: 30
+  - itemCode: SCARED_SAUSAGE
+    itemBasePrice: 25
   - itemCode: SHARP_BULLET
     itemBasePrice: 25
+  - itemCode: SNAKE
+    itemBasePrice: 25
+  - itemCode: TERRIFIED_ONION
+    itemBasePrice: 15
+  - itemCode: TOXIC_SLUDGE
+    itemBasePrice: 20
   - itemCode: TREE
     itemBasePrice: 15
   - itemCode: TURRET

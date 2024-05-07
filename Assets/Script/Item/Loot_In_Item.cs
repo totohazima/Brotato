@@ -31,17 +31,17 @@ public class Loot_In_Item : MonoBehaviour
     public void Init(ItemScrip scrip, int index)
     {
         scriptable = scrip;
-        itemCode = scriptable.itemCode.ToString();
+        //itemCode = scriptable.itemCode.ToString();
         itemImage.sprite = scriptable.itemSprite;
         itemNum = index;
-        TextSetting(itemCode);
+        TextSetting();
     }
 
-    public void TextSetting(string code)
+    public void TextSetting()
     {
         ItemStatInfoTable.Data import = GameManager.instance.gameDataBase.itemStatInfoTable.table[itemNum];
 
-        itemName.text = scriptable.itemName;
+        itemName.text = import.itemName;
         maxCount = import.itemMaxCount;
 
         if (maxCount == -100)
@@ -57,14 +57,13 @@ public class Loot_In_Item : MonoBehaviour
             itemCountType.text = "µ¶Æ¯ÇÑ";
         }
 
-        itemInfoCount = scriptable.infoText.Length;
-
+        ItemTextInfoTable.Data textImporter = GameManager.instance.gameDataBase.ItemTextInfoTable.table[itemNum];
+        itemInfoCount = textImporter.textCount;
         itemInfo = new string[itemInfoCount];
-
         for (int i = 0; i < itemInfoCount; i++)
         {
             TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
-            itemInfo[i] = scriptable.infoText[i];
+            itemInfo[i] = textImporter.text[i];
             text.text = itemInfo[i];
         }
 

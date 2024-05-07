@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     public float armor;
     public float evasion;
     public float accuracy;
+    public float lucky;
+    public float harvest;
     public float speed;
 
     [Header("Detail_Stat")]
@@ -46,6 +48,9 @@ public class Player : MonoBehaviour
     public float enemySpeed;
     public float instantMagnet;
 
+    [Header("Detail_Stat")]
+    public Stat.ItemTag[] characterItemTags;
+
     [HideInInspector] public float maxHealth_Origin;
     [HideInInspector] public float regeneration_Origin;
     [HideInInspector] public float bloodSucking_Origin;
@@ -60,6 +65,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public float armor_Origin;
     [HideInInspector] public float evasion_Origin;
     [HideInInspector] public float accuracy_Origin;
+    [HideInInspector] public float lucky_Origin;
+    [HideInInspector] public float harvest_Origin;
     [HideInInspector] public float speed_Origin;
 
     [HideInInspector] public float consumableHeal_Origin;
@@ -87,7 +94,7 @@ public class Player : MonoBehaviour
     public List<GameObject> weapons;
     public enum Character
     {
-        VERSATILE, //다재다능
+        WELLROUNDED, //다재다능
         RANGER, //레인저
         PACIFIST, //평화주의자
         MULTITASKER, //멀티태스커
@@ -142,6 +149,11 @@ public class Player : MonoBehaviour
         enemySpeed_Origin = import.enemySpeed;
         instantMagnet_Origin = import.instantMagnet;
 
+        characterItemTags = new Stat.ItemTag[import.itemTags.Length];
+        for (int i = 0; i < import.itemTags.Length; i++)
+        {
+            characterItemTags[i] = import.itemTags[i];
+        }
         StatCalculate();
     }
 

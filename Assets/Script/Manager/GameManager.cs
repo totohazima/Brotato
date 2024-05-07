@@ -8,6 +8,12 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public GameDataBase gameDataBase;
     public Wave_Scriptable[] wave_Scriptables = new Wave_Scriptable[10];
     public bool isStart;
+
+    [Header("Player_Info")]
+    public Player.Character character;
+
+    [Header("Item_Info")]
+    public ItemGroup_Scriptable itemGroup_Scriptable;
     void Awake()
     {
         instance = this;

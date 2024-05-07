@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   table:
   - itemCode: 0
+    itemName: "\uC678\uACC4\uC778 \uD600"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode: 13000000
+    riseStatCode: 15000000
     riseNum:
     - 30
     decreaseStatCode: 
     decreaseNum: []
   - itemCode: 1
+    itemName: "\uC678\uACC4\uBC8C\uB808"
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
@@ -30,40 +32,75 @@ MonoBehaviour:
     riseNum:
     - 2
     - 3
-    decreaseStatCode: 10000000
+    decreaseStatCode: 12000000
     decreaseNum:
     - 1
   - itemCode: 2
+    itemName: "\uC544\uAE30 \uCF54\uB07C\uB9AC"
+    itemMaxCount: -100
+    statRiseCount: 0
+    statDecreaseCount: 0
+    riseStatCode: 
+    riseNum: []
+    decreaseStatCode: 
+    decreaseNum: []
+  - itemCode: 3
+    itemName: "\uC544\uAE30 \uB3C4\uB9C8\uBC40"
     itemMaxCount: 5
     statRiseCount: 2
     statDecreaseCount: 0
-    riseStatCode: 220000000b000000
+    riseStatCode: 240000000b000000
     riseNum:
     - 20
     - 10
     decreaseStatCode: 
     decreaseNum: []
-  - itemCode: 3
+  - itemCode: 4
+    itemName: "\uAC00\uBC29"
     itemMaxCount: 3
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode: 1d000000
+    riseStatCode: 1f000000
     riseNum:
     - 15
-    decreaseStatCode: 0f000000
+    decreaseStatCode: 11000000
     decreaseNum:
     - 1
-  - itemCode: 4
+  - itemCode: 5
+    itemName: "\uBC15\uC950"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode: 0f000000
+    riseStatCode: 03000000
+    riseNum:
+    - 2
+    decreaseStatCode: 10000000
+    decreaseNum:
+    - 2
+  - itemCode: 6
+    itemName: "\uBE44\uB2C8"
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 1
+    riseStatCode: 11000000
     riseNum:
     - 4
     decreaseStatCode: 0b000000
     decreaseNum:
     - 6
-  - itemCode: 5
+  - itemCode: 7
+    itemName: "\uB053\uB294 \uBB3C"
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 1
+    riseStatCode: 07000000
+    riseNum:
+    - 2
+    decreaseStatCode: 01000000
+    decreaseNum:
+    - 1
+  - itemCode: 8
+    itemName: "\uCC45"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
@@ -72,16 +109,18 @@ MonoBehaviour:
     - 1
     decreaseStatCode: 
     decreaseNum: []
-  - itemCode: 6
+  - itemCode: 9
+    itemName: "\uAD8C\uD22C \uAE00\uB7EC\uBE0C"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode: 1b000000
+    riseStatCode: 1d000000
     riseNum:
     - 3
     decreaseStatCode: 
     decreaseNum: []
-  - itemCode: 7
+  - itemCode: 10
+    itemName: "\uAE68\uC9C4 \uC785"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
@@ -91,7 +130,19 @@ MonoBehaviour:
     decreaseStatCode: 02000000
     decreaseNum:
     - 1
-  - itemCode: 8
+  - itemCode: 11
+    itemName: "\uB098\uBE44"
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 1
+    riseStatCode: 03000000
+    riseNum:
+    - 2
+    decreaseStatCode: 07000000
+    decreaseNum:
+    - 1
+  - itemCode: 12
+    itemName: "\uCF00\uC774\uD06C"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
@@ -101,7 +152,20 @@ MonoBehaviour:
     decreaseStatCode: 04000000
     decreaseNum:
     - 1
-  - itemCode: 9
+  - itemCode: 13
+    itemName: "\uC22F"
+    itemMaxCount: -100
+    statRiseCount: 2
+    statDecreaseCount: 1
+    riseStatCode: 0700000005000000
+    riseNum:
+    - 1
+    - 2
+    decreaseStatCode: 10000000
+    decreaseNum:
+    - 2
+  - itemCode: 14
+    itemName: "\uBC1C\uD1B1 \uB098\uBB34"
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
@@ -112,7 +176,8 @@ MonoBehaviour:
     decreaseStatCode: 01000000
     decreaseNum:
     - 1
-  - itemCode: 10
+  - itemCode: 15
+    itemName: "\uCEE4\uD53C"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
@@ -122,26 +187,29 @@ MonoBehaviour:
     decreaseStatCode: 04000000
     decreaseNum:
     - 2
-  - itemCode: 11
+  - itemCode: 16
+    itemName: "\uCFE0\uD3F0"
     itemMaxCount: 5
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode: 14000000
+    riseStatCode: 16000000
     riseNum:
     - -5
     decreaseStatCode: 
     decreaseNum: []
-  - itemCode: 12
+  - itemCode: 17
+    itemName: "\uADC0\uC5EC\uC6B4 \uC6D0\uC22D\uC774"
     itemMaxCount: 13
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode: 11000000
+    riseStatCode: 13000000
     riseNum:
     - 8
     decreaseStatCode: 06000000
     decreaseNum:
     - 1
-  - itemCode: 13
+  - itemCode: 18
+    itemName: "\uBD88\uB7C9 \uC2A4\uD14C\uB85C\uC774\uB4DC"
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
@@ -152,7 +220,8 @@ MonoBehaviour:
     decreaseStatCode: 08000000
     decreaseNum:
     - 3
-  - itemCode: 14
+  - itemCode: 19
+    itemName: "\uC810\uCC29 \uD14C\uC774\uD504"
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
@@ -163,27 +232,41 @@ MonoBehaviour:
     decreaseStatCode: 01000000
     decreaseNum:
     - 2
-  - itemCode: 15
+  - itemCode: 20
+    itemName: "\uB2E4\uC774\uB108\uB9C8\uC774\uD2B8"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode: 15000000
+    riseStatCode: 17000000
     riseNum:
     - 15
     decreaseStatCode: 
     decreaseNum: []
-  - itemCode: 16
+  - itemCode: 21
+    itemName: "\uBE44\uB8CC"
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 1
+    riseStatCode: 10000000
+    riseNum:
+    - 8
+    decreaseStatCode: 05000000
+    decreaseNum:
+    - 1
+  - itemCode: 22
+    itemName: "\uC810\uC796\uC740 \uC678\uACC4\uC778"
     itemMaxCount: 10
     statRiseCount: 3
     statDecreaseCount: 0
-    riseStatCode: 040000002000000001000000
+    riseStatCode: 040000002200000001000000
     riseNum:
     - 5
     - 5
     - 2
     decreaseStatCode: 
     decreaseNum: []
-  - itemCode: 17
+  - itemCode: 23
+    itemName: "\uC548\uACBD"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
@@ -192,7 +275,8 @@ MonoBehaviour:
     - 20
     decreaseStatCode: 
     decreaseNum: []
-  - itemCode: 18
+  - itemCode: 24
+    itemName: "\uC5FC\uC18C \uB450\uAC1C\uACE8"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
@@ -202,7 +286,8 @@ MonoBehaviour:
     decreaseStatCode: 09000000
     decreaseNum:
     - 2
-  - itemCode: 19
+  - itemCode: 25
+    itemName: "\uC9C4\uB4DD\uD55C \uBC84\uC11C\uCEE4"
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
@@ -213,7 +298,8 @@ MonoBehaviour:
     decreaseStatCode: 0c000000
     decreaseNum:
     - 1
-  - itemCode: 20
+  - itemCode: 26
+    itemName: "\uBA38\uB9AC\uBD80\uC0C1"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
@@ -223,7 +309,8 @@ MonoBehaviour:
     decreaseStatCode: 0b000000
     decreaseNum:
     - 8
-  - itemCode: 21
+  - itemCode: 27
+    itemName: "\uACE0\uC2B4\uB3C4\uCE58"
     itemMaxCount: -100
     statRiseCount: 2
     statDecreaseCount: 1
@@ -234,17 +321,19 @@ MonoBehaviour:
     decreaseStatCode: 02000000
     decreaseNum:
     - 1
-  - itemCode: 22
+  - itemCode: 28
+    itemName: "\uD5EC\uBA67"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
     riseStatCode: 0c000000
     riseNum:
     - 1
-    decreaseStatCode: 0f000000
+    decreaseStatCode: 11000000
     decreaseNum:
     - 2
-  - itemCode: 23
+  - itemCode: 29
+    itemName: "\uC8FC\uC785"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
@@ -254,7 +343,8 @@ MonoBehaviour:
     decreaseStatCode: 01000000
     decreaseNum:
     - 2
-  - itemCode: 24
+  - itemCode: 30
+    itemName: "\uAD11\uAE30"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
@@ -264,7 +354,8 @@ MonoBehaviour:
     decreaseStatCode: 04000000
     decreaseNum:
     - 3
-  - itemCode: 25
+  - itemCode: 31
+    itemName: "\uC9C0\uB8B0"
     itemMaxCount: -100
     statRiseCount: 0
     statDecreaseCount: 0
@@ -272,16 +363,18 @@ MonoBehaviour:
     riseNum: []
     decreaseStatCode: 
     decreaseNum: []
-  - itemCode: 26
+  - itemCode: 32
+    itemName: "\uB808\uBAA8\uB124\uC774\uB4DC"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0
-    riseStatCode: 10000000
+    riseStatCode: 12000000
     riseNum:
     - 1
     decreaseStatCode: 
     decreaseNum: []
-  - itemCode: 27
+  - itemCode: 33
+    itemName: "\uB80C\uC988"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
@@ -291,7 +384,64 @@ MonoBehaviour:
     decreaseStatCode: 0b000000
     decreaseNum:
     - 5
-  - itemCode: 28
+  - itemCode: 34
+    itemName: "\uAE38\uC783\uC740 \uC624\uB9AC"
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 1
+    riseStatCode: 0f000000
+    riseNum:
+    - 10
+    decreaseStatCode: 07000000
+    decreaseNum:
+    - 1
+  - itemCode: 35
+    itemName: "\uB098\uBB34\uAFBC \uC154\uCE20"
+    itemMaxCount: 1
+    statRiseCount: 0
+    statDecreaseCount: 0
+    riseStatCode: 
+    riseNum: []
+    decreaseStatCode: 
+    decreaseNum: []
+  - itemCode: 36
+    itemName: "\uBC84\uC12F"
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 1
+    riseStatCode: 02000000
+    riseNum:
+    - 3
+    decreaseStatCode: 0f000000
+    decreaseNum:
+    - 2
+  - itemCode: 37
+    itemName: "\uB3CC\uC5F0\uBCC0\uC774"
+    itemMaxCount: -100
+    statRiseCount: 2
+    statDecreaseCount: 1
+    riseStatCode: 0600000007000000
+    riseNum:
+    - 1
+    - 1
+    decreaseStatCode: 11000000
+    decreaseNum:
+    - 3
+  - itemCode: 38
+    itemName: "\uD3C9\uD654\uB85C\uC6B4 \uBC8C"
+    itemMaxCount: -100
+    statRiseCount: 2
+    statDecreaseCount: 2
+    riseStatCode: 0d00000010000000
+    riseNum:
+    - 4
+    - 4
+    decreaseStatCode: 0500000006000000
+    decreaseNum:
+    - 1
+    - 1
+  - itemCode: 39
+    itemName: "\uC5F0\uD544"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 2
@@ -302,7 +452,8 @@ MonoBehaviour:
     decreaseNum:
     - 1
     - 1
-  - itemCode: 29
+  - itemCode: 40
+    itemName: "\uC2DD\uBB3C"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
@@ -312,64 +463,123 @@ MonoBehaviour:
     decreaseStatCode: 03000000
     decreaseNum:
     - 1
-  - itemCode: 30
+  - itemCode: 41
+    itemName: "\uD504\uB85C\uD3A0\uB7EC \uBAA8\uC790"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode: 12000000
+    riseStatCode: 0f000000
+    riseNum:
+    - 10
+    decreaseStatCode: 04000000
+    decreaseNum:
+    - 2
+  - itemCode: 42
+    itemName: "\uD749\uD130"
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 1
+    riseStatCode: 14000000
     riseNum:
     - 20
     decreaseStatCode: 0b000000
     decreaseNum:
     - 8
-  - itemCode: 31
+  - itemCode: 43
+    itemName: "\uAC81\uBA39\uC740 \uC18C\uC2DC\uC9C0"
+    itemMaxCount: 4
+    statRiseCount: 0
+    statDecreaseCount: 0
+    riseStatCode: 
+    riseNum: []
+    decreaseStatCode: 
+    decreaseNum: []
+  - itemCode: 44
+    itemName: "\uBFB0\uC871\uD0C4\uD658"
     itemMaxCount: 1
     statRiseCount: 1
     statDecreaseCount: 2
-    riseStatCode: 18000000
+    riseStatCode: 1a000000
     riseNum:
     - 1
-    decreaseStatCode: 1900000004000000
+    decreaseStatCode: 1b00000004000000
     decreaseNum:
     - 20
     - 5
-  - itemCode: 32
+  - itemCode: 45
+    itemName: "\uBC40"
     itemMaxCount: -100
-    statRiseCount: 1
-    statDecreaseCount: 0
-    riseStatCode: 1f000000
-    riseNum:
-    - 1
-    decreaseStatCode: 
-    decreaseNum: []
-  - itemCode: 33
-    itemMaxCount: -100
-    statRiseCount: 0
-    statDecreaseCount: 0
-    riseStatCode: 
-    riseNum: []
-    decreaseStatCode: 
-    decreaseNum: []
-  - itemCode: 34
-    itemMaxCount: 1
     statRiseCount: 0
     statDecreaseCount: 1
     riseStatCode: 
     riseNum: []
+    decreaseStatCode: 01000000
+    decreaseNum:
+    - 1
+  - itemCode: 46
+    itemName: "\uAC81\uBA39\uC740 \uC591\uD30C"
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 1
+    riseStatCode: 11000000
+    riseNum:
+    - 4
     decreaseStatCode: 0f000000
     decreaseNum:
-    - 3
-  - itemCode: 35
+    - 6
+  - itemCode: 47
+    itemName: "\uB3C5\uC131 \uC2AC\uB7EC\uC9C0"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 1
-    riseStatCode: 10000000
+    riseStatCode: 07000000
     riseNum:
     - 2
     decreaseStatCode: 0d000000
     decreaseNum:
     - 2
-  - itemCode: 36
+  - itemCode: 48
+    itemName: "\uB098\uBB34"
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 0
+    riseStatCode: 21000000
+    riseNum:
+    - 1
+    decreaseStatCode: 
+    decreaseNum: []
+  - itemCode: 49
+    itemName: "\uD3EC\uD0D1"
+    itemMaxCount: -100
+    statRiseCount: 0
+    statDecreaseCount: 0
+    riseStatCode: 
+    riseNum: []
+    decreaseStatCode: 
+    decreaseNum: []
+  - itemCode: 50
+    itemName: "\uD749\uCE21\uD55C \uC774"
+    itemMaxCount: 1
+    statRiseCount: 0
+    statDecreaseCount: 1
+    riseStatCode: 
+    riseNum: []
+    decreaseStatCode: 11000000
+    decreaseNum:
+    - 3
+  - itemCode: 51
+    itemName: "\uAD34\uC0C1\uD55C \uC74C\uC2DD"
+    itemMaxCount: -100
+    statRiseCount: 1
+    statDecreaseCount: 1
+    riseStatCode: 12000000
+    riseNum:
+    - 2
+    decreaseStatCode: 0d000000
+    decreaseNum:
+    - 2
+  - itemCode: 52
+    itemName: "\uC774\uC0C1\uD55C \uC720\uB839"
     itemMaxCount: -100
     statRiseCount: 1
     statDecreaseCount: 0

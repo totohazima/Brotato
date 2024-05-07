@@ -142,6 +142,7 @@ MonoBehaviour:
   itemType: 0
   itemCode: 
   itemName: 
+  itemPrice: 0
   curCount: 0
   maxCount: 0
   isFull: 0
@@ -151,9 +152,9 @@ MonoBehaviour:
   riseCount: 0
   riseStat: 
   riseStats: []
-  descendCount: 0
-  descendStat: 
-  descendStats: []
+  decreaseCount: 0
+  decreaseStat: 
+  decreaseStats: []
   isMax: 0
   frame: {fileID: 3807637213131930663}
   itemInfo: {fileID: 8660237254229834525, guid: 7386809f611c49248b2d16f335c125c7, type: 3}

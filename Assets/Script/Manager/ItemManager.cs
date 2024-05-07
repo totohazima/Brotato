@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
-    public ItemScrip[] items;
     public Item invenItem; //상점 등에서 보여줄 아이템 오브젝트
     public Weapon_Object invenWeapon; //상점 등에서 보여줄 무기 오브젝트
     public Item_Object_Pause pauseItem; //일시정지 등에서 보여줄 아이템 오브젝트
@@ -18,23 +17,23 @@ public class ItemManager : MonoBehaviour
 
     List<GameObject>[] poolItems;
 
-    StageManager game;
+    StageManager stage;
     void Awake()
     {
         instance = this;
-        game = StageManager.instance;
+        stage = StageManager.instance;
 
     }
 
     public void ItemObtain(int index)
     {
         bool isGet = false;
-        ItemScrip getItem = items[index];
+        ItemScrip getItem = GameManager.instance.itemGroup_Scriptable.items[index];
         Item checkItem = null;
 
-        for (int i = 0; i < game.playerInfo.itemInventory.Count; i++)
+        for (int i = 0; i < stage.playerInfo.itemInventory.Count; i++)
         {
-            Item Item = game.playerInfo.itemInventory[i];
+            Item Item = stage.playerInfo.itemInventory[i];
             if (getItem.itemCode == Item.itemType)
             {
                 checkItem = Item;
@@ -45,13 +44,13 @@ public class ItemManager : MonoBehaviour
         
         if (isGet == false)
         {
-            ItemScrip item = items[index];
+            ItemScrip item = GameManager.instance.itemGroup_Scriptable.items[index];
             GameObject objItem = Instantiate(invenItem.gameObject);
             objItem.transform.SetParent(transform);
             Item invenItems = objItem.GetComponent<Item>();
             invenItems.Init(item);
             invenItems.curCount++;
-            game.playerInfo.itemInventory.Add(invenItems);
+            stage.playerInfo.itemInventory.Add(invenItems);
 
             StageManager.instance.playerInfo.StatCalculate();
         }
@@ -76,7 +75,7 @@ public class ItemManager : MonoBehaviour
             Destroy(item3);
         }
         
-        List<GameObject> inventory = game.playerInfo.weapons;
+        List<GameObject> inventory = stage.playerInfo.weapons;
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
             Weapon_Action info = inventory[i].GetComponent<Weapon_Action>();
@@ -104,7 +103,7 @@ public class ItemManager : MonoBehaviour
             Destroy(item3);
         }
          
-        List<Item> inventory = game.playerInfo.itemInventory;
+        List<Item> inventory = stage.playerInfo.itemInventory;
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
             Instantiate(inventory[i].gameObject, itemScrollTrans[0]);

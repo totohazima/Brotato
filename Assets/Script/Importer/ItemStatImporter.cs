@@ -22,9 +22,10 @@ public class ItemStatImporter : CustomExcelDataImportBase
             {
                 ItemStatInfoTable.Data data = new ItemStatInfoTable.Data();
                 data.itemCode = (Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), itemName);
-                data.itemMaxCount = (int)(row.GetCell(1)?.NumericCellValue ?? 0);
-                data.statRiseCount = (int)(row.GetCell(2)?.NumericCellValue ?? 0);
-                data.statDecreaseCount = (int)(row.GetCell(3)?.NumericCellValue ?? 0);
+                data.itemName = (row.GetCell(1)?.StringCellValue ?? "");
+                data.itemMaxCount = (int)(row.GetCell(2)?.NumericCellValue ?? 0);
+                data.statRiseCount = (int)(row.GetCell(3)?.NumericCellValue ?? 0);
+                data.statDecreaseCount = (int)(row.GetCell(4)?.NumericCellValue ?? 0);
 
                 data.riseStatCode = new Stat.PlayerStat[data.statRiseCount];
                 data.riseNum = new float[data.statRiseCount];
@@ -34,15 +35,15 @@ public class ItemStatImporter : CustomExcelDataImportBase
                 for (int j = 0; j < data.statRiseCount; j++)
                 {
                     IRow riseRow = sheet.GetRow(i + j);
-                    data.riseStatCode[j] = (Stat.PlayerStat)System.Enum.Parse(typeof(Stat.PlayerStat), (riseRow.GetCell(4)?.StringCellValue ?? ""));
-                    data.riseNum[j] = (float)(riseRow.GetCell(5)?.NumericCellValue ?? 0);
+                    data.riseStatCode[j] = (Stat.PlayerStat)System.Enum.Parse(typeof(Stat.PlayerStat), (riseRow.GetCell(5)?.StringCellValue ?? ""));
+                    data.riseNum[j] = (float)(riseRow.GetCell(6)?.NumericCellValue ?? 0);
                 }
 
                 for (int j = 0; j < data.statDecreaseCount; j++)
                 {
                     IRow decreaseRow = sheet.GetRow(i + j);
-                    data.decreaseStatCode[j] = (Stat.PlayerStat)System.Enum.Parse(typeof(Stat.PlayerStat), (decreaseRow.GetCell(6)?.StringCellValue ?? ""));
-                    data.decreaseNum[j] = (float)(decreaseRow.GetCell(7)?.NumericCellValue ?? 0);
+                    data.decreaseStatCode[j] = (Stat.PlayerStat)System.Enum.Parse(typeof(Stat.PlayerStat), (decreaseRow.GetCell(7)?.StringCellValue ?? ""));
+                    data.decreaseNum[j] = (float)(decreaseRow.GetCell(8)?.NumericCellValue ?? 0);
                 }
 
                 dataList.Add(data);

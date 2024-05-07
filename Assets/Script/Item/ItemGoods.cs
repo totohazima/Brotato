@@ -44,12 +44,12 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
     public void Init(ItemScrip scrip, int index)
     {
         scriptable = scrip;
-        itemCode = scriptable.itemCode.ToString();
+        //itemCode = scriptable.itemCode.ToString();
         itemImage.sprite = scriptable.itemSprite;
         itemNum = index;
 
         
-        TextSetting(itemCode);
+        TextSetting();
     }
 
     public void UI_Update()
@@ -77,19 +77,11 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
             itemPriceText.text = itemPrice.ToString("F0");
         }
     }
-    public void TextSetting(string code)
+    public void TextSetting()
     {
         ItemStatInfoTable.Data import = GameManager.instance.gameDataBase.itemStatInfoTable.table[itemNum];
 
-        //int index1 = 0;
-        //for (int i = 0; i < import.itemCode.Length; i++)
-        //{
-        //    if (code == import.itemCode[i])
-        //    {
-        //        index1 = i;
-        //    }
-        //}
-        itemName.text = scriptable.itemName;
+        itemName.text = import.itemName;
         maxCount = import.itemMaxCount;
         itemPriceText.text = itemPrice.ToString("F0");
 

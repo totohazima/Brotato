@@ -23,6 +23,8 @@ public class Stat
         ARMOR,          //방어, 퍼센트
         EVASION,        //회피, 퍼센트
         ACCURACY,       //명중, 퍼센트
+        LUCKY,          //행운, 정수
+        HARVEST,        //수확, 정수
         SPEED,          //이속, 퍼센트
 
         CONSUMABLE_HEAL,
@@ -46,4 +48,41 @@ public class Stat
         INSTNAT_MAGNET,
     }
     
+    public enum Tier
+    {
+        Tier1,
+        Tier2,
+        Tier3,
+        Tier4,
+    }
+    public enum ItemTag
+    {
+        None,
+        MaxHP,
+        HPRegeneration,
+        LifeSteal,
+        Damage,
+        MeleeDamage,
+        RangedDamage,
+        ElementalDamage,
+        AttackSpeed,
+        CritChance,
+        Engineering,
+        Range,
+        Armor,
+        Dodge,
+        Speed,
+        Luck,
+        Harvesting,
+        Economy,
+        Exploration,
+        Explosive,
+        LessEnemies,
+        LessEnemySpeed,
+        MoreEnemies,
+        PickUp,
+        Saving,
+        StandStill,
+        XPGain,
+    }
 }
