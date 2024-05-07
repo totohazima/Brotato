@@ -111,14 +111,17 @@ public class Stat_Manager : MonoBehaviour, UI_Upadte
         basic_Status_Num[4].text = player.persentDamage.ToString("F0");
         basic_Status_Num[5].text = player.meleeDamage.ToString("F0");
         basic_Status_Num[6].text = player.rangeDamage.ToString("F0");
-        basic_Status_Num[7].text = player.attackSpeed.ToString("F0");
-        basic_Status_Num[8].text = player.criticalChance.ToString("F0");
-        basic_Status_Num[9].text = player.engine.ToString("F0");
-        basic_Status_Num[10].text = player.range.ToString("F0");
-        basic_Status_Num[11].text = player.armor.ToString("F0");
-        basic_Status_Num[12].text = player.evasion.ToString("F0");
-        basic_Status_Num[13].text = player.accuracy.ToString("F0");
-        basic_Status_Num[14].text = player.speed.ToString("F0");
+        basic_Status_Num[7].text = player.elementalDamage.ToString("F0");
+        basic_Status_Num[8].text = player.attackSpeed.ToString("F0");
+        basic_Status_Num[9].text = player.criticalChance.ToString("F0");
+        basic_Status_Num[10].text = player.engine.ToString("F0");
+        basic_Status_Num[11].text = player.range.ToString("F0");
+        basic_Status_Num[12].text = player.armor.ToString("F0");
+        basic_Status_Num[13].text = player.evasion.ToString("F0");
+        basic_Status_Num[14].text = player.accuracy.ToString("F0");
+        basic_Status_Num[15].text = player.lucky.ToString("F0");
+        basic_Status_Num[16].text = player.harvest.ToString("F0");
+        basic_Status_Num[17].text = player.speed.ToString("F0");
 
         for (int i = 1; i < basic_Status.Length; i++)
         {

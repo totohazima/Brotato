@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68269a9379ca5bb4480731bbc60492d0, type: 3}
+  m_Name: Harvest
+  m_EditorClassIdentifier: 
+  statName: "\uC218\uD655"
+  statImage: {fileID: 21300000, guid: 56f7e56386f6dea46bc6ff8e94239883, type: 3}
+  statPlusText:
+  - "\uC6E8\uC774\uBE0C\uAC00 \uB05D\uB0A0 \uB54C"
+  - "\uB9CC\uD07C\uC758 \uC7AC\uB8CC\uC640 XP\uB97C \uC5BB\uC2B5\uB2C8\uB2E4."
+  - "\uC6E8\uC774\uBE0C 10\uAE4C\uC9C0 \uD65C\uC131\uD654\uB420 \uB9C8\uB2E4 5%\uB9CC\uD07C
+    \uC99D\uAC00\uD558\uC9C0\uB9CC,"
+  - "\uB300\uC2E0 \uADF8\uB7EC\uACE0 \uB098\uC11C 20%\uB9CC\uD07C \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  statMinusText:
+  - "\uC6E8\uC774\uBE0C\uAC00 \uB05D\uB0A0 \uB54C"
+  - "\uB9CC\uD07C\uC758 \uC7AC\uB8CC\uB97C \uC783\uC2B5\uB2C8\uB2E4."

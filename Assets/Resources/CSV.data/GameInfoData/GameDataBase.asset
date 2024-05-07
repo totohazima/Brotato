@@ -15,11 +15,11 @@ MonoBehaviour:
   enemyBaseStatInfoTable: {fileID: 11400000, guid: 00dde118f38d4314ea82c4ff02c52105, type: 2}
   enemyGrowthStatInfoTable: {fileID: 11400000, guid: ef31b84d6b282dd40b25d4bf5b1795a9, type: 2}
   playerStatInfoTable: {fileID: 11400000, guid: c8b6183f8d594a6458528aa9545d4c33, type: 2}
-  itemStatInfoTable: {fileID: 0}
+  itemStatInfoTable: {fileID: 11400000, guid: 73509b5813e49f049a95580cce1c9b5d, type: 2}
   upgradeStatInfoTable: {fileID: 11400000, guid: efbd8711cc1a6af4391ed9812aba7b8c, type: 2}
   itemBasePriceInfoTable: {fileID: 11400000, guid: d33c9c61d9694d249ac7e413f1f45e35, type: 2}
   weaponBasePriceInfoTable: {fileID: 11400000, guid: f2d8bba904b2ba947b01f2f296741d16, type: 2}
   difficultInfoTable: {fileID: 11400000, guid: 9d377e96885e4dc4eba81309512b63e1, type: 2}
   waveStatInfoTable: {fileID: 11400000, guid: f13925d55ae673b439f8ec2502f74b14, type: 2}
-  weaponStatInfoTable: {fileID: 0}
-  ItemTextInfoTable: {fileID: 0}
+  weaponStatInfoTable: {fileID: 11400000, guid: 60a7424595538de4dbba4febfe9802f9, type: 2}
+  ItemTextInfoTable: {fileID: 11400000, guid: 2cfce25b7bba8ac4aa924d1a71c147b0, type: 2}
