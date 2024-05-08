@@ -316,7 +316,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<color=#4CFF52>+10</color> \uCD5C\uB300 HP\n<color=#4CFF52>+5</color>
+  m_Text: "<color=#4CFF52>+5</color> \uCD5C\uB300 HP\n<color=#4CFF52>+8</color> \uC218\uD655\n<color=#4CFF52>+5</color>
     \uC18D\uB3C4"
 --- !u!1 &4568262129439886620
 GameObject:

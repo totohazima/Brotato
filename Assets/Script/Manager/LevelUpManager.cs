@@ -24,21 +24,23 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
         //    statName[i] = stats[i].GetChild(0).GetComponent<Text>();
         //    statNum[i] = stats[i].GetChild(1).GetComponent<Text>();
         //}
-        //upgrades = new GameObject[upgrade.childCount];
-        //for (int i = 0; i < upgrade.childCount; i++)
-        //{
-        //    upgrades[i] = upgrade.GetChild(i).gameObject;
-        //}
+        upgrades = new GameObject[upgrade.childCount];
+        for (int i = 0; i < upgrade.childCount; i++)
+        {
+            upgrades[i] = upgrade.GetChild(i).gameObject;
+        }
         player = StageManager.instance.mainPlayer.GetComponent<Player>();
     }
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
+        StageManager.instance.StatUI_On();
         StartCoroutine(UpgradeSetting());
     }
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
+        StageManager.instance.StatUI_Off();
     }
 
     public void CustomUpdate()

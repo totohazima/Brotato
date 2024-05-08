@@ -28,7 +28,7 @@ public class LootOpen_Manager : MonoBehaviour
         itemIndex = null;
         checkIndex = 0;
         LootSetting();
-        stats.anchoredPosition = new Vector3(100, 0, 0);
+        StageManager.instance.StatUI_On();
     }
     private void LootSetting()
     {
@@ -128,7 +128,7 @@ public class LootOpen_Manager : MonoBehaviour
         }
         else
         {
-            stats.anchoredPosition = new Vector3(-100, 0, 0);
+            StageManager.instance.StatUI_Off();
             gameObject.SetActive(false);
             StageManager.instance.ShopOpen();
         }
@@ -145,7 +145,7 @@ public class LootOpen_Manager : MonoBehaviour
         }
         else
         {
-            stats.anchoredPosition = new Vector3(-100, 0, 0);
+            StageManager.instance.StatUI_Off();
             gameObject.SetActive(false);
             StageManager.instance.ShopOpen();
         }

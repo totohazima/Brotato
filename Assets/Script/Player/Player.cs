@@ -125,6 +125,8 @@ public class Player : MonoBehaviour
         armor_Origin = import.armor;
         evasion_Origin = import.evasion;
         accuracy_Origin = import.accuracy;
+        lucky_Origin = import.lucky;
+        harvest_Origin = import.harvest;
         speed_Origin = import.speed;
 
         maxHealth = import.health;
@@ -182,6 +184,8 @@ public class Player : MonoBehaviour
             armor = armor_Origin;
             evasion = evasion_Origin;
             accuracy = accuracy_Origin;
+            lucky = lucky_Origin;
+            harvest = harvest_Origin;
             speed = speed_Origin;
 
             consumableHeal = consumableHeal_Origin;
@@ -584,5 +588,7 @@ public class Player : MonoBehaviour
             }
         }
 
+        harvest *= 1 + (GameManager.instance.harvestVariance_Amount / 100);
+        harvest = Mathf.Round(harvest);
     }
 }

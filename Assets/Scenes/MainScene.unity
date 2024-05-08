@@ -9976,4 +9976,6 @@ MonoBehaviour:
   isStart: 0
   character: 0
   itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
-  riseHarvest_Amount: 0
+  harvestVariance_Amount: 0
+  riseHarvest_Num: 5
+  decreaseHarvest_Num: -20

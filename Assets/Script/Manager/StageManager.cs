@@ -207,6 +207,20 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             curHp = maxHp;
             FriendlyRemove();
 
+            //수확 스탯
+            if (playerInfo.harvest > 0)
+            {
+                int harvest = (int)Mathf.Round(playerInfo.harvest);
+                money += harvest;
+                curExp += playerInfo.harvest;
+                GameManager.instance.harvestVariance_Amount += GameManager.instance.riseHarvest_Num;
+            }
+            else if(playerInfo.harvest < 0)
+            {
+                int harvest = (int)Mathf.Round(playerInfo.harvest);
+                money -= harvest;
+            }
+            playerInfo.StatCalculate();
             ///test
             ///웨이브 종료 시 경험치 제공
             //curExp += 100;
@@ -396,26 +410,34 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     {
         returnMainMenu_UI.SetActive(true);
         pauseUI.SetActive(false);
-        statUI.anchoredPosition = new Vector3(-100, 0, 0);
+        StatUI_On();
     }
     public void ReturnUI_Off()
     {
         returnMainMenu_UI.SetActive(false);
         pauseUI.SetActive(true);
-        statUI.anchoredPosition = new Vector3(100, 0, 0);
+        StatUI_Off();
     }
 
     public void ReStartUI_On()
     {
         restartUI.SetActive(true);
         pauseUI.SetActive(false);
-        statUI.anchoredPosition = new Vector3(-100, 0, 0);
+        StatUI_On();
     }
     public void ReStartUI_Off()
     {
         restartUI.SetActive(false);
         pauseUI.SetActive(true);
+        StatUI_Off();
+    }
+    public void StatUI_On()
+    {
         statUI.anchoredPosition = new Vector3(100, 0, 0);
+    }
+    public void StatUI_Off()
+    {
+        statUI.anchoredPosition = new Vector3(-100, 0, 0);
     }
 
     public void Option_On()
@@ -443,6 +465,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         MainSceneManager main = MainSceneManager.instance;
         isPause = false;
         GameManager.instance.isStart = false;
+        GameManager.instance.harvestVariance_Amount = 0;
         Destroy(main.selectedPlayer);
         Destroy(main.selectedWeapon);
         Destroy(main.selectedDifficult);
