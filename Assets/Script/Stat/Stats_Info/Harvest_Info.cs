@@ -15,7 +15,8 @@ public class Harvest_Info : Stat_Info
         }
         else
         {
-            infoText.text = scriptable.statMinusText[0] + " " + StageManager.instance.playerInfo.harvest.ToString("F0") + scriptable.statMinusText[1];
+            float harvest = -(StageManager.instance.playerInfo.harvest);
+            infoText.text = scriptable.statMinusText[0] + " " + harvest.ToString("F0") + scriptable.statMinusText[1];
         }
     }
 }

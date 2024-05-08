@@ -19,12 +19,15 @@ public class UpgradeStat : MonoBehaviour
         DAMAGE_UP,
         MELEEDM_UP,
         RANGEDM_UP,
+        ELEMENTALDM_UP,
         ATKSPEED_UP,
         CRITICAL_UP,
         ENGINE_UP,
         RANGE_UP,
         ARMOR_UP,
         EVASION_UP,
+        LUCK_UP,
+        HARVEST_UP,
         SPEED_UP,
     }
 
@@ -34,6 +37,10 @@ public class UpgradeStat : MonoBehaviour
     }
 
     void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
+    {
+        UpgradeTierSetting();
+    }
+    private void UpgradeTierSetting()
     {
         UpgradeStatInfoTable.Data import = GameManager.instance.gameDataBase.upgradeStatInfoTable.table[(int)upgradeType];
         int tier1 = 1;
@@ -47,51 +54,7 @@ public class UpgradeStat : MonoBehaviour
 
         name.text = import.upgradeName;
         effect.text = "<color=#4CFF52>+" + import.tierEffect[tier] + "</color> " + import.upgradeEffect;
-        //switch (upgradeType)
-        //{
-        //    case LevelUpStat.HP_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.heart[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.REGEN_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.lungs[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.BLOOD_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.teeth[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.DAMAGE_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.triceps[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.MELEEDM_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.forearms[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.RANGEDM_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.shoulders[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.ATKSPEED_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.reflexes[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.CRITICAL_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.fingers[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.ENGINE_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.skull[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.RANGE_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.eyes[tier] + "</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.ARMOR_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.chest[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.EVASION_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.back[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-        //    case LevelUpStat.SPEED_UP:
-        //        effect.text = "<color=#4CFF52>+" + upgrade.legs[tier] + "%</color> " + upgrade.upgradeEffect[(int)upgradeType];
-        //        break;
-
-        //}
     }
-
 
     public void StatUpgrade()
     {
@@ -120,6 +83,9 @@ public class UpgradeStat : MonoBehaviour
                 case LevelUpStat.RANGEDM_UP:
                     stage.playerInfo.rangeDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
+                case LevelUpStat.ELEMENTALDM_UP:
+                    stage.playerInfo.elementalDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
                 case LevelUpStat.ATKSPEED_UP:
                     stage.playerInfo.attackSpeed_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
@@ -137,6 +103,12 @@ public class UpgradeStat : MonoBehaviour
                     break;
                 case LevelUpStat.EVASION_UP:
                     stage.playerInfo.evasion_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.LUCK_UP:
+                    stage.playerInfo.lucky_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    break;
+                case LevelUpStat.HARVEST_UP:
+                    stage.playerInfo.harvest_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.SPEED_UP:
                     stage.playerInfo.speed_Origin += import.table[(int)upgradeType].tierEffect[tier];

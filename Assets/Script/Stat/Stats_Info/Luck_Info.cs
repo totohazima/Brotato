@@ -15,7 +15,8 @@ public class Luck_Info : Stat_Info
         }
         else
         {
-            infoText.text = scriptable.statMinusText[0] + " " + StageManager.instance.playerInfo.lucky.ToString("F0") + scriptable.statMinusText[1] + " " + scriptable.statMinusText[2];
+            float luck = -(StageManager.instance.playerInfo.lucky);
+            infoText.text = scriptable.statMinusText[0] + " " + luck.ToString("F0") + scriptable.statMinusText[1] + " " + scriptable.statMinusText[2];
         }
     }
 }

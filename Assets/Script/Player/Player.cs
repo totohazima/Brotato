@@ -256,6 +256,12 @@ public class Player : MonoBehaviour
                         case Stat.PlayerStat.ACCURACY:
                             accuracy += itemInventory[i].riseStats[j];
                             break;
+                        case Stat.PlayerStat.LUCKY:
+                            lucky += itemInventory[i].riseStats[j];
+                            break;
+                        case Stat.PlayerStat.HARVEST:
+                            harvest += itemInventory[i].riseStats[j];
+                            break;
                         case Stat.PlayerStat.SPEED:
                             speed += itemInventory[i].riseStats[j];
                             break;
@@ -363,6 +369,12 @@ public class Player : MonoBehaviour
                             break;
                         case Stat.PlayerStat.ACCURACY:
                             accuracy -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.LUCKY:
+                            lucky -= itemInventory[i].decreaseStats[j];
+                            break;
+                        case Stat.PlayerStat.HARVEST:
+                            harvest -= itemInventory[i].decreaseStats[j];
                             break;
                         case Stat.PlayerStat.SPEED:
                             speed -= itemInventory[i].decreaseStats[j];

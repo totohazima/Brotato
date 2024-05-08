@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Luck
   m_EditorClassIdentifier: 
   statName: "\uD589\uC6B4"
-  statImage: {fileID: 21300000, guid: 49733771139f11844af2f93df5fa788f, type: 3}
+  statImage: {fileID: 21300000, guid: 3ca9a60d09b188a48968818596edad20, type: 3}
   statPlusText:
   - "\uC801\uC744 \uCC98\uCE58\uD560 \uB54C \uC544\uC774\uD15C \uBC0F \uC18C\uBAA8\uD488\uC744
     \uD68D\uB4DD\uD560 \uAE30\uD68C\uAC00 "

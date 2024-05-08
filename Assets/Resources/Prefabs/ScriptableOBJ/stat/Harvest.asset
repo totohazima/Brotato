@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Harvest
   m_EditorClassIdentifier: 
   statName: "\uC218\uD655"
-  statImage: {fileID: 21300000, guid: 56f7e56386f6dea46bc6ff8e94239883, type: 3}
+  statImage: {fileID: 21300000, guid: 706b238e790a1004fa92a73e673b58b8, type: 3}
   statPlusText:
   - "\uC6E8\uC774\uBE0C\uAC00 \uB05D\uB0A0 \uB54C"
   - "\uB9CC\uD07C\uC758 \uC7AC\uB8CC\uC640 XP\uB97C \uC5BB\uC2B5\uB2C8\uB2E4."

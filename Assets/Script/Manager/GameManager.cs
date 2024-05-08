@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour, UI_Upadte
 
     [Header("Item_Info")]
     public ItemGroup_Scriptable itemGroup_Scriptable;
+
+    [Header("Test")]
+    public float riseHarvest_Amount; //웨이브마다 수확 증가치 5 -> 5%
     void Awake()
     {
         instance = this;
