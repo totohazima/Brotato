@@ -116,15 +116,6 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
             for (int i = 0; i < indexes.Length; i++) //5개 번호 중에 최대 수량에 도달한 아이템이 있는지 체크
             {
-                //Item.ItemType type = ItemManager.instance.items[indexes[i]].itemCode;
-                //for (int j = 0; j < ItemManager.instance.maxItemList.Count; j++)
-                //{
-                //    if (ItemManager.instance.maxItemList[j] == type)
-                //    {
-                //        isNot = true;
-                //    }
-                //}
-
                 Item.ItemType type = GameManager.instance.itemGroup_Scriptable.items[indexes[i]].itemCode;
                 for (int j = 0; j < ItemManager.instance.maxItemList.Count; j++)
                 {

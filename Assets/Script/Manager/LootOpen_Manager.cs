@@ -27,8 +27,8 @@ public class LootOpen_Manager : MonoBehaviour
     {
         itemIndex = null;
         checkIndex = 0;
-        LootSetting();
         StageManager.instance.StatUI_On();
+        LootSetting();
     }
     private void LootSetting()
     {

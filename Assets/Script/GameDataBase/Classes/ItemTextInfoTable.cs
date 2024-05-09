@@ -13,3 +13,4 @@ public class ItemTextInfoTable : GameDataTable<ItemTextInfoTable.Data>
         public string[] text;
     }
 }
+

@@ -7,9 +7,10 @@ public class UpgradeStat : MonoBehaviour
 {
     public LevelUpStat upgradeType;
     public int tier;
-
     public Text name;
-    public Text effect;
+    public Text effectText;
+    public Image backGroundImage;
+    public Outline outline;
     StageManager stage;
     public enum LevelUpStat
     {
@@ -36,26 +37,146 @@ public class UpgradeStat : MonoBehaviour
         stage = StageManager.instance;
     }
 
-    void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
+    void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)s
     {
         UpgradeTierSetting();
     }
     private void UpgradeTierSetting()
     {
-        UpgradeStatInfoTable.Data import = GameManager.instance.gameDataBase.upgradeStatInfoTable.table[(int)upgradeType];
-        int tier1 = 1;
-        int tier2 = 0;
-        int tier3 = 0;
-        int tier4 = 0;
+        UpgradePercentageInfoTable.Data[] percentData = new UpgradePercentageInfoTable.Data[GameManager.instance.gameDataBase.upgradePercentageInfoTable.table.Length];
+        for (int i = 0; i < percentData.Length; i++)
+        {
+            percentData[i] = GameManager.instance.gameDataBase.upgradePercentageInfoTable.table[i];
+        }
+        int level = stage.playerLevel + 1 - (stage.levelUpChance);
+        float totalChance = 100;
+        float tier1 = 0;
+        float tier2 = 0;
+        float tier3 = 0;
+        float tier4 = 0;
 
+        if (level == 1) { tier1 = 100; }
+        else if (level == 5) { tier2 = 100; }
+        else if (level == 10 || level == 15 || level == 20) { tier3 = 100; }
+        else if (level > 24 && level % 5 == 0) { tier4 = 100; }
+        else
+        {
+            for (int i = percentData.Length - 1; i >= 0; i--)
+            {
+                UpgradePercentageInfoTable.Data data = percentData[i];
+                if (level >= data.minLevel)
+                {
+                    float chance = (data.chancePerLevel * (level - data.minLevel) + data.baseChance) * (1 + (stage.playerInfo.lucky / 100));
+                    if (chance > data.maxChance)
+                    {
+                        chance = data.maxChance;
+                    }
+
+                    if (chance > totalChance)
+                    {
+                        chance = totalChance;
+                        if(totalChance <= 0)
+                        {
+                            totalChance -= chance;
+                        }
+                    }
+                    else
+                    {
+                        totalChance -= chance;
+                    }
+
+                    switch (i)
+                    {
+                        case 3:
+                            tier4 = chance;
+                            break;
+                        case 2:
+                            tier3 = chance;
+                            break;
+                        case 1:
+                            tier2 = chance;
+                            break;
+                        case 0:
+                            tier1 = chance;
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (i)
+                    {
+                        case 3:
+                            tier4 = 0;
+                            break;
+                        case 2:
+                            tier3 = 0;
+                            break;
+                        case 1:
+                            tier2 = 0;
+                            break;
+                        case 0:
+                            tier1 = 0;
+                            break;
+                    }
+                }
+            }
+        }
         float[] chanceLise = { tier1, tier2, tier3, tier4 };
         int index = StageManager.instance.Judgment(chanceLise);
         tier = index;
 
+        UpgradeStatInfoTable.Data import = GameManager.instance.gameDataBase.upgradeStatInfoTable.table[(int)upgradeType];
         name.text = import.upgradeName;
-        effect.text = "<color=#4CFF52>+" + import.tierEffect[tier] + "</color> " + import.upgradeEffect;
-    }
+        effectText.text = "<color=#4CFF52>+" + import.tierEffect[tier] + "</color> " + import.upgradeEffect;
+        ImageRender(tier);
 
+        ///확률 보여주기용
+        for (int i = 0; i < GameManager.instance.upgradeChance.Length; i++)
+        {
+            switch(i)
+            {
+                case 0:
+                    GameManager.instance.upgradeChance[i] = tier1;
+                    break;
+                case 1:
+                    GameManager.instance.upgradeChance[i] = tier2;
+                    break;
+                case 2:
+                    GameManager.instance.upgradeChance[i] = tier3;
+                    break;
+                case 3:
+                    GameManager.instance.upgradeChance[i] = tier4;
+                    break;
+            }
+        }
+        ///
+    }
+    private void ImageRender(int tier)
+    {
+        switch(tier)
+        {
+            case 0:
+                backGroundImage.color = Color.black;
+                outline.effectColor = Color.black;
+                name.color = Color.white;
+                break;
+            case 1:
+                backGroundImage.color = new Color(5 / 255f, 25 / 255f, 40 / 255f);
+                outline.effectColor = new Color(21 / 255f, 178 / 255f, 232 / 255f);
+                name.color = new Color(21 / 255f, 178 / 255f, 232 / 255f);
+                break;
+            case 2:
+                backGroundImage.color = new Color(20 / 255f, 10 / 255f, 45 / 255f);
+                outline.effectColor = new Color(204 / 255f, 0 / 255f, 255 / 255f);
+                name.color = new Color(204 / 255f, 0 / 255f, 255 / 255f);
+                break;
+            case 3:
+                backGroundImage.color = new Color(45 / 255f, 10 / 255f, 10 / 255f);
+                outline.effectColor = new Color(250 / 255f, 7 / 255f, 11 / 255f);
+                name.color = new Color(250 / 255f, 7 / 255f, 11 / 255f);
+                break;
+        }
+    }
     public void StatUpgrade()
     {
         UpgradeStatInfoTable import = GameManager.instance.gameDataBase.upgradeStatInfoTable;
@@ -121,6 +242,7 @@ public class UpgradeStat : MonoBehaviour
 
             if (stage.levelUpChance <= 0)
             {
+                stage.StatUI_Off();
                 //여기서 전리품 메뉴로
                 if (stage.lootChance > 0)
                 {

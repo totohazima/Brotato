@@ -21,19 +21,19 @@ MonoBehaviour:
   weaponPrefab: {fileID: 8547711840563967469, guid: 4facb9b5b1b33744eabca76c92ee66cd, type: 3}
   tier1_Info:
   - "\uBC1C\uC0AC\uCCB4\uB294"
-  - "\uD655\uB960\uB85C \uD0C0\uACA9 \uC2DC \uD3ED\uBC1C\uD568"
+  - "% \uD655\uB960\uB85C \uD0C0\uACA9 \uC2DC \uD3ED\uBC1C\uD568"
   tier1_InfoStat:
   - 50
   - 0
   tier2_Info:
   - "\uBC1C\uC0AC\uCCB4\uB294"
-  - "\uD655\uB960\uB85C \uD0C0\uACA9 \uC2DC \uD3ED\uBC1C\uD568"
+  - "% \uD655\uB960\uB85C \uD0C0\uACA9 \uC2DC \uD3ED\uBC1C\uD568"
   tier2_InfoStat:
   - 65
   - 0
   tier3_Info:
   - "\uBC1C\uC0AC\uCCB4\uB294"
-  - "\uD655\uB960\uB85C \uD0C0\uACA9 \uC2DC \uD3ED\uBC1C\uD568"
+  - "% \uD655\uB960\uB85C \uD0C0\uACA9 \uC2DC \uD3ED\uBC1C\uD568"
   tier3_InfoStat:
   - 80
   - 0

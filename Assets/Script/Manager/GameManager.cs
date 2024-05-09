@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public float harvestVariance_Amount; //수확 변동치(웨이브마다 해당수치가 변하며 수확스탯 계산식에서 마지막에 %로 곱해줌)
     public float riseHarvest_Num; //웨이브마다 수확 증가치 5 -> 5%
     public float decreaseHarvest_Num; //10웨이브 이후 수확 감소치 20 -> 20%
+    public float[] weaponTierChance = new float[4];
+    public float[] upgradeChance = new float[4];
     void Awake()
     {
         instance = this;

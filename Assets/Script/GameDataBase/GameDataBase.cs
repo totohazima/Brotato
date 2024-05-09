@@ -12,7 +12,7 @@ namespace Only1Games.GDBA
         }
 
 
-        [Header("(StatusTable)")]
+        [Header("StatusTable")]
         public EnemyBaseStatInfoTable enemyBaseStatInfoTable = null;
         public EnemyGrowthStatInfoTable enemyGrowthStatInfoTable = null;
         public PlayerStatInfoTable playerStatInfoTable = null;
@@ -24,8 +24,11 @@ namespace Only1Games.GDBA
         public WaveStatInfoTable waveStatInfoTable = null;
         public WeaponStatInfoTable weaponStatInfoTable = null;
 
+        [Header("PercentageTable")]
+        public WeaponPercentageInfoTable weaponPercentageInfoTable = null;
+        public UpgradePercentageInfoTable upgradePercentageInfoTable = null;
 
-        [Header("(TextTable)")]
+        [Header("TextTable")]
         public ItemTextInfoTable ItemTextInfoTable = null;
     }
 

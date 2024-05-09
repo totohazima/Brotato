@@ -93,7 +93,7 @@ MonoBehaviour:
   - itemCode: 15
     textCount: 2
     text:
-    - "<color=#4CFF52>+1%</color> \uACF5\uACA9 \uC18D\uB3C4"
+    - "<color=#4CFF52>+10%</color> \uACF5\uACA9 \uC18D\uB3C4"
     - "<color=red>-2%</color> \uB300\uBBF8\uC9C0"
   - itemCode: 16
     textCount: 1
@@ -135,7 +135,7 @@ MonoBehaviour:
   - itemCode: 23
     textCount: 1
     text:
-    - "<color=#4CFF52>+2</color> \uBC94\uC704"
+    - "<color=#4CFF52>+20</color> \uBC94\uC704"
   - itemCode: 24
     textCount: 2
     text:
@@ -233,7 +233,7 @@ MonoBehaviour:
   - itemCode: 42
     textCount: 2
     text:
-    - "<color=#4CFF52>+2%</color> EXP \uD68D\uB4DD"
+    - "<color=#4CFF52>+20%</color> EXP \uD68D\uB4DD"
     - "<color=red>-8</color> \uBC94\uC704"
   - itemCode: 43
     textCount: 1
@@ -274,7 +274,7 @@ MonoBehaviour:
   - itemCode: 50
     textCount: 2
     text:
-    - "\uC801\uC744 \uACF5\uACA9\uD558\uBA74 \uC801\uC758 \uC18D\uB3C4\uAC00 <color=red>10%</color>
+    - "\uC801\uC744 \uACF5\uACA9\uD558\uBA74 \uC801\uC758 \uC18D\uB3C4\uAC00 <color=red>-10%</color>
       \uAC10\uC18C\uD569\uB2C8\uB2E4 \uCD5C\uB300:<color=#4CFF52>30%</color>"
     - "<color=red>-3%</color> \uC18D\uB3C4"
   - itemCode: 51

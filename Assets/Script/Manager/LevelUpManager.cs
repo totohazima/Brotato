@@ -40,7 +40,6 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
-        StageManager.instance.StatUI_Off();
     }
 
     public void CustomUpdate()

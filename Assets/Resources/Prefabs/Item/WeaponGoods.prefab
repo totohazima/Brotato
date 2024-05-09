@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 5357557446351914543}
   - component: {fileID: 1109205512400816947}
   m_Layer: 5
-  m_Name: ItemName
+  m_Name: WeaponName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2010,6 +2010,7 @@ MonoBehaviour:
   typeText: 
   index: 0
   atkType: 0
+  backgroundImage: {fileID: 1967387858530367400}
   weaponImage: {fileID: 1813898348922209107}
   weaponName: {fileID: 1109205512400816947}
   weaponSetType: {fileID: 8112918636792443607}
@@ -2051,8 +2052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
-  m_EffectDistance: {x: 3, y: 3}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1.5, y: 1.5}
   m_UseGraphicAlpha: 1
 --- !u!1 &8087595633307454834
 GameObject:

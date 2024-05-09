@@ -7,6 +7,7 @@ public class WeaponGoods : Weapon, UI_Upadte
 {
     public Weapons index;
     public WeaponType atkType;
+    public Image backgroundImage;
     public Image weaponImage;
     public Text weaponName;
     public Text weaponSetType;
@@ -53,7 +54,106 @@ public class WeaponGoods : Weapon, UI_Upadte
         index = scrip.weaponNickNames;
         weaponImage.sprite = scrip.weaponImage;
         atkType = scrip.attackType;
-        StatSetting((int)index, 0);
+
+        //무기티어 확률계산
+        WeaponPercentageInfoTable.Data[] percentData = new WeaponPercentageInfoTable.Data[GameManager.instance.gameDataBase.weaponPercentageInfoTable.table.Length];
+        for (int i = 0; i < percentData.Length; i++)
+        {
+            percentData[i] = GameManager.instance.gameDataBase.weaponPercentageInfoTable.table[i];
+        }
+        int waveNum = StageManager.instance.waveLevel + 1;
+        float totalChance = 100;
+        float tier1 = 0;
+        float tier2 = 0;
+        float tier3 = 0;
+        float tier4 = 0;
+
+        for (int i = percentData.Length - 1; i >= 0; i--)
+        {
+            WeaponPercentageInfoTable.Data data = percentData[i];
+            if (waveNum >= data.available_Wave)
+            {
+                float chance = (data.chancePerWave * (waveNum - data.minWave) + data.baseChance) * (1 + (StageManager.instance.playerInfo.lucky / 100));
+                float divide =  totalChance / 100;
+                if(chance > data.maxChance)
+                {
+                    chance = data.maxChance;
+                }
+
+                chance = chance * divide;
+                if (chance > totalChance)
+                {
+                    chance = totalChance;
+                    if (totalChance <= 0)
+                    {
+                        totalChance -= chance;
+                    }
+                }
+                else
+                {
+                    totalChance -= chance;
+                }
+
+                switch (i)
+                {
+                    case 3:
+                        tier4 = chance;
+                        break;
+                    case 2:
+                        tier3 = chance;
+                        break;
+                    case 1:
+                        tier2 = chance;
+                        break;
+                    case 0:
+                        tier1 = chance;
+                        break;
+                }
+            }
+            else
+            {
+                switch (i)
+                {
+                    case 3:
+                        tier4 = 0;
+                        break;
+                    case 2:
+                        tier3 = 0;
+                        break;
+                    case 1:
+                        tier2 = 0;
+                        break;
+                    case 0:
+                        tier1 = 0;
+                        break;
+                }
+            }
+        }
+        ///확률 보여주기용
+        for (int i = 0; i < GameManager.instance.weaponTierChance.Length; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    GameManager.instance.weaponTierChance[i] = Mathf.Round(tier1 * 100) * 0.01f;
+                    break;
+                case 1:
+                    GameManager.instance.weaponTierChance[i] = Mathf.Round(tier2 * 100) * 0.01f;
+                    break;
+                case 2:
+                    GameManager.instance.weaponTierChance[i] = Mathf.Round(tier3 * 100) * 0.01f;
+                    break;
+                case 3:
+                    GameManager.instance.weaponTierChance[i] = Mathf.Round(tier4 * 100) * 0.01f;
+                    break;
+            }
+        }
+        ///
+
+        float[] chanceLise = { tier1, tier2, tier3, tier4 };
+        int tier = StageManager.instance.Judgment(chanceLise);
+        weaponTier = tier;
+        StatSetting((int)index, tier);
     }
     public void UI_Update()
     {
@@ -244,15 +344,57 @@ public class WeaponGoods : Weapon, UI_Upadte
             infoUI.gameObject.SetActive(true);
             switch (index)
             {
-                case Weapon.Weapons.SHREDDER:
-                    infoUI.text = scriptable.tier1_Info[0] + " <color=#4CFF52>" + scriptable.tier1_InfoStat[0] + "</color>" + scriptable.tier1_Info[1];
+                case Weapons.SHREDDER:
+                    switch (weaponTier)
+                    {
+                        case 0:
+                            infoUI.text = scriptable.tier1_Info[0] + " <color=#4CFF52>" + scriptable.tier1_InfoStat[0] + "</color>" + scriptable.tier1_Info[1];
+                            break;
+                        case 1:
+                            infoUI.text = scriptable.tier2_Info[0] + " <color=#4CFF52>" + scriptable.tier2_InfoStat[0] + "</color>" + scriptable.tier2_Info[1];
+                            break;
+                        case 2:
+                            infoUI.text = scriptable.tier3_Info[0] + " <color=#4CFF52>" + scriptable.tier3_InfoStat[0] + "</color>" + scriptable.tier3_Info[1];
+                            break;
+                        case 3:
+                            infoUI.text = scriptable.tier4_Info[0];
+                            break;
+                    }
                     break;
-                case Weapon.Weapons.WRENCH:
-                    infoUI.text = scriptable.tier1_InfoStat[0] + "(" + scriptable.tier1_InfoStat[1] + "<sprite=3>) " + scriptable.tier1_Info[0];
+                case Weapons.WRENCH:
+                    switch (weaponTier)
+                    {
+                        case 0:
+                            infoUI.text = scriptable.tier1_InfoStat[0] + "(" + scriptable.tier1_InfoStat[1] + "<sprite=3>) " + scriptable.tier1_Info[0];
+                            break;
+                        case 1:
+                            infoUI.text = scriptable.tier2_InfoStat[0] + "(" + scriptable.tier2_InfoStat[1] + "<sprite=3>) " + scriptable.tier2_Info[0] + scriptable.tier2_InfoStat[2] + scriptable.tier2_Info[1];
+                            break;
+                        case 2:
+                            infoUI.text = scriptable.tier3_InfoStat[0] + "(" + scriptable.tier3_InfoStat[1] + "<sprite=3>) " + scriptable.tier3_Info[0] + scriptable.tier3_InfoStat[2] + scriptable.tier3_Info[1];
+                            break;
+                        case 3:
+                            infoUI.text = scriptable.tier4_InfoStat[0] + "(" + scriptable.tier4_InfoStat[1] + "<sprite=3>) " + scriptable.tier4_Info[0] + scriptable.tier4_InfoStat[2] + scriptable.tier4_Info[1];
+                            break;
+                    }
                     break;
-                case Weapon.Weapons.DRIVER:
-                    infoUI.text = scriptable.tier1_Info[0] + " <color=#4CFF52>" + scriptable.tier1_InfoStat[0].ToString("F2") + "</color>" + scriptable.tier1_Info[1];
-                    break;
+                case Weapons.DRIVER:
+                    switch (weaponTier)
+                    {
+                        case 0:
+                            infoUI.text = scriptable.tier1_Info[0] + " <color=#4CFF52>" + scriptable.tier1_InfoStat[0].ToString("F2") + "</color>" + scriptable.tier1_Info[1];
+                            break;
+                        case 1:
+                            infoUI.text = scriptable.tier2_Info[0] + " <color=#4CFF52>" + scriptable.tier2_InfoStat[0].ToString("F2") + "</color>" + scriptable.tier2_Info[1];
+                            break;
+                        case 2:
+                            infoUI.text = scriptable.tier3_Info[0] + " <color=#4CFF52>" + scriptable.tier3_InfoStat[0].ToString("F2") + "</color>" + scriptable.tier3_Info[1];
+                            break;
+                        case 3:
+                            infoUI.text = scriptable.tier4_Info[0] + " <color=#4CFF52>" + scriptable.tier4_InfoStat[0].ToString("F2") + "</color>" + scriptable.tier4_Info[1];
+                            break;
+                    }
+                    break;               
             }
 
         }
@@ -275,6 +417,31 @@ public class WeaponGoods : Weapon, UI_Upadte
         else
         {
             priceText.text = weaponPrice.ToString("F0");
+        }
+
+        //티어 이미지 설정
+        switch (weaponTier)
+        {
+            case 0:
+                backgroundImage.color = Color.black;
+                line.effectColor = Color.black;
+                weaponName.color = Color.white;
+                break;
+            case 1:
+                backgroundImage.color = new Color(5 / 255f, 25 / 255f, 40 / 255f);
+                line.effectColor = new Color(21 / 255f, 178 / 255f, 232 / 255f);
+                weaponName.color = new Color(21 / 255f, 178 / 255f, 232 / 255f);
+                break;
+            case 2:
+                backgroundImage.color = new Color(20 / 255f, 10 / 255f, 45 / 255f);
+                line.effectColor = new Color(204 / 255f, 0 / 255f, 255 / 255f);
+                weaponName.color = new Color(204 / 255f, 0 / 255f, 255 / 255f);
+                break;
+            case 3:
+                backgroundImage.color = new Color(45 / 255f, 10 / 255f, 10 / 255f);
+                line.effectColor = new Color(250 / 255f, 7 / 255f, 11 / 255f);
+                weaponName.color = new Color(250 / 255f, 7 / 255f, 11 / 255f);
+                break;
         }
     }
 

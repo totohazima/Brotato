@@ -441,8 +441,8 @@ public class Weapon_Info : MonoBehaviour
         ItemManager.instance.WeaponListUp();
         WeaponManager.instance.WeaponSetSearch();
         StageManager.instance.playerInfo.StatCalculate();
-        float recyclePrice = (price / 0.25f);
-        recyclePrice = Mathf.Ceil(recyclePrice);
+        float recyclePrice = (price * 0.25f);
+        recyclePrice = Mathf.Round(recyclePrice);
         StageManager.instance.money += (int)recyclePrice;
         Destroy(gameObject);
     }

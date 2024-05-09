@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Only1Games.GDBA;
@@ -12,6 +12,6 @@ public class WaveStatInfoTable : GameDataTable<WaveStatInfoTable.Data>
         public float enemySpawnCount;
         public float enemySpawnTime;
         public float waveTime;
-        public float waveTreeStat; //¿Ã¹Ù¸¥ ³ª¹« ¼ÒÈ¯À» À§ÇÑ ½ºÅÈ
+        public float waveTreeStat; 
     }
 }
