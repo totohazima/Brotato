@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [Header("Stat")]
     public EnemyName name;
+    public Stat.enemyType enemyType;
     public int level;
     public float maxHealth;
     public float curHealth;
@@ -41,7 +42,6 @@ public class Enemy : MonoBehaviour
 
     public virtual IEnumerator Died()
     {
-        //SpawnManager.instance.enemys.Remove(gameObject);
         ugliyToothSlow = 0;
         float randomX, randomY;
         for (int i = 0; i < moneyDropRate; i++)
@@ -56,11 +56,20 @@ public class Enemy : MonoBehaviour
             meterialScript.expValue = expValue;
         }
 
-        float consum = consumableDropRate / 100;
-        float loot = lootDropRate / 100;
-        float notDrop = (100 - (consum + loot)) / 100;
+        float consume = consumableDropRate / 100;
+        float loot;
+        if (enemyType == Stat.enemyType.NORMAL_ENEMY || enemyType == Stat.enemyType.NEUTRALITY_ENEMY)
+        {
+            loot = (lootDropRate * (1 + (StageManager.instance.playerInfo.lucky / 100))) / (1 + StageManager.instance.inWaveLoot_Amount);
+            loot = loot / 100;
+        }
+        else
+        {
+            loot = lootDropRate / 100;
+        }
+        float notDrop = (100 - (consume + loot)) / 100;
 
-        float[] chanceLise = { notDrop, consum, loot };
+        float[] chanceLise = { notDrop, consume, loot };
         int index = StageManager.instance.Judgment(chanceLise);
 
         switch (index)
@@ -78,6 +87,7 @@ public class Enemy : MonoBehaviour
                 randomX = Random.Range(-3f, 3f);
                 randomY = Random.Range(-3f, 3f);
                 lootCrate.transform.position = new Vector3(transform.position.x + randomX, transform.position.y + randomY);
+                StageManager.instance.inWaveLoot_Amount++;
                 break;
         }
         gameObject.SetActive(false);
@@ -91,6 +101,7 @@ public class Enemy : MonoBehaviour
             EnemyBaseStatInfoTable.Data enemy = GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[index];
             EnemyGrowthStatInfoTable.Data grow = GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[index];
 
+            enemyType = enemy.enemyType;
             maxHealth = enemy.baseHp;
             damage = enemy.baseDamage;
             coolTime = enemy.baseCoolTime;

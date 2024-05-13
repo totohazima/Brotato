@@ -540,7 +540,7 @@ namespace Only1Games.GDBA
                 case "EnemyGrowthStat":
                     return new EnemyGrowthStatImporter(filePath);
                 case "DifficultStat":
-                    return new DifficultStatImporter(filePath);
+                    return new DifficultImporter(filePath);
                 case "ItemStat":
                     return new ItemStatImporter(filePath);
                 case "ItemBasePrice":

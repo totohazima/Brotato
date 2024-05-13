@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
 {
     public static LevelUpManager instance;
-
+    public Text money;
     public Transform[] stats;
     public Text[] statName;
     public Text[] statNum;
@@ -44,6 +44,7 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
 
     public void CustomUpdate()
     {
+        money.text = StageManager.instance.money.ToString("F0");
         //statNum[0].text = StageManager.instance.playerLevel.ToString("F0");
         //statNum[1].text = player.maxHealth.ToString("F0");
         //statNum[2].text = player.regeneration.ToString("F0");

@@ -212,7 +212,7 @@ public class Weapon_Info : MonoBehaviour
 
             switch (weaponInfo.multipleDamageType[i])
             {
-                case Weapon.DamageType.MELEE:
+                case Weapon.DamageType.MELEE_DAMAGE:
                     damageNumUI.text += "<sprite=0>";
                     break;
                 case Weapon.DamageType.RANGE:

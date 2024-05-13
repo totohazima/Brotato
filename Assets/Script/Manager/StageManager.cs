@@ -46,7 +46,8 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public int money;   //돈
     public int interest; //이자
     public int lootChance; //상자깡 찬스
-    private float timer; //시간
+    public int inWaveLoot_Amount; //현재 웨이브에서 나온 상자의 개수
+    [SerializeField] private float timer; //시간
     public bool isPause; //일시정지
     public bool isEnd; //웨이브 끝
     public int difficult; //난이도
@@ -56,7 +57,6 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public float enemyRiseDamage; //적 데미지 증가치 %
     public float enemyRiseHealth; //적 체력 증가치 %
     public bool doubleBoss; //보스가 2마리 (한 마리는 체력이 25% 감소)
-   // private bool isStart; //게임이 처음 시작할 때
     [Header("# GameObject")]
     public Camera stageMainCamera;
     public GameObject playerPrefab;
@@ -379,7 +379,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         waveLevel++;
         timer = waveTime[waveLevel];
         isEnd = false;
-
+        inWaveLoot_Amount = 0;
         SpawnManager spawn = SpawnManager.instance;
         spawn.WaveSelect(waveLevel);
         //spawn.enemyLimit *= 1 + (ItemEffect.instance.GentleAlien() / 100);
@@ -410,26 +410,26 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     {
         returnMainMenu_UI.SetActive(true);
         pauseUI.SetActive(false);
-        StatUI_On();
+        StatUI_Off();
     }
     public void ReturnUI_Off()
     {
         returnMainMenu_UI.SetActive(false);
         pauseUI.SetActive(true);
-        StatUI_Off();
+        StatUI_On();
     }
 
     public void ReStartUI_On()
     {
         restartUI.SetActive(true);
         pauseUI.SetActive(false);
-        StatUI_On();
+        StatUI_Off();
     }
     public void ReStartUI_Off()
     {
         restartUI.SetActive(false);
         pauseUI.SetActive(true);
-        StatUI_Off();
+        StatUI_On();
     }
     public void StatUI_On()
     {

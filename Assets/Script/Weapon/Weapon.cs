@@ -24,10 +24,14 @@ public class Weapon : MonoBehaviour
 
     public enum DamageType
     {
-        MELEE,
-        RANGE,
+        MELEE_DAMAGE,
+        RANGE_DAMAGE,
+        ELEMENTAL,
         HEALTH,
         ENGINE,
+        RANGE,
+        ARMOR,
+        LUCK,
     }
 
     public enum SettType
@@ -173,17 +177,29 @@ public class Weapon : MonoBehaviour
         {
             switch (multipleDamageType[i])
             {
-                case DamageType.MELEE:
+                case DamageType.MELEE_DAMAGE:
                     afterDamage += player.meleeDamage * (multipleDamage[i] / 100);
                     break;
-                case DamageType.RANGE:
+                case DamageType.RANGE_DAMAGE:
                     afterDamage += player.rangeDamage * (multipleDamage[i] / 100);
+                    break;
+                case DamageType.ELEMENTAL:
+                    afterDamage += player.elementalDamage * (multipleDamage[i] / 100);
                     break;
                 case DamageType.HEALTH:
                     afterDamage += player.maxHealth * (multipleDamage[i] / 100);
                     break;
                 case DamageType.ENGINE:
                     afterDamage += player.engine * (multipleDamage[i] / 100);
+                    break;
+                case DamageType.RANGE:
+                    afterDamage += player.range * (multipleDamage[i] / 100);
+                    break;
+                case DamageType.ARMOR:
+                    afterDamage += player.armor * (multipleDamage[i] / 100);
+                    break;
+                case DamageType.LUCK:
+                    afterDamage += player.lucky * (multipleDamage[i] / 100);
                     break;
             }
         }

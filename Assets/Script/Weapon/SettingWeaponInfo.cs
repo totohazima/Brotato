@@ -75,17 +75,29 @@ public class SettingWeaponInfo : MonoBehaviour
             
             switch(weapon.multipleDamageType[i])
             {
-                case Weapon.DamageType.MELEE:
+                case Weapon.DamageType.MELEE_DAMAGE:
                     damage.text += "<sprite=0>";
                     break;
-                case Weapon.DamageType.RANGE:
+                case Weapon.DamageType.RANGE_DAMAGE:
                     damage.text += "<sprite=1>";
                     break;
-                case Weapon.DamageType.HEALTH:
+                case Weapon.DamageType.ELEMENTAL:
                     damage.text += "<sprite=2>";
                     break;
-                case Weapon.DamageType.ENGINE:
+                case Weapon.DamageType.HEALTH:
                     damage.text += "<sprite=3>";
+                    break;
+                case Weapon.DamageType.ENGINE:
+                    damage.text += "<sprite=4>";
+                    break;
+                case Weapon.DamageType.RANGE:
+                    damage.text += "<sprite=5>";
+                    break;
+                case Weapon.DamageType.ARMOR:
+                    damage.text += "<sprite=6>";
+                    break;
+                case Weapon.DamageType.LUCK:
+                    damage.text += "<sprite=7>";
                     break;
             }
         }
@@ -124,7 +136,7 @@ public class SettingWeaponInfo : MonoBehaviour
                     infoUI.text = weaponScrip.tier1_Info[0] + " <color=#4CFF52>" + weaponScrip.tier1_InfoStat[0] + "</color>" + weaponScrip.tier1_Info[1];
                     break;
                 case Weapon.Weapons.WRENCH:
-                    infoUI.text = weaponScrip.tier1_InfoStat[0] + "(" + weaponScrip.tier1_InfoStat[1] + "<sprite=3>) " + weaponScrip.tier1_Info[0];
+                    infoUI.text = weaponScrip.tier1_InfoStat[0] + "(" + weaponScrip.tier1_InfoStat[1] + "<sprite=4>) " + weaponScrip.tier1_Info[0];
                     break;
                 case Weapon.Weapons.DRIVER:
                     infoUI.text = weaponScrip.tier1_Info[0] + " <color=#4CFF52>" + weaponScrip.tier1_InfoStat[0].ToString("F2") + "</color>" + weaponScrip.tier1_Info[1];

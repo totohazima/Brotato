@@ -25,21 +25,22 @@ public class EnemyBaseStatImporter : CustomExcelDataImportBase
             InfoTable.table[i - 1] = new EnemyBaseStatInfoTable.Data();
             data = InfoTable.table[i - 1];
 
-            cell = row.GetCell(0); data.monsterCode = (cell == null ? "" : cell.StringCellValue);
-            cell = row.GetCell(1); data.baseHp = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(2); data.baseDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(3); data.baseCoolTime = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(4); data.baseArmor = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(5); data.baseRange = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(6); data.baseEvasion = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(7); data.baseAccuracy = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(8); data.baseMinSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(9); data.baseMaxSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(10); data.baseMoneyDropCount = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(11); data.baseMoneyValue = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(12); data.baseExp = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(13); data.baseConsumableDropPersent = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(14); data.baseLootDropPersent = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(0); data.monsterCode = (Enemy.EnemyName)System.Enum.Parse(typeof(Enemy.EnemyName), (cell == null ? "" : cell.StringCellValue));
+            cell = row.GetCell(1); data.enemyType = (Stat.enemyType)System.Enum.Parse(typeof(Stat.enemyType), (cell == null ? "" : cell.StringCellValue));
+            cell = row.GetCell(2); data.baseHp = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(3); data.baseDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(4); data.baseCoolTime = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(5); data.baseArmor = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(6); data.baseRange = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(7); data.baseEvasion = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(8); data.baseAccuracy = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(9); data.baseMinSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(10); data.baseMaxSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(11); data.baseMoneyDropCount = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(12); data.baseMoneyValue = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(13); data.baseExp = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(14); data.baseConsumableDropPersent = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(15); data.baseLootDropPersent = (float)(cell == null ? 0 : cell.NumericCellValue);
         }
         EditorUtility.SetDirty(InfoTable);
     }

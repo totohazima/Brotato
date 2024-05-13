@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EnemyBaseStat
   m_EditorClassIdentifier: 
   table:
-  - monsterCode: BASIC
+  - monsterCode: 0
+    enemyType: 0
     baseHp: 10
     baseDamage: 1
     baseCoolTime: 0
@@ -28,7 +29,8 @@ MonoBehaviour:
     baseExp: 1
     baseConsumableDropPersent: 1
     baseLootDropPersent: 1
-  - monsterCode: RANGER
+  - monsterCode: 1
+    enemyType: 0
     baseHp: 9
     baseDamage: 1
     baseCoolTime: 10
@@ -43,7 +45,8 @@ MonoBehaviour:
     baseExp: 1
     baseConsumableDropPersent: 3
     baseLootDropPersent: 10
-  - monsterCode: CHARGER
+  - monsterCode: 2
+    enemyType: 0
     baseHp: 10
     baseDamage: 1
     baseCoolTime: 15
@@ -58,7 +61,8 @@ MonoBehaviour:
     baseExp: 1
     baseConsumableDropPersent: 1
     baseLootDropPersent: 1
-  - monsterCode: TANKER
+  - monsterCode: 3
+    enemyType: 0
     baseHp: 15
     baseDamage: 2
     baseCoolTime: 0
@@ -73,7 +77,8 @@ MonoBehaviour:
     baseExp: 1
     baseConsumableDropPersent: 3
     baseLootDropPersent: 3
-  - monsterCode: BOSS
+  - monsterCode: 4
+    enemyType: 2
     baseHp: 29250
     baseDamage: 30
     baseCoolTime: 0
@@ -88,7 +93,8 @@ MonoBehaviour:
     baseExp: 1
     baseConsumableDropPersent: 100
     baseLootDropPersent: 100
-  - monsterCode: TREE
+  - monsterCode: 5
+    enemyType: 3
     baseHp: 8
     baseDamage: 0
     baseCoolTime: 0

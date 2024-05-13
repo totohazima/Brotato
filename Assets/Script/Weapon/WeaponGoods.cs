@@ -165,7 +165,7 @@ public class WeaponGoods : Weapon, UI_Upadte
         {
             switch (multipleDamageType[i])
             {
-                case DamageType.MELEE:
+                case DamageType.MELEE_DAMAGE:
                     multiple[i] = player.meleeDamage * (multipleDamage[i] / 100);
                     break;
                 case DamageType.RANGE:
@@ -238,7 +238,7 @@ public class WeaponGoods : Weapon, UI_Upadte
 
             switch (multipleDamageType[i])
             {
-                case DamageType.MELEE:
+                case DamageType.MELEE_DAMAGE:
                     damageNumUI.text += "<sprite=0>";
                     break;
                 case DamageType.RANGE:
@@ -420,28 +420,37 @@ public class WeaponGoods : Weapon, UI_Upadte
         }
 
         //티어 이미지 설정
-        switch (weaponTier)
+        if (isLock == true)
         {
-            case 0:
-                backgroundImage.color = Color.black;
-                line.effectColor = Color.black;
-                weaponName.color = Color.white;
-                break;
-            case 1:
-                backgroundImage.color = new Color(5 / 255f, 25 / 255f, 40 / 255f);
-                line.effectColor = new Color(21 / 255f, 178 / 255f, 232 / 255f);
-                weaponName.color = new Color(21 / 255f, 178 / 255f, 232 / 255f);
-                break;
-            case 2:
-                backgroundImage.color = new Color(20 / 255f, 10 / 255f, 45 / 255f);
-                line.effectColor = new Color(204 / 255f, 0 / 255f, 255 / 255f);
-                weaponName.color = new Color(204 / 255f, 0 / 255f, 255 / 255f);
-                break;
-            case 3:
-                backgroundImage.color = new Color(45 / 255f, 10 / 255f, 10 / 255f);
-                line.effectColor = new Color(250 / 255f, 7 / 255f, 11 / 255f);
-                weaponName.color = new Color(250 / 255f, 7 / 255f, 11 / 255f);
-                break;
+            line.effectColor = Color.white;
+            lockUI.color = new Color(255 / 255f, 255 / 255f, 255 / 255f);
+        }
+        else
+        {
+            lockUI.color = new Color(150 / 255f, 150 / 255f, 150 / 255f);
+            switch (weaponTier)
+            {
+                case 0:
+                    backgroundImage.color = Color.black;
+                    line.effectColor = Color.black;
+                    weaponName.color = Color.white;
+                    break;
+                case 1:
+                    backgroundImage.color = new Color(5 / 255f, 25 / 255f, 40 / 255f);
+                    line.effectColor = new Color(21 / 255f, 178 / 255f, 232 / 255f);
+                    weaponName.color = new Color(21 / 255f, 178 / 255f, 232 / 255f);
+                    break;
+                case 2:
+                    backgroundImage.color = new Color(20 / 255f, 10 / 255f, 45 / 255f);
+                    line.effectColor = new Color(204 / 255f, 0 / 255f, 255 / 255f);
+                    weaponName.color = new Color(204 / 255f, 0 / 255f, 255 / 255f);
+                    break;
+                case 3:
+                    backgroundImage.color = new Color(45 / 255f, 10 / 255f, 10 / 255f);
+                    line.effectColor = new Color(250 / 255f, 7 / 255f, 11 / 255f);
+                    weaponName.color = new Color(250 / 255f, 7 / 255f, 11 / 255f);
+                    break;
+            }
         }
     }
 
@@ -452,12 +461,14 @@ public class WeaponGoods : Weapon, UI_Upadte
         {
             StageManager.instance.money -= (int)weaponPrice;
             GameObject weapon = Instantiate(weaponData[(int)index].weaponPrefab);
+            Weapon weaponInfo = weapon.GetComponent<Weapon>();
+            weaponInfo.weaponTier = weaponTier;
             weapon.transform.SetParent(StageManager.instance.playerInfo.weaponMainPos);
+
             StageManager.instance.playerInfo.weapons.Add(weapon);
             UnLockIng();
             ShopManager.instance.goodsList.Remove(gameObject);
             ItemManager.instance.WeaponListUp();
-            //ItemManager.instance.WeaponListUp(ShopManager.instance.tabsScroll[0], ShopManager.instance.verticalTabsScroll[0], PauseUI_Manager.instance.scrollContents[0]);
             WeaponManager.instance.WeaponSetSearch();
             StageManager.instance.playerInfo.StatCalculate();
             gameObject.SetActive(false);
@@ -505,14 +516,14 @@ public class WeaponGoods : Weapon, UI_Upadte
     {
         ShopManager.instance.lockList.Add(gameObject);
         isLock = true;
-        line.enabled = true;
-        lockUI.color = new Color(255 / 255f, 255 / 255f, 255 / 255f);
+        //line.enabled = true;
+        //lockUI.color = new Color(255 / 255f, 255 / 255f, 255 / 255f);
     }
     void UnLockIng()
     {
         ShopManager.instance.lockList.Remove(gameObject);
         isLock = false;
-        line.enabled = false;
-        lockUI.color = new Color(150 / 255f, 150 / 255f, 150 / 255f);
+        //line.enabled = false;
+        //lockUI.color = new Color(150 / 255f, 150 / 255f, 150 / 255f);
     }
 }

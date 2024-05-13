@@ -8,7 +8,8 @@ public class EnemyBaseStatInfoTable : GameDataTable<EnemyBaseStatInfoTable.Data>
     [System.Serializable]
     public class Data : GameData
     {
-        public string monsterCode;
+        public Enemy.EnemyName monsterCode;
+        public Stat.enemyType enemyType;
         public float baseHp;
         public float baseDamage;
         public float baseCoolTime;

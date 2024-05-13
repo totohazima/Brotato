@@ -85,4 +85,12 @@ public class Stat
         StandStill,
         XPGain,
     }
+
+    public enum enemyType
+    {
+        NORMAL_ENEMY,     //일반
+        ELITE_ENEMY,      //엘리트
+        BOSS_ENEMY,       //보스
+        NEUTRALITY_ENEMY, //중립
+    }
 }
