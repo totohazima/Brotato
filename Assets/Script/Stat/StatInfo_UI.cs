@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Stat_Manager : MonoBehaviour, UI_Upadte
+public class StatInfo_UI : MonoBehaviour, UI_Upadte
 {
-    public static Stat_Manager instance;
+    public static StatInfo_UI instance;
     public RectTransform rect;
     [SerializeField]
     private Transform selectTab;
@@ -102,7 +102,7 @@ public class Stat_Manager : MonoBehaviour, UI_Upadte
     }
     private void ViewBasicStats()
     {
-        player = StageManager.instance.playerInfo;
+        player = GameManager.instance.player_Info;
 
         basic_Status_Num[0].text = (StageManager.instance.playerLevel + 1).ToString("F0");
         basic_Status_Num[1].text = player.maxHealth.ToString("F0");

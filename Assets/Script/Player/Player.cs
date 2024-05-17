@@ -161,10 +161,8 @@ public class Player : MonoBehaviour
 
     public void StatCalculate()
     {
-        if (ItemEffect.instance != null)
-        {
-            ItemEffect.instance.CountCheck();
-        }
+        if (GameManager.instance.player_Info != null)
+            GameManager.instance.ItemSearch();
 
         //스탯 초기화
         StatReset();
@@ -512,7 +510,7 @@ public class Player : MonoBehaviour
             if (GameManager.instance.character == Character.ENGINEER) //엔지니어 엔지니어링 증가량 +25%
                 engine += riseStat * 1.25f;
             else
-                engine = riseStat;
+                engine += riseStat;
             //총 = 범위
             if (game.gun_Set == 2)
             {

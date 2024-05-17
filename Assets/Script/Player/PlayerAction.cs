@@ -32,7 +32,6 @@ public class PlayerAction : Player, ICustomUpdateMono
         rigid = GetComponent<Rigidbody>();
         magnetRanges = magnet.radius;
         joy = JoyStick.instance;
-        //joy.moveTarget.SetParent(transform);
         joyStick = StageManager.instance.joystick;
         playerSprite.SpriteSetting();
         StatSetting((int)game.character);

@@ -23,6 +23,10 @@ public class EnemyBullet : Bullet
     }
     public void Init(float damage, int per, float range, float accuracy, Vector3 dir)
     {
+        if(damage < 0)
+        {
+            damage = 0;
+        }
         this.damage = damage;
         this.per = per;
         this.range = range;

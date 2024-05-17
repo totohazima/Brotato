@@ -41,6 +41,13 @@ public class Tree : EnemyAction
         Transform text = DamageTextManager.instance.TextCreate(0, damageText).transform;
         text.position = textPopUpPos.position;
 
-        curHealth--;
+        if (GameManager.instance.isLumberJack == true)
+        {
+            curHealth = 0;
+        }
+        else
+        {
+            curHealth--;
+        }
     }
 }

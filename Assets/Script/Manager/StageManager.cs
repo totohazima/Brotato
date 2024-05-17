@@ -202,9 +202,14 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
                 money -= harvest;
             }
             playerInfo.StatCalculate();
-            ///test
-            ///웨이브 종료 시 경험치 제공
-            //curExp += 100;
+            //평화주의자: 살아있는 몹 하나당 +0.65 재료, XP
+            if(GameManager.instance.character == Player.Character.PACIFIST)
+            {
+                int enemyCount = SpawnManager.instance.enemys.Count;
+                float gainMoney = 0.65f * enemyCount;
+                money += (int)Mathf.Round(gainMoney);
+                curExp += 0.65f * enemyCount;
+            }
 
             StartCoroutine(DropItemLootingTime());
             
@@ -350,10 +355,10 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public void nextWave()
     {
         curHp = maxHp;
-        if(ItemEffect.instance.isWeirdGhost == true)
+        if(GameManager.instance.isWeirdGhost == true)
         {
             curHp = 1;
-            ItemEffect.instance.isWeirdGhost = false;
+            GameManager.instance.isWeirdGhost = false;
         }
         waveLevel++;
         timer = waveTime[waveLevel];

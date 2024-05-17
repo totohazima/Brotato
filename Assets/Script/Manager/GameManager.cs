@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public int native_Set;
     [Header("#Item_Info")]
     public ItemGroup_Scriptable itemGroup_Scriptable;
+    public bool isUglyTooth; //못생긴 이빨 구매 시 적 타격 시마다 스피드 -10% (3회 중첩)
+    public bool isLumberJack; //럼버 잭 셔츠 구매 시 나무가 한 방에 파괴됨
+    public bool isWeirdGhost; // 이상한 유령 구매 시 true가 되며 웨이브 시작 시 체력이 1이됨 
+    public int minesCount; //지뢰 아이템 갯수
+    public int turretCount; //터렛 아이템 갯수
     [Header("#Difficult_Info")]
     public int difficult_Level; //난이도
     public bool isSpecialEnemySpawn; //새로운 적의 출현
@@ -122,7 +127,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
             }
         }
         //엔지니어 렌치 추가
-        if (character == Player.Character.ENGINEER)
+        else if (character == Player.Character.ENGINEER)
         {
             GameObject plusWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Wrench_Weapon");
             if (plusWeapon != null)
@@ -131,6 +136,26 @@ public class GameManager : MonoBehaviour, UI_Upadte
                 weapon.transform.SetParent(player_Info.weaponMainPos);
                 player_Info.weapons.Add(weapon);
             }
+        }
+        else if(character == Player.Character.PACIFIST)
+        {
+            ItemScrip getItem = null;
+            for (int i = 0; i < itemGroup_Scriptable.items.Length; i++)
+            {
+                if(itemGroup_Scriptable.items[i].itemCode == Item.ItemType.LUMBERJACK_SHIRT)
+                {
+                    getItem = itemGroup_Scriptable.items[i];
+                    break;
+                }
+            }
+
+            GameObject obj = Resources.Load<GameObject>("Prefabs/Item/Item_Object");
+            GameObject itemObj = Instantiate(obj);
+            itemObj.transform.SetParent(transform);
+            Item item = itemObj.GetComponent<Item>();
+            item.Init(getItem);
+            item.curCount++;
+            player_Info.itemInventory.Add(item);
         }
 
         for (int i = 0; i < StageManager.instance.playerInfo.weapons.Count; i++)
@@ -142,7 +167,33 @@ public class GameManager : MonoBehaviour, UI_Upadte
         }
         LoadingSceneManager.CloseScene("MainScene");
     }
+    public void ItemSearch()
+    {
+        List<Item> item = player_Info.itemInventory;
 
+        for (int i = 0; i < item.Count; i++)
+        {
+            switch (item[i].itemType)
+            {
+                case Item.ItemType.UGLY_TOOTH:
+                    isUglyTooth = true;
+                    break;
+                case Item.ItemType.LUMBERJACK_SHIRT:
+                    isLumberJack = true;
+                    break;
+                case Item.ItemType.WEIRD_GHOST:
+                    isWeirdGhost = true;
+                    break;
+                case Item.ItemType.LAND_MINES:
+                    minesCount = item[i].curCount;
+                    break;
+                case Item.ItemType.TURRET:
+                    turretCount = item[i].curCount;
+                    break;
+            }
+
+        }
+    }
     public void WeaponSetSearch()
     {
         unArmed_Set = 0;

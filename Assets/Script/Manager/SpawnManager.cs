@@ -147,7 +147,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     }
     public IEnumerator MineSetting()
     {
-        GameObject[] mark = new GameObject[ItemEffect.instance.LandMines()];
+        GameObject[] mark = new GameObject[GameManager.instance.minesCount];
         GameObject[] mine = new GameObject[mark.Length];
 
         for (int i = 0; i < mark.Length; i++)
@@ -187,7 +187,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     }
     public IEnumerator TurretSetting()
     {
-        GameObject[] mark = new GameObject[ItemEffect.instance.Turret()];
+        GameObject[] mark = new GameObject[GameManager.instance.turretCount];
         GameObject[] turret = new GameObject[mark.Length];
 
         for (int i = 0; i < mark.Length; i++)

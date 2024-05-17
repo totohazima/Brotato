@@ -9,9 +9,9 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     public SpriteRenderer sprite;
     public Transform textPopUpPos;
     public WhiteFlash whiteFlash;
-    [HideInInspector] public Transform target;
     public float moveSpeed;
     public bool isDontPush; //true일 경우 넉백 미작동
+    [HideInInspector] public Transform target;
     [HideInInspector] public StageManager stage;
     [HideInInspector] public float hitTimer;
     [HideInInspector] public Rigidbody rigid;
@@ -91,7 +91,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     }
     public virtual void DamageCalculator(float damage, int per, float accuracy, bool isCritical, float criticalDamage, float knockBack, Vector3 bulletPos)
     {
-        if (ItemEffect.instance.IsUglyTooth == true)
+        if (GameManager.instance.isUglyTooth == true)
         {
             if (ugliyToothSlow < 3)
             {

@@ -90,6 +90,7 @@ public class Enemy : MonoBehaviour
                 StageManager.instance.inWaveLoot_Amount++;
                 break;
         }
+        SpawnManager.instance.enemys.Remove(gameObject);
         gameObject.SetActive(false);
         yield return new WaitForSeconds(0f);
     }

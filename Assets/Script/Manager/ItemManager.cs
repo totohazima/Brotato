@@ -41,18 +41,18 @@ public class ItemManager : MonoBehaviour
         {
             ItemScrip item = GameManager.instance.itemGroup_Scriptable.items[index];
             GameObject objItem = Instantiate(invenItem.gameObject);
-            objItem.transform.SetParent(transform);
+            objItem.transform.SetParent(GameManager.instance.transform);
             Item invenItems = objItem.GetComponent<Item>();
             invenItems.Init(item);
             invenItems.curCount++;
-            stage.playerInfo.itemInventory.Add(invenItems);
+            GameManager.instance.player_Info.itemInventory.Add(invenItems);
 
-            StageManager.instance.playerInfo.StatCalculate();
+            GameManager.instance.player_Info.StatCalculate();
         }
         else if(isGet == true)
         {
             checkItem.curCount++;
-            StageManager.instance.playerInfo.StatCalculate();
+            GameManager.instance.player_Info.StatCalculate();
         }
         
     }
