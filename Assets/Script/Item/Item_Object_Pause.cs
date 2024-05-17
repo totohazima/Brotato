@@ -35,7 +35,7 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
             }
         }
 
-        if(PauseUI_Manager.instance.selectObj_Item == null)
+        if(PauseUI.instance.selectObj_Item == null)
         {
             if(infoObj_Pause != null)
             {
@@ -55,19 +55,19 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
     
     public void OnPointerDown(PointerEventData eventData)
     {
-        PauseUI_Manager.instance.selectObj_Item = this;
+        PauseUI.instance.selectObj_Item = this;
         ShowItemInfo();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         selectImage.SetActive(false);
-        PauseUI_Manager.instance.selectObj_Item = null;
+        PauseUI.instance.selectObj_Item = null;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(PauseUI_Manager.instance.selectObj_Item != null)
+        if(PauseUI.instance.selectObj_Item != null)
         {
             selectImage.SetActive(true);
             ShowItemInfo();
@@ -76,7 +76,7 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (PauseUI_Manager.instance.selectObj_Item != null)
+        if (PauseUI.instance.selectObj_Item != null)
         {
             selectImage.SetActive(false);
             Destroy(infoObj_Pause.gameObject);

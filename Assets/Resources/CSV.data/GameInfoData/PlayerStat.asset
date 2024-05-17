@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
   table:
-  - playerCode: VERSATILE
+  - playerCode: WELLROUNDED
     name: "\uB2E4\uC7AC\uB2E4\uB2A5"
     health: 15
     hpRegen: 0

@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class Weapon_Set : MonoBehaviour, ICustomUpdateMono
 {
     public Text[] texts;
-    [HideInInspector] public WeaponManager weaponManager;
+    [HideInInspector] public GameManager game;
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
-        weaponManager = WeaponManager.instance;
+        game = GameManager.instance;
     }
 
     void OnDisable()

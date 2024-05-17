@@ -34,8 +34,8 @@ public class SettingWeaponInfo : MonoBehaviour
 
     void OnEnable()
     {
-        weapon = MainSceneManager.instance.selectWeapon.GetComponent<Weapon>();
-        weaponScrip = MainSceneManager.instance.selectWeapon.GetComponent<ForSettingWeapon>().weaponScrip;
+        weapon = GameManager.instance.weapon.GetComponent<Weapon>();
+        weaponScrip = GameManager.instance.weapon.weaponScrip;
 
         myImage.sprite = weaponScrip.weaponImage;
         infoName = weaponScrip.weaponName;

@@ -241,14 +241,26 @@ public class WeaponGoods : Weapon, UI_Upadte
                 case DamageType.MELEE_DAMAGE:
                     damageNumUI.text += "<sprite=0>";
                     break;
-                case DamageType.RANGE:
+                case DamageType.RANGE_DAMAGE:
                     damageNumUI.text += "<sprite=1>";
                     break;
-                case DamageType.HEALTH:
+                case DamageType.ELEMENTAL:
                     damageNumUI.text += "<sprite=2>";
                     break;
-                case DamageType.ENGINE:
+                case DamageType.HEALTH:
                     damageNumUI.text += "<sprite=3>";
+                    break;
+                case DamageType.ENGINE:
+                    damageNumUI.text += "<sprite=4>";
+                    break;
+                case DamageType.RANGE:
+                    damageNumUI.text += "<sprite=5>";
+                    break;
+                case DamageType.ARMOR:
+                    damageNumUI.text += "<sprite=6>";
+                    break;
+                case DamageType.LUCK:
+                    damageNumUI.text += "<sprite=7>";
                     break;
             }
         }
@@ -469,7 +481,7 @@ public class WeaponGoods : Weapon, UI_Upadte
             UnLockIng();
             ShopManager.instance.goodsList.Remove(gameObject);
             ItemManager.instance.WeaponListUp();
-            WeaponManager.instance.WeaponSetSearch();
+            GameManager.instance.WeaponSetSearch();
             StageManager.instance.playerInfo.StatCalculate();
             gameObject.SetActive(false);
         }
@@ -488,7 +500,7 @@ public class WeaponGoods : Weapon, UI_Upadte
                         UnLockIng();
                         ShopManager.instance.goodsList.Remove(gameObject);
                         ItemManager.instance.WeaponListUp();
-                        WeaponManager.instance.WeaponSetSearch();
+                        GameManager.instance.WeaponSetSearch();
                         StageManager.instance.playerInfo.StatCalculate();
                         gameObject.SetActive(false);
                         break;

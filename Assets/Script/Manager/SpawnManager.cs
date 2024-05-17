@@ -256,7 +256,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     }
     public void WaveSelect(int waveLevel)
     {
-        WaveStatInfoTable.Data import = stage.waveStat.table[waveLevel];
+        WaveStatInfoTable.Data import = GameManager.instance.gameDataBase.waveStatInfoTable.table[waveLevel];
 
         enemyLimit = (int)import.maxEnemySpawn;
         spawnTime = import.enemySpawnTime;

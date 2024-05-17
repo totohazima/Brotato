@@ -6,11 +6,10 @@ using UnityEngine.SceneManagement;
 public class LoadingSceneManager : MonoBehaviour
 {
     public static string nextScene;
-
     [SerializeField]
     Image progressBar;
 
-    private void Start()
+    private void Awake()
     {
         StartCoroutine(LoadScene());
     }
@@ -52,6 +51,7 @@ public class LoadingSceneManager : MonoBehaviour
                 if (progressBar.fillAmount == 1.0f) 
                 { 
                     op.allowSceneActivation = true;
+                    CloseScene("LoadingScene");
                     yield break; 
                 } 
             }

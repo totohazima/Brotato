@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d112b164a6b146d44bff53711596e0c1, type: 3}
+  m_Name: Wellrounded
+  m_EditorClassIdentifier: 
+  code: 0
+  pevis: {fileID: -1294197565, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  head_1: {fileID: -379805354, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  head_2: {fileID: 1259227599, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  head_3: {fileID: -1925044016, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  halfCloseEye: {fileID: -128218010, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  closeEye: {fileID: 824275875, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  body: {fileID: -358427781, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  rightArm: {fileID: -528192981, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  rightHand: {fileID: -652722737, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  leftArm: {fileID: -2057347291, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  leftHand: {fileID: 1554772428, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  belt: {fileID: 904412981, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  rightLeg: {fileID: -359029569, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  leftLeg: {fileID: 1174241019, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  rightFoot: {fileID: -1179078385, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}
+  leftFoot: {fileID: -1358843437, guid: c00cb6473fb62c449a8e129843a0e39a, type: 3}

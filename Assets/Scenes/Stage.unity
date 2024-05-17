@@ -2531,6 +2531,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &113225496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 113225497}
+  m_Layer: 0
+  m_Name: WeaponPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &113225497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113225496}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &115513862
 GameObject:
   m_ObjectHideFlags: 0
@@ -6930,7 +6961,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1623960962}
-        m_TargetAssemblyTypeName: PauseUI_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: PauseUI, Assembly-CSharp
         m_MethodName: CardTab_VIew
         m_Mode: 1
         m_Arguments:
@@ -7209,7 +7240,7 @@ RectTransform:
   - {fileID: 847628565}
   - {fileID: 253017532}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7894,7 +7925,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &337575422
 GameObject:
@@ -7983,6 +8014,7 @@ GameObject:
   - component: {fileID: 338661387}
   - component: {fileID: 338661389}
   - component: {fileID: 338661388}
+  - component: {fileID: 338661390}
   m_Layer: 5
   m_Name: MainMenuReturnUI
   m_TagString: Untagged
@@ -8050,6 +8082,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338661386}
   m_CullTransparentMesh: 1
+--- !u!114 &338661390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338661386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc9b12b6bd75e34284dc61a12e7a79a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &343301550
 GameObject:
   m_ObjectHideFlags: 0
@@ -8133,7 +8177,6 @@ MonoBehaviour:
   gameOverUI: {fileID: 1297593249}
   playerInfo: {fileID: 0}
   playerLevel: 0
-  isDie: 0
   curHp: 0
   maxHp: 0
   curExp: 0
@@ -8146,15 +8189,8 @@ MonoBehaviour:
   lootChance: 0
   inWaveLoot_Amount: 0
   timer: 0
-  isPause: 0
   isEnd: 0
-  difficult: 0
-  isSpecialEnemySpawn: 0
-  isEliteSpawn: 0
-  eliteEnemyWave: 0
-  enemyRiseDamage: 0
-  enemyRiseHealth: 0
-  doubleBoss: 0
+  pool: {fileID: 0}
   stageMainCamera: {fileID: 963194227}
   playerPrefab: {fileID: 8567391312352320930, guid: c97f5b105d348404cb50d03c8b582871, type: 3}
   mainPlayer: {fileID: 0}
@@ -8162,7 +8198,6 @@ MonoBehaviour:
   joyStickRayCaster: {fileID: 2027927261}
   itemInfoManager: {fileID: 847628565}
   ui_Canvas: {fileID: 304249513}
-  pool: {fileID: 0}
   wallPos:
   - {fileID: 992369001}
   - {fileID: 2052896861}
@@ -10458,7 +10493,7 @@ RectTransform:
   m_Children:
   - {fileID: 1684623929}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12719,8 +12754,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 343301552}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 338661390}
+        m_TargetAssemblyTypeName: ReturnMainMenuUI, Assembly-CSharp
         m_MethodName: ReturnUI_Off
         m_Mode: 1
         m_Arguments:
@@ -24599,7 +24634,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1623960962}
-        m_TargetAssemblyTypeName: PauseUI_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: PauseUI, Assembly-CSharp
         m_MethodName: WeaponTab_VIew
         m_Mode: 1
         m_Arguments:
@@ -25285,7 +25320,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1623960962}
-        m_TargetAssemblyTypeName: PauseUI_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: PauseUI, Assembly-CSharp
         m_MethodName: ItemTab_VIew
         m_Mode: 1
         m_Arguments:
@@ -26898,6 +26933,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1104014744}
+  - component: {fileID: 1104014745}
   m_Layer: 5
   m_Name: GameClear
   m_TagString: Untagged
@@ -26927,6 +26963,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1104014745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104014743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a310a8822a3cd0d4c85496b7abbf65f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1104988923
 GameObject:
   m_ObjectHideFlags: 0
@@ -27447,7 +27495,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1363576205}
   m_HandleRect: {fileID: 1363576204}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -32001,7 +32049,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1289449092
 MonoBehaviour:
@@ -32194,6 +32242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1297593250}
+  - component: {fileID: 1297593251}
   m_Layer: 5
   m_Name: GameOver
   m_TagString: Untagged
@@ -32223,6 +32272,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1297593251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297593249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155eaf7d5f0dfcd408c3640b3fd95aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1299023129
 GameObject:
   m_ObjectHideFlags: 0
@@ -33963,7 +34024,6 @@ GameObject:
   - component: {fileID: 1367207024}
   - component: {fileID: 1367207023}
   - component: {fileID: 1367207025}
-  - component: {fileID: 1367207026}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -34009,7 +34069,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1367207025
 MonoBehaviour:
@@ -34025,24 +34085,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsUglyTooth: 0
   isWeirdGhost: 0
---- !u!114 &1367207026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367207022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23663112652ea944f9c36a8eb0777d97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unArmed_Set: 0
-  tool_Set: 0
-  gun_Set: 0
-  explosive_Set: 0
-  precision_Set: 0
-  native_Set: 0
 --- !u!1 &1368252692
 GameObject:
   m_ObjectHideFlags: 0
@@ -35287,8 +35329,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 343301552}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1623960962}
+        m_TargetAssemblyTypeName: PauseUI, Assembly-CSharp
         m_MethodName: Option_On
         m_Mode: 1
         m_Arguments:
@@ -37690,8 +37732,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 343301552}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1623960962}
+        m_TargetAssemblyTypeName: PauseUI, Assembly-CSharp
         m_MethodName: ReturnUI_On
         m_Mode: 1
         m_Arguments:
@@ -38195,8 +38237,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 343301552}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 338661390}
+        m_TargetAssemblyTypeName: ReturnMainMenuUI, Assembly-CSharp
         m_MethodName: ReturnMainMenu
         m_Mode: 1
         m_Arguments:
@@ -38605,6 +38647,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1479623122}
   - component: {fileID: 1479623121}
+  - component: {fileID: 1479623126}
+  - component: {fileID: 1479623125}
   m_Layer: 0
   m_Name: PoolManager
   m_TagString: Untagged
@@ -38654,6 +38698,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1479623125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479623120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3fcb0fb9ba59e4d8ad398344c3d37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObject: {fileID: 4012523125829970869, guid: 05d210546179917498008d12b3719e05, type: 3}
+  poolingObject: []
+  poolObject_Pause: {fileID: 4267381058049278263, guid: 053293dd132f16c46b94b4d5949bcbdd, type: 3}
+  poolingObject_Pause: []
+--- !u!114 &1479623126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479623120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8b698ec0b2eb243ad83f5552ddc691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObject: {fileID: 235857404025737640, guid: b22801a716d6d4843a2d889cd38e3d26, type: 3}
+  poolingObject: []
+  poolObject_Pause: {fileID: 7375014054857124987, guid: 6556813d09f2c5148a6b6186b151327d, type: 3}
+  poolingObject_Pause: []
 --- !u!1 &1483478199
 GameObject:
   m_ObjectHideFlags: 0
@@ -39046,8 +39122,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 343301552}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1623960962}
+        m_TargetAssemblyTypeName: PauseUI, Assembly-CSharp
         m_MethodName: ReStartUI_On
         m_Mode: 1
         m_Arguments:
@@ -43137,12 +43213,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1623960958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab71f692fca917740a894fc7d9dac50c, type: 3}
+  m_Script: {fileID: 11500000, guid: 94ee87f0286eb6943b68d482569e08e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pauseUI: {fileID: 1623960958}
   statUI: {fileID: 253017532}
   title: {fileID: 1576987344}
+  returnMainMenu_UI: {fileID: 338661386}
+  restartMenu_UI: {fileID: 1832387586}
   selectTab: {fileID: 1009810378}
   tabs:
   - {fileID: 1009810378}
@@ -43734,8 +43812,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 343301552}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1832387590}
+        m_TargetAssemblyTypeName: ReStartStageUI, Assembly-CSharp
         m_MethodName: GameReStart
         m_Mode: 1
         m_Arguments:
@@ -44036,9 +44114,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 343301552}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReturnMainMenu
+      - m_Target: {fileID: 1297593251}
+        m_TargetAssemblyTypeName: GameOverUI, Assembly-CSharp
+        m_MethodName: GameOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -48255,6 +48333,7 @@ GameObject:
   - component: {fileID: 1832387587}
   - component: {fileID: 1832387589}
   - component: {fileID: 1832387588}
+  - component: {fileID: 1832387590}
   m_Layer: 5
   m_Name: ReStartUI
   m_TagString: Untagged
@@ -48322,6 +48401,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832387586}
   m_CullTransparentMesh: 1
+--- !u!114 &1832387590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832387586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b30448f993cadf418a06337babb2de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1832980024
 GameObject:
   m_ObjectHideFlags: 0
@@ -48622,9 +48713,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 343301552}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReturnMainMenu
+      - m_Target: {fileID: 1104014745}
+        m_TargetAssemblyTypeName: GameClearUI, Assembly-CSharp
+        m_MethodName: GameClear
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -50578,7 +50669,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.6617}
+  m_AnchoredPosition: {x: 0.000019073486, y: 1.6617}
   m_SizeDelta: {x: -511.39783, y: 45.4014}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1922682427
@@ -51410,8 +51501,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 343301552}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1832387590}
+        m_TargetAssemblyTypeName: ReStartStageUI, Assembly-CSharp
         m_MethodName: ReStartUI_Off
         m_Mode: 1
         m_Arguments:
@@ -54356,7 +54447,7 @@ Transform:
   - {fileID: 107276442}
   - {fileID: 692776744}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2086319899
 GameObject:
@@ -55649,7 +55740,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &84940423609676680
 Transform:
@@ -56347,7 +56438,7 @@ Transform:
   - {fileID: 6864060665335404651}
   - {fileID: 8544365402421328299}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 270, y: -90, z: -90}
 --- !u!1839735485 &1156787795608076780
 Tilemap:

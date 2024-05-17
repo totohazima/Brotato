@@ -140,11 +140,11 @@ public class Enemy : MonoBehaviour
             }
             damage = num2;
 
-            maxHealth += maxHealth * (StageManager.instance.enemyRiseHealth / 100);
-            damage += damage * (StageManager.instance.enemyRiseDamage / 100);
+            maxHealth += maxHealth * (GameManager.instance.enemyRiseHealth / 100);
+            damage += damage * (GameManager.instance.enemyRiseDamage / 100);
 
             //보스 2마리 소환 시 체력 25% 감소
-            if(type == EnemyName.BOSS && StageManager.instance.doubleBoss == true)
+            if(type == EnemyName.BOSS && GameManager.instance.doubleBoss == true)
             {
                 maxHealth = maxHealth * 0.75f;
             }

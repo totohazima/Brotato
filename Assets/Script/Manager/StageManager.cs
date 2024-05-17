@@ -32,13 +32,12 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public GameObject gameClearUI;
     public GameObject gameOverUI;
     [Header("# Variable")]
+    private float overExp; //레벨업 후 남은 경험치
     public PlayerAction playerInfo;
     public int playerLevel; //플레이어 레벨
-    public bool isDie; //플레이어 사망
     public float curHp; //현재 체력
     public float maxHp; //최대 체력
     public float curExp;  //현재 경험치
-    private float overExp; //레벨업 후 남은 경험치
     public float maxExp;  //최대 경험치
     public int levelUpChance; //웨이브 종료 후 레벨 업 할 횟수
     public int waveLevel;   //웨이브 레벨
@@ -47,28 +46,19 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public int interest; //이자
     public int lootChance; //상자깡 찬스
     public int inWaveLoot_Amount; //현재 웨이브에서 나온 상자의 개수
-    [SerializeField] private float timer; //시간
-    public bool isPause; //일시정지
+    public float timer; //시간
     public bool isEnd; //웨이브 끝
-    public int difficult; //난이도
-    public bool isSpecialEnemySpawn; //새로운 적의 출현
-    public bool isEliteSpawn; //엘리트와 무리가 등장
-    public int eliteEnemyWave; //엘리트와 무리가 등장하는 웨이브 수
-    public float enemyRiseDamage; //적 데미지 증가치 %
-    public float enemyRiseHealth; //적 체력 증가치 %
-    public bool doubleBoss; //보스가 2마리 (한 마리는 체력이 25% 감소)
+
     [Header("# GameObject")]
+    private Transform main;
+    [HideInInspector] public PoolManager pool;
     public Camera stageMainCamera;
     public GameObject playerPrefab;
     public GameObject mainPlayer;
     public GameObject poolManager;
     public GameObject joyStickRayCaster;
     public Transform itemInfoManager;
-    private Transform main;
     public Transform ui_Canvas;
-    [HideInInspector]
-    public PoolManager pool;
-    private GameObject optionUI;
     public Transform[] wallPos; //0 = 위, 1 = 아래, 2 왼쪽, 3 = 오른쪽
     public JoyStick joystick;
     public float xMin, xMax, yMin, yMax;
@@ -76,32 +66,16 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     void Awake()
     {
         instance = this;
-        money = 30;
-        SceneManager.UnloadSceneAsync("LoadingScene", UnloadSceneOptions.None);
         pool = poolManager.GetComponent<PoolManager>();
         mainPlayer = Instantiate(playerPrefab);
         main = mainPlayer.transform;
         playerInfo = mainPlayer.GetComponent<PlayerAction>();
-        optionUI = MainSceneManager.instance.option;
-        GameObject startWeapon = Instantiate(MainSceneManager.instance.selectWeapon.GetComponent<ForSettingWeapon>().weaponPrefabs);
+        GameManager.instance.player_Info = playerInfo;
+        //curHp = 1; //사망 방지
+        
 
         waveStat = GameManager.instance.gameDataBase.waveStatInfoTable;
-        difficult = MainSceneManager.instance.selectedDifficult.GetComponent<Difficult>().difficultLevel;
-        //isSpecialEnemySpawn = DifficultImporter.instance.isSpecialEnemy[difficult];
-        //isEliteSpawn = DifficultImporter.instance.isEliteSpawn[difficult];
-        //eliteEnemyWave = DifficultImporter.instance.isEliteWaveCount[difficult];
-        //enemyRiseDamage = DifficultImporter.instance.enemyRiseDamage[difficult];
-        //enemyRiseHealth = DifficultImporter.instance.enemyRiseHealth[difficult];
-        //doubleBoss = DifficultImporter.instance.doubleBoss[difficult];
 
-        startWeapon.transform.SetParent(playerInfo.weaponMainPos);
-        playerInfo.weapons.Add(startWeapon);
-
-        xMin = wallPos[2].position.x;
-        xMax = wallPos[3].position.x;
-        yMin = wallPos[1].position.y;
-        yMax = wallPos[0].position.y;
-;
         waveTime = new float[waveStat.table.Length];
         for (int i = 0; i < waveTime.Length; i++)
         {
@@ -109,7 +83,14 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         }
         timer = waveTime[0];
 
-        StartCoroutine(GameManager.instance.StageStart());
+        xMin = wallPos[2].position.x;
+        xMax = wallPos[3].position.x;
+        yMin = wallPos[1].position.y;
+        yMax = wallPos[0].position.y;
+
+        StartCoroutine(GameManager.instance.WaveStart());
+
+        
     }
     void OnEnable()
     {
@@ -121,11 +102,11 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     }
     public void LateUpdate()
     {
-        if (isPause == true)//일시정지 활성화
+        if (GameManager.instance.isPause == true)//일시정지 활성화
         {
             Time.timeScale = 0;
         }
-        else if (isPause == false)//일시정지 비활성화
+        else if (GameManager.instance.isPause == false)//일시정지 비활성화
         {
             Time.timeScale = 1;
         }
@@ -186,12 +167,12 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         {
             if (curHp <= 0)
             {
-                isDie = true;
+                GameManager.instance.isDie = true;
                 StartCoroutine(Died());
             }
             else
             {
-                isDie = false;
+                GameManager.instance.isDie = false;
             }
         }
 
@@ -363,8 +344,6 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         shopUI.SetActive(true);
         ShopManager.instance.ShopReRoll();
         ItemManager.instance.ItemListUp();
-        //ShopManager.instance.ShopGoodsSetting();
-        //ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1], PauseUI_Manager.instance.scrollContents[1]);
     }
     
 
@@ -382,11 +361,12 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         inWaveLoot_Amount = 0;
         SpawnManager spawn = SpawnManager.instance;
         spawn.WaveSelect(waveLevel);
+        ///젠틀한 에일리언 효과 미정
         //spawn.enemyLimit *= 1 + (ItemEffect.instance.GentleAlien() / 100);
         //spawn.spawnTime = waveTime[waveLevel] / spawn.enemyLimit;
         if (spawn.scrip[waveLevel].isBossSpawn == true)
         {
-            if (doubleBoss == true)
+            if (GameManager.instance.doubleBoss == true)
             {
                 StartCoroutine(spawn.BossSpawn(2));
             }
@@ -406,31 +386,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             }
         }
     }
-    public void ReturnUI_On()
-    {
-        returnMainMenu_UI.SetActive(true);
-        pauseUI.SetActive(false);
-        StatUI_Off();
-    }
-    public void ReturnUI_Off()
-    {
-        returnMainMenu_UI.SetActive(false);
-        pauseUI.SetActive(true);
-        StatUI_On();
-    }
 
-    public void ReStartUI_On()
-    {
-        restartUI.SetActive(true);
-        pauseUI.SetActive(false);
-        StatUI_Off();
-    }
-    public void ReStartUI_Off()
-    {
-        restartUI.SetActive(false);
-        pauseUI.SetActive(true);
-        StatUI_On();
-    }
     public void StatUI_On()
     {
         statUI.anchoredPosition = new Vector3(100, 0, 0);
@@ -439,49 +395,14 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     {
         statUI.anchoredPosition = new Vector3(-100, 0, 0);
     }
-
-    public void Option_On()
-    {
-        optionUI.transform.SetParent(ui_Canvas);
-        optionUI.transform.localScale = new Vector3(1, 1, 1);
-        RectTransform rect = optionUI.GetComponent<RectTransform>();
-        rect.offsetMax = Vector3.zero;
-        rect.offsetMin = Vector3.zero;
-        optionUI.SetActive(true);
-    }
+   
     void GameEnd()
     {
         gameClearUI.SetActive(true);
         isEnd = true;
     }
-    public void GameReStart()
-    {
-        GameManager.instance.isStart = false;
-        LoadingSceneManager.CloseScene("Stage");
-        LoadingSceneManager.LoadScene("Stage");
-    }
-    public void ReturnMainMenu()
-    {
-        MainSceneManager main = MainSceneManager.instance;
-        isPause = false;
-        GameManager.instance.isStart = false;
-        GameManager.instance.harvestVariance_Amount = 0;
-        Destroy(main.selectedPlayer);
-        Destroy(main.selectedWeapon);
-        Destroy(main.selectedDifficult);
 
-        main.selectPlayer = null;
-        main.selectedPlayer = null;
-        main.selectWeapon = null;
-        main.selectedWeapon = null;
-        main.selectDifficult = null;
-        main.selectedDifficult = null;
-
-        main.difficultSettingMenu.SetActive(false);
-        main.canvas.gameObject.SetActive(true);
-        main.mainCamera.gameObject.SetActive(true);
-        LoadingSceneManager.CloseScene("Stage");
-    }
+    
     public void HitCalculate(float damage)
     {
         float hit, dodge;

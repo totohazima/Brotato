@@ -207,9 +207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 517593448}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: ReturnPlayerMenu
+      - m_Target: {fileID: 1828338344}
+        m_TargetAssemblyTypeName: SelectUI_Weapon, Assembly-CSharp
+        m_MethodName: BeforeMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 50095663}
   - component: {fileID: 50095665}
   - component: {fileID: 50095664}
+  - component: {fileID: 50095666}
   m_Layer: 5
   m_Name: PlayerSetting
   m_TagString: Untagged
@@ -414,6 +415,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50095662}
   m_CullTransparentMesh: 1
+--- !u!114 &50095666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50095662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f15538e079fb44b93bf627c633dade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectables:
+  - {fileID: 1704410210}
+  - {fileID: 162390470}
+  - {fileID: 1364467019}
+  - {fileID: 949891789}
+  - {fileID: 444118237}
+  - {fileID: 284649557}
+  - {fileID: 1530132564}
+  - {fileID: 2142245523}
 --- !u!1 &117984733
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,9 +596,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 517593448}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: GameStartBtn
+      - m_Target: {fileID: 824455514}
+        m_TargetAssemblyTypeName: SelectUI_Difficult, Assembly-CSharp
+        m_MethodName: NextMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -755,8 +777,9 @@ MonoBehaviour:
   instantMagnet_Origin: 0
   itemInventory: []
   weapons: []
-  index: 0
+  index: 1
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
+  icon: {fileID: 1089252174}
 --- !u!114 &162390473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1141,7 +1164,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4993559181853768443, guid: aedca48a51b4bbb47b18074acee1e7bb, type: 3}
+  m_Sprite: {fileID: 793139371, guid: 1cd990251504a4d4589888277f0609f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1446,8 +1469,9 @@ MonoBehaviour:
   instantMagnet_Origin: 0
   itemInventory: []
   weapons: []
-  index: 0
+  index: 5
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
+  icon: {fileID: 1873595323}
 --- !u!114 &284649560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2103,7 +2127,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4993559181853768443, guid: aedca48a51b4bbb47b18074acee1e7bb, type: 3}
+  m_Sprite: {fileID: 837677396, guid: 1cd990251504a4d4589888277f0609f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2608,8 +2632,9 @@ MonoBehaviour:
   instantMagnet_Origin: 0
   itemInventory: []
   weapons: []
-  index: 0
+  index: 4
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
+  icon: {fileID: 1582106138}
 --- !u!114 &444118240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2837,7 +2862,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &517593447
 GameObject:
@@ -2876,20 +2901,15 @@ MonoBehaviour:
   selectPlayer: {fileID: 0}
   playerSettingMenu: {fileID: 50095662}
   playerGroup: {fileID: 732613485}
-  players: []
   selectedWeapon: {fileID: 0}
   selectWeapon: {fileID: 0}
   weaponSettingMenu: {fileID: 1828338340}
   weaponGroup: {fileID: 220323008}
-  weapons: []
   selectedDifficult: {fileID: 0}
   selectDifficult: {fileID: 0}
   difficultSettingMenu: {fileID: 824455510}
   difficultGroup: {fileID: 1555907415}
-  difficults: []
-  option: {fileID: 0}
   canvas: {fileID: 1884764971}
-  dontDestoryOBJ: {fileID: 4892910015604989830, guid: 1721fe1606b16cc4f85d146a252464d2, type: 3}
 --- !u!4 &517593449
 Transform:
   m_ObjectHideFlags: 0
@@ -2903,7 +2923,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &579090470
 GameObject:
@@ -3135,6 +3155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 626791560}
   - component: {fileID: 626791562}
+  - component: {fileID: 626791563}
   m_Layer: 5
   m_Name: PlayerGroup
   m_TagString: Untagged
@@ -3171,6 +3192,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626791559}
   m_CullTransparentMesh: 1
+--- !u!114 &626791563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626791559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f15538e079fb44b93bf627c633dade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectables:
+  - {fileID: 1704410210}
+  - {fileID: 162390470}
+  - {fileID: 1364467019}
+  - {fileID: 949891789}
+  - {fileID: 444118237}
+  - {fileID: 284649557}
+  - {fileID: 1530132564}
+  - {fileID: 2142245523}
 --- !u!1 &664416161
 GameObject:
   m_ObjectHideFlags: 0
@@ -3625,7 +3667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 80.88747, y: 0}
+  m_AnchoredPosition: {x: 80.88808, y: 0}
   m_SizeDelta: {x: 161.77478, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &732613487
@@ -3879,7 +3921,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4993559181853768443, guid: aedca48a51b4bbb47b18074acee1e7bb, type: 3}
+  m_Sprite: {fileID: 821164703, guid: 1cd990251504a4d4589888277f0609f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3963,7 +4005,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &824455510
 GameObject:
@@ -3976,6 +4018,7 @@ GameObject:
   - component: {fileID: 824455511}
   - component: {fileID: 824455513}
   - component: {fileID: 824455512}
+  - component: {fileID: 824455514}
   m_Layer: 5
   m_Name: difficultySetting
   m_TagString: Untagged
@@ -4046,6 +4089,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824455510}
   m_CullTransparentMesh: 1
+--- !u!114 &824455514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824455510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ec3b28a09686b4ba20a2b6f07f8666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectables:
+  - {fileID: 1439606703}
+  - {fileID: 1259578373}
+  - {fileID: 1498100378}
+  - {fileID: 356702554}
+  - {fileID: 714873242}
+  - {fileID: 1189583888}
 --- !u!1 &851982719
 GameObject:
   m_ObjectHideFlags: 0
@@ -4436,8 +4498,9 @@ MonoBehaviour:
   instantMagnet_Origin: 0
   itemInventory: []
   weapons: []
-  index: 0
+  index: 3
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
+  icon: {fileID: 327173418}
 --- !u!114 &949891792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4711,9 +4774,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 517593448}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: ReturnMenu
+      - m_Target: {fileID: 50095666}
+        m_TargetAssemblyTypeName: SelectUI_Player, Assembly-CSharp
+        m_MethodName: BeforeMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4895,7 +4958,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4993559181853768443, guid: aedca48a51b4bbb47b18074acee1e7bb, type: 3}
+  m_Sprite: {fileID: 34244889, guid: 1cd990251504a4d4589888277f0609f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4997,9 +5060,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 517593448}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: RandomPlayer
+      - m_Target: {fileID: 50095666}
+        m_TargetAssemblyTypeName: SelectUI_Player, Assembly-CSharp
+        m_MethodName: RandomSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5212,9 +5275,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 517593448}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: GoDifficultMenu
+      - m_Target: {fileID: 1828338344}
+        m_TargetAssemblyTypeName: SelectUI_Weapon, Assembly-CSharp
+        m_MethodName: NextMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5590,9 +5653,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 517593448}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: GoWeaponMenu
+      - m_Target: {fileID: 50095666}
+        m_TargetAssemblyTypeName: SelectUI_Player, Assembly-CSharp
+        m_MethodName: NextMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6194,8 +6257,9 @@ MonoBehaviour:
   instantMagnet_Origin: 0
   itemInventory: []
   weapons: []
-  index: 0
+  index: 2
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
+  icon: {fileID: 240492034}
 --- !u!114 &1364467022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7282,8 +7346,9 @@ MonoBehaviour:
   instantMagnet_Origin: 0
   itemInventory: []
   weapons: []
-  index: 0
+  index: 6
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
+  icon: {fileID: 2088124493}
 --- !u!114 &1530132567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7514,7 +7579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4993559181853768443, guid: aedca48a51b4bbb47b18074acee1e7bb, type: 3}
+  m_Sprite: {fileID: -237197024, guid: 1cd990251504a4d4589888277f0609f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7798,8 +7863,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1998905037}
   m_HandleRect: {fileID: 1998905036}
   m_Direction: 0
-  m_Value: -0.0000003772849
-  m_Size: 0.79522187
+  m_Value: -0.000004150134
+  m_Size: 0.7950274
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7856,7 +7921,7 @@ GameObject:
   - component: {fileID: 1704410213}
   - component: {fileID: 1704410212}
   m_Layer: 5
-  m_Name: Versatile
+  m_Name: Wellrounded
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7975,6 +8040,7 @@ MonoBehaviour:
   weapons: []
   index: 0
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
+  icon: {fileID: 1905451209}
 --- !u!114 &1704410213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8160,6 +8226,7 @@ GameObject:
   - component: {fileID: 1828338341}
   - component: {fileID: 1828338343}
   - component: {fileID: 1828338342}
+  - component: {fileID: 1828338344}
   m_Layer: 5
   m_Name: WeaponSetting
   m_TagString: Untagged
@@ -8230,6 +8297,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828338340}
   m_CullTransparentMesh: 1
+--- !u!114 &1828338344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828338340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7905200f8df639f40af0ed63d45a9682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectables:
+  - {fileID: 937640703}
+  - {fileID: 296915866}
+  - {fileID: 607608429}
+  - {fileID: 2026067908}
+  - {fileID: 1235061615}
+  - {fileID: 1606860014}
+  - {fileID: 2087554177}
 --- !u!1 &1866452913
 GameObject:
   m_ObjectHideFlags: 0
@@ -8364,7 +8451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4993559181853768443, guid: aedca48a51b4bbb47b18074acee1e7bb, type: 3}
+  m_Sprite: {fileID: 790818236, guid: 1cd990251504a4d4589888277f0609f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8476,7 +8563,7 @@ RectTransform:
   m_Children:
   - {fileID: 1131317374}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8541,7 +8628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4993559181853768443, guid: aedca48a51b4bbb47b18074acee1e7bb, type: 3}
+  m_Sprite: {fileID: -340996280, guid: 1cd990251504a4d4589888277f0609f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8719,9 +8806,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 517593448}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: ReturnWeaponMenu
+      - m_Target: {fileID: 824455514}
+        m_TargetAssemblyTypeName: SelectUI_Difficult, Assembly-CSharp
+        m_MethodName: BeforeMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8803,7 +8890,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.7952218, y: 1}
+  m_AnchorMax: {x: 0.7950274, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9429,7 +9516,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4993559181853768443, guid: aedca48a51b4bbb47b18074acee1e7bb, type: 3}
+  m_Sprite: {fileID: -705102152, guid: 1cd990251504a4d4589888277f0609f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9531,9 +9618,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 517593448}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: RandomWeapon
+      - m_Target: {fileID: 1828338344}
+        m_TargetAssemblyTypeName: SelectUI_Weapon, Assembly-CSharp
+        m_MethodName: RandomSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9821,8 +9908,9 @@ MonoBehaviour:
   instantMagnet_Origin: 0
   itemInventory: []
   weapons: []
-  index: 0
+  index: 7
   playerPrefab: {fileID: 7845154757143082975, guid: 66fe2e2c70975ae47b22bec155711169, type: 3}
+  icon: {fileID: 775115546}
 --- !u!114 &2142245526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9917,65 +10005,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142245523}
   m_CullTransparentMesh: 1
---- !u!4 &3304408591248705482
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3304408591248705483}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3304408591248705483
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3304408591248705482}
-  - component: {fileID: 3304408591248705493}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &3304408591248705493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3304408591248705483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e0bd111269c1ea458b45960c46c4ff3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameDataBase: {fileID: 11400000, guid: 800da2e1e41733a4ab55adec33f820a2, type: 2}
-  wave_Scriptables:
-  - {fileID: 11400000, guid: 88178f4d67577e54bad45611f13a1101, type: 2}
-  - {fileID: 11400000, guid: fa4d322e96e3e0c499da130f45a930fa, type: 2}
-  - {fileID: 11400000, guid: c3805271ae0c2bb448af5447abc56679, type: 2}
-  - {fileID: 11400000, guid: 4e45e23aaa6a0fa43b6f8fca19df845b, type: 2}
-  - {fileID: 11400000, guid: 2b1355504704c984e997c79c9d6396c5, type: 2}
-  - {fileID: 11400000, guid: 4796714aca37e2645a3f2337ec67cb1d, type: 2}
-  - {fileID: 11400000, guid: 0d727f1729b20e74d96d898a307d5398, type: 2}
-  - {fileID: 11400000, guid: 6bc4fef2468adc54f894fc31e1a297f9, type: 2}
-  - {fileID: 11400000, guid: 728b72867d78d14409f07e88cba79f0d, type: 2}
-  - {fileID: 11400000, guid: 83b241446a0e7d34aa30fc6d3792c090, type: 2}
-  isStart: 0
-  character: 0
-  itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
-  harvestVariance_Amount: 0
-  riseHarvest_Num: 5
-  decreaseHarvest_Num: -20

@@ -6,23 +6,23 @@ public class Tool_Sett : Weapon_Set
 {
     public override void CustomUpdate()
     {
-        if (weaponManager.tool_Set == 2)
+        if (game.tool_Set == 2)
         {
             texts[0].color = Color.white;
         }
-        else if (weaponManager.tool_Set == 3)
+        else if (game.tool_Set == 3)
         {
             texts[1].color = Color.white;
         }
-        else if (weaponManager.tool_Set == 4)
+        else if (game.tool_Set == 4)
         {
             texts[2].color = Color.white;
         }
-        else if (weaponManager.tool_Set == 5)
+        else if (game.tool_Set == 5)
         {
             texts[3].color = Color.white;
         }
-        else if (weaponManager.tool_Set >= 6)
+        else if (game.tool_Set >= 6)
         {
             texts[4].color = Color.white;
         }

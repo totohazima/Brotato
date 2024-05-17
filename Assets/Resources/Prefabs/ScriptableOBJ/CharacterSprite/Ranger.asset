@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d112b164a6b146d44bff53711596e0c1, type: 3}
+  m_Name: Ranger
+  m_EditorClassIdentifier: 
+  code: 1
+  pevis: {fileID: 1146819590, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  head_1: {fileID: -838167273, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  head_2: {fileID: 148280959, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  head_3: {fileID: -438467326, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  halfCloseEye: {fileID: 1778285940, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  closeEye: {fileID: -1225197178, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  body: {fileID: 1318584110, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  hood_1: {fileID: 611501302, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  hood_2: {fileID: 527473872, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  hood_3: {fileID: 1206264872, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  rightArm: {fileID: 738285865, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  rightHand: {fileID: -101135111, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  leftArm: {fileID: 745130626, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  leftHand: {fileID: -1402637799, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  belt: {fileID: 237363126, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  rightLeg: {fileID: 0}
+  leftLeg: {fileID: 0}
+  rightFoot: {fileID: -994756377, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}
+  leftFoot: {fileID: -1030626770, guid: e322e7115a9fbe84c80ae900aa809522, type: 3}

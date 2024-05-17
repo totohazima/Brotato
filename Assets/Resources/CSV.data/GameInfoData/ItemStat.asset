@@ -396,7 +396,7 @@ MonoBehaviour:
     decreaseNum:
     - 1
   - itemCode: 35
-    itemName: "\uB098\uBB34\uAFBC \uC154\uCE20"
+    itemName: "\uB7FC\uBC84 \uC7AD \uC154\uCE20"
     itemMaxCount: 1
     statRiseCount: 0
     statDecreaseCount: 0

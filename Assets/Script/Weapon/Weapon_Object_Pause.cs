@@ -35,7 +35,7 @@ public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerU
         }
         weapon_Image.sprite = weaponData[(int)weapon_Object.index].weaponImage;
 
-        if (PauseUI_Manager.instance.selectObj_Weapon == null)
+        if (PauseUI.instance.selectObj_Weapon == null)
         {
             if (infoObj_Pause != null)
             {
@@ -56,19 +56,19 @@ public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerU
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        PauseUI_Manager.instance.selectObj_Weapon = this;
+        PauseUI.instance.selectObj_Weapon = this;
         ShowItemInfo();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         selectImage.SetActive(false);
-        PauseUI_Manager.instance.selectObj_Weapon = null;
+        PauseUI.instance.selectObj_Weapon = null;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (PauseUI_Manager.instance.selectObj_Weapon != null)
+        if (PauseUI.instance.selectObj_Weapon != null)
         {
             selectImage.SetActive(true);
             ShowItemInfo();
@@ -77,7 +77,7 @@ public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerU
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (PauseUI_Manager.instance.selectObj_Weapon != null)
+        if (PauseUI.instance.selectObj_Weapon != null)
         {
             selectImage.SetActive(false);
             Destroy(infoObj_Pause.gameObject);

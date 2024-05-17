@@ -219,22 +219,34 @@ public class Player : MonoBehaviour
                     switch (itemInventory[i].riseStat[j])
                     {
                         case Stat.PlayerStat.MAXHEALTH:
-                            maxHealth += itemInventory[i].riseStats[j];
+                            if (GameManager.instance.character == Character.RANGER) //레인저 체력 증가량 -25%
+                                maxHealth = itemInventory[i].riseStats[j] * 0.75f;
+                            else
+                                maxHealth += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.REGENERATION:
-                            regeneration += itemInventory[i].riseStats[j];
+                            if (GameManager.instance.character == Character.BULL) //황소 재생 증가량 +50%
+                                regeneration += itemInventory[i].riseStats[j] * 1.5f;
+                            else
+                                regeneration += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.BLOOD_SUCKING:
                             bloodSucking += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.PERSENT_DAMAGE:
-                            persentDamage += itemInventory[i].riseStats[j];
+                            if (GameManager.instance.character == Character.ENGINEER) //엔지니어 대미지 증가량 -50%
+                                persentDamage += itemInventory[i].riseStats[j] * 0.5f;
+                            else
+                                persentDamage += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.MELEE_DAMAGE:
                             meleeDamage += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.RANGE_DAMAGE:
-                            rangeDamage += itemInventory[i].riseStats[j];
+                            if (GameManager.instance.character == Character.RANGER) //레인저 원거리 대미지 증가량 +50%
+                                rangeDamage += itemInventory[i].riseStats[j] * 1.5f;
+                            else
+                                rangeDamage += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.ELEMENTAL_DAMAGE:
                             elementalDamage += itemInventory[i].riseStats[j];
@@ -246,7 +258,10 @@ public class Player : MonoBehaviour
                             criticalChance += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.ENGINE:
-                            engine += itemInventory[i].riseStats[j];
+                            if (GameManager.instance.character == Character.ENGINEER) //엔지니어 엔지니어링 증가량 +25%
+                                engine += itemInventory[i].riseStats[j] * 1.25f;
+                            else
+                                engine += itemInventory[i].riseStats[j];
                             break;
                         case Stat.PlayerStat.RANGE:
                             range += itemInventory[i].riseStats[j];
@@ -449,146 +464,179 @@ public class Player : MonoBehaviour
         SettCalculate();
         void SettCalculate()
         {
-            if (WeaponManager.instance != null)
+            GameManager game = GameManager.instance;
+            float riseStat = 0;
+            //비무장 = 회피
+            if (game.unArmed_Set == 2)
             {
-                WeaponManager sett = WeaponManager.instance;
-
-                //비무장 = 회피
-                if (sett.unArmed_Set == 2)
-                {
-                    evasion += 3;
-                }
-                else if (sett.unArmed_Set == 3)
-                {
-                    evasion += 6;
-                }
-                else if (sett.unArmed_Set == 4)
-                {
-                    evasion += 9;
-                }
-                else if (sett.unArmed_Set == 5)
-                {
-                    evasion += 12;
-                }
-                else if (sett.unArmed_Set >= 6)
-                {
-                    evasion += 15;
-                }
-
-                //도구 = 엔지니어링
-                if (sett.tool_Set == 2)
-                {
-                    engine += 1;
-                }
-                else if (sett.tool_Set == 3)
-                {
-                    engine += 2;
-                }
-                else if (sett.tool_Set == 4)
-                {
-                    engine += 3;
-                }
-                else if (sett.tool_Set == 5)
-                {
-                    engine += 4;
-                }
-                else if (sett.tool_Set >= 6)
-                {
-                    engine += 5;
-                }
-
-                //총 = 범위
-                if (sett.gun_Set == 2)
-                {
-                    range += 10;
-                }
-                else if (sett.gun_Set == 3)
-                {
-                    range += 20;
-                }
-                else if (sett.gun_Set == 4)
-                {
-                    range += 30;
-                }
-                else if (sett.gun_Set == 5)
-                {
-                    range += 40;
-                }
-                else if (sett.gun_Set >= 6)
-                {
-                    range += 50;
-                }
-
-                //폭발물 = 폭발 크기
-                if (sett.explosive_Set == 2)
-                {
-                    explosiveSize += 5;
-                }
-                else if (sett.explosive_Set == 3)
-                {
-                    explosiveSize += 10;
-                }
-                else if (sett.explosive_Set == 4)
-                {
-                    explosiveSize += 15;
-                }
-                else if (sett.explosive_Set == 5)
-                {
-                    explosiveSize += 20;
-                }
-                else if (sett.explosive_Set >= 6)
-                {
-                    explosiveSize += 25;
-                }
-
-                //정확 = 치명타율
-                if (sett.precision_Set == 2)
-                {
-                    criticalChance += 3;
-                }
-                else if (sett.precision_Set == 3)
-                {
-                    criticalChance += 6;
-                }
-                else if (sett.precision_Set == 4)
-                {
-                    criticalChance += 9;
-
-                }
-                else if (sett.precision_Set == 5)
-                {
-                    criticalChance += 12;
-                }
-                else if (sett.precision_Set >= 6)
-                {
-                    criticalChance += 15;
-                }
-
-                //원시 = 체력
-                if (sett.native_Set == 2)
-                {
-                    maxHealth += 3;
-                }
-                else if (sett.native_Set == 3)
-                {
-                    maxHealth += 6;
-                }
-                else if (sett.native_Set == 4)
-                {
-                    maxHealth += 9;
-                }
-                else if (sett.native_Set == 5)
-                {
-                    maxHealth += 12;
-                }
-                else if (sett.native_Set >= 6)
-                {
-                    maxHealth += 15;
-                }
+                riseStat = 3;
             }
+            else if (game.unArmed_Set == 3)
+            {
+                riseStat = 6;
+            }
+            else if (game.unArmed_Set == 4)
+            {
+                riseStat = 9;
+            }
+            else if (game.unArmed_Set == 5)
+            {
+                riseStat = 12;
+            }
+            else if (game.unArmed_Set >= 6)
+            {
+                riseStat = 15;
+            }
+            evasion += riseStat;
+            //도구 = 엔지니어링
+            if (game.tool_Set == 2)
+            {
+                riseStat = 1;
+            }
+            else if (game.tool_Set == 3)
+            {
+                riseStat = 2;
+            }
+            else if (game.tool_Set == 4)
+            {
+                riseStat = 3;
+            }
+            else if (game.tool_Set == 5)
+            {
+                riseStat = 4;
+            }
+            else if (game.tool_Set >= 6)
+            {
+                riseStat = 5;
+            }
+            if (GameManager.instance.character == Character.ENGINEER) //엔지니어 엔지니어링 증가량 +25%
+                engine += riseStat * 1.25f;
+            else
+                engine = riseStat;
+            //총 = 범위
+            if (game.gun_Set == 2)
+            {
+                riseStat = 10;
+            }
+            else if (game.gun_Set == 3)
+            {
+                riseStat = 20;
+            }
+            else if (game.gun_Set == 4)
+            {
+                riseStat = 30;
+            }
+            else if (game.gun_Set == 5)
+            {
+                riseStat = 40;
+            }
+            else if (game.gun_Set >= 6)
+            {
+                riseStat = 50;
+            }
+            range += riseStat;
+            //폭발물 = 폭발 크기
+            if (game.explosive_Set == 2)
+            {
+                riseStat = 5;
+            }
+            else if (game.explosive_Set == 3)
+            {
+                riseStat = 10;
+            }
+            else if (game.explosive_Set == 4)
+            {
+                riseStat = 15;
+            }
+            else if (game.explosive_Set == 5)
+            {
+                riseStat = 20;
+            }
+            else if (game.explosive_Set >= 6)
+            {
+                riseStat = 25;
+            }
+            explosiveSize += riseStat;
+            //정확 = 치명타율
+            if (game.precision_Set == 2)
+            {
+                riseStat = 3;
+            }
+            else if (game.precision_Set == 3)
+            {
+                riseStat = 6;
+            }
+            else if (game.precision_Set == 4)
+            {
+                riseStat = 9;
+
+            }
+            else if (game.precision_Set == 5)
+            {
+                riseStat = 12;
+            }
+            else if (game.precision_Set >= 6)
+            {
+                riseStat = 15;
+            }
+            criticalChance += riseStat;
+            //원시 = 체력
+            if (game.native_Set == 2)
+            {
+                riseStat = 3;
+            }
+            else if (game.native_Set == 3)
+            {
+                riseStat = 6;
+            }
+            else if (game.native_Set == 4)
+            {
+                riseStat = 9;
+            }
+            else if (game.native_Set == 5)
+            {
+                riseStat = 12;
+            }
+            else if (game.native_Set >= 6)
+            {
+                riseStat = 15;
+            }
+            if (GameManager.instance.character == Character.RANGER) //레인저 최대 체력 증가량 -25%
+                maxHealth += riseStat * 0.75f;
+            else
+                maxHealth += riseStat;
         }
 
         harvest *= 1 + (GameManager.instance.harvestVariance_Amount / 100);
         harvest = Mathf.Round(harvest);
+
+        if(GameManager.instance.character == Character.MULTITASKER)
+        {
+            persentDamage -= 5 * weapons.Count;
+        }
+        if(GameManager.instance.character == Character.GLADIATOR)
+        {
+            bool isSame = false;
+            List<Weapon.Weapons> sortWeapon = new List<Weapon.Weapons>();
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                Weapon_Action myWeapon = weapons[i].GetComponent<Weapon_Action>();
+
+                for (int j = 0; j < sortWeapon.Count; j++)
+                {
+                    if(myWeapon.index == sortWeapon[j])
+                    {
+                        isSame = true;
+                    }
+                }
+                //같은 무기가 없을 경우
+                if(isSame == false)
+                {
+                    sortWeapon.Add(myWeapon.index);
+                }
+            }
+
+            attackSpeed += 20 * sortWeapon.Count;
+        }
     }
 }

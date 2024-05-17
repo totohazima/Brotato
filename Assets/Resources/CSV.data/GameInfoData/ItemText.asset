@@ -34,7 +34,7 @@ MonoBehaviour:
     text:
     - "\uC7AC\uB8CC\uAC00 \uB5A8\uC5B4\uC84C\uC744 \uB54C \uC7AC\uB8CC\uB97C \uC989\uC2DC
       \uB04C\uC5B4\uB2F9\uAE38 \uD655\uB960 <color=#4CFF52>+20%</color>"
-    - "<color=#4CFF52>+1</color> \uBC94\uC704"
+    - "<color=#4CFF52>+10</color> \uBC94\uC704"
   - itemCode: 4
     textCount: 2
     text:

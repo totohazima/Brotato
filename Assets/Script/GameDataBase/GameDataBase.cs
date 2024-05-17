@@ -29,6 +29,7 @@ namespace Only1Games.GDBA
         public UpgradePercentageInfoTable upgradePercentageInfoTable = null;
 
         [Header("TextTable")]
+        public PlayerSelectTextInfoTable playerSelectTextInfoTable = null;
         public ItemTextInfoTable ItemTextInfoTable = null;
     }
 

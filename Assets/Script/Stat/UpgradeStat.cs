@@ -11,6 +11,7 @@ public class UpgradeStat : MonoBehaviour
     public Text effectText;
     public Image backGroundImage;
     public Outline outline;
+    GameManager game;
     StageManager stage;
     public enum LevelUpStat
     {
@@ -34,6 +35,7 @@ public class UpgradeStat : MonoBehaviour
 
     void Awake()
     {
+        game = GameManager.instance;
         stage = StageManager.instance;
     }
 
@@ -186,53 +188,89 @@ public class UpgradeStat : MonoBehaviour
             switch (upgradeType)
             {
                 case LevelUpStat.HP_UP:
-                    stage.playerInfo.maxHealth_Origin += import.table[(int)upgradeType].tierEffect[tier];
-                    stage.curHp += import.table[(int)upgradeType].tierEffect[tier];
+                    if (game.character == Player.Character.RANGER) //레인저 체력 증가량 -25%
+                    {
+                        game.player_Info.maxHealth_Origin += import.table[(int)upgradeType].tierEffect[tier] * 0.75f;
+                        stage.curHp += game.player_Info.maxHealth;
+                    }
+                    else
+                    {
+                        game.player_Info.maxHealth_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                        stage.curHp += game.player_Info.maxHealth;
+                    }
                     break;
                 case LevelUpStat.REGEN_UP:
-                    stage.playerInfo.regeneration_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    if (game.character == Player.Character.BULL) //황소 재생 증가량 +50%
+                    {
+                        game.player_Info.regeneration_Origin += import.table[(int)upgradeType].tierEffect[tier] * 1.5f;
+                    }
+                    else
+                    {
+                        game.player_Info.regeneration_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    }
                     break;
                 case LevelUpStat.BLOOD_UP:
-                    stage.playerInfo.bloodSucking_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.bloodSucking_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.DAMAGE_UP:
-                    stage.playerInfo.persentDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    if (game.character == Player.Character.ENGINEER) //엔지니어 대미지 증가량 -50%
+                    {
+                        game.player_Info.persentDamage_Origin += import.table[(int)upgradeType].tierEffect[tier] * 0.5f;
+                    }
+                    else
+                    {
+                        game.player_Info.persentDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    }
                     break;
                 case LevelUpStat.MELEEDM_UP:
-                    stage.playerInfo.meleeDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.meleeDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.RANGEDM_UP:
-                    stage.playerInfo.rangeDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    if (game.character == Player.Character.ENGINEER) //레인저 원거리 대미지 증가량 +50%
+                    {
+                        game.player_Info.rangeDamage_Origin += import.table[(int)upgradeType].tierEffect[tier] * 1.5f;
+                    }
+                    else
+                    {
+                        game.player_Info.rangeDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    }
                     break;
                 case LevelUpStat.ELEMENTALDM_UP:
-                    stage.playerInfo.elementalDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.elementalDamage_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.ATKSPEED_UP:
-                    stage.playerInfo.attackSpeed_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.attackSpeed_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.CRITICAL_UP:
-                    stage.playerInfo.criticalChance_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.criticalChance_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.ENGINE_UP:
-                    stage.playerInfo.engine_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    if (game.character == Player.Character.ENGINEER) //엔지니어 엔지니어링 증가량 +25%
+                    {
+                        game.player_Info.engine_Origin += import.table[(int)upgradeType].tierEffect[tier]* 1.25f;
+                    }
+                    else
+                    {
+                        game.player_Info.engine_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    }
                     break;
                 case LevelUpStat.RANGE_UP:
-                    stage.playerInfo.range_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.range_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.ARMOR_UP:
-                    stage.playerInfo.armor_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.armor_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.EVASION_UP:
-                    stage.playerInfo.evasion_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.evasion_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.LUCK_UP:
-                    stage.playerInfo.lucky_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.lucky_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.HARVEST_UP:
-                    stage.playerInfo.harvest_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.harvest_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
                 case LevelUpStat.SPEED_UP:
-                    stage.playerInfo.speed_Origin += import.table[(int)upgradeType].tierEffect[tier];
+                    game.player_Info.speed_Origin += import.table[(int)upgradeType].tierEffect[tier];
                     break;
             }
 

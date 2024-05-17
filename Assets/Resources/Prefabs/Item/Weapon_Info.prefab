@@ -1061,7 +1061,7 @@ MonoBehaviour:
   - {fileID: 794074925168664418}
   - {fileID: 5668487766283913256}
   - {fileID: 7474117036896440065}
-  weaponManager: {fileID: 0}
+  game: {fileID: 0}
 --- !u!1 &1803462033976380400
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1159,7 @@ MonoBehaviour:
   - {fileID: 1106783286396571233}
   - {fileID: 5050658676429117440}
   - {fileID: 4328570943474728893}
-  weaponManager: {fileID: 0}
+  game: {fileID: 0}
 --- !u!1 &1939358925917382274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,7 +1257,7 @@ MonoBehaviour:
   - {fileID: 8408813395789521656}
   - {fileID: 6096876397266036318}
   - {fileID: 7614167205164757660}
-  weaponManager: {fileID: 0}
+  game: {fileID: 0}
 --- !u!1 &2041878411644891869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,7 +1912,7 @@ MonoBehaviour:
   - {fileID: 749073618868206784}
   - {fileID: 7115298177725925362}
   - {fileID: 5267246596692580934}
-  weaponManager: {fileID: 0}
+  game: {fileID: 0}
 --- !u!1 &3153996946894787749
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,7 +3929,7 @@ MonoBehaviour:
   - {fileID: 9202840517643983028}
   - {fileID: 5188598363454880509}
   - {fileID: 2015779658137720828}
-  weaponManager: {fileID: 0}
+  game: {fileID: 0}
 --- !u!1 &6171053859588313089
 GameObject:
   m_ObjectHideFlags: 0
@@ -4997,7 +4997,7 @@ MonoBehaviour:
   - {fileID: 2422125290008119295}
   - {fileID: 60650364996075894}
   - {fileID: 924924686744903341}
-  weaponManager: {fileID: 0}
+  game: {fileID: 0}
 --- !u!1 &7099267757764295707
 GameObject:
   m_ObjectHideFlags: 0

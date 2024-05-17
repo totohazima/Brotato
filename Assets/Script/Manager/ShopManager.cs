@@ -26,7 +26,6 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     public List<GameObject> goodsList;
     List<GameObject>[] list;
     StageManager stage;
-    ItemManager item;
     public WeaponScrip[] weapon;
 
     [Header("# 무기 확률 체크")]
@@ -37,7 +36,6 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     {
         instance = this;
         stage = StageManager.instance;
-        item = ItemManager.instance;
 
         list = new List<GameObject>[goods.Length];
 
@@ -67,9 +65,6 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
             rerollPrice = Mathf.Floor(rerollPrice); //내림
             rerollPrice_Add = Mathf.Floor(rerollPrice / 3);
         }
-
-        //ItemManager.instance.WeaponListUp(tabsScroll[0], verticalTabsScroll[0], PauseUI_Manager.instance.scrollContents[0]);
-        //ItemManager.instance.ItemListUp(tabsScroll[1], verticalTabsScroll[1], PauseUI_Manager.instance.scrollContents[1]);
     }
     void OnDisable()
     {
@@ -88,7 +83,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
         moneyNumUI.text = stage.money.ToString();
         nextWaveUI.text = "이동(웨이브 " + (stage.waveLevel + 2) + ")";
 
-        tabsText[0].text = "무기(" + tabsScroll[0].childCount + "/6)";
+        tabsText[0].text = "무기(" + tabsScroll[0].childCount + "/" + GameManager.instance.maxWeaponCount +")";
         tabsText[1].text = "아이템(" + tabsScroll[1].childCount + ")";
         tabsText[2].text = "천부 카드";
 
@@ -180,16 +175,34 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
         for (int j = 0; j < stage.playerInfo.weapons.Count; j++)
         {
-            Weapon_Action weapon = stage.playerInfo.weapons[j].GetComponent<Weapon_Action>();
+            Weapon_Action weapon = GameManager.instance.player_Info.weapons[j].GetComponent<Weapon_Action>();
             bool isSameType = false;
             bool isSameClass = false;
-            ///같은 무기 구분
+            //같은 무기 구분
             Weapon.Weapons type = (Weapon.Weapons)System.Enum.Parse(typeof(Weapon.Weapons), weapon.weaponCode);
             for (int z = 0; z < weaponTypes.Count; z++)
             {
                 if (weaponTypes[z] == type)
                 {
                     isSameType = true;
+                }
+                //근거리 무기는 제외하는 경우
+                if(GameManager.instance.character == Player.Character.RANGER)
+                {
+                    Weapon.WeaponType attackType = (Weapon.WeaponType)System.Enum.Parse(typeof(Weapon.WeaponType), weapon.attackType);
+                    if (attackType == Weapon.WeaponType.MELEE)
+                    {
+                        isSameType = true;
+                    }
+                }
+                //원거리 무기는 제외하는 경우
+                else if (GameManager.instance.character == Player.Character.GLADIATOR)
+                {
+                    Weapon.WeaponType attackType = (Weapon.WeaponType)System.Enum.Parse(typeof(Weapon.WeaponType), weapon.attackType);
+                    if (attackType == Weapon.WeaponType.RANGE)
+                    {
+                        isSameType = true;
+                    }
                 }
             }
             if (isSameType == false)
@@ -206,6 +219,25 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
                     if (weaponClasses[z] == weaponClass)
                     {
                         isSameClass = true;
+                    }
+
+                    //근거리 무기는 제외하는 경우
+                    if (GameManager.instance.character == Player.Character.RANGER)
+                    {
+                        Weapon.WeaponType attackType = (Weapon.WeaponType)System.Enum.Parse(typeof(Weapon.WeaponType), weapon.attackType);
+                        if (attackType == Weapon.WeaponType.MELEE)
+                        {
+                            isSameClass = true;
+                        }
+                    }
+                    //원거리 무기는 제외하는 경우
+                    else if (GameManager.instance.character == Player.Character.GLADIATOR)
+                    {
+                        Weapon.WeaponType attackType = (Weapon.WeaponType)System.Enum.Parse(typeof(Weapon.WeaponType), weapon.attackType);
+                        if (attackType == Weapon.WeaponType.RANGE)
+                        {
+                            isSameClass = true;
+                        }
                     }
                 }
 
@@ -311,12 +343,38 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
                     }
                     else
                     {
-                        
-                        nums = Random.Range(0, weapon.Length);
+                        List<WeaponScrip> weapons = new List<WeaponScrip>();
+                        for (int z = 0; z < weapon.Length; z++)
+                        {
+                            //근거리 무기는 제외하는 경우
+                            if (GameManager.instance.character == Player.Character.RANGER)
+                            {
+                                Weapon.WeaponType attackType = weapon[z].attackType;
+                                if (attackType != Weapon.WeaponType.MELEE)
+                                {
+                                    weapons.Add(weapon[z]);
+                                }
+                            }
+                            //원거리 무기는 제외하는 경우
+                            else if (GameManager.instance.character == Player.Character.GLADIATOR)
+                            {
+                                Weapon.WeaponType attackType = weapon[z].attackType;
+                                if (attackType != Weapon.WeaponType.RANGE)
+                                {
+                                    weapons.Add(weapon[z]);
+                                }
+                            }
+                            //둘 다 아닌 경우
+                            else
+                            {
+                                weapons.Add(weapon[z]);
+                            }
+                        }
+                        nums = Random.Range(0, weapons.Count);
 
                         GameObject product = Get(1);
                         WeaponGoods weaponGoods = product.GetComponent<WeaponGoods>();
-                        weaponGoods.Init(weapon[nums]/*weapon[num].weaponName, weapon[num].setType, weapon[num].weaponNickNames, weapon[num].weaponImage, weapon[num].attackType*/);
+                        weaponGoods.Init(weapons[nums]);
                         weaponGoods.transform.SetParent(goodsContent);
                         goodsList.Add(weaponGoods.gameObject);
 

@@ -8,15 +8,13 @@ public class ForSettingWeapon : Weapon, ICustomUpdateMono
     public Weapons index; //무기 번호
     public GameObject weaponPrefab;
     public WeaponScrip weaponScrip;
-    MainSceneManager main;
-    WeaponStatImporter importer;
+    GameManager game;
     Image image;
     public Sprite weaponImage;
     public GameObject weaponPrefabs;
     void Awake()
     {
-        main = MainSceneManager.instance;
-        //importer = WeaponStatImporter.instance;
+        game = GameManager.instance;
         image = GetComponent<Image>();
         weaponImage = weaponScrip.weaponImage;
         weaponPrefabs = weaponScrip.weaponPrefab;
@@ -33,11 +31,11 @@ public class ForSettingWeapon : Weapon, ICustomUpdateMono
     }
     public void CustomUpdate()
     {
-        if (main.selectWeapon == gameObject)
+        if (game.weapon == this)
         {
             image.color = new Color(200 / 255f, 200 / 255f, 200 / 255f);
         }
-        else if (main.selectWeapon != gameObject)
+        else if (game.weapon != this)
         {
             image.color = new Color(70 / 255f, 70 / 255f, 70 / 255f);
         }
@@ -46,17 +44,16 @@ public class ForSettingWeapon : Weapon, ICustomUpdateMono
 
     public void ClickWeapon()
     {
-        if(main.selectWeapon != null)
+        if(game.weapon != null)
         {
-            Destroy(main.selectedWeapon);
-            main.selectedWeapon = null;
+            Destroy(game.weapon_Obj);
         }
 
-        main.selectWeapon = gameObject;
+        game.weapon = this;
 
         GameObject obj = Instantiate(weaponPrefab);
-        main.selectedWeapon = obj;
-        obj.transform.SetParent(main.weaponSetGroup);
+        game.weapon_Obj = obj;
+        obj.transform.SetParent(MainSceneManager.instance.weaponSetGroup);
 
         RectTransform rect = obj.GetComponent<RectTransform>();
         rect.localScale = new Vector3(1, 1, 1);

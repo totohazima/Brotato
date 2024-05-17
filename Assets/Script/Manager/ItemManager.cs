@@ -11,18 +11,13 @@ public class ItemManager : MonoBehaviour
     public Item_Object_Pause pauseItem; //일시정지 등에서 보여줄 아이템 오브젝트
     public Weapon_Object_Pause pauseWeapon; //일시정지 등에서 보여줄 무기 오브젝트
     public List<Item.ItemType> maxItemList;
-
     public Transform[] weaponScrollTrans;
     public Transform[] itemScrollTrans;
-
-    List<GameObject>[] poolItems;
-
     StageManager stage;
     void Awake()
     {
         instance = this;
         stage = StageManager.instance;
-
     }
 
     public void ItemObtain(int index)
@@ -61,18 +56,15 @@ public class ItemManager : MonoBehaviour
         }
         
     }
-    public void WeaponListUp(/*Transform horizontalList, Transform verticalList, Transform pauseList*/) //pauList만 다른 아이템으로 교체
+    public void WeaponListUp() 
     {
-        for (int i = 0; i < weaponScrollTrans[0].childCount; i++)
+        for (int i = 0; i < ListUpUI_Weapon.instance.poolingObject.Count; i++)
         {
-            GameObject item = weaponScrollTrans[0].GetChild(i).gameObject;
-            Destroy(item);
-
-            GameObject item2 = weaponScrollTrans[1].GetChild(i).gameObject;
-            Destroy(item2);
-
-            GameObject item3 = weaponScrollTrans[2].GetChild(i).gameObject;
-            Destroy(item3);
+            ListUpUI_Weapon.ReturnObject(ListUpUI_Weapon.instance.poolingObject[i]);
+        }
+        for (int i = 0; i < ListUpUI_Weapon.instance.poolingObject_Pause.Count; i++)
+        {
+            ListUpUI_Weapon.ReturnObject_Pause(ListUpUI_Weapon.instance.poolingObject_Pause[i]);
         }
         
         List<GameObject> inventory = stage.playerInfo.weapons;
@@ -80,17 +72,26 @@ public class ItemManager : MonoBehaviour
         {
             Weapon_Action info = inventory[i].GetComponent<Weapon_Action>();
             invenWeapon.weapon_Object = info;
-            Instantiate(invenWeapon.gameObject, weaponScrollTrans[0]);
-            Instantiate(invenWeapon.gameObject, weaponScrollTrans[1]);
 
-            Weapon_Object_Pause pause = pauseWeapon;
-            pause.weapon_Object = info;
-            Instantiate(pause.gameObject, weaponScrollTrans[2]);
+            Weapon_Object weapon_Object1 = ListUpUI_Weapon.GetWeaponObj();
+            weapon_Object1.weapon_Object = info;
+            weapon_Object1.transform.SetParent(weaponScrollTrans[0]);
+            weapon_Object1.transform.localScale = new Vector3(1, 1, 1);
+
+            Weapon_Object weapon_Object2 = ListUpUI_Weapon.GetWeaponObj();
+            weapon_Object2.weapon_Object = info;
+            weapon_Object2.transform.SetParent(weaponScrollTrans[1]);
+            weapon_Object2.transform.localScale = new Vector3(1, 1, 1);
+
+            Weapon_Object_Pause weapon_ObjectPause = ListUpUI_Weapon.GetWeaponObj_Pause();
+            weapon_ObjectPause.weapon_Object = info;
+            weapon_ObjectPause.transform.SetParent(weaponScrollTrans[2]);
+            weapon_ObjectPause.transform.localScale = new Vector3(1, 1, 1);
         }
     }
-    public void ItemListUp(/*Transform horizontalList, Transform verticalList, Transform pauseList*/) 
+    public void ItemListUp() 
     {
-        
+        ///이 부분 추후 위 함수처럼 수정해야 함
         for (int i = 0; i < itemScrollTrans[0].childCount; i++)
         {
             GameObject item = itemScrollTrans[0].GetChild(i).gameObject;
@@ -102,10 +103,11 @@ public class ItemManager : MonoBehaviour
             GameObject item3 = itemScrollTrans[2].GetChild(i).gameObject;
             Destroy(item3);
         }
-         
+
         List<Item> inventory = stage.playerInfo.itemInventory;
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
+
             Instantiate(inventory[i].gameObject, itemScrollTrans[0]);
             Instantiate(inventory[i].gameObject, itemScrollTrans[1]);
 
@@ -119,30 +121,6 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    //public GameObject Get(int index)
-    //{
-    //    GameObject select = null;
-
-    //    //선택한 풀의 놀고있는(비활성화 된) 게임오브젝트 접근
-
-    //    foreach (GameObject item in poolItems[index])
-    //    {
-    //        if (!item.gameObject.activeSelf)
-    //        {
-    //            //발견하면 select 변수에 할당
-    //            select = item;
-    //            select.SetActive(true);
-    //            break;
-    //        }
-    //    }
-    //    //못 찾았으면
-    //    if (!select)
-    //    {
-    //        //새롭게 생성하고 select에 할당
-    //        select = Instantiate(items[index].gameObject, transform);
-    //        poolItems[index].Add(select);
-    //    }
-    //    return select;
-    //}
+   
 }
 

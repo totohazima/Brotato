@@ -10,11 +10,11 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
     public Image weapon_Image;
     public GameObject combined_Mark;
     public WeaponScrip[] weaponData;
+    public Weapon_Info weapon_Info;
     [SerializeField]
     Outline frame;
-    List<Weapon_Action> weaponList = new List<Weapon_Action>();
-    public Weapon_Info weapon_Info;
-    bool isCombined;
+    [SerializeField] List<Weapon_Action> weaponList = new List<Weapon_Action>();
+    [SerializeField] bool isCombined;
     public virtual void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
         CustomUpdateManager.customUpdates.Add(this);
@@ -25,6 +25,7 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
     }
     public virtual void OnDisable()
     {
+        weaponList.Clear();
         CustomUpdateManager.customUpdates.Remove(this);
     }
 

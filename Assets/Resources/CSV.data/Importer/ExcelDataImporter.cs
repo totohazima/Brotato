@@ -520,6 +520,8 @@ namespace Only1Games.GDBA
                     return true;
                 case "ItemText":
                     return true;
+                case "PlayerSelectText":
+                    return true;
                 case "WeaponPercentage":
                     return true;
                 case "UpgradePercentage":
@@ -557,6 +559,8 @@ namespace Only1Games.GDBA
                     return new WeaponStatImporter(filePath);
                 case "ItemText":
                     return new ItemTextImporter(filePath);
+                case "PlayerSelectText":
+                    return new PlayerSelectTextImporter(filePath);
                 case "WeaponPercentage":
                     return new WeaponPercentageImporter(filePath);
                 case "UpgradePercentage":

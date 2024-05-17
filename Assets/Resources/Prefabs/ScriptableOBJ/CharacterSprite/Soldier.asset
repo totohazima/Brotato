@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d112b164a6b146d44bff53711596e0c1, type: 3}
+  m_Name: Soldier
+  m_EditorClassIdentifier: 
+  code: 7
+  pevis: {fileID: 1114375646, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  head_1: {fileID: 1869535691, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  head_2: {fileID: -960614944, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  head_3: {fileID: -1556634072, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  halfCloseEye: {fileID: -1453854749, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  closeEye: {fileID: -44465718, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  body: {fileID: -1133545853, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  hood_1: {fileID: 0}
+  hood_2: {fileID: 0}
+  hood_3: {fileID: 0}
+  rightArm: {fileID: -445337830, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  rightHand: {fileID: -1746039374, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  leftArm: {fileID: 1725525354, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  leftHand: {fileID: -1326176875, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  belt: {fileID: -1691966959, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  rightLeg: {fileID: -814745161, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  leftLeg: {fileID: 281498644, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  rightFoot: {fileID: -814745161, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}
+  leftFoot: {fileID: 281498644, guid: 3d9fcd5e77a021842b1adb4e9d218444, type: 3}

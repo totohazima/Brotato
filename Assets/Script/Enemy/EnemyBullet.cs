@@ -6,14 +6,14 @@ public class EnemyBullet : Bullet
 {
     public override void FixedUpdate()
     {
-        if (StageManager.instance.isPause == true)
+        if (GameManager.instance.isPause == true)
         {
             if (rigid != null)
             {
                 rigid.velocity = Vector3.zero;
             }
         }
-        else if (StageManager.instance.isPause == false)
+        else if (GameManager.instance.isPause == false)
         {
             if (rigid != null)
             {

@@ -4,38 +4,37 @@ using UnityEngine;
 
 public class PlayerAction : Player, ICustomUpdateMono
 {
-    private ForSettingPlayer CharacterImport;
-    private MainSceneManager main;
-    private StageManager game;
+    private GameManager game;
+    private StageManager stage;
     private Rigidbody rigid;
+    private float magnetRanges; //자석 범위
+    private JoyStick joy;
+    private float timer; //체력 재생 타이머
+    private float regenTime; //체력 재생 시간
+    private float invincibleTime = 0.5f; //피격 후 무적 시간
+    [SerializeField] private float moveSpeed; //캐릭터 이동속도
+    [SerializeField] private float hitTImer;
     public Animator anim;
     public CapsuleCollider coll;
     public SphereCollider magnet;
     public Transform animTrans;
-    private float magnetRanges; //자석 범위
-    private JoyStick joy;
-    [SerializeField] private float moveSpeed; //캐릭터 이동속도
-    private float timer; //체력 재생 타이머
-    private float regenTime; //체력 재생 시간
     public Transform weaponMainPos;
     public bool isFullWeapon; //무기가 꽉찬 경우
     public bool isHit; //피격 시 true가 되며 true일 경우 피격 판정이 일어나지 않는다.
-    [SerializeField] private float hitTImer;
-    private float invincibleTime = 0.5f; //피격 후 무적 시간
     public JoyStick joyStick;
     public WhiteFlash whiteFlash;
-
+    public PlayerSprite playerSprite;
     void Start()
     {
-        main = MainSceneManager.instance;
-        game = StageManager.instance;
+        game = GameManager.instance;
+        stage = StageManager.instance;
         rigid = GetComponent<Rigidbody>();
-        CharacterImport = main.selectPlayer.GetComponent<ForSettingPlayer>();
         magnetRanges = magnet.radius;
         joy = JoyStick.instance;
         //joy.moveTarget.SetParent(transform);
         joyStick = StageManager.instance.joystick;
-        StatSetting(CharacterImport.characterNum);
+        playerSprite.SpriteSetting();
+        StatSetting((int)game.character);
     }
 
     void OnEnable()
@@ -49,7 +48,7 @@ public class PlayerAction : Player, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-        if (weapons.Count >= 6)
+        if (weapons.Count >= game.maxWeaponCount)
         {
             isFullWeapon = true;
         }
@@ -58,7 +57,7 @@ public class PlayerAction : Player, ICustomUpdateMono
             isFullWeapon = false;
         }
 
-        if (game.isDie == true || game.isEnd == true)
+        if (game.isDie == true || stage.isEnd == true)
         {
             anim.SetBool("Move", false);
             return;
@@ -106,7 +105,7 @@ public class PlayerAction : Player, ICustomUpdateMono
             }
         }
 
-        if(isHit == true || game.isEnd == true)
+        if(isHit == true || stage.isEnd == true)
         {
             coll.enabled = false;
         }
@@ -125,8 +124,8 @@ public class PlayerAction : Player, ICustomUpdateMono
         rigid.velocity = Vector3.zero;
 
         ///이동 제한 
-        float x = Mathf.Clamp(transform.position.x, game.xMin, game.xMax);
-        float y = Mathf.Clamp(transform.position.y, game.yMin, game.yMax);
+        float x = Mathf.Clamp(transform.position.x, stage.xMin, stage.xMax);
+        float y = Mathf.Clamp(transform.position.y, stage.yMin, stage.yMax);
         transform.position = new Vector3(x, y, transform.position.z);
     }
     void StatApply()
@@ -166,11 +165,11 @@ public class PlayerAction : Player, ICustomUpdateMono
         if (regenHp > 0) 
         {
             timer += Time.deltaTime;
-            if (game.curHp < game.maxHp)
+            if (stage.curHp < stage.maxHp)
             {
                 if (timer >= regenTime)
                 {
-                    game.curHp += 1;
+                    stage.curHp += 1;
                     timer = 0;
                     string healTxt = "<color=#4CFF52>1</color>";
                     Transform text = DamageTextManager.instance.TextCreate(0, healTxt).transform;

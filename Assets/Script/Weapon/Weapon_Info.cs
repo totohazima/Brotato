@@ -59,7 +59,7 @@ public class Weapon_Info : MonoBehaviour
         recyclePrice = Mathf.Round(recyclePrice);
         recycle_NumUI.text = "<sprite=0>+" + recyclePrice.ToString("F0") + "   ÀçÈ°¿ë";
              itemPos = pos;
-        if (StageManager.instance.isPause == false)
+        if (GameManager.instance.isPause == false)
         {
             settUI.SetActive(true);
             btnGroups.SetActive(true);
@@ -104,7 +104,7 @@ public class Weapon_Info : MonoBehaviour
                 }
             }
         }
-        else if(StageManager.instance.isPause == true)
+        else if(GameManager.instance.isPause == true)
         {
             settUI.SetActive(true);
             for (int i = 0; i < settOptionUI.Length; i++)
@@ -215,14 +215,26 @@ public class Weapon_Info : MonoBehaviour
                 case Weapon.DamageType.MELEE_DAMAGE:
                     damageNumUI.text += "<sprite=0>";
                     break;
-                case Weapon.DamageType.RANGE:
+                case Weapon.DamageType.RANGE_DAMAGE:
                     damageNumUI.text += "<sprite=1>";
                     break;
-                case Weapon.DamageType.HEALTH:
+                case Weapon.DamageType.ELEMENTAL:
                     damageNumUI.text += "<sprite=2>";
                     break;
-                case Weapon.DamageType.ENGINE:
+                case Weapon.DamageType.HEALTH:
                     damageNumUI.text += "<sprite=3>";
+                    break;
+                case Weapon.DamageType.ENGINE:
+                    damageNumUI.text += "<sprite=4>";
+                    break;
+                case Weapon.DamageType.RANGE:
+                    damageNumUI.text += "<sprite=5>";
+                    break;
+                case Weapon.DamageType.ARMOR:
+                    damageNumUI.text += "<sprite=6>";
+                    break;
+                case Weapon.DamageType.LUCK:
+                    damageNumUI.text += "<sprite=7>";
                     break;
             }
         }
@@ -425,7 +437,7 @@ public class Weapon_Info : MonoBehaviour
                     StageManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
                     Destroy(weaponInfo.gameObject);
                     ItemManager.instance.WeaponListUp();
-                    WeaponManager.instance.WeaponSetSearch();
+                    GameManager.instance.WeaponSetSearch();
                     StageManager.instance.playerInfo.StatCalculate();
                     Destroy(gameObject);
                     break;
@@ -439,7 +451,7 @@ public class Weapon_Info : MonoBehaviour
         StageManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
         Destroy(weaponInfo.gameObject);
         ItemManager.instance.WeaponListUp();
-        WeaponManager.instance.WeaponSetSearch();
+        GameManager.instance.WeaponSetSearch();
         StageManager.instance.playerInfo.StatCalculate();
         float recyclePrice = (price * 0.25f);
         recyclePrice = Mathf.Round(recyclePrice);
