@@ -32,6 +32,13 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     [SerializeField] List<GameObject> sameWeapon;
     [SerializeField] List<GameObject> sameClassWeapon;
     [SerializeField] List<GameObject> allWeapon;
+
+    enum ShopTab
+    {
+        WeaponTab,
+        ItemTab,
+        CardTab,
+    }
     void Awake()
     {
         instance = this;
@@ -83,9 +90,9 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
         moneyNumUI.text = stage.money.ToString();
         nextWaveUI.text = "이동(웨이브 " + (stage.waveLevel + 2) + ")";
 
-        tabsText[0].text = "무기(" + tabsScroll[0].childCount + "/" + GameManager.instance.maxWeaponCount +")";
-        tabsText[1].text = "아이템(" + tabsScroll[1].childCount + ")";
-        tabsText[2].text = "천부 카드";
+        tabsText[(int)ShopTab.WeaponTab].text = "무기(" + tabsScroll[0].childCount + "/" + GameManager.instance.maxWeaponCount +")";
+        tabsText[(int)ShopTab.ItemTab].text = "아이템(" + tabsScroll[1].childCount + ")";
+        tabsText[(int)ShopTab.CardTab].text = "천부 카드";
 
         float price = rerollPrice + (rerollPrice_Add * rerollCount);
         rerollPrice_Text.text = price.ToString("F0");

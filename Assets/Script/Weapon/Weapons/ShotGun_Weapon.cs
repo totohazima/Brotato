@@ -45,12 +45,27 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
         }
 
         timer += Time.deltaTime;
-        if (scanner.target != null)
+        //군인: 이동 중 공격 불가
+        if (GameManager.instance.character == Player.Character.SOLDIER)
         {
-            if (timer >= afterCoolTime)
+            if (GameManager.instance.player_Info.isStand == true && scanner.target != null)
             {
-                Fire();
-                timer = 0;
+                if (timer >= afterCoolTime)
+                {
+                    Fire();
+                    timer = 0;
+                }
+            }
+        }
+        else
+        {
+            if (scanner.target != null)
+            {
+                if (timer >= afterCoolTime)
+                {
+                    Fire();
+                    timer = 0;
+                }
             }
         }
     }

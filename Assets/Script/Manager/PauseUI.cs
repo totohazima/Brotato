@@ -75,7 +75,7 @@ public class PauseUI : MonoBehaviour, UI_Upadte
     void UIVisualize()
     {
         title.text = "위험 " + GameManager.instance.difficult_Level;
-        tabTitles[(int)tabName.WeaponTab].text = "무기(" + scrollContents[0].childCount + "/6)";
+        tabTitles[(int)tabName.WeaponTab].text = "무기(" + scrollContents[0].childCount + "/" + GameManager.instance.maxWeaponCount +")";
         tabTitles[(int)tabName.ItemTab].text = "아이템(" + scrollContents[1].childCount + ")";
     }
 

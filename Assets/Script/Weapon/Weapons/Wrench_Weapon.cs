@@ -59,14 +59,32 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
         }
 
         timer += Time.deltaTime;
-        if (scanner.target != null)
+        //군인: 이동 중 공격 불가
+        if (GameManager.instance.character == Player.Character.SOLDIER)
         {
-            if (timer >= afterCoolTime)
+            if (GameManager.instance.player_Info.isStand == true && scanner.target != null)
             {
-                if (isFire == false)
+                if (timer >= afterCoolTime)
                 {
-                    StartCoroutine(Fire());
-                    timer = 0;
+                    if (isFire == false)
+                    {
+                        StartCoroutine(Fire());
+                        timer = 0;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (scanner.target != null)
+            {
+                if (timer >= afterCoolTime)
+                {
+                    if (isFire == false)
+                    {
+                        StartCoroutine(Fire());
+                        timer = 0;
+                    }
                 }
             }
         }

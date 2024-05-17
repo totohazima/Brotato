@@ -8,7 +8,7 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
     float timer;
     float mineTimer;
     WeaponScanner scanner;
-    StageManager game;
+    StageManager stage;
     [SerializeField]
     private Transform baseObj;
     [SerializeField]
@@ -23,7 +23,7 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
         scanner = GetComponent<WeaponScanner>();
         sprite = baseObj.GetComponent<SpriteRenderer>();
         bullet = baseObj.GetComponent<Melee_Bullet>();
-        game = StageManager.instance;
+        stage = StageManager.instance;
     }
     void OnEnable()
     {
@@ -38,12 +38,12 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-        if(game.isEnd == true && isTimerReset == false)
+        if(stage.isEnd == true && isTimerReset == false)
         {
             mineTimer = 100;
             isTimerReset = true;
         }
-        else if(game.isEnd == false)
+        else if(stage.isEnd == false)
         {
             isTimerReset = false;
         }
@@ -67,7 +67,7 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
             StartCoroutine(MuzzleMove());
         }
 
-        if (game.isEnd == false)
+        if (stage.isEnd == false)
         {
             mineTimer += Time.deltaTime;
             switch (weaponTier)
@@ -103,14 +103,32 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
             }
         }
         timer += Time.deltaTime;
-        if (scanner.target != null)
+        //군인: 이동 중 공격 불가
+        if (GameManager.instance.character == Player.Character.SOLDIER)
         {
-            if (timer >= afterCoolTime)
+            if (GameManager.instance.player_Info.isStand == true && scanner.target != null)
             {
-                if (isFire == false)
+                if (timer >= afterCoolTime)
                 {
-                    StartCoroutine(Fire());
-                    timer = 0;
+                    if (isFire == false)
+                    {
+                        StartCoroutine(Fire());
+                        timer = 0;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (scanner.target != null)
+            {
+                if (timer >= afterCoolTime)
+                {
+                    if (isFire == false)
+                    {
+                        StartCoroutine(Fire());
+                        timer = 0;
+                    }
                 }
             }
         }

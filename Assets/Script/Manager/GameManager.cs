@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour, UI_Upadte
         GameObject obj = Instantiate(dontDestoryOBJ);
         option = obj.transform.GetChild(1).gameObject;
         optionUI = option.gameObject;
+
+        GameStart();
     }
 
     public void UI_Update()
@@ -82,7 +84,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
             doubleBoss = import.twinBoss;
         }
     }
-    public void GameStart() //Title에서 Main으로
+    private void GameStart() //Title에서 Main으로
     {
         LoadingSceneManager.LoadScene("MainScene");
     }
@@ -101,13 +103,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         StageManager.instance.curHp = StageManager.instance.playerInfo.maxHealth_Origin;
         StageManager.instance.money = 30;
         WeaponSetSearch();
-        for (int i = 0; i < StageManager.instance.playerInfo.weapons.Count; i++)
-        {
-            if (StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>().index == Weapon.Weapons.WRENCH)
-            {
-                StartCoroutine(StageManager.instance.playerInfo.weapons[i].GetComponent<Wrench_Weapon>().SpawnTurret());
-            }
-        }
+        
 
         //시작 무기 추가
         GameObject startWeapon = Instantiate(weaponPrefab);
@@ -123,6 +119,25 @@ public class GameManager : MonoBehaviour, UI_Upadte
                 GameObject weapon = Instantiate(plusWeapon);
                 weapon.transform.SetParent(player_Info.weaponMainPos);
                 player_Info.weapons.Add(weapon);
+            }
+        }
+        //엔지니어 렌치 추가
+        if (character == Player.Character.ENGINEER)
+        {
+            GameObject plusWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Wrench_Weapon");
+            if (plusWeapon != null)
+            {
+                GameObject weapon = Instantiate(plusWeapon);
+                weapon.transform.SetParent(player_Info.weaponMainPos);
+                player_Info.weapons.Add(weapon);
+            }
+        }
+
+        for (int i = 0; i < StageManager.instance.playerInfo.weapons.Count; i++)
+        {
+            if (StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>().index == Weapon.Weapons.WRENCH)
+            {
+                StartCoroutine(StageManager.instance.playerInfo.weapons[i].GetComponent<Wrench_Weapon>().SpawnTurret());
             }
         }
         LoadingSceneManager.CloseScene("MainScene");

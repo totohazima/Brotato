@@ -21,6 +21,7 @@ public class PlayerAction : Player, ICustomUpdateMono
     public Transform weaponMainPos;
     public bool isFullWeapon; //무기가 꽉찬 경우
     public bool isHit; //피격 시 true가 되며 true일 경우 피격 판정이 일어나지 않는다.
+    public bool isStand; //캐릭터가 멈춰있는지 확인하는 변수
     public JoyStick joyStick;
     public WhiteFlash whiteFlash;
     public PlayerSprite playerSprite;
@@ -59,6 +60,7 @@ public class PlayerAction : Player, ICustomUpdateMono
 
         if (game.isDie == true || stage.isEnd == true)
         {
+            isStand = false;
             anim.SetBool("Move", false);
             return;
         }
@@ -80,10 +82,31 @@ public class PlayerAction : Player, ICustomUpdateMono
             {
                 animTrans.rotation = Quaternion.Euler(0, 0, 0);
             }
+
+            if (isStand == true)
+            {
+                isStand = false;
+                //군인: 가만히 있을 시 대미지 +50%, 공격 속도 +50%
+                if (game.character == Character.SOLDIER)
+                {
+                    persentDamage -= 50;
+                    attackSpeed -= 50;
+                }
+            }
         }
         else
         {
             anim.SetBool("Move", false);
+            if (isStand == false)
+            {
+                isStand = true;
+                //군인: 가만히 있을 시 대미지 +50%, 공격 속도 +50%
+                if (game.character == Character.SOLDIER)
+                {
+                    persentDamage += 50;
+                    attackSpeed += 50;
+                }
+            }
         }
        
  
