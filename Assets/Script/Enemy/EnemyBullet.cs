@@ -6,6 +6,11 @@ public class EnemyBullet : Bullet
 {
     public override void FixedUpdate()
     {
+        if (StageManager.instance.isEnd == true)
+        {
+            gameObject.SetActive(false);
+        }
+
         if (GameManager.instance.isPause == true)
         {
             if (rigid != null)
@@ -72,7 +77,17 @@ public class EnemyBullet : Bullet
             {
                 StageManager.instance.curHp -= damage;
             }
+            //황소: 피격 시 폭발
+            if (GameManager.instance.character == Player.Character.BULL)
+            {
+                GameObject booms = PoolManager.instance.Get(6);
+                booms.transform.position = collision.transform.position;
 
+                Bullet bullet = booms.GetComponent<Bullet>();
+                float damage = (30 + (GameManager.instance.player_Info.meleeDamage * 3) + (GameManager.instance.player_Info.rangeDamage * 3) + (GameManager.instance.player_Info.elementalDamage * 3))
+                    * (1 + (GameManager.instance.player_Info.persentDamage / 100) * (1 + (GameManager.instance.player_Info.explosiveDamage / 100)));
+                bullet.Init(damage, 10000, -1000, 100, 0, 0, 0, 0, Vector3.zero);
+            }
             per--;
             if (per < 0)
             {

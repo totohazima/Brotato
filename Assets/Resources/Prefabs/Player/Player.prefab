@@ -1849,8 +1849,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0.2564837, z: 0}
+  m_Radius: 0.45
+  m_Center: {x: 0, y: 0.26, z: 0}
 --- !u!1 &8297264463823625142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +2087,7 @@ MonoBehaviour:
   weaponMainPos: {fileID: 814681150070084302}
   isFullWeapon: 0
   isHit: 0
+  isStand: 0
   joyStick: {fileID: 0}
   whiteFlash: {fileID: 4027493141447934144}
   playerSprite: {fileID: 9146790347053127844}

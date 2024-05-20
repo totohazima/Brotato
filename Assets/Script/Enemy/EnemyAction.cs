@@ -145,7 +145,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
                     if(GameManager.instance.character == Player.Character.BULL)
                     {
                         GameObject booms = PoolManager.instance.Get(6);
-                        booms.transform.position = transform.position;
+                        booms.transform.position = other.transform.position;
 
                         Bullet bullet = booms.GetComponent<Bullet>();
                         float damage = (30 + (GameManager.instance.player_Info.meleeDamage * 3) + (GameManager.instance.player_Info.rangeDamage * 3) + (GameManager.instance.player_Info.elementalDamage * 3))
