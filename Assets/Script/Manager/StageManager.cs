@@ -411,6 +411,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     
     public void HitCalculate(float damage)
     {
+        float damages = Mathf.Round(damage);
         float hit, dodge;
         if(playerInfo.evasion >= 60)
         {
@@ -429,20 +430,23 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             //방어력이 0 초과
             if(playerInfo.armor > 0)
             {
-                float enduce = playerInfo.armor / 100;
-                damage -= (damage * enduce);
-                curHp -= damage;
+                float enduce = 1 / (1 + (GameManager.instance.player_Info.armor / 15));
+                enduce = 1 - enduce;
+                damages -= damages * enduce;
+                curHp -= damages;
             }
             //방어력이 0 미만
             else if(playerInfo.armor < 0)
             {
-                float enduce = playerInfo.armor / 100;
-                damage -= (damage * enduce);
-                curHp -= damage;
+                float armor = Mathf.Abs(GameManager.instance.player_Info.armor);
+                float enduce = 1 / (1 + (armor / 15));
+                enduce = 1 + (1 - enduce);
+                damages = (damages * enduce);
+                curHp -= damages;
             }
             else
             {
-                curHp -= damage;
+                curHp -= damages;
             }
         }
         else
