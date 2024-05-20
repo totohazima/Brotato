@@ -190,19 +190,58 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         GameObject[] mark = new GameObject[GameManager.instance.turretCount];
         GameObject[] turret = new GameObject[mark.Length];
 
-        for (int i = 0; i < mark.Length; i++)
+        //엔지니어: 건축물이 서로 가깝게 생성됨
+        if (GameManager.instance.character == Player.Character.ENGINEER)
         {
-            mark[i] = PoolManager.instance.Get(7);
-            Vector3 pos = FriendlySpawnPosition();
-            mark[i].transform.position = pos;
+            for (int i = 0; i < mark.Length; i++)
+            {
+                mark[i] = PoolManager.instance.Get(7);
+                float distance = Random.Range(2f, 30f);
+                Vector2 randomDirection = Random.insideUnitCircle.normalized;
+                Vector2 pos = GameManager.instance.engineerBuildingPos + randomDirection * distance;
+                if (pos.x > stage.xMax)
+                {
+                    pos.x = stage.xMax;
+                }
+                else if (pos.x < stage.xMin)
+                {
+                    pos.x = stage.xMin;
+                }
+                if (pos.y > stage.yMax)
+                {
+                    pos.y = stage.yMax;
+                }
+                else if (pos.y < stage.yMin)
+                {
+                    pos.y = stage.yMin;
+                }
+                mark[i].transform.position = pos; 
+            }
+            yield return new WaitForSeconds(0.6f);
+            for (int i = 0; i < mark.Length; i++)
+            {
+                turret[i] = PoolManager.instance.Get(8);
+                turret[i].transform.position = mark[i].transform.position;
+                turrets.Add(turret[i]);
+                mark[i].SetActive(false);
+            }
         }
-        yield return new WaitForSeconds(0.6f);
-        for (int i = 0; i < mark.Length; i++)
+        else
         {
-            turret[i] = PoolManager.instance.Get(8);
-            turret[i].transform.position = mark[i].transform.position;
-            turrets.Add(turret[i]);
-            mark[i].SetActive(false);
+            for (int i = 0; i < mark.Length; i++)
+            {
+                mark[i] = PoolManager.instance.Get(7);
+                Vector3 pos = FriendlySpawnPosition();
+                mark[i].transform.position = pos;
+            }
+            yield return new WaitForSeconds(0.6f);
+            for (int i = 0; i < mark.Length; i++)
+            {
+                turret[i] = PoolManager.instance.Get(8);
+                turret[i].transform.position = mark[i].transform.position;
+                turrets.Add(turret[i]);
+                mark[i].SetActive(false);
+            }
         }
     }
     public IEnumerator TreeSpawn()

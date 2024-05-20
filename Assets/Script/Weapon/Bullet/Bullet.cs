@@ -25,6 +25,11 @@ public class Bullet : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
+        if(StageManager.instance.isEnd == true)
+        {
+            gameObject.SetActive(false);
+        }
+
         if (GameManager.instance.isPause == true)
         {
             if (rigid != null)

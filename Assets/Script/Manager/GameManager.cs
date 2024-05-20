@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public bool isDie; //플레이어 사망
     public bool isPause; //일시정지
     [Header("#Weapon_Info")]
+    public Vector2 engineerBuildingPos;
     public int unArmed_Set;
     public int tool_Set;
     public int gun_Set;
@@ -108,12 +109,15 @@ public class GameManager : MonoBehaviour, UI_Upadte
         StageManager.instance.curHp = StageManager.instance.playerInfo.maxHealth_Origin;
         StageManager.instance.money = 30;
         WeaponSetSearch();
-        
+
 
         //시작 무기 추가
-        GameObject startWeapon = Instantiate(weaponPrefab);
-        startWeapon.transform.SetParent(player_Info.weaponMainPos);
-        player_Info.weapons.Add(startWeapon);
+        if (weaponPrefab != null)
+        {
+            GameObject startWeapon = Instantiate(weaponPrefab);
+            startWeapon.transform.SetParent(player_Info.weaponMainPos);
+            player_Info.weapons.Add(startWeapon);
+        }
 
         //레인저 권총 추가
         if (character == Player.Character.RANGER)
@@ -137,6 +141,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
                 player_Info.weapons.Add(weapon);
             }
         }
+        //평화주의자 럼버잭 셔츠 추가
         else if(character == Player.Character.PACIFIST)
         {
             ItemScrip getItem = null;
@@ -158,13 +163,18 @@ public class GameManager : MonoBehaviour, UI_Upadte
             player_Info.itemInventory.Add(item);
         }
 
-        for (int i = 0; i < StageManager.instance.playerInfo.weapons.Count; i++)
-        {
-            if (StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>().index == Weapon.Weapons.WRENCH)
-            {
-                StartCoroutine(StageManager.instance.playerInfo.weapons[i].GetComponent<Wrench_Weapon>().SpawnTurret());
-            }
-        }
+        float randomX = Random.Range(StageManager.instance.xMin, StageManager.instance.xMax);
+        float randomY = Random.Range(StageManager.instance.yMin, StageManager.instance.yMax);
+        Vector3 point = new Vector3(randomX, randomY);
+        engineerBuildingPos = point;
+        //for (int i = 0; i < StageManager.instance.playerInfo.weapons.Count; i++)
+        //{
+        //    if (StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>().index == Weapon.Weapons.WRENCH)
+        //    {
+        //        StartCoroutine(StageManager.instance.playerInfo.weapons[i].GetComponent<Wrench_Weapon>().SpawnTurret());
+        //    }
+        //}
+        player_Info.StatCalculate();
         LoadingSceneManager.CloseScene("MainScene");
     }
     public void ItemSearch()

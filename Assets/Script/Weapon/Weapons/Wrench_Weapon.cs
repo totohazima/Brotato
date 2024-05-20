@@ -8,21 +8,21 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
     float timer;
     float turretTimer;
     WeaponScanner scanner;
-    StageManager game;
+    StageManager stage;
     [SerializeField]
     private Transform baseObj;
     Melee_Bullet bullet;
     bool isFire;
+    bool isSpawnedTurret;
     [SerializeField]
     private CapsuleCollider coll;
     public Transform[] curvePos;
-
     void Awake()
     {
         scanner = GetComponent<WeaponScanner>();
         sprite = baseObj.GetComponent<SpriteRenderer>();
         bullet = baseObj.GetComponent<Melee_Bullet>();
-        game = StageManager.instance;
+        stage = StageManager.instance;
     }
     void OnEnable()
     {
@@ -87,6 +87,16 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
                     }
                 }
             }
+        }
+
+        if(stage.isEnd == true)
+        {
+            isSpawnedTurret = false;
+        }
+        else if(stage.isEnd == false && isSpawnedTurret == false)
+        {
+            isSpawnedTurret = true;
+            StartCoroutine(SpawnTurret());
         }
     }
 
@@ -228,7 +238,7 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
         }
     }
 
-    public IEnumerator SpawnTurret()
+    private IEnumerator SpawnTurret()
     {
         int index = 0;
         switch (weaponTier)
@@ -248,12 +258,42 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
         }
         GameObject[] mark = new GameObject[index];
         GameObject[] turret = new GameObject[mark.Length];
-
-        for (int i = 0; i < mark.Length; i++)
+        //엔지니어: 건축물이 서로 가깝게 생성됨
+        if (GameManager.instance.character == Player.Character.ENGINEER)
         {
-            mark[i] = PoolManager.instance.Get(7);
-            Vector3 pos = SpawnManager.instance.FriendlySpawnPosition();
-            mark[i].transform.position = pos;
+            for (int i = 0; i < mark.Length; i++)
+            {
+                mark[i] = PoolManager.instance.Get(7);
+                float distance = Random.Range(2f, 30f);
+                Vector2 randomDirection = Random.insideUnitCircle.normalized;
+                Vector2 pos = GameManager.instance.engineerBuildingPos + randomDirection * distance;
+                if (pos.x > stage.xMax)
+                {
+                    pos.x = stage.xMax;
+                }
+                else if (pos.x < stage.xMin)
+                {
+                    pos.x = stage.xMin;
+                }
+                if (pos.y > stage.yMax)
+                {
+                    pos.y = stage.yMax;
+                }
+                else if (pos.y < stage.yMin)
+                {
+                    pos.y = stage.yMin;
+                }
+                mark[i].transform.position = pos;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < mark.Length; i++)
+            {
+                mark[i] = PoolManager.instance.Get(7);
+                Vector3 pos = SpawnManager.instance.FriendlySpawnPosition();
+                mark[i].transform.position = pos;
+            }
         }
         yield return new WaitForSeconds(0.6f);
         for (int i = 0; i < mark.Length; i++)

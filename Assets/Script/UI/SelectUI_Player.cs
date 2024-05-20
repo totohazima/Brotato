@@ -28,9 +28,19 @@ public class SelectUI_Player : SelectUI
         }
         else if (GameManager.instance.player != null)
         {
-            GameManager.instance.player_Obj.transform.SetParent(MainSceneManager.instance.weaponSetGroup);
-            MainSceneManager.instance.weaponSettingMenu.SetActive(true);
-            MainSceneManager.instance.playerSettingMenu.SetActive(false);
+            //황소: 무기 탑재 불가
+            if (GameManager.instance.character == Player.Character.BULL)
+            {
+                GameManager.instance.player_Obj.transform.SetParent(MainSceneManager.instance.difficultSetGroup);
+                MainSceneManager.instance.difficultSettingMenu.SetActive(true);
+                MainSceneManager.instance.playerSettingMenu.SetActive(false);
+            }
+            else
+            {
+                GameManager.instance.player_Obj.transform.SetParent(MainSceneManager.instance.weaponSetGroup);
+                MainSceneManager.instance.weaponSettingMenu.SetActive(true);
+                MainSceneManager.instance.playerSettingMenu.SetActive(false);
+            }
         }
     }
     public override void BeforeMenu()

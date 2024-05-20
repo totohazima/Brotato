@@ -28,11 +28,23 @@ public class SelectUI_Difficult : SelectUI
 
     public override void BeforeMenu()
     {
-        Destroy(GameManager.instance.difficult_Obj);
-        GameManager.instance.diffiicult = null;
-        GameManager.instance.difficult_Obj = null;
-        GameManager.instance.player_Obj.transform.SetParent(MainSceneManager.instance.weaponSetGroup);
-        MainSceneManager.instance.weaponSettingMenu.SetActive(true);
-        MainSceneManager.instance.difficultSettingMenu.SetActive(false);
+        if (GameManager.instance.character == Player.Character.BULL)
+        {
+            Destroy(GameManager.instance.difficult_Obj);
+            GameManager.instance.diffiicult = null;
+            GameManager.instance.difficult_Obj = null;
+            GameManager.instance.player_Obj.transform.SetParent(MainSceneManager.instance.playerSetGroup);
+            MainSceneManager.instance.playerSettingMenu.SetActive(true);
+            MainSceneManager.instance.difficultSettingMenu.SetActive(false);
+        }
+        else
+        {
+            Destroy(GameManager.instance.difficult_Obj);
+            GameManager.instance.diffiicult = null;
+            GameManager.instance.difficult_Obj = null;
+            GameManager.instance.player_Obj.transform.SetParent(MainSceneManager.instance.weaponSetGroup);
+            MainSceneManager.instance.weaponSettingMenu.SetActive(true);
+            MainSceneManager.instance.difficultSettingMenu.SetActive(false);
+        }
     }
 }

@@ -117,8 +117,9 @@ public class LootOpen_Manager : MonoBehaviour
     public void UseItem()
     {
         int i = checkIndex - 1;
-        ItemManager.instance.ItemObtain(itemIndex[i]);
-        //ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1]);
+        Item.ItemType itemType;
+        itemType = GameManager.instance.itemGroup_Scriptable.items[itemIndex[i]].itemCode;
+        ItemManager.instance.ItemObtain(itemType);
         item.SetActive(false);
         StageManager.instance.lootChance--;
 

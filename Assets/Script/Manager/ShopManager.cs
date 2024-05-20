@@ -261,6 +261,13 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
         {
             float itemChance = 0.65f;
             float weaponChance = 0.35f;
+            //황소: 무기 탑재 불가
+            if (GameManager.instance.character == Player.Character.BULL)
+            {
+                itemChance = 1;
+                weaponChance = 0;
+            }
+
 
             float[] chanceLise = { itemChance, weaponChance };
             int chanceIndex = stage.Judgment(chanceLise);

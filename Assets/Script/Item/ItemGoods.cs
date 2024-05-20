@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 public class ItemGoods : MonoBehaviour, UI_Upadte
 {
-    public string itemCode;
+    public Item.ItemType itemCode;
     public Image itemImage;
     public Text itemName;
     public Transform itemInfoUI;
@@ -44,7 +44,7 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
     public void Init(ItemScrip scrip, int index)
     {
         scriptable = scrip;
-        //itemCode = scriptable.itemCode.ToString();
+        itemCode = scriptable.itemCode;
         itemImage.sprite = scriptable.itemSprite;
         itemNum = index;
 
@@ -56,14 +56,7 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
     {
         ItemBasePriceInfoTable.Data priceImport = GameManager.instance.gameDataBase.itemBasePriceInfoTable.table[itemNum];
         itemBasePrice = priceImport.itemBasePrice;
-        //for (int z = 0; z < priceImporter.itemCode.Length; z++)
-        //{
-        //    if (itemCode.ToString() == priceImporter.itemCode[z])
-        //    {
-        //        itemBasePrice = priceImporter.itemBasePrice[z];
-        //        break;
-        //    }
-        //}
+
         int wave = StageManager.instance.waveLevel + 1;
         itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
         itemPrice = itemPrice * ((100 + StageManager.instance.playerInfo.priceSale) / 100);
@@ -107,15 +100,6 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
             itemInfo[i] = textImporter.text[i];
             text.text = itemInfo[i];
         }
-
-        //itemInfoCount = scriptable.infoText.Length;
-        //itemInfo = new string[itemInfoCount];
-        //for (int i = 0; i < itemInfoCount; i++)
-        //{
-        //    TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
-        //    itemInfo[i] = scriptable.infoText[i];
-        //    text.text = itemInfo[i];
-        //}
     }
 
     public void BuyItem()
@@ -123,9 +107,8 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
         if (StageManager.instance.money >= itemPrice)
         {
             StageManager.instance.money -= (int)itemPrice;
-            ItemManager.instance.ItemObtain(itemNum);
+            ItemManager.instance.ItemObtain(itemCode);
             ItemManager.instance.ItemListUp();
-            //ItemManager.instance.ItemListUp(ShopManager.instance.tabsScroll[1], ShopManager.instance.verticalTabsScroll[1], PauseUI_Manager.instance.scrollContents[1]);
             UnLockIng();
             ShopManager.instance.goodsList.Remove(gameObject);
             gameObject.SetActive(false);

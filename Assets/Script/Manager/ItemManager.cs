@@ -20,10 +20,27 @@ public class ItemManager : MonoBehaviour
         stage = StageManager.instance;
     }
 
-    public void ItemObtain(int index)
+    public void ItemObtain(Item.ItemType itemType)
     {
         bool isGet = false;
-        ItemScrip getItem = GameManager.instance.itemGroup_Scriptable.items[index];
+        ItemScrip getItem = null;
+        int index = 0;
+        //ItemScrip getItem = GameManager.instance.itemGroup_Scriptable.items[index];
+        for (int i = 0; i < GameManager.instance.itemGroup_Scriptable.items.Length; i++)
+        {
+            if(GameManager.instance.itemGroup_Scriptable.items[i].itemCode == itemType)
+            {
+                Debug.Log("아이템 획득" + GameManager.instance.itemGroup_Scriptable.items[i].itemCode.ToString());
+                index = i;
+                getItem = GameManager.instance.itemGroup_Scriptable.items[i];
+            }
+        }
+        if(getItem == null)
+        {
+            Debug.Log(itemType.ToString() + " 찾을 수 없음");
+            return;
+        }
+        
         Item checkItem = null;
 
         for (int i = 0; i < stage.playerInfo.itemInventory.Count; i++)
@@ -91,34 +108,63 @@ public class ItemManager : MonoBehaviour
     }
     public void ItemListUp() 
     {
-        ///이 부분 추후 위 함수처럼 수정해야 함
-        for (int i = 0; i < itemScrollTrans[0].childCount; i++)
+        for (int i = 0; i < ListUpUI_Item.instance.poolingObject.Count; i++)
         {
-            GameObject item = itemScrollTrans[0].GetChild(i).gameObject;
-            Destroy(item);
-
-            GameObject item2 = itemScrollTrans[1].GetChild(i).gameObject;
-            Destroy(item2);
-
-            GameObject item3 = itemScrollTrans[2].GetChild(i).gameObject;
-            Destroy(item3);
+            ListUpUI_Item.ReturnObject(ListUpUI_Item.instance.poolingObject[i]);
         }
-
-        List<Item> inventory = stage.playerInfo.itemInventory;
+        for (int i = 0; i < ListUpUI_Item.instance.poolingObject_Pause.Count; i++)
+        {
+            ListUpUI_Item.ReturnObject_Pause(ListUpUI_Item.instance.poolingObject_Pause[i]);
+        }
+        List<Item> inventory = GameManager.instance.player_Info.itemInventory;
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
+            Item item_Object = ListUpUI_Item.GetItemObj();
+            item_Object.Init(inventory[i].scriptable);
+            item_Object.transform.SetParent(itemScrollTrans[0]);
+            item_Object.transform.localScale = new Vector3(1, 1, 1);
 
-            Instantiate(inventory[i].gameObject, itemScrollTrans[0]);
-            Instantiate(inventory[i].gameObject, itemScrollTrans[1]);
+            Item item_Object2 = ListUpUI_Item.GetItemObj();
+            item_Object2.Init(inventory[i].scriptable);
+            item_Object2.transform.SetParent(itemScrollTrans[1]);
+            item_Object2.transform.localScale = new Vector3(1, 1, 1);
 
-            Item_Object_Pause pause = pauseItem;
-            pause.itemType = inventory[i].itemType;
-            pause.curCount = inventory[i].curCount;
-            pause.maxCount = inventory[i].maxCount;
-            pause.Init(inventory[i].scriptable);
-            Instantiate(pause.gameObject, itemScrollTrans[2]);
-
+            Item_Object_Pause item_ObjectPause = ListUpUI_Item.GetItemObj_Pause();
+            item_ObjectPause.itemType = inventory[i].itemType;
+            item_ObjectPause.curCount = inventory[i].curCount;
+            item_ObjectPause.maxCount = inventory[i].maxCount;
+            item_ObjectPause.Init(inventory[i].scriptable);
+            item_ObjectPause.transform.SetParent(itemScrollTrans[2]);
+            item_ObjectPause.transform.localScale = new Vector3(1, 1, 1);
         }
+        ///이 부분 추후 위 함수처럼 수정해야 함
+        //for (int i = 0; i < itemScrollTrans[0].childCount; i++)
+        //{
+        //    GameObject item = itemScrollTrans[0].GetChild(i).gameObject;
+        //    Destroy(item);
+
+        //    GameObject item2 = itemScrollTrans[1].GetChild(i).gameObject;
+        //    Destroy(item2);
+
+        //    GameObject item3 = itemScrollTrans[2].GetChild(i).gameObject;
+        //    Destroy(item3);
+        //}
+
+        //List<Item> inventory = stage.playerInfo.itemInventory;
+        //for (int i = inventory.Count - 1; i >= 0; i--)
+        //{
+
+        //    Instantiate(inventory[i].gameObject, itemScrollTrans[0]);
+        //    Instantiate(inventory[i].gameObject, itemScrollTrans[1]);
+
+        //    Item_Object_Pause pause = pauseItem;
+        //    pause.itemType = inventory[i].itemType;
+        //    pause.curCount = inventory[i].curCount;
+        //    pause.maxCount = inventory[i].maxCount;
+        //    pause.Init(inventory[i].scriptable);
+        //    Instantiate(pause.gameObject, itemScrollTrans[2]);
+
+        //}
     }
 
    
