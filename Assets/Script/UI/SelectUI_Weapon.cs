@@ -58,9 +58,40 @@ public class SelectUI_Weapon : SelectUI
     }
     public override void RandomSelect() //랜덤으로 무기 선택
     {
-        int i = Random.Range(1, forSettingWeapons.Length);
-        ForSettingWeapon setting = forSettingWeapons[i];
-        setting.ClickWeapon();
+        List<ForSettingWeapon> randomList = new List<ForSettingWeapon>();
+
+        switch (GameManager.instance.character)
+        {
+            //레인저: 근접무기 탑재 불가
+            case Player.Character.RANGER:
+                for (int i = 0; i < forSettingWeapons.Length; i++)
+                {
+                    if(forSettingWeapons[i].weaponScrip.attackType == Weapon.WeaponType.RANGE)
+                    {
+                        randomList.Add(forSettingWeapons[i]);
+                    }
+                }
+                break;
+            //검투사: 원거리 무기 탑재 불가
+            case Player.Character.GLADIATOR:
+                for (int i = 0; i < forSettingWeapons.Length; i++)
+                {
+                    if (forSettingWeapons[i].weaponScrip.attackType == Weapon.WeaponType.MELEE)
+                    {
+                        randomList.Add(forSettingWeapons[i]);
+                    }
+                }
+                break;
+            default:
+                for (int i = 0; i < forSettingWeapons.Length; i++)
+                {
+                    randomList.Add(forSettingWeapons[i]);
+                }
+                break;
+        }
+        
+        int j = Random.Range(0, randomList.Count);
+        randomList[j].ClickWeapon();
     }
 
     public override void NextMenu()

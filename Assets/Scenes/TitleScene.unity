@@ -827,6 +827,7 @@ MonoBehaviour:
   optionUI: {fileID: 0}
   isDie: 0
   isPause: 0
+  engineerBuildingPos: {x: 0, y: 0}
   unArmed_Set: 0
   tool_Set: 0
   gun_Set: 0
@@ -834,6 +835,11 @@ MonoBehaviour:
   precision_Set: 0
   native_Set: 0
   itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
+  isUglyTooth: 0
+  isLumberJack: 0
+  isWeirdGhost: 0
+  minesCount: 0
+  turretCount: 0
   difficult_Level: 0
   isSpecialEnemySpawn: 0
   isEliteSpawn: 0

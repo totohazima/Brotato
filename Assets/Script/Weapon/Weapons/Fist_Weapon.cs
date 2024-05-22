@@ -145,7 +145,7 @@ public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
     }
     private IEnumerator Fire()
     {
-        bullet.Init(afterDamage, afterPenetrate, afterRange, 100, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
+        bullet.Init(afterDamage, afterPenetrate, afterRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
 
         if (scanner.target != null)
         {

@@ -39,7 +39,8 @@ public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerU
         {
             if (infoObj_Pause != null)
             {
-                Destroy(infoObj_Pause.gameObject);
+                //Destroy(infoObj_Pause.gameObject);
+                weapon_Info.SetActive(false);
             }
             if (selectImage != null)
             {
@@ -57,7 +58,7 @@ public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerU
     public void OnPointerDown(PointerEventData eventData)
     {
         PauseUI.instance.selectObj_Weapon = this;
-        ShowItemInfo();
+        ShowWeaponInfo();
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -71,7 +72,7 @@ public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerU
         if (PauseUI.instance.selectObj_Weapon != null)
         {
             selectImage.SetActive(true);
-            ShowItemInfo();
+            ShowWeaponInfo();
         }
     }
 
@@ -80,13 +81,16 @@ public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerU
         if (PauseUI.instance.selectObj_Weapon != null)
         {
             selectImage.SetActive(false);
-            Destroy(infoObj_Pause.gameObject);
+            //Destroy(infoObj_Pause.gameObject);
+            weapon_Info.SetActive(false);
         }
     }
 
-    public override void ShowItemInfo()
+    public override void ShowWeaponInfo()
     {
-        infoObj_Pause = Instantiate(weapon_Info, StageManager.instance.itemInfoManager);
+        //infoObj_Pause = Instantiate(weapon_Info, StageManager.instance.itemInfoManager);
+        weapon_Info.SetActive(true);
+        infoObj_Pause = weapon_Info.GetComponent<Weapon_Info>();
         infoObj_Pause.Init(weaponData[(int)weapon_Object.index], weapon_Object, transform.position, false);
     }
 }

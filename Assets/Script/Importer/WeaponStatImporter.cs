@@ -19,7 +19,7 @@ public class WeaponStatImporter : CustomExcelDataImportBase
             IRow row = sheet.GetRow(i);
             string weaponCode = row.GetCell(1).StringCellValue;
 
-            if (!string.IsNullOrEmpty(weaponCode) && weaponCode != "null")
+            if (!string.IsNullOrEmpty(weaponCode) && weaponCode != "")
             {
                 WeaponStatInfoTable.Data data = new WeaponStatInfoTable.Data();
                 data.weaponNum = (int)(row.GetCell(0)?.NumericCellValue ?? 0);

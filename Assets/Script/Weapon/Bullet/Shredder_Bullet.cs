@@ -5,9 +5,9 @@ using UnityEngine;
 public class Shredder_Bullet : Bullet
 {
     float boomChance;
-    public void Init(float damage, int per, float range, float accuracy, float criticalChance, float criticalDamage, float knockBack, float penetrateDamage, Vector3 dir, float boomChance)
+    public void Init(float damage, int per, float range, float accuracy,float bloodSucking, float criticalChance, float criticalDamage, float knockBack, float penetrateDamage, Vector3 dir, float boomChance)
     {
-        base.Init(damage, per, range, accuracy, criticalChance, criticalDamage, knockBack, penetrateDamage, dir);
+        base.Init(damage, per, range, accuracy, bloodSucking, criticalChance, criticalDamage, knockBack, penetrateDamage, dir);
         this.boomChance = boomChance;
     }
     public override void OnTriggerEnter(Collider collision)
@@ -31,7 +31,7 @@ public class Shredder_Bullet : Bullet
 
                 Bullet bullet = booms.GetComponent<Bullet>();
                 float damages = damage * (1 + (StageManager.instance.playerInfo.explosiveDamage / 100));
-                bullet.Init(damages, 10000, -1000, 100, 0, 0, 0, 0, Vector3.zero);
+                bullet.Init(damages, 10000, -1000, 100, 0, 0, 0, 0, 0, Vector3.zero);
             }
         }
     }

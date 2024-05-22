@@ -354,3 +354,104 @@ MonoBehaviour:
     penetrationDamage: 0
     attackType: MELEE
     weaponType: "\uB3C4\uAD6C"
+  - weaponNum: 7
+    weaponCode: WAND
+    weaponBaseDamage:
+    - 1
+    - 1
+    - 1
+    - 1
+    weaponBaseBulletCount: 01000000010000000100000001000000
+    riseDamageCount: 1
+    riseDamageType:
+    - ELEMENTAL
+    riseDamage1:
+    - 50
+    riseDamage2:
+    - 65
+    riseDamage3:
+    - 80
+    riseDamage4:
+    - 100
+    baseCriticalChance:
+    - 0
+    - 0
+    - 0
+    - 0
+    baseCriticalDamage:
+    - 2
+    - 2
+    - 2
+    - 2
+    baseCoolTime:
+    - 0.87
+    - 0.78
+    - 0.7
+    - 0.53
+    baseKnockback:
+    - 10
+    - 10
+    - 10
+    - 10
+    baseRange:
+    - 350
+    - 375
+    - 400
+    - 425
+    penetration: 0
+    penetrationDamage: 0
+    attackType: RANGE
+    weaponType: "\uC6D0\uC18C"
+  - weaponNum: 8
+    weaponCode: TORCH
+    weaponBaseDamage:
+    - 1
+    - 1
+    - 1
+    - 1
+    weaponBaseBulletCount: 01000000010000000100000001000000
+    riseDamageCount: 2
+    riseDamageType:
+    - MELEE_DAMAGE
+    - ELEMENTAL
+    riseDamage1:
+    - 50
+    - 50
+    riseDamage2:
+    - 50
+    - 50
+    riseDamage3:
+    - 50
+    - 50
+    riseDamage4:
+    - 50
+    - 50
+    baseCriticalChance:
+    - 0
+    - 0
+    - 0
+    - 0
+    baseCriticalDamage:
+    - 1.5
+    - 1.5
+    - 1.5
+    - 1.5
+    baseCoolTime:
+    - 1.1
+    - 1.04
+    - 0.95
+    - 0.8
+    baseKnockback:
+    - 0
+    - 0
+    - 0
+    - 0
+    baseRange:
+    - 175
+    - 175
+    - 175
+    - 175
+    penetration: 0
+    penetrationDamage: 0
+    attackType: MELEE
+    weaponType: "\uC6D0\uC2DC, \uC6D0\uC18C"

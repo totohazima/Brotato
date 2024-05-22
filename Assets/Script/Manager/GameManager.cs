@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public int explosive_Set;
     public int precision_Set;
     public int native_Set;
+    public int elemental_Set;
     [Header("#Item_Info")]
     public ItemGroup_Scriptable itemGroup_Scriptable;
     public bool isUglyTooth; //못생긴 이빨 구매 시 적 타격 시마다 스피드 -10% (3회 중첩)
@@ -108,9 +109,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         }
         StageManager.instance.curHp = StageManager.instance.playerInfo.maxHealth_Origin;
         StageManager.instance.money = 30;
-        WeaponSetSearch();
-
-
+        
         //시작 무기 추가
         if (weaponPrefab != null)
         {
@@ -174,6 +173,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         //        StartCoroutine(StageManager.instance.playerInfo.weapons[i].GetComponent<Wrench_Weapon>().SpawnTurret());
         //    }
         //}
+        WeaponSetSearch();
         player_Info.StatCalculate();
         LoadingSceneManager.CloseScene("MainScene");
     }
@@ -242,6 +242,9 @@ public class GameManager : MonoBehaviour, UI_Upadte
                         break;
                     case Weapon.SettType.NATIVE:
                         native_Set++;
+                        break;
+                    case Weapon.SettType.ELEMENTALS:
+                        elemental_Set++;
                         break;
                 }
             }

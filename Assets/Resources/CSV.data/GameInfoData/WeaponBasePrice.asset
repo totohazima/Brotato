@@ -55,3 +55,15 @@ MonoBehaviour:
     - 22
     - 45
     - 91
+  - weaponCode: WAND
+    weaponBasePrice:
+    - 15
+    - 31
+    - 61
+    - 122
+  - weaponCode: TORCH
+    weaponBasePrice:
+    - 12
+    - 26
+    - 52
+    - 105

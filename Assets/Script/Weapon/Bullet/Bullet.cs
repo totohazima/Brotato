@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public int per;
     public float range;
     public float accuracy;
+    public float bloodSucking;
     public float criticalChance;
     public float criticalDamage;
     public bool isCritical;
@@ -51,7 +52,7 @@ public class Bullet : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    public virtual void Init(float damage, int per, float range, float accuracy, float criticalChance, float criticalDamage, float knockBack, float penetrateDamage, Vector3 dir)
+    public virtual void Init(float damage, int per, float range, float accuracy, float bloodSucking, float criticalChance, float criticalDamage, float knockBack, float penetrateDamage, Vector3 dir)
     {
         if(damage < 0)
         {
@@ -61,6 +62,7 @@ public class Bullet : MonoBehaviour
         this.per = per;
         this.range = range;
         this.accuracy = accuracy;
+        this.bloodSucking = bloodSucking;
         this.criticalChance = criticalChance;
         this.criticalDamage = criticalDamage;
         this.knockBack = knockBack;
@@ -100,7 +102,7 @@ public class Bullet : MonoBehaviour
             IDamageCalculate damageCal = collision.GetComponentInParent<IDamageCalculate>();
             if(damageCal != null)
             {
-                damageCal.DamageCalculator(damage, per, accuracy, isCritical, criticalDamage, knockBack, transform.position);
+                damageCal.DamageCalculator(damage, per, accuracy, bloodSucking, isCritical, criticalDamage, knockBack, transform.position);
             }
 
             per--;

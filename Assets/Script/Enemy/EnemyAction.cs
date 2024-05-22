@@ -89,7 +89,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         rigid.AddForce(dir.normalized * (power), ForceMode.Impulse); //power가 양수일시 플레이어 방향으로 넉백됨
         yield return 0;
     }
-    public virtual void DamageCalculator(float damage, int per, float accuracy, bool isCritical, float criticalDamage, float knockBack, Vector3 bulletPos)
+    public virtual void DamageCalculator(float damage, int per, float accuracy, float bloodSuck, bool isCritical, float criticalDamage, float knockBack, Vector3 bulletPos)
     {
         if (GameManager.instance.isUglyTooth == true)
         {
@@ -98,7 +98,19 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
                 ugliyToothSlow++;
             }
         }
-       
+
+        float nonBloodSucking = 100 - bloodSuck;
+        float[] chanceLise = { nonBloodSucking, bloodSuck };
+        int index = StageManager.instance.Judgment(chanceLise);
+        if(index == 0)
+        { }
+        else
+        {
+            stage.curHp++;
+            string txt = "<color=#4CFF52>1</color>";
+            Transform texts = DamageTextManager.instance.TextCreate(0, txt).transform;
+            texts.position = GameManager.instance.player_Info.transform.position;
+        }
 
         float finalDamage = 0;
         string damageText = null;
@@ -150,13 +162,33 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
                         Bullet bullet = booms.GetComponent<Bullet>();
                         float damage = (30 + (GameManager.instance.player_Info.meleeDamage * 3) + (GameManager.instance.player_Info.rangeDamage * 3) + (GameManager.instance.player_Info.elementalDamage * 3))
                             * (1 + (GameManager.instance.player_Info.persentDamage / 100) * (1 + (GameManager.instance.player_Info.explosiveDamage / 100)));
-                        bullet.Init(damage, 10000, -1000, 100, 0, 0, 0, 0, Vector3.zero);
+                        bullet.Init(damage, 10000, -1000, 100, 0, 0, 0, 0, 0, Vector3.zero);
                     }
                 }
                 
             }
         }
     }
+    private int Judgment(float[] rando)
+    {
+        int count = rando.Length;
+        float max = 0;
+        for (int i = 0; i < count; i++)
+            max += rando[i];
 
+        float range = UnityEngine.Random.Range(0f, (float)max);
+        //0.1, 0.2, 30, 40
+        double chance = 0;
+        for (int i = 0; i < count; i++)
+        {
+            chance += rando[i];
+            if (range > chance)
+                continue;
+
+            return i;
+        }
+
+        return -1;
+    }
 
 }

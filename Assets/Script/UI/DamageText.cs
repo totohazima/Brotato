@@ -14,7 +14,7 @@ public class DamageText : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
         startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x, startPos.y - 7);
+        Vector3 endPos = new Vector3(startPos.x, startPos.y - 3);
         LeanTween.move(gameObject, endPos, 0.35f).setEase(LeanTweenType.easeOutBounce);
         yield return new WaitForSeconds(0.4f);
         gameObject.SetActive(false);

@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler, UI_Upadte
 {
     public GameObject selectImage;
-    Item_Info infoObj_Pause;
     public override void OnEnable()
     {
         base.OnEnable();
@@ -37,9 +36,14 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
 
         if(PauseUI.instance.selectObj_Item == null)
         {
-            if(infoObj_Pause != null)
+            if(infoObj != null)
             {
-                Destroy(infoObj_Pause.gameObject);
+                if (infoObj.masterItem != null)
+                {
+                    item_Info.transform.SetParent(infoObj.masterItem);
+                }
+                infoObj.gameObject.SetActive(false);
+                //Destroy(infoObj_Pause.gameObject);
             }
             if (selectImage != null)
             {
@@ -79,13 +83,44 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
         if (PauseUI.instance.selectObj_Item != null)
         {
             selectImage.SetActive(false);
-            Destroy(infoObj_Pause.gameObject);
+            item_Info.transform.SetParent(infoObj.masterItem);
+            item_Info.gameObject.SetActive(false);
+            //Destroy(infoObj_Pause.gameObject);
         }
     }
 
     public override void ShowItemInfo()
     {
-        infoObj_Pause = Instantiate(itemInfo, StageManager.instance.itemInfoManager);
-        infoObj_Pause.Init(scriptable, transform.position);
+        infoObj.Init(scriptable, transform.position);
+        infoObj.masterItem = info;
+
+        item_Info.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+
+        //오브젝트가 UI안에서 위에 있는지 아래에 있는지 체크
+        Vector3 worldPos = myRect.TransformPoint(myRect.anchoredPosition);
+        Vector3 pauseLocalPos = PauseUI.instance.scrollsRect[(int)PauseUI.tabName.ItemTab].InverseTransformPoint(worldPos);
+
+        // 캔버스 상 좌표에서 0 이하인 경우
+        if (pauseLocalPos.y <= PauseUI.instance.scrollsRect[(int)PauseUI.tabName.ItemTab].anchoredPosition.y)
+        {
+            //y값을 측정해 ItemInfo가 딱 맞는 위치에 소환되게 함
+            LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+            infoRect.offsetMax = originInfo_OffsetMax;
+            float calcY = infoObj.itemInfoUI_Rect.anchoredPosition.y - infoObj.originItemInfo_PosY; //(0, -50)
+            float top = -infoRect.offsetMax.y/*(0, -40)*/ + calcY;
+            infoRect.offsetMax = new Vector2(0, -top);
+        }
+        else
+        {
+            //y값을 측정해 ItemInfo가 딱 맞는 위치에 소환되게 함
+            LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+            float heightPos = infoObj.bgRect.rect.height;
+            infoRect.offsetMax = new Vector2(0, -heightPos);
+        }
+        item_Info.transform.SetParent(StageManager.instance.itemInfoManager);
     }
 }

@@ -13,7 +13,9 @@ public class Weapon : MonoBehaviour
         SHREDDER,
         PUNCH,
         WRENCH,
-        DRIVER
+        DRIVER,
+        WAND,
+        TORCH,
     }
 
     public enum WeaponType
@@ -42,6 +44,7 @@ public class Weapon : MonoBehaviour
         EXPLOSIVE,
         PRECISION,
         NATIVE,
+        ELEMENTALS,
     }
     public int weaponNum;
     public int weaponTier;
@@ -217,13 +220,13 @@ public class Weapon : MonoBehaviour
         float preRange;
         if(attackType == WeaponType.MELEE.ToString()) //근접은 스탯 사거리 효과 절반만 받음
         {
-            preRange = range + player.range / 2;
+            preRange = range + (player.range / 2);
         }
         else
         {
             preRange = range + player.range;
         }
-        afterRange = preRange / 10;
+        afterRange = preRange;
         afterPenetrateDamage = -penetrateDamage + player.penetrateDamage;
         afterBloodSucking = bloodSucking + player.bloodSucking;
         afterKnockBack = knockBack + player.knockBack;

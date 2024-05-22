@@ -104,7 +104,7 @@ public class StatInfo_UI : MonoBehaviour, UI_Upadte
     {
         player = GameManager.instance.player_Info;
 
-        basic_Status_Num[0].text = (StageManager.instance.playerLevel + 1).ToString("F0");
+        basic_Status_Num[0].text = (GameManager.instance.player_Info.playerLevel + 1).ToString("F0");
         basic_Status_Num[1].text = player.maxHealth.ToString("F0");
         basic_Status_Num[2].text = player.regeneration.ToString("F0");
         basic_Status_Num[3].text = player.bloodSucking.ToString("F0");

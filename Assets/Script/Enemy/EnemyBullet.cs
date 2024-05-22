@@ -86,7 +86,7 @@ public class EnemyBullet : Bullet
                 Bullet bullet = booms.GetComponent<Bullet>();
                 float damage = (30 + (GameManager.instance.player_Info.meleeDamage * 3) + (GameManager.instance.player_Info.rangeDamage * 3) + (GameManager.instance.player_Info.elementalDamage * 3))
                     * (1 + (GameManager.instance.player_Info.persentDamage / 100) * (1 + (GameManager.instance.player_Info.explosiveDamage / 100)));
-                bullet.Init(damage, 10000, -1000, 100, 0, 0, 0, 0, Vector3.zero);
+                bullet.Init(damage, 10000, -1000, 100, 0, 0, 0, 0, 0, Vector3.zero);
             }
             per--;
             if (per < 0)

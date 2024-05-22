@@ -21,17 +21,19 @@ public class Item : MonoBehaviour, ICustomUpdateMono
     public int riseCount;
     public Stat.PlayerStat[] riseStat;
     public float[] riseStats;
-
     public int decreaseCount;
     public Stat.PlayerStat[] decreaseStat;
     public float[] decreaseStats;
-
     public bool isMax;
     public Outline frame;
-    public Item_Info itemInfo;
-
-    [HideInInspector]
-    public ItemScrip scriptable;
+    public Transform info;
+    public GameObject item_Info;
+    public Item_Info infoObj;
+    [HideInInspector] public ItemScrip scriptable;
+    [HideInInspector] public RectTransform myRect;
+    [HideInInspector] public RectTransform infoRect;
+    [HideInInspector] public Vector2 originInfo_OffsetMax;
+    
     public enum ItemType
     {
         ALIEN_TONGUE,
@@ -89,6 +91,13 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         WEIRD_GHOST,
     }
 
+    void Awake()
+    {
+        myRect = gameObject.GetComponent<RectTransform>();
+        infoRect = info.GetComponent<RectTransform>();
+        originInfo_OffsetMax = infoRect.offsetMax;
+        infoObj = item_Info.GetComponent<Item_Info>();
+    }
     public void Init(ItemScrip scrip)
     {
         scriptable = scrip;
@@ -147,7 +156,6 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         itemPrice = MathF.Round(itemPrice);
         
     }
-    Item_Info infoObj = null;
 
     public void PointDown()
     {
@@ -156,7 +164,9 @@ public class Item : MonoBehaviour, ICustomUpdateMono
     }
     public void PointUp()
     {
-        Destroy(infoObj.gameObject);
+        //Destroy(infoObj.gameObject);
+        item_Info.transform.SetParent(infoObj.masterItem);
+        item_Info.SetActive(false);
         frame.effectColor = Color.black;
     }
     public void PointClick()
@@ -177,8 +187,35 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         //클릭 중에는 itemGoods와 동일한 UI가 나타난다(가격, 잠금버튼 없는)
         //UI는 중심을 기준으로 x가 +면 왼쪽으로 y가 +면 아이템 아래로 생성한다. (반대의 경우엔 정반대로 생성)
         //클릭 해제 시 하얀 테두리만 남고 UI는 꺼진다.
-        infoObj = Instantiate(itemInfo, StageManager.instance.itemInfoManager);
+        //infoObj = Instantiate(itemInfo, StageManager.instance.itemInfoManager);
+
         infoObj.Init(scriptable, transform.position);
+        infoObj.masterItem = info;
+
+        item_Info.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+        // 캔버스 상 좌표에서 0 이하인 경우
+        if (myRect.localPosition.y <= 0)
+        {
+            //y값을 측정해 ItemInfo가 딱 맞는 위치에 소환되게 함
+            LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+            infoRect.offsetMax = originInfo_OffsetMax;
+            float calcY = infoObj.itemInfoUI_Rect.anchoredPosition.y - infoObj.originItemInfo_PosY; //(0, -50)
+            float top = -infoRect.offsetMax.y/*(0, -40)*/ + calcY;
+            infoRect.offsetMax = new Vector2(0, -top);
+        }
+        else
+        {
+            //y값을 측정해 ItemInfo가 딱 맞는 위치에 소환되게 함
+            LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+            float heightPos = infoObj.bgRect.rect.height;
+            infoRect.offsetMax = new Vector2(0, -heightPos);
+        }
+
+        item_Info.transform.SetParent(StageManager.instance.itemInfoManager);
     }
     public void StatSetting(int index)
     {

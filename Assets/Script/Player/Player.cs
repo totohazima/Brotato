@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public string characterCode;
     public string characterName;
     [Header("Basic_Stat")]
+    public int playerLevel; //플레이어 레벨
     public float maxHealth;
     public float regeneration;
     public float bloodSucking;
@@ -486,6 +487,7 @@ public class Player : MonoBehaviour
                 riseStat = 15;
             }
             evasion += riseStat;
+            riseStat = 0;
             //도구 = 엔지니어링
             if (game.tool_Set == 2)
             {
@@ -511,6 +513,7 @@ public class Player : MonoBehaviour
                 engine += riseStat * 1.25f;
             else
                 engine += riseStat;
+            riseStat = 0;
             //총 = 범위
             if (game.gun_Set == 2)
             {
@@ -533,6 +536,7 @@ public class Player : MonoBehaviour
                 riseStat = 50;
             }
             range += riseStat;
+            riseStat = 0;
             //폭발물 = 폭발 크기
             if (game.explosive_Set == 2)
             {
@@ -555,6 +559,7 @@ public class Player : MonoBehaviour
                 riseStat = 25;
             }
             explosiveSize += riseStat;
+            riseStat = 0;
             //정확 = 치명타율
             if (game.precision_Set == 2)
             {
@@ -578,6 +583,7 @@ public class Player : MonoBehaviour
                 riseStat = 15;
             }
             criticalChance += riseStat;
+            riseStat = 0;
             //원시 = 체력
             if (game.native_Set == 2)
             {
@@ -603,6 +609,30 @@ public class Player : MonoBehaviour
                 maxHealth += riseStat * 0.75f;
             else
                 maxHealth += riseStat;
+            riseStat = 0;
+            //원소 = 원소 대미지
+            if (game.elemental_Set == 2)
+            {
+                riseStat = 1;
+            }
+            else if (game.elemental_Set == 3)
+            {
+                riseStat = 2;
+            }
+            else if (game.elemental_Set == 4)
+            {
+                riseStat = 3;
+            }
+            else if (game.elemental_Set == 5)
+            {
+                riseStat = 4;
+            }
+            else if (game.elemental_Set >= 6)
+            {
+                riseStat = 5;
+            }
+            elementalDamage += riseStat;
+            riseStat = 0;
         }
 
         harvest *= 1 + (GameManager.instance.harvestVariance_Amount / 100);

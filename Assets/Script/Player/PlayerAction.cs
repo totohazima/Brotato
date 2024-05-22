@@ -108,8 +108,6 @@ public class PlayerAction : Player, ICustomUpdateMono
             }
         }
        
- 
-
         for (int i = 0; i < weapons.Count; i++)
         {
             float deg = 360 * i / weapons.Count - 90;

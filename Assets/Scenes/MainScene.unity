@@ -702,6 +702,7 @@ MonoBehaviour:
   characterNum: 0
   characterCode: 
   characterName: 
+  playerLevel: 0
   maxHealth: 0
   regeneration: 0
   bloodSucking: 0
@@ -1394,6 +1395,7 @@ MonoBehaviour:
   characterNum: 0
   characterCode: 
   characterName: 
+  playerLevel: 0
   maxHealth: 0
   regeneration: 0
   bloodSucking: 0
@@ -2557,6 +2559,7 @@ MonoBehaviour:
   characterNum: 0
   characterCode: 
   characterName: 
+  playerLevel: 0
   maxHealth: 0
   regeneration: 0
   bloodSucking: 0
@@ -4423,6 +4426,7 @@ MonoBehaviour:
   characterNum: 0
   characterCode: 
   characterName: 
+  playerLevel: 0
   maxHealth: 0
   regeneration: 0
   bloodSucking: 0
@@ -6182,6 +6186,7 @@ MonoBehaviour:
   characterNum: 0
   characterCode: 
   characterName: 
+  playerLevel: 0
   maxHealth: 0
   regeneration: 0
   bloodSucking: 0
@@ -7271,6 +7276,7 @@ MonoBehaviour:
   characterNum: 0
   characterCode: 
   characterName: 
+  playerLevel: 0
   maxHealth: 0
   regeneration: 0
   bloodSucking: 0
@@ -7963,6 +7969,7 @@ MonoBehaviour:
   characterNum: 0
   characterCode: 
   characterName: 
+  playerLevel: 0
   maxHealth: 0
   regeneration: 0
   bloodSucking: 0
@@ -9833,6 +9840,7 @@ MonoBehaviour:
   characterNum: 0
   characterCode: 
   characterName: 
+  playerLevel: 0
   maxHealth: 0
   regeneration: 0
   bloodSucking: 0

@@ -16,7 +16,7 @@ public class Melee_Bullet : Bullet
             IDamageCalculate damageCal = collision.GetComponentInParent<IDamageCalculate>();
             if (damageCal != null)
             {
-                damageCal.DamageCalculator(damage, per, accuracy, isCritical, criticalDamage, knockBack, transform.position);
+                damageCal.DamageCalculator(damage, per, accuracy, bloodSucking,isCritical, criticalDamage, knockBack, transform.position);
             }
         }
     }

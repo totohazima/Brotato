@@ -17,20 +17,26 @@ public class PauseUI : MonoBehaviour, UI_Upadte
     public GameObject[] underLines;
 
     public GameObject[] scrolls;
+    public RectTransform[] scrollsRect;
     public Transform[] scrollContents;
 
     public Item_Object_Pause selectObj_Item;
     public Weapon_Object_Pause selectObj_Weapon;
 
-    enum tabName
+    public enum tabName
     {
-        WeaponTab,
-        ItemTab,
-        GiftCardTab,
+        WeaponTab = 0,
+        ItemTab = 1,
+        GiftCardTab = 2,
     }
     void Awake()
     {
         instance = this;
+        scrollsRect = new RectTransform[scrolls.Length];
+        for (int i = 0; i < scrolls.Length; i++)
+        {
+            scrollsRect[i] = scrolls[i].GetComponent<RectTransform>();
+        }
     }
     void OnEnable()
     {

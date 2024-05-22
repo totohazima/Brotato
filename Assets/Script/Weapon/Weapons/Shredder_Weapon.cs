@@ -149,7 +149,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
         Transform bullet = PoolManager.instance.Get(10).transform;
         bullet.position = muzzle.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
-        bullet.GetComponent<Shredder_Bullet>().Init(afterDamage, afterPenetrate, afterRange, 100, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dir * 200, boomChance);
+        bullet.GetComponent<Shredder_Bullet>().Init(afterDamage, afterPenetrate, afterRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dir * 200, boomChance);
         scanner.target = null;
     }
 }

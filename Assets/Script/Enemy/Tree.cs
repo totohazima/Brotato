@@ -23,7 +23,7 @@ public class Tree : EnemyAction
 
     }
 
-    public override void DamageCalculator(float damage, int per, float accuracy, bool isCritical, float criticalDamage, float knockBack, Vector3 bulletPos)
+    public override void DamageCalculator(float damage, int per, float accuracy, float bloodSuck, bool isCritical, float criticalDamage, float knockBack, Vector3 bulletPos)
     {
         float finalDamage = 0;
         string damageText = null;

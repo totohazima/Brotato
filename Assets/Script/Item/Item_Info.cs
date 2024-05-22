@@ -11,17 +11,21 @@ public class Item_Info : MonoBehaviour
     public Text itemName;
     public Transform itemInfoUI;
     public Text itemCountType;
+    public TextMeshProUGUI[] infoText;
+    public RectTransform itemInfoUI_Rect;
+    public RectTransform bgRect;
+    public Transform masterItem;
+    [HideInInspector] public float originItemInfo_PosY;
     private int itemInfoCount;
     private string[] itemInfo;
-    public TextMeshProUGUI[] infoText;
     private int maxCount;
-    [HideInInspector]
-    //public int itemNum; //itemManager에서 아이템을 찾기 위함
-    ItemScrip scriptable;
-    public RectTransform itemInfoUI_Rect;
     Vector3 itemPos;
     List<TextMeshProUGUI> texts = new List<TextMeshProUGUI>();
-
+    ItemScrip scriptable;
+    void Awake()
+    {
+        originItemInfo_PosY = itemInfoUI_Rect.anchoredPosition.y;
+    }
     void OnDisable()
     {
         for (int i = 0; i < texts.Count; i++)
@@ -71,15 +75,6 @@ public class Item_Info : MonoBehaviour
             text.text = textImporter.text[i];
             texts.Add(text);
         }
-
-        //itemInfoCount = scriptable.infoText.Length;
-        //itemInfo = new string[itemInfoCount];
-        //for (int i = 0; i < itemInfoCount; i++)
-        //{
-        //    TextMeshProUGUI text = Instantiate(infoText[0], itemInfoUI);
-        //    text.text = scriptable.infoText[i];
-        //    texts.Add(text);
-        //}
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(itemInfoUI_Rect);
         float textHeight = itemInfoUI_Rect.rect.height;

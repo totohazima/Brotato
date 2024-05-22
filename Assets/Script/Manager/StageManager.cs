@@ -34,7 +34,6 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     [Header("# Variable")]
     private float overExp; //레벨업 후 남은 경험치
     public PlayerAction playerInfo;
-    public int playerLevel; //플레이어 레벨
     public float curHp; //현재 체력
     public float maxHp; //최대 체력
     public float curExp;  //현재 경험치
@@ -142,14 +141,14 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             curHp = maxHp;
         }
         UiVisualize();
-        if (playerLevel < 20)
+        if (GameManager.instance.player_Info.playerLevel < 20)
         {
             if (curExp >= maxExp)
             {
                 overExp = curExp - maxExp;
                 curExp = overExp;
                 overExp = 0;
-                playerLevel++;
+                GameManager.instance.player_Info.playerLevel++;
                 levelUpChance++;
             }
         }
@@ -271,10 +270,10 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         moneyUI.text = money.ToString("F0");
         interestNum.text = interest.ToString("F0");
 
-        maxExp = 50 + (30 * (playerLevel));
+        maxExp = 50 + (30 * (GameManager.instance.player_Info.playerLevel));
         expBarUI.maxValue = maxExp;
         expBarUI.value = curExp;
-        levelNum.text = "LV." + (playerLevel + 1);
+        levelNum.text = "LV." + (GameManager.instance.player_Info.playerLevel + 1);
 
         if (timer < 5)
         {
@@ -451,7 +450,9 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         }
         else
         {
-            Debug.Log("회피");
+            string dodgeText = "<color=#4CFF52>회피</color>";
+            Transform text = DamageTextManager.instance.TextCreate(0, dodgeText).transform;
+            text.position = GameManager.instance.player_Info.transform.position;
         }
     }
 

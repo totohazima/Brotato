@@ -58,7 +58,7 @@ public class ItemManager : MonoBehaviour
         {
             ItemScrip item = GameManager.instance.itemGroup_Scriptable.items[index];
             GameObject objItem = Instantiate(invenItem.gameObject);
-            objItem.transform.SetParent(GameManager.instance.transform);
+            objItem.transform.SetParent(transform);
             Item invenItems = objItem.GetComponent<Item>();
             invenItems.Init(item);
             invenItems.curCount++;
