@@ -162,7 +162,6 @@ public class Weapon_Info : MonoBehaviour
             closeBG.SetActive(false);
         }
         WeaponInfoSetting();
-        //StartCoroutine(WeaponInfoSetting());
     }
     
 
@@ -412,38 +411,6 @@ public class Weapon_Info : MonoBehaviour
         {
             infoUI.gameObject.SetActive(false);
         }
-
-        //LayoutRebuilder.ForceRebuildLayoutImmediate(bgRect);
-        //float textHeight = bgRect.rect.height;
-        //float x = 0;
-        //float y = 0;
-        //if (Camera.main.ScreenToWorldPoint(itemPos).x >= 0)
-        //{
-        //    x = itemPos.x - 200;
-        //}
-        //else if (Camera.main.ScreenToWorldPoint(itemPos).x < 0)
-        //{
-        //    x = itemPos.x + 230;
-        //}
-
-        //if (Camera.main.ScreenToWorldPoint(itemPos).y >= 0)
-        //{
-        //    y = itemPos.y - textHeight * 9;
-        //}
-        //else if (Camera.main.ScreenToWorldPoint(itemPos).y < 0)
-        //{
-        //    if (isCombined == true)
-        //    {
-        //        y = itemPos.y + textHeight * 8.5f;
-        //    }
-        //    else
-        //    {
-        //        y = itemPos.y + textHeight * 6f;
-        //    }
-
-        //}
-        //transform.position = new Vector3(x, y);
-        
     }
 
 
@@ -482,7 +449,6 @@ public class Weapon_Info : MonoBehaviour
         float recyclePrice = (price * 0.25f);
         recyclePrice = Mathf.Round(recyclePrice);
         StageManager.instance.money += (int)recyclePrice;
-        //Destroy(gameObject);
         transform.SetParent(masterItem);
         gameObject.SetActive(false);
     }
@@ -491,6 +457,5 @@ public class Weapon_Info : MonoBehaviour
     {
         transform.SetParent(masterItem);
         gameObject.SetActive(false);
-        //Destroy(gameObject);
     }
 }

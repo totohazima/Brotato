@@ -183,24 +183,16 @@ public class Item : MonoBehaviour, ICustomUpdateMono
     }
     public virtual void ShowItemInfo()//클릭 시 아이템 정보를 보여주는 용도
     {
-        //클릭 하고 있을 시 아이템의 하얀 테두리가 나온다
-        //클릭 중에는 itemGoods와 동일한 UI가 나타난다(가격, 잠금버튼 없는)
-        //UI는 중심을 기준으로 x가 +면 왼쪽으로 y가 +면 아이템 아래로 생성한다. (반대의 경우엔 정반대로 생성)
-        //클릭 해제 시 하얀 테두리만 남고 UI는 꺼진다.
-        //infoObj = Instantiate(itemInfo, StageManager.instance.itemInfoManager);
-
         infoObj.Init(scriptable, transform.position);
         infoObj.masterItem = info;
 
         item_Info.SetActive(true);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+        ForceRebuildLayouts(infoRect, infoObj.bgRect);
         // 캔버스 상 좌표에서 0 이하인 경우
         if (myRect.localPosition.y <= 0)
         {
             //y값을 측정해 ItemInfo가 딱 맞는 위치에 소환되게 함
-            LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
-            LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+            ForceRebuildLayouts(infoRect, infoObj.bgRect);
             infoRect.offsetMax = originInfo_OffsetMax;
             float calcY = infoObj.itemInfoUI_Rect.anchoredPosition.y - infoObj.originItemInfo_PosY; //(0, -50)
             float top = -infoRect.offsetMax.y/*(0, -40)*/ + calcY;
@@ -209,13 +201,19 @@ public class Item : MonoBehaviour, ICustomUpdateMono
         else
         {
             //y값을 측정해 ItemInfo가 딱 맞는 위치에 소환되게 함
-            LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
-            LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+            ForceRebuildLayouts(infoRect, infoObj.bgRect);
             float heightPos = infoObj.bgRect.rect.height;
             infoRect.offsetMax = new Vector2(0, -heightPos);
         }
 
         item_Info.transform.SetParent(StageManager.instance.itemInfoManager);
+    }
+    public void ForceRebuildLayouts(params RectTransform[] rectTransforms)
+    {
+        foreach (var rectTransform in rectTransforms)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+        }
     }
     public void StatSetting(int index)
     {

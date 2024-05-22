@@ -37,10 +37,7 @@ public class Item_Info : MonoBehaviour
     public void Init(ItemScrip scrip, Vector3 pos)
     {
         scriptable = scrip;
-        //itemCode = scriptable.itemCode.ToString();
-        //itemName.text = scriptable.itemName;
         itemImage.sprite = scriptable.itemSprite;
-        //itemNum = index;
         itemPos = pos;
         TextSetting();
     }
@@ -75,29 +72,5 @@ public class Item_Info : MonoBehaviour
             text.text = textImporter.text[i];
             texts.Add(text);
         }
-
-        LayoutRebuilder.ForceRebuildLayoutImmediate(itemInfoUI_Rect);
-        float textHeight = itemInfoUI_Rect.rect.height;
-        float x = 0;
-        float y = 0;
-        if (Camera.main.ScreenToWorldPoint(itemPos).x >= 0)
-        {
-            x = itemPos.x - 200;
-        }
-        else if (Camera.main.ScreenToWorldPoint(itemPos).x < 0)
-        {
-            x = itemPos.x + 200;
-        }
-
-        if (Camera.main.ScreenToWorldPoint(itemPos).y >= 0)
-        {
-            y = itemPos.y - 200 - textHeight;
-        }
-        else if (Camera.main.ScreenToWorldPoint(itemPos).y < 0)
-        {
-            y = itemPos.y + 200 + textHeight;
-
-        }
-        transform.position = new Vector3(x, y);
     }
 }
