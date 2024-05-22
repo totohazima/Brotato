@@ -188,6 +188,11 @@ public class Item : MonoBehaviour, ICustomUpdateMono
 
         item_Info.SetActive(true);
         ForceRebuildLayouts(infoRect, infoObj.bgRect);
+
+        AdjustItemInfoPosition();
+    }
+    public virtual void AdjustItemInfoPosition()
+    {
         // 캔버스 상 좌표에서 0 이하인 경우
         if (myRect.localPosition.y <= 0)
         {

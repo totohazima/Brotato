@@ -96,6 +96,10 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
         item_Info.SetActive(true);
         ForceRebuildLayouts(infoRect, infoObj.bgRect);
 
+        AdjustItemInfoPosition();
+    }
+    public override void AdjustItemInfoPosition()
+    {
         // 오브젝트가 UI 안에서 위에 있는지 아래에 있는지 체크
         Vector3 worldPos = myRect.TransformPoint(myRect.anchoredPosition);
         Vector3 pauseLocalPos = PauseUI.instance.scrollsRect[(int)PauseUI.tabName.ItemTab].InverseTransformPoint(worldPos);
@@ -118,39 +122,4 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
 
         item_Info.transform.SetParent(StageManager.instance.itemInfoManager);
     }
-
-    //public override void ShowItemInfo()
-    //{
-    //    infoObj.Init(scriptable, transform.position);
-    //    infoObj.masterItem = info;
-
-    //    item_Info.SetActive(true);
-    //    LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
-    //    LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
-
-    //    //오브젝트가 UI안에서 위에 있는지 아래에 있는지 체크
-    //    Vector3 worldPos = myRect.TransformPoint(myRect.anchoredPosition);
-    //    Vector3 pauseLocalPos = PauseUI.instance.scrollsRect[(int)PauseUI.tabName.ItemTab].InverseTransformPoint(worldPos);
-
-    //    // 캔버스 상 좌표에서 0 이하인 경우
-    //    if (pauseLocalPos.y <= PauseUI.instance.scrollsRect[(int)PauseUI.tabName.ItemTab].anchoredPosition.y)
-    //    {
-    //        //y값을 측정해 ItemInfo가 딱 맞는 위치에 소환되게 함
-    //        LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
-    //        LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
-    //        infoRect.offsetMax = originInfo_OffsetMax;
-    //        float calcY = infoObj.itemInfoUI_Rect.anchoredPosition.y - infoObj.originItemInfo_PosY; //(0, -50)
-    //        float top = -infoRect.offsetMax.y/*(0, -40)*/ + calcY;
-    //        infoRect.offsetMax = new Vector2(0, -top);
-    //    }
-    //    else
-    //    {
-    //        //y값을 측정해 ItemInfo가 딱 맞는 위치에 소환되게 함
-    //        LayoutRebuilder.ForceRebuildLayoutImmediate(infoRect);
-    //        LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
-    //        float heightPos = infoObj.bgRect.rect.height;
-    //        infoRect.offsetMax = new Vector2(0, -heightPos);
-    //    }
-    //    item_Info.transform.SetParent(StageManager.instance.itemInfoManager);
-    //}
 }

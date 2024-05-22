@@ -115,12 +115,17 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
 
         weapon_Info.SetActive(true);
         //크기가 늦게 조절되는 WeaponInfo를 강제로 업데이트되게 함
-        LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+        ForceRebuildLayouts(infoObj.bgRect);
+        AdjustWeaponInfoPosition();
+    }
+
+    public virtual void AdjustWeaponInfoPosition()
+    {
         //캔버스 상 좌표에서 0 이하인 경우
         if (myRect.localPosition.y <= 0)
         {
             //height 값을 측정해 WeaponInfo가 딱 맞는 위치에 소환되게 함
-            LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+            ForceRebuildLayouts(infoObj.bgRect);
             infoRect.offsetMax = originInfo_OffsetMax; //(0,213)
             float calcHeight = infoObj.originBG_Height/*(209.54f)*/ - infoObj.bgRect.rect.height;
             float top = infoRect.offsetMax.y - calcHeight;
@@ -129,12 +134,18 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
         else
         {
             //height 값을 측정해 WeaponInfo가 딱 맞는 위치에 소환되게 함
-            LayoutRebuilder.ForceRebuildLayoutImmediate(infoObj.bgRect);
+            ForceRebuildLayouts(infoObj.bgRect);
             float heightPos = myRect.rect.height;
             infoRect.offsetMax = new Vector2(0, -heightPos);
         }
 
         weapon_Info.transform.SetParent(StageManager.instance.itemInfoManager);
     }
-
+    public void ForceRebuildLayouts(params RectTransform[] rectTransforms)
+    {
+        foreach (var rectTransform in rectTransforms)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+        }
+    }
 }
