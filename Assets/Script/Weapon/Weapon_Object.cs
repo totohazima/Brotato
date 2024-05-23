@@ -12,19 +12,22 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
     public WeaponScrip[] weaponData;
     public Transform info;
     public GameObject weapon_Info;
-    [SerializeField]
-    Outline frame;
+    public Weapon_Info infoObj;
+    public bool isCombined;
+    [HideInInspector] public RectTransform myRect;
+    [HideInInspector] public RectTransform infoRect;
+    [HideInInspector] public Vector2 originInfo_OffsetMax;
+    [SerializeField] Outline frame;
     [SerializeField] List<Weapon_Action> weaponList = new List<Weapon_Action>();
-    [SerializeField] bool isCombined;
-    RectTransform myRect;
-    RectTransform infoRect;
-    Vector2 originInfo_OffsetMax;
-
+    
+    
+    
     void Awake()
     {
         myRect = gameObject.GetComponent<RectTransform>();
         infoRect = info.GetComponent<RectTransform>();
         originInfo_OffsetMax = infoRect.offsetMax;
+        infoObj = weapon_Info.GetComponent<Weapon_Info>();
     }
     public virtual void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
@@ -84,7 +87,7 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
             combined_Mark.SetActive(false);
         }
     }
-    Weapon_Info infoObj = null;
+
     public void PointDown()
     {
         frame.effectColor = Color.white;
@@ -109,7 +112,7 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
     }
     public virtual void ShowWeaponInfo()//클릭 시 아이템 정보를 보여주는 용도
     { 
-        infoObj = weapon_Info.GetComponent<Weapon_Info>();
+        //infoObj = weapon_Info.GetComponent<Weapon_Info>();
         infoObj.Init(weaponData[(int)weapon_Object.index], weapon_Object, transform.position, isCombined);
         infoObj.masterItem = info;
 

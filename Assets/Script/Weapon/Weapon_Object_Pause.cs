@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler, UI_Upadte
 {
     public GameObject selectImage;
-    Weapon_Info infoObj_Pause;
     public override void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
@@ -37,9 +36,12 @@ public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerU
 
         if (PauseUI.instance.selectObj_Weapon == null)
         {
-            if (infoObj_Pause != null)
+            if (infoObj != null)
             {
-                //Destroy(infoObj_Pause.gameObject);
+                if (infoObj.masterItem != null)
+                {
+                    weapon_Info.transform.SetParent(infoObj.masterItem);
+                }
                 weapon_Info.SetActive(false);
             }
             if (selectImage != null)
@@ -81,16 +83,46 @@ public class Weapon_Object_Pause : Weapon_Object, IPointerDownHandler, IPointerU
         if (PauseUI.instance.selectObj_Weapon != null)
         {
             selectImage.SetActive(false);
-            //Destroy(infoObj_Pause.gameObject);
+            weapon_Info.transform.SetParent(infoObj.masterItem);
             weapon_Info.SetActive(false);
         }
     }
 
     public override void ShowWeaponInfo()
     {
-        //infoObj_Pause = Instantiate(weapon_Info, StageManager.instance.itemInfoManager);
+        infoObj.Init(weaponData[(int)weapon_Object.index], weapon_Object, transform.position, isCombined);
+        infoObj.masterItem = info;
+
         weapon_Info.SetActive(true);
-        infoObj_Pause = weapon_Info.GetComponent<Weapon_Info>();
-        infoObj_Pause.Init(weaponData[(int)weapon_Object.index], weapon_Object, transform.position, false);
+        //크기가 늦게 조절되는 WeaponInfo를 강제로 업데이트되게 함
+        ForceRebuildLayouts(infoObj.bgRect);
+        AdjustWeaponInfoPosition();
+    }
+
+    public override void AdjustWeaponInfoPosition()
+    {
+        // 오브젝트가 UI 안에서 위에 있는지 아래에 있는지 체크
+        Vector3 worldPos = myRect.TransformPoint(myRect.anchoredPosition);
+        Vector3 pauseLocalPos = PauseUI.instance.scrollsRect[(int)PauseUI.tabName.WeaponTab].InverseTransformPoint(worldPos);
+
+        //캔버스 상 좌표에서 0 이하인 경우
+        if (pauseLocalPos.y <= PauseUI.instance.scrollsRect[(int)PauseUI.tabName.WeaponTab].anchoredPosition.y)
+        {
+            //height 값을 측정해 WeaponInfo가 딱 맞는 위치에 소환되게 함
+            ForceRebuildLayouts(infoObj.bgRect);
+            infoRect.offsetMax = originInfo_OffsetMax; //(0,213)
+            float calcHeight = infoObj.originBG_Height/*(209.54f)*/ - infoObj.bgRect.rect.height;
+            float top = infoRect.offsetMax.y - calcHeight;
+            infoRect.offsetMax = new Vector2(0, top);
+        }
+        else
+        {
+            //height 값을 측정해 WeaponInfo가 딱 맞는 위치에 소환되게 함
+            ForceRebuildLayouts(infoObj.bgRect);
+            float heightPos = myRect.rect.height;
+            infoRect.offsetMax = new Vector2(0, -heightPos);
+        }
+
+        weapon_Info.transform.SetParent(StageManager.instance.itemInfoManager);
     }
 }
