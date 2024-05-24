@@ -14,16 +14,26 @@ public class Bullet : MonoBehaviour
     public bool isCritical;
     public float knockBack;
     private float penetrateDamage; //관통 후 데미지가 깍이는 수치(원래 대미지를 넘을 순 없다)
+
+    [Header("# StatusEffect")]
+    public StatusEffect.EffectType[] effectType;
+    public int infectedCount;
+    public float burnDamage;
+    public int burnCount;
+    public float slowEffect;
+
     [HideInInspector] public Rigidbody rigid;
     [HideInInspector] public Vector3 direction;
-
     [HideInInspector] public Vector3 startPos;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
     }
-
+    void OnDisable()
+    {
+        StatusReset();
+    }
     public virtual void FixedUpdate()
     {
         if(StageManager.instance.isEnd == true)
@@ -90,6 +100,33 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    public virtual void StatusEffecInit(params StatusEffect.EffectType[] effectTypes)
+    {
+        effectType = new StatusEffect.EffectType[effectTypes.Length];
+        for (int i = 0; i < effectType.Length; i++)
+        {
+            effectType[i] = effectTypes[i];
+        }
+    }
+    public void BurnInit(int infectedCount,float burnDamage, int burnCount)
+    {
+        this.infectedCount = infectedCount;
+        this.burnDamage = burnDamage;
+        this.burnCount = burnCount;
+    }
+    public void SlowInit(float slowEffect)
+    {
+        this.slowEffect = slowEffect;
+    }
+
+    public void StatusReset()
+    {
+        effectType = new StatusEffect.EffectType[0];
+        burnDamage = 0;
+        burnCount = 0;
+        slowEffect = 0;
+    }
+
     public virtual void OnTriggerEnter(Collider collision)
     {
         if(collision.CompareTag("Wall"))
@@ -103,6 +140,7 @@ public class Bullet : MonoBehaviour
             if(damageCal != null)
             {
                 damageCal.DamageCalculator(damage, per, accuracy, bloodSucking, isCritical, criticalDamage, knockBack, transform.position);
+                damageCal.StatusEffectCalculator(effectType, this);
             }
 
             per--;

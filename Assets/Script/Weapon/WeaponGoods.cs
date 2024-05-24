@@ -353,6 +353,7 @@ public class WeaponGoods : Weapon, UI_Upadte
         //무기 설명
         if (scriptable.tier1_Info[0] != "") //설명이 있을 경우
         {
+            GameManager game = GameManager.instance;
             infoUI.gameObject.SetActive(true);
             switch (index)
             {
@@ -406,7 +407,59 @@ public class WeaponGoods : Weapon, UI_Upadte
                             infoUI.text = scriptable.tier4_Info[0] + " <color=#4CFF52>" + scriptable.tier4_InfoStat[0].ToString("F2") + "</color>" + scriptable.tier4_Info[1];
                             break;
                     }
-                    break;               
+                    break;
+                case Weapons.WAND:
+                    string damageTxt = null;
+                    switch (weaponTier)
+                    {
+                        case (0):
+                            damageTxt = (scriptable.tier1_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier1_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            infoUI.text = "<color=#4CFF52>" + damageTxt + "</color>x<color=#4CFF52>" + scriptable.tier1_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + scriptable.tier1_Info[0];
+                            break;
+                        case (1):
+                            damageTxt = (scriptable.tier2_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier2_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            infoUI.text = "<color=#4CFF52>" + damageTxt + "</color>x<color=#4CFF52>" + scriptable.tier2_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + scriptable.tier2_Info[0];
+                            break;
+                        case (2):
+                            damageTxt = (scriptable.tier3_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier3_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            infoUI.text = "<color=#4CFF52>" + damageTxt + "</color>x<color=#4CFF52>" + scriptable.tier3_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + scriptable.tier3_Info[0];
+                            break;
+                        case (3):
+                            damageTxt = (scriptable.tier4_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier4_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            infoUI.text = "<color=#4CFF52>" + damageTxt + "</color>x<color=#4CFF52>" + scriptable.tier4_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + scriptable.tier4_Info[0];
+                            break;
+                    }
+                    break;
+                case Weapons.TORCH:
+                    string damageTxt2 = null;
+                    switch (weaponTier)
+                    {
+                        case (0):
+                            damageTxt2 = (scriptable.tier1_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier1_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            infoUI.text = "<color=#4CFF52>" + damageTxt2 + "</color>x<color=#4CFF52>" + scriptable.tier1_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + scriptable.tier1_Info[0];
+                            break;
+                        case (1):
+                            damageTxt2 = (scriptable.tier2_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier2_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            infoUI.text = "<color=#4CFF52>" + damageTxt2 + "</color>x<color=#4CFF52>" + scriptable.tier2_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + scriptable.tier2_Info[0];
+                            break;
+                        case (2):
+                            damageTxt2 = (scriptable.tier3_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier3_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            infoUI.text = "<color=#4CFF52>" + damageTxt2 + "</color>x<color=#4CFF52>" + scriptable.tier3_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + scriptable.tier3_Info[0];
+                            break;
+                        case (3):
+                            damageTxt2 = (scriptable.tier4_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier4_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            infoUI.text = "<color=#4CFF52>" + damageTxt2 + "</color>x<color=#4CFF52>" + scriptable.tier4_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + scriptable.tier4_Info[0];
+                            break;
+                    }
+                    break;
             }
 
         }

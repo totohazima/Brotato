@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public bool isWeirdGhost; // 이상한 유령 구매 시 true가 되며 웨이브 시작 시 체력이 1이됨 
     public int minesCount; //지뢰 아이템 갯수
     public int turretCount; //터렛 아이템 갯수
+    public int snakeCount; //뱀 아이템 갯수 (하나 당 화상 적용 시 전염되는 몬스터 수 +1)
     [Header("#Difficult_Info")]
     public int difficult_Level; //난이도
     public bool isSpecialEnemySpawn; //새로운 적의 출현
@@ -166,13 +167,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         float randomY = Random.Range(StageManager.instance.yMin, StageManager.instance.yMax);
         Vector3 point = new Vector3(randomX, randomY);
         engineerBuildingPos = point;
-        //for (int i = 0; i < StageManager.instance.playerInfo.weapons.Count; i++)
-        //{
-        //    if (StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>().index == Weapon.Weapons.WRENCH)
-        //    {
-        //        StartCoroutine(StageManager.instance.playerInfo.weapons[i].GetComponent<Wrench_Weapon>().SpawnTurret());
-        //    }
-        //}
+
         WeaponSetSearch();
         player_Info.StatCalculate();
         LoadingSceneManager.CloseScene("MainScene");
@@ -200,6 +195,9 @@ public class GameManager : MonoBehaviour, UI_Upadte
                 case Item.ItemType.TURRET:
                     turretCount = item[i].curCount;
                     break;
+                case Item.ItemType.SNAKE:
+                    snakeCount = item[i].curCount;
+                    break;
             }
 
         }
@@ -212,40 +210,44 @@ public class GameManager : MonoBehaviour, UI_Upadte
         explosive_Set = 0;
         precision_Set = 0;
         native_Set = 0;
+        elemental_Set = 0;
 
-        Weapon_Action[] weapon = new Weapon_Action[player_Info.weapons.Count];
-        for (int i = 0; i < weapon.Length; i++)
+        if (player_Info != null)
         {
-            weapon[i] = StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>();
-        }
-
-        for (int i = 0; i < weapon.Length; i++)
-        {
-            for (int j = 0; j < weapon[i].setTypes.Length; j++)
+            Weapon_Action[] weapon = new Weapon_Action[player_Info.weapons.Count];
+            for (int i = 0; i < weapon.Length; i++)
             {
-                switch (weapon[i].setTypes[j])
+                weapon[i] = StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>();
+            }
+
+            for (int i = 0; i < weapon.Length; i++)
+            {
+                for (int j = 0; j < weapon[i].setTypes.Length; j++)
                 {
-                    case Weapon.SettType.UNARMED:
-                        unArmed_Set++;
-                        break;
-                    case Weapon.SettType.TOOL:
-                        tool_Set++;
-                        break;
-                    case Weapon.SettType.GUN:
-                        gun_Set++;
-                        break;
-                    case Weapon.SettType.EXPLOSIVE:
-                        explosive_Set++;
-                        break;
-                    case Weapon.SettType.PRECISION:
-                        precision_Set++;
-                        break;
-                    case Weapon.SettType.NATIVE:
-                        native_Set++;
-                        break;
-                    case Weapon.SettType.ELEMENTALS:
-                        elemental_Set++;
-                        break;
+                    switch (weapon[i].setTypes[j])
+                    {
+                        case Weapon.SettType.UNARMED:
+                            unArmed_Set++;
+                            break;
+                        case Weapon.SettType.TOOL:
+                            tool_Set++;
+                            break;
+                        case Weapon.SettType.GUN:
+                            gun_Set++;
+                            break;
+                        case Weapon.SettType.EXPLOSIVE:
+                            explosive_Set++;
+                            break;
+                        case Weapon.SettType.PRECISION:
+                            precision_Set++;
+                            break;
+                        case Weapon.SettType.NATIVE:
+                            native_Set++;
+                            break;
+                        case Weapon.SettType.ELEMENTALS:
+                            elemental_Set++;
+                            break;
+                    }
                 }
             }
         }

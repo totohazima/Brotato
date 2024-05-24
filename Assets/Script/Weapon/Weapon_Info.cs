@@ -46,7 +46,6 @@ public class Weapon_Info : MonoBehaviour
     private Vector3 itemPos;
     private float price;
     bool isCombined;
-
     enum SettUI
     {
         Unarmed,
@@ -350,6 +349,7 @@ public class Weapon_Info : MonoBehaviour
         //무기 설명
         if (weaponScrip.tier1_Info[0] != "") //설명이 있을 경우
         {
+            GameManager game = GameManager.instance;
             infoUI.gameObject.SetActive(true);
             switch (weaponCode)
             {
@@ -401,6 +401,58 @@ public class Weapon_Info : MonoBehaviour
                             break;
                         case (3):
                             infoUI.text = weaponScrip.tier4_Info[0] + " <color=#4CFF52>" + weaponScrip.tier4_InfoStat[0].ToString("F2") + "</color>" + weaponScrip.tier4_Info[1];
+                            break;
+                    }
+                    break;
+                case Weapon.Weapons.WAND:
+                    float damage = 0;
+                    switch (weaponInfo.weaponTier)
+                    {
+                        case (0):
+                            damage = (weaponScrip.tier1_InfoStat[0] + (game.player_Info.elementalDamage * (weaponScrip.tier1_InfoStat[2] / 100))) * (1 + (game.player_Info.persentDamage / 100));
+                            infoUI.text = "<color=#4CFF52>" + damage.ToString("F0") + "</color>x<color=#4CFF52>" + weaponScrip.tier1_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + weaponScrip.tier1_Info[0];
+                            break;
+                        case (1):
+                            damage = (weaponScrip.tier2_InfoStat[0] + (game.player_Info.elementalDamage * (weaponScrip.tier2_InfoStat[2] / 100))) * (1 + (game.player_Info.persentDamage / 100));
+                            infoUI.text = "<color=#4CFF52>" + damage.ToString("F0") + "</color>x<color=#4CFF52>" + weaponScrip.tier2_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + weaponScrip.tier2_Info[0];
+                            break;
+                        case (2):
+                            damage = (weaponScrip.tier3_InfoStat[0] + (game.player_Info.elementalDamage * (weaponScrip.tier3_InfoStat[2] / 100))) * (1 + (game.player_Info.persentDamage / 100));
+                            infoUI.text = "<color=#4CFF52>" + damage.ToString("F0") + "</color>x<color=#4CFF52>" + weaponScrip.tier3_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + weaponScrip.tier3_Info[0];
+                            break;
+                        case (3):
+                            damage = (weaponScrip.tier4_InfoStat[0] + (game.player_Info.elementalDamage * (weaponScrip.tier4_InfoStat[2] / 100))) * (1 + (game.player_Info.persentDamage / 100));
+                            infoUI.text = "<color=#4CFF52>" + damage.ToString("F0") + "</color>x<color=#4CFF52>" + weaponScrip.tier4_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + weaponScrip.tier4_Info[0];
+                            break;
+                    }
+                    break;
+                case Weapon.Weapons.TORCH:
+                    float damage2 = 0;
+                    switch (weaponInfo.weaponTier)
+                    {
+                        case (0):
+                            damage2 = (weaponScrip.tier1_InfoStat[0] + (game.player_Info.elementalDamage * (weaponScrip.tier1_InfoStat[2] / 100))) * (1 + (game.player_Info.persentDamage / 100));
+                            infoUI.text = "<color=#4CFF52>" + damage2.ToString("F0") + "</color>x<color=#4CFF52>" + weaponScrip.tier1_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + weaponScrip.tier1_Info[0];
+                            break;
+                        case (1):
+                            damage2 = (weaponScrip.tier2_InfoStat[0] + (game.player_Info.elementalDamage * (weaponScrip.tier2_InfoStat[2] / 100))) * (1 + (game.player_Info.persentDamage / 100));
+                            infoUI.text = "<color=#4CFF52>" + damage2.ToString("F0") + "</color>x<color=#4CFF52>" + weaponScrip.tier2_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + weaponScrip.tier2_Info[0];
+                            break;
+                        case (2):
+                            damage2 = (weaponScrip.tier3_InfoStat[0] + (game.player_Info.elementalDamage * (weaponScrip.tier3_InfoStat[2] / 100))) * (1 + (game.player_Info.persentDamage / 100));
+                            infoUI.text = "<color=#4CFF52>" + damage2.ToString("F0") + "</color>x<color=#4CFF52>" + weaponScrip.tier3_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + weaponScrip.tier3_Info[0];
+                            break;
+                        case (3):
+                            damage2 = (weaponScrip.tier4_InfoStat[0] + (game.player_Info.elementalDamage * (weaponScrip.tier4_InfoStat[2] / 100))) * (1 + (game.player_Info.persentDamage / 100));
+                            infoUI.text = "<color=#4CFF52>" + damage2.ToString("F0") + "</color>x<color=#4CFF52>" + weaponScrip.tier4_InfoStat[1] + "</color>";
+                            infoUI.text += "(<sprite=2>)" + weaponScrip.tier4_Info[0];
                             break;
                     }
                     break;

@@ -17,6 +17,7 @@ public class Melee_Bullet : Bullet
             if (damageCal != null)
             {
                 damageCal.DamageCalculator(damage, per, accuracy, bloodSucking,isCritical, criticalDamage, knockBack, transform.position);
+                damageCal.StatusEffectCalculator(effectType, this);
             }
         }
     }

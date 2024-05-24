@@ -132,9 +132,15 @@ MonoBehaviour:
   per: 0
   range: 0
   accuracy: 0
+  bloodSucking: 0
   criticalChance: 0
   criticalDamage: 0
+  isCritical: 0
   knockBack: 0
+  effectType: 
+  burnDamage: 0
+  burnCount: 0
+  slowEffect: 0
   rigid: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}

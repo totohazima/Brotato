@@ -157,6 +157,7 @@ public class Player : MonoBehaviour
         {
             characterItemTags[i] = import.itemTags[i];
         }
+        GameManager.instance.WeaponSetSearch();
         StatCalculate();
     }
 

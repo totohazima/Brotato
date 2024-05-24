@@ -141,6 +141,14 @@ public class SettingWeaponInfo : MonoBehaviour
                 case Weapon.Weapons.DRIVER:
                     infoUI.text = weaponScrip.tier1_Info[0] + " <color=#4CFF52>" + weaponScrip.tier1_InfoStat[0].ToString("F2") + "</color>" + weaponScrip.tier1_Info[1];
                     break;
+                case Weapon.Weapons.WAND:
+                    infoUI.text = "<color=#4CFF52>" + (weaponScrip.tier1_InfoStat[0] + (GameManager.instance.player.elementalDamage * (weaponScrip.tier1_InfoStat[2] / 100))) * (1 + (GameManager.instance.player.persentDamage / 100)) + "</color>x<color=#4CFF52>" + weaponScrip.tier1_InfoStat[1] + "</color>";
+                    infoUI.text += "(<sprite=2>)" + weaponScrip.tier1_Info[0];
+                    break;
+                case Weapon.Weapons.TORCH:
+                    infoUI.text = "<color=#4CFF52>" + (weaponScrip.tier1_InfoStat[0] + (GameManager.instance.player.elementalDamage * (weaponScrip.tier1_InfoStat[2] / 100))) * (1 + (GameManager.instance.player.persentDamage / 100)) + "</color>x<color=#4CFF52>" + weaponScrip.tier1_InfoStat[1] + "</color>";
+                    infoUI.text += "(<sprite=2>)" + weaponScrip.tier1_Info[0];
+                    break;
             }
 
         }

@@ -11,6 +11,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     public WhiteFlash whiteFlash;
     public float moveSpeed;
     public bool isDontPush; //true일 경우 넉백 미작동
+    [HideInInspector] public StatusEffect statusEffect;
     [HideInInspector] public Transform target;
     [HideInInspector] public StageManager stage;
     [HideInInspector] public float hitTimer;
@@ -20,11 +21,13 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     {
         stage = StageManager.instance;
         rigid = GetComponent<Rigidbody>();
+        statusEffect = GetComponent<StatusEffect>();
         target = stage.mainPlayer.transform;
     }
     public virtual void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
+        SpawnManager.instance.enemys.Add(this);
         StatSetting((int)name, name);
     }
     void OnDisable()
@@ -101,7 +104,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
 
         float nonBloodSucking = 100 - bloodSuck;
         float[] chanceLise = { nonBloodSucking, bloodSuck };
-        int index = StageManager.instance.Judgment(chanceLise);
+        int index = Judgment(chanceLise);
         if(index == 0)
         { }
         else
@@ -131,17 +134,47 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         curHealth -= finalDamage;
 
         if (whiteFlash != null)
-        {
             whiteFlash.PlayFlash();
-        }
+        
 
         if (isDontPush == false)
-        {
             StartCoroutine(KnockBack(stage.playerInfo.transform.position, knockBack * 10));
+        
+    }
+    public void StatusEffectCalculator(StatusEffect.EffectType[] effect, Bullet bullet)
+    {
+        for (int i = 0; i < effect.Length; i++)
+        {
+            switch(effect[i])
+            {
+                case StatusEffect.EffectType.NONE:
+                    break;
+                case StatusEffect.EffectType.BURN:
+                    ApplyBurnEffect(bullet.infectedCount ,bullet.burnDamage, bullet.burnCount);
+                    break;
+                case StatusEffect.EffectType.SLOW:
+                    ApplySlowEffect(bullet.slowEffect);
+                    break;
+            }
         }
     }
+    public void ApplyBurnEffect(int infectedCount, float burnDamage, int burnCount)
+    {
+        //가장 높은 대미지를 가진 화상효과만 적용됨
+        if (statusEffect.burnDamage <= burnDamage)
+        {
+            statusEffect.infectedCount = infectedCount;
+            statusEffect.burnDamage = burnDamage;
+            statusEffect.burnCount = burnCount;
+            statusEffect.maxBurnCount = burnCount;
+        }
+    }
+    public void ApplySlowEffect(float slowEffect)
+    {
+        statusEffect.slowEffect = slowEffect;
+    }
 
-  
+
     private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Player"))
@@ -169,6 +202,64 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
             }
         }
     }
+
+    public virtual IEnumerator Died()
+    {
+        statusEffect.StatusReset();
+
+        ugliyToothSlow = 0;
+        float randomX, randomY;
+        for (int i = 0; i < moneyDropRate; i++)
+        {
+            GameObject meterial = PoolManager.instance.Get(2);
+            randomX = Random.Range(-2f, 2f);
+            randomY = Random.Range(-2f, 2f);
+            meterial.transform.position = new Vector3(transform.position.x + randomX, transform.position.y + randomY);
+
+            Meterial meterialScript = meterial.GetComponent<Meterial>();
+            meterialScript.moneyValue = moneyValue;
+            meterialScript.expValue = expValue;
+        }
+
+        float consume = consumableDropRate / 100;
+        float loot;
+        if (enemyType == Stat.enemyType.NORMAL_ENEMY || enemyType == Stat.enemyType.NEUTRALITY_ENEMY)
+        {
+            loot = (lootDropRate * (1 + (StageManager.instance.playerInfo.lucky / 100))) / (1 + StageManager.instance.inWaveLoot_Amount);
+            loot = loot / 100;
+        }
+        else
+        {
+            loot = lootDropRate / 100;
+        }
+        float notDrop = (100 - (consume + loot)) / 100;
+
+        float[] chanceLise = { notDrop, consume, loot };
+        int index = StageManager.instance.Judgment(chanceLise);
+
+        switch (index)
+        {
+            case 0:
+                break;
+            case 1:
+                GameObject consumable = PoolManager.instance.Get(3);
+                randomX = Random.Range(-3f, 3f);
+                randomY = Random.Range(-3f, 3f);
+                consumable.transform.position = new Vector3(transform.position.x + randomX, transform.position.y + randomY);
+                break;
+            case 2:
+                GameObject lootCrate = PoolManager.instance.Get(4);
+                randomX = Random.Range(-3f, 3f);
+                randomY = Random.Range(-3f, 3f);
+                lootCrate.transform.position = new Vector3(transform.position.x + randomX, transform.position.y + randomY);
+                StageManager.instance.inWaveLoot_Amount++;
+                break;
+        }
+        SpawnManager.instance.enemys.Remove(this);
+        gameObject.SetActive(false);
+        yield return 0;
+    }
+
     private int Judgment(float[] rando)
     {
         int count = rando.Length;

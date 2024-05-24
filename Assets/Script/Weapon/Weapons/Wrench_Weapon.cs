@@ -39,7 +39,7 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
     {
         ResetStat();
         AfterStatSetting();
-        scanner.radius = afterRange;
+        scanner.radius = realRange;
 
         for (int i = 0; i < tierOutline.Length; i++)
         {
@@ -156,7 +156,7 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
     }
     private IEnumerator Fire()
     {
-        bullet.Init(afterDamage, afterPenetrate, afterRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
+        bullet.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
 
         if (scanner.target != null)
         {

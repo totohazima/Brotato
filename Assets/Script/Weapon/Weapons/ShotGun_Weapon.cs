@@ -30,7 +30,7 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
     {
         ResetStat();
         AfterStatSetting();
-        scanner.radius = afterRange;
+        scanner.radius = realRange;
         StartCoroutine(MuzzleMove());
         for (int i = 0; i < tierOutline.Length; i++)
         {
@@ -138,7 +138,7 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
             Transform bullet = PoolManager.instance.Get(9).transform;
             bullet.position = muzzle.position;
             bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
-            bullet.GetComponent<Bullet>().Init(afterDamage, afterPenetrate, afterRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack,afterPenetrateDamage, dir * 200);
+            bullet.GetComponent<Bullet>().Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack,afterPenetrateDamage, dir * 200);
             scanner.target = null;
         }
     }

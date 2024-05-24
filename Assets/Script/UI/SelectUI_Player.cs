@@ -16,7 +16,7 @@ public class SelectUI_Player : SelectUI
 
     public override void RandomSelect() //랜덤으로 플레이어 선택
     {
-        int i = Random.Range(1, forSettingPlayers.Length);
+        int i = Random.Range(0, forSettingPlayers.Length);
         ForSettingPlayer setting = forSettingPlayers[i];
         setting.ClickPlayer();
     }

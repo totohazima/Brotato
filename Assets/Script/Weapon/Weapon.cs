@@ -72,6 +72,7 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float afterCriticalDamage;
     [HideInInspector] public float afterCoolTime;
     [HideInInspector] public float afterRange;
+    [HideInInspector] public float realRange; //실제 사거리
     [HideInInspector] public int afterPenetrate;
     [HideInInspector] public float afterPenetrateDamage;
     [HideInInspector] public float afterBloodSucking;
@@ -227,6 +228,7 @@ public class Weapon : MonoBehaviour
             preRange = range + player.range;
         }
         afterRange = preRange;
+        realRange = afterRange / 10;
         afterPenetrateDamage = -penetrateDamage + player.penetrateDamage;
         afterBloodSucking = bloodSucking + player.bloodSucking;
         afterKnockBack = knockBack + player.knockBack;

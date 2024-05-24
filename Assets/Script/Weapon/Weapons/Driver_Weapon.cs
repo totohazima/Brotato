@@ -50,7 +50,7 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
 
         ResetStat();
         AfterStatSetting();
-        scanner.radius = afterRange;
+        scanner.radius = realRange;
         for (int i = 0; i < tierOutline.Length; i++)
         {
             if (i == weaponTier)
@@ -190,16 +190,16 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
     }
     private IEnumerator Fire()
     {
-        bullet.Init(afterDamage, afterPenetrate, afterRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
+        bullet.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
 
         if (scanner.target != null)
         {
             Vector3 targetPos = scanner.target.position;
             Vector3 originalPos = transform.position;
-            float realRange = afterRange - (Vector3.Distance(baseObj.position, meleeMuzzle.position));
+            float realRanges = realRange - (Vector3.Distance(baseObj.position, meleeMuzzle.position));
 
             Vector3 moveDir = (targetPos - originalPos).normalized;
-            Vector3 destination = originalPos + moveDir * realRange;
+            Vector3 destination = originalPos + moveDir * realRanges;
 
             float moveSpeed = 100f; // 이동 속도
             float moveDuration = 0.2f;

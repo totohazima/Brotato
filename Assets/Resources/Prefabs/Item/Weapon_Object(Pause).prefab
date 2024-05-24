@@ -77,6 +77,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bd3de5250cdb6cc408b23435f663c403, type: 2}
   - {fileID: 11400000, guid: 1c6a77193f876ce4eb17f32b22e9d9b7, type: 2}
   - {fileID: 11400000, guid: e87c150b61ff9524788cc6b5db20703b, type: 2}
+  - {fileID: 11400000, guid: d285f73dbdd1e044daba9d280d43576b, type: 2}
+  - {fileID: 11400000, guid: 39c4fe6c325a0fc46b4e6ca72a38194b, type: 2}
   info: {fileID: 4418403955249243710}
   weapon_Info: {fileID: 4666468545453393843}
   infoObj: {fileID: 0}

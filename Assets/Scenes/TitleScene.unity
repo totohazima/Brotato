@@ -834,6 +834,7 @@ MonoBehaviour:
   explosive_Set: 0
   precision_Set: 0
   native_Set: 0
+  elemental_Set: 0
   itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
   isUglyTooth: 0
   isLumberJack: 0

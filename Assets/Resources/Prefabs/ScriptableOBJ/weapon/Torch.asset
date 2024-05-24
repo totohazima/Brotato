@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c24b29c46e181438a3a6a2a750fa97, type: 3}
+  m_Name: Torch
+  m_EditorClassIdentifier: 
+  weaponName: "\uD1A0\uCE58"
+  setType: "\uC6D0\uC2DC, \uC6D0\uC18C"
+  weaponNickNames: 8
+  attackType: 0
+  weaponSetType: 0500000006000000
+  weaponImage: {fileID: 21300000, guid: 1351e3eb71befdb4688f8c05297b96ce, type: 3}
+  weaponPrefab: {fileID: 4245991933172224598, guid: a7c631a0e1ab0ff4e94eb41e3ecbd211, type: 3}
+  tier1_Info:
+  - "\uC758 \uD654\uC0C1 \uB300\uBBF8\uC9C0\uB97C \uAC00\uD569\uB2C8\uB2E4"
+  tier1_InfoStat:
+  - 3
+  - 3
+  - 100
+  tier2_Info:
+  - "\uC758 \uD654\uC0C1 \uB300\uBBF8\uC9C0\uB97C \uAC00\uD569\uB2C8\uB2E4"
+  tier2_InfoStat:
+  - 5
+  - 4
+  - 100
+  tier3_Info:
+  - "\uC758 \uD654\uC0C1 \uB300\uBBF8\uC9C0\uB97C \uAC00\uD569\uB2C8\uB2E4"
+  tier3_InfoStat:
+  - 8
+  - 5
+  - 100
+  tier4_Info:
+  - "\uC758 \uD654\uC0C1 \uB300\uBBF8\uC9C0\uB97C \uAC00\uD569\uB2C8\uB2E4"
+  tier4_InfoStat:
+  - 12
+  - 8
+  - 100

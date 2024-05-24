@@ -17,7 +17,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     float mineTimer;
     float minesCoolTime; //Áö·Ú »ı¼º ÄğÅ¸ÀÓ
 
-    public List<GameObject> enemys;
+    public List<EnemyAction> enemys;
     public List<GameObject> mines;
     public List<GameObject> turrets;
     public List<GameObject> trees;
@@ -90,7 +90,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     {
         for (int i = 0; i < enemys.Count; i++)
         {
-            enemys[i].SetActive(false);
+            enemys[i].gameObject.SetActive(false);
         }
         enemys.Clear();
     }
@@ -121,7 +121,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
                 }
             }
             enemy[i].transform.position = mark[i].transform.position;
-            enemys.Add(enemy[i]);
+            //enemys.Add(enemy[i]);
             mark[i].SetActive(false);
         }
     }
@@ -141,7 +141,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         {
             enemy[i] = Spawn(4);
             enemy[i].transform.position = mark[i].transform.position;
-            enemys.Add(enemy[i]);
+            //enemys.Add(enemy[i]);
             mark[i].SetActive(false);
         }
     }
