@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public int minesCount; //지뢰 아이템 갯수
     public int turretCount; //터렛 아이템 갯수
     public int snakeCount; //뱀 아이템 갯수 (하나 당 화상 적용 시 전염되는 몬스터 수 +1)
+    public bool isScaredSausage;
+    public float scaredSausageChance; //겁먹은 소시지의 화상 확률 (하나당 25%)
+    public float scaredSausageDamage; //겁먹은 소시지의 틱 당 화상 대미지 (하나당 1)
+    public int scaredSausageDamageCount; //겁먹은 소시지의 틱 횟수 
     [Header("#Difficult_Info")]
     public int difficult_Level; //난이도
     public bool isSpecialEnemySpawn; //새로운 적의 출현
@@ -197,6 +201,12 @@ public class GameManager : MonoBehaviour, UI_Upadte
                     break;
                 case Item.ItemType.SNAKE:
                     snakeCount = item[i].curCount;
+                    break;
+                case Item.ItemType.SCARED_SAUSAGE:
+                    isScaredSausage = true;
+                    scaredSausageChance = item[i].curCount * 25f;
+                    scaredSausageDamage = item[i].curCount * 1;
+                    scaredSausageDamageCount = item[i].curCount * 3;
                     break;
             }
 

@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour
     public int infectedCount;
     public float burnDamage;
     public int burnCount;
+    public bool isSausage;
     public float slowEffect;
 
     [HideInInspector] public Rigidbody rigid;
@@ -90,6 +91,27 @@ public class Bullet : MonoBehaviour
         else
         {
             isCritical = false;
+        }
+
+        if (GameManager.instance.isScaredSausage == true)
+        {
+            float burnChance = GameManager.instance.scaredSausageChance;
+            float nonBurning = 100 - burnChance;
+            float[] chance = { burnChance, nonBurning };
+            int index2 = Judgment(chance);
+
+            if(index2 == 0)
+            {
+                isSausage = true;
+            }
+            else
+            {
+                isSausage = false;
+            }
+        }
+        else
+        {
+            isSausage = false;
         }
 
         startPos = transform.position;
@@ -165,5 +187,27 @@ public class Bullet : MonoBehaviour
             }
             
         }
+    }
+
+    public int Judgment(float[] rando)
+    {
+        int count = rando.Length;
+        float max = 0;
+        for (int i = 0; i < count; i++)
+            max += rando[i];
+
+        float range = UnityEngine.Random.Range(0f, (float)max);
+        //0.1, 0.2, 30, 40
+        double chance = 0;
+        for (int i = 0; i < count; i++)
+        {
+            chance += rando[i];
+            if (range > chance)
+                continue;
+
+            return i;
+        }
+
+        return -1;
     }
 }

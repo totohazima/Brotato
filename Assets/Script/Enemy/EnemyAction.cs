@@ -143,9 +143,17 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     }
     public void StatusEffectCalculator(StatusEffect.EffectType[] effect, Bullet bullet)
     {
+        if (bullet.isSausage == true)
+        {
+            GameManager game = GameManager.instance;
+
+            float damage = (game.scaredSausageDamage + game.player_Info.elementalDamage) * (1 + (game.player_Info.persentDamage / 100));
+            ScaredSausage(game.snakeCount, damage, game.scaredSausageDamageCount);
+        }
+
         for (int i = 0; i < effect.Length; i++)
         {
-            switch(effect[i])
+            switch (effect[i])
             {
                 case StatusEffect.EffectType.NONE:
                     break;
@@ -157,6 +165,24 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
                     break;
             }
         }
+    }
+
+    /// <summary>
+    /// 겁 먹은 소시지를 가지고 있을 경우 사용하는 함수
+    /// 소시지 갯수에 비례한 확률로 화상에 걸릴지 체크한다.
+    /// 모든 무기에 전부 적용되는 상태이상 함수
+    /// </summary>
+    public void ScaredSausage(int infectedCount, float burnDamage, int burnCount)
+    {
+        //가장 높은 대미지를 가진 화상효과만 적용됨
+        if (statusEffect.burnDamage <= burnDamage)
+        {
+            statusEffect.infectedCount = infectedCount;
+            statusEffect.burnDamage = burnDamage;
+            statusEffect.burnCount = burnCount;
+            statusEffect.maxBurnCount = burnCount;
+        }
+
     }
     public void ApplyBurnEffect(int infectedCount, float burnDamage, int burnCount)
     {
