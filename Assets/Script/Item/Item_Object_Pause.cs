@@ -16,7 +16,7 @@ public class Item_Object_Pause : Item, IPointerDownHandler, IPointerUpHandler, I
     public override void OnDisable()
     {
         base.OnDisable();
-        UIUpdateManager.uiUpdates.Add(this);
+        UIUpdateManager.uiUpdates.Remove(this);
     }
 
     public void UI_Update()

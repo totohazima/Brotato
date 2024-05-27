@@ -45,7 +45,7 @@ public class Regen_Info : Stat_Info
         string txt = null;
         if(regen > 0)
         {
-            txt = scriptable.statPlusText[0] + " " + regenSecond + scriptable.statPlusText[1] + regenPer + scriptable.statPlusText[2];
+            txt = scriptable.statPlusText[0] + " " + regenSecond.ToString("F2") + scriptable.statPlusText[1] + regenPer + scriptable.statPlusText[2];
         }
         else if(regen < 0)
         {

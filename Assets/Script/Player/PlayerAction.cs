@@ -13,7 +13,7 @@ public class PlayerAction : Player, ICustomUpdateMono
     private float regenTime; //체력 재생 시간
     private float invincibleTime = 0.5f; //피격 후 무적 시간
     [SerializeField] private float moveSpeed; //캐릭터 이동속도
-    [SerializeField] private float hitTImer;
+    [SerializeField] private float hitTimer;
     public Animator anim;
     public CapsuleCollider coll;
     public SphereCollider magnet;
@@ -117,11 +117,11 @@ public class PlayerAction : Player, ICustomUpdateMono
 
         if (isHit == true)
         {
-            hitTImer += Time.deltaTime;
-            if (hitTImer >= invincibleTime)
+            hitTimer += Time.deltaTime;
+            if (hitTimer >= invincibleTime)
             {
                 isHit = false;
-                hitTImer = 0;
+                hitTimer = 0;
             }
         }
 

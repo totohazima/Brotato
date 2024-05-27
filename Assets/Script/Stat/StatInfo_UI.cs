@@ -104,43 +104,46 @@ public class StatInfo_UI : MonoBehaviour, UI_Upadte
     {
         player = GameManager.instance.player_Info;
 
-        basic_Status_Num[0].text = (GameManager.instance.player_Info.playerLevel + 1).ToString("F0");
-        basic_Status_Num[1].text = player.maxHealth.ToString("F0");
-        basic_Status_Num[2].text = player.regeneration.ToString("F0");
-        basic_Status_Num[3].text = player.bloodSucking.ToString("F0");
-        basic_Status_Num[4].text = player.persentDamage.ToString("F0");
-        basic_Status_Num[5].text = player.meleeDamage.ToString("F0");
-        basic_Status_Num[6].text = player.rangeDamage.ToString("F0");
-        basic_Status_Num[7].text = player.elementalDamage.ToString("F0");
-        basic_Status_Num[8].text = player.attackSpeed.ToString("F0");
-        basic_Status_Num[9].text = player.criticalChance.ToString("F0");
-        basic_Status_Num[10].text = player.engine.ToString("F0");
-        basic_Status_Num[11].text = player.range.ToString("F0");
-        basic_Status_Num[12].text = player.armor.ToString("F0");
-        basic_Status_Num[13].text = player.evasion.ToString("F0");
-        basic_Status_Num[14].text = player.accuracy.ToString("F0");
-        basic_Status_Num[15].text = player.lucky.ToString("F0");
-        basic_Status_Num[16].text = player.harvest.ToString("F0");
-        basic_Status_Num[17].text = player.speed.ToString("F0");
-
-        for (int i = 1; i < basic_Status.Length; i++)
+        if (player != null)
         {
-            if(int.Parse(basic_Status_Num[i].text) > 0)
+            basic_Status_Num[0].text = (player.playerLevel + 1).ToString("F0");
+            basic_Status_Num[1].text = player.maxHealth.ToString("F0");
+            basic_Status_Num[2].text = player.regeneration.ToString("F0");
+            basic_Status_Num[3].text = player.bloodSucking.ToString("F0");
+            basic_Status_Num[4].text = player.persentDamage.ToString("F0");
+            basic_Status_Num[5].text = player.meleeDamage.ToString("F0");
+            basic_Status_Num[6].text = player.rangeDamage.ToString("F0");
+            basic_Status_Num[7].text = player.elementalDamage.ToString("F0");
+            basic_Status_Num[8].text = player.attackSpeed.ToString("F0");
+            basic_Status_Num[9].text = player.criticalChance.ToString("F0");
+            basic_Status_Num[10].text = player.engine.ToString("F0");
+            basic_Status_Num[11].text = player.range.ToString("F0");
+            basic_Status_Num[12].text = player.armor.ToString("F0");
+            basic_Status_Num[13].text = player.evasion.ToString("F0");
+            basic_Status_Num[14].text = player.accuracy.ToString("F0");
+            basic_Status_Num[15].text = player.lucky.ToString("F0");
+            basic_Status_Num[16].text = player.harvest.ToString("F0");
+            basic_Status_Num[17].text = player.speed.ToString("F0");
+
+            for (int i = 1; i < basic_Status.Length; i++)
             {
-                basic_Status_Name[i].color = new Color(72 / 255f, 255 / 255f, 82 / 255f); //#4CFF52 컬러
-                basic_Status_Num[i].color = new Color(72 / 255f, 255 / 255f, 82 / 255f);
+                if (int.Parse(basic_Status_Num[i].text) > 0)
+                {
+                    basic_Status_Name[i].color = new Color(72 / 255f, 255 / 255f, 82 / 255f); //#4CFF52 컬러
+                    basic_Status_Num[i].color = new Color(72 / 255f, 255 / 255f, 82 / 255f);
+                }
+                else if (int.Parse(basic_Status_Num[i].text) < 0)
+                {
+                    basic_Status_Name[i].color = Color.red;
+                    basic_Status_Num[i].color = Color.red;
+                }
+                else
+                {
+                    basic_Status_Name[i].color = Color.white;
+                    basic_Status_Num[i].color = Color.white;
+                }
+
             }
-            else if(int.Parse(basic_Status_Num[i].text) < 0)
-            {
-                basic_Status_Name[i].color = Color.red;
-                basic_Status_Num[i].color = Color.red;
-            }
-            else
-            {
-                basic_Status_Name[i].color = Color.white;
-                basic_Status_Num[i].color = Color.white;
-            }
-                
         }
     }
     private void ViewDetailStats()

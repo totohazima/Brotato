@@ -96,7 +96,7 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
     /// </summary>
 #if UNITY_EDITOR
     int segments = 100;
-    Color gizmoColor = Color.red;
+    Color gizmoColor = Color.green;
     bool drawWhenSelected = true;
 
     void OnDrawGizmosSelected()

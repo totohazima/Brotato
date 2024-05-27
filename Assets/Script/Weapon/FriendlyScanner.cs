@@ -79,10 +79,30 @@ public class FriendlyScanner : MonoBehaviour,ICustomUpdateMono
     /// 범위 확인 용 기즈모
     /// </summary>
 #if UNITY_EDITOR
+    int segments = 100;
+    Color gizmoColor = Color.green;
+    bool drawWhenSelected = true;
+
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position, radius);
+        if (drawWhenSelected)
+        {
+            Gizmos.color = gizmoColor;
+            DrawHollowCircle(transform.position, radius, segments);
+        }
+    }
+    void DrawHollowCircle(Vector3 center, float radius, int segments)
+    {
+        float angle = 0f;
+        Vector3 lastPoint = center + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0f);
+
+        for (int i = 1; i <= segments; i++)
+        {
+            angle = i * Mathf.PI * 2f / segments;
+            Vector3 newPoint = center + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0f);
+            Gizmos.DrawLine(lastPoint, newPoint);
+            lastPoint = newPoint;
+        }
     }
 #endif
 }

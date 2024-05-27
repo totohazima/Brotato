@@ -30,8 +30,7 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
     void OnEnable()
     {
         effecter = gameObject.GetComponent<EnemyAction>();
-        tickRate = 0.5f;
-        EffectOnOff(EffectType.BURN, false);
+        tickRate = 0.1f;
         CustomUpdateManager.customUpdates.Add(this);
     }
 
@@ -56,7 +55,7 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
         IsBoolReset(ref isInfectedBurn);
         IsBoolReset(ref isSlow);
 
-        EffectOnOff(EffectType.BURN, false);
+        EffectOnOff();
     }
     public void CustomUpdate()
     {
@@ -65,11 +64,12 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
             return;
         }
 
+        EffectOnOff();
+
         if (burnCount != 0)
         {
             isBurn = true;
             Burning();
-            EffectOnOff(EffectType.BURN, true);
             if(infectedCount != 0)
             {
                 isInfectedBurn = true;
@@ -82,7 +82,6 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
             {
                 FloatReset(ref burnTimer);
             }
-            EffectOnOff(EffectType.BURN, false);
         }
 
         if (slowEffect != 0)
@@ -152,8 +151,6 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
             FloatReset(ref burnDamage);
             IsBoolReset(ref isInfectedBurn);
             isBurn = false;
-
-            EffectOnOff(EffectType.BURN, false);
         }
     }
     /// <summary>
@@ -199,21 +196,17 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
     /// <summary>
     /// 이펙트 온오프
     /// </summary>
-    private void EffectOnOff(EffectType effectType, bool isBool)
+    private void EffectOnOff()
     {
-        switch(effectType)
+        switch(isBurn)
         {
-            case EffectType.BURN:
-                if(isBool == true)
-                {
-                    if (burningEffect.isPlaying == false)
-                        burningEffect.Play();
-                }
-                else
-                {
-                    if (burningEffect.isStopped == false)
+            case true:
+                if (burningEffect.isPlaying == false)
+                    burningEffect.Play();
+                break;
+            case false:
+                if (burningEffect.isStopped == false)
                         burningEffect.Stop();
-                }
                 break;
         }
     }
@@ -243,7 +236,7 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
 
 #if UNITY_EDITOR
     int segments = 100;
-    Color gizmoColor = Color.red;
+    Color gizmoColor = Color.yellow;
     bool drawWhenSelected = true;
 
     void OnDrawGizmosSelected()
