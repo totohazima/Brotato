@@ -220,7 +220,7 @@ public class Player : MonoBehaviour
                     {
                         case Stat.PlayerStat.MAXHEALTH:
                             if (GameManager.instance.character == Character.RANGER) //레인저 체력 증가량 -25%
-                                maxHealth = itemInventory[i].riseStats[j] * 0.75f;
+                                maxHealth += itemInventory[i].riseStats[j] * 0.75f;
                             else
                                 maxHealth += itemInventory[i].riseStats[j];
                             break;

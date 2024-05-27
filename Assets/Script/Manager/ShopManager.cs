@@ -319,7 +319,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
                         goodsList.Add(weaponGoods.gameObject);
 
                         sameWeapon.Add(weaponGoods.gameObject);
-                        Debug.Log("같은 무기 (20%) " + weapon[nums].weaponName.ToString());
+                        //Debug.Log("같은 무기 (20%) " + weapon[nums].weaponName.ToString());
                     }
                     else if (weaponIndex == 1)
                     {
@@ -353,7 +353,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
                         goodsList.Add(weaponGoods.gameObject);
 
                         sameClassWeapon.Add(weaponGoods.gameObject);
-                        Debug.Log("같은 클래스의 무기 (15%) " + weapon[nums].weaponName.ToString());
+                        //Debug.Log("같은 클래스의 무기 (15%) " + weapon[nums].weaponName.ToString());
                     }
                     else
                     {
@@ -393,12 +393,9 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
                         goodsList.Add(weaponGoods.gameObject);
 
                         allWeapon.Add(weaponGoods.gameObject);
-                        Debug.Log("모든 무기 (65%) " + weapon[nums].weaponName.ToString());
+                        //Debug.Log("모든 무기 (65%) " + weapon[nums].weaponName.ToString());
                     }
-                }
-
-                //int num = Random.Range(0, weapon.Length);
-                
+                }      
             }
         }
 

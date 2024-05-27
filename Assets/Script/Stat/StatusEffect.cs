@@ -234,6 +234,11 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
         effects = 0;
     }
 
+
+    /// <summary>
+    /// 화상 전염 사거리 표시
+    /// 에디터 상에서만 볼 수 있음
+    /// </summary>
 #if UNITY_EDITOR
     int segments = 100;
     Color gizmoColor = Color.yellow;

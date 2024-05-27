@@ -30,7 +30,6 @@ public class ItemManager : MonoBehaviour
         {
             if(GameManager.instance.itemGroup_Scriptable.items[i].itemCode == itemType)
             {
-                Debug.Log("æ∆¿Ã≈€ »πµÊ" + GameManager.instance.itemGroup_Scriptable.items[i].itemCode.ToString());
                 index = i;
                 getItem = GameManager.instance.itemGroup_Scriptable.items[i];
             }
