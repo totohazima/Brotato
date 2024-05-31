@@ -150,7 +150,7 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
         bullet.StatusEffecInit(StatusEffect.EffectType.BURN);
         float damage = 0;
         int count = 0;
-        PlayerAction player = GameManager.instance.player_Info;
+        Player_Action player = GameManager.instance.player_Info;
         switch (weaponTier)
         {
             case 0:

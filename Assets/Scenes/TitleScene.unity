@@ -773,6 +773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3304408591248705482}
   - component: {fileID: 3304408591248705493}
+  - component: {fileID: 3304408591248705494}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -841,6 +842,11 @@ MonoBehaviour:
   isWeirdGhost: 0
   minesCount: 0
   turretCount: 0
+  snakeCount: 0
+  isScaredSausage: 0
+  scaredSausageChance: 0
+  scaredSausageDamage: 0
+  scaredSausageDamageCount: 0
   difficult_Level: 0
   isSpecialEnemySpawn: 0
   isEliteSpawn: 0
@@ -863,3 +869,17 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  easySave: {fileID: 3304408591248705494}
+--- !u!114 &3304408591248705494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3304408591248705483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2384dd455b3b914da2732ed4e34e589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSaved: 0

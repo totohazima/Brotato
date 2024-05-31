@@ -52,7 +52,7 @@ public class EnemyBullet : Bullet
 
         if (collision.CompareTag("Player"))
         {
-            PlayerAction player = StageManager.instance.playerInfo;
+            Player_Action player = StageManager.instance.playerInfo;
 
             if (player.whiteFlash != null)
                 player.whiteFlash.PlayFlash();

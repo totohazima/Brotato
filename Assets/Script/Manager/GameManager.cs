@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Only1Games.GDBA;
+using ES3Types;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour, UI_Upadte
 {
     public static GameManager instance;
@@ -17,7 +19,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
     [HideInInspector] public GameObject player_Obj;
     [HideInInspector] public GameObject difficult_Obj;
     [HideInInspector] public int maxWeaponCount; //최대 무기 갯수
-    public PlayerAction player_Info;
+    public Player_Action player_Info;
     public Player.Character character;
     public GameObject weaponPrefab;
     public GameObject optionUI;
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public float decreaseHarvest_Num; //10웨이브 이후 수확 감소치 20 -> 20%
     public float[] weaponTierChance = new float[4];
     public float[] upgradeChance = new float[4];
+    public SaveLoadExample easySave;
     void Awake()
     {
         instance = this;
@@ -176,6 +179,103 @@ public class GameManager : MonoBehaviour, UI_Upadte
         player_Info.StatCalculate();
         LoadingSceneManager.CloseScene("MainScene");
     }
+
+    public IEnumerator GameLoad()
+    {
+        yield return 0;
+        isStart = true;
+        if (character == Player.Character.MULTITASKER)
+        {
+            maxWeaponCount = 12;
+        }
+        else
+        {
+            maxWeaponCount = 6;
+        }
+        StageManager.instance.curHp = player_Info.maxHealth_Origin;
+        StageManager.instance.waveLevel = ES3.Load<int>("Wave",easySave.saveFilePath);
+
+        //무기 로드
+        int weaponCount = ES3.Load<int>("WeaponCount", easySave.saveFilePath);
+        for (int i = 0; i < weaponCount; i++)
+        {
+            Weapon.Weapons weapons = ES3.Load<Weapon.Weapons>($"Weapon_{i}_Code", easySave.saveFilePath);
+            int saveWeaponTier = ES3.Load<int>($"Weapon_{i}_Tier", easySave.saveFilePath);
+            GameObject saveWeapon = null;
+
+            switch (weapons)
+            {
+                case Weapon.Weapons.PISTOL:
+                    saveWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Pistol_Weapon");
+                    break;
+                case Weapon.Weapons.DOUBLESHOTGUN:
+                    saveWeapon = Resources.Load<GameObject>("Prefabs/Weapon/ShotGun_Weapon");
+                    break;
+                case Weapon.Weapons.SPEAR:
+                    saveWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Spear_Weapon");
+                    break;
+                case Weapon.Weapons.SHREDDER:
+                    saveWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Shredder_Weapon");
+                    break;
+                case Weapon.Weapons.PUNCH:
+                    saveWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Fist_Weapon");
+                    break;
+                case Weapon.Weapons.WRENCH:
+                    saveWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Wrench_Weapon");
+                    break;
+                case Weapon.Weapons.DRIVER:
+                    saveWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Driver_Weapon");
+                    break;
+                case Weapon.Weapons.WAND:
+                    saveWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Wand_Weapon");
+                    break;
+                case Weapon.Weapons.TORCH:
+                    saveWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Torch_Weapon");
+                    break;
+            }
+
+            if(saveWeapon != null)
+            {
+                saveWeapon.GetComponent<Weapon>().weaponTier = saveWeaponTier;
+                GameObject weapon = Instantiate(saveWeapon);
+                weapon.transform.SetParent(player_Info.weaponMainPos);
+                player_Info.weapons.Add(weapon);
+            }
+        }
+
+        //아이템 로드
+        int itemCount = ES3.Load<int>("ItemCount", easySave.saveFilePath);
+        for (int i = 0; i < itemCount; i++)
+        {
+            Item.ItemType itemCode = ES3.Load<Item.ItemType>($"Item_{i}_Code", easySave.saveFilePath);
+            int item_Count = ES3.Load<int>($"Item_{i}_Count", easySave.saveFilePath);
+            ItemScrip getItem = null;
+            for (int j = 0; j < itemGroup_Scriptable.items.Length; j++)
+            {
+                if (itemGroup_Scriptable.items[j].itemCode == itemCode)
+                {
+                    getItem = itemGroup_Scriptable.items[j];
+                    break;
+                }
+            }
+
+            GameObject obj = Resources.Load<GameObject>("Prefabs/Item/Item_Object");
+            Transform itemObj = Instantiate(obj.transform);
+            itemObj.SetParent(transform);
+            Item item = itemObj.GetComponent<Item>();
+            item.Init(getItem);
+            item.curCount = item_Count;
+            player_Info.itemInventory.Add(item);
+        }
+
+        //StageManager.instance.ShopOpen();
+
+        WeaponSetSearch();
+        player_Info.StatCalculate();
+        easySave.isLoaded = false;
+        LoadingSceneManager.CloseScene("MainScene");
+    }
+
     public void ItemSearch()
     {
         List<Item> item = player_Info.itemInventory;

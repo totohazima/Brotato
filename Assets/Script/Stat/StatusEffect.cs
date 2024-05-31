@@ -30,7 +30,7 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
     void OnEnable()
     {
         effecter = gameObject.GetComponent<EnemyAction>();
-        tickRate = 0.1f;
+        tickRate = 0.5f;
         CustomUpdateManager.customUpdates.Add(this);
     }
 

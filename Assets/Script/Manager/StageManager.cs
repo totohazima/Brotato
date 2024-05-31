@@ -33,7 +33,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public GameObject gameOverUI;
     [Header("# Variable")]
     private float overExp; //레벨업 후 남은 경험치
-    public PlayerAction playerInfo;
+    public Player_Action playerInfo;
     public float curHp; //현재 체력
     public float maxHp; //최대 체력
     public float curExp;  //현재 경험치
@@ -68,7 +68,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         pool = poolManager.GetComponent<PoolManager>();
         mainPlayer = Instantiate(playerPrefab);
         main = mainPlayer.transform;
-        playerInfo = mainPlayer.GetComponent<PlayerAction>();
+        playerInfo = mainPlayer.GetComponent<Player_Action>();
         GameManager.instance.player_Info = playerInfo;
         //curHp = 1; //사망 방지
         
@@ -87,8 +87,14 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         yMin = wallPos[1].position.y;
         yMax = wallPos[0].position.y;
 
-        StartCoroutine(GameManager.instance.WaveStart());
-
+        if (GameManager.instance.easySave.isLoaded == true)
+        {
+            StartCoroutine(GameManager.instance.GameLoad());
+        }
+        else
+        {
+            StartCoroutine(GameManager.instance.WaveStart());
+        }
         
     }
     void OnEnable()
@@ -182,6 +188,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
                 GameEnd();
                 return;
             }
+
             timer = waveTime[waveLevel];
             isEnd = true;
             curHp = maxHp;
@@ -348,6 +355,8 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         shopUI.SetActive(true);
         ShopManager.instance.ShopReRoll();
         ItemManager.instance.ItemListUp();
+
+        GameManager.instance.easySave.SaveScene();
     }
     
 

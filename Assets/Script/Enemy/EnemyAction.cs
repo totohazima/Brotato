@@ -200,7 +200,6 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         statusEffect.slowEffect = slowEffect;
     }
 
-
     private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Player"))

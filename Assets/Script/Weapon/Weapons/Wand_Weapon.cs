@@ -140,7 +140,7 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
 
         float damage = 0;
         int count = 0;
-        PlayerAction player = GameManager.instance.player_Info;
+        Player_Action player = GameManager.instance.player_Info;
         switch(weaponTier)
         {
             case 0:
