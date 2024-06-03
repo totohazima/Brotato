@@ -93,7 +93,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     }
     public virtual void DamageCalculator(float damage, int per, float accuracy, float bloodSuck, bool isCritical, float criticalDamage, float knockBack, Vector3 bulletPos)
     {
-        if (GameManager.instance.isUglyTooth == true)
+        if (GameManager.instance.playerInfo.isUglyTooth == true)
         {
             if (ugliyToothSlow < 3)
             {
@@ -108,7 +108,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         { }
         else
         {
-            stage.curHp++;
+            GameManager.instance.playerInfo.playerHealth++;
             string txt = "<color=#4CFF52>1</color>";
             Transform texts = DamageTextManager.instance.TextCreate(0, txt).transform;
             texts.position = GameManager.instance.player_Info.transform.position;
@@ -146,8 +146,8 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         {
             GameManager game = GameManager.instance;
 
-            float damage = (game.scaredSausageDamage + game.player_Info.elementalDamage) * (1 + (game.player_Info.persentDamage / 100));
-            ScaredSausage(game.snakeCount, damage, game.scaredSausageDamageCount);
+            float damage = (game.playerInfo.scaredSausageDamage + game.player_Info.elementalDamage) * (1 + (game.player_Info.persentDamage / 100));
+            ScaredSausage(game.playerInfo.snakeCount, damage, game.playerInfo.scaredSausageDamageCount);
         }
 
         for (int i = 0; i < effect.Length; i++)
@@ -209,7 +209,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
                 if (stage.playerInfo.whiteFlash != null && name != EnemyName.TREE)
                 {
                     stage.playerInfo.whiteFlash.PlayFlash();
-                    stage.HitCalculate(damage);
+                    GameManager.instance.playerInfo.HitCalculate(damage);
                     //황소: 피격 시 폭발
                     if(GameManager.instance.character == Player.Character.BULL)
                     {

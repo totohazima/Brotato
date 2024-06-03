@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class StatusEffect : MonoBehaviour, ICustomUpdateMono
 {
-    public EnemyAction effecter;
+    public GameObject effecterObject;
+    private EnemyAction effecter;
     public ParticleSystem burningEffect;
     [Header("# 화상 효과")]
     public bool isBurn;
@@ -29,6 +30,7 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
     
     void OnEnable()
     {
+        effecter = effecterObject.GetComponent<EnemyAction>();
         tickRate = 0.5f;
         CustomUpdateManager.customUpdates.Add(this);
     }

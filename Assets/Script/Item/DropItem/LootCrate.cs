@@ -8,12 +8,12 @@ public class LootCrate : DropItem
     {
         if (other.CompareTag("Player"))
         {
-            StageManager.instance.lootChance++;
+            GameManager.instance.playerInfo.lootChance++;
 
             float heal = (3f + StageManager.instance.playerInfo.consumableHeal);
-            if (StageManager.instance.curHp < StageManager.instance.maxHp)
+            if (GameManager.instance.playerInfo.playerHealth < StageManager.instance.maxHp)
             {
-                StageManager.instance.curHp += heal;
+                GameManager.instance.playerInfo.playerHealth += heal;
                 string healTxt = "<color=#4CFF52>" + heal.ToString("F0") + "</color>";
                 Transform text = DamageTextManager.instance.TextCreate(0, healTxt).transform;
                 text.position = transform.position;

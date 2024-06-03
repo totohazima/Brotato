@@ -112,13 +112,13 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
             bool isNot = false;
             for (int i = 0; i < indexes.Length; i++) //번호 뽑기
             {
-                index = Random.Range(0, GameManager.instance.itemGroup_Scriptable.items.Length);
+                index = Random.Range(0, GameManager.instance.playerInfo.itemGroup_Scriptable.items.Length);
                 indexes[i] = index;
             }
 
             for (int i = 0; i < indexes.Length; i++) //5개 번호 중에 최대 수량에 도달한 아이템이 있는지 체크
             {
-                Item.ItemType type = GameManager.instance.itemGroup_Scriptable.items[indexes[i]].itemCode;
+                Item.ItemType type = GameManager.instance.playerInfo.itemGroup_Scriptable.items[indexes[i]].itemCode;
                 for (int j = 0; j < ItemManager.instance.maxItemList.Count; j++)
                 {
                     if (ItemManager.instance.maxItemList[j] == type)
@@ -146,11 +146,11 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
             for (int j = 0; j < lockList.Count; j++)
             {
                 ItemGoods goods = lockList[j].GetComponent<ItemGoods>();
-                for (int i = 0; i < GameManager.instance.itemGroup_Scriptable.items.Length; i++)
+                for (int i = 0; i < GameManager.instance.playerInfo.itemGroup_Scriptable.items.Length; i++)
                 {
                     if (goods != null)
                     {
-                        if (goods.scriptable == GameManager.instance.itemGroup_Scriptable.items[i])
+                        if (goods.scriptable == GameManager.instance.playerInfo.itemGroup_Scriptable.items[i])
                         {
                             lockNum[j] = i;
                         }
@@ -274,7 +274,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
 
             if (chanceIndex == 0)
             {
-                ItemScrip items = GameManager.instance.itemGroup_Scriptable.items[indexes[i]];
+                ItemScrip items = GameManager.instance.playerInfo.itemGroup_Scriptable.items[indexes[i]];
                 GameObject product = Get(0);
                 ItemGoods itemGoods = product.GetComponent<ItemGoods>();
                 itemGoods.Init(items, indexes[i]);

@@ -41,7 +41,7 @@ public class Tree : EnemyAction
         Transform text = DamageTextManager.instance.TextCreate(0, damageText).transform;
         text.position = textPopUpPos.position;
         ///임시로 황소캐릭터의 폭발은 나무를 한 방에 부숨
-        if (GameManager.instance.isLumberJack == true || GameManager.instance.character == Player.Character.BULL)
+        if (GameManager.instance.playerInfo.isLumberJack == true || GameManager.instance.character == Player.Character.BULL)
         {
             curHealth = 0;
         }

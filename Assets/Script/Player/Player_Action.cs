@@ -185,11 +185,11 @@ public class Player_Action : Player, ICustomUpdateMono
         if (regenHp > 0) 
         {
             timer += Time.deltaTime;
-            if (stage.curHp < stage.maxHp)
+            if (GameManager.instance.playerInfo.playerHealth < stage.maxHp)
             {
                 if (timer >= regenTime)
                 {
-                    stage.curHp += 1;
+                    GameManager.instance.playerInfo.playerHealth += 1;
                     timer = 0;
                     string healTxt = "<color=#4CFF52>1</color>";
                     Transform text = DamageTextManager.instance.TextCreate(0, healTxt).transform;

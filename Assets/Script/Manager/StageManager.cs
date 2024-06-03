@@ -33,15 +33,9 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public GameObject gameOverUI;
     [Header("# Variable")]
     public Player_Action playerInfo;
-    public float curHp; //현재 체력
     public float maxHp; //최대 체력
-    //public float curExp;  //현재 경험치
-    //public float maxExp;  //최대 경험치
     public int waveLevel;   //웨이브 레벨
     public float[] waveTime;    //웨이브 시간
-    //public int money;   //돈
-    //public int interest; //이자
-    public int lootChance; //상자깡 찬스
     public int inWaveLoot_Amount; //현재 웨이브에서 나온 상자의 개수
     public float timer; //시간
 
@@ -139,9 +133,9 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         }
 
 
-        if(curHp > maxHp)
+        if(GameManager.instance.playerInfo.playerHealth > maxHp)
         {
-            curHp = maxHp;
+            GameManager.instance.playerInfo.playerHealth = maxHp;
         }
         UiVisualize();
         
@@ -157,7 +151,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
 
         if (GameManager.instance.isStart == true)
         {
-            if (curHp <= 0)
+            if (GameManager.instance.playerInfo.playerHealth <= 0)
             {
                 GameManager.instance.playerInfo.isDie = true;
                 StartCoroutine(Died());
@@ -178,7 +172,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
 
             timer = waveTime[waveLevel];
             GameManager.instance.isEnd = true;
-            curHp = maxHp;
+            GameManager.instance.playerInfo.playerHealth = maxHp;
             FriendlyRemove();
 
             //수확 스탯
@@ -217,7 +211,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         {  
             LevelUp();
         }
-        else if (lootChance > 0)
+        else if (GameManager.instance.playerInfo.lootChance > 0)
         {
             LootMenuOpen();
         }
@@ -258,8 +252,8 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     {
         maxHp = playerInfo.maxHealth;
         hpBarUI.maxValue = maxHp;
-        hpBarUI.value = curHp;
-        hpNum.text = curHp.ToString("F0") + " / " + maxHp.ToString("F0");
+        hpBarUI.value = GameManager.instance.playerInfo.playerHealth;
+        hpNum.text = GameManager.instance.playerInfo.playerHealth.ToString("F0") + " / " + maxHp.ToString("F0");
 
         moneyUI.text = GameManager.instance.playerInfo.money.ToString("F0");
         interestNum.text = GameManager.instance.playerInfo.interest.ToString("F0");
@@ -305,14 +299,14 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             }
         }
 
-        if(lootChance >= 1)
+        if(GameManager.instance.playerInfo.lootChance >= 1)
         {
             lootCrateMarkUi.SetActive(true);
             for (int i = 0; i < 7; i++)
             {
                 lootMarks[i].SetActive(false);
             }
-            for (int i = 0; i < lootChance; i++)
+            for (int i = 0; i < GameManager.instance.playerInfo.lootChance; i++)
             {
                 if (i <= 6)
                 {
@@ -349,11 +343,11 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
 
     public void nextWave()
     {
-        curHp = maxHp;
-        if(GameManager.instance.isWeirdGhost == true)
+        GameManager.instance.playerInfo.playerHealth = maxHp;
+        if(GameManager.instance.playerInfo.isWeirdGhost == true)
         {
-            curHp = 1;
-            GameManager.instance.isWeirdGhost = false;
+            GameManager.instance.playerInfo.playerHealth = 1;
+            GameManager.instance.playerInfo.isWeirdGhost = false;
         }
         waveLevel++;
         timer = waveTime[waveLevel];
@@ -378,14 +372,6 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         GameManager.instance.engineerBuildingPos = spawn.FriendlySpawnPosition();
         StartCoroutine(spawn.MineSetting());
         StartCoroutine(spawn.TurretSetting());
-
-        //for (int i = 0; i < playerInfo.weapons.Count; i++)
-        //{
-        //    if(playerInfo.weapons[i].GetComponent<Weapon_Action>().index == Weapon.Weapons.WRENCH)
-        //    {
-        //        StartCoroutine(playerInfo.weapons[i].GetComponent<Wrench_Weapon>().SpawnTurret());
-        //    }
-        //}
     }
 
     public void StatUI_On()
@@ -401,55 +387,6 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     {
         gameClearUI.SetActive(true);
         GameManager.instance.isEnd = true;
-    }
-
-    
-    public void HitCalculate(float damage)
-    {
-        float damages = Mathf.Round(damage);
-        float hit, dodge;
-        if(playerInfo.evasion >= 60)
-        {
-            dodge = 60;
-            hit = 100 - dodge;
-        }
-        else
-        {
-            dodge = playerInfo.evasion;
-            hit = 100 - dodge;
-        }
-        float[] chance = { hit, dodge };
-        int index = Judgment(chance);
-        if(index == 0)
-        {
-            //방어력이 0 초과
-            if(playerInfo.armor > 0)
-            {
-                float enduce = 1 / (1 + (GameManager.instance.player_Info.armor / 15));
-                enduce = 1 - enduce;
-                damages -= damages * enduce;
-                curHp -= damages;
-            }
-            //방어력이 0 미만
-            else if(playerInfo.armor < 0)
-            {
-                float armor = Mathf.Abs(GameManager.instance.player_Info.armor);
-                float enduce = 1 / (1 + (armor / 15));
-                enduce = 1 + (1 - enduce);
-                damages = (damages * enduce);
-                curHp -= damages;
-            }
-            else
-            {
-                curHp -= damages;
-            }
-        }
-        else
-        {
-            string dodgeText = "<color=#4CFF52>회피</color>";
-            Transform text = DamageTextManager.instance.TextCreate(0, dodgeText).transform;
-            text.position = GameManager.instance.player_Info.transform.position;
-        }
     }
 
     public int Judgment(float[] rando)

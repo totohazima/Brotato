@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d96e53643700f24abe655562f692d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effecter: {fileID: -467257502591534980}
+  effecterObject: {fileID: 3416201615854339148}
   burningEffect: {fileID: 7917593172263351142}
   isBurn: 0
   isInfectedBurn: 0

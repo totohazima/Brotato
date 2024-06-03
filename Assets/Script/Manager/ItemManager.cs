@@ -26,12 +26,12 @@ public class ItemManager : MonoBehaviour
         ItemScrip getItem = null;
         int index = 0;
         //ItemScrip getItem = GameManager.instance.itemGroup_Scriptable.items[index];
-        for (int i = 0; i < GameManager.instance.itemGroup_Scriptable.items.Length; i++)
+        for (int i = 0; i < GameManager.instance.playerInfo.itemGroup_Scriptable.items.Length; i++)
         {
-            if(GameManager.instance.itemGroup_Scriptable.items[i].itemCode == itemType)
+            if(GameManager.instance.playerInfo.itemGroup_Scriptable.items[i].itemCode == itemType)
             {
                 index = i;
-                getItem = GameManager.instance.itemGroup_Scriptable.items[i];
+                getItem = GameManager.instance.playerInfo.itemGroup_Scriptable.items[i];
             }
         }
         if(getItem == null)
@@ -55,7 +55,7 @@ public class ItemManager : MonoBehaviour
         
         if (isGet == false)
         {
-            ItemScrip item = GameManager.instance.itemGroup_Scriptable.items[index];
+            ItemScrip item = GameManager.instance.playerInfo.itemGroup_Scriptable.items[index];
             GameObject objItem = Instantiate(invenItem.gameObject);
             objItem.transform.SetParent(transform);
             Item invenItems = objItem.GetComponent<Item>();

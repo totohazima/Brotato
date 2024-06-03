@@ -32,14 +32,14 @@ public class LootOpen_Manager : MonoBehaviour
     }
     private void LootSetting()
     {
-        int count = StageManager.instance.lootChance;
+        int count = GameManager.instance.playerInfo.lootChance;
         int[] indexes = new int[count];
         List<ItemScrip> unBanList = new List<ItemScrip>();
 
-        for (int i = 0; i < GameManager.instance.itemGroup_Scriptable.items.Length; i++) //뽑을 아이템에 최대 수량에 도달한 아이템이 있는지 체크
+        for (int i = 0; i < GameManager.instance.playerInfo.itemGroup_Scriptable.items.Length; i++) //뽑을 아이템에 최대 수량에 도달한 아이템이 있는지 체크
         {
-            unBanList.Add(GameManager.instance.itemGroup_Scriptable.items[i]);
-            Item.ItemType type = GameManager.instance.itemGroup_Scriptable.items[i].itemCode;
+            unBanList.Add(GameManager.instance.playerInfo.itemGroup_Scriptable.items[i]);
+            Item.ItemType type = GameManager.instance.playerInfo.itemGroup_Scriptable.items[i].itemCode;
         }
 
         for (int i = 0; i < unBanList.Count; i++)
@@ -61,9 +61,9 @@ public class LootOpen_Manager : MonoBehaviour
         }
         for (int j = 0; j < count; j++)
         {
-            for (int i = 0; i < GameManager.instance.itemGroup_Scriptable.items.Length; i++)
+            for (int i = 0; i < GameManager.instance.playerInfo.itemGroup_Scriptable.items.Length; i++)
             {
-                if (GameManager.instance.itemGroup_Scriptable.items[i] == itemList[j])
+                if (GameManager.instance.playerInfo.itemGroup_Scriptable.items[i] == itemList[j])
                 {
                     indexes[j] = i;
                 }
@@ -97,7 +97,7 @@ public class LootOpen_Manager : MonoBehaviour
     }
     private void LootOpen()
     {
-        ItemScrip items = GameManager.instance.itemGroup_Scriptable.items[itemIndex[checkIndex]];
+        ItemScrip items = GameManager.instance.playerInfo.itemGroup_Scriptable.items[itemIndex[checkIndex]];
         GameObject product = Get(0);
         Loot_In_Item lootItem = product.GetComponent<Loot_In_Item>();
         loot_In_Item = lootItem;
@@ -118,12 +118,12 @@ public class LootOpen_Manager : MonoBehaviour
     {
         int i = checkIndex - 1;
         Item.ItemType itemType;
-        itemType = GameManager.instance.itemGroup_Scriptable.items[itemIndex[i]].itemCode;
+        itemType = GameManager.instance.playerInfo.itemGroup_Scriptable.items[itemIndex[i]].itemCode;
         ItemManager.instance.ItemObtain(itemType);
         item.SetActive(false);
-        StageManager.instance.lootChance--;
+        GameManager.instance.playerInfo.lootChance--;
 
-        if (StageManager.instance.lootChance > 0)
+        if (GameManager.instance.playerInfo.lootChance > 0)
         {
             LootOpen();
         }
@@ -139,8 +139,8 @@ public class LootOpen_Manager : MonoBehaviour
         item.SetActive(false);
         GameManager.instance.playerInfo.money += (int)loot_In_Item.recyclePrice;
 
-        StageManager.instance.lootChance--;
-        if (StageManager.instance.lootChance > 0)
+        GameManager.instance.playerInfo.lootChance--;
+        if (GameManager.instance.playerInfo.lootChance > 0)
         {
             LootOpen();
         }

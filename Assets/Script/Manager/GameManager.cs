@@ -35,18 +35,6 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public int precision_Set;
     public int native_Set;
     public int elemental_Set;
-    [Header("#Item_Info")]
-    public ItemGroup_Scriptable itemGroup_Scriptable;
-    public bool isUglyTooth; //못생긴 이빨 구매 시 적 타격 시마다 스피드 -10% (3회 중첩)
-    public bool isLumberJack; //럼버 잭 셔츠 구매 시 나무가 한 방에 파괴됨
-    public bool isWeirdGhost; // 이상한 유령 구매 시 true가 되며 웨이브 시작 시 체력이 1이됨 
-    public int minesCount; //지뢰 아이템 갯수
-    public int turretCount; //터렛 아이템 갯수
-    public int snakeCount; //뱀 아이템 갯수 (하나 당 화상 적용 시 전염되는 몬스터 수 +1)
-    public bool isScaredSausage;
-    public float scaredSausageChance; //겁먹은 소시지의 화상 확률 (하나당 25%)
-    public float scaredSausageDamage; //겁먹은 소시지의 틱 당 화상 대미지 (하나당 1)
-    public int scaredSausageDamageCount; //겁먹은 소시지의 틱 횟수 
     [Header("#Difficult_Info")]
     public int difficult_Level; //난이도
     public bool isSpecialEnemySpawn; //새로운 적의 출현
@@ -128,7 +116,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         {
             maxWeaponCount = 6;
         }
-        StageManager.instance.curHp = StageManager.instance.playerInfo.maxHealth_Origin;
+        playerInfo.playerHealth = StageManager.instance.playerInfo.maxHealth_Origin;
         playerInfo.money = 30;
         
         //시작 무기 추가
@@ -165,11 +153,11 @@ public class GameManager : MonoBehaviour, UI_Upadte
         else if(character == Player.Character.PACIFIST)
         {
             ItemScrip getItem = null;
-            for (int i = 0; i < itemGroup_Scriptable.items.Length; i++)
+            for (int i = 0; i < playerInfo.itemGroup_Scriptable.items.Length; i++)
             {
-                if(itemGroup_Scriptable.items[i].itemCode == Item.ItemType.LUMBERJACK_SHIRT)
+                if(playerInfo.itemGroup_Scriptable.items[i].itemCode == Item.ItemType.LUMBERJACK_SHIRT)
                 {
-                    getItem = itemGroup_Scriptable.items[i];
+                    getItem = playerInfo.itemGroup_Scriptable.items[i];
                     break;
                 }
             }
@@ -205,7 +193,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         {
             maxWeaponCount = 6;
         }
-        StageManager.instance.curHp = player_Info.maxHealth_Origin;
+        playerInfo.playerHealth = player_Info.maxHealth_Origin;
         StageManager.instance.waveLevel = ES3.Load<int>("Wave",easySave.saveFilePath);
 
         //무기 로드
@@ -263,11 +251,11 @@ public class GameManager : MonoBehaviour, UI_Upadte
             Item.ItemType itemCode = ES3.Load<Item.ItemType>($"Item_{i}_Code", easySave.saveFilePath);
             int item_Count = ES3.Load<int>($"Item_{i}_Count", easySave.saveFilePath);
             ItemScrip getItem = null;
-            for (int j = 0; j < itemGroup_Scriptable.items.Length; j++)
+            for (int j = 0; j < playerInfo.itemGroup_Scriptable.items.Length; j++)
             {
-                if (itemGroup_Scriptable.items[j].itemCode == itemCode)
+                if (playerInfo.itemGroup_Scriptable.items[j].itemCode == itemCode)
                 {
-                    getItem = itemGroup_Scriptable.items[j];
+                    getItem = playerInfo.itemGroup_Scriptable.items[j];
                     break;
                 }
             }
@@ -289,42 +277,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         LoadingSceneManager.CloseScene("MainScene");
     }
 
-    public void ItemSearch()
-    {
-        List<Item> item = player_Info.itemInventory;
-
-        for (int i = 0; i < item.Count; i++)
-        {
-            switch (item[i].itemType)
-            {
-                case Item.ItemType.UGLY_TOOTH:
-                    isUglyTooth = true;
-                    break;
-                case Item.ItemType.LUMBERJACK_SHIRT:
-                    isLumberJack = true;
-                    break;
-                case Item.ItemType.WEIRD_GHOST:
-                    isWeirdGhost = true;
-                    break;
-                case Item.ItemType.LAND_MINES:
-                    minesCount = item[i].curCount;
-                    break;
-                case Item.ItemType.TURRET:
-                    turretCount = item[i].curCount;
-                    break;
-                case Item.ItemType.SNAKE:
-                    snakeCount = item[i].curCount;
-                    break;
-                case Item.ItemType.SCARED_SAUSAGE:
-                    isScaredSausage = true;
-                    scaredSausageChance = item[i].curCount * 25f;
-                    scaredSausageDamage = item[i].curCount * 1;
-                    scaredSausageDamageCount = item[i].curCount * 3;
-                    break;
-            }
-
-        }
-    }
+    
     public void WeaponSetSearch()
     {
         unArmed_Set = 0;

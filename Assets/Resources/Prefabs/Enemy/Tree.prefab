@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d96e53643700f24abe655562f692d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effecter: {fileID: 434323400774497632}
+  effecterObject: {fileID: 5843693155662958422}
   burningEffect: {fileID: 6023847169326261607}
   isBurn: 0
   isInfectedBurn: 0

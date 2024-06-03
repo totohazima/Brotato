@@ -160,7 +160,7 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
                 count = (int)scrip.tier4_InfoStat[1];
                 break;
         }
-        bulletInit.BurnInit(GameManager.instance.snakeCount, damage, count);
+        bulletInit.BurnInit(GameManager.instance.playerInfo.snakeCount, damage, count);
 
         scanner.target = null;
     }

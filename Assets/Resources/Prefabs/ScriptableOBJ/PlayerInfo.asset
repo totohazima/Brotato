@@ -13,10 +13,23 @@ MonoBehaviour:
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
   isDie: 0
+  playerHealth: 13
   playerLevel: 0
   levelUpChance: 0
-  curExp: 16
-  maxExp: 50
+  lootChance: 0
+  curExp: 0
+  maxExp: 0
   overExp: 0
-  money: 30
+  money: 0
   interest: 0
+  itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
+  isUglyTooth: 0
+  isLumberJack: 1
+  isWeirdGhost: 0
+  minesCount: 0
+  turretCount: 0
+  snakeCount: 0
+  isScaredSausage: 0
+  scaredSausageChance: 0
+  scaredSausageDamage: 0
+  scaredSausageDamageCount: 0

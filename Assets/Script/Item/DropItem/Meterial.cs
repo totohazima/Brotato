@@ -38,7 +38,7 @@ public class Meterial : DropItem
                 game.playerInfo.curExp += (expValue * (1 + (game.player_Info.expGain / 100)));
             }
 
-            if (StageManager.instance.curHp < StageManager.instance.maxHp)
+            if (GameManager.instance.playerInfo.playerHealth < StageManager.instance.maxHp)
             {
                 float monkeyChance = (game.player_Info.meterialHeal / 100);
                 float failure = 1 - monkeyChance;
@@ -46,7 +46,7 @@ public class Meterial : DropItem
                 int index = StageManager.instance.Judgment(chanceLise);
                 if (index == 0)
                 {
-                    StageManager.instance.curHp++;
+                    GameManager.instance.playerInfo.playerHealth++;
                     string healTxt = "<color=#4CFF52>1</color>";
                     Transform text = DamageTextManager.instance.TextCreate(0, healTxt).transform;
                     text.position = transform.position;

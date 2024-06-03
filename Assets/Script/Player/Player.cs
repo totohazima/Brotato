@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
     public void StatCalculate()
     {
         if (GameManager.instance.player_Info != null)
-            GameManager.instance.ItemSearch();
+            GameManager.instance.playerInfo.ItemSearch();
 
         //Ω∫≈» √ ±‚»≠
         StatReset();

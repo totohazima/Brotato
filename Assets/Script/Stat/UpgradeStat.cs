@@ -191,12 +191,12 @@ public class UpgradeStat : MonoBehaviour
                     if (game.character == Player.Character.RANGER) //레인저 체력 증가량 -25%
                     {
                         game.player_Info.maxHealth_Origin += import.table[(int)upgradeType].tierEffect[tier] * 0.75f;
-                        stage.curHp += game.player_Info.maxHealth;
+                        game.playerInfo.playerHealth += game.player_Info.maxHealth;
                     }
                     else
                     {
                         game.player_Info.maxHealth_Origin += import.table[(int)upgradeType].tierEffect[tier];
-                        stage.curHp += game.player_Info.maxHealth;
+                        game.playerInfo.playerHealth += game.player_Info.maxHealth;
                     }
                     break;
                 case LevelUpStat.REGEN_UP:
@@ -282,7 +282,7 @@ public class UpgradeStat : MonoBehaviour
             {
                 stage.StatUI_Off();
                 //여기서 전리품 메뉴로
-                if (stage.lootChance > 0)
+                if (GameManager.instance.playerInfo.lootChance > 0)
                 {
                     stage.LootMenuOpen();
                 }

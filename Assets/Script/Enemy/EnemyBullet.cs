@@ -75,7 +75,7 @@ public class EnemyBullet : Bullet
             }
             else if(index == 1)
             {
-                StageManager.instance.curHp -= damage;
+                GameManager.instance.playerInfo.playerHealth -= damage;
             }
             //황소: 피격 시 폭발
             if (GameManager.instance.character == Player.Character.BULL)

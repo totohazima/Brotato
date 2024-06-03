@@ -147,7 +147,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     }
     public IEnumerator MineSetting()
     {
-        GameObject[] mark = new GameObject[GameManager.instance.minesCount];
+        GameObject[] mark = new GameObject[GameManager.instance.playerInfo.minesCount];
         GameObject[] mine = new GameObject[mark.Length];
 
         for (int i = 0; i < mark.Length; i++)
@@ -187,7 +187,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     }
     public IEnumerator TurretSetting()
     {
-        GameObject[] mark = new GameObject[GameManager.instance.turretCount];
+        GameObject[] mark = new GameObject[GameManager.instance.playerInfo.turretCount];
         GameObject[] turret = new GameObject[mark.Length];
 
         //엔지니어: 건축물이 서로 가깝게 생성됨

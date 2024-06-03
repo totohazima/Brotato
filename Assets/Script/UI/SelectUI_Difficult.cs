@@ -5,8 +5,10 @@ using UnityEngine;
 public class SelectUI_Difficult : SelectUI
 {
     private forSettingDifficult[] diffiicult_Buttons;
+    private bool isClicked;
     void Awake()
     {
+        isClicked = false;
         diffiicult_Buttons = new forSettingDifficult[selectables.Length];
         for (int i = 0; i < selectables.Length; i++)
         {
@@ -16,14 +18,18 @@ public class SelectUI_Difficult : SelectUI
 
     public override void NextMenu()
     {
-        if (GameManager.instance.diffiicult == null)
+        if (isClicked == false)
         {
-            Debug.Log("난이도 선택 필요");
-        }
-        else if (GameManager.instance.diffiicult != null)
-        {
-            SaveLoadExample.instance.DeleteData();
-            LoadingSceneManager.LoadScene("Stage");
+            if (GameManager.instance.diffiicult == null)
+            {
+                Debug.Log("난이도 선택 필요");
+            }
+            else if (GameManager.instance.diffiicult != null)
+            {
+                isClicked = true;
+                SaveLoadExample.instance.DeleteData();
+                LoadingSceneManager.LoadScene("Stage");
+            }
         }
     }
 

@@ -93,9 +93,9 @@ public class Bullet : MonoBehaviour
             isCritical = false;
         }
 
-        if (GameManager.instance.isScaredSausage == true)
+        if (GameManager.instance.playerInfo.isScaredSausage == true)
         {
-            float burnChance = GameManager.instance.scaredSausageChance;
+            float burnChance = GameManager.instance.playerInfo.scaredSausageChance;
             float nonBurning = 100 - burnChance;
             float[] chance = { burnChance, nonBurning };
             int index2 = Judgment(chance);

@@ -60,7 +60,7 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
         {
             if(type == ItemType.CONSUMABLE || type == ItemType.LOOT) //소모품이나 상자는 체력이 최대일 때 끌려오지 않음
             {
-                if(StageManager.instance.curHp < StageManager.instance.maxHp)
+                if(GameManager.instance.playerInfo.playerHealth < StageManager.instance.maxHp)
                 {
                     target = other.transform;
                 }

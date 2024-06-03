@@ -170,7 +170,7 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
                 count = (int)scrip.tier4_InfoStat[1];
                 break;
         }
-        bullet.BurnInit(GameManager.instance.snakeCount, damage, count);
+        bullet.BurnInit(GameManager.instance.playerInfo.snakeCount, damage, count);
 
         if (scanner.target != null)
         {
