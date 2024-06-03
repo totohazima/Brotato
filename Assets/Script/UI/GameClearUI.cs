@@ -6,12 +6,8 @@ public class GameClearUI : MonoBehaviour
 {
     public void GameClear()
     {
-        GameManager.instance.isPause = false;
-        GameManager.instance.isStart = false;
-        GameManager.instance.harvestVariance_Amount = 0;
-        GameManager.instance.player_Info = null;
-        GameManager.instance.weaponPrefab = null;
+        GameManager.instance.GameManagerClear();
         SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Single);
-        SceneManager.UnloadSceneAsync("Stage", UnloadSceneOptions.None);
+        //SceneManager.UnloadSceneAsync("Stage", UnloadSceneOptions.None);
     }
 }

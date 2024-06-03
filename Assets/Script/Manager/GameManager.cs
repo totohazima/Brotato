@@ -328,4 +328,17 @@ public class GameManager : MonoBehaviour, UI_Upadte
             }
         }
     }
+    public void GameManagerClear()
+    {
+        isPause = false;
+        isStart = false;
+        harvestVariance_Amount = 0;
+        player = null;
+        player_Info = null;
+        weapon = null;
+        weapon_Obj = null;
+        weaponPrefab = null;
+        diffiicult = null;
+        difficult_Obj = null;
+    }
 }

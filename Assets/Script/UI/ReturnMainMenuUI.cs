@@ -18,24 +18,9 @@ public class ReturnMainMenuUI : MonoBehaviour
     }
     public void ReturnMainMenu()
     {
-        GameManager game = GameManager.instance;
-
-        game.isPause = false;
-        game.isStart = false;
-        game.harvestVariance_Amount = 0;
-
-        game.player = null;
-        game.player_Info = null;
-
-        game.weapon = null;
-        game.weapon_Obj = null;
-        game.weaponPrefab = null;
-
-        game.diffiicult = null;
-        game.difficult_Obj = null;
-
+        GameManager.instance.GameManagerClear();
         SceneManager.LoadSceneAsync("MainScene",LoadSceneMode.Single);
-        SceneManager.UnloadSceneAsync("Stage",UnloadSceneOptions.None);
+        //SceneManager.UnloadSceneAsync("Stage",UnloadSceneOptions.None);
         
     }
 }
