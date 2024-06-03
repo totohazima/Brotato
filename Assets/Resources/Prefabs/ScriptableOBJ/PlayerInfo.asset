@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334c3fce11727c745ac94356c94dd011, type: 3}
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
+  isDie: 0
   playerLevel: 0
-  money: 0
+  levelUpChance: 0
+  curExp: 16
+  maxExp: 50
+  overExp: 0
+  money: 30
+  interest: 0

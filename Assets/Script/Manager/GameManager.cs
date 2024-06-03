@@ -99,6 +99,18 @@ public class GameManager : MonoBehaviour, UI_Upadte
             enemyRiseHealth = import.enemyHpRise;
             doubleBoss = import.twinBoss;
         }
+
+        if (playerInfo.maxExp != 0 && playerInfo.playerLevel < 20)
+        {
+            if (playerInfo.curExp >= playerInfo.maxExp)
+            {
+                playerInfo.overExp = playerInfo.curExp - playerInfo.maxExp;
+                playerInfo.curExp = playerInfo.overExp;
+                playerInfo.overExp = 0;
+                playerInfo.playerLevel++;
+                playerInfo.levelUpChance++;
+            }
+        }
     }
     private void GameStart() //Title에서 Main으로
     {

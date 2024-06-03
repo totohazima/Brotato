@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
-
 namespace Only1Games.GDBA
 {
     public class ExcelDataImporter : EditorWindow

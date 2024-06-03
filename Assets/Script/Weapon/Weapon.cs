@@ -208,7 +208,10 @@ public class Weapon : MonoBehaviour
             }
         }
         afterDamage *= 1 + (player.persentDamage / 100);
-
+        if(afterDamage < 1)
+        {
+            afterDamage = 1;
+        }
         afterBulletCount = bulletCount;
         afterPenetrate = penetrate + player.penetrate;
         afterCriticalChance = criticalChance + player.criticalChance;

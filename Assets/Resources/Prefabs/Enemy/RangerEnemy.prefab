@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3416201615854339151}
   - component: {fileID: 3416201615854339150}
   - component: {fileID: 4978586786777847957}
-  - component: {fileID: -1325441606460378198}
   - component: {fileID: 4079730640374893509}
   m_Layer: 6
   m_Name: RangerEnemy
@@ -96,35 +95,11 @@ MonoBehaviour:
   whiteFlash: {fileID: 4079730640374893509}
   moveSpeed: 0
   isDontPush: 0
-  statusEffect: {fileID: 0}
+  statusEffect: {fileID: 5974002186924974097}
   target: {fileID: 0}
   stage: {fileID: 0}
   hitTimer: 0
   rigid: {fileID: 0}
---- !u!114 &-1325441606460378198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3416201615854339148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d96e53643700f24abe655562f692d9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effecter: {fileID: 0}
-  burningEffect: {fileID: 2817187413382815981}
-  isBurn: 0
-  isInfectedBurn: 0
-  infectedCount: 0
-  infecterRange: 5
-  burnDamage: 0
-  burnCount: 0
-  tickRate: 0.5
-  maxBurnCount: 0
-  isSlow: 0
-  slowEffect: 0
 --- !u!114 &4079730640374893509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3416201617400161527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -211,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3416201617514675537}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -299,6 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3171491018790617481}
+  - component: {fileID: 5974002186924974097}
   m_Layer: 6
   m_Name: StatusEffect
   m_TagString: Untagged
@@ -314,7 +290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6492887965587265601}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -322,6 +298,30 @@ Transform:
   m_Father: {fileID: 3416201615854339151}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5974002186924974097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6492887965587265601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d96e53643700f24abe655562f692d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effecter: {fileID: 4978586786777847957}
+  burningEffect: {fileID: 2817187413382815981}
+  isBurn: 0
+  isInfectedBurn: 0
+  infectedCount: 0
+  infecterRange: 7
+  burnDamage: 0
+  burnCount: 0
+  tickRate: 0
+  maxBurnCount: 0
+  isSlow: 0
+  slowEffect: 0
 --- !u!1 &9096677729711794064
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9096677729711794064}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.392, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

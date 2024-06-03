@@ -41,6 +41,10 @@ public class SettingWeaponInfo : MonoBehaviour
         infoName = weaponScrip.weaponName;
         infoType = weaponScrip.setType;
         infoDamage = weapon.damage;
+        if(infoDamage < 1)
+        {
+            infoDamage = 1;
+        }
         infoCriticalChance = weapon.criticalChance;
         infoCoolTime = weapon.coolTime;
         infoKnockBack = weapon.knockBack;

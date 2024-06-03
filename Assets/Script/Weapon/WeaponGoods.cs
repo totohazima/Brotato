@@ -182,6 +182,10 @@ public class WeaponGoods : Weapon, UI_Upadte
         }
         
         afterDamage = (damage + temporaryDamage) * (1 + (player.persentDamage / 100));
+        if (afterDamage < 1)
+        {
+            afterDamage = 1;
+        }
         afterCriticalChance = criticalChance + player.criticalChance;
         afterCoolTime = coolTime - (coolTime * (player.attackSpeed / 100));
         afterRange = range + player.range;

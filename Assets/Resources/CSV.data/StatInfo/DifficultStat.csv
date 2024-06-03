@@ -1,7 +1,0 @@
-난이도,특수 몬스터 스폰 여부,엘리트 몬스터 스폰 여부,엘리트 몬스터 스폰 웨이브 수,몬스터 공격력 증가치 (%),몬스터 생명력 증가치(%),보스 2마리 스폰 여부
-0단계,FALSE,FALSE,0,0,0,FALSE
-1단계,TRUE,FALSE,0,0,0,FALSE
-2단계,TRUE,TRUE,1,0,0,FALSE
-3단계,TRUE,TRUE,1,12,6,FALSE
-4단계,TRUE,TRUE,3,15,7,FALSE
-5단계,TRUE,TRUE,3,20,10,TRUE

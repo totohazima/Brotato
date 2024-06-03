@@ -6,6 +6,7 @@ using ES3Types;
 public class SaveLoadExample : MonoBehaviour, UI_Upadte
 {
     public static SaveLoadExample instance;
+    public PlayerInfo playerInfo;
     public bool isSaved;
     public bool isLoaded;
     [HideInInspector] public string saveFilePath = "SceneSaveData.es3";
@@ -33,8 +34,7 @@ public class SaveLoadExample : MonoBehaviour, UI_Upadte
     public void SaveScene()
     {
         ES3.Save("isSave", true, saveFilePath);
-
-        //ES3.Save("StageManager", StageManager, saveFilePath);
+        ES3.Save("PlayerInfo", playerInfo, saveFilePath);
         ES3.Save("Wave", StageManager.instance.waveLevel, saveFilePath);
         ES3.Save("Character", GameManager.instance.character, saveFilePath);
         /// <summary>
@@ -72,6 +72,7 @@ public class SaveLoadExample : MonoBehaviour, UI_Upadte
         if (ES3.KeyExists("isSave", saveFilePath))
         {
             isLoaded = true;
+            GameManager.instance.playerInfo = ES3.Load<PlayerInfo>("PlayerInfo", saveFilePath);
             Player.Character code = ES3.Load<Player.Character>("Character", saveFilePath);
             GameManager.instance.character = code;
             LoadingSceneManager.LoadScene("Stage");

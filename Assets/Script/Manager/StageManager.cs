@@ -32,13 +32,11 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public GameObject gameClearUI;
     public GameObject gameOverUI;
     [Header("# Variable")]
-    private float overExp; //레벨업 후 남은 경험치
     public Player_Action playerInfo;
     public float curHp; //현재 체력
     public float maxHp; //최대 체력
     //public float curExp;  //현재 경험치
     //public float maxExp;  //최대 경험치
-    public int levelUpChance; //웨이브 종료 후 레벨 업 할 횟수
     public int waveLevel;   //웨이브 레벨
     public float[] waveTime;    //웨이브 시간
     //public int money;   //돈
@@ -146,17 +144,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             curHp = maxHp;
         }
         UiVisualize();
-        if (GameManager.instance.playerInfo.playerLevel < 20)
-        {
-            if (GameManager.instance.playerInfo.curExp >= GameManager.instance.playerInfo.maxExp)
-            {
-                overExp = GameManager.instance.playerInfo.curExp - GameManager.instance.playerInfo.maxExp;
-                GameManager.instance.playerInfo.curExp = overExp;
-                overExp = 0;
-                GameManager.instance.playerInfo.playerLevel++;
-                levelUpChance++;
-            }
-        }
+        
 
         if(GameManager.instance.playerInfo.interest > 0)
         {
@@ -225,7 +213,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     {
         yield return new WaitForSeconds(1f);
         main.position = Vector3.zero;
-        if (levelUpChance > 0)
+        if (GameManager.instance.playerInfo.levelUpChance > 0)
         {  
             LevelUp();
         }
@@ -293,14 +281,14 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         
         waveLevelUI.text = "웨이브 " + (waveLevel + 1).ToString("F0");
 
-        if(levelUpChance >= 1)
+        if(GameManager.instance.playerInfo.levelUpChance >= 1)
         {
             levelUpMarkUi.SetActive(true);
             for (int i = 0; i < 7; i++)
             {
                 levelMarks[i].SetActive(false);
             }
-            for(int i = 0; i < levelUpChance; i++)
+            for(int i = 0; i < GameManager.instance.playerInfo.levelUpChance; i++)
             {
                 if (i <= 6)
                 {

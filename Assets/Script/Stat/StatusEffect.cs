@@ -29,7 +29,6 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
     
     void OnEnable()
     {
-        effecter = gameObject.GetComponent<EnemyAction>();
         tickRate = 0.5f;
         CustomUpdateManager.customUpdates.Add(this);
     }
@@ -100,6 +99,11 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
 
         if (burnTimer >= tickRate)
         {
+            if(burnDamage < 1)
+            {
+                burnDamage = 1;
+            }
+
             effecter.curHealth -= burnDamage;
             burnCount--;
 

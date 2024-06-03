@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21913821968641162}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.392, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7250229039531194023}
+  - component: {fileID: 2205593267740721844}
   m_Layer: 6
   m_Name: StatusEffect
   m_TagString: Untagged
@@ -55,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3456709150813890020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.05427444, y: -0.73315, z: 0}
+  m_LocalPosition: {x: -0.05427444, y: 3, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -63,6 +64,30 @@ Transform:
   m_Father: {fileID: 5843693155662958421}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2205593267740721844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456709150813890020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d96e53643700f24abe655562f692d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effecter: {fileID: 434323400774497632}
+  burningEffect: {fileID: 6023847169326261607}
+  isBurn: 0
+  isInfectedBurn: 0
+  infectedCount: 0
+  infecterRange: 7
+  burnDamage: 0
+  burnCount: 0
+  tickRate: 0
+  maxBurnCount: 0
+  isSlow: 0
+  slowEffect: 0
 --- !u!1 &5843693155662958422
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +99,6 @@ GameObject:
   - component: {fileID: 5843693155662958421}
   - component: {fileID: 5843693155662958420}
   - component: {fileID: 434323400774497632}
-  - component: {fileID: 1714960227034255084}
   m_Layer: 6
   m_Name: Tree
   m_TagString: Enemy
@@ -158,35 +182,11 @@ MonoBehaviour:
   whiteFlash: {fileID: 0}
   moveSpeed: 0
   isDontPush: 0
-  statusEffect: {fileID: 0}
+  statusEffect: {fileID: 2205593267740721844}
   target: {fileID: 0}
   stage: {fileID: 0}
   hitTimer: 0
   rigid: {fileID: 0}
---- !u!114 &1714960227034255084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5843693155662958422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d96e53643700f24abe655562f692d9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effecter: {fileID: 0}
-  burningEffect: {fileID: 6023847169326261607}
-  isBurn: 0
-  isInfectedBurn: 0
-  infectedCount: 0
-  infecterRange: 5
-  burnDamage: 0
-  burnCount: 0
-  tickRate: 0.5
-  maxBurnCount: 0
-  isSlow: 0
-  slowEffect: 0
 --- !u!1 &5843693155734613997
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5843693155734613997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -259,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5843693156081776203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 13, y: 13, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

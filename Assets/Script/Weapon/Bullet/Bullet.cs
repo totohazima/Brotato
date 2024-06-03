@@ -65,9 +65,9 @@ public class Bullet : MonoBehaviour
     }
     public virtual void Init(float damage, int per, float range, float accuracy, float bloodSucking, float criticalChance, float criticalDamage, float knockBack, float penetrateDamage, Vector3 dir)
     {
-        if(damage < 0)
+        if(damage < 1)
         {
-            damage = 0;
+            damage = 1;
         }
         this.damage = damage;
         this.per = per;

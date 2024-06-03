@@ -8147,17 +8147,11 @@ MonoBehaviour:
   playerInfo: {fileID: 0}
   curHp: 0
   maxHp: 0
-  curExp: 0
-  maxExp: 0
-  levelUpChance: 0
   waveLevel: 0
   waveTime: []
-  money: 0
-  interest: 0
   lootChance: 0
   inWaveLoot_Amount: 0
   timer: 0
-  isEnd: 0
   pool: {fileID: 0}
   stageMainCamera: {fileID: 963194227}
   playerPrefab: {fileID: 8567391312352320930, guid: c97f5b105d348404cb50d03c8b582871, type: 3}

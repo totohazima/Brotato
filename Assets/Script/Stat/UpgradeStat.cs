@@ -50,7 +50,7 @@ public class UpgradeStat : MonoBehaviour
         {
             percentData[i] = GameManager.instance.gameDataBase.upgradePercentageInfoTable.table[i];
         }
-        int level = game.playerInfo.playerLevel + 1 - (stage.levelUpChance);
+        int level = game.playerInfo.playerLevel + 1 - (game.playerInfo.levelUpChance);
         float totalChance = 100;
         float tier1 = 0;
         float tier2 = 0;
@@ -274,11 +274,11 @@ public class UpgradeStat : MonoBehaviour
                     break;
             }
 
-            stage.playerInfo.StatCalculate();
+            game.player_Info.StatCalculate();
 
-            stage.levelUpChance--;
+            game.playerInfo.levelUpChance--;
 
-            if (stage.levelUpChance <= 0)
+            if (game.playerInfo.levelUpChance <= 0)
             {
                 stage.StatUI_Off();
                 //여기서 전리품 메뉴로

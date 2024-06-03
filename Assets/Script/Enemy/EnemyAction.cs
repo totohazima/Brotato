@@ -11,7 +11,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     public WhiteFlash whiteFlash;
     public float moveSpeed;
     public bool isDontPush; //true일 경우 넉백 미작동
-    [HideInInspector] public StatusEffect statusEffect;
+    public StatusEffect statusEffect;
     [HideInInspector] public Transform target;
     [HideInInspector] public StageManager stage;
     [HideInInspector] public float hitTimer;
@@ -21,7 +21,6 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     {
         stage = StageManager.instance;
         rigid = GetComponent<Rigidbody>();
-        statusEffect = GetComponent<StatusEffect>();
         target = stage.mainPlayer.transform;
     }
     public virtual void OnEnable()
