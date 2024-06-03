@@ -36,17 +36,16 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public Player_Action playerInfo;
     public float curHp; //현재 체력
     public float maxHp; //최대 체력
-    public float curExp;  //현재 경험치
-    public float maxExp;  //최대 경험치
+    //public float curExp;  //현재 경험치
+    //public float maxExp;  //최대 경험치
     public int levelUpChance; //웨이브 종료 후 레벨 업 할 횟수
     public int waveLevel;   //웨이브 레벨
     public float[] waveTime;    //웨이브 시간
-    public int money;   //돈
-    public int interest; //이자
+    //public int money;   //돈
+    //public int interest; //이자
     public int lootChance; //상자깡 찬스
     public int inWaveLoot_Amount; //현재 웨이브에서 나온 상자의 개수
     public float timer; //시간
-    public bool isEnd; //웨이브 끝
 
     [Header("# GameObject")]
     private Transform main;
@@ -116,7 +115,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             Time.timeScale = 1;
         }
 
-        if(isEnd == true)
+        if(GameManager.instance.isEnd == true)
         {
             pauseIcon.SetActive(false);
         }
@@ -128,14 +127,14 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     public void CustomUpdate()
     {
 
-        if (isEnd == false)
+        if (GameManager.instance.isEnd == false)
         {
             timer -= Time.deltaTime;
 
             waveTimerUI.gameObject.SetActive(true);
             joyStickRayCaster.SetActive(true);
         }
-        else if (isEnd == true)
+        else if (GameManager.instance.isEnd == true)
         {
             waveTimerUI.gameObject.SetActive(false);
             joyStickRayCaster.SetActive(false);
@@ -147,23 +146,23 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             curHp = maxHp;
         }
         UiVisualize();
-        if (GameManager.instance.player_Info.playerLevel < 20)
+        if (GameManager.instance.playerInfo.playerLevel < 20)
         {
-            if (curExp >= maxExp)
+            if (GameManager.instance.playerInfo.curExp >= GameManager.instance.playerInfo.maxExp)
             {
-                overExp = curExp - maxExp;
-                curExp = overExp;
+                overExp = GameManager.instance.playerInfo.curExp - GameManager.instance.playerInfo.maxExp;
+                GameManager.instance.playerInfo.curExp = overExp;
                 overExp = 0;
-                GameManager.instance.player_Info.playerLevel++;
+                GameManager.instance.playerInfo.playerLevel++;
                 levelUpChance++;
             }
         }
 
-        if(interest > 0)
+        if(GameManager.instance.playerInfo.interest > 0)
         {
             interestUI.SetActive(true);
         }
-        else if(interest <= 0)
+        else if(GameManager.instance.playerInfo.interest <= 0)
         {
             interestUI.SetActive(false);
         }
@@ -172,12 +171,12 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         {
             if (curHp <= 0)
             {
-                GameManager.instance.isDie = true;
+                GameManager.instance.playerInfo.isDie = true;
                 StartCoroutine(Died());
             }
             else
             {
-                GameManager.instance.isDie = false;
+                GameManager.instance.playerInfo.isDie = false;
             }
         }
 
@@ -190,7 +189,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             }
 
             timer = waveTime[waveLevel];
-            isEnd = true;
+            GameManager.instance.isEnd = true;
             curHp = maxHp;
             FriendlyRemove();
 
@@ -198,14 +197,14 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             if (playerInfo.harvest > 0)
             {
                 int harvest = (int)Mathf.Round(playerInfo.harvest);
-                money += harvest;
-                curExp += playerInfo.harvest;
+                GameManager.instance.playerInfo.money += harvest;
+                GameManager.instance.playerInfo.curExp += playerInfo.harvest;
                 GameManager.instance.harvestVariance_Amount += GameManager.instance.riseHarvest_Num;
             }
             else if(playerInfo.harvest < 0)
             {
                 int harvest = (int)Mathf.Round(playerInfo.harvest);
-                money -= harvest;
+                GameManager.instance.playerInfo.money -= harvest;
             }
             playerInfo.StatCalculate();
             //평화주의자: 살아있는 몹 하나당 +0.65 재료, XP
@@ -213,8 +212,8 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             {
                 int enemyCount = SpawnManager.instance.enemys.Count;
                 float gainMoney = 0.65f * enemyCount;
-                money += (int)Mathf.Round(gainMoney);
-                curExp += 0.65f * enemyCount;
+                GameManager.instance.playerInfo.money += (int)Mathf.Round(gainMoney);
+                GameManager.instance.playerInfo.curExp += 0.65f * enemyCount;
             }
 
             StartCoroutine(DropItemLootingTime());
@@ -242,7 +241,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     
     IEnumerator Died()
     {
-        isEnd = true;
+        GameManager.instance.isEnd = true;
         gameOverUI.SetActive(true);
         yield return 0;
     }
@@ -274,13 +273,13 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         hpBarUI.value = curHp;
         hpNum.text = curHp.ToString("F0") + " / " + maxHp.ToString("F0");
 
-        moneyUI.text = money.ToString("F0");
-        interestNum.text = interest.ToString("F0");
+        moneyUI.text = GameManager.instance.playerInfo.money.ToString("F0");
+        interestNum.text = GameManager.instance.playerInfo.interest.ToString("F0");
 
-        maxExp = 50 + (30 * (GameManager.instance.player_Info.playerLevel));
-        expBarUI.maxValue = maxExp;
-        expBarUI.value = curExp;
-        levelNum.text = "LV." + (GameManager.instance.player_Info.playerLevel + 1);
+        GameManager.instance.playerInfo.maxExp = 50 + (30 * (GameManager.instance.playerInfo.playerLevel));
+        expBarUI.maxValue = GameManager.instance.playerInfo.maxExp;
+        expBarUI.value = GameManager.instance.playerInfo.curExp;
+        levelNum.text = "LV." + (GameManager.instance.playerInfo.playerLevel + 1);
 
         if (timer < 5)
         {
@@ -370,7 +369,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         }
         waveLevel++;
         timer = waveTime[waveLevel];
-        isEnd = false;
+        GameManager.instance.isEnd = false;
         inWaveLoot_Amount = 0;
         SpawnManager spawn = SpawnManager.instance;
         spawn.WaveSelect(waveLevel);
@@ -413,7 +412,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     void GameEnd()
     {
         gameClearUI.SetActive(true);
-        isEnd = true;
+        GameManager.instance.isEnd = true;
     }
 
     

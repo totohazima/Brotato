@@ -5,12 +5,14 @@ using ES3Types;
 
 public class SaveLoadExample : MonoBehaviour, UI_Upadte
 {
+    public static SaveLoadExample instance;
     public bool isSaved;
     public bool isLoaded;
     [HideInInspector] public string saveFilePath = "SceneSaveData.es3";
 
     void Awake()
     {
+        instance = this;
         UIUpdateManager.uiUpdates.Add(this);
     }
     public void UI_Update()
@@ -79,6 +81,14 @@ public class SaveLoadExample : MonoBehaviour, UI_Upadte
         else
         {
             Debug.LogWarning("No saved scene data found.");
+        }
+    }
+
+    public void DeleteData()
+    {
+        if (ES3.FileExists("SceneSaveData.es3"))
+        {
+            ES3.DeleteFile("SceneSaveData.es3");
         }
     }
 }

@@ -22,6 +22,7 @@ public class SelectUI_Difficult : SelectUI
         }
         else if (GameManager.instance.diffiicult != null)
         {
+            SaveLoadExample.instance.DeleteData();
             LoadingSceneManager.LoadScene("Stage");
         }
     }

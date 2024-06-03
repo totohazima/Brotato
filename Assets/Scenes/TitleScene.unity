@@ -822,6 +822,7 @@ MonoBehaviour:
   player_Obj: {fileID: 0}
   difficult_Obj: {fileID: 0}
   maxWeaponCount: 0
+  playerInfo: {fileID: 11400000, guid: a0c772f27bc179f44a3444e6a5080e89, type: 2}
   player_Info: {fileID: 0}
   character: 0
   weaponPrefab: {fileID: 0}
@@ -883,3 +884,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSaved: 0
+  isLoaded: 0
+  saveFilePath: SceneSaveData.es3

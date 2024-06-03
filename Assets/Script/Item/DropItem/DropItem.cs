@@ -40,7 +40,7 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-        if(StageManager.instance.isEnd == true)
+        if(GameManager.instance.isEnd == true)
         {
             target = StageManager.instance.mainPlayer.transform;
         }

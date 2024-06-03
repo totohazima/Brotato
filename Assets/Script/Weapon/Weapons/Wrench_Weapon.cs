@@ -89,11 +89,11 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
             }
         }
 
-        if(stage.isEnd == true)
+        if(GameManager.instance.isEnd == true)
         {
             isSpawnedTurret = false;
         }
-        else if(stage.isEnd == false && isSpawnedTurret == false)
+        else if(GameManager.instance.isEnd == false && isSpawnedTurret == false)
         {
             isSpawnedTurret = true;
             StartCoroutine(SpawnTurret());

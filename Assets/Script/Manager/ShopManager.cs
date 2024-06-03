@@ -87,7 +87,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     void UiVisualize()
     {
         titleWaveUI.text = "웨이브 " + (stage.waveLevel + 1) + "(총 10 물결)";
-        moneyNumUI.text = stage.money.ToString();
+        GameManager.instance.playerInfo.money.ToString("F0");
         nextWaveUI.text = "이동(웨이브 " + (stage.waveLevel + 2) + ")";
 
         tabsText[(int)ShopTab.WeaponTab].text = "무기(" + tabsScroll[0].childCount + "/" + GameManager.instance.maxWeaponCount +")";
@@ -404,9 +404,9 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
     public void RerollButton()
     {
         float price = rerollPrice + (rerollPrice_Add * rerollCount);
-        if (price <= stage.money)
+        if (price <= GameManager.instance.playerInfo.money)
         {
-            stage.money -= (int)price;
+            GameManager.instance.playerInfo.money -= (int)price;
             rerollCount++;
             ShopReRoll();
         }

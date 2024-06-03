@@ -137,7 +137,7 @@ public class LootOpen_Manager : MonoBehaviour
     public void SellItem()
     {
         item.SetActive(false);
-        StageManager.instance.money += (int)loot_In_Item.recyclePrice;
+        GameManager.instance.playerInfo.money += (int)loot_In_Item.recyclePrice;
 
         StageManager.instance.lootChance--;
         if (StageManager.instance.lootChance > 0)

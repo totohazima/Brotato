@@ -50,7 +50,7 @@ public class UpgradeStat : MonoBehaviour
         {
             percentData[i] = GameManager.instance.gameDataBase.upgradePercentageInfoTable.table[i];
         }
-        int level = game.player_Info.playerLevel + 1 - (stage.levelUpChance);
+        int level = game.playerInfo.playerLevel + 1 - (stage.levelUpChance);
         float totalChance = 100;
         float tier1 = 0;
         float tier2 = 0;

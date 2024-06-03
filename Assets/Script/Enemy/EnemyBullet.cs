@@ -6,7 +6,7 @@ public class EnemyBullet : Bullet
 {
     public override void FixedUpdate()
     {
-        if (StageManager.instance.isEnd == true)
+        if (GameManager.instance.isEnd == true)
         {
             gameObject.SetActive(false);
         }

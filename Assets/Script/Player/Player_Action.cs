@@ -57,7 +57,7 @@ public class Player_Action : Player, ICustomUpdateMono
             isFullWeapon = false;
         }
 
-        if (game.isDie == true || stage.isEnd == true)
+        if (game.playerInfo.isDie == true || game.isEnd == true)
         {
             isStand = false;
             anim.SetBool("Move", false);
@@ -125,7 +125,7 @@ public class Player_Action : Player, ICustomUpdateMono
             }
         }
 
-        if(isHit == true || stage.isEnd == true)
+        if(isHit == true || game.isEnd == true)
         {
             coll.enabled = false;
         }

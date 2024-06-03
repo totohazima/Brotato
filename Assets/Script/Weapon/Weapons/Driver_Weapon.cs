@@ -38,12 +38,12 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-        if(stage.isEnd == true && isTimerReset == false)
+        if(GameManager.instance.isEnd == true && isTimerReset == false)
         {
             mineTimer = 100;
             isTimerReset = true;
         }
-        else if(stage.isEnd == false)
+        else if(GameManager.instance.isEnd == false)
         {
             isTimerReset = false;
         }
@@ -67,7 +67,7 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
             StartCoroutine(MuzzleMove());
         }
 
-        if (stage.isEnd == false)
+        if (GameManager.instance.isEnd == false)
         {
             mineTimer += Time.deltaTime;
             switch (weaponTier)

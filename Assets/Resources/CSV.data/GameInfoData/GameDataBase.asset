@@ -25,4 +25,5 @@ MonoBehaviour:
   weaponPercentageInfoTable: {fileID: 11400000, guid: b22ed554190b4f74d9a0fa4f1ea2d2e0, type: 2}
   upgradePercentageInfoTable: {fileID: 11400000, guid: b6d6c81e88126e04ca5740d450731193, type: 2}
   playerSelectTextInfoTable: {fileID: 11400000, guid: 07bc12fd743acf1409abab096190b4cc, type: 2}
+  playerAchivementInfoTable: {fileID: 11400000, guid: 6ad13515804f28c4e8f8a91f26fcf247, type: 2}
   ItemTextInfoTable: {fileID: 11400000, guid: 2cfce25b7bba8ac4aa924d1a71c147b0, type: 2}

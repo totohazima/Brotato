@@ -8,6 +8,8 @@ public class ForSettingPlayer : Player,ICustomUpdateMono
     public Character index;
     public GameObject playerPrefab;
     public Image icon;
+    public Image lockIcon;
+    public bool isLock;
     GameManager game;
     Image image;
     void Awake()
@@ -15,7 +17,21 @@ public class ForSettingPlayer : Player,ICustomUpdateMono
         game = GameManager.instance;
         image = GetComponent<Image>();
 
-        StatSetting((int)index);
+        PlayerAchivementInfoTable.Data import = GameManager.instance.gameDataBase.playerAchivementInfoTable.table[(int)index];
+        switch(import.isEarlyUnlock)
+        {
+            case true:
+                isLock = false;
+                break;
+            case false:
+                isLock = true;
+                break;
+        }
+
+        if (isLock == true)
+            StatSetting(0);
+        else
+            StatSetting((int)index);
     }
     void OnEnable()
     {
@@ -36,25 +52,55 @@ public class ForSettingPlayer : Player,ICustomUpdateMono
         {
             image.color = new Color(70 / 255f, 70 / 255f, 70 / 255f);
         }
+
+        if(isLock == true && lockIcon.gameObject.activeSelf == false)
+        {
+            lockIcon.gameObject.SetActive(true);
+            icon.gameObject.SetActive(false);
+        }
+        else if(isLock == false && icon.gameObject.activeSelf == false)
+        {
+            lockIcon.gameObject.SetActive(false);
+            icon.gameObject.SetActive(true);
+        }
     }
 
     public void ClickPlayer()
     {
-        if(game.player != null)
+        //if(game.player != null)
+        //{
+        //    Destroy(game.player_Obj);
+        //}
+        Destroy(game.player_Obj);
+        //캐릭터 해금된 경우
+        if (isLock == false)
         {
-            Destroy(game.player_Obj);
+            game.player = this;
+
+            GameObject obj = Instantiate(playerPrefab);
+            game.player_Obj = obj;
+            obj.transform.SetParent(MainSceneManager.instance.playerSetGroup);
+
+            RectTransform rect = obj.GetComponent<RectTransform>();
+            rect.localScale = new Vector3(1, 1, 1);
+
+            SelectableCharacter character = obj.GetComponent<SelectableCharacter>();
+            character.TextSetting((int)index, icon.sprite, isLock);
         }
+        //캐릭터 해금되지 않은 경우
+        else
+        {
+            game.player = null;
 
-        game.player = this;
+            GameObject obj = Instantiate(playerPrefab);
+            game.player_Obj = obj;
+            obj.transform.SetParent(MainSceneManager.instance.playerSetGroup);
 
-        GameObject obj = Instantiate(playerPrefab);
-        game.player_Obj = obj;
-        obj.transform.SetParent(MainSceneManager.instance.playerSetGroup);
+            RectTransform rect = obj.GetComponent<RectTransform>();
+            rect.localScale = new Vector3(1, 1, 1);
 
-        RectTransform rect = obj.GetComponent<RectTransform>();
-        rect.localScale = new Vector3(1, 1, 1);
-
-        SelectableCharacter character = obj.GetComponent<SelectableCharacter>();
-        character.TextSetting((int)index, icon.sprite);
+            SelectableCharacter character = obj.GetComponent<SelectableCharacter>();
+            character.TextSetting((int)index, icon.sprite, isLock);
+        }
     }
 }

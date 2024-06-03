@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public string characterCode;
     public string characterName;
     [Header("Basic_Stat")]
-    public int playerLevel; //플레이어 레벨
+    //public int playerLevel; //플레이어 레벨
     public float maxHealth;
     public float regeneration;
     public float bloodSucking;
@@ -103,6 +103,9 @@ public class Player : MonoBehaviour
         ENGINEER, //엔지니어
         BULL, //황소
         SOLDIER, //군인
+        TEST1,
+        TEST2,
+        TEST3,
     }
 
     public void StatSetting(int index)

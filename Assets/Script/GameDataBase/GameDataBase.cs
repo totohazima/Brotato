@@ -30,6 +30,7 @@ namespace Only1Games.GDBA
 
         [Header("TextTable")]
         public PlayerSelectTextInfoTable playerSelectTextInfoTable = null;
+        public PlayerAchivementInfoTable playerAchivementInfoTable = null;
         public ItemTextInfoTable ItemTextInfoTable = null;
     }
 

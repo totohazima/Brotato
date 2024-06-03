@@ -475,7 +475,7 @@ public class WeaponGoods : Weapon, UI_Upadte
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
         weaponPrice = weaponPrice * ((100 + StageManager.instance.playerInfo.priceSale) / 100);
         weaponPrice = System.MathF.Round(weaponPrice);
-        if (weaponPrice > StageManager.instance.money)
+        if (weaponPrice > GameManager.instance.playerInfo.money)
         {
             priceText.text = "<color=red>" + weaponPrice.ToString("F0") + "</color>";
         }
@@ -522,9 +522,9 @@ public class WeaponGoods : Weapon, UI_Upadte
 
     public void BuyWeapon()
     {
-        if (StageManager.instance.playerInfo.isFullWeapon == false && StageManager.instance.money >= weaponPrice)
+        if (StageManager.instance.playerInfo.isFullWeapon == false && GameManager.instance.playerInfo.money >= weaponPrice)
         {
-            StageManager.instance.money -= (int)weaponPrice;
+            GameManager.instance.playerInfo.money -= (int)weaponPrice;
             GameObject weapon = Instantiate(weaponData[(int)index].weaponPrefab);
             Weapon weaponInfo = weapon.GetComponent<Weapon>();
             weaponInfo.weaponTier = weaponTier;
@@ -538,7 +538,7 @@ public class WeaponGoods : Weapon, UI_Upadte
             StageManager.instance.playerInfo.StatCalculate();
             gameObject.SetActive(false);
         }
-        else if(StageManager.instance.money >= weaponPrice)
+        else if(GameManager.instance.playerInfo.money >= weaponPrice)
         {
             List<GameObject> weapons = StageManager.instance.playerInfo.weapons;
             for (int i = 0; i < weapons.Count; i++)
@@ -548,7 +548,7 @@ public class WeaponGoods : Weapon, UI_Upadte
                 {
                     if(weapon.weaponTier == weaponTier && weapon.weaponTier < 3)
                     {
-                        StageManager.instance.money -= (int)weaponPrice;
+                        GameManager.instance.playerInfo.money -= (int)weaponPrice;
                         weapon.weaponTier++;
                         UnLockIng();
                         ShopManager.instance.goodsList.Remove(gameObject);

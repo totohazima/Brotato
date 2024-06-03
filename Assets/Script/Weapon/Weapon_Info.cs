@@ -500,7 +500,7 @@ public class Weapon_Info : MonoBehaviour
         StageManager.instance.playerInfo.StatCalculate();
         float recyclePrice = (price * 0.25f);
         recyclePrice = Mathf.Round(recyclePrice);
-        StageManager.instance.money += (int)recyclePrice;
+        GameManager.instance.playerInfo.money += (int)recyclePrice;
         transform.SetParent(masterItem);
         gameObject.SetActive(false);
     }

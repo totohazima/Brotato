@@ -19,11 +19,12 @@ public class GameManager : MonoBehaviour, UI_Upadte
     [HideInInspector] public GameObject player_Obj;
     [HideInInspector] public GameObject difficult_Obj;
     [HideInInspector] public int maxWeaponCount; //최대 무기 갯수
+    public PlayerInfo playerInfo;
     public Player_Action player_Info;
     public Player.Character character;
     public GameObject weaponPrefab;
     public GameObject optionUI;
-    public bool isDie; //플레이어 사망
+    public bool isEnd; //웨이브 끝
     public bool isPause; //일시정지
     [Header("#Weapon_Info")]
     public Vector2 engineerBuildingPos;
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         GameObject obj = Instantiate(dontDestoryOBJ);
         option = obj.transform.GetChild(1).gameObject;
         optionUI = option.gameObject;
-
+        playerInfo.Reset_PlayerInfo();
         GameStart();
     }
 
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
             maxWeaponCount = 6;
         }
         StageManager.instance.curHp = StageManager.instance.playerInfo.maxHealth_Origin;
-        StageManager.instance.money = 30;
+        playerInfo.money = 30;
         
         //시작 무기 추가
         if (weaponPrefab != null)

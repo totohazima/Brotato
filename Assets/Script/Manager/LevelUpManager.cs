@@ -44,7 +44,7 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-        money.text = StageManager.instance.money.ToString("F0");
+        money.text = GameManager.instance.playerInfo.money.ToString("F0");
         //statNum[0].text = StageManager.instance.playerLevel.ToString("F0");
         //statNum[1].text = player.maxHealth.ToString("F0");
         //statNum[2].text = player.regeneration.ToString("F0");
@@ -91,9 +91,9 @@ public class LevelUpManager : MonoBehaviour, ICustomUpdateMono
             return;
         }
 
-        if (StageManager.instance.money >= 1)
+        if (GameManager.instance.playerInfo.money >= 1)
         {
-            StageManager.instance.money -= 1;
+            GameManager.instance.playerInfo.money -= 1;
             StartCoroutine(UpgradeSetting());
         }
         else

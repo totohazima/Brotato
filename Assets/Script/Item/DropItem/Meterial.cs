@@ -4,50 +4,49 @@ using UnityEngine;
 
 public class Meterial : DropItem
 {
-
     public int moneyValue;
     public float expValue;
 
     void OnTriggerEnter(Collider other)
     {
-        StageManager game = StageManager.instance;
+        GameManager game = GameManager.instance;
         if(other.CompareTag("Player"))
         {
-            if (game.isEnd == false)
+            if (GameManager.instance.isEnd == false)
             {
-                game.money += moneyValue;
-                game.curExp += (expValue * (1 + (game.playerInfo.expGain / 100)));
-                if (game.interest > 0)
+                game.playerInfo.money += moneyValue;
+                game.playerInfo.curExp += (expValue * (1 + (game.player_Info.expGain / 100)));
+                if (game.playerInfo.interest > 0)
                 {
-                    if (game.interest < moneyValue)
+                    if (game.playerInfo.interest < moneyValue)
                     {
-                        game.money += game.interest;
-                        game.interest = 0;
+                        game.playerInfo.money += game.playerInfo.interest;
+                        game.playerInfo.interest = 0;
                     }
-                    else if (game.interest >= moneyValue)
+                    else if (game.playerInfo.interest >= moneyValue)
                     {
-                        game.money += moneyValue;
-                        game.interest -= moneyValue;
+                        game.playerInfo.money += moneyValue;
+                        game.playerInfo.interest -= moneyValue;
                     }
                 }
 
                 
             }
-            else if(game.isEnd == true)
+            else if(GameManager.instance.isEnd == true)
             {
-                game.interest += moneyValue;
-                game.curExp += (expValue * (1 + (game.playerInfo.expGain / 100)));
+                game.playerInfo.interest += moneyValue;
+                game.playerInfo.curExp += (expValue * (1 + (game.player_Info.expGain / 100)));
             }
 
-            if (game.curHp < game.maxHp)
+            if (StageManager.instance.curHp < StageManager.instance.maxHp)
             {
-                float monkeyChance = (StageManager.instance.playerInfo.meterialHeal / 100);
+                float monkeyChance = (game.player_Info.meterialHeal / 100);
                 float failure = 1 - monkeyChance;
                 float[] chanceLise = { monkeyChance, failure };
-                int index = game.Judgment(chanceLise);
+                int index = StageManager.instance.Judgment(chanceLise);
                 if (index == 0)
                 {
-                    game.curHp++;
+                    StageManager.instance.curHp++;
                     string healTxt = "<color=#4CFF52>1</color>";
                     Transform text = DamageTextManager.instance.TextCreate(0, healTxt).transform;
                     text.position = transform.position;

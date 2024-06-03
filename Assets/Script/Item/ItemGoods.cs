@@ -61,7 +61,7 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
         itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
         itemPrice = itemPrice * ((100 + StageManager.instance.playerInfo.priceSale) / 100);
         itemPrice = MathF.Round(itemPrice);
-        if (itemPrice > StageManager.instance.money)
+        if (itemPrice > GameManager.instance.playerInfo.money)
         {
             itemPriceText.text = "<color=red>" + itemPrice.ToString("F0") + "</color>";
         }
@@ -104,9 +104,9 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
 
     public void BuyItem()
     {
-        if (StageManager.instance.money >= itemPrice)
+        if (GameManager.instance.playerInfo.money >= itemPrice)
         {
-            StageManager.instance.money -= (int)itemPrice;
+            GameManager.instance.playerInfo.money -= (int)itemPrice;
             ItemManager.instance.ItemObtain(itemCode);
             ItemManager.instance.ItemListUp();
             UnLockIng();

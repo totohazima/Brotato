@@ -52,7 +52,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     }
     public void CustomUpdate()
     {
-        if (stage.isEnd == true)
+        if (GameManager.instance.isEnd == true)
         {
             treeTimer = 0;
             enemyClear();
