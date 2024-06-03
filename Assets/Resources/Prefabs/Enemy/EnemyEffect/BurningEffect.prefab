@@ -9660,7 +9660,7 @@ GameObject:
   - component: {fileID: 198151785488069066}
   - component: {fileID: 199292984608142242}
   m_Layer: 0
-  m_Name: Magic fire pro yellow
+  m_Name: BurningEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10636,9 +10636,9 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 2
-          outSlope: 2
+          value: 0.68066406
+          inSlope: 0
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
