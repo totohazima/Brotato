@@ -24,11 +24,12 @@ public class WaveStatImporter : CustomExcelDataImportBase
             InfoTable.table[i - 1] = new WaveStatInfoTable.Data();
             data = InfoTable.table[i - 1];
 
-            cell = row.GetCell(0); data.maxEnemySpawn = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(1); data.enemySpawnCount = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(2); data.enemySpawnTime = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(3); data.waveTime = (float)(cell == null ? 0 : cell.NumericCellValue);
-            cell = row.GetCell(4); data.waveTreeStat = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(0); data.waveName = (cell == null ? "" : cell.StringCellValue);
+            cell = row.GetCell(1); data.maxEnemySpawn = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(2); data.enemySpawnCount = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(3); data.enemySpawnTime = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(4); data.waveTime = (float)(cell == null ? 0 : cell.NumericCellValue);
+            cell = row.GetCell(5); data.waveTreeStat = (float)(cell == null ? 0 : cell.NumericCellValue);
         }
         EditorUtility.SetDirty(InfoTable);
     }

@@ -139,6 +139,6 @@ public class ChargerEnemy : EnemyAction
         dashVec = Vector3.zero;
         rigid.velocity = Vector3.zero;
         TimeReset();
-        yield return base.Died();
+        return base.Died();
     }
 }

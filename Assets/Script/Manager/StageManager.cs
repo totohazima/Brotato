@@ -149,22 +149,11 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             interestUI.SetActive(false);
         }
 
-        if (GameManager.instance.isStart == true)
-        {
-            if (GameManager.instance.playerInfo.playerHealth <= 0)
-            {
-                GameManager.instance.playerInfo.isDie = true;
-                StartCoroutine(Died());
-            }
-            else
-            {
-                GameManager.instance.playerInfo.isDie = false;
-            }
-        }
+        
 
         if (timer <= 0) //웨이브 클리어 시
         {
-            if (waveLevel == 9)
+            if (waveLevel == 19)
             {
                 GameEnd();
                 return;
@@ -221,12 +210,6 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         }
     }
     
-    IEnumerator Died()
-    {
-        GameManager.instance.isEnd = true;
-        gameOverUI.SetActive(true);
-        yield return 0;
-    }
     void FriendlyRemove()
     {
         SpawnManager spawn = SpawnManager.instance;
@@ -386,6 +369,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     void GameEnd()
     {
         gameClearUI.SetActive(true);
+        GameManager.instance.easySave.DeleteData();
         GameManager.instance.isEnd = true;
     }
 

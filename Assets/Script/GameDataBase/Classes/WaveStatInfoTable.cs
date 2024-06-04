@@ -8,6 +8,7 @@ public class WaveStatInfoTable : GameDataTable<WaveStatInfoTable.Data>
     [System.Serializable]
     public class Data : GameData
     {
+        public string waveName;
         public float maxEnemySpawn;
         public float enemySpawnCount;
         public float enemySpawnTime;

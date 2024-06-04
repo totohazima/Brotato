@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334c3fce11727c745ac94356c94dd011, type: 3}
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
-  isDie: 0
+  isDie: 1
   maxHealth: 0
   playerHealth: 0
   regeneration: 0
@@ -55,21 +55,21 @@ MonoBehaviour:
   levelUpChance: 0
   lootChance: 0
   curExp: 0
-  maxExp: 0
+  maxExp: 50
   overExp: 0
-  money: 0
+  money: 30
   interest: 0
-  engineerBuildingPos: {x: 0, y: 0}
+  engineerBuildingPos: {x: -5.0722427, y: -11.519222}
   unArmed_Set: 0
   tool_Set: 0
-  gun_Set: 0
+  gun_Set: 1
   explosive_Set: 0
   precision_Set: 0
   native_Set: 0
   elemental_Set: 0
   itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
   invenItem: {fileID: 4012523125829970869, guid: 05d210546179917498008d12b3719e05, type: 3}
-  isUglyTooth: 0
+  isUglyTooth: 1
   isLumberJack: 0
   isWeirdGhost: 0
   minesCount: 0

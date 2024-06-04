@@ -13,52 +13,122 @@ MonoBehaviour:
   m_Name: WaveStat
   m_EditorClassIdentifier: 
   table:
-  - maxEnemySpawn: 100
+  - waveName: "1 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
     enemySpawnCount: 1
     enemySpawnTime: 0.85
     waveTime: 45
     waveTreeStat: 1.5
-  - maxEnemySpawn: 100
+  - waveName: "2 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
     enemySpawnCount: 1
     enemySpawnTime: 0.85
     waveTime: 45
     waveTreeStat: 1.5
-  - maxEnemySpawn: 100
+  - waveName: "3 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
     enemySpawnCount: 1
     enemySpawnTime: 0.7
     waveTime: 55
     waveTreeStat: 1.5
-  - maxEnemySpawn: 100
+  - waveName: "4 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
     enemySpawnCount: 1
     enemySpawnTime: 0.7
     waveTime: 55
     waveTreeStat: 1.5
-  - maxEnemySpawn: 100
+  - waveName: "5 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
     enemySpawnCount: 1
     enemySpawnTime: 0.7
     waveTime: 55
     waveTreeStat: 1.5
-  - maxEnemySpawn: 100
+  - waveName: "6 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
     enemySpawnCount: 1
     enemySpawnTime: 0.65
     waveTime: 65
     waveTreeStat: 1.5
-  - maxEnemySpawn: 100
+  - waveName: "7 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
     enemySpawnCount: 1
     enemySpawnTime: 0.65
     waveTime: 65
     waveTreeStat: 1.5
-  - maxEnemySpawn: 100
+  - waveName: "8 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
     enemySpawnCount: 1
     enemySpawnTime: 0.65
     waveTime: 65
     waveTreeStat: 1.5
-  - maxEnemySpawn: 100
+  - waveName: "9 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
     enemySpawnCount: 1
     enemySpawnTime: 0.6
     waveTime: 70
     waveTreeStat: 1.5
-  - maxEnemySpawn: 100
+  - waveName: "10 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - waveName: "11 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - waveName: "12 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - waveName: "13 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - waveName: "14 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - waveName: "15 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - waveName: "16 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - waveName: "17 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - waveName: "18 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - waveName: "19 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
+    enemySpawnCount: 1
+    enemySpawnTime: 0.6
+    waveTime: 70
+    waveTreeStat: 1.5
+  - waveName: "20 \uC6E8\uC774\uBE0C"
+    maxEnemySpawn: 100
     enemySpawnCount: 1
     enemySpawnTime: 0.6
     waveTime: 70

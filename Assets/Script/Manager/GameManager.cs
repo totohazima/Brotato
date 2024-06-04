@@ -90,10 +90,30 @@ public class GameManager : MonoBehaviour, UI_Upadte
                 playerInfo.levelUpChance++;
             }
         }
+
+        if (isStart == true)
+        {
+            if (playerInfo.playerHealth <= 0)
+            {
+                playerInfo.isDie = true;
+                StartCoroutine(Died());
+            }
+            else
+            {
+                playerInfo.isDie = false;
+            }
+        }
     }
     private void GameStart() //Title에서 Main으로
     {
         LoadingSceneManager.LoadScene("MainScene");
+    }
+    private IEnumerator Died()
+    {
+        easySave.DeleteData();
+        isEnd = true;
+        StageManager.instance.gameOverUI.SetActive(true);
+        yield return 0;
     }
     public IEnumerator WaveStart()
     {
@@ -272,6 +292,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
     
     public void GameManagerClear()
     {
+        isEnd = false;
         isPause = false;
         isStart = false;
         harvestVariance_Amount = 0;

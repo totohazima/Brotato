@@ -90,6 +90,7 @@ public class SaveLoadExample : MonoBehaviour, UI_Upadte
         if (ES3.FileExists("SceneSaveData.es3"))
         {
             ES3.DeleteFile("SceneSaveData.es3");
+            Debug.Log("Data Deleted");
         }
     }
 }
