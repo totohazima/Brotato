@@ -77,6 +77,38 @@ MonoBehaviour:
     baseExp: 1
     baseConsumableDropPersent: 3
     baseLootDropPersent: 3
+  - monsterCode: 4
+    enemyType: 2
+    baseHp: 29250
+    baseDamage: 30
+    baseCoolTime: 0
+    baseArmor: 0
+    baseRange: 0
+    baseEvasion: 0
+    baseAccuracy: 100
+    baseMinSpeed: 300
+    baseMaxSpeed: 300
+    baseMoneyDropCount: 10
+    baseMoneyValue: 1
+    baseExp: 1
+    baseConsumableDropPersent: 100
+    baseLootDropPersent: 100
+  - monsterCode: 5
+    enemyType: 2
+    baseHp: 29250
+    baseDamage: 30
+    baseCoolTime: 0
+    baseArmor: 0
+    baseRange: 0
+    baseEvasion: 0
+    baseAccuracy: 100
+    baseMinSpeed: 300
+    baseMaxSpeed: 300
+    baseMoneyDropCount: 10
+    baseMoneyValue: 1
+    baseExp: 1
+    baseConsumableDropPersent: 100
+    baseLootDropPersent: 100
   - monsterCode: 6
     enemyType: 3
     baseHp: 8

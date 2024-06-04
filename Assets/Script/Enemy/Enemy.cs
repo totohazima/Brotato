@@ -43,95 +43,135 @@ public class Enemy : MonoBehaviour
 
     public void StatSetting(EnemyName index, Stat.enemyType type)
     {
-        //ÀÏ¹Ý, Áß¸³ ¸÷ ½ºÅÈ Àû¿ë
-        if (type == Stat.enemyType.NORMAL_ENEMY || type == Stat.enemyType.NEUTRALITY_ENEMY)
+        StatReset();
+        void StatReset()
         {
-            StatReset();
-            void StatReset()
+            EnemyBaseStatInfoTable.Data enemy = null;
+            EnemyGrowthStatInfoTable.Data grow = null;
+            for (int i = 0; i < GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table.Length; i++)
             {
-                EnemyBaseStatInfoTable.Data enemy = null;
-                EnemyGrowthStatInfoTable.Data grow = null;
-                for (int i = 0; i < GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table.Length; i++)
+                if (GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[i].monsterCode == index)
                 {
-                    if (GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[i].monsterCode == index)
-                    {
-                        enemy = GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[i];
+                    enemy = GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[i];
 
-                    }
                 }
-                for (int i = 0; i < GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table.Length; i++)
-                {
-                    if (GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[i].monsterCode == index)
-                    {
-                        grow = GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[i];
-                    }
-                }
-
-                enemyType = enemy.enemyType;
-                maxHealth = enemy.baseHp;
-                damage = enemy.baseDamage;
-                coolTime = enemy.baseCoolTime;
-                armor = enemy.baseArmor;
-                range = enemy.baseRange;
-                evasion = enemy.baseEvasion;
-                accuracy = enemy.baseAccuracy;
-                minSpeed = enemy.baseMinSpeed;
-                maxSpeed = enemy.baseMaxSpeed;
-                moneyDropRate = enemy.baseMoneyDropCount;
-                moneyValue = (int)enemy.baseMoneyValue;
-                expValue = (int)enemy.baseExp;
-                consumableDropRate = enemy.baseConsumableDropPersent;
-                lootDropRate = enemy.baseLootDropPersent;
-
-                healthPerWave = grow.hpRisePer;
-                damagePerWave = grow.attackRisePer;
             }
-        }
-        //º¸½º ¸÷ ½ºÅÈ Àû¿ë
-        else if (type == Stat.enemyType.BOSS_ENEMY)
-        {
-            StatReset();
-            void StatReset()
+            for (int i = 0; i < GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table.Length; i++)
             {
-                BossBaseStatInfoTable.Data enemy = null;
-                BossGrowthStatInfoTable.Data grow = null;
-                for (int i = 0; i < GameManager.instance.gameDataBase.bossBaseStatInfoTable.table.Length; i++)
+                if (GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[i].monsterCode == index)
                 {
-                    if (GameManager.instance.gameDataBase.bossBaseStatInfoTable.table[i].monsterCode == index)
-                    {
-                        enemy = GameManager.instance.gameDataBase.bossBaseStatInfoTable.table[i];
-
-                    }
+                    grow = GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[i];
                 }
-                for (int i = 0; i < GameManager.instance.gameDataBase.bossGrowthStatInfoTable.table.Length; i++)
-                {
-                    if (GameManager.instance.gameDataBase.bossGrowthStatInfoTable.table[i].monsterCode == index)
-                    {
-                        grow = GameManager.instance.gameDataBase.bossGrowthStatInfoTable.table[i];
-                    }
-                }
-
-                enemyType = enemy.enemyType;
-                maxHealth = enemy.baseHp;
-                damage = enemy.baseDamage;
-                coolTime = enemy.baseCoolTime;
-                armor = enemy.baseArmor;
-                range = enemy.baseRange;
-                evasion = enemy.baseEvasion;
-                accuracy = enemy.baseAccuracy;
-                minSpeed = enemy.baseMinSpeed;
-                maxSpeed = enemy.baseMaxSpeed;
-                moneyDropRate = enemy.baseMoneyDropCount;
-                moneyValue = (int)enemy.baseMoneyValue;
-                expValue = (int)enemy.baseExp;
-                consumableDropRate = enemy.baseConsumableDropPersent;
-                lootDropRate = enemy.baseLootDropPersent;
-
-                healthPerWave = grow.hpRisePer;
-                damagePerWave = grow.attackRisePer;
             }
+
+            enemyType = enemy.enemyType;
+            maxHealth = enemy.baseHp;
+            damage = enemy.baseDamage;
+            coolTime = enemy.baseCoolTime;
+            armor = enemy.baseArmor;
+            range = enemy.baseRange;
+            evasion = enemy.baseEvasion;
+            accuracy = enemy.baseAccuracy;
+            minSpeed = enemy.baseMinSpeed;
+            maxSpeed = enemy.baseMaxSpeed;
+            moneyDropRate = enemy.baseMoneyDropCount;
+            moneyValue = (int)enemy.baseMoneyValue;
+            expValue = (int)enemy.baseExp;
+            consumableDropRate = enemy.baseConsumableDropPersent;
+            lootDropRate = enemy.baseLootDropPersent;
+
+            healthPerWave = grow.hpRisePer;
+            damagePerWave = grow.attackRisePer;
         }
-      
+        ////ÀÏ¹Ý, Áß¸³ ¸÷ ½ºÅÈ Àû¿ë
+        //if (type == Stat.enemyType.NORMAL_ENEMY || type == Stat.enemyType.NEUTRALITY_ENEMY)
+        //{
+        //    StatReset();
+        //    void StatReset()
+        //    {
+        //        EnemyBaseStatInfoTable.Data enemy = null;
+        //        EnemyGrowthStatInfoTable.Data grow = null;
+        //        for (int i = 0; i < GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table.Length; i++)
+        //        {
+        //            if (GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[i].monsterCode == index)
+        //            {
+        //                enemy = GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[i];
+
+        //            }
+        //        }
+        //        for (int i = 0; i < GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table.Length; i++)
+        //        {
+        //            if (GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[i].monsterCode == index)
+        //            {
+        //                grow = GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[i];
+        //            }
+        //        }
+
+        //        enemyType = enemy.enemyType;
+        //        maxHealth = enemy.baseHp;
+        //        damage = enemy.baseDamage;
+        //        coolTime = enemy.baseCoolTime;
+        //        armor = enemy.baseArmor;
+        //        range = enemy.baseRange;
+        //        evasion = enemy.baseEvasion;
+        //        accuracy = enemy.baseAccuracy;
+        //        minSpeed = enemy.baseMinSpeed;
+        //        maxSpeed = enemy.baseMaxSpeed;
+        //        moneyDropRate = enemy.baseMoneyDropCount;
+        //        moneyValue = (int)enemy.baseMoneyValue;
+        //        expValue = (int)enemy.baseExp;
+        //        consumableDropRate = enemy.baseConsumableDropPersent;
+        //        lootDropRate = enemy.baseLootDropPersent;
+
+        //        healthPerWave = grow.hpRisePer;
+        //        damagePerWave = grow.attackRisePer;
+        //    }
+        //}
+        ////º¸½º ¸÷ ½ºÅÈ Àû¿ë
+        //else if (type == Stat.enemyType.BOSS_ENEMY)
+        //{
+        //    StatReset();
+        //    void StatReset()
+        //    {
+        //        BossBaseStatInfoTable.Data enemy = null;
+        //        BossGrowthStatInfoTable.Data grow = null;
+        //        for (int i = 0; i < GameManager.instance.gameDataBase.bossBaseStatInfoTable.table.Length; i++)
+        //        {
+        //            if (GameManager.instance.gameDataBase.bossBaseStatInfoTable.table[i].monsterCode == index)
+        //            {
+        //                enemy = GameManager.instance.gameDataBase.bossBaseStatInfoTable.table[i];
+
+        //            }
+        //        }
+        //        for (int i = 0; i < GameManager.instance.gameDataBase.bossGrowthStatInfoTable.table.Length; i++)
+        //        {
+        //            if (GameManager.instance.gameDataBase.bossGrowthStatInfoTable.table[i].monsterCode == index)
+        //            {
+        //                grow = GameManager.instance.gameDataBase.bossGrowthStatInfoTable.table[i];
+        //            }
+        //        }
+
+        //        enemyType = enemy.enemyType;
+        //        maxHealth = enemy.baseHp;
+        //        damage = enemy.baseDamage;
+        //        coolTime = enemy.baseCoolTime;
+        //        armor = enemy.baseArmor;
+        //        range = enemy.baseRange;
+        //        evasion = enemy.baseEvasion;
+        //        accuracy = enemy.baseAccuracy;
+        //        minSpeed = enemy.baseMinSpeed;
+        //        maxSpeed = enemy.baseMaxSpeed;
+        //        moneyDropRate = enemy.baseMoneyDropCount;
+        //        moneyValue = (int)enemy.baseMoneyValue;
+        //        expValue = (int)enemy.baseExp;
+        //        consumableDropRate = enemy.baseConsumableDropPersent;
+        //        lootDropRate = enemy.baseLootDropPersent;
+
+        //        healthPerWave = grow.hpRisePer;
+        //        damagePerWave = grow.attackRisePer;
+        //    }
+        //}
+
         WaveStat();
         //void WaveStat()
         //{
