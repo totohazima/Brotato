@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Only1Games.GDBA;
-public class EnemyGrowthStatInfoTable : GameDataTable<EnemyGrowthStatInfoTable.Data>
+public class BossGrowthStatInfoTable : GameDataTable<BossGrowthStatInfoTable.Data>
 {
     [System.Serializable]
     public class Data : GameData

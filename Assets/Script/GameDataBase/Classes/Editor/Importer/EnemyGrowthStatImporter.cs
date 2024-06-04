@@ -27,7 +27,7 @@ public class EnemyGrowthStatImporter : CustomExcelDataImportBase
             InfoTable.table[i - 1] = new EnemyGrowthStatInfoTable.Data();
             data = InfoTable.table[i - 1];
 
-            cell = row.GetCell(0); data.monsterCode = (cell == null ? "" : cell.StringCellValue);
+            cell = row.GetCell(0); data.monsterCode = (Enemy.EnemyName)System.Enum.Parse(typeof(Enemy.EnemyName), (cell == null ? "" : cell.StringCellValue));
             cell = row.GetCell(1); data.hpRisePer = (float)(cell == null ? 0 : cell.NumericCellValue);
             cell = row.GetCell(2); data.attackRisePer = (float)(cell == null ? 0 : cell.NumericCellValue);
         }

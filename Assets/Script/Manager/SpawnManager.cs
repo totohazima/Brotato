@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             if (timer >= spawnTime)
             {
                 StartCoroutine(EnemySpawn());
-
+                StartCoroutine(BossSpawn(1, Enemy.EnemyName.INVOKER));
                 timer = 0f;
             }
         }
@@ -126,7 +126,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         }
     }
 
-    public IEnumerator BossSpawn(int index)
+    public IEnumerator BossSpawn(int index, Enemy.EnemyName bossName)
     {
         GameObject[] mark = new GameObject[index];
         GameObject[] enemy = new GameObject[mark.Length];
@@ -139,9 +139,17 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         yield return new WaitForSeconds(1f);
         for (int i = 0; i < mark.Length; i++)
         {
-            enemy[i] = Spawn(4);
+            switch(bossName)
+            {
+                case Enemy.EnemyName.PREDATOR:
+                    enemy[i] = Spawn(4);
+                    break;
+                case Enemy.EnemyName.INVOKER:
+                    enemy[i] = Spawn(5);
+                    break;
+            }
+            
             enemy[i].transform.position = mark[i].transform.position;
-            //enemys.Add(enemy[i]);
             mark[i].SetActive(false);
         }
     }

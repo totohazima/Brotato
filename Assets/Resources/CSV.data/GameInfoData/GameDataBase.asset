@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBaseStatInfoTable: {fileID: 11400000, guid: 00dde118f38d4314ea82c4ff02c52105, type: 2}
   enemyGrowthStatInfoTable: {fileID: 11400000, guid: ef31b84d6b282dd40b25d4bf5b1795a9, type: 2}
+  bossBaseStatInfoTable: {fileID: 11400000, guid: 0b8c68bb20ee0544fbd8550819f202e7, type: 2}
+  bossGrowthStatInfoTable: {fileID: 11400000, guid: b284d1827e2cbd248ae9121e29c35d66, type: 2}
   playerStatInfoTable: {fileID: 11400000, guid: c8b6183f8d594a6458528aa9545d4c33, type: 2}
   itemStatInfoTable: {fileID: 11400000, guid: 73509b5813e49f049a95580cce1c9b5d, type: 2}
   upgradeStatInfoTable: {fileID: 11400000, guid: efbd8711cc1a6af4391ed9812aba7b8c, type: 2}

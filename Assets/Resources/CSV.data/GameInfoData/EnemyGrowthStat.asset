@@ -13,21 +13,18 @@ MonoBehaviour:
   m_Name: EnemyGrowthStat
   m_EditorClassIdentifier: 
   table:
-  - monsterCode: BASIC
+  - monsterCode: 0
     hpRisePer: 38
     attackRisePer: 1
-  - monsterCode: RANGER
+  - monsterCode: 1
     hpRisePer: 38
     attackRisePer: 1
-  - monsterCode: CHARGER
+  - monsterCode: 2
     hpRisePer: 38
     attackRisePer: 1
-  - monsterCode: TANKER
+  - monsterCode: 3
     hpRisePer: 38
     attackRisePer: 1
-  - monsterCode: BOSS
-    hpRisePer: 0
-    attackRisePer: 1
-  - monsterCode: TREE
+  - monsterCode: 6
     hpRisePer: 0
     attackRisePer: 0

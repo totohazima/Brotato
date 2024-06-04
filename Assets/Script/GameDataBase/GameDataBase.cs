@@ -15,6 +15,8 @@ namespace Only1Games.GDBA
         [Header("StatusTable")]
         public EnemyBaseStatInfoTable enemyBaseStatInfoTable = null;
         public EnemyGrowthStatInfoTable enemyGrowthStatInfoTable = null;
+        public BossBaseStatInfoTable bossBaseStatInfoTable = null;
+        public BossGrowthStatInfoTable bossGrowthStatInfoTable = null;
         public PlayerStatInfoTable playerStatInfoTable = null;
         public ItemStatInfoTable itemStatInfoTable = null;
         public UpgradeStatInfoTable upgradeStatInfoTable = null;

@@ -288,8 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d323545376d98c4dba8c06bd3af485d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolinObject: {fileID: 50224487757756445, guid: b22801a716d6d4843a2d889cd38e3d26, type: 3}
-  poolingObject: []
 --- !u!1 &942788480
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +501,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 511
 --- !u!114 &1873760251
 MonoBehaviour:
   m_ObjectHideFlags: 0

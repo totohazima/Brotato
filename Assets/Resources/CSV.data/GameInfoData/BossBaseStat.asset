@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a12432995a0a6e42a8b9ebefcc12430, type: 3}
+  m_Name: BossBaseStat
+  m_EditorClassIdentifier: 
+  table:
+  - monsterCode: 4
+    enemyType: 2
+    baseHp: 29250
+    baseDamage: 30
+    baseCoolTime: 0
+    baseArmor: 0
+    baseRange: 0
+    baseEvasion: 0
+    baseAccuracy: 100
+    baseMinSpeed: 300
+    baseMaxSpeed: 300
+    baseMoneyDropCount: 10
+    baseMoneyValue: 1
+    baseExp: 1
+    baseConsumableDropPersent: 100
+    baseLootDropPersent: 100
+  - monsterCode: 5
+    enemyType: 2
+    baseHp: 29250
+    baseDamage: 30
+    baseCoolTime: 0
+    baseArmor: 0
+    baseRange: 0
+    baseEvasion: 0
+    baseAccuracy: 100
+    baseMinSpeed: 300
+    baseMaxSpeed: 300
+    baseMoneyDropCount: 10
+    baseMoneyValue: 1
+    baseExp: 1
+    baseConsumableDropPersent: 100
+    baseLootDropPersent: 100

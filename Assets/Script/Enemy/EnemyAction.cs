@@ -27,7 +27,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     {
         CustomUpdateManager.customUpdates.Add(this);
         SpawnManager.instance.enemys.Add(this);
-        StatSetting((int)name, name);
+        StatSetting(name, enemyType);
     }
     void OnDisable()
     {

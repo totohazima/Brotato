@@ -501,6 +501,10 @@ namespace Only1Games.GDBA
                     return true;
                 case "EnemyGrowthStat":
                     return true;
+                case "BossBaseStat":
+                    return true;
+                case "BossGrowthStat":
+                    return true;
                 case "DifficultStat":
                     return true;
                 case "ItemStat":
@@ -542,6 +546,10 @@ namespace Only1Games.GDBA
                     return new EnemyBaseStatImporter(filePath);
                 case "EnemyGrowthStat":
                     return new EnemyGrowthStatImporter(filePath);
+                case "BossBaseStat":
+                    return new BossBaseStatImporter(filePath);
+                case "BossGrowthStat":
+                    return new BossGrowthStatImporter(filePath);
                 case "DifficultStat":
                     return new DifficultImporter(filePath);
                 case "ItemStat":

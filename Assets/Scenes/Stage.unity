@@ -32031,6 +32031,7 @@ MonoBehaviour:
   - {fileID: 3416201615854339148, guid: c6a7b6ee2a01f434d925a3693d660ef9, type: 3}
   - {fileID: 3416201615854339148, guid: 4693b54f36cd9bf46a3a420a6f3cb48f, type: 3}
   - {fileID: 3416201615854339148, guid: a0b7bc019b229a24692106de80b02ba3, type: 3}
+  - {fileID: 3416201615854339148, guid: f9b6462dddac8b549899989ff4ee7740, type: 3}
   scrip: []
   enemyLimit: 0
   spawnCount: 0

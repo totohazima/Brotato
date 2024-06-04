@@ -36,39 +36,130 @@ public class Enemy : MonoBehaviour
         RANGER,
         CHARGER,
         TANKER,
-        BOSS,
-        TREE,
+        PREDATOR,   //보스
+        INVOKER,    //보스
+        TREE,   //중립
     }
 
-    public void StatSetting(int index, EnemyName type)
+    public void StatSetting(EnemyName index, Stat.enemyType type)
     {
-        StatReset();
-        void StatReset()
+        //일반, 중립 몹 스탯 적용
+        if (type == Stat.enemyType.NORMAL_ENEMY || type == Stat.enemyType.NEUTRALITY_ENEMY)
         {
-            EnemyBaseStatInfoTable.Data enemy = GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[index];
-            EnemyGrowthStatInfoTable.Data grow = GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[index];
+            StatReset();
+            void StatReset()
+            {
+                EnemyBaseStatInfoTable.Data enemy = null;
+                EnemyGrowthStatInfoTable.Data grow = null;
+                for (int i = 0; i < GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table.Length; i++)
+                {
+                    if (GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[i].monsterCode == index)
+                    {
+                        enemy = GameManager.instance.gameDataBase.enemyBaseStatInfoTable.table[i];
 
-            enemyType = enemy.enemyType;
-            maxHealth = enemy.baseHp;
-            damage = enemy.baseDamage;
-            coolTime = enemy.baseCoolTime;
-            armor = enemy.baseArmor;
-            range = enemy.baseRange;
-            evasion = enemy.baseEvasion;
-            accuracy = enemy.baseAccuracy;
-            minSpeed = enemy.baseMinSpeed;
-            maxSpeed = enemy.baseMaxSpeed;
-            moneyDropRate = enemy.baseMoneyDropCount;
-            moneyValue = (int)enemy.baseMoneyValue;
-            expValue = (int)enemy.baseExp;
-            consumableDropRate = enemy.baseConsumableDropPersent;
-            lootDropRate = enemy.baseLootDropPersent;
+                    }
+                }
+                for (int i = 0; i < GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table.Length; i++)
+                {
+                    if (GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[i].monsterCode == index)
+                    {
+                        grow = GameManager.instance.gameDataBase.enemyGrowthStatInfoTable.table[i];
+                    }
+                }
 
-            healthPerWave = grow.hpRisePer;
-            damagePerWave = grow.attackRisePer;
+                enemyType = enemy.enemyType;
+                maxHealth = enemy.baseHp;
+                damage = enemy.baseDamage;
+                coolTime = enemy.baseCoolTime;
+                armor = enemy.baseArmor;
+                range = enemy.baseRange;
+                evasion = enemy.baseEvasion;
+                accuracy = enemy.baseAccuracy;
+                minSpeed = enemy.baseMinSpeed;
+                maxSpeed = enemy.baseMaxSpeed;
+                moneyDropRate = enemy.baseMoneyDropCount;
+                moneyValue = (int)enemy.baseMoneyValue;
+                expValue = (int)enemy.baseExp;
+                consumableDropRate = enemy.baseConsumableDropPersent;
+                lootDropRate = enemy.baseLootDropPersent;
+
+                healthPerWave = grow.hpRisePer;
+                damagePerWave = grow.attackRisePer;
+            }
         }
+        //보스 몹 스탯 적용
+        else if (type == Stat.enemyType.BOSS_ENEMY)
+        {
+            StatReset();
+            void StatReset()
+            {
+                BossBaseStatInfoTable.Data enemy = null;
+                BossGrowthStatInfoTable.Data grow = null;
+                for (int i = 0; i < GameManager.instance.gameDataBase.bossBaseStatInfoTable.table.Length; i++)
+                {
+                    if (GameManager.instance.gameDataBase.bossBaseStatInfoTable.table[i].monsterCode == index)
+                    {
+                        enemy = GameManager.instance.gameDataBase.bossBaseStatInfoTable.table[i];
 
+                    }
+                }
+                for (int i = 0; i < GameManager.instance.gameDataBase.bossGrowthStatInfoTable.table.Length; i++)
+                {
+                    if (GameManager.instance.gameDataBase.bossGrowthStatInfoTable.table[i].monsterCode == index)
+                    {
+                        grow = GameManager.instance.gameDataBase.bossGrowthStatInfoTable.table[i];
+                    }
+                }
+
+                enemyType = enemy.enemyType;
+                maxHealth = enemy.baseHp;
+                damage = enemy.baseDamage;
+                coolTime = enemy.baseCoolTime;
+                armor = enemy.baseArmor;
+                range = enemy.baseRange;
+                evasion = enemy.baseEvasion;
+                accuracy = enemy.baseAccuracy;
+                minSpeed = enemy.baseMinSpeed;
+                maxSpeed = enemy.baseMaxSpeed;
+                moneyDropRate = enemy.baseMoneyDropCount;
+                moneyValue = (int)enemy.baseMoneyValue;
+                expValue = (int)enemy.baseExp;
+                consumableDropRate = enemy.baseConsumableDropPersent;
+                lootDropRate = enemy.baseLootDropPersent;
+
+                healthPerWave = grow.hpRisePer;
+                damagePerWave = grow.attackRisePer;
+            }
+        }
+      
         WaveStat();
+        //void WaveStat()
+        //{
+        //    int wave = StageManager.instance.waveLevel;
+
+        //    float num = maxHealth;
+        //    for (int i = 0; i < wave; i++)
+        //    {
+        //        num *= 1 + (healthPerWave / 100);
+        //    }
+        //    maxHealth = num;
+
+        //    float num2 = damage;
+        //    for (int i = 0; i < wave; i++)
+        //    {
+        //        num2 *= 1 + (damagePerWave / 100);
+        //    }
+        //    damage = num2;
+
+        //    maxHealth += maxHealth * (GameManager.instance.enemyRiseHealth / 100);
+        //    damage += damage * (GameManager.instance.enemyRiseDamage / 100);
+
+        //    //보스 2마리 소환 시 체력 25% 감소
+        //    if (type == Stat.enemyType.BOSS_ENEMY && GameManager.instance.doubleBoss == true)
+        //    {
+        //        maxHealth = maxHealth * 0.75f;
+        //    }
+        //}
         void WaveStat()
         {
             int wave = StageManager.instance.waveLevel;
@@ -76,14 +167,14 @@ public class Enemy : MonoBehaviour
             float num = maxHealth;
             for (int i = 0; i < wave; i++)
             {
-                num *= 1 + (healthPerWave / 100);
+                num += healthPerWave;
             }
             maxHealth = num;
 
             float num2 = damage;
             for (int i = 0; i < wave; i++)
             {
-                num2 *= 1 + (damagePerWave / 100);
+                num2 += damagePerWave; 
             }
             damage = num2;
 
@@ -91,12 +182,11 @@ public class Enemy : MonoBehaviour
             damage += damage * (GameManager.instance.enemyRiseDamage / 100);
 
             //보스 2마리 소환 시 체력 25% 감소
-            if(type == EnemyName.BOSS && GameManager.instance.doubleBoss == true)
+            if (type == Stat.enemyType.BOSS_ENEMY && GameManager.instance.doubleBoss == true)
             {
                 maxHealth = maxHealth * 0.75f;
             }
         }
-
         curHealth = maxHealth;
     }
 }

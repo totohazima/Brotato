@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334c3fce11727c745ac94356c94dd011, type: 3}
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
-  isDie: 1
+  isDie: 0
   maxHealth: 0
-  playerHealth: 0
+  playerHealth: 15
   regeneration: 0
   bloodSucking: 0
   persentDamage: 0
@@ -54,12 +54,12 @@ MonoBehaviour:
   playerLevel: 0
   levelUpChance: 0
   lootChance: 0
-  curExp: 0
+  curExp: 14
   maxExp: 50
   overExp: 0
-  money: 30
-  interest: 0
-  engineerBuildingPos: {x: -5.0722427, y: -11.519222}
+  money: 38
+  interest: 6
+  engineerBuildingPos: {x: 98.3575, y: 3.0460072}
   unArmed_Set: 0
   tool_Set: 0
   gun_Set: 1

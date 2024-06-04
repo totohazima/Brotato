@@ -343,13 +343,27 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
         //spawn.spawnTime = waveTime[waveLevel] / spawn.enemyLimit;
         if (spawn.scrip[waveLevel].isBossSpawn == true)
         {
-            if (GameManager.instance.doubleBoss == true)
+            if (waveLevel != 19)
             {
-                StartCoroutine(spawn.BossSpawn(2));
+                if (GameManager.instance.doubleBoss == true)
+                {
+                    StartCoroutine(spawn.BossSpawn(2, Enemy.EnemyName.PREDATOR));
+                }
+                else
+                {
+                    StartCoroutine(spawn.BossSpawn(1, Enemy.EnemyName.PREDATOR));
+                }
             }
-            else
+            if (waveLevel == 19)
             {
-                StartCoroutine(spawn.BossSpawn(1));
+                if (GameManager.instance.doubleBoss == true)
+                {
+                    StartCoroutine(spawn.BossSpawn(2, Enemy.EnemyName.INVOKER));
+                }
+                else
+                {
+                    StartCoroutine(spawn.BossSpawn(1, Enemy.EnemyName.INVOKER));
+                }
             }
         }
         GameManager.instance.playerInfo.engineerBuildingPos = spawn.FriendlySpawnPosition();
