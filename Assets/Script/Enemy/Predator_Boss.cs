@@ -9,21 +9,33 @@ public class Predator_Boss : EnemyAction
     public override void OnEnable()
     {
         base.OnEnable();
+        StartCoroutine(bulletSetting());
+    }
+
+    /// <summary>
+    /// 총알이 중앙에 생성돼 사망하는 현상 방지
+    /// 추후 풀매니저 변경 시 제거
+    /// </summary>
+    private IEnumerator bulletSetting()
+    {
         degs = 0;
         bullet = new Transform[5];
         for (int i = 0; i < bullet.Length; i++)
         {
             bullet[i] = PoolManager.instance.Get(11).transform;
             bullet[i].position = transform.position;
+        }
+        yield return new WaitForSeconds(0.1f);
+        for (int i = 0; i < bullet.Length; i++)
+        {
             bullet[i].GetComponent<EnemyBullet>().Init(damage, 100000, 100000, accuracy, Vector3.zero);
         }
     }
-
     public override void CustomUpdate()
     {
         base.CustomUpdate();
 
-        degs += 2;
+        degs += 1.5f;
         for (int i = 0; i < bullet.Length; i++)
         {
             float deg = (360 * i / bullet.Length - 90) + degs;

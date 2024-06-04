@@ -22,14 +22,12 @@ public class Invoker_Boss : EnemyAction
         for (int i = 0; i < bullet.Length; i++)
         {
             bullet[i] = PoolManager.instance.Get(11).transform;
-            bullet[i].gameObject.SetActive(false);
             bullet[i].position = transform.position;
-            bullet[i].GetComponent<EnemyBullet>().Init(damage, 100000, 100000, accuracy, Vector3.zero);
         }
         yield return new WaitForSeconds(0.1f);
         for (int i = 0; i < bullet.Length; i++)
         {
-            bullet[i].gameObject.SetActive(true);
+            bullet[i].GetComponent<EnemyBullet>().Init(damage, 100000, 100000, accuracy, Vector3.zero);
         }
     }
     public override void CustomUpdate()
