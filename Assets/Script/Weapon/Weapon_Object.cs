@@ -32,9 +32,9 @@ public class Weapon_Object : MonoBehaviour, ICustomUpdateMono
     public virtual void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
         CustomUpdateManager.customUpdates.Add(this);
-        for (int i = 0; i < StageManager.instance.playerInfo.weapons.Count; i++)
+        for (int i = 0; i < GameManager.instance.player_Info.weapons.Count; i++)
         {
-            weaponList.Add(StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>());
+            weaponList.Add(GameManager.instance.player_Info.weapons[i].GetComponent<Weapon_Action>());
         }
     }
     public virtual void OnDisable()

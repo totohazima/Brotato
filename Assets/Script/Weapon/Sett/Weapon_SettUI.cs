@@ -35,7 +35,7 @@ public class Weapon_SettUI : MonoBehaviour, UI_Upadte
             case Weapon.SettType.UNARMED:
                 for (int i = 0; i < texts.Length; i++)
                 {
-                    if (i == game.unArmed_Set - 2)
+                    if (i == game.playerInfo.unArmed_Set - 2)
                     {
                         texts[i].color = Color.white;
                     }
@@ -48,7 +48,7 @@ public class Weapon_SettUI : MonoBehaviour, UI_Upadte
             case Weapon.SettType.TOOL:
                 for (int i = 0; i < texts.Length; i++)
                 {
-                    if (i == game.tool_Set - 2)
+                    if (i == game.playerInfo.tool_Set - 2)
                     {
                         texts[i].color = Color.white;
                     }
@@ -61,7 +61,7 @@ public class Weapon_SettUI : MonoBehaviour, UI_Upadte
             case Weapon.SettType.GUN:
                 for (int i = 0; i < texts.Length; i++)
                 {
-                    if (i == game.gun_Set - 2)
+                    if (i == game.playerInfo.gun_Set - 2)
                     {
                         texts[i].color = Color.white;
                     }
@@ -74,7 +74,7 @@ public class Weapon_SettUI : MonoBehaviour, UI_Upadte
             case Weapon.SettType.EXPLOSIVE:
                 for (int i = 0; i < texts.Length; i++)
                 {
-                    if (i == game.explosive_Set - 2)
+                    if (i == game.playerInfo.explosive_Set - 2)
                     {
                         texts[i].color = Color.white;
                     }
@@ -87,7 +87,7 @@ public class Weapon_SettUI : MonoBehaviour, UI_Upadte
             case Weapon.SettType.PRECISION:
                 for (int i = 0; i < texts.Length; i++)
                 {
-                    if (i == game.precision_Set - 2)
+                    if (i == game.playerInfo.precision_Set - 2)
                     {
                         texts[i].color = Color.white;
                     }
@@ -100,7 +100,7 @@ public class Weapon_SettUI : MonoBehaviour, UI_Upadte
             case Weapon.SettType.NATIVE:
                 for (int i = 0; i < texts.Length; i++)
                 {
-                    if (i == game.native_Set - 2)
+                    if (i == game.playerInfo.native_Set - 2)
                     {
                         texts[i].color = Color.white;
                     }
@@ -113,7 +113,7 @@ public class Weapon_SettUI : MonoBehaviour, UI_Upadte
             case Weapon.SettType.ELEMENTALS:
                 for (int i = 0; i < texts.Length; i++)
                 {
-                    if (i == game.elemental_Set - 2)
+                    if (i == game.playerInfo.elemental_Set - 2)
                     {
                         texts[i].color = Color.white;
                     }

@@ -26,15 +26,6 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public GameObject optionUI;
     public bool isEnd; //웨이브 끝
     public bool isPause; //일시정지
-    [Header("#Weapon_Info")]
-    public Vector2 engineerBuildingPos;
-    public int unArmed_Set;
-    public int tool_Set;
-    public int gun_Set;
-    public int explosive_Set;
-    public int precision_Set;
-    public int native_Set;
-    public int elemental_Set;
     [Header("#Difficult_Info")]
     public int difficult_Level; //난이도
     public bool isSpecialEnemySpawn; //새로운 적의 출현
@@ -174,9 +165,9 @@ public class GameManager : MonoBehaviour, UI_Upadte
         float randomX = Random.Range(StageManager.instance.xMin, StageManager.instance.xMax);
         float randomY = Random.Range(StageManager.instance.yMin, StageManager.instance.yMax);
         Vector3 point = new Vector3(randomX, randomY);
-        engineerBuildingPos = point;
+        playerInfo.engineerBuildingPos = point;
 
-        WeaponSetSearch();
+        playerInfo.WeaponSetSearch();
         player_Info.StatCalculate();
         LoadingSceneManager.CloseScene("MainScene");
     }
@@ -271,63 +262,14 @@ public class GameManager : MonoBehaviour, UI_Upadte
 
         //StageManager.instance.ShopOpen();
 
-        WeaponSetSearch();
+        playerInfo.WeaponSetSearch();
         player_Info.StatCalculate();
         easySave.isLoaded = false;
         LoadingSceneManager.CloseScene("MainScene");
     }
 
     
-    public void WeaponSetSearch()
-    {
-        unArmed_Set = 0;
-        tool_Set = 0;
-        gun_Set = 0;
-        explosive_Set = 0;
-        precision_Set = 0;
-        native_Set = 0;
-        elemental_Set = 0;
-
-        if (player_Info != null)
-        {
-            Weapon_Action[] weapon = new Weapon_Action[player_Info.weapons.Count];
-            for (int i = 0; i < weapon.Length; i++)
-            {
-                weapon[i] = StageManager.instance.playerInfo.weapons[i].GetComponent<Weapon_Action>();
-            }
-
-            for (int i = 0; i < weapon.Length; i++)
-            {
-                for (int j = 0; j < weapon[i].setTypes.Length; j++)
-                {
-                    switch (weapon[i].setTypes[j])
-                    {
-                        case Weapon.SettType.UNARMED:
-                            unArmed_Set++;
-                            break;
-                        case Weapon.SettType.TOOL:
-                            tool_Set++;
-                            break;
-                        case Weapon.SettType.GUN:
-                            gun_Set++;
-                            break;
-                        case Weapon.SettType.EXPLOSIVE:
-                            explosive_Set++;
-                            break;
-                        case Weapon.SettType.PRECISION:
-                            precision_Set++;
-                            break;
-                        case Weapon.SettType.NATIVE:
-                            native_Set++;
-                            break;
-                        case Weapon.SettType.ELEMENTALS:
-                            elemental_Set++;
-                            break;
-                    }
-                }
-            }
-        }
-    }
+    
     public void GameManagerClear()
     {
         isPause = false;

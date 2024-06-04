@@ -8145,11 +8145,9 @@ MonoBehaviour:
   gameClearUI: {fileID: 1104014743}
   gameOverUI: {fileID: 1297593249}
   playerInfo: {fileID: 0}
-  curHp: 0
   maxHp: 0
   waveLevel: 0
   waveTime: []
-  lootChance: 0
   inWaveLoot_Amount: 0
   timer: 0
   pool: {fileID: 0}

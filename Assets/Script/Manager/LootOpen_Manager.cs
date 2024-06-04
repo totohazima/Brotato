@@ -119,7 +119,8 @@ public class LootOpen_Manager : MonoBehaviour
         int i = checkIndex - 1;
         Item.ItemType itemType;
         itemType = GameManager.instance.playerInfo.itemGroup_Scriptable.items[itemIndex[i]].itemCode;
-        ItemManager.instance.ItemObtain(itemType);
+        //ItemManager.instance.ItemObtain(itemType);
+        GameManager.instance.playerInfo.ItemObtain(itemType);
         item.SetActive(false);
         GameManager.instance.playerInfo.lootChance--;
 

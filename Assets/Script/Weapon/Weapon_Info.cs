@@ -484,7 +484,7 @@ public class Weapon_Info : MonoBehaviour
 
     public void Combine()
     {
-        List<GameObject> weapons = StageManager.instance.playerInfo.weapons;
+        List<GameObject> weapons = GameManager.instance.player_Info.weapons;
         for (int i = 0; i < weapons.Count; i++)
         {
             Weapon_Action weapon = weapons[i].GetComponent<Weapon_Action>();
@@ -493,10 +493,10 @@ public class Weapon_Info : MonoBehaviour
                 if (weapon.weaponTier == weaponInfo.weaponTier && weapon.index == weaponInfo.index)
                 {
                     weapon.weaponTier++;
-                    StageManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
+                    GameManager.instance.player_Info.weapons.Remove(weaponInfo.gameObject);
                     Destroy(weaponInfo.gameObject);
                     ItemManager.instance.WeaponListUp();
-                    GameManager.instance.WeaponSetSearch();
+                    GameManager.instance.playerInfo.WeaponSetSearch();
                     StageManager.instance.playerInfo.StatCalculate();
                     //Destroy(gameObject);
                     transform.SetParent(masterItem);
@@ -509,10 +509,10 @@ public class Weapon_Info : MonoBehaviour
     }
     public void ReCycle()
     {
-        StageManager.instance.playerInfo.weapons.Remove(weaponInfo.gameObject);
+        GameManager.instance.player_Info.weapons.Remove(weaponInfo.gameObject);
         Destroy(weaponInfo.gameObject);
         ItemManager.instance.WeaponListUp();
-        GameManager.instance.WeaponSetSearch();
+        GameManager.instance.playerInfo.WeaponSetSearch();
         StageManager.instance.playerInfo.StatCalculate();
         float recyclePrice = (price * 0.25f);
         recyclePrice = Mathf.Round(recyclePrice);

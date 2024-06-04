@@ -13,7 +13,44 @@ MonoBehaviour:
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
   isDie: 0
-  playerHealth: 13
+  maxHealth: 0
+  playerHealth: 0
+  regeneration: 0
+  bloodSucking: 0
+  persentDamage: 0
+  meleeDamage: 0
+  rangeDamage: 0
+  elementalDamage: 0
+  attackSpeed: 0
+  criticalChance: 0
+  engine: 0
+  range: 0
+  armor: 0
+  evasion: 0
+  accuracy: 0
+  lucky: 0
+  harvest: 0
+  speed: 0
+  consumableHeal: 0
+  meterialHeal: 0
+  expGain: 0
+  magnetRange: 0
+  priceSale: 0
+  explosiveDamage: 0
+  explosiveSize: 0
+  chain: 0
+  penetrate: 0
+  penetrateDamage: 0
+  bossDamage: 0
+  knockBack: 0
+  doubleMeterial: 0
+  lootInMeterial: 0
+  freeReroll: 0
+  tree: 0
+  enemyAmount: 0
+  enemySpeed: 0
+  instantMagnet: 0
+  characterItemTags: 
   playerLevel: 0
   levelUpChance: 0
   lootChance: 0
@@ -22,9 +59,18 @@ MonoBehaviour:
   overExp: 0
   money: 0
   interest: 0
+  engineerBuildingPos: {x: 0, y: 0}
+  unArmed_Set: 0
+  tool_Set: 0
+  gun_Set: 0
+  explosive_Set: 0
+  precision_Set: 0
+  native_Set: 0
+  elemental_Set: 0
   itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
+  invenItem: {fileID: 4012523125829970869, guid: 05d210546179917498008d12b3719e05, type: 3}
   isUglyTooth: 0
-  isLumberJack: 1
+  isLumberJack: 0
   isWeirdGhost: 0
   minesCount: 0
   turretCount: 0

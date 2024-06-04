@@ -369,7 +369,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
                 StartCoroutine(spawn.BossSpawn(1));
             }
         }
-        GameManager.instance.engineerBuildingPos = spawn.FriendlySpawnPosition();
+        GameManager.instance.playerInfo.engineerBuildingPos = spawn.FriendlySpawnPosition();
         StartCoroutine(spawn.MineSetting());
         StartCoroutine(spawn.TurretSetting());
     }

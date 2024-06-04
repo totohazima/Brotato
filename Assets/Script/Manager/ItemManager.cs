@@ -20,58 +20,58 @@ public class ItemManager : MonoBehaviour
         stage = StageManager.instance;
     }
 
-    public void ItemObtain(Item.ItemType itemType)
-    {
-        bool isGet = false;
-        ItemScrip getItem = null;
-        int index = 0;
-        //ItemScrip getItem = GameManager.instance.itemGroup_Scriptable.items[index];
-        for (int i = 0; i < GameManager.instance.playerInfo.itemGroup_Scriptable.items.Length; i++)
-        {
-            if(GameManager.instance.playerInfo.itemGroup_Scriptable.items[i].itemCode == itemType)
-            {
-                index = i;
-                getItem = GameManager.instance.playerInfo.itemGroup_Scriptable.items[i];
-            }
-        }
-        if(getItem == null)
-        {
-            Debug.Log(itemType.ToString() + " 찾을 수 없음");
-            return;
-        }
+    //public void ItemObtain(Item.ItemType itemType)
+    //{
+    //    bool isGet = false;
+    //    ItemScrip getItem = null;
+    //    int index = 0;
+    //    //ItemScrip getItem = GameManager.instance.itemGroup_Scriptable.items[index];
+    //    for (int i = 0; i < GameManager.instance.playerInfo.itemGroup_Scriptable.items.Length; i++)
+    //    {
+    //        if(GameManager.instance.playerInfo.itemGroup_Scriptable.items[i].itemCode == itemType)
+    //        {
+    //            index = i;
+    //            getItem = GameManager.instance.playerInfo.itemGroup_Scriptable.items[i];
+    //        }
+    //    }
+    //    if(getItem == null)
+    //    {
+    //        Debug.Log(itemType.ToString() + " 찾을 수 없음");
+    //        return;
+    //    }
         
-        Item checkItem = null;
+    //    Item checkItem = null;
 
-        for (int i = 0; i < stage.playerInfo.itemInventory.Count; i++)
-        {
-            Item Item = stage.playerInfo.itemInventory[i];
-            if (getItem.itemCode == Item.itemType)
-            {
-                checkItem = Item;
-                isGet = true;
-            }
-        }
+    //    for (int i = 0; i < GameManager.instance.playerInfo.itemInventory.Count; i++)
+    //    {
+    //        Item Item = GameManager.instance.playerInfo.itemInventory[i];
+    //        if (getItem.itemCode == Item.itemType)
+    //        {
+    //            checkItem = Item;
+    //            isGet = true;
+    //        }
+    //    }
 
         
-        if (isGet == false)
-        {
-            ItemScrip item = GameManager.instance.playerInfo.itemGroup_Scriptable.items[index];
-            GameObject objItem = Instantiate(invenItem.gameObject);
-            objItem.transform.SetParent(transform);
-            Item invenItems = objItem.GetComponent<Item>();
-            invenItems.Init(item);
-            invenItems.curCount++;
-            GameManager.instance.player_Info.itemInventory.Add(invenItems);
+    //    if (isGet == false)
+    //    {
+    //        ItemScrip item = GameManager.instance.playerInfo.itemGroup_Scriptable.items[index];
+    //        GameObject objItem = Instantiate(invenItem.gameObject);
+    //        objItem.transform.SetParent(transform);
+    //        Item invenItems = objItem.GetComponent<Item>();
+    //        invenItems.Init(item);
+    //        invenItems.curCount++;
+    //        GameManager.instance.playerInfo.itemInventory.Add(invenItems);
 
-            GameManager.instance.player_Info.StatCalculate();
-        }
-        else if(isGet == true)
-        {
-            checkItem.curCount++;
-            GameManager.instance.player_Info.StatCalculate();
-        }
+    //        GameManager.instance.player_Info.StatCalculate();
+    //    }
+    //    else if(isGet == true)
+    //    {
+    //        checkItem.curCount++;
+    //        GameManager.instance.player_Info.StatCalculate();
+    //    }
         
-    }
+    //}
     public void WeaponListUp() 
     {
         for (int i = 0; i < ListUpUI_Weapon.instance.poolingObject.Count; i++)
@@ -83,7 +83,7 @@ public class ItemManager : MonoBehaviour
             ListUpUI_Weapon.ReturnObject_Pause(ListUpUI_Weapon.instance.poolingObject_Pause[i]);
         }
         
-        List<GameObject> inventory = stage.playerInfo.weapons;
+        List<GameObject> inventory = GameManager.instance.player_Info.weapons;
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
             Weapon_Action info = inventory[i].GetComponent<Weapon_Action>();
@@ -146,7 +146,7 @@ public class ItemManager : MonoBehaviour
             Destroy(item3);
         }
 
-        List<Item> inventory = stage.playerInfo.itemInventory;
+        List<Item> inventory = GameManager.instance.player_Info.itemInventory;
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
 

@@ -107,7 +107,8 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
         if (GameManager.instance.playerInfo.money >= itemPrice)
         {
             GameManager.instance.playerInfo.money -= (int)itemPrice;
-            ItemManager.instance.ItemObtain(itemCode);
+            //ItemManager.instance.ItemObtain(itemCode);
+            GameManager.instance.playerInfo.ItemObtain(itemCode);
             ItemManager.instance.ItemListUp();
             UnLockIng();
             ShopManager.instance.goodsList.Remove(gameObject);

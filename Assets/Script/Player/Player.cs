@@ -48,8 +48,6 @@ public class Player : MonoBehaviour
     public float enemyAmount;
     public float enemySpeed;
     public float instantMagnet;
-
-    [Header("Detail_Stat")]
     public Stat.ItemTag[] characterItemTags;
 
     [HideInInspector] public float maxHealth_Origin;
@@ -90,7 +88,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public float enemySpeed_Origin;
     [HideInInspector] public float instantMagnet_Origin;
 
-    [Header("ITEM")]
+    [Header("Inventory")]
     public List<Item> itemInventory;
     public List<GameObject> weapons;
     public enum Character
@@ -160,7 +158,7 @@ public class Player : MonoBehaviour
         {
             characterItemTags[i] = import.itemTags[i];
         }
-        GameManager.instance.WeaponSetSearch();
+        GameManager.instance.playerInfo.WeaponSetSearch();
         StatCalculate();
     }
 
@@ -212,6 +210,7 @@ public class Player : MonoBehaviour
             instantMagnet = instantMagnet_Origin;
         }
 
+        PlayerInfo info = GameManager.instance.playerInfo;
         //아이템 스탯 계산
         for (int i = 0; i < itemInventory.Count; i++)
         {
@@ -470,46 +469,46 @@ public class Player : MonoBehaviour
             GameManager game = GameManager.instance;
             float riseStat = 0;
             //비무장 = 회피
-            if (game.unArmed_Set == 2)
+            if (game.playerInfo.unArmed_Set == 2)
             {
                 riseStat = 3;
             }
-            else if (game.unArmed_Set == 3)
+            else if (game.playerInfo.unArmed_Set == 3)
             {
                 riseStat = 6;
             }
-            else if (game.unArmed_Set == 4)
+            else if (game.playerInfo.unArmed_Set == 4)
             {
                 riseStat = 9;
             }
-            else if (game.unArmed_Set == 5)
+            else if (game.playerInfo.unArmed_Set == 5)
             {
                 riseStat = 12;
             }
-            else if (game.unArmed_Set >= 6)
+            else if (game.playerInfo.unArmed_Set >= 6)
             {
                 riseStat = 15;
             }
             evasion += riseStat;
             riseStat = 0;
             //도구 = 엔지니어링
-            if (game.tool_Set == 2)
+            if (game.playerInfo.tool_Set == 2)
             {
                 riseStat = 1;
             }
-            else if (game.tool_Set == 3)
+            else if (game.playerInfo.tool_Set == 3)
             {
                 riseStat = 2;
             }
-            else if (game.tool_Set == 4)
+            else if (game.playerInfo.tool_Set == 4)
             {
                 riseStat = 3;
             }
-            else if (game.tool_Set == 5)
+            else if (game.playerInfo.tool_Set == 5)
             {
                 riseStat = 4;
             }
-            else if (game.tool_Set >= 6)
+            else if (game.playerInfo.tool_Set >= 6)
             {
                 riseStat = 5;
             }
@@ -519,93 +518,93 @@ public class Player : MonoBehaviour
                 engine += riseStat;
             riseStat = 0;
             //총 = 범위
-            if (game.gun_Set == 2)
+            if (game.playerInfo.gun_Set == 2)
             {
                 riseStat = 10;
             }
-            else if (game.gun_Set == 3)
+            else if (game.playerInfo.gun_Set == 3)
             {
                 riseStat = 20;
             }
-            else if (game.gun_Set == 4)
+            else if (game.playerInfo.gun_Set == 4)
             {
                 riseStat = 30;
             }
-            else if (game.gun_Set == 5)
+            else if (game.playerInfo.gun_Set == 5)
             {
                 riseStat = 40;
             }
-            else if (game.gun_Set >= 6)
+            else if (game.playerInfo.gun_Set >= 6)
             {
                 riseStat = 50;
             }
             range += riseStat;
             riseStat = 0;
             //폭발물 = 폭발 크기
-            if (game.explosive_Set == 2)
+            if (game.playerInfo.explosive_Set == 2)
             {
                 riseStat = 5;
             }
-            else if (game.explosive_Set == 3)
+            else if (game.playerInfo.explosive_Set == 3)
             {
                 riseStat = 10;
             }
-            else if (game.explosive_Set == 4)
+            else if (game.playerInfo.explosive_Set == 4)
             {
                 riseStat = 15;
             }
-            else if (game.explosive_Set == 5)
+            else if (game.playerInfo.explosive_Set == 5)
             {
                 riseStat = 20;
             }
-            else if (game.explosive_Set >= 6)
+            else if (game.playerInfo.explosive_Set >= 6)
             {
                 riseStat = 25;
             }
             explosiveSize += riseStat;
             riseStat = 0;
             //정확 = 치명타율
-            if (game.precision_Set == 2)
+            if (game.playerInfo.precision_Set == 2)
             {
                 riseStat = 3;
             }
-            else if (game.precision_Set == 3)
+            else if (game.playerInfo.precision_Set == 3)
             {
                 riseStat = 6;
             }
-            else if (game.precision_Set == 4)
+            else if (game.playerInfo.precision_Set == 4)
             {
                 riseStat = 9;
 
             }
-            else if (game.precision_Set == 5)
+            else if (game.playerInfo.precision_Set == 5)
             {
                 riseStat = 12;
             }
-            else if (game.precision_Set >= 6)
+            else if (game.playerInfo.precision_Set >= 6)
             {
                 riseStat = 15;
             }
             criticalChance += riseStat;
             riseStat = 0;
             //원시 = 체력
-            if (game.native_Set == 2)
+            if (game.playerInfo.native_Set == 2)
             {
                 riseStat = 3;
             }
-            else if (game.native_Set == 3)
+            else if (game.playerInfo.native_Set == 3)
             {
                 riseStat = 6;
             }
-            else if (game.native_Set == 4)
+            else if (game.playerInfo.native_Set == 4)
             {
                 riseStat = 9;
             }
-            else if (game.native_Set == 5)
+            else if (game.playerInfo.native_Set == 5)
             {
                 riseStat = 12;
             }
-            else if (game.native_Set >= 6)
+            else if (game.playerInfo.native_Set >= 6)
             {
                 riseStat = 15;
             }
@@ -615,23 +614,23 @@ public class Player : MonoBehaviour
                 maxHealth += riseStat;
             riseStat = 0;
             //원소 = 원소 대미지
-            if (game.elemental_Set == 2)
+            if (game.playerInfo.elemental_Set == 2)
             {
                 riseStat = 1;
             }
-            else if (game.elemental_Set == 3)
+            else if (game.playerInfo.elemental_Set == 3)
             {
                 riseStat = 2;
             }
-            else if (game.elemental_Set == 4)
+            else if (game.playerInfo.elemental_Set == 4)
             {
                 riseStat = 3;
             }
-            else if (game.elemental_Set == 5)
+            else if (game.playerInfo.elemental_Set == 5)
             {
                 riseStat = 4;
             }
-            else if (game.elemental_Set >= 6)
+            else if (game.playerInfo.elemental_Set >= 6)
             {
                 riseStat = 5;
             }

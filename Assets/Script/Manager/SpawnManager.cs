@@ -198,7 +198,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
                 mark[i] = PoolManager.instance.Get(7);
                 float distance = Random.Range(2f, 30f);
                 Vector2 randomDirection = Random.insideUnitCircle.normalized;
-                Vector2 pos = GameManager.instance.engineerBuildingPos + randomDirection * distance;
+                Vector2 pos = GameManager.instance.playerInfo.engineerBuildingPos + randomDirection * distance;
                 if (pos.x > stage.xMax)
                 {
                     pos.x = stage.xMax;
