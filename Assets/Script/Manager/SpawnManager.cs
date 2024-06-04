@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             if (timer >= spawnTime)
             {
                 StartCoroutine(EnemySpawn());
-                StartCoroutine(BossSpawn(1, Enemy.EnemyName.INVOKER));
+                //StartCoroutine(BossSpawn(1, Enemy.EnemyName.INVOKER));
                 timer = 0f;
             }
         }
