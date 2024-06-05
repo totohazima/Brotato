@@ -21,7 +21,7 @@ public class ChargerEnemy : EnemyAction
         if (curHealth <= 0)
         {
             isDie = true;
-            StartCoroutine(Died());
+            StartCoroutine(Died(false));
         }
         else
         {
@@ -133,12 +133,13 @@ public class ChargerEnemy : EnemyAction
         transform.position = new Vector3(x, y, transform.position.z);
     }
 
-    public override IEnumerator Died()
+    public override IEnumerator Died(bool isDeSpawned)
     {
         isCharge = false;
         dashVec = Vector3.zero;
         rigid.velocity = Vector3.zero;
         TimeReset();
-        return base.Died();
+        return base.Died(isDeSpawned);
     }
+
 }

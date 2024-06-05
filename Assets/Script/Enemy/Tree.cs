@@ -15,7 +15,7 @@ public class Tree : EnemyAction
         if (curHealth <= 0)
         {
             isDie = true;
-            StartCoroutine(Died());
+            StartCoroutine(Died(false));
         }
         else
         {
@@ -57,7 +57,7 @@ public class Tree : EnemyAction
         }
     }
 
-    public override IEnumerator Died()
+    public override IEnumerator Died(bool isDeSpawned)
     {
         statusEffect.StatusReset();
 

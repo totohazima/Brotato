@@ -94,8 +94,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         //100마리 초과 시 몬스터 디스폰
         if(enemyCount > enemyLimit)
         {
-            enemys[0].gameObject.SetActive(false);
-            enemys.Remove(enemys[0]);
+            enemys[0].Died(true);
             if(GameManager.instance.character == Player.Character.PACIFIST)
             {
                 float gainMoney = 0.65f;

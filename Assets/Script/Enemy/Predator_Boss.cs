@@ -44,13 +44,13 @@ public class Predator_Boss : EnemyAction
         }
     }
 
-    public override IEnumerator Died()
+    public override IEnumerator Died(bool isDeSpawned)
     {
         for (int i = 0; i < bullet.Length; i++)
         {
             bullet[i].gameObject.SetActive(false);
         }
-        return base.Died();
+        return base.Died(isDeSpawned);
     }
     private Vector3 ConvertAngleToVector(float _deg)//각도로 좌표 구하기
     {
