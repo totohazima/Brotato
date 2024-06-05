@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
         PlayerStatInfoTable.Data import = GameManager.instance.gameDataBase.playerStatInfoTable.table[index];
 
         characterNum = index;
-        characterCode = import.playerCode;
+        characterCode = import.playerCode.ToString();
         characterName = import.name;
         maxHealth_Origin = import.health;
         regeneration_Origin = import.hpRegen;

@@ -35,6 +35,7 @@ public class Player_Action : Player, ICustomUpdateMono
         joyStick = StageManager.instance.joystick;
         playerSprite.SpriteSetting();
         StatSetting((int)game.character);
+        game.playerInfo.StatImport(game.character);
     }
 
     void OnEnable()

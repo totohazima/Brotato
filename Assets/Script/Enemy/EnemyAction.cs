@@ -21,7 +21,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     {
         stage = StageManager.instance;
         rigid = GetComponent<Rigidbody>();
-        target = stage.mainPlayer.transform;
+        target = GameManager.instance.playerTrans;
     }
     public virtual void OnEnable()
     {

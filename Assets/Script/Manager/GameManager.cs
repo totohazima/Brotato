@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
     public Player.Character character;
     public GameObject weaponPrefab;
     public GameObject optionUI;
+    public Transform playerTrans;
     public bool isEnd; //웨이브 끝
     public bool isPause; //일시정지
     [Header("#Difficult_Info")]

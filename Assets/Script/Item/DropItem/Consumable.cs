@@ -10,6 +10,8 @@ public class Consumable : DropItem
         if (other.CompareTag("Player"))
         {
             float heal = (3f + StageManager.instance.playerInfo.consumableHeal);
+            if (heal < 0)
+                heal = 1;
             if (GameManager.instance.playerInfo.playerHealth < StageManager.instance.maxHp)
             {
                 GameManager.instance.playerInfo.playerHealth += heal;

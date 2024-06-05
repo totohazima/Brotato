@@ -106,25 +106,43 @@ public class ChargerEnemy : EnemyAction
 
     private IEnumerator ChargeVec()
     {
-        float speed = Random.Range(4000, 4000);
+        isDontPush = true;
+        float speed = Random.Range(minSpeed * 10, maxSpeed * 10);
         moveSpeed = speed / 2500;
 
         Vector3 dirVec = target.position - rigid.position;
         dashVec = dirVec.normalized * moveSpeed;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         isCharge = true;
-        isDontPush = true;
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.65f);
         timer = 0;
         isCharge = false;
         isDontPush = false;
         dashVec = Vector3.zero;
     }
 
+    //private void Charge()
+    //{
+    //    rigid.MovePosition(rigid.position + dashVec);
+    //    rigid.velocity = Vector3.zero;
+
+    //    ///이동 제한
+    //    float x = Mathf.Clamp(transform.position.x, stage.xMin, stage.xMax);
+    //    float y = Mathf.Clamp(transform.position.y, stage.yMin, stage.yMax);
+    //    transform.position = new Vector3(x, y, transform.position.z);
+    //}
+
+
     private void Charge()
     {
-        rigid.MovePosition(rigid.position + dashVec);
+        float acceleration = 150f; // 가속도를 조절하는 변수
+        // 현재 속도를 서서히 증가시킵니다.
+        float maxSpeed = moveSpeed * 100;
+        moveSpeed = Mathf.MoveTowards(moveSpeed, maxSpeed, acceleration * Time.deltaTime);
+
+        // 이동 방향에 현재 속도를 곱하여 이동합니다.
+        rigid.MovePosition(rigid.position + dashVec * moveSpeed * Time.deltaTime);
         rigid.velocity = Vector3.zero;
 
         ///이동 제한
@@ -132,7 +150,6 @@ public class ChargerEnemy : EnemyAction
         float y = Mathf.Clamp(transform.position.y, stage.yMin, stage.yMax);
         transform.position = new Vector3(x, y, transform.position.z);
     }
-
     public override IEnumerator Died(bool isDeSpawned)
     {
         isCharge = false;

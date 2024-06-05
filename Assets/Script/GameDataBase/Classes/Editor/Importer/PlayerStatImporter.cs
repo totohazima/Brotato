@@ -24,7 +24,7 @@ public class PlayerStatImporter : CustomExcelDataImportBase
             InfoTable.table[i - 1] = new PlayerStatInfoTable.Data();
             data = InfoTable.table[i - 1];
 
-            cell = row.GetCell(0); data.playerCode = (cell == null ? "" : cell.StringCellValue);
+            cell = row.GetCell(0); data.playerCode = (Player.Character)System.Enum.Parse(typeof(Player.Character),(cell == null ? "" : cell.StringCellValue));
             cell = row.GetCell(1); data.name = (cell == null ? "" : cell.StringCellValue);
             cell = row.GetCell(2); data.health = (float)(cell == null ? 0 : cell.NumericCellValue);
             cell = row.GetCell(3); data.hpRegen = (float)(cell == null ? 0 : cell.NumericCellValue);

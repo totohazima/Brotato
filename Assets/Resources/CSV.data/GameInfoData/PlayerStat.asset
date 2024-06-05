@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
   table:
-  - playerCode: WELLROUNDED
+  - playerCode: 0
     name: "\uB2E4\uC7AC\uB2E4\uB2A5"
     health: 15
     hpRegen: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
     enemySpeed: 0
     instantMagnet: 0
     itemTags: 00000000
-  - playerCode: RANGER
+  - playerCode: 1
     name: "\uB808\uC778\uC800"
     health: 10
     hpRegen: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
     enemySpeed: 0
     instantMagnet: 0
     itemTags: 060000000b000000
-  - playerCode: PACIFIST
+  - playerCode: 2
     name: "\uD3C9\uD654\uC8FC\uC758\uC790"
     health: 10
     hpRegen: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
     enemySpeed: 0
     instantMagnet: 0
     itemTags: 01000000020000000c000000
-  - playerCode: MULTITASKER
+  - playerCode: 3
     name: "\uBA40\uD2F0\uD0DC\uC2A4\uCEE4"
     health: 10
     hpRegen: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
     enemySpeed: 0
     instantMagnet: 0
     itemTags: 00000000
-  - playerCode: GLADIATOR
+  - playerCode: 4
     name: "\uAC80\uD22C\uC0AC"
     health: 10
     hpRegen: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
     enemySpeed: 0
     instantMagnet: 0
     itemTags: 05000000
-  - playerCode: ENGINEER
+  - playerCode: 5
     name: "\uC5D4\uC9C0\uB2C8\uC5B4"
     health: 10
     hpRegen: 0
@@ -247,7 +247,7 @@ MonoBehaviour:
     enemySpeed: 0
     instantMagnet: 0
     itemTags: 0a000000
-  - playerCode: BULL
+  - playerCode: 6
     name: "\uD669\uC18C"
     health: 30
     hpRegen: 15
@@ -286,7 +286,7 @@ MonoBehaviour:
     enemySpeed: 0
     instantMagnet: 0
     itemTags: 010000000200000013000000
-  - playerCode: SOLDIER
+  - playerCode: 7
     name: "\uAD70\uC778"
     health: 10
     hpRegen: 0

@@ -7,7 +7,7 @@ public class PlayerStatInfoTable : GameDataTable<PlayerStatInfoTable.Data>
     [System.Serializable]
     public class Data : GameData
     {
-        public string playerCode;
+        public Player.Character playerCode;
         public string name;
         public float health;
         public float hpRegen;

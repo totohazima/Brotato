@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
   isDie: 0
-  maxHealth: 0
-  playerHealth: 15
-  regeneration: 0
+  maxHealth: 30
+  playerHealth: 4
+  regeneration: 15
   bloodSucking: 0
   persentDamage: 0
   meleeDamage: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
   criticalChance: 0
   engine: 0
   range: 0
-  armor: 0
+  armor: 10
   evasion: 0
   accuracy: 0
   lucky: 0
@@ -50,27 +50,45 @@ MonoBehaviour:
   enemyAmount: 0
   enemySpeed: 0
   instantMagnet: 0
-  characterItemTags: 
-  playerLevel: 0
+  characterItemTags: 010000000200000013000000
+  maxHealth_Upgrade: 0
+  playerHealth_Upgrade: 0
+  regeneration_Upgrade: 0
+  bloodSucking_Upgrade: 0
+  persentDamage_Upgrade: 0
+  meleeDamage_Upgrade: 0
+  rangeDamage_Upgrade: 0
+  elementalDamage_Upgrade: 0
+  attackSpeed_Upgrade: 0
+  criticalChance_Upgrade: 0
+  engine_Upgrade: 0
+  range_Upgrade: 0
+  armor_Upgrade: 0
+  evasion_Upgrade: 0
+  accuracy_Upgrade: 0
+  lucky_Upgrade: 0
+  harvest_Upgrade: 0
+  speed_Upgrade: 0
+  playerLevel: 1
   levelUpChance: 0
-  lootChance: 2
-  curExp: 0
-  maxExp: 50
+  lootChance: 0
+  curExp: 42
+  maxExp: 80
   overExp: 0
-  money: 30
-  interest: 0
-  engineerBuildingPos: {x: 58.09536, y: -4.5029793}
+  money: 1110716
+  interest: 6
+  engineerBuildingPos: {x: -40.07657, y: -42.100376}
   unArmed_Set: 0
   tool_Set: 0
-  gun_Set: 1
+  gun_Set: 0
   explosive_Set: 0
   precision_Set: 0
   native_Set: 0
   elemental_Set: 0
   itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
   invenItem: {fileID: 4012523125829970869, guid: 05d210546179917498008d12b3719e05, type: 3}
-  isUglyTooth: 1
-  isLumberJack: 1
+  isUglyTooth: 0
+  isLumberJack: 0
   isWeirdGhost: 0
   minesCount: 0
   turretCount: 0
