@@ -85,11 +85,31 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         transform.position = new Vector3(x, y, transform.position.z);
     }
 
+    //private IEnumerator KnockBack(Vector3 playerPos, float power)
+    //{
+    //    Vector3 dir = transform.position - playerPos;
+    //    rigid.AddForce(dir.normalized * (power), ForceMode.Impulse); //power가 양수일시 플레이어 방향으로 넉백됨
+    //    yield return 0;
+    //}
     private IEnumerator KnockBack(Vector3 playerPos, float power)
     {
         Vector3 dir = transform.position - playerPos;
-        rigid.AddForce(dir.normalized * (power), ForceMode.Impulse); //power가 양수일시 플레이어 방향으로 넉백됨
-        yield return 0;
+        rigid.AddForce(dir.normalized * power, ForceMode.Impulse);
+        float duration = 0.3f;
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            // 감속 효과를 위해 시간이 지날수록 힘을 줄입니다.
+            float percentComplete = elapsedTime / duration;
+            float currentPower = Mathf.Lerp(power, 0f, percentComplete);
+
+            rigid.AddForce(dir.normalized * currentPower, ForceMode.Impulse);
+
+            // 시간을 업데이트합니다.
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
     }
     public virtual void DamageCalculator(float damage, int per, float accuracy, float bloodSuck, bool isCritical, float criticalDamage, float knockBack, Vector3 bulletPos)
     {
@@ -137,7 +157,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         
 
         if (isDontPush == false)
-            StartCoroutine(KnockBack(stage.playerInfo.transform.position, knockBack * 10));
+            StartCoroutine(KnockBack(stage.playerInfo.transform.position, knockBack * 3));
         
     }
     public void StatusEffectCalculator(StatusEffect.EffectType[] effect, Bullet bullet)
