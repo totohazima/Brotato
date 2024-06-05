@@ -7,21 +7,22 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     public static SpawnManager instance;
     public GameObject[] enemyPrefab;
     public Wave_Scriptable[] scrip;
-    int enemyCount; //소환되어있는 몬스터 수
     public int enemyLimit; //한 웨이브에 소환될 몬스터 수
     public int spawnCount; //한 번에 소환되는 몬스터 수
+    public float spawnTime; //스폰 시간
+    public int enemyCount;
     float timer;
     float treeTimer;
-    public float spawnTime; //스폰 시간
     StageManager stage;
     float mineTimer;
     float minesCoolTime; //지뢰 생성 쿨타임
-
     public List<EnemyAction> enemys;
     public List<GameObject> mines;
     public List<GameObject> turrets;
     public List<GameObject> trees;
     private List<GameObject>[] pools;
+
+    [HideInInspector] public int replaceEnemyCount; //몬스터 사망 시 소환 될 몬스터 수
     void Awake()
     {
         instance = this;
@@ -58,16 +59,19 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             enemyClear();
             return;
         }
-        enemyCount = enemys.Count;
         timer += Time.deltaTime;
-        if (enemyCount < enemyLimit)
+
+        if (timer >= spawnTime)
         {
-            if (timer >= spawnTime)
-            {
-                StartCoroutine(EnemySpawn());
-                //StartCoroutine(BossSpawn(1, Enemy.EnemyName.INVOKER));
-                timer = 0f;
-            }
+            StartCoroutine(EnemySpawn());
+            //StartCoroutine(BossSpawn(1, Enemy.EnemyName.INVOKER));
+            timer = 0f;
+        }
+        ///몬스터 사망시 바로 다음 몬스터 스폰
+        if(replaceEnemyCount > 0)
+        {
+            StartCoroutine(EnemySpawn());
+            replaceEnemyCount--;
         }
 
         //지뢰
@@ -75,7 +79,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         minesCoolTime = 12f;
         if (mineTimer >= minesCoolTime)
         {
-            StartCoroutine(MineSetting());
+            StartCoroutine(MineSpawn(GameManager.instance.playerInfo.minesCount));
             mineTimer = 0f;
         }
 
@@ -84,6 +88,19 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         {
             StartCoroutine(TreeSpawn());
             treeTimer = 0;
+        }
+
+        enemyCount = enemys.Count;
+        //100마리 초과 시 몬스터 디스폰
+        if(enemyCount > enemyLimit)
+        {
+            enemys[0].gameObject.SetActive(false);
+            enemys.Remove(enemys[0]);
+            if(GameManager.instance.character == Player.Character.PACIFIST)
+            {
+                float gainMoney = 0.65f;
+                GameManager.instance.playerInfo.money += (int)Mathf.Round(gainMoney);
+            }
         }
     }
     void enemyClear()
@@ -94,7 +111,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         }
         enemys.Clear();
     }
-    IEnumerator EnemySpawn()
+    private IEnumerator EnemySpawn()
     {
         GameObject[] mark = new GameObject[spawnCount];
         GameObject[] enemy = new GameObject[mark.Length];
@@ -121,7 +138,6 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
                 }
             }
             enemy[i].transform.position = mark[i].transform.position;
-            //enemys.Add(enemy[i]);
             mark[i].SetActive(false);
         }
     }
@@ -153,26 +169,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             mark[i].SetActive(false);
         }
     }
-    public IEnumerator MineSetting()
-    {
-        GameObject[] mark = new GameObject[GameManager.instance.playerInfo.minesCount];
-        GameObject[] mine = new GameObject[mark.Length];
-
-        for (int i = 0; i < mark.Length; i++)
-        {
-            mark[i] = PoolManager.instance.Get(7);
-            Vector3 pos = FriendlySpawnPosition();
-            mark[i].transform.position = pos;
-        }
-        yield return new WaitForSeconds(0.6f);
-        for (int i = 0; i < mark.Length; i++)
-        {
-            mine[i] = PoolManager.instance.Get(5);
-            mine[i].transform.position = mark[i].transform.position;
-            mines.Add(mine[i]);
-            mark[i].SetActive(false);
-        }
-    }
+    
     public IEnumerator MineSpawn(int index)
     {
         GameObject[] mark = new GameObject[index];
@@ -297,7 +294,6 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         {
             tree[i] = PoolManager.instance.Get(13);
             tree[i].transform.position = mark[i].transform.position;
-            trees.Add(tree[i]);
             mark[i].SetActive(false);
         }
     }
@@ -310,7 +306,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
         spawnCount = (int)import.enemySpawnCount;
     }
 
-    Vector3 EnemySpawnPosition() //적대적 유닛 소환 위치
+    public Vector3 EnemySpawnPosition() //적대적 유닛 소환 위치
     {
         Vector3 spawnPoint;
         while (true)
@@ -345,7 +341,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
 
         return spawnPoint;
     }
-    private GameObject Spawn(int index)
+    public GameObject Spawn(int index)
     {
         GameObject select = null;
 

@@ -279,11 +279,13 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
                 StageManager.instance.inWaveLoot_Amount++;
                 break;
         }
+
+        SpawnManager.instance.replaceEnemyCount++;
         SpawnManager.instance.enemys.Remove(this);
         gameObject.SetActive(false);
         yield return 0;
     }
-
+    
     private int Judgment(float[] rando)
     {
         int count = rando.Length;

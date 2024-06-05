@@ -295,6 +295,7 @@ public class PlayerInfo : ScriptableObject
         isDie = false;
         playerLevel = 0;
         levelUpChance = 0;
+        lootChance = 0;
         curExp = 0;
         maxExp = 0;
         money = 0;

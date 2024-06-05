@@ -53,13 +53,13 @@ MonoBehaviour:
   characterItemTags: 
   playerLevel: 0
   levelUpChance: 0
-  lootChance: 0
-  curExp: 14
+  lootChance: 2
+  curExp: 0
   maxExp: 50
   overExp: 0
-  money: 38
-  interest: 6
-  engineerBuildingPos: {x: 98.3575, y: 3.0460072}
+  money: 30
+  interest: 0
+  engineerBuildingPos: {x: 58.09536, y: -4.5029793}
   unArmed_Set: 0
   tool_Set: 0
   gun_Set: 1
@@ -70,7 +70,7 @@ MonoBehaviour:
   itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
   invenItem: {fileID: 4012523125829970869, guid: 05d210546179917498008d12b3719e05, type: 3}
   isUglyTooth: 1
-  isLumberJack: 0
+  isLumberJack: 1
   isWeirdGhost: 0
   minesCount: 0
   turretCount: 0

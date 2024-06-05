@@ -15,7 +15,7 @@ MonoBehaviour:
   table:
   - monsterCode: 0
     enemyType: 0
-    baseHp: 10
+    baseHp: 3
     baseDamage: 1
     baseCoolTime: 0
     baseArmor: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     baseLootDropPersent: 1
   - monsterCode: 1
     enemyType: 0
-    baseHp: 9
+    baseHp: 8
     baseDamage: 1
     baseCoolTime: 10
     baseArmor: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
     baseLootDropPersent: 10
   - monsterCode: 2
     enemyType: 0
-    baseHp: 10
+    baseHp: 4
     baseDamage: 1
     baseCoolTime: 15
     baseArmor: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
     baseLootDropPersent: 1
   - monsterCode: 3
     enemyType: 0
-    baseHp: 15
+    baseHp: 20
     baseDamage: 2
     baseCoolTime: 0
     baseArmor: 0

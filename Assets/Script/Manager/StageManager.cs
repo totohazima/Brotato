@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class StageManager : MonoBehaviour, ICustomUpdateMono
+public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
 {
     public static StageManager instance;
     [Header("# UI")]
@@ -91,12 +91,15 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
+        UIUpdateManager.uiUpdates.Add(this);
     }
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
+        UIUpdateManager.uiUpdates.Remove(this);
     }
-    public void LateUpdate()
+
+    public void UI_Update()
     {
         if (GameManager.instance.isPause == true)//일시정지 활성화
         {
@@ -367,7 +370,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono
             }
         }
         GameManager.instance.playerInfo.engineerBuildingPos = spawn.FriendlySpawnPosition();
-        StartCoroutine(spawn.MineSetting());
+        StartCoroutine(spawn.MineSpawn(GameManager.instance.playerInfo.minesCount));
         StartCoroutine(spawn.TurretSetting());
     }
 

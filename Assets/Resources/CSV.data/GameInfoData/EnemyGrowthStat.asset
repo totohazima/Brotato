@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   table:
   - monsterCode: 0
-    hpRisePer: 38
-    attackRisePer: 1
+    hpRisePer: 2
+    attackRisePer: 0.6
   - monsterCode: 1
-    hpRisePer: 38
-    attackRisePer: 1
+    hpRisePer: 1
+    attackRisePer: 0.6
   - monsterCode: 2
-    hpRisePer: 38
-    attackRisePer: 1
+    hpRisePer: 2.5
+    attackRisePer: 0.85
   - monsterCode: 3
-    hpRisePer: 38
-    attackRisePer: 1
+    hpRisePer: 11
+    attackRisePer: 0.85
   - monsterCode: 4
     hpRisePer: 0
-    attackRisePer: 1
+    attackRisePer: 0
   - monsterCode: 5
     hpRisePer: 0
-    attackRisePer: 1
+    attackRisePer: 0
   - monsterCode: 6
     hpRisePer: 0
     attackRisePer: 0
