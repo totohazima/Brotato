@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using System;
-using Sirenix.OdinInspector;
 [CreateAssetMenu(fileName = "New PlayerInfo", menuName = "GameDataBase/playerInfo")]
 public class PlayerInfo : ScriptableObject
 {
     [Header("PlayerState")]
     public bool isDie; //플레이어 사망
+    public float doNotSpawnRange;
     #region BasicStats
     [FoldoutGroup("BasicStats")] public float maxHealth;    //최대 체력
     [FoldoutGroup("BasicStats")] public float playerHealth; //현재 체력
@@ -81,7 +82,7 @@ public class PlayerInfo : ScriptableObject
     public int money; //돈
     public int interest; //이자
     [Header("#Weapon_Info")]
-    public Vector2 engineerBuildingPos;
+    [HideInInspector]public Vector2 engineerBuildingPos;
     [FoldoutGroup("WeaponSett")] public int unArmed_Set;
     [FoldoutGroup("WeaponSett")] public int tool_Set;
     [FoldoutGroup("WeaponSett")] public int gun_Set;
@@ -867,7 +868,25 @@ public class PlayerInfo : ScriptableObject
         money = 0;
         interest = 0;
     }
+    public void EngineerTurretPosSetting()
+    {
+        while (true)
+        {
+            float randomX = UnityEngine.Random.Range(StageManager.instance.xMin, StageManager.instance.xMax);
+            float randomY = UnityEngine.Random.Range(StageManager.instance.yMin, StageManager.instance.yMax);
 
+            Vector3 playerPos = GameManager.instance.playerTrans.position;
+            Vector3 point = new Vector3(randomX, randomY);
+
+            float distance = Vector3.Distance(playerPos, point);
+            if (distance < 25)
+            {
+                engineerBuildingPos = point;
+                break;
+            }
+            InfiniteLoopDetector.Run();
+        }
+    }
     private int Judgment(float[] rando)
     {
         int count = rando.Length;
@@ -889,4 +908,6 @@ public class PlayerInfo : ScriptableObject
 
         return -1;
     }
+
+
 }

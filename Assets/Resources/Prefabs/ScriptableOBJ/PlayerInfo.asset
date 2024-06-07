@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
   isDie: 0
-  maxHealth: 30
-  playerHealth: 4
-  regeneration: 15
+  doNotSpawnRange: 15
+  maxHealth: 10
+  playerHealth: 11097
+  regeneration: 0
   bloodSucking: 0
   persentDamage: 0
   meleeDamage: 0
@@ -23,9 +24,9 @@ MonoBehaviour:
   elementalDamage: 0
   attackSpeed: 0
   criticalChance: 0
-  engine: 0
+  engine: 10
   range: 0
-  armor: 10
+  armor: 0
   evasion: 0
   accuracy: 0
   lucky: 0
@@ -50,7 +51,7 @@ MonoBehaviour:
   enemyAmount: 0
   enemySpeed: 0
   instantMagnet: 0
-  characterItemTags: 010000000200000013000000
+  characterItemTags: 0a000000
   maxHealth_Upgrade: 0
   playerHealth_Upgrade: 0
   regeneration_Upgrade: 0
@@ -69,17 +70,17 @@ MonoBehaviour:
   lucky_Upgrade: 0
   harvest_Upgrade: 0
   speed_Upgrade: 0
-  playerLevel: 1
-  levelUpChance: 0
-  lootChance: 0
-  curExp: 42
-  maxExp: 80
+  playerLevel: 4
+  levelUpChance: 4
+  lootChance: 2
+  curExp: 55
+  maxExp: 170
   overExp: 0
-  money: 1110716
-  interest: 6
-  engineerBuildingPos: {x: -40.07657, y: -42.100376}
+  money: 397
+  interest: 0
+  engineerBuildingPos: {x: 13.710995, y: 0.1758461}
   unArmed_Set: 0
-  tool_Set: 0
+  tool_Set: 2
   gun_Set: 0
   explosive_Set: 0
   precision_Set: 0

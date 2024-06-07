@@ -19,16 +19,16 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
         moveSpeed = 100f;
         if (type == ItemType.METERIAL)
         {
-            StageManager game = StageManager.instance;
+            GameManager game = GameManager.instance;
 
-            float instantMagnet = game.playerInfo.instantMagnet / 100;
+            float instantMagnet = game.player_Info.instantMagnet / 100;
             float notInstant = 1 - instantMagnet;
             float[] chanceLise = { instantMagnet, notInstant };
-            int index = game.Judgment(chanceLise);
+            int index = Judgment(chanceLise);
 
             if (index == 0)
             {
-                target = game.mainPlayer.transform;
+                target = game.playerTrans;
             }
         }
     }
@@ -42,7 +42,7 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
     {
         if(GameManager.instance.isEnd == true)
         {
-            target = StageManager.instance.mainPlayer.transform;
+            target = GameManager.instance.playerTrans;
         }
 
         if (target != null)
@@ -71,5 +71,27 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
             }
             
         }
+    }
+
+    public int Judgment(float[] rando)
+    {
+        int count = rando.Length;
+        float max = 0;
+        for (int i = 0; i < count; i++)
+            max += rando[i];
+
+        float range = UnityEngine.Random.Range(0f, (float)max);
+        //0.1, 0.2, 30, 40
+        double chance = 0;
+        for (int i = 0; i < count; i++)
+        {
+            chance += rando[i];
+            if (range > chance)
+                continue;
+
+            return i;
+        }
+
+        return -1;
     }
 }

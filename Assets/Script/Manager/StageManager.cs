@@ -198,7 +198,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
     }
     private IEnumerator DropItemLootingTime() //웨이브 종료 시 떨어진 드랍템이 자동으로 들어오는 시간
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         main.position = Vector3.zero;
         if (GameManager.instance.playerInfo.levelUpChance > 0)
         {  
@@ -370,7 +370,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
                 }
             }
         }
-        GameManager.instance.playerInfo.engineerBuildingPos = spawn.FriendlySpawnPosition();
+        GameManager.instance.playerInfo.EngineerTurretPosSetting();
         StartCoroutine(spawn.MineSpawn(GameManager.instance.playerInfo.minesCount));
         StartCoroutine(spawn.TurretSetting());
     }

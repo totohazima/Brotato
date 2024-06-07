@@ -216,4 +216,31 @@ public class Player_Action : Player, ICustomUpdateMono
     //        isHit = true;
     //    }
     //}
+#if UNITY_EDITOR
+    int segments = 100;
+    Color gizmoColor = Color.yellow;
+    bool drawWhenSelected = true;
+
+    void OnDrawGizmosSelected()
+    {
+        if (game.isStart == true && drawWhenSelected)
+        {
+            Gizmos.color = gizmoColor;
+            DrawHollowCircle(game.playerTrans.position, game.playerInfo.doNotSpawnRange, segments);
+        }
+    }
+    void DrawHollowCircle(Vector3 center, float radius, int segments)
+    {
+        float angle = 0f;
+        Vector3 lastPoint = center + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0f);
+
+        for (int i = 1; i <= segments; i++)
+        {
+            angle = i * Mathf.PI * 2f / segments;
+            Vector3 newPoint = center + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0f);
+            Gizmos.DrawLine(lastPoint, newPoint);
+            lastPoint = newPoint;
+        }
+    }
+#endif
 }

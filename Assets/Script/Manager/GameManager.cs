@@ -183,10 +183,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
             player_Info.itemInventory.Add(item);
         }
 
-        float randomX = Random.Range(StageManager.instance.xMin, StageManager.instance.xMax);
-        float randomY = Random.Range(StageManager.instance.yMin, StageManager.instance.yMax);
-        Vector3 point = new Vector3(randomX, randomY);
-        playerInfo.engineerBuildingPos = point;
+        playerInfo.EngineerTurretPosSetting();
 
         playerInfo.WeaponSetSearch();
         player_Info.StatCalculate();

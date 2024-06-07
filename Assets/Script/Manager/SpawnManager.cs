@@ -173,12 +173,42 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
     {
         GameObject[] mark = new GameObject[index];
         GameObject[] mine = new GameObject[mark.Length];
-
-        for (int i = 0; i < mark.Length; i++)
+        //엔지니어: 건축물이 서로 가깝게 생성됨
+        if (GameManager.instance.character == Player.Character.ENGINEER)
         {
-            mark[i] = PoolManager.instance.Get(7);
-            Vector3 pos = FriendlySpawnPosition();
-            mark[i].transform.position = pos;
+            for (int i = 0; i < mark.Length; i++)
+            {
+                mark[i] = PoolManager.instance.Get(7);
+                float distance = Random.Range(2f, 30f);
+                Vector2 randomDirection = Random.insideUnitCircle.normalized;
+                Vector2 pos = GameManager.instance.playerInfo.engineerBuildingPos + randomDirection * distance;
+                if (pos.x > stage.xMax)
+                {
+                    pos.x = stage.xMax;
+                }
+                else if (pos.x < stage.xMin)
+                {
+                    pos.x = stage.xMin;
+                }
+                if (pos.y > stage.yMax)
+                {
+                    pos.y = stage.yMax;
+                }
+                else if (pos.y < stage.yMin)
+                {
+                    pos.y = stage.yMin;
+                }
+                mark[i].transform.position = pos;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < mark.Length; i++)
+            {
+                mark[i] = PoolManager.instance.Get(7);
+                Vector3 pos = FriendlySpawnPosition();
+                mark[i].transform.position = pos;
+            }
         }
         yield return new WaitForSeconds(0.6f);
         for (int i = 0; i < mark.Length; i++)
@@ -221,14 +251,6 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
                 }
                 mark[i].transform.position = pos; 
             }
-            yield return new WaitForSeconds(0.6f);
-            for (int i = 0; i < mark.Length; i++)
-            {
-                turret[i] = PoolManager.instance.Get(8);
-                turret[i].transform.position = mark[i].transform.position;
-                turrets.Add(turret[i]);
-                mark[i].SetActive(false);
-            }
         }
         else
         {
@@ -238,14 +260,14 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
                 Vector3 pos = FriendlySpawnPosition();
                 mark[i].transform.position = pos;
             }
-            yield return new WaitForSeconds(0.6f);
-            for (int i = 0; i < mark.Length; i++)
-            {
-                turret[i] = PoolManager.instance.Get(8);
-                turret[i].transform.position = mark[i].transform.position;
-                turrets.Add(turret[i]);
-                mark[i].SetActive(false);
-            }
+        }
+        yield return new WaitForSeconds(0.6f);
+        for (int i = 0; i < mark.Length; i++)
+        {
+            turret[i] = PoolManager.instance.Get(8);
+            turret[i].transform.position = mark[i].transform.position;
+            turrets.Add(turret[i]);
+            mark[i].SetActive(false);
         }
     }
     public IEnumerator TreeSpawn()
@@ -313,11 +335,11 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             float randomX = Random.Range(stage.xMin, stage.xMax);
             float randomY = Random.Range(stage.yMin, stage.yMax);
 
-            Vector3 playerPos = stage.mainPlayer.transform.position;
+            Vector3 playerPos = GameManager.instance.playerTrans.position;
             Vector3 point = new Vector3(randomX, randomY);
 
             float distance = Vector3.Distance(playerPos, point);
-            if (distance > 25)
+            if (distance > GameManager.instance.playerInfo.doNotSpawnRange)
             {
                 spawnPoint = point;
                 break;
