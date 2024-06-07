@@ -37,12 +37,34 @@ public class StageCameraManager : MonoBehaviour, ICustomUpdateMono
         float minY = (StageManager.instance.yMin - 6) + cameraHalfHeight;
         float maxY = (StageManager.instance.yMax + 18) - cameraHalfHeight;
 
-        // 카메라 위치를 스테이지 경계 내로 제한
-        targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
-        targetPos.y = Mathf.Clamp(targetPos.y, minY, maxY);
+        // Check if the camera bounds are smaller than the stage bounds
+        bool isCameraWiderThanStage = cameraHalfWidth * 2 >= (StageManager.instance.xMax - StageManager.instance.xMin);
+        bool isCameraTallerThanStage = cameraHalfHeight * 2 >= (StageManager.instance.yMax - StageManager.instance.yMin);
 
-        // 카메라 위치를 업데이트
+        if (isCameraWiderThanStage)
+        {
+            // Center the camera horizontally if the stage is narrower than the camera
+            targetPos.x = (StageManager.instance.xMin + StageManager.instance.xMax) / 2;
+        }
+        else
+        {
+            // Otherwise, clamp the camera position horizontally
+            targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
+        }
+
+        if (isCameraTallerThanStage)
+        {
+            // Center the camera vertically if the stage is shorter than the camera
+            targetPos.y = (StageManager.instance.yMin + StageManager.instance.yMax) / 2;
+        }
+        else
+        {
+            // Otherwise, clamp the camera position vertically
+            targetPos.y = Mathf.Clamp(targetPos.y, minY, maxY);
+        }
+
         transform.position = targetPos;
     }
 }
+
 
