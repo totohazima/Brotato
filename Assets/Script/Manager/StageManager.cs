@@ -49,8 +49,8 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
     public GameObject joyStickRayCaster;
     public Transform itemInfoManager;
     public Transform ui_Canvas;
-    public Transform[] wallPos; //0 = 위, 1 = 아래, 2 왼쪽, 3 = 오른쪽
     public JoyStick joystick;
+    public Transform[] wallPos; //0 = 위, 1 = 아래, 2 왼쪽, 3 = 오른쪽
     public float xMin, xMax, yMin, yMax;
     public WaveStatInfoTable waveStat;
     void Awake()
@@ -198,7 +198,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
     }
     private IEnumerator DropItemLootingTime() //웨이브 종료 시 떨어진 드랍템이 자동으로 들어오는 시간
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         main.position = Vector3.zero;
         if (GameManager.instance.playerInfo.levelUpChance > 0)
         {  
