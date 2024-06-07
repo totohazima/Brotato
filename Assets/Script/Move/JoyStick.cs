@@ -14,10 +14,11 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     public GameObject stick;
     public bool isMove;
 
-    float radio = 120;
-    Transform joyTrans;
-    Transform stickTrans;
-    [SerializeField] RectTransform stickRect;
+    [SerializeField] private float radio = 120;
+    private Transform joyTrans;
+    private Transform stickTrans;
+    [SerializeField] private RectTransform stickRect;
+
     void Awake()
     {
         instance = this;
@@ -25,10 +26,12 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         stickTrans = stick.transform;
         joyStick.SetActive(false);
     }
+
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
     }
+
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
@@ -36,9 +39,10 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         joyStick.SetActive(false);
         isMove = false;
     }
+
     public void CustomUpdate()
     {
-        if(GameManager.instance.isEnd == true )
+        if (GameManager.instance.isEnd)
         {
             stickTrans.position = joyTrans.position;
             joyStick.SetActive(false);
@@ -58,9 +62,8 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     {
         Vector3 dragPosition = new Vector3(eventData.position.x, eventData.position.y, 0);
         stickTrans.position = dragPosition;
-        ///<summary>
-        ///특정 오브젝트가 좌표에서 원형으로 벗어나지 못하게 하는 코드
-        ///</summary>
+
+        // 스틱이 원형 반경을 벗어나지 않도록 제한
         float radius = radio;
         Vector3 centerPosition = joyTrans.position;
         float distance = Vector3.Distance(stickTrans.position, centerPosition);
@@ -73,30 +76,28 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
         isMove = true;
     }
+
     public void OnPointerUp(PointerEventData eventData)
     {
         stickTrans.position = joyTrans.position;
         joyStick.SetActive(false);
         isMove = false;
     }
+
     public float Horizontal
     {
         get
         {
-            return (stickRect.position.x - DeathArea.x) / radio;
+            return Mathf.Clamp((stickRect.position.x - DeathArea.x) / radio, -1f, 1f);
         }
     }
 
-    /// <summary>
-    /// Value Vertical of the Joystick
-    /// Get this for get the vertical value of joystick
-    /// </summary>
     public float Vertical
     {
         get
         {
-            return (stickRect.position.y - DeathArea.y) / radio;
+            return Mathf.Clamp((stickRect.position.y - DeathArea.y) / radio, -1f, 1f);
         }
     }
-
 }
+

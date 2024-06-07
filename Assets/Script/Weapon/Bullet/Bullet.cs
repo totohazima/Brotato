@@ -58,7 +58,7 @@ public class Bullet : MonoBehaviour
         }
 
         float distance = Vector3.Distance(startPos, transform.position);
-        if (distance >= range && range != -1000)
+        if (distance >= range + (range / 100) && range != -1000)
         {
             gameObject.SetActive(false);
         }

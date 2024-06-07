@@ -136,18 +136,46 @@ public class Player_Action : Player, ICustomUpdateMono
         }
 
     }
+    //private void Move(Vector3 dir)
+    //{
+    //    anim.SetBool("Move", true);
+    //    //Vector3 dirVec = joy.moveTarget.position - rigid.position;
+    //    Vector3 nextVec = dir.normalized * moveSpeed;
+    //    rigid.MovePosition(rigid.position + nextVec);
+    //    rigid.velocity = Vector3.zero;
+
+    //    ///이동 제한 
+    //    float x = Mathf.Clamp(transform.position.x, stage.xMin, stage.xMax);
+    //    float y = Mathf.Clamp(transform.position.y, stage.yMin, stage.yMax);
+    //    transform.position = new Vector3(x, y, transform.position.z);
+    //}
     private void Move(Vector3 dir)
     {
         anim.SetBool("Move", true);
-        //Vector3 dirVec = joy.moveTarget.position - rigid.position;
-        Vector3 nextVec = dir.normalized * moveSpeed;
-        rigid.MovePosition(rigid.position + nextVec);
-        rigid.velocity = Vector3.zero;
 
-        ///이동 제한 
-        float x = Mathf.Clamp(transform.position.x, stage.xMin, stage.xMax);
-        float y = Mathf.Clamp(transform.position.y, stage.yMin, stage.yMax);
-        transform.position = new Vector3(x, y, transform.position.z);
+        // 플레이어의 현재 위치
+        Vector3 currentPosition = transform.position;
+
+        // 새로운 위치를 계산하기 전에 현재 위치가 외곽에 있는지 확인합니다.
+        float newX = currentPosition.x + dir.x * moveSpeed;
+        float newY = currentPosition.y + dir.y * moveSpeed;
+
+        // X 좌표가 외곽에 닿았을 때 이동을 제한합니다.
+        if (newX <= stage.xMin || newX >= stage.xMax)
+        {
+            newX = currentPosition.x; // X 이동을 막습니다.
+        }
+
+        // Y 좌표가 외곽에 닿았을 때 이동을 제한합니다.
+        if (newY <= stage.yMin || newY >= stage.yMax)
+        {
+            newY = currentPosition.y; // Y 이동을 막습니다.
+        }
+
+        // 새로운 위치를 설정합니다.
+        Vector3 nextPosition = new Vector3(newX, newY, currentPosition.z);
+        rigid.MovePosition(nextPosition);
+        rigid.velocity = Vector3.zero;
     }
     void StatApply()
     {

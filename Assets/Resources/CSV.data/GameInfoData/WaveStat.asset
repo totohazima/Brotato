@@ -16,120 +16,120 @@ MonoBehaviour:
   - waveName: "1 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 20
     waveTreeStat: 1.5
   - waveName: "2 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 25
     waveTreeStat: 1.5
   - waveName: "3 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 30
     waveTreeStat: 1.5
   - waveName: "4 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 35
     waveTreeStat: 1.5
   - waveName: "5 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 40
     waveTreeStat: 1.5
   - waveName: "6 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 45
     waveTreeStat: 1.5
   - waveName: "7 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 50
     waveTreeStat: 1.5
   - waveName: "8 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 55
     waveTreeStat: 1.5
   - waveName: "9 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "10 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "11 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "12 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "13 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "14 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "15 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "16 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "17 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "18 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "19 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 60
     waveTreeStat: 1.5
   - waveName: "20 \uC6E8\uC774\uBE0C"
     maxEnemySpawn: 100
     enemySpawnCount: 1
-    enemySpawnTime: 0.55
+    enemySpawnTime: 1
     waveTime: 90
     waveTreeStat: 1.5
