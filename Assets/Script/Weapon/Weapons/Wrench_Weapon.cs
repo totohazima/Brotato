@@ -6,7 +6,6 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
 {
     SpriteRenderer sprite;
     float timer;
-    float turretTimer;
     WeaponScanner scanner;
     StageManager stage;
     [SerializeField]

@@ -234,7 +234,7 @@ public class Player_Action : Player, ICustomUpdateMono
     private Vector3 ConvertAngleToVector(float _deg)//각도로 좌표 구하기
     {
         var rad = _deg * Mathf.Deg2Rad;
-        return new Vector3(Mathf.Cos(rad) * 5f, Mathf.Sin(rad) * 5f, 0);
+        return new Vector3(Mathf.Cos(rad) * 3f, Mathf.Sin(rad) * 3f, 0);
     }
 
     //private void OnTriggerStay(Collider other)
@@ -254,7 +254,7 @@ public class Player_Action : Player, ICustomUpdateMono
         if (game.isStart == true && drawWhenSelected)
         {
             Gizmos.color = gizmoColor;
-            DrawHollowCircle(game.playerTrans.position, game.playerInfo.doNotSpawnRange, segments);
+            DrawHollowCircle(game.player_Info.weaponMainPos.position, game.playerInfo.doNotSpawnRange, segments);
         }
     }
     void DrawHollowCircle(Vector3 center, float radius, int segments)

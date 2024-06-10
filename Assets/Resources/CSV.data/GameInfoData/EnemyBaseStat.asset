@@ -111,7 +111,7 @@ MonoBehaviour:
     baseLootDropPersent: 100
   - monsterCode: 6
     enemyType: 3
-    baseHp: 8
+    baseHp: 10
     baseDamage: 0
     baseCoolTime: 0
     baseArmor: 0

@@ -9,8 +9,9 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
     [SerializeField] private Transform baseObj;
     [SerializeField] private CapsuleCollider coll;
     private SpriteRenderer sprite;
-    private float timer;
-    private float turretTimer;
+    [SerializeField] private float timer;
+    [SerializeField] private float duration;
+    [SerializeField] private float elapsedTime;
     private WeaponScanner scanner;
     private StageManager stage;
     private Melee_Bullet bullet;
@@ -65,11 +66,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             {
                 if (timer >= afterCoolTime)
                 {
-                    if (isFire == false)
-                    {
-                        StartCoroutine(WheelAttack());
-                        timer = 0;
-                    }
+                    StartCoroutine(WheelAttack());
                 }
             }
         }
@@ -79,11 +76,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             {
                 if (timer >= afterCoolTime)
                 {
-                    if (isFire == false)
-                    {
-                        StartCoroutine(WheelAttack());
-                        timer = 0;
-                    }
+                    StartCoroutine(WheelAttack());                  
                 }
             }
         }
@@ -179,26 +172,39 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             Vector3 dirs = target - transform.position;
             float angles = Mathf.Atan2(dirs.y, dirs.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angles), 0.1f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.1f);
 
             if (scanner.target != null)
             {
                 Vector3 targetPos = scanner.target.position;
                 float dis = Vector3.Distance(transform.position, targetPos);
 
-                isFire = true;
-                coll.enabled = true;
+                if (isFire == false)
+                {
+                    duration = 0.1f * dis;
+                }
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / duration;
+                if (t > 1.0f)
+                {
+                    t = 1.0f;
+                }
+                Vector3 newPosition = CalculateBezierPoint(t, startPos.position, targetPos, endPos.position);
+                transform.position = newPosition;
 
-                ReturnWeapon(baseObj);
-                scanner.target = null;
-                coll.enabled = false;
-                isFire = false;
+                coll.enabled = true;
+                isFire = true;
+                if (transform.position == endPos.position)
+                {
+                    ReturnWeapon(baseObj);
+                    scanner.target = null;
+                    coll.enabled = false;
+                    timer = 0;
+                    duration = 0;
+                    elapsedTime = 0;
+                }
             }
         }
-        else
-        {
-            StopCoroutine(WheelAttack());
-        }
+        yield return 0;
     }
 
     private IEnumerator SpawnTurret()

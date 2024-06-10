@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Tree : EnemyAction
 {
+    private int treeDestroyCount;
     public override void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
         SpawnManager.instance.trees.Add(gameObject);
         StatSetting(name, enemyType);
+        treeDestroyCount = 8;
     }
     public override void CustomUpdate()
     {
@@ -49,11 +51,12 @@ public class Tree : EnemyAction
         ///임시로 황소캐릭터의 폭발은 나무를 한 방에 부숨
         if (GameManager.instance.playerInfo.isLumberJack == true || GameManager.instance.character == Player.Character.BULL)
         {
-            curHealth = 0;
+            treeDestroyCount = 0;
         }
         else
         {
-            curHealth--;
+            curHealth -= finalDamage;
+            treeDestroyCount--;
         }
     }
 

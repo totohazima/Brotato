@@ -32,5 +32,5 @@ MonoBehaviour:
     hpRisePer: 0
     attackRisePer: 0
   - monsterCode: 6
-    hpRisePer: 0
+    hpRisePer: 5
     attackRisePer: 0
