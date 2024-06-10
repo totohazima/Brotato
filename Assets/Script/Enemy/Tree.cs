@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tree : EnemyAction
 {
-    private int treeDestroyCount;
+    [SerializeField] private int treeDestroyCount;
     public override void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
@@ -14,7 +14,7 @@ public class Tree : EnemyAction
     }
     public override void CustomUpdate()
     {
-        if (curHealth <= 0)
+        if (curHealth <= 0 || treeDestroyCount <= 0)
         {
             isDie = true;
             StartCoroutine(Died(false));
