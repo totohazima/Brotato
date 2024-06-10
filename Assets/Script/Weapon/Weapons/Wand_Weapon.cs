@@ -78,7 +78,7 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
     {
         if (scanner.target == null)
         {
-            Vector3 target = JoyStick.instance.moveTarget.position;
+            Vector3 target = Vector3.zero;
             if (target.x < transform.position.x)
             {
                 sprite.flipY = true;

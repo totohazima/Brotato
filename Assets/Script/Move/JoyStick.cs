@@ -9,7 +9,6 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     private Vector3 DeathArea;
     [SerializeField] private RectTransform CenterReference;
-    public Transform moveTarget;
     public GameObject joyStick;
     public GameObject stick;
     public bool isMove;
