@@ -28,6 +28,7 @@ public class SelectUI_Difficult : SelectUI
             {
                 isClicked = true;
                 SaveLoadExample.instance.DeleteData();
+                GameManager.instance.playerInfo.Reset_PlayerInfo();
                 LoadingSceneManager.LoadScene("Stage");
             }
         }
