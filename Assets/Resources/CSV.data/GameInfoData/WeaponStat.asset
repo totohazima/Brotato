@@ -288,10 +288,10 @@ MonoBehaviour:
     - 1.55
     - 1.49
     baseKnockback:
-    - 3
-    - 3
-    - 3
-    - 3
+    - 20
+    - 20
+    - 20
+    - 20
     baseRange:
     - 175
     - 175
@@ -341,10 +341,10 @@ MonoBehaviour:
     - 0.97
     - 0.87
     baseKnockback:
-    - 20
-    - 20
-    - 20
-    - 20
+    - 3
+    - 3
+    - 3
+    - 3
     baseRange:
     - 125
     - 125
@@ -442,10 +442,10 @@ MonoBehaviour:
     - 0.95
     - 0.8
     baseKnockback:
-    - 0
-    - 0
-    - 0
-    - 0
+    - 20
+    - 20
+    - 20
+    - 20
     baseRange:
     - 175
     - 175

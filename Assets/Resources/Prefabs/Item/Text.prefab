@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<color=red>\uD55C\uAE00</color><sprite=2>"
+  m_text: "<color=red>\uD55C\uAE00</color><sprite=4>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bf2afbbaa34624945a28c0bf06167996, type: 2}
   m_sharedMaterial: {fileID: -2580704703272837541, guid: bf2afbbaa34624945a28c0bf06167996, type: 2}

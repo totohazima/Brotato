@@ -382,16 +382,16 @@ public class WeaponGoods : Weapon, UI_Upadte
                     switch (weaponTier)
                     {
                         case 0:
-                            infoUI.text = scriptable.tier1_InfoStat[0] + "(" + scriptable.tier1_InfoStat[1] + "<sprite=3>) " + scriptable.tier1_Info[0];
+                            infoUI.text = scriptable.tier1_InfoStat[0] + "(" + scriptable.tier1_InfoStat[1] + "<sprite=4>) " + scriptable.tier1_Info[0];
                             break;
                         case 1:
-                            infoUI.text = scriptable.tier2_InfoStat[0] + "(" + scriptable.tier2_InfoStat[1] + "<sprite=3>) " + scriptable.tier2_Info[0] + scriptable.tier2_InfoStat[2] + scriptable.tier2_Info[1];
+                            infoUI.text = scriptable.tier2_InfoStat[0] + "(" + scriptable.tier2_InfoStat[1] + "<sprite=4>) " + scriptable.tier2_Info[0] + scriptable.tier2_InfoStat[2] + scriptable.tier2_Info[1];
                             break;
                         case 2:
-                            infoUI.text = scriptable.tier3_InfoStat[0] + "(" + scriptable.tier3_InfoStat[1] + "<sprite=3>) " + scriptable.tier3_Info[0] + scriptable.tier3_InfoStat[2] + scriptable.tier3_Info[1];
+                            infoUI.text = scriptable.tier3_InfoStat[0] + "(" + scriptable.tier3_InfoStat[1] + "<sprite=4>) " + scriptable.tier3_Info[0] + scriptable.tier3_InfoStat[2] + scriptable.tier3_Info[1];
                             break;
                         case 3:
-                            infoUI.text = scriptable.tier4_InfoStat[0] + "(" + scriptable.tier4_InfoStat[1] + "<sprite=3>) " + scriptable.tier4_Info[0] + scriptable.tier4_InfoStat[2] + scriptable.tier4_Info[1];
+                            infoUI.text = scriptable.tier4_InfoStat[0] + "(" + scriptable.tier4_InfoStat[1] + "<sprite=4>) " + scriptable.tier4_Info[0] + scriptable.tier4_InfoStat[2] + scriptable.tier4_Info[1];
                             break;
                     }
                     break;

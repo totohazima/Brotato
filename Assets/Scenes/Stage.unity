@@ -55437,6 +55437,7 @@ MonoBehaviour:
   joyStick: {fileID: 503253277}
   stick: {fileID: 353082198}
   isMove: 0
+  radio: 120
   stickRect: {fileID: 353082199}
 --- !u!114 &2027927264
 MonoBehaviour:
