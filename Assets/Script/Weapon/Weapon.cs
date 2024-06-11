@@ -231,7 +231,7 @@ public class Weapon : MonoBehaviour
             preRange = range + player.range;
         }
         afterRange = preRange;
-        realRange = afterRange / 10;
+        realRange = afterRange / 13;
         afterPenetrateDamage = -penetrateDamage + player.penetrateDamage;
         afterBloodSucking = bloodSucking + player.bloodSucking;
         afterKnockBack = knockBack + player.knockBack;

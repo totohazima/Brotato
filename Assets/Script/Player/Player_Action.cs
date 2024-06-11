@@ -239,7 +239,7 @@ public class Player_Action : Player, ICustomUpdateMono
     private Vector3 ConvertAngleToVector(float _deg)//각도로 좌표 구하기
     {
         var rad = _deg * Mathf.Deg2Rad;
-        return new Vector3(Mathf.Cos(rad) * 3f, Mathf.Sin(rad) * 3f, 0);
+        return new Vector3(Mathf.Cos(rad) * 2.5f, Mathf.Sin(rad) * 2.5f, 0);
     }
 
     //private void OnTriggerStay(Collider other)

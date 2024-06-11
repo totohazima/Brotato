@@ -150,7 +150,7 @@ public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
             Vector3 moveDir = (targetPos - originalPos).normalized;
             Vector3 destination = originalPos + moveDir * realRanges;
 
-            float moveDuration = (realRange / 100) / 2;
+            float moveDuration = (realRange / 80) / 2;
             isFire = true;
 
             yield return new WaitForSeconds(0.1f);
@@ -162,7 +162,7 @@ public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
             yield return new WaitForSeconds(moveDuration);
             bullet.knockBack = 0;
             // 공격 지속 시간 (이 부분을 필요에 맞게 조정하세요)
-            yield return new WaitForSeconds(realRange / 100);
+            yield return new WaitForSeconds(realRange / 80);
 
             // 원래 위치로 돌아오기
             

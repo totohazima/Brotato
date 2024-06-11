@@ -85,12 +85,6 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         transform.position = new Vector3(x, y, transform.position.z);
     }
 
-    //private IEnumerator KnockBack(Vector3 playerPos, float power)
-    //{
-    //    Vector3 dir = transform.position - playerPos;
-    //    rigid.AddForce(dir.normalized * (power), ForceMode.Impulse); //power가 양수일시 플레이어 방향으로 넉백됨
-    //    yield return 0;
-    //}
     private IEnumerator KnockBack(Vector3 playerPos, float power)
     {
         Vector3 dir = transform.position - playerPos;
@@ -303,7 +297,12 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
             }
         }
 
-        SpawnManager.instance.replaceEnemyCount++;
+        
+        float[] chance = { 50, 50 };
+        int index2 = Judgment(chance);
+        if (index2 == 0)
+            SpawnManager.instance.replaceEnemyCount++;
+
         SpawnManager.instance.enemys.Remove(this);
         gameObject.SetActive(false);
         yield return 0;
