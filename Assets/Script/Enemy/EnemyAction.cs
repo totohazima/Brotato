@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
 {
     public Animator anim;
@@ -12,6 +12,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     public float moveSpeed;
     public bool isDontPush; //true일 경우 넉백 미작동
     public StatusEffect statusEffect;
+    public Slider hpBar_UI;
     [HideInInspector] public Transform target;
     [HideInInspector] public StageManager stage;
     [HideInInspector] public float hitTimer;
@@ -51,6 +52,10 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
             return;
         }
 
+        if (enemyType == Stat.enemyType.BOSS_ENEMY)
+        {
+            UI_Setting();
+        }
         Move();
         
         if(target.position.x < transform.position.x)
@@ -308,6 +313,11 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         yield return 0;
     }
     
+    public virtual void UI_Setting()
+    {
+        hpBar_UI.maxValue = maxHealth;
+        hpBar_UI.value = curHealth;
+    }
     private int Judgment(float[] rando)
     {
         int count = rando.Length;
