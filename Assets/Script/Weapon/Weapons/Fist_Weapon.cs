@@ -4,24 +4,18 @@ using UnityEngine;
 
 public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
 {
-    SpriteRenderer sprite;
-    float timer;
-    WeaponScanner scanner;
-    StageManager game;
-    [SerializeField]
-    private Transform baseObj;
-    [SerializeField]
-    private Transform meleeMuzzle;
-    Melee_Bullet bullet;
-    bool isFire;
-    [SerializeField]
-    private CapsuleCollider coll;
+    private float timer;
+    private WeaponScanner scanner;
+    private Melee_Bullet bullet;
+    private bool isFire;
+    [SerializeField] private Transform baseObj;
+    [SerializeField] private Transform meleeMuzzle;
+    [SerializeField] private CapsuleCollider coll;
+    [SerializeField] private Transform imageGroup;
     void Awake()
     {
         scanner = GetComponent<WeaponScanner>();
-        sprite = baseObj.GetComponent<SpriteRenderer>();
         bullet = baseObj.GetComponent<Melee_Bullet>();
-        game = StageManager.instance;
     }
     void OnEnable()
     {
@@ -97,51 +91,37 @@ public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
     {
         if (scanner.target == null)
         {
-            Vector3 target = Vector3.zero;
-            //if (target.x < transform.position.x)
-            //{
-            //    sprite.flipX = true;
-            //    for (int i = 1; i < tierOutline.Length; i++)
-            //    {
-            //        tierOutline[i].flipX = true;
-            //    }
-            //}
-            //else
-            //{
-            //    sprite.flipX = false;
-            //    for (int i = 1; i < tierOutline.Length; i++)
-            //    {
-            //        tierOutline[i].flipX = false;
-            //    }
-            //}
-            Vector3 dir = target - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
+            if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft == true)
+            {
+                WeaponSpinning(true);
+                LeanTween.rotate(gameObject, new Vector3(0, 0, 180), 0.01f).setEase(LeanTweenType.easeInOutQuad);
+            }
+            else
+            {
+                WeaponSpinning(false);
+                LeanTween.rotate(gameObject, new Vector3(0, 0, 0), 0.01f).setEase(LeanTweenType.easeInOutQuad);
+            }
+            //Vector3 target = Vector3.zero;
+            //Vector3 dir = target - transform.position;
+            //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            //LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
         }
         else
         {
             Vector3 target = scanner.target.position;
-            //if (target.x < transform.position.x)
-            //{
-            //    sprite.flipX = true;
-            //    for (int i = 1; i < tierOutline.Length; i++)
-            //    {
-            //        tierOutline[i].flipX = true;
-            //    }
-            //}
-            //else
-            //{
-            //    sprite.flipX = false;
-            //    for (int i = 1; i < tierOutline.Length; i++)
-            //    {
-            //        tierOutline[i].flipX = false;
-            //    }
-            //}
+            if (target.x < transform.position.x)
+            {
+                WeaponSpinning(true);
+            }
+            else
+            {
+                WeaponSpinning(false);
+            }
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
         }
-        yield return 0;
+        yield return null;
     }
     private IEnumerator Fire()
     {
@@ -151,31 +131,29 @@ public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
         {
             Vector3 targetPos = scanner.target.position;
             Vector3 originalPos = transform.position;
+
             float realRanges = realRange - (Vector3.Distance(baseObj.position, meleeMuzzle.position));
+            StartCoroutine(MuzzleMove());
+            //if (targetPos.x < transform.position.x)
+            //{
+            //    WeaponSpinning(true);
+            //}
+            //else
+            //{
+            //    WeaponSpinning(false);
+            //}
+            ////타겟 방향으로 회전
+            //Vector3 dir = targetPos - transform.position;
+            //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            //LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
 
             Vector3 moveDir = (targetPos - originalPos).normalized;
             Vector3 destination = originalPos + moveDir * realRanges;
 
-            float moveSpeed = 100f; // 이동 속도
-            float moveDuration = 0.2f;
-            //float moveDuration = realRange / moveSpeed;
-
-            // 타겟 반대 방향으로 일정 거리 이동
-            float backDistance = 10f; // 타겟 반대 방향으로 이동할 거리
-            Vector3 backDestination = targetPos + (-moveDir) * backDistance;
-
+            float moveDuration = (realRange / 100) / 2;
             isFire = true;
 
-            //타겟 방향으로 회전
-            Vector3 target = scanner.target.position;
-            Vector3 dir = target - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(0.1f);
-
-            // 타겟 반대 방향으로 이동
-            //LeanTween.move(baseObj.gameObject, backDestination, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-            //yield return new WaitForSeconds(0.02f);
 
             LeanTween.move(baseObj.gameObject, destination, moveDuration).setEase(LeanTweenType.easeInOutQuad);
             coll.enabled = true;
@@ -184,7 +162,7 @@ public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
             yield return new WaitForSeconds(moveDuration);
             bullet.knockBack = 0;
             // 공격 지속 시간 (이 부분을 필요에 맞게 조정하세요)
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(realRange / 100);
 
             // 원래 위치로 돌아오기
             
@@ -198,6 +176,24 @@ public class Fist_Weapon : Weapon_Action, ICustomUpdateMono
         else
         {
             StopCoroutine(Fire());
+        }
+    }
+
+    public override void WeaponSpinning(bool isLeft)
+    {
+        if (isLeft == true)
+        {
+            for (int i = 0; i < tierOutline.Length; i++)
+            {
+                tierOutline[i].flipY = true;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < tierOutline.Length; i++)
+            {
+                tierOutline[i].flipY = false;
+            }
         }
     }
 }

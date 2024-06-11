@@ -14,4 +14,12 @@ public class Weapon_Action : Weapon
         baseObject.localPosition = Vector3.zero;
     }
 
+    /// <summary>
+    /// 무기 회전
+    /// </summary>
+    /// <param name="isLeft"></param>
+    public virtual void WeaponSpinning(bool isLeft)
+    {
+        return;
+    }
 }

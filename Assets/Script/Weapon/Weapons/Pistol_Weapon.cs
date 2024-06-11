@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class Pistol_Weapon : Weapon_Action, ICustomUpdateMono
 {
-    SpriteRenderer sprite;
-    float timer;
-    public Transform muzzle;
-    WeaponScanner scanner;
-    StageManager game;
+    private float timer;
+    private WeaponScanner scanner;
+    [SerializeField] private Transform muzzle;
+    [SerializeField] private Transform imageGroup;
 
     void Awake()
     {
         scanner = GetComponent<WeaponScanner>();
-        sprite = GetComponent<SpriteRenderer>();
-        game = StageManager.instance;
     }
     void OnEnable()
     {
@@ -52,7 +49,7 @@ public class Pistol_Weapon : Weapon_Action, ICustomUpdateMono
             {
                 if (timer >= afterCoolTime)
                 {
-                    Fire();
+                    StartCoroutine(Fire());
                     timer = 0;
                 }
             }
@@ -63,7 +60,7 @@ public class Pistol_Weapon : Weapon_Action, ICustomUpdateMono
             {
                 if (timer >= afterCoolTime)
                 {
-                    Fire();
+                    StartCoroutine(Fire());
                     timer = 0;
                 }
             }
@@ -78,45 +75,27 @@ public class Pistol_Weapon : Weapon_Action, ICustomUpdateMono
     {
         if(scanner.target == null)
         {
-            Vector3 target = Vector3.zero;
-            if (target.x < transform.position.x)
+            if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft == true)
             {
-                sprite.flipY = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipY = true;
-                }
+                WeaponSpinning(true);
+                LeanTween.rotate(gameObject, new Vector3(0, 0, 180), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
             else
             {
-                sprite.flipY = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipY = false;
-                }
+                WeaponSpinning(false);
+                LeanTween.rotate(gameObject, new Vector3(0, 0, 0), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
-            Vector3 dir = target - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
         }
         else
         {
             Vector3 target = scanner.target.position;
             if (target.x < transform.position.x)
             {
-                sprite.flipY = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipY = true;
-                }
+                WeaponSpinning(true);
             }
             else
             {
-                sprite.flipY = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipY = false;
-                }
+                WeaponSpinning(false);
             }
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -126,18 +105,50 @@ public class Pistol_Weapon : Weapon_Action, ICustomUpdateMono
         yield return 0;
     }
 
-    private void Fire()
+    private IEnumerator Fire()
     {
-        Vector3 dir = scanner.target.position - transform.position;
-        dir = dir.normalized;
-        Transform bullet = PoolManager.instance.Get(9).transform;
-        bullet.position = muzzle.position;
-        bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
+        if (scanner.target != null)
+        {
+            Vector3 targetPos = scanner.target.position;
+            StartCoroutine(MuzzleMove());
+            //if (targetPos.x < transform.position.x)
+            //{
+            //    WeaponSpinning(true);
+            //}
+            //else
+            //{
+            //    WeaponSpinning(false);
+            //}
+            //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            //LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.1f);
+            Vector3 dir = targetPos - transform.position;
+            dir = dir.normalized;
+            Transform bullet = PoolManager.instance.Get(9).transform;
+            bullet.position = muzzle.position;
+            bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
 
-        Bullet bulletInit = bullet.GetComponent<Bullet>();
-        bulletInit.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dir * 200);
+            Bullet bulletInit = bullet.GetComponent<Bullet>();
+            bulletInit.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dir * 200);
+        }
+    }
 
-        scanner.target = null;
+    public override void WeaponSpinning(bool isLeft)
+    {
+        if (isLeft == true)
+        {
+            for (int i = 0; i < tierOutline.Length; i++)
+            {
+                tierOutline[i].flipY = true;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < tierOutline.Length; i++)
+            {
+                tierOutline[i].flipY = false;
+            }
+        }
     }
 }
 

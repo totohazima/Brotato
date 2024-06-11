@@ -19,6 +19,7 @@ public class Player_Action : Player, ICustomUpdateMono
     public SphereCollider magnet;
     public Transform animTrans;
     public Transform weaponMainPos;
+    public bool isRight = true, isLeft; //현재 바라보고 있는 방향
     public bool isFullWeapon; //무기가 꽉찬 경우
     public bool isHit; //피격 시 true가 되며 true일 경우 피격 판정이 일어나지 않는다.
     public bool isStand; //캐릭터가 멈춰있는지 확인하는 변수
@@ -77,10 +78,14 @@ public class Player_Action : Player, ICustomUpdateMono
             if(dir.x < 0) //왼쪽
             {
                 animTrans.rotation = Quaternion.Euler(0, 180, 0);
+                isRight = false;
+                isLeft = true;
             }
             else //오른 쪽
             {
                 animTrans.rotation = Quaternion.Euler(0, 0, 0);
+                isRight = true;
+                isLeft = false;
             }
 
             if (isStand == true)

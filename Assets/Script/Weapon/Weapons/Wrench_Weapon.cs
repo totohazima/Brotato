@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
 {
-    SpriteRenderer sprite;
-    float timer;
-    WeaponScanner scanner;
-    StageManager stage;
-    [SerializeField]
-    private Transform baseObj;
-    Melee_Bullet bullet;
-    bool isFire;
-    bool isSpawnedTurret;
-    [SerializeField]
-    private CapsuleCollider coll;
+    private float timer;
+    private WeaponScanner scanner;
+    private StageManager stage;
+    private Melee_Bullet bullet;
+    private bool isFire;
+    private bool isSpawnedTurret;
+    [SerializeField] private Transform baseObj;
+    [SerializeField] private CapsuleCollider coll;
+    [SerializeField] private Transform imageGroup;
     public Transform[] curvePos;
     void Awake()
     {
         scanner = GetComponent<WeaponScanner>();
-        sprite = baseObj.GetComponent<SpriteRenderer>();
         bullet = baseObj.GetComponent<Melee_Bullet>();
         stage = StageManager.instance;
     }
@@ -107,45 +104,31 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
     {
         if (scanner.target == null)
         {
-            Vector3 target = Vector3.zero;
-            if (target.x < transform.position.x)
+            if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft == true)
             {
-                sprite.flipX = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = true;
-                }
+                WeaponSpinning(true);
+                LeanTween.rotate(gameObject, new Vector3(0, 0, 180), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
             else
             {
-                sprite.flipX = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = false;
-                }
+                WeaponSpinning(false);
+                LeanTween.rotate(gameObject, new Vector3(0, 0, 0), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
-            Vector3 dir = target - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
+            //Vector3 target = Vector3.zero;
+            //Vector3 dir = target - transform.position;
+            //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            //LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
         }
         else
         {
             Vector3 target = scanner.target.position;
             if (target.x < transform.position.x)
             {
-                sprite.flipX = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = true;
-                }
+                WeaponSpinning(true);
             }
             else
             {
-                sprite.flipX = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = false;
-                }
+                WeaponSpinning(false);
             }
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -159,26 +142,12 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
 
         if (scanner.target != null)
         {
-            Vector3 target = scanner.target.position;
-            if (target.x < transform.position.x)
-            {
-                sprite.flipX = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = true;
-                }
-            }
-            else
-            {
-                sprite.flipX = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = false;
-                }
-            }
-            Vector3 dirs = target - transform.position;
-            float angles = Mathf.Atan2(dirs.y, dirs.x) * Mathf.Rad2Deg;
-            LeanTween.rotate(gameObject, new Vector3(0, 0, angles), 0.1f).setEase(LeanTweenType.easeInOutQuad);
+            StartCoroutine(MuzzleMove());
+
+            //Vector3 target = scanner.target.position;
+            //Vector3 dirs = target - transform.position;
+            //float angles = Mathf.Atan2(dirs.y, dirs.x) * Mathf.Rad2Deg;
+            //LeanTween.rotate(gameObject, new Vector3(0, 0, angles), 0.1f).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(0.1f);
 
             if (scanner.target != null)
@@ -316,6 +285,24 @@ public class Wrench_Weapon : Weapon_Action, ICustomUpdateMono
             }
             SpawnManager.instance.turrets.Add(turret[i]);
             mark[i].SetActive(false);
+        }
+    }
+
+    public override void WeaponSpinning(bool isLeft)
+    {
+        if (isLeft == true)
+        {
+            for (int i = 0; i < tierOutline.Length; i++)
+            {
+                tierOutline[i].flipY = true;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < tierOutline.Length; i++)
+            {
+                tierOutline[i].flipY = false;
+            }
         }
     }
 }

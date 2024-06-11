@@ -4,25 +4,18 @@ using UnityEngine;
 
 public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
 {
-    SpriteRenderer sprite;
-    float timer;
-    float turretTimer;
-    WeaponScanner scanner;
-    StageManager stage;
-    [SerializeField]
-    private Transform baseObj;
-    Melee_Bullet bullet;
-    bool isFire;
-    bool isSpawnedTurret;
-    [SerializeField]
-    private CapsuleCollider coll;
+    private float timer;
+    private WeaponScanner scanner;
+    private Melee_Bullet bullet;
+    private bool isFire;
+    [SerializeField] private Transform baseObj;
+    [SerializeField] private CapsuleCollider coll;
+    [SerializeField] private Transform imageGroup;
     public Transform[] curvePos;
     void Awake()
     {
         scanner = GetComponent<WeaponScanner>();
-        sprite = baseObj.GetComponent<SpriteRenderer>();
         bullet = baseObj.GetComponent<Melee_Bullet>();
-        stage = StageManager.instance;
     }
     void OnEnable()
     {
@@ -98,45 +91,31 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
     {
         if (scanner.target == null)
         {
-            Vector3 target = Vector3.zero;
-            if (target.x < transform.position.x)
+            if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft == true)
             {
-                sprite.flipX = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = true;
-                }
+                WeaponSpinning(true);
+                LeanTween.rotate(gameObject, new Vector3(0, 0, 180), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
             else
             {
-                sprite.flipX = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = false;
-                }
+                WeaponSpinning(false);
+                LeanTween.rotate(gameObject, new Vector3(0, 0, 0), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
-            Vector3 dir = target - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
+            //Vector3 target = Vector3.zero;
+            //Vector3 dir = target - transform.position;
+            //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            //LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
         }
         else
         {
             Vector3 target = scanner.target.position;
-            if (target.x < transform.position.x)
+            if(target.x < transform.position.x)
             {
-                sprite.flipX = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = true;
-                }
+                WeaponSpinning(true);
             }
             else
             {
-                sprite.flipX = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = false;
-                }
+                WeaponSpinning(false);
             }
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -174,81 +153,75 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
 
         if (scanner.target != null)
         {
-            Vector3 target = scanner.target.position;
-            if (target.x < transform.position.x)
-            {
-                sprite.flipX = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = true;
-                }
-            }
-            else
-            {
-                sprite.flipX = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = false;
-                }
-            }
-            Vector3 dirs = target - transform.position;
-            float angles = Mathf.Atan2(dirs.y, dirs.x) * Mathf.Rad2Deg;
-            LeanTween.rotate(gameObject, new Vector3(0, 0, angles), 0.1f).setEase(LeanTweenType.easeInOutQuad);
+            StartCoroutine(MuzzleMove());
+            //Vector3 dirs = target - transform.position;
+            //float angles = Mathf.Atan2(dirs.y, dirs.x) * Mathf.Rad2Deg;
+            //LeanTween.rotate(gameObject, new Vector3(0, 0, angles), 0.1f).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(0.1f);
 
-            if (scanner.target != null)
-            {
-                Vector3 targetPos = scanner.target.position;
-                float dis = Vector3.Distance(transform.position, targetPos);
-                float angle = GetAngle(transform.position, targetPos);
-                Vector3 pos1 = ConvertAngleToVector(angle + 90, dis);
-                Vector3 pos2 = ConvertAngleToVector(angle + 45, dis);
-                Vector3 pos3 = ConvertAngleToVector(angle - 15, dis);
-                Vector3 pos4 = ConvertAngleToVector(angle - 30, dis);
-                Vector3 pos5 = ConvertAngleToVector(angle - 45, dis);
-                Vector3 pos6 = ConvertAngleToVector(angle - 60, dis);
-                Vector3 pos7 = ConvertAngleToVector(angle - 75, dis);
-                Vector3 pos8 = ConvertAngleToVector(angle - 90, dis);
-                curvePos[0].position = transform.position + pos1;
-                curvePos[1].position = transform.position + pos2;
-                curvePos[2].position = transform.position + pos3;
-                curvePos[3].position = transform.position + pos4;
-                curvePos[4].position = transform.position + pos5;
-                curvePos[5].position = transform.position + pos6;
-                curvePos[6].position = transform.position + pos7;
-                curvePos[7].position = transform.position + pos8;
+            Vector3 targetPos = scanner.target.position;
+            float dis = Vector3.Distance(transform.position, targetPos);
+            float angle = GetAngle(transform.position, targetPos);
+            Vector3 pos1 = ConvertAngleToVector(angle + 90, dis);
+            Vector3 pos2 = ConvertAngleToVector(angle + 45, dis);
+            Vector3 pos3 = ConvertAngleToVector(angle - 15, dis);
+            Vector3 pos4 = ConvertAngleToVector(angle - 30, dis);
+            Vector3 pos5 = ConvertAngleToVector(angle - 45, dis);
+            Vector3 pos6 = ConvertAngleToVector(angle - 60, dis);
+            Vector3 pos7 = ConvertAngleToVector(angle - 75, dis);
+            Vector3 pos8 = ConvertAngleToVector(angle - 90, dis);
+            curvePos[0].position = transform.position + pos1;
+            curvePos[1].position = transform.position + pos2;
+            curvePos[2].position = transform.position + pos3;
+            curvePos[3].position = transform.position + pos4;
+            curvePos[4].position = transform.position + pos5;
+            curvePos[5].position = transform.position + pos6;
+            curvePos[6].position = transform.position + pos7;
+            curvePos[7].position = transform.position + pos8;
 
-                isFire = true;
-                coll.enabled = true;
-                LeanTween.move(baseObj.gameObject, curvePos[0].position, 0.04f).setEase(LeanTweenType.easeInOutQuad);
-                yield return new WaitForSeconds(0.04f);
-                LeanTween.move(baseObj.gameObject, curvePos[1].position, 0.04f).setEase(LeanTweenType.easeInOutQuad);
-                yield return new WaitForSeconds(0.04f);
-                LeanTween.move(baseObj.gameObject, targetPos, 0.15f).setEase(LeanTweenType.easeInOutQuad);
-                yield return new WaitForSeconds(0.15f);
-                LeanTween.move(baseObj.gameObject, curvePos[2].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-                yield return new WaitForSeconds(0.02f);
-                LeanTween.move(baseObj.gameObject, curvePos[3].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-                yield return new WaitForSeconds(0.02f);
-                LeanTween.move(baseObj.gameObject, curvePos[4].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-                yield return new WaitForSeconds(0.02f);
-                LeanTween.move(baseObj.gameObject, curvePos[5].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-                yield return new WaitForSeconds(0.02f);
-                LeanTween.move(baseObj.gameObject, curvePos[6].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-                yield return new WaitForSeconds(0.02f);
-                LeanTween.move(baseObj.gameObject, curvePos[7].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-                yield return new WaitForSeconds(0.02f);
-                LeanTween.move(baseObj.gameObject, transform.position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-                yield return new WaitForSeconds(0.02f);
-                ReturnWeapon(baseObj);
-                scanner.target = null;
-                coll.enabled = false;
-                isFire = false;
+            isFire = true;
+            coll.enabled = true;
+            LeanTween.move(baseObj.gameObject, curvePos[0].position, 0.04f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.04f);
+            LeanTween.move(baseObj.gameObject, curvePos[1].position, 0.04f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.04f);
+            LeanTween.move(baseObj.gameObject, targetPos, 0.15f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.15f);
+            LeanTween.move(baseObj.gameObject, curvePos[2].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, curvePos[3].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, curvePos[4].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, curvePos[5].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, curvePos[6].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, curvePos[7].position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            LeanTween.move(baseObj.gameObject, transform.position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
+            ReturnWeapon(baseObj);
+            scanner.target = null;
+            coll.enabled = false;
+            isFire = false;
+        }
+    }
+    public override void WeaponSpinning(bool isLeft)
+    {
+        if (isLeft == true)
+        {
+            for (int i = 0; i < tierOutline.Length; i++)
+            {
+                tierOutline[i].flipY = true;
             }
         }
         else
         {
-            StopCoroutine(Fire());
+            for (int i = 0; i < tierOutline.Length; i++)
+            {
+                tierOutline[i].flipY = false;
+            }
         }
     }
 }
