@@ -153,22 +153,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
         if (scanner.target != null)
         {
             Vector3 target = scanner.target.position;
-            if (target.x < transform.position.x)
-            {
-                sprite.flipX = true;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = true;
-                }
-            }
-            else
-            {
-                sprite.flipX = false;
-                for (int i = 1; i < tierOutline.Length; i++)
-                {
-                    tierOutline[i].flipX = false;
-                }
-            }
+            
             Vector3 dirs = target - transform.position;
             float angles = Mathf.Atan2(dirs.y, dirs.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angles), 0.1f).setEase(LeanTweenType.easeInOutQuad);

@@ -42,6 +42,7 @@ public class Player_Action : Player, ICustomUpdateMono
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
+        isStand = false;
     }
     void OnDisable()
     {
@@ -88,7 +89,7 @@ public class Player_Action : Player, ICustomUpdateMono
                 isLeft = false;
             }
 
-            if (isStand == true)
+            if (game.isStart == true && isStand == true)
             {
                 isStand = false;
                 //군인: 가만히 있을 시 대미지 +50%, 공격 속도 +50%
@@ -102,7 +103,7 @@ public class Player_Action : Player, ICustomUpdateMono
         else
         {
             anim.SetBool("Move", false);
-            if (isStand == false)
+            if (game.isStart == true && isStand == false)
             {
                 isStand = true;
                 //군인: 가만히 있을 시 대미지 +50%, 공격 속도 +50%
