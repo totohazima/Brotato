@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Action : Player, ICustomUpdateMono
@@ -26,6 +24,7 @@ public class Player_Action : Player, ICustomUpdateMono
     public JoyStick joyStick;
     public WhiteFlash whiteFlash;
     public PlayerSprite playerSprite;
+
     void Start()
     {
         game = GameManager.instance;
@@ -66,7 +65,9 @@ public class Player_Action : Player, ICustomUpdateMono
             anim.SetBool("Move", false);
             return;
         }
+
         StatApply();
+        WeaponAngleSetting();
 
         if (joy.isMove == true)
         {
@@ -76,7 +77,7 @@ public class Player_Action : Player, ICustomUpdateMono
             // 오브젝트의 위치를 dir 방향으로 이동시킨다.
             Move(dir);
 
-            if(dir.x < 0) //왼쪽
+            if (dir.x < 0) //왼쪽
             {
                 animTrans.rotation = Quaternion.Euler(0, 180, 0);
                 isRight = false;
@@ -114,13 +115,6 @@ public class Player_Action : Player, ICustomUpdateMono
                 }
             }
         }
-       
-        for (int i = 0; i < weapons.Count; i++)
-        {
-            float deg = 360 * i / weapons.Count - 90;
-            Vector3 pos = ConvertAngleToVector(deg);
-            weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
-        }
 
         if (isHit == true)
         {
@@ -132,7 +126,7 @@ public class Player_Action : Player, ICustomUpdateMono
             }
         }
 
-        if(isHit == true || game.isEnd == true)
+        if (isHit == true || game.isEnd == true)
         {
             coll.enabled = false;
         }
@@ -183,7 +177,48 @@ public class Player_Action : Player, ICustomUpdateMono
         rigid.MovePosition(nextPosition);
         rigid.velocity = Vector3.zero;
     }
-    void StatApply()
+    /// <summary>
+    /// 무기 숫자에 따라 각도 세팅
+    /// </summary>
+    private void WeaponAngleSetting()
+    {
+        //float[] deg = new float[0];
+        //switch (weapons.Count)
+        //{
+        //    case 1: 
+        //        deg = new float[] { 90};
+        //        break;
+        //    case 2:
+        //        deg = new float[] { 45, 135 };
+        //        break;
+        //    case 3:
+        //        deg = new float[] { 45, 135, 270 };
+        //        break;
+        //    case 4:
+        //        deg = new float[] { 45, 135, 225, 315 };
+        //        break;
+        //    case 5:
+        //        deg = new float[] { 45, 135, 225, 270, 315 };
+        //        break;
+        //    case 6:
+        //        deg = new float[] { 45, 135, 180, 225, 315, 360 };
+        //        break;
+        //}
+        //for (int i = 0; i < deg.Length; i++)
+        //{
+        //    //float deg = 360 * i / weapons.Count - 90;
+        //    Vector3 pos = ConvertAngleToVector(-deg[i]);
+        //    weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
+        //}
+        for (int i = 0; i < weapons.Count; i++)
+        {
+            float deg = 360 * i / weapons.Count - 90;
+            Vector3 pos = ConvertAngleToVector(deg);
+            weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
+        }
+    }
+
+    private void StatApply()
     {
         float regenHp = (float)(0.09 * regeneration);
         if (regenHp > 1)
@@ -200,7 +235,7 @@ public class Player_Action : Player, ICustomUpdateMono
                 i -= 0.01f;
             }
         }
-        else if(regenHp < 1)
+        else if (regenHp < 1)
         {
             float i = 1;
             while (true)
@@ -217,7 +252,7 @@ public class Player_Action : Player, ICustomUpdateMono
         {
             regenTime = 99f;
         }
-        if (regenHp > 0) 
+        if (regenHp > 0)
         {
             timer += Time.deltaTime;
             if (GameManager.instance.playerInfo.playerHealth < stage.maxHp)
