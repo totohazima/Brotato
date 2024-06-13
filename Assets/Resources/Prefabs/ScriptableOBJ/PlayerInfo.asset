@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334c3fce11727c745ac94356c94dd011, type: 3}
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
-  isDie: 0
+  isDie: 1
   doNotSpawnRange: 15
-  maxHealth: 15
-  playerHealth: 15
+  maxHealth: 10
+  playerHealth: -3.8000002
   regeneration: 0
   bloodSucking: 0
   persentDamage: 0
@@ -24,14 +24,14 @@ MonoBehaviour:
   elementalDamage: 0
   attackSpeed: 0
   criticalChance: 0
-  engine: 0
+  engine: 10
   range: 0
   armor: 0
   evasion: 0
   accuracy: 0
   lucky: 0
-  harvest: 8
-  speed: 5
+  harvest: 0
+  speed: 0
   consumableHeal: 0
   meterialHeal: 0
   expGain: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   enemyAmount: 0
   enemySpeed: 0
   instantMagnet: 0
-  characterItemTags: 00000000
+  characterItemTags: 0a000000
   maxHealth_Upgrade: 0
   playerHealth_Upgrade: 0
   regeneration_Upgrade: 0
@@ -73,15 +73,15 @@ MonoBehaviour:
   playerLevel: 0
   levelUpChance: 0
   lootChance: 0
-  curExp: 23
+  curExp: 20
   maxExp: 50
   overExp: 0
-  money: 43
-  interest: 10
-  engineerBuildingPos: {x: -12.53368, y: 2.0325203}
+  money: 48
+  interest: 6
+  engineerBuildingPos: {x: 11.92194, y: 23.516706}
   unArmed_Set: 0
-  tool_Set: 0
-  gun_Set: 1
+  tool_Set: 1
+  gun_Set: 0
   explosive_Set: 0
   precision_Set: 0
   native_Set: 0

@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         //엔지니어 렌치 추가
         else if (character == Player.Character.ENGINEER)
         {
-            GameObject plusWeapon = Resources.Load<GameObject>("Prefabs/Weapon/Wrench_Weapon");
+            GameObject plusWeapon = Resources.Load<GameObject>("Prefabs/Weapon/NewTorch_Weapon");
             if (plusWeapon != null)
             {
                 GameObject weapon = Instantiate(plusWeapon);
@@ -286,8 +286,23 @@ public class GameManager : MonoBehaviour, UI_Upadte
         LoadingSceneManager.CloseScene("MainScene");
     }
 
-    
-    
+    /// <summary>
+    /// 씬이 켜져있는지 확인하는 함수
+    /// </summary>
+    /// <param name="sceneName">해당 씬의 이름</param>
+    public bool IsSceneLoaded(string sceneName)
+    {
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (scene.name == sceneName)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void GameManagerClear()
     {
         isEnd = false;

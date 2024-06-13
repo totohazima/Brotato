@@ -38,7 +38,10 @@ public class MainSceneManager : MonoBehaviour
     }
     void Start()
     {
-        SceneManager.UnloadSceneAsync("TitleScene");
+        if (GameManager.instance.IsSceneLoaded("TitleScene") == true)
+        {
+            SceneManager.UnloadSceneAsync("TitleScene");
+        }
     }
     public void StartBtn() //게임 시작
     {

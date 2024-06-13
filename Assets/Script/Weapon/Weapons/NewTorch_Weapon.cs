@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 
-public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
+public class NewTorch_Weapon : Weapon_Action, ICustomUpdateMono
 {
     [SerializeField] private Transform startPos;
     [SerializeField] private Transform controlPos1;
@@ -13,16 +12,13 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
     [SerializeField] private CapsuleCollider coll;
     [SerializeField] private float timer;
     private WeaponScanner scanner;
-    private StageManager stage;
     private Melee_Bullet bullet;
     private bool isFire;
     private bool isLeft;
-    private bool isSpawnedTurret;
     void Awake()
     {
         scanner = GetComponent<WeaponScanner>();
         bullet = baseObj.GetComponent<Melee_Bullet>();
-        stage = StageManager.instance;
     }
     void OnEnable()
     {
@@ -82,16 +78,6 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                 }
             }
         }
-
-        if (GameManager.instance.isEnd == true)
-        {
-            isSpawnedTurret = false;
-        }
-        else if (GameManager.instance.isEnd == false && isSpawnedTurret == false)
-        {
-            isSpawnedTurret = true;
-            StartCoroutine(SpawnTurret());
-        }
     }
 
     public void ResetStat()
@@ -138,6 +124,30 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
     private IEnumerator WheelAttack()
     {
         bullet.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
+        bullet.StatusEffecInit(StatusEffect.EffectType.BURN);
+        float damage = 0;
+        int count = 0;
+        Player_Action player = GameManager.instance.player_Info;
+        switch (weaponTier)
+        {
+            case 0:
+                damage = (scrip.tier1_InfoStat[0] + (player.elementalDamage * (scrip.tier1_InfoStat[2] / 100))) * (1 + (player.persentDamage / 100));
+                count = (int)scrip.tier1_InfoStat[1];
+                break;
+            case 1:
+                damage = (scrip.tier2_InfoStat[0] + (player.elementalDamage * (scrip.tier2_InfoStat[2] / 100))) * (1 + (player.persentDamage / 100));
+                count = (int)scrip.tier2_InfoStat[1];
+                break;
+            case 2:
+                damage = (scrip.tier3_InfoStat[0] + (player.elementalDamage * (scrip.tier3_InfoStat[2] / 100))) * (1 + (player.persentDamage / 100));
+                count = (int)scrip.tier3_InfoStat[1];
+                break;
+            case 3:
+                damage = (scrip.tier4_InfoStat[0] + (player.elementalDamage * (scrip.tier4_InfoStat[2] / 100))) * (1 + (player.persentDamage / 100));
+                count = (int)scrip.tier4_InfoStat[1];
+                break;
+        }
+        bullet.BurnInit(GameManager.instance.playerInfo.snakeCount, damage, count);
 
         if (scanner.target != null)
         {
@@ -161,7 +171,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
 
             duration = 0.014f * dis;
             coll.enabled = true;
-            isFire = true; 
+            isFire = true;
 
             ///적이 왼쪽에 있을 경우
             if (isLeft == true)
@@ -269,87 +279,6 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
         }
     }
 
-    private IEnumerator SpawnTurret()
-    {
-        int index = 0;
-        switch (weaponTier)
-        {
-            case (0):
-                index = (int)scrip.tier1_InfoStat[2];
-                break;
-            case (1):
-                index = (int)scrip.tier2_InfoStat[2];
-                break;
-            case (2):
-                index = (int)scrip.tier3_InfoStat[2];
-                break;
-            case (3):
-                index = (int)scrip.tier4_InfoStat[2];
-                break;
-        }
-        GameObject[] mark = new GameObject[index];
-        GameObject[] turret = new GameObject[mark.Length];
-        //엔지니어: 건축물이 서로 가깝게 생성됨
-        if (GameManager.instance.character == Player.Character.ENGINEER)
-        {
-            for (int i = 0; i < mark.Length; i++)
-            {
-                mark[i] = PoolManager.instance.Get(7);
-                float distance = Random.Range(2f, 30f);
-                Vector2 randomDirection = Random.insideUnitCircle.normalized;
-                Vector2 pos = GameManager.instance.playerInfo.engineerBuildingPos + randomDirection * distance;
-                if (pos.x > stage.xMax)
-                {
-                    pos.x = stage.xMax;
-                }
-                else if (pos.x < stage.xMin)
-                {
-                    pos.x = stage.xMin;
-                }
-                if (pos.y > stage.yMax)
-                {
-                    pos.y = stage.yMax;
-                }
-                else if (pos.y < stage.yMin)
-                {
-                    pos.y = stage.yMin;
-                }
-                mark[i].transform.position = pos;
-            }
-        }
-        else
-        {
-            for (int i = 0; i < mark.Length; i++)
-            {
-                mark[i] = PoolManager.instance.Get(7);
-                Vector3 pos = SpawnManager.instance.FriendlySpawnPosition();
-                mark[i].transform.position = pos;
-            }
-        }
-        yield return new WaitForSeconds(0.6f);
-        for (int i = 0; i < mark.Length; i++)
-        {
-            turret[i] = PoolManager.instance.Get(8);
-            turret[i].transform.position = mark[i].transform.position;
-            switch (weaponTier)
-            {
-                case (0):
-                    turret[i].GetComponent<Turret>().Init(scrip.tier1_InfoStat[0], scrip.tier1_InfoStat[1]);
-                    break;
-                case (1):
-                    turret[i].GetComponent<Turret>().Init(scrip.tier2_InfoStat[0], scrip.tier2_InfoStat[1]);
-                    break;
-                case (2):
-                    turret[i].GetComponent<Turret>().Init(scrip.tier3_InfoStat[0], scrip.tier3_InfoStat[1]);
-                    break;
-                case (3):
-                    turret[i].GetComponent<Turret>().Init(scrip.tier4_InfoStat[0], scrip.tier4_InfoStat[1]);
-                    break;
-            }
-            SpawnManager.instance.turrets.Add(turret[i]);
-            mark[i].SetActive(false);
-        }
-    }
     Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {
         float u = 1 - t;

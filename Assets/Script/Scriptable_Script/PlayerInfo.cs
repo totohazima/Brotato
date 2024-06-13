@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 [CreateAssetMenu(fileName = "New PlayerInfo", menuName = "GameDataBase/playerInfo")]
 public class PlayerInfo : ScriptableObject
 {
@@ -887,6 +888,7 @@ public class PlayerInfo : ScriptableObject
             InfiniteLoopDetector.Run();
         }
     }
+    
     private int Judgment(float[] rando)
     {
         int count = rando.Length;
