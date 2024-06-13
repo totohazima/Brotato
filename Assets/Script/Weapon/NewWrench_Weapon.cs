@@ -166,22 +166,22 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             ///적이 왼쪽에 있을 경우
             if (isLeft == true)
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 2f);
-                Vector3 end = ConvertAngleToVector(returnAngle - 90, dis / 2f);
+                Vector3 start = ConvertAngleToVector(angle + 90, dis / 3f);
+                Vector3 end = ConvertAngleToVector(angle - 90, dis);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
                 Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
-                Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
+                //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
                 Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
-                Vector3 controlVector_2 = new Vector3(con2Pos.x, end.y, 0);
+                Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
 
                 startPos.position = transform.position + endVector;
                 controlPos1.position = transform.position + controlVector_2;
                 controlPos2.position = transform.position + controlVector_1;
                 endPos.position = transform.position + startVector;
                 // 공격 시작 시 초기 회전 설정
-                baseObj.localRotation = Quaternion.Euler(0, 0, -120);
+                baseObj.localRotation = Quaternion.Euler(0, 0, -160);
                 yield return new WaitForSeconds(duration);
                 // 첫 번째 구간: startPos -> targetPos
                 while (elapsedTime < duration)
@@ -190,12 +190,13 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                     Vector3 point = CalculateQuadraticBezierPoint(t, startPos.position, controlPos1.position, targetPos);
 
                     baseObj.position = point;
-                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -120), Quaternion.Euler(0, 0, 0), t);
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
 
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
-
+                //휘두른 무기를 수거하기 직전
+                yield return new WaitForSeconds(0.01f);
                 elapsedTime = 0f;
 
                 // 두 번째 구간: targetPos -> endPos
@@ -205,31 +206,30 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                     Vector3 point = CalculateQuadraticBezierPoint(t, targetPos, controlPos2.position, endPos.position);
 
                     baseObj.position = point;
-                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 120), t);
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 160), t);
                     elapsedTime += Time.deltaTime;
                     yield return null;
-                }
-
+                }    
             }
             ///적이 오른쪽에 있을 경우
             else
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 2f);
-                Vector3 end = ConvertAngleToVector(returnAngle - 90, dis / 2f);
+                Vector3 start = ConvertAngleToVector(angle + 60, dis / 3f);
+                Vector3 end = ConvertAngleToVector(angle - 90, dis);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
                 Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
-                Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
+                //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
                 Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
-                Vector3 controlVector_2 = new Vector3(con2Pos.x, end.y, 0);
+                Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
 
                 startPos.position = transform.position + startVector;
                 controlPos1.position = transform.position + controlVector_1;
                 controlPos2.position = transform.position + controlVector_2;
                 endPos.position = transform.position + endVector;
                 // 공격 시작 시 초기 회전 설정
-                baseObj.localRotation = Quaternion.Euler(0, 0, 120);
+                baseObj.localRotation = Quaternion.Euler(0, 0, 160);
                 yield return new WaitForSeconds(duration);
                 while (elapsedTime < duration)
                 {
@@ -237,11 +237,12 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                     Vector3 point = CalculateQuadraticBezierPoint(t, startPos.position, controlPos1.position, targetPos);
 
                     baseObj.position = point;
-                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 120), Quaternion.Euler(0, 0, 0), t);
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
 
+                yield return new WaitForSeconds(0.01f);
                 elapsedTime = 0f;
 
                 while (elapsedTime < duration)
@@ -250,12 +251,16 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                     Vector3 point = CalculateQuadraticBezierPoint(t, targetPos, controlPos2.position, endPos.position);
 
                     baseObj.position = point;
-                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, -120), t);
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, -160), t);
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
-
             }
+
+            // 세 번째 구간: endPos -> transform.position
+            LeanTween.moveLocal(baseObj.gameObject, Vector3.zero, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            LeanTween.rotateLocal(baseObj.gameObject, Vector3.zero, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.02f);
 
             coll.enabled = false;
             isFire = false;
@@ -264,8 +269,6 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             dis = 0;
             duration = 0;
             elapsedTime = 0;
-            ReturnWeapon(baseObj);
-            baseObj.localRotation = Quaternion.Euler(0, 0, 0);
         }
     }
 

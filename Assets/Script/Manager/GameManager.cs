@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         //엔지니어 렌치 추가
         else if (character == Player.Character.ENGINEER)
         {
-            GameObject plusWeapon = Resources.Load<GameObject>("Prefabs/Weapon/NewTorch_Weapon");
+            GameObject plusWeapon = Resources.Load<GameObject>("Prefabs/Weapon/NewWrench_Weapon");
             if (plusWeapon != null)
             {
                 GameObject weapon = Instantiate(plusWeapon);
