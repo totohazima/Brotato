@@ -166,8 +166,8 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             ///적이 왼쪽에 있을 경우
             if (isLeft == true)
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 4);
-                Vector3 end = ConvertAngleToVector(angle - 90, dis / 2);
+                Vector3 start = ConvertAngleToVector(angle + 90, dis / 3);
+                Vector3 end = ConvertAngleToVector(angle - 90, dis / 1.5f);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
@@ -181,7 +181,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                 controlPos2.position = transform.position + controlVector_1;
                 endPos.position = transform.position + startVector;
                 // 공격 시작 시 초기 회전 설정
-                baseObj.localRotation = Quaternion.Euler(0, 0, -160);
+                //baseObj.localRotation = Quaternion.Euler(0, 0, -160);
                 yield return new WaitForSeconds(duration);
                 // 첫 번째 구간: startPos -> targetPos
                 while (elapsedTime < duration)
@@ -214,8 +214,8 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             ///적이 오른쪽에 있을 경우
             else
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 2);
-                Vector3 end = ConvertAngleToVector(angle - 90, dis / 4);
+                Vector3 start = ConvertAngleToVector(angle + 90, dis / 1.5f);
+                Vector3 end = ConvertAngleToVector(angle - 90, dis / 3);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
@@ -229,7 +229,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                 controlPos2.position = transform.position + controlVector_2;
                 endPos.position = transform.position + endVector;
                 // 공격 시작 시 초기 회전 설정
-                baseObj.localRotation = Quaternion.Euler(0, 0, 160);
+                //baseObj.localRotation = Quaternion.Euler(0, 0, 160);
                 yield return new WaitForSeconds(duration);
                 while (elapsedTime < duration)
                 {

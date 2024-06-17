@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TreeMarkFlash
+  m_Controller: {fileID: 9100000, guid: 38ba8ab0db5d9cd408c6785842f84a11, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 77dab21f2fd107347aed2ae6b2a27d62, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 27d6528401f9fdd4598b1325b5de7b92, type: 2}

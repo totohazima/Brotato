@@ -120,7 +120,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             mark[i] = PoolManager.instance.Get(0);
             mark[i].transform.position = EnemySpawnPosition();
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         for (int i = 0; i < spawnCount; i++)
         {
             float[] enemyChance = new float[scrip[stage.waveLevel].spawnEnemys.Length];
@@ -210,7 +210,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
                 mark[i].transform.position = pos;
             }
         }
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(1f);
         for (int i = 0; i < mark.Length; i++)
         {
             mine[i] = PoolManager.instance.Get(5);
@@ -261,7 +261,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
                 mark[i].transform.position = pos;
             }
         }
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(1f);
         for (int i = 0; i < mark.Length; i++)
         {
             turret[i] = PoolManager.instance.Get(8);
@@ -310,7 +310,7 @@ public class SpawnManager : MonoBehaviour, ICustomUpdateMono
             Vector3 pos = FriendlySpawnPosition();
             mark[i].transform.position = pos;
         }
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(1f);
         for (int i = 0; i < mark.Length; i++)
         {
             tree[i] = PoolManager.instance.Get(13);
