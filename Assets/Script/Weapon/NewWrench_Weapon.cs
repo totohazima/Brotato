@@ -166,14 +166,14 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             ///적이 왼쪽에 있을 경우
             if (isLeft == true)
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 3);
-                Vector3 end = ConvertAngleToVector(angle - 90, dis / 1.5f);
+                Vector3 start = ConvertAngleToVector(angle + 90, dis / 2);
+                Vector3 end = ConvertAngleToVector(angle - 90, dis / 2);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
                 Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
                 //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
-                Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
+                Vector3 controlVector_1 = new Vector3(start.x, start.y, 0);
                 Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
 
                 startPos.position = transform.position + endVector;
@@ -214,14 +214,14 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             ///적이 오른쪽에 있을 경우
             else
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 1.5f);
-                Vector3 end = ConvertAngleToVector(angle - 90, dis / 3);
+                Vector3 start = ConvertAngleToVector(angle + 90, dis / 2);
+                Vector3 end = ConvertAngleToVector(angle - 90, dis / 2);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
                 Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
                 //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
-                Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
+                Vector3 controlVector_1 = new Vector3(start.x, start.y, 0);
                 Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
 
                 startPos.position = transform.position + startVector;
