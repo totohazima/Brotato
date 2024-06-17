@@ -182,7 +182,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                 endPos.position = transform.position + startVector;
                 // 공격 시작 시 초기 회전 설정
                 //baseObj.localRotation = Quaternion.Euler(0, 0, -160);
-                yield return new WaitForSeconds(duration);
+                //yield return new WaitForSeconds(duration);
                 // 첫 번째 구간: startPos -> targetPos
                 while (elapsedTime < duration)
                 {
@@ -242,7 +242,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                     yield return null;
                 }
 
-                yield return new WaitForSeconds(0.01f);
+                //yield return new WaitForSeconds(0.01f);
                 elapsedTime = 0f;
 
                 while (elapsedTime < duration)
@@ -258,8 +258,8 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             }
 
             // 세 번째 구간: endPos -> transform.position
-            LeanTween.moveLocal(baseObj.gameObject, Vector3.zero, 0.02f).setEase(LeanTweenType.easeInOutQuad);
-            LeanTween.rotateLocal(baseObj.gameObject, Vector3.zero, 0.02f).setEase(LeanTweenType.easeInOutQuad);
+            LeanTween.moveLocal(baseObj.gameObject, Vector3.zero, 0.05f).setEase(LeanTweenType.easeInOutQuad);
+            LeanTween.rotateLocal(baseObj.gameObject, Vector3.zero, 0.05f).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(0.02f);
 
             coll.enabled = false;
