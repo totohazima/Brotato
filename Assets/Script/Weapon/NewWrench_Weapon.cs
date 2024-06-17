@@ -166,23 +166,33 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             ///적이 왼쪽에 있을 경우
             if (isLeft == true)
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 2);
-                Vector3 end = ConvertAngleToVector(angle - 90, dis / 2);
+                //Vector3 start = ConvertAngleToVector(angle + 90, dis / 2);
+                //Vector3 end = ConvertAngleToVector(angle - 90, dis / 2);
+                //Vector3 startVector = new Vector3(start.x, start.y, 0);
+                //Vector3 endVector = new Vector3(end.x, end.y, 0);
+
+                //Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
+                ////Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
+                //Vector3 controlVector_1 = new Vector3(start.x, start.y, 0);
+                //Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
+
+                //startPos.position = transform.position + endVector;
+                //controlPos1.position = transform.position + controlVector_2;
+                //controlPos2.position = transform.position + controlVector_1;
+                //endPos.position = transform.position + startVector;
+
+                Vector3 start = ConvertAngleToVector(angle + 99, dis / 2f);
+                Vector3 end = ConvertAngleToVector(angle - 82, dis / 1.8f);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
                 Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
                 //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
-                Vector3 controlVector_1 = new Vector3(start.x, start.y, 0);
+                Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
                 Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
 
                 startPos.position = transform.position + endVector;
-                controlPos1.position = transform.position + controlVector_2;
-                controlPos2.position = transform.position + controlVector_1;
                 endPos.position = transform.position + startVector;
-                // 공격 시작 시 초기 회전 설정
-                //baseObj.localRotation = Quaternion.Euler(0, 0, -160);
-                //yield return new WaitForSeconds(duration);
                 // 첫 번째 구간: startPos -> targetPos
                 while (elapsedTime < duration)
                 {
@@ -214,23 +224,33 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             ///적이 오른쪽에 있을 경우
             else
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 2);
-                Vector3 end = ConvertAngleToVector(angle - 90, dis / 2);
+                //Vector3 start = ConvertAngleToVector(angle + 90, dis / 2);
+                //Vector3 end = ConvertAngleToVector(angle - 90, dis / 2);
+                //Vector3 startVector = new Vector3(start.x, start.y, 0);
+                //Vector3 endVector = new Vector3(end.x, end.y, 0);
+
+                //Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
+                ////Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
+                //Vector3 controlVector_1 = new Vector3(start.x, start.y, 0);
+                //Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
+
+                //startPos.position = transform.position + startVector;
+                //controlPos1.position = transform.position + controlVector_1;
+                //controlPos2.position = transform.position + controlVector_2;
+                //endPos.position = transform.position + endVector;
+                Vector3 start = ConvertAngleToVector(angle + 82, dis / 1.55f);
+                Vector3 end = ConvertAngleToVector(angle - 99, dis / 1.8f);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
                 Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
                 //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
-                Vector3 controlVector_1 = new Vector3(start.x, start.y, 0);
+                Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
                 Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
 
                 startPos.position = transform.position + startVector;
-                controlPos1.position = transform.position + controlVector_1;
-                controlPos2.position = transform.position + controlVector_2;
                 endPos.position = transform.position + endVector;
-                // 공격 시작 시 초기 회전 설정
-                //baseObj.localRotation = Quaternion.Euler(0, 0, 160);
-                yield return new WaitForSeconds(duration);
+
                 while (elapsedTime < duration)
                 {
                     float t = elapsedTime / duration;

@@ -11,10 +11,9 @@ public class BezierMove : MonoBehaviour
     public Transform target;
     public Transform endPoint;
     public bool isLeft;
-    void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            StartCoroutine(WheelAttack());
+        StartCoroutine(WheelAttack());
     }
 
     private IEnumerator WheelAttack()
@@ -24,14 +23,14 @@ public class BezierMove : MonoBehaviour
         {
 
             Vector3 targetPos = target.position;
-            if (targetPos.x < transform.position.x)
-            {
-                isLeft = true;
-            }
-            else
-            {
-                isLeft = false;
-            }
+            //if (targetPos.x < transform.position.x)
+            //{
+            //    isLeft = true;
+            //}
+            //else
+            //{
+            //    isLeft = false;
+            //}
             float duration = 0;
             float elapsedTime = 0;
             float dis = Vector3.Distance(transform.position, targetPos);
@@ -42,8 +41,8 @@ public class BezierMove : MonoBehaviour
             ///적이 왼쪽에 있을 경우
             if (isLeft == true)
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 3);
-                Vector3 end = ConvertAngleToVector(angle - 90, dis / 1.5f);
+                Vector3 start = ConvertAngleToVector(angle + 99, dis / 2f);
+                Vector3 end = ConvertAngleToVector(angle - 82, dis / 1.8f);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
@@ -53,8 +52,8 @@ public class BezierMove : MonoBehaviour
                 Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
 
                 startPoint.position = transform.position + endVector;
-                controlPoint.position = transform.position + controlVector_2;
-                controlPoint2.position = transform.position + controlVector_1;
+                //controlPoint.position = transform.position + controlVector_2;
+                //controlPoint2.position = transform.position + controlVector_1;
                 endPoint.position = transform.position + startVector;
                 // 공격 시작 시 초기 회전 설정
                 //baseObj.localRotation = Quaternion.Euler(0, 0, -160);
@@ -90,8 +89,8 @@ public class BezierMove : MonoBehaviour
             ///적이 오른쪽에 있을 경우
             else
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 1.5f);
-                Vector3 end = ConvertAngleToVector(angle - 90, dis / 3);
+                Vector3 start = ConvertAngleToVector(angle + 82, dis / 1.55f);
+                Vector3 end = ConvertAngleToVector(angle - 99, dis / 1.8f);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
@@ -101,11 +100,11 @@ public class BezierMove : MonoBehaviour
                 Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
 
                 startPoint.position = transform.position + startVector;
-                controlPoint.position = transform.position + controlVector_1;
-                controlPoint2.position = transform.position + controlVector_2;
+                //controlPoint.position = transform.position + controlVector_1;
+                //controlPoint2.position = transform.position + controlVector_2;
                 endPoint.position = transform.position + endVector;
-                // 공격 시작 시 초기 회전 설정
-                //baseObj.localRotation = Quaternion.Euler(0, 0, 160);
+
+                //Vector3 targetVector = ConvertAngleToVector()
                 yield return new WaitForSeconds(duration);
                 while (elapsedTime < duration)
                 {
