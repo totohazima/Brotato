@@ -166,8 +166,8 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             ///적이 왼쪽에 있을 경우
             if (isLeft == true)
             {
-                Vector3 start = ConvertAngleToVector(angle + 90, dis / 3f);
-                Vector3 end = ConvertAngleToVector(angle - 90, dis);
+                Vector3 start = ConvertAngleToVector(angle + 90, dis / 4);
+                Vector3 end = ConvertAngleToVector(angle - 90, dis / 2);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
@@ -214,8 +214,8 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             ///적이 오른쪽에 있을 경우
             else
             {
-                Vector3 start = ConvertAngleToVector(angle + 60, dis / 3f);
-                Vector3 end = ConvertAngleToVector(angle - 90, dis);
+                Vector3 start = ConvertAngleToVector(angle + 90, dis / 2);
+                Vector3 end = ConvertAngleToVector(angle - 90, dis / 4);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
                 Vector3 endVector = new Vector3(end.x, end.y, 0);
 
