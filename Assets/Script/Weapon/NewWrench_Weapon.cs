@@ -157,7 +157,6 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             float elapsedTime = 0;
             float dis = Vector3.Distance(transform.position, targetPos);
             float angle = GetAngle(transform.position, targetPos);
-            float returnAngle = GetAngle(GameManager.instance.player_Info.weaponMainPos.position, targetPos);
 
             duration = 0.014f * dis;
             coll.enabled = true;
@@ -181,23 +180,20 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                 //controlPos2.position = transform.position + controlVector_1;
                 //endPos.position = transform.position + startVector;
 
-                Vector3 start = ConvertAngleToVector(angle + 99, dis / 2f);
-                Vector3 end = ConvertAngleToVector(angle - 82, dis / 1.8f);
+                Vector3 start = ConvertAngleToVector(160, dis * 1.5f);
+                Vector3 end = ConvertAngleToVector( -88f, dis / 1.3f);
+                //Vector3 end = GetPositionAtAngle(scanner.target, 90, dis / 2f);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
-                Vector3 endVector = new Vector3(end.x, end.y, 0);
+                Vector3 endVector = new Vector3(end.x, end.y, 0); ;
 
-                Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
-                //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
-                Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
-                Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
+                startPos.position = transform.position + startVector;
+                endPos.position = transform.position + endVector;
 
-                startPos.position = transform.position + endVector;
-                endPos.position = transform.position + startVector;
                 // 첫 번째 구간: startPos -> targetPos
                 while (elapsedTime < duration)
                 {
                     float t = elapsedTime / duration;
-                    Vector3 point = CalculateQuadraticBezierPoint(t, startPos.position, controlPos1.position, targetPos);
+                    Vector3 point = CalculateQuadraticBezierPoint(t, transform.position, controlPos1.position, startPos.position);
 
                     baseObj.position = point;
                     baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
@@ -205,21 +201,42 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
-                //휘두른 무기를 수거하기 직전
-                yield return new WaitForSeconds(0.01f);
+
                 elapsedTime = 0f;
 
                 // 두 번째 구간: targetPos -> endPos
                 while (elapsedTime < duration)
                 {
                     float t = elapsedTime / duration;
-                    Vector3 point = CalculateQuadraticBezierPoint(t, targetPos, controlPos2.position, endPos.position);
+                    Vector3 point = CalculateQuadraticBezierPoint(t, startPos.position, controlPos2.position, endPos.position);
 
                     baseObj.position = point;
                     baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 160), t);
+
                     elapsedTime += Time.deltaTime;
                     yield return null;
-                }    
+                }
+
+                // 세 번째 구간: endPos -> transform.position
+                yield return new WaitForSeconds(0.05f);
+                elapsedTime = 0f;
+                while (elapsedTime < duration)
+                {
+                    float t = elapsedTime / duration;
+                    Vector3 point = CalculateQuadraticBezierPoint(t, endPos.position, transform.position, transform.position);
+
+                    baseObj.position = point;
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
+
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+                isFire = false;
+                isLeft = false;
+                scanner.target = null;
+                dis = 0;
+                duration = 0;
+                elapsedTime = 0;
             }
             ///적이 오른쪽에 있을 경우
             else
@@ -238,15 +255,11 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                 //controlPos1.position = transform.position + controlVector_1;
                 //controlPos2.position = transform.position + controlVector_2;
                 //endPos.position = transform.position + endVector;
-                Vector3 start = ConvertAngleToVector(angle + 82, dis / 1.55f);
-                Vector3 end = ConvertAngleToVector(angle - 99, dis / 1.8f);
-                Vector3 startVector = new Vector3(start.x, start.y, 0);
-                Vector3 endVector = new Vector3(end.x, end.y, 0);
-
-                Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
-                //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
-                Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
-                Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
+                Vector3 start = ConvertAngleToVector(20f, dis * 1.5f);
+                Vector3 end = ConvertAngleToVector( -92, dis / 1.3f);
+                //Vector3 end = GetPositionAtAngle(scanner.target, 90, dis / 2f);
+                Vector3 startVector = start;
+                Vector3 endVector = end;
 
                 startPos.position = transform.position + startVector;
                 endPos.position = transform.position + endVector;
@@ -254,7 +267,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                 while (elapsedTime < duration)
                 {
                     float t = elapsedTime / duration;
-                    Vector3 point = CalculateQuadraticBezierPoint(t, startPos.position, controlPos1.position, targetPos);
+                    Vector3 point = CalculateQuadraticBezierPoint(t, transform.position, controlPos1.position, startPos.position);
 
                     baseObj.position = point;
                     baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
@@ -268,7 +281,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                 while (elapsedTime < duration)
                 {
                     float t = elapsedTime / duration;
-                    Vector3 point = CalculateQuadraticBezierPoint(t, targetPos, controlPos2.position, endPos.position);
+                    Vector3 point = CalculateQuadraticBezierPoint(t, startPos.position, controlPos2.position, endPos.position);
 
                     baseObj.position = point;
                     baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, -160), t);
@@ -278,9 +291,18 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             }
 
             // 세 번째 구간: endPos -> transform.position
-            LeanTween.moveLocal(baseObj.gameObject, Vector3.zero, 0.05f).setEase(LeanTweenType.easeInOutQuad);
-            LeanTween.rotateLocal(baseObj.gameObject, Vector3.zero, 0.05f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.05f);
+            elapsedTime = 0f;
+            while (elapsedTime < duration)
+            {
+                float t = elapsedTime / duration;
+                Vector3 point = CalculateQuadraticBezierPoint(t, endPos.position, transform.position, transform.position);
+
+                baseObj.position = point;
+                baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
 
             coll.enabled = false;
             isFire = false;

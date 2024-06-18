@@ -21,78 +21,30 @@ public class BezierMove : MonoBehaviour
 
         if (target != null)
         {
-
+            yield return new WaitForSeconds(1f);
             Vector3 targetPos = target.position;
-            //if (targetPos.x < transform.position.x)
-            //{
-            //    isLeft = true;
-            //}
-            //else
-            //{
-            //    isLeft = false;
-            //}
+            if (targetPos.x < transform.position.x)
+            {
+                isLeft = true;
+            }
+            else
+            {
+                isLeft = false;
+            }
             float duration = 0;
             float elapsedTime = 0;
             float dis = Vector3.Distance(transform.position, targetPos);
             float angle = GetAngle(transform.position, targetPos);
-
+            Debug.Log(dis);
             //duration = 0.014f * dis;
             duration = 1f;
             ///적이 왼쪽에 있을 경우
             if (isLeft == true)
             {
-                Vector3 start = ConvertAngleToVector(angle + 99, dis / 2f);
-                Vector3 end = ConvertAngleToVector(angle - 82, dis / 1.8f);
+                Vector3 start = ConvertAngleToVector(160, dis * 1.5f);
+                Vector3 end = GetPositionAtAngle(targetPos, -90, dis / 2f);
                 Vector3 startVector = new Vector3(start.x, start.y, 0);
-                Vector3 endVector = new Vector3(end.x, end.y, 0);
-
-                Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
-                //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
-                Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
-                Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
-
-                startPoint.position = transform.position + endVector;
-                //controlPoint.position = transform.position + controlVector_2;
-                //controlPoint2.position = transform.position + controlVector_1;
-                endPoint.position = transform.position + startVector;
-                // 공격 시작 시 초기 회전 설정
-                //baseObj.localRotation = Quaternion.Euler(0, 0, -160);
-                //yield return new WaitForSeconds(duration);
-                // 첫 번째 구간: startPos -> targetPos
-                while (elapsedTime < duration)
-                {
-                    float t = elapsedTime / duration;
-                    Vector3 point = CalculateQuadraticBezierPoint(t, startPoint.position, controlPoint.position, targetPos);
-
-                    transform.position = point;
-                    transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
-
-                    elapsedTime += Time.deltaTime;
-                    yield return null;
-                }
-                //휘두른 무기를 수거하기 직전
-                yield return new WaitForSeconds(0.01f);
-                elapsedTime = 0f;
-
-                // 두 번째 구간: targetPos -> endPos
-                while (elapsedTime < duration)
-                {
-                    float t = elapsedTime / duration;
-                    Vector3 point = CalculateQuadraticBezierPoint(t, targetPos, controlPoint2.position, endPoint.position);
-
-                    transform.position = point;
-                    transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 160), t);
-                    elapsedTime += Time.deltaTime;
-                    yield return null;
-                }
-            }
-            ///적이 오른쪽에 있을 경우
-            else
-            {
-                Vector3 start = ConvertAngleToVector(angle + 82, dis / 1.55f);
-                Vector3 end = ConvertAngleToVector(angle - 99, dis / 1.8f);
-                Vector3 startVector = new Vector3(start.x, start.y, 0);
-                Vector3 endVector = new Vector3(end.x, end.y, 0);
+                Vector3 endVector = new Vector3(end.x, end.y, 0); ;
 
                 Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
                 //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
@@ -103,13 +55,78 @@ public class BezierMove : MonoBehaviour
                 //controlPoint.position = transform.position + controlVector_1;
                 //controlPoint2.position = transform.position + controlVector_2;
                 endPoint.position = transform.position + endVector;
-
-                //Vector3 targetVector = ConvertAngleToVector()
-                yield return new WaitForSeconds(duration);
+                Debug.Log(GetAngle(targetPos, startPoint.position));
+                Debug.Log(GetAngle(targetPos, endPoint.position));
+                // 첫 번째 구간: startPos -> targetPos
                 while (elapsedTime < duration)
                 {
                     float t = elapsedTime / duration;
-                    Vector3 point = CalculateQuadraticBezierPoint(t, startPoint.position, controlPoint.position, targetPos);
+                    Vector3 point = CalculateQuadraticBezierPoint(t, transform.position, controlPoint.position, startPoint.position);
+
+                    transform.position = point;
+                    transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
+
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                elapsedTime = 0f;
+
+                // 두 번째 구간: targetPos -> endPos
+                while (elapsedTime < duration)
+                {
+                    float t = elapsedTime / duration;
+                    Vector3 point = CalculateQuadraticBezierPoint(t, startPoint.position, controlPoint2.position, endPoint.position);
+
+                    transform.position = point;
+                    transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 160), t);
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                // 세 번째 구간: endPos -> transform.position
+                yield return new WaitForSeconds(0.05f);
+                elapsedTime = 0f;
+                while (elapsedTime < duration / 3)
+                {
+                    float t = elapsedTime / (duration / 3);
+                    Vector3 point = CalculateQuadraticBezierPoint(t, endPoint.position, Vector3.zero, Vector3.zero);
+
+                    transform.position = point;
+                    transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                dis = 0;
+                duration = 0;
+                elapsedTime = 0;
+            }
+            ///적이 오른쪽에 있을 경우
+            else
+            {
+                //Vector3 start = ConvertAngleToVector(angle + -133, dis / 5f);
+                Vector3 start = ConvertAngleToVector(20f, dis * 1.5f);
+                Vector3 end = GetPositionAtAngle(targetPos,-90, dis / 2f);
+                Vector3 startVector = start;
+                Vector3 endVector = end;
+
+                Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
+                //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
+                Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
+                Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
+
+                Debug.Log(GetAngle(targetPos, startPoint.position));
+                Debug.Log(GetAngle(targetPos, endPoint.position));
+                startPoint.position = transform.position + startVector;
+                //controlPoint.position = transform.position + controlVector_1;
+                //controlPoint2.position = transform.position + controlVector_2;
+                endPoint.position = transform.position + endVector;
+
+                while (elapsedTime < duration)
+                {
+                    float t = elapsedTime / duration;
+                    Vector3 point = CalculateQuadraticBezierPoint(t, Vector3.zero, controlPoint.position, startPoint.position);
 
                     transform.position = point;
                     transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
@@ -123,7 +140,7 @@ public class BezierMove : MonoBehaviour
                 while (elapsedTime < duration)
                 {
                     float t = elapsedTime / duration;
-                    Vector3 point = CalculateQuadraticBezierPoint(t, targetPos, controlPoint2.position, endPoint.position);
+                    Vector3 point = CalculateQuadraticBezierPoint(t, startPoint.position, controlPoint2.position, endPoint.position);
 
                     transform.position = point;
                     transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, -160), t);
@@ -133,9 +150,18 @@ public class BezierMove : MonoBehaviour
             }
 
             // 세 번째 구간: endPos -> transform.position
-            LeanTween.moveLocal(transform.gameObject, Vector3.zero, 0.05f).setEase(LeanTweenType.easeInOutQuad);
-            LeanTween.rotateLocal(transform.gameObject, Vector3.zero, 0.05f).setEase(LeanTweenType.easeInOutQuad);
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.05f);
+            elapsedTime = 0f;
+            while (elapsedTime < duration / 3)
+            {
+                float t = elapsedTime / (duration / 3);
+                Vector3 point = CalculateQuadraticBezierPoint(t, endPoint.position, Vector3.zero, Vector3.zero);
+
+                transform.position = point;
+                transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
 
             dis = 0;
             duration = 0;
@@ -165,6 +191,17 @@ public class BezierMove : MonoBehaviour
     {
         var rad = _deg * Mathf.Deg2Rad;
         return new Vector3(Mathf.Cos(rad) * width, Mathf.Sin(rad) * width, 2);
+    }
+    public Vector3 GetPositionAtAngle(Vector2 start, float angle, float distance)
+    {
+        // 각도를 라디안으로 변환
+        float angleInRadians = angle * Mathf.Deg2Rad;
+
+        // 새로운 좌표 계산
+        float x = start.x + distance * Mathf.Cos(angleInRadians);
+        float y = start.y + distance * Mathf.Sin(angleInRadians);
+
+        return new Vector3(x, y, 0);
     }
 }
 

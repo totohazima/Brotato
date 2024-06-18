@@ -244,15 +244,46 @@ public class Weapon : MonoBehaviour
         weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
         weaponPrice = MathF.Round(weaponPrice);
     }
+
+
+    /// <summary>
+    /// 각도 구하기
+    /// </summary>
+    /// <param name="start">기준점</param>
+    /// <param name="end">각도를 구할 좌표</param>
+    /// <returns></returns>
     public float GetAngle(Vector2 start, Vector2 end)//각도구하기
     {
         Vector2 vectorPos = end - start;
         return Mathf.Atan2(vectorPos.y, vectorPos.x) * Mathf.Rad2Deg;
     }
-
-    public Vector3 ConvertAngleToVector(float _deg, float width)//각도로 좌표 구하기
+    /// <summary>
+    /// 각도로 좌표구하기(구식)
+    /// </summary>
+    /// <param name="_deg">각도</param>
+    /// <param name="width">좌표와의 거리</param>
+    /// <returns></returns>
+    public Vector3 ConvertAngleToVector(float _deg, float width)
     {
         var rad = _deg * Mathf.Deg2Rad;
         return new Vector3(Mathf.Cos(rad) * width, Mathf.Sin(rad) * width, 2);
+    }
+    /// <summary>
+    ///  특정 좌표에서 특정 각도의 좌표값 구하기
+    /// </summary>
+    /// <param name="origin">특정 좌표</param>
+    /// <param name="angle">각도</param>
+    /// <param name="distance">좌표와의 거리</param>
+    /// <returns></returns>
+    public Vector3 GetPositionAtAngle(Transform origin, float angle, float distance)
+    {
+        // 각도를 라디안으로 변환
+        var angleInRadians = angle * Mathf.Deg2Rad;
+
+        // 새로운 좌표 계산
+        float x = origin.position.x + distance * Mathf.Cos(angleInRadians);
+        float y = origin.position.y + distance * Mathf.Sin(angleInRadians);
+
+        return new Vector3(x, y, origin.position.z);
     }
 }
