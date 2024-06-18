@@ -190,10 +190,10 @@ public class NewTorch_Weapon : Weapon_Action, ICustomUpdateMono
                 //controlPos1.position = transform.position + controlVector_2;
                 //controlPos2.position = transform.position + controlVector_1;
                 //endPos.position = transform.position + startVector;
-                Vector3 start = ConvertAngleToVector(160, dis * 1.5f);
-                Vector3 end = ConvertAngleToVector(-88f, dis / 1.3f);
-                Vector3 startVector = new Vector3(start.x, start.y, 0);
-                Vector3 endVector = new Vector3(end.x, end.y, 0); ;
+                Vector3 start = GetPositionAtAngle(targetPos, 134, dis / 2f);
+                Vector3 end = GetPositionAtAngle(targetPos, -90f, dis / 1.5f);
+                Vector3 startVector = start;
+                Vector3 endVector = end;
 
                 startPos.position = transform.position + startVector;
                 endPos.position = transform.position + endVector;
@@ -264,8 +264,8 @@ public class NewTorch_Weapon : Weapon_Action, ICustomUpdateMono
                 //controlPos1.position = transform.position + controlVector_1;
                 //controlPos2.position = transform.position + controlVector_2;
                 //endPos.position = transform.position + endVector;
-                Vector3 start = ConvertAngleToVector(20f, dis * 1.5f);
-                Vector3 end = ConvertAngleToVector(-92, dis / 1.3f);
+                Vector3 start = GetPositionAtAngle(targetPos, 46.5f, dis / 2f);
+                Vector3 end = GetPositionAtAngle(targetPos, -90, dis / 1.5f);
                 Vector3 startVector = start;
                 Vector3 endVector = end;
 

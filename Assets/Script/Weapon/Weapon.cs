@@ -275,15 +275,17 @@ public class Weapon : MonoBehaviour
     /// <param name="angle">각도</param>
     /// <param name="distance">좌표와의 거리</param>
     /// <returns></returns>
-    public Vector3 GetPositionAtAngle(Transform origin, float angle, float distance)
+    public Vector3 GetPositionAtAngle(Vector3 origin, float angle, float distance)
     {
         // 각도를 라디안으로 변환
         var angleInRadians = angle * Mathf.Deg2Rad;
 
         // 새로운 좌표 계산
-        float x = origin.position.x + distance * Mathf.Cos(angleInRadians);
-        float y = origin.position.y + distance * Mathf.Sin(angleInRadians);
+        float x = origin.x + distance * Mathf.Cos(angleInRadians);
+        float y = origin.y + distance * Mathf.Sin(angleInRadians);
 
-        return new Vector3(x, y, origin.position.z);
+        x = x - transform.position.x;
+        y = y - transform.position.y;
+        return new Vector3(x, y, origin.z);
     }
 }

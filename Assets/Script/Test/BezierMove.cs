@@ -10,6 +10,7 @@ public class BezierMove : MonoBehaviour
     public Transform controlPoint2;
     public Transform target;
     public Transform endPoint;
+    public Transform baseObj;
     public bool isLeft;
     private void Start()
     {
@@ -41,10 +42,10 @@ public class BezierMove : MonoBehaviour
             ///적이 왼쪽에 있을 경우
             if (isLeft == true)
             {
-                Vector3 start = ConvertAngleToVector(160, dis * 1.5f);
-                Vector3 end = GetPositionAtAngle(targetPos, -90, dis / 2f);
-                Vector3 startVector = new Vector3(start.x, start.y, 0);
-                Vector3 endVector = new Vector3(end.x, end.y, 0); ;
+                Vector3 start = GetPositionAtAngle(targetPos, 134, dis / 2f);
+                Vector3 end = GetPositionAtAngle(targetPos, -90f, dis / 2f);
+                Vector3 startVector = start;
+                Vector3 endVector = end;
 
                 Vector3 con1Pos = ConvertAngleToVector(angle + 45, dis);
                 //Vector3 con2Pos = ConvertAngleToVector(returnAngle - 45, dis);
@@ -63,8 +64,8 @@ public class BezierMove : MonoBehaviour
                     float t = elapsedTime / duration;
                     Vector3 point = CalculateQuadraticBezierPoint(t, transform.position, controlPoint.position, startPoint.position);
 
-                    transform.position = point;
-                    transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
+                    baseObj.position = point;
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
 
                     elapsedTime += Time.deltaTime;
                     yield return null;
@@ -78,8 +79,8 @@ public class BezierMove : MonoBehaviour
                     float t = elapsedTime / duration;
                     Vector3 point = CalculateQuadraticBezierPoint(t, startPoint.position, controlPoint2.position, endPoint.position);
 
-                    transform.position = point;
-                    transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 160), t);
+                    baseObj.position = point;
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 160), t);
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
@@ -90,10 +91,10 @@ public class BezierMove : MonoBehaviour
                 while (elapsedTime < duration / 3)
                 {
                     float t = elapsedTime / (duration / 3);
-                    Vector3 point = CalculateQuadraticBezierPoint(t, endPoint.position, Vector3.zero, Vector3.zero);
+                    Vector3 point = CalculateQuadraticBezierPoint(t, endPoint.position, transform.position, transform.position);
 
-                    transform.position = point;
-                    transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
+                    baseObj.position = point;
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
@@ -106,8 +107,8 @@ public class BezierMove : MonoBehaviour
             else
             {
                 //Vector3 start = ConvertAngleToVector(angle + -133, dis / 5f);
-                Vector3 start = ConvertAngleToVector(20f, dis * 1.5f);
-                Vector3 end = GetPositionAtAngle(targetPos,-90, dis / 2f);
+                Vector3 start = GetPositionAtAngle(targetPos, 46.5f, dis / 2f);
+                Vector3 end = GetPositionAtAngle(targetPos, -90, dis / 2f);
                 Vector3 startVector = start;
                 Vector3 endVector = end;
 
@@ -116,8 +117,6 @@ public class BezierMove : MonoBehaviour
                 Vector3 controlVector_1 = new Vector3(con1Pos.x, start.y, 0);
                 Vector3 controlVector_2 = new Vector3(end.x, end.y, 0);
 
-                Debug.Log(GetAngle(targetPos, startPoint.position));
-                Debug.Log(GetAngle(targetPos, endPoint.position));
                 startPoint.position = transform.position + startVector;
                 //controlPoint.position = transform.position + controlVector_1;
                 //controlPoint2.position = transform.position + controlVector_2;
@@ -128,8 +127,8 @@ public class BezierMove : MonoBehaviour
                     float t = elapsedTime / duration;
                     Vector3 point = CalculateQuadraticBezierPoint(t, Vector3.zero, controlPoint.position, startPoint.position);
 
-                    transform.position = point;
-                    transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
+                    baseObj.position = point;
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
@@ -142,8 +141,8 @@ public class BezierMove : MonoBehaviour
                     float t = elapsedTime / duration;
                     Vector3 point = CalculateQuadraticBezierPoint(t, startPoint.position, controlPoint2.position, endPoint.position);
 
-                    transform.position = point;
-                    transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, -160), t);
+                    baseObj.position = point;
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, -160), t);
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
@@ -155,10 +154,10 @@ public class BezierMove : MonoBehaviour
             while (elapsedTime < duration / 3)
             {
                 float t = elapsedTime / (duration / 3);
-                Vector3 point = CalculateQuadraticBezierPoint(t, endPoint.position, Vector3.zero, Vector3.zero);
+                Vector3 point = CalculateQuadraticBezierPoint(t, endPoint.position, transform.position, transform.position);
 
-                transform.position = point;
-                transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
+                baseObj.position = point;
+                baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
@@ -201,6 +200,8 @@ public class BezierMove : MonoBehaviour
         float x = start.x + distance * Mathf.Cos(angleInRadians);
         float y = start.y + distance * Mathf.Sin(angleInRadians);
 
+        x = x - transform.position.x;
+        y = y - transform.position.y;
         return new Vector3(x, y, 0);
     }
 }
