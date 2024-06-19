@@ -5,19 +5,25 @@ using UnityEngine;
 public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
 {
     private float timer;
+    private float targetLockTimer; // 타겟을 유지하는 시간 타이머
     private WeaponScanner scanner;
     [SerializeField] private Transform muzzle;
     [SerializeField] private Transform imageGroup;
+    [SerializeField] private float targetLockTime = 0.5f; // 타겟 유지 시간
+    [SerializeField] private Transform currentTarget;
+    [SerializeField] private bool isAttacking;
 
     void Awake()
     {
         scanner = GetComponent<WeaponScanner>();
     }
+
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
         ResetStat();
     }
+
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
@@ -29,70 +35,107 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
         AfterStatSetting();
         scanner.radius = realRange;
         StartCoroutine(MuzzleMove());
-        for (int i = 0; i < tierOutline.Length; i++)
+        UpdateTierOutline();
+
+        timer += Time.deltaTime;
+        targetLockTimer += Time.deltaTime;
+
+        //타겟이 죽었을 경우 타겟 제거
+        if (currentTarget != null)
         {
-            if (i == weaponTier)
+            if (currentTarget.parent.gameObject.activeSelf == false)
             {
-                tierOutline[i].gameObject.SetActive(true);
+                currentTarget = null;
+                targetLockTimer = 0;
             }
-            else
+        }
+        // 타겟 재설정
+        if (targetLockTimer >= targetLockTime && scanner.detectedTargets != null && scanner.detectedTargets.Count > 0)
+        {
+            if (currentTarget == null || !scanner.detectedTargets.Contains(currentTarget))
             {
-                tierOutline[i].gameObject.SetActive(false);
+                currentTarget = GetClosestTarget(scanner.detectedTargets);
+                targetLockTimer = 0; // 타겟을 변경했으므로 타이머 초기화
             }
         }
 
-        timer += Time.deltaTime;
-        //군인: 이동 중 공격 불가
+        // 군인 캐릭터의 경우 이동 중에는 공격 불가능
         if (GameManager.instance.character == Player.Character.SOLDIER)
         {
-            if (GameManager.instance.player_Info.isStand == true && scanner.currentTarget != null)
+            if (GameManager.instance.player_Info.isStand && currentTarget != null && IsInAttackRange(currentTarget))
             {
-                if (timer >= afterCoolTime)
-                {
-                    StartCoroutine(Fire());
-                    timer = 0;
-                }
+                TryFire();
             }
         }
         else
         {
-            if (scanner.currentTarget != null)
+            if (currentTarget != null && IsInAttackRange(currentTarget))
             {
-                if (timer >= afterCoolTime)
-                {
-                    StartCoroutine(Fire());
-                    timer = 0;
-                }
+                TryFire();
             }
         }
     }
 
-    public void ResetStat()
+    void TryFire()
+    {
+        if (timer >= afterCoolTime)
+        {
+            StartCoroutine(Fire());
+            timer = 0;
+        }
+    }
+
+    Transform GetClosestTarget(List<Transform> targets)
+    {
+        Transform closestTarget = null;
+        float closestDistance = float.MaxValue;
+        Vector3 currentPosition = transform.position;
+
+        foreach (Transform target in targets)
+        {
+            if (IsInAttackRange(target))
+            {
+                float distance = Vector3.Distance(currentPosition, target.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestTarget = target;
+                }
+            }
+        }
+
+        return closestTarget;
+    }
+
+    bool IsInAttackRange(Transform target)
+    {
+        float distance = Vector3.Distance(transform.position, target.position);
+        return distance <= realRange;
+    }
+
+    void ResetStat()
     {
         StatSetting((int)index, weaponTier);
     }
-    private IEnumerator MuzzleMove()
+
+    IEnumerator MuzzleMove()
     {
-        if (scanner.currentTarget == null)
+        if (currentTarget == null)
         {
-            if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft == true)
+            if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft)
             {
+                LeanTween.rotate(gameObject, new Vector3(0, 0, 180), 0.1f).setEase(LeanTweenType.easeInOutQuad);
                 WeaponSpinning(true);
-                LeanTween.rotate(gameObject, new Vector3(0, 0, 180), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
             else
             {
+                LeanTween.rotate(gameObject, new Vector3(0, 0, 0), 0.1f).setEase(LeanTweenType.easeInOutQuad);
                 WeaponSpinning(false);
-                LeanTween.rotate(gameObject, new Vector3(0, 0, 0), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
-            //Vector3 target = Vector3.zero;
-            //Vector3 dir = target - transform.position;
-            //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            //LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
         }
         else
         {
-            Vector3 target = scanner.currentTarget.position;
+            Vector3 target = currentTarget.position;
             if (target.x < transform.position.x)
             {
                 WeaponSpinning(true);
@@ -105,46 +148,66 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
         }
-        yield return 0;
+
+        yield return null;
     }
-    private IEnumerator Fire()
+
+    IEnumerator Fire()
     {
-        if (scanner.currentTarget != null)
+        if (currentTarget != null)
         {
+            isAttacking = true;
+
             Vector3 targetPos = scanner.currentTarget.position;
             StartCoroutine(MuzzleMove());
+            if (targetPos.x < transform.position.x)
+            {
+                WeaponSpinning(true);
+            }
+            else
+            {
+                WeaponSpinning(false);
+            }
+            Vector3 dir = (targetPos - transform.position).normalized;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(0.1f);
+
             for (int i = 0; i < bulletCount; i++)
             {
                 float x = Random.Range(-7f, 7f);
                 targetPos.x += x;
 
-                Vector3 dir = targetPos - transform.position;
-                dir = dir.normalized;
+                Vector3 dirs = targetPos - transform.position;
+                dirs = dirs.normalized;
 
                 Transform bullet = PoolManager.instance.Get(9).transform;
                 bullet.position = muzzle.position;
-                bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
-                bullet.GetComponent<Bullet>().Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dir * 200);
+                bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dirs);
+                bullet.GetComponent<Bullet>().Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dirs * 200);
             }
+
+
+            //yield return new WaitForSeconds(0.1f);
+
+            isAttacking = false;
+        }
+    }
+
+    void UpdateTierOutline()
+    {
+        for (int i = 0; i < tierOutline.Length; i++)
+        {
+            tierOutline[i].gameObject.SetActive(i == weaponTier);
         }
     }
 
     public override void WeaponSpinning(bool isLeft)
     {
-        if (isLeft == true)
+        for (int i = 0; i < tierOutline.Length; i++)
         {
-            for (int i = 0; i < tierOutline.Length; i++)
-            {
-                tierOutline[i].flipY = true;
-            }
-        }
-        else
-        {
-            for (int i = 0; i < tierOutline.Length; i++)
-            {
-                tierOutline[i].flipY = false;
-            }
+            tierOutline[i].flipY = isLeft;
         }
     }
 }
+

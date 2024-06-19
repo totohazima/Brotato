@@ -154,33 +154,36 @@ public class Pistol_Weapon : Weapon_Action, ICustomUpdateMono
 
     IEnumerator Fire()
     {
-        isAttacking = true;
-
-        Vector3 targetPos = currentTarget.position;
-        StartCoroutine(MuzzleMove());
-        if (targetPos.x < transform.position.x)
+        if (currentTarget != null)
         {
-            WeaponSpinning(true);
+            isAttacking = true;
+
+            Vector3 targetPos = currentTarget.position;
+            StartCoroutine(MuzzleMove());
+            if (targetPos.x < transform.position.x)
+            {
+                WeaponSpinning(true);
+            }
+            else
+            {
+                WeaponSpinning(false);
+            }
+            Vector3 dir = (targetPos - transform.position).normalized;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.1f);
+
+            Transform bullet = PoolManager.instance.Get(9).transform;
+            bullet.position = muzzle.position;
+            bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
+
+            Bullet bulletInit = bullet.GetComponent<Bullet>();
+            bulletInit.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dir * 200);
+
+            //yield return new WaitForSeconds(0.1f);
+
+            isAttacking = false;
         }
-        else
-        {
-            WeaponSpinning(false);
-        }
-        Vector3 dir = (targetPos - transform.position).normalized;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
-        yield return new WaitForSeconds(0.1f);
-
-        Transform bullet = PoolManager.instance.Get(9).transform;
-        bullet.position = muzzle.position;
-        bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
-
-        Bullet bulletInit = bullet.GetComponent<Bullet>();
-        bulletInit.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dir * 200);
-
-        yield return new WaitForSeconds(0.1f);
-
-        isAttacking = false;
     }
 
     void UpdateTierOutline()
