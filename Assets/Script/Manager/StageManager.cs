@@ -241,7 +241,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
         maxHp = playerInfo.maxHealth;
         hpBarUI.maxValue = maxHp;
         hpBarUI.value = GameManager.instance.playerInfo.playerHealth;
-        hpNum.text = GameManager.instance.playerInfo.playerHealth.ToString("F0") + " / " + maxHp.ToString("F0");
+        hpNum.text = Mathf.Ceil(GameManager.instance.playerInfo.playerHealth).ToString("F0") + " / " + maxHp.ToString("F0");
 
         moneyUI.text = GameManager.instance.playerInfo.money.ToString("F0");
         interestNum.text = GameManager.instance.playerInfo.interest.ToString("F0");
