@@ -1,89 +1,3 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-
-//public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
-//{
-//    public float radius; // 적 탐지 거리
-//    public Transform target; // 실질적 공격 타겟
-//    private Collider[] colliders;
-//    private float timeInterval = 0.2f;
-//    private float timer = 0;
-
-//    void OnEnable()
-//    {
-//        CustomUpdateManager.customUpdates.Add(this);
-//    }
-
-//    void OnDisable()
-//    {
-//        CustomUpdateManager.customUpdates.Remove(this);
-//        if (target != null)
-//        {
-//            StageManager.instance.trackedTargets.Remove(target);
-//        }
-//    }
-
-//    public void CustomUpdate()
-//    {
-//        timer += Time.deltaTime;
-//        if (timer >= timeInterval)
-//        {
-//            Scan();
-//            timer = 0;
-//        }
-//    }
-
-//    private void Scan()
-//    {
-//        if (target != null && (!target.gameObject.activeSelf || IsTargetAlreadyTracked(target)))
-//        {
-//            StageManager.instance.trackedTargets.Remove(target);
-//            target = null;
-//        }
-
-//        colliders = Physics.OverlapSphere(transform.position, radius, 1 << 6);
-
-//        float shortestDistance = Mathf.Infinity;
-//        Transform nearestTarget = null;
-
-//        foreach (Collider col in colliders)
-//        {
-//            if (col == null || !col.gameObject.activeSelf || IsTargetAlreadyTracked(col.transform))
-//            {
-//                continue;
-//            }
-
-//            float dis = Vector3.Distance(transform.position, col.transform.position);
-//            if (dis < shortestDistance)
-//            {
-//                shortestDistance = dis;
-//                nearestTarget = col.transform;
-//            }
-//        }
-
-//        if (nearestTarget != null && !IsTargetAlreadyTracked(nearestTarget))
-//        {
-//            target = nearestTarget;
-//            StageManager.instance.trackedTargets.Add(target);
-//        }
-//        else if (nearestTarget == null)
-//        {
-//            target = null;
-//        }
-//    }
-
-//    private bool IsTargetAlreadyTracked(Transform targetToCheck)
-//    {
-//        foreach (Transform trackedTarget in StageManager.instance.trackedTargets)
-//        {
-//            if (trackedTarget == targetToCheck)
-//            {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -92,7 +6,7 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
 {
     public Transform currentTarget;
     public float radius; // 적 탐지 거리
-    private List<Transform> detectedTargets = new List<Transform>(); // 감지된 타겟들의 목록
+    public List<Transform> detectedTargets = new List<Transform>(); // 감지된 타겟들의 목록
     private float timeInterval = 0.2f;
     private float timer = 0;
 
@@ -214,8 +128,4 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
     }
 #endif
 }
-
-
-
-
 

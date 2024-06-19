@@ -112,7 +112,7 @@ public class PlayerInfo : ScriptableObject
     /// <param name="damage">적이 나한테 입힌 대미지</param>
     public void HitCalculate(float damage)
     {
-        float damages = Mathf.Round(damage);
+        float damages = damage;
         float hit, dodge;
         if (GameManager.instance.player_Info.evasion >= 60)
         {
@@ -134,7 +134,6 @@ public class PlayerInfo : ScriptableObject
                 float enduce = 1 / (1 + (GameManager.instance.player_Info.armor / 15));
                 enduce = 1 - enduce;
                 damages -= damages * enduce;
-                GameManager.instance.playerInfo.playerHealth -= damages;
             }
             //방어력이 0 미만
             else if (GameManager.instance.player_Info.armor < 0)
@@ -143,12 +142,11 @@ public class PlayerInfo : ScriptableObject
                 float enduce = 1 / (1 + (armor / 15));
                 enduce = 1 + (1 - enduce);
                 damages = (damages * enduce);
-                GameManager.instance.playerInfo.playerHealth -= damages;
             }
-            else
-            {
-                GameManager.instance.playerInfo.playerHealth -= damages;
-            }
+
+            damages = MathF.Round(damages);
+            GameManager.instance.playerInfo.playerHealth -= damages;
+            
         }
         else
         {

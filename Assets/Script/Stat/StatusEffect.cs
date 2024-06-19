@@ -112,6 +112,9 @@ public class StatusEffect : MonoBehaviour, ICustomUpdateMono
             if (effecter.whiteFlash != null)
                 effecter.whiteFlash.PlayFlash();
 
+            GameObject hitEffect = PoolManager.instance.Get(14);
+            hitEffect.transform.position = transform.position;
+
             string txt = burnDamage.ToString("F0");
             Transform text = DamageTextManager.instance.TextCreate(0, txt).transform;
             text.position = effecter.textPopUpPos.position;

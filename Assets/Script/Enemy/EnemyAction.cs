@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Stat;
 public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
 {
     public Animator anim;
@@ -153,8 +154,10 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
 
         if (whiteFlash != null)
             whiteFlash.PlayFlash();
-        
 
+        GameObject hitEffect = PoolManager.instance.Get(14);
+        hitEffect.transform.position = transform.position;
+        
         if (isDontPush == false)
             StartCoroutine(KnockBack(stage.playerInfo.transform.position, knockBack * 3));
         
