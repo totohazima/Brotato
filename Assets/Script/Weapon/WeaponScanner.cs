@@ -1,24 +1,112 @@
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+
+//public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
+//{
+//    public float radius; // 적 탐지 거리
+//    public Transform target; // 실질적 공격 타겟
+//    private Collider[] colliders;
+//    private float timeInterval = 0.2f;
+//    private float timer = 0;
+
+//    void OnEnable()
+//    {
+//        CustomUpdateManager.customUpdates.Add(this);
+//    }
+
+//    void OnDisable()
+//    {
+//        CustomUpdateManager.customUpdates.Remove(this);
+//        if (target != null)
+//        {
+//            StageManager.instance.trackedTargets.Remove(target);
+//        }
+//    }
+
+//    public void CustomUpdate()
+//    {
+//        timer += Time.deltaTime;
+//        if (timer >= timeInterval)
+//        {
+//            Scan();
+//            timer = 0;
+//        }
+//    }
+
+//    private void Scan()
+//    {
+//        if (target != null && (!target.gameObject.activeSelf || IsTargetAlreadyTracked(target)))
+//        {
+//            StageManager.instance.trackedTargets.Remove(target);
+//            target = null;
+//        }
+
+//        colliders = Physics.OverlapSphere(transform.position, radius, 1 << 6);
+
+//        float shortestDistance = Mathf.Infinity;
+//        Transform nearestTarget = null;
+
+//        foreach (Collider col in colliders)
+//        {
+//            if (col == null || !col.gameObject.activeSelf || IsTargetAlreadyTracked(col.transform))
+//            {
+//                continue;
+//            }
+
+//            float dis = Vector3.Distance(transform.position, col.transform.position);
+//            if (dis < shortestDistance)
+//            {
+//                shortestDistance = dis;
+//                nearestTarget = col.transform;
+//            }
+//        }
+
+//        if (nearestTarget != null && !IsTargetAlreadyTracked(nearestTarget))
+//        {
+//            target = nearestTarget;
+//            StageManager.instance.trackedTargets.Add(target);
+//        }
+//        else if (nearestTarget == null)
+//        {
+//            target = null;
+//        }
+//    }
+
+//    private bool IsTargetAlreadyTracked(Transform targetToCheck)
+//    {
+//        foreach (Transform trackedTarget in StageManager.instance.trackedTargets)
+//        {
+//            if (trackedTarget == targetToCheck)
+//            {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
 {
+    public Transform currentTarget;
     public float radius; // 적 탐지 거리
-    public Transform target; //실질적 공격 타겟
-    float shortDis;
-    private Collider[] colliders;
-    float timeInterval = 0.2f;
-    float timer = 0;
+    private List<Transform> detectedTargets = new List<Transform>(); // 감지된 타겟들의 목록
+    private float timeInterval = 0.2f;
+    private float timer = 0;
 
     void OnEnable()
     {
         CustomUpdateManager.customUpdates.Add(this);
     }
+
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
+        ClearTargets();
     }
+
     public void CustomUpdate()
     {
         timer += Time.deltaTime;
@@ -28,45 +116,75 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
             timer = 0;
         }
     }
+
     private void Scan()
     {
-        colliders = Physics.OverlapSphere(transform.position, radius, 1 << 6);
+        // 현재 타겟이 있고, 활성화 상태가 아니거나 이미 추적 중인 경우 제거
+        if (currentTarget != null && (!currentTarget.gameObject.activeSelf || !detectedTargets.Contains(currentTarget)))
+        {
+            RemoveTarget(currentTarget);
+        }
 
-        // 가장 가까운 적을 찾기 위한 변수들
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, 1 << 6);
+
+        // 가장 가까운 타겟 찾기
         float shortestDistance = Mathf.Infinity;
         Transform nearestTarget = null;
 
         foreach (Collider col in colliders)
         {
-            // 적이 죽었을 때 Collider가 사라지면 해당 적은 무시
             if (col == null || !col.gameObject.activeSelf)
             {
                 continue;
             }
 
-            float dis = Vector3.Distance(transform.position, col.transform.position);
-            if (dis < shortestDistance)
+            Transform targetTransform = col.transform;
+            float dis = Vector3.Distance(transform.position, targetTransform.position);
+
+            // 이미 추적 중인 타겟이 아니고, 가장 가까운 타겟일 경우
+            if (dis < shortestDistance && !detectedTargets.Contains(targetTransform))
             {
                 shortestDistance = dis;
-                nearestTarget = col.transform;
+                nearestTarget = targetTransform;
             }
         }
 
-        // 가장 가까운 적이 있는 경우 타겟 설정
+        // 가장 가까운 타겟을 현재 타겟으로 설정
         if (nearestTarget != null)
         {
-            target = nearestTarget;
+            SetTarget(nearestTarget);
         }
         else
         {
-            // 탐지된 적이 없는 경우 타겟 초기화
-            target = null;
+            ClearTargets();
         }
     }
 
-    /// <summary>
-    /// 범위 확인 용 기즈모
-    /// </summary>
+    private void SetTarget(Transform newTarget)
+    {
+        ClearTargets();
+        currentTarget = newTarget;
+        detectedTargets.Add(currentTarget);
+        StageManager.instance.trackedTargets.Add(currentTarget);
+    }
+
+    private void RemoveTarget(Transform targetToRemove)
+    {
+        detectedTargets.Remove(targetToRemove);
+        StageManager.instance.trackedTargets.Remove(targetToRemove);
+        currentTarget = null;
+    }
+
+    private void ClearTargets()
+    {
+        foreach (Transform targetToRemove in detectedTargets)
+        {
+            StageManager.instance.trackedTargets.Remove(targetToRemove);
+        }
+        detectedTargets.Clear();
+        currentTarget = null;
+    }
+
 #if UNITY_EDITOR
     int segments = 100;
     Color gizmoColor = Color.green;
@@ -80,6 +198,7 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
             DrawHollowCircle(transform.position, radius, segments);
         }
     }
+
     void DrawHollowCircle(Vector3 center, float radius, int segments)
     {
         float angle = 0f;
@@ -95,3 +214,8 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
     }
 #endif
 }
+
+
+
+
+

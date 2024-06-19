@@ -46,7 +46,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
         //군인: 이동 중 공격 불가
         if (GameManager.instance.character == Player.Character.SOLDIER)
         {
-            if (GameManager.instance.player_Info.isStand == true && scanner.target != null)
+            if (GameManager.instance.player_Info.isStand == true && scanner.currentTarget != null)
             {
                 if (timer >= afterCoolTime)
                 {
@@ -57,7 +57,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
         }
         else
         {
-            if (scanner.target != null)
+            if (scanner.currentTarget != null)
             {
                 if (timer >= afterCoolTime)
                 {
@@ -89,7 +89,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
     }
     private IEnumerator MuzzleMove()
     {
-        if (scanner.target == null)
+        if (scanner.currentTarget == null)
         {
             if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft == true)
             {
@@ -108,7 +108,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
         }
         else
         {
-            Vector3 target = scanner.target.position;
+            Vector3 target = scanner.currentTarget.position;
             if (target.x < transform.position.x)
             {
                 WeaponSpinning(true);
@@ -125,7 +125,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
     }
     private IEnumerator Fire()
     {
-        Vector3 targetPos = scanner.target.position;
+        Vector3 targetPos = scanner.currentTarget.position;
         StartCoroutine(MuzzleMove());
         yield return new WaitForSeconds(0.1f);
 
@@ -136,7 +136,7 @@ public class Shredder_Weapon : Weapon_Action, ICustomUpdateMono
         bullet.position = muzzle.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
         bullet.GetComponent<Shredder_Bullet>().Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dir * 200, boomChance);
-        scanner.target = null;
+        scanner.currentTarget = null;
     }
 
     public override void WeaponSpinning(bool isLeft)

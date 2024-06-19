@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDie: 0
   doNotSpawnRange: 15
-  maxHealth: 10
-  playerHealth: 13
+  maxHealth: 15
+  playerHealth: 21
   regeneration: 0
   bloodSucking: 0
   persentDamage: 0
@@ -24,14 +24,14 @@ MonoBehaviour:
   elementalDamage: 0
   attackSpeed: 0
   criticalChance: 0
-  engine: 10
+  engine: 0
   range: 0
   armor: 0
   evasion: 0
   accuracy: 0
   lucky: 0
-  harvest: 0
-  speed: 0
+  harvest: 8
+  speed: 5
   consumableHeal: 0
   meterialHeal: 0
   expGain: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   enemyAmount: 0
   enemySpeed: 0
   instantMagnet: 0
-  characterItemTags: 0a000000
+  characterItemTags: 00000000
   maxHealth_Upgrade: 0
   playerHealth_Upgrade: 0
   regeneration_Upgrade: 0
@@ -73,25 +73,25 @@ MonoBehaviour:
   playerLevel: 0
   levelUpChance: 0
   lootChance: 0
-  curExp: 24
-  maxExp: 50
+  curExp: 0
+  maxExp: 0
   overExp: 0
-  money: 11110883
-  interest: 7
-  engineerBuildingPos: {x: -13.758432, y: -6.4839}
+  money: 0
+  interest: 0
+  engineerBuildingPos: {x: -10.672462, y: -3.445774}
   unArmed_Set: 0
-  tool_Set: 6
+  tool_Set: 0
   gun_Set: 0
   explosive_Set: 0
   precision_Set: 0
-  native_Set: 0
-  elemental_Set: 0
+  native_Set: 3
+  elemental_Set: 3
   itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
   invenItem: {fileID: 4012523125829970869, guid: 05d210546179917498008d12b3719e05, type: 3}
   isUglyTooth: 0
   isLumberJack: 0
   isWeirdGhost: 0
-  minesCount: 1
+  minesCount: 0
   turretCount: 0
   snakeCount: 0
   isScaredSausage: 0

@@ -55,7 +55,7 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
         //군인: 이동 중 공격 불가
         if (GameManager.instance.character == Player.Character.SOLDIER)
         {
-            if (GameManager.instance.player_Info.isStand == true && scanner.target != null)
+            if (GameManager.instance.player_Info.isStand == true && scanner.currentTarget != null)
             {
                 if (timer >= afterCoolTime)
                 {
@@ -69,7 +69,7 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
         }
         else
         {
-            if (scanner.target != null)
+            if (scanner.currentTarget != null)
             {
                 if (timer >= afterCoolTime)
                 {
@@ -89,7 +89,7 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
     }
     private IEnumerator MuzzleMove() //근접 무기는 공격이 끝나기 전까지 회전하면 안됨
     {
-        if (scanner.target == null)
+        if (scanner.currentTarget == null)
         {
             if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft == true)
             {
@@ -108,7 +108,7 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
         }
         else
         {
-            Vector3 target = scanner.target.position;
+            Vector3 target = scanner.currentTarget.position;
             if(target.x < transform.position.x)
             {
                 WeaponSpinning(true);
@@ -151,7 +151,7 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
         }
         bullet.BurnInit(GameManager.instance.playerInfo.snakeCount, damage, count);
 
-        if (scanner.target != null)
+        if (scanner.currentTarget != null)
         {
             StartCoroutine(MuzzleMove());
             //Vector3 dirs = target - transform.position;
@@ -159,7 +159,7 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
             //LeanTween.rotate(gameObject, new Vector3(0, 0, angles), 0.1f).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(0.1f);
 
-            Vector3 targetPos = scanner.target.position;
+            Vector3 targetPos = scanner.currentTarget.position;
             float dis = Vector3.Distance(transform.position, targetPos);
             float angle = GetAngle(transform.position, targetPos);
             Vector3 pos1 = ConvertAngleToVector(angle + 90, dis);
@@ -202,7 +202,7 @@ public class Torch_Weapon : Weapon_Action, ICustomUpdateMono
             LeanTween.move(baseObj.gameObject, transform.position, 0.02f).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(0.02f);
             ReturnWeapon(baseObj);
-            scanner.target = null;
+            scanner.currentTarget = null;
             coll.enabled = false;
             isFire = false;
         }

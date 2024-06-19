@@ -57,7 +57,7 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
         //군인: 이동 중 공격 불가
         if (GameManager.instance.character == Player.Character.SOLDIER)
         {
-            if (GameManager.instance.player_Info.isStand == true && scanner.target != null)
+            if (GameManager.instance.player_Info.isStand == true && scanner.currentTarget != null)
             {
                 if (timer >= afterCoolTime)
                 {
@@ -71,7 +71,7 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
         }
         else
         {
-            if (scanner.target != null)
+            if (scanner.currentTarget != null)
             {
                 if (timer >= afterCoolTime)
                 {
@@ -92,7 +92,7 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
 
     private IEnumerator MuzzleMove()
     {
-        if (scanner.target == null)
+        if (scanner.currentTarget == null)
         {
             if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft == true)
             {
@@ -111,7 +111,7 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
         }
         else
         {
-            Vector3 target = scanner.target.position;
+            Vector3 target = scanner.currentTarget.position;
             if (target.x < transform.position.x)
             {
                 WeaponSpinning(true);
@@ -131,9 +131,9 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
     {
         bullet.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
 
-        if (scanner.target != null)
+        if (scanner.currentTarget != null)
         {
-            Vector3 targetPos = scanner.target.position;
+            Vector3 targetPos = scanner.currentTarget.position;
             Vector3 originalPos = transform.position;
             float realRanges = realRange - (Vector3.Distance(baseObj.position, meleeMuzzle.position));
             StartCoroutine(MuzzleMove());

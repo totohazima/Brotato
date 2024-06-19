@@ -308,6 +308,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         if (index2 == 0)
             SpawnManager.instance.replaceEnemyCount++;
 
+        StageManager.instance.trackedTargets.Remove(transform);
         SpawnManager.instance.enemys.Remove(this);
         gameObject.SetActive(false);
         yield return 0;

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
 {
     public static StageManager instance;
+    public List<Transform> trackedTargets = new List<Transform>();
     [Header("# UI")]
     public Slider hpBarUI;
     public Text hpNum;
