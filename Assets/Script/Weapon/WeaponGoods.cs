@@ -29,21 +29,23 @@ public class WeaponGoods : Weapon, UI_Upadte
     public Text bloodSuckingNumUI;
     public TextMeshProUGUI infoUI;
 
-    private bool isLock;
     public Image lockUI;
     public Outline line;
     public Text priceText;
+    private bool isPriceEnd;
+    private bool isLock;
     WeaponScrip scriptable;
     [SerializeField]
     WeaponScrip[] weaponData;
     void OnEnable() //생성시 티어를 정한다 (현재 1티어만 존재)
     {
         UIUpdateManager.uiUpdates.Add(this);
-
+        isPriceEnd = false;
     }
     void OnDisable()
     {
         UIUpdateManager.uiUpdates.Remove(this);
+
     }
 
     public void Init(WeaponScrip scrip/*string name, string setName, Weapons code, Sprite image, WeaponType type*/)
@@ -472,13 +474,21 @@ public class WeaponGoods : Weapon, UI_Upadte
             infoUI.gameObject.SetActive(false);
         }
 
-        //가격 설정
-        WeaponBasePriceInfoTable.Data priceInfoTable = GameManager.instance.gameDataBase.weaponBasePriceInfoTable.table[weaponNum];
-        weaponBasePrice = priceInfoTable.weaponBasePrice[weaponTier];
-        int wave = StageManager.instance.waveLevel + 1;
-        weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
-        weaponPrice = weaponPrice * ((100 + StageManager.instance.playerInfo.priceSale) / 100);
-        weaponPrice = System.MathF.Round(weaponPrice);
+        //잠겼을 땐 가격이 그대로 유지되어야 함
+        if (GameManager.instance.isEnd && isLock)
+        {
+            // GameManager.instance.isEnd가 true이고, 상품이 잠긴 경우
+            // 가격 설정을 건너뛰어야 합니다.
+            isPriceEnd = true;  // 가격 설정이 이미 끝난 상태로 설정합니다.
+        }
+        else if (GameManager.instance.isEnd && !isLock && !isPriceEnd)
+        {
+            // GameManager.instance.isEnd가 true이고, 상품이 잠긴 상태가 아니며
+            // 가격 설정이 아직 되지 않은 경우에만 가격 설정을 합니다.
+            PriceSetting();
+            isPriceEnd = true;  // 가격 설정을 마쳤음을 표시합니다.
+        }
+
         if (weaponPrice > GameManager.instance.playerInfo.money)
         {
             priceText.text = "<color=red>" + weaponPrice.ToString("F0") + "</color>";
@@ -594,5 +604,18 @@ public class WeaponGoods : Weapon, UI_Upadte
         isLock = false;
         //line.enabled = false;
         //lockUI.color = new Color(150 / 255f, 150 / 255f, 150 / 255f);
+    }
+
+    /// <summary>
+    /// 가격 설정
+    /// </summary>
+    private void PriceSetting()
+    {
+        WeaponBasePriceInfoTable.Data priceInfoTable = GameManager.instance.gameDataBase.weaponBasePriceInfoTable.table[weaponNum];
+        weaponBasePrice = priceInfoTable.weaponBasePrice[weaponTier];
+        int wave = StageManager.instance.waveLevel + 1;
+        weaponPrice = (weaponBasePrice + wave + (weaponBasePrice * 0.1f * wave)) * 1;
+        weaponPrice = weaponPrice * ((100 + StageManager.instance.playerInfo.priceSale) / 100);
+        weaponPrice = System.MathF.Round(weaponPrice);
     }
 }

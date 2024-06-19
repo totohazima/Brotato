@@ -25,9 +25,11 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
     public int itemNum; //itemManager에서 아이템을 찾기 위함
     public Outline line;
     public ItemScrip scriptable;
+    private bool isPriceEnd;
     void OnEnable()
     {
         UIUpdateManager.uiUpdates.Add(this);
+        isPriceEnd = false;
     }
     void OnDisable()
     {
@@ -54,13 +56,21 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
 
     public void UI_Update()
     {
-        ItemBasePriceInfoTable.Data priceImport = GameManager.instance.gameDataBase.itemBasePriceInfoTable.table[itemNum];
-        itemBasePrice = priceImport.itemBasePrice;
+        //잠겼을 땐 가격이 그대로 유지되어야 함
+        if (GameManager.instance.isEnd && isLock)
+        {
+            // GameManager.instance.isEnd가 true이고, 상품이 잠긴 경우
+            // 가격 설정을 건너뛰어야 합니다.
+            isPriceEnd = true;  // 가격 설정이 이미 끝난 상태로 설정합니다.
+        }
+        else if (GameManager.instance.isEnd && !isLock && !isPriceEnd)
+        {
+            // GameManager.instance.isEnd가 true이고, 상품이 잠긴 상태가 아니며
+            // 가격 설정이 아직 되지 않은 경우에만 가격 설정을 합니다.
+            PriceSetting();
+            isPriceEnd = true;  // 가격 설정을 마쳤음을 표시합니다.
+        }
 
-        int wave = StageManager.instance.waveLevel + 1;
-        itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
-        itemPrice = itemPrice * ((100 + StageManager.instance.playerInfo.priceSale) / 100);
-        itemPrice = MathF.Round(itemPrice);
         if (itemPrice > GameManager.instance.playerInfo.money)
         {
             itemPriceText.text = "<color=red>" + itemPrice.ToString("F0") + "</color>";
@@ -144,5 +154,14 @@ public class ItemGoods : MonoBehaviour, UI_Upadte
         isLock = false;
         line.enabled = false;
         lockUI.color = new Color(150 / 255f, 150 / 255f, 150 / 255f);
+    }
+    private void PriceSetting()
+    {
+        ItemBasePriceInfoTable.Data priceImport = GameManager.instance.gameDataBase.itemBasePriceInfoTable.table[itemNum];
+        itemBasePrice = priceImport.itemBasePrice;
+        int wave = StageManager.instance.waveLevel + 1;
+        itemPrice = (itemBasePrice + wave + (itemBasePrice * 0.1f * wave)) * 1;
+        itemPrice = itemPrice * ((100 + StageManager.instance.playerInfo.priceSale) / 100);
+        itemPrice = MathF.Round(itemPrice);
     }
 }
