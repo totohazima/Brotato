@@ -9,7 +9,7 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
     private WeaponScanner scanner;
     [SerializeField] private Transform muzzle;
     [SerializeField] private Transform imageGroup;
-    [SerializeField] private float targetLockTime = 0.5f; // 타겟 유지 시간
+    [SerializeField] private float targetLockTime = 0.6f; // 타겟 유지 시간
     [SerializeField] private Transform currentTarget;
     [SerializeField] private bool isAttacking;
 

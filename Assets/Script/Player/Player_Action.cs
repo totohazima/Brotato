@@ -182,40 +182,46 @@ public class Player_Action : Player, ICustomUpdateMono
     /// </summary>
     private void WeaponAngleSetting()
     {
-        //float[] deg = new float[0];
-        //switch (weapons.Count)
-        //{
-        //    case 1: 
-        //        deg = new float[] { 90};
-        //        break;
-        //    case 2:
-        //        deg = new float[] { 45, 135 };
-        //        break;
-        //    case 3:
-        //        deg = new float[] { 45, 135, 270 };
-        //        break;
-        //    case 4:
-        //        deg = new float[] { 45, 135, 225, 315 };
-        //        break;
-        //    case 5:
-        //        deg = new float[] { 45, 135, 225, 270, 315 };
-        //        break;
-        //    case 6:
-        //        deg = new float[] { 45, 135, 180, 225, 315, 360 };
-        //        break;
-        //}
-        //for (int i = 0; i < deg.Length; i++)
-        //{
-        //    //float deg = 360 * i / weapons.Count - 90;
-        //    Vector3 pos = ConvertAngleToVector(-deg[i]);
-        //    weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
-        //}
-        for (int i = 0; i < weapons.Count; i++)
+        float[] deg = new float[0];
+        switch (weapons.Count)
         {
-            float deg = 360 * i / weapons.Count - 90;
-            Vector3 pos = ConvertAngleToVector(deg);
+            case 1:
+                deg = new float[] { 90 };
+                break;
+            case 2:
+                deg = new float[] { 45, 135 };
+                break;
+            case 3:
+                deg = new float[] { 45, 135, 270 };
+                break;
+            case 4:
+                deg = new float[] { 45, 135, 225, 315 };
+                break;
+            case 5:
+                deg = new float[] { 45, 135, 200, 270, 340 };
+                break;
+            case 6:
+                deg = new float[] { 45, 135, 180, 225, 315, 360 };
+                break;
+            default:
+                deg = new float[weapons.Count];
+                for (int i = 0; i < weapons.Count; i++)
+                {
+                    deg[i] = i * 360f / weapons.Count;
+                }
+                break;
+        }
+        for (int i = 0; i < deg.Length; i++)
+        {
+            Vector3 pos = ConvertAngleToVector(-deg[i]);
             weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
         }
+        //for (int i = 0; i < weapons.Count; i++)
+        //{
+        //    float deg = 360 * i / weapons.Count - 90;
+        //    Vector3 pos = ConvertAngleToVector(deg);
+        //    weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
+        //}
     }
 
     private void StatApply()
@@ -275,7 +281,7 @@ public class Player_Action : Player, ICustomUpdateMono
     private Vector3 ConvertAngleToVector(float _deg)//각도로 좌표 구하기
     {
         var rad = _deg * Mathf.Deg2Rad;
-        return new Vector3(Mathf.Cos(rad) * 2.5f, Mathf.Sin(rad) * 2.5f, 0);
+        return new Vector3(Mathf.Cos(rad) * 5f, Mathf.Sin(rad) * 5f, 0);
     }
 
     //private void OnTriggerStay(Collider other)
