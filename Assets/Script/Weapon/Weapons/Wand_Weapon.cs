@@ -6,6 +6,7 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
 {
     float timer;
     WeaponScanner scanner;
+    [SerializeField] private bool isFire;
     [SerializeField] private Transform muzzle;
     [SerializeField] private Transform imageGroup;
 
@@ -73,7 +74,7 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
     }
     private IEnumerator MuzzleMove()
     {
-        if (scanner.currentTarget == null)
+        if (scanner.currentTarget == null && isFire == false)
         {
             if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft == true)
             {
@@ -90,7 +91,7 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
             //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             //LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
         }
-        else
+        else if(scanner.currentTarget != null && isFire == false)
         {
             Vector3 target = scanner.currentTarget.position;
             if (target.x < transform.position.x)
@@ -113,6 +114,8 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
     {
         if (scanner.currentTarget != null)
         {
+            isFire = true;
+
             Vector3 targetPos = scanner.currentTarget.position;
             StartCoroutine(MuzzleMove());
             yield return new WaitForSeconds(0.1f);
@@ -150,6 +153,8 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
                     break;
             }
             bulletInit.BurnInit(GameManager.instance.playerInfo.snakeCount, damage, count);
+
+            isFire = false;
         }
     }
     public override void WeaponSpinning(bool isLeft)

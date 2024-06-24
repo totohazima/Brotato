@@ -93,10 +93,13 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
         
         else
         {
-            if (timer >= afterCoolTime)
+            if (scanner.currentTarget != null)
             {
-                StartCoroutine(Fire());
-                timer = 0;
+                if (timer >= afterCoolTime)
+                {
+                    StartCoroutine(Fire());
+                    timer = 0;
+                }
             }
         }
 
@@ -159,7 +162,7 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
                 WeaponSpinning(false);
             }
         }
-        else
+        else if(scanner.currentTarget != null && isFire == false)
         {
             Vector3 target = scanner.currentTarget.position;
             if (target.x < transform.position.x)
@@ -190,24 +193,11 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
             Vector3 originalPos = transform.position;
             float realRanges = realRange - Vector3.Distance(baseObj.position, meleeMuzzle.position);
             StartCoroutine(MuzzleMove());
-            if (targetPos.x < transform.position.x)
-            {
-                WeaponSpinning(true);
-            }
-            else
-            {
-                WeaponSpinning(false);
-            }
-            Vector3 dir = (targetPos - transform.position).normalized;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(0.1f);
 
             Vector3 moveDir = (targetPos - originalPos).normalized;
             Vector3 destination = originalPos + moveDir * realRanges;
-
             float moveDuration = realRange / 160; // 속도 조정
-
-            yield return new WaitForSeconds(0.1f);
 
             LeanTween.move(baseObj.gameObject, destination, moveDuration).setEase(LeanTweenType.easeInOutQuad);
             coll.enabled = true;

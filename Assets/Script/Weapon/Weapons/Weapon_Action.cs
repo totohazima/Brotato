@@ -22,4 +22,23 @@ public class Weapon_Action : Weapon
     {
         return;
     }
+
+    /// <summary>
+    /// 공격 시점에 타겟이 해당 무기 사거리내에 있는지 확인하는 함수
+    /// </summary>
+    /// <param name="target">타겟</param>
+    /// <param name="range">무기의 사거리</param>
+    /// <returns></returns>
+    public virtual bool IsRangeInTarget(Transform target, float range)
+    {
+        float trueRange = Vector3.Distance(transform.position, target.position);
+        if(trueRange <= range)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

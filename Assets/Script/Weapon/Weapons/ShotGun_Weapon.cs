@@ -10,7 +10,7 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
     [SerializeField] private Transform muzzle;
     [SerializeField] private Transform imageGroup;
     [SerializeField] private float targetLockTime = 0.6f; // 타겟 유지 시간
-    [SerializeField] private bool isAttacking;
+    [SerializeField] private bool isFire;
 
     void Awake()
     {
@@ -119,7 +119,7 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
 
     IEnumerator MuzzleMove()
     {
-        if (scanner.currentTarget == null)
+        if (scanner.currentTarget == null && isFire == false)
         {
             if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft)
             {
@@ -132,7 +132,7 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
                 WeaponSpinning(false);
             }
         }
-        else
+        else  if(scanner.currentTarget != null && isFire == false)
         {
             Vector3 target = scanner.currentTarget.position;
             if (target.x < transform.position.x)
@@ -155,21 +155,10 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
     {
         if (scanner.currentTarget != null)
         {
-            isAttacking = true;
+            isFire = true;
 
             Vector3 targetPos = scanner.currentTarget.position;
             StartCoroutine(MuzzleMove());
-            if (targetPos.x < transform.position.x)
-            {
-                WeaponSpinning(true);
-            }
-            else
-            {
-                WeaponSpinning(false);
-            }
-            Vector3 dir = (targetPos - transform.position).normalized;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(0.1f);
 
             for (int i = 0; i < bulletCount; i++)
@@ -186,10 +175,7 @@ public class ShotGun_Weapon : Weapon_Action, ICustomUpdateMono
                 bullet.GetComponent<Bullet>().Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dirs * 200);
             }
 
-
-            //yield return new WaitForSeconds(0.1f);
-
-            isAttacking = false;
+            isFire = false;
         }
     }
 
