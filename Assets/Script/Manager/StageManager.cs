@@ -135,6 +135,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
         {
             waveTimerUI.gameObject.SetActive(false);
             joyStickRayCaster.SetActive(false);
+            FriendlyRemove();
         }
 
 
@@ -167,8 +168,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
             timer = waveTime[waveLevel];
             GameManager.instance.isEnd = true;
             GameManager.instance.playerInfo.playerHealth = maxHp;
-            FriendlyRemove();
-
+            
             //¼öÈ® ½ºÅÈ
             if (playerInfo.harvest > 0)
             {
@@ -214,7 +214,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
             ShopOpen();
         }
     }
-    
+
     void FriendlyRemove()
     {
         SpawnManager spawn = SpawnManager.instance;
@@ -236,6 +236,8 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
         spawn.turrets.Clear();
         spawn.trees.Clear();
     }
+
+
     void UiVisualize()
     {
         maxHp = playerInfo.maxHealth;
@@ -249,7 +251,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
         GameManager.instance.playerInfo.maxExp = 50 + (30 * (GameManager.instance.playerInfo.playerLevel));
         expBarUI.maxValue = GameManager.instance.playerInfo.maxExp;
         expBarUI.value = GameManager.instance.playerInfo.curExp;
-        levelNum.text = "LV." + (GameManager.instance.playerInfo.playerLevel + 1);
+        levelNum.text = "LV." + (GameManager.instance.playerInfo.playerLevel);
 
         if (timer < 5)
         {

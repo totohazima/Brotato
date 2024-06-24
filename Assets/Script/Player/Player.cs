@@ -210,6 +210,9 @@ public class Player : MonoBehaviour
             instantMagnet = instantMagnet_Origin;
         }
 
+        //레벨 당 체력 + 1
+        maxHealth += GameManager.instance.playerInfo.playerLevel;
+
         PlayerInfo info = GameManager.instance.playerInfo;
         //아이템 스탯 계산
         for (int i = 0; i < itemInventory.Count; i++)

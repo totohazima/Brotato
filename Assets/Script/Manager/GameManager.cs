@@ -90,6 +90,8 @@ public class GameManager : MonoBehaviour, UI_Upadte
                 playerInfo.overExp = 0;
                 playerInfo.playerLevel++;
                 playerInfo.levelUpChance++;
+
+                player_Info.StatCalculate();
             }
         }
 
