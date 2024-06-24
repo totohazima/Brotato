@@ -731,8 +731,8 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
     private WeaponScanner scanner;
     private StageManager stage;
     private Melee_Bullet bullet;
-    private bool isFire;
-    private bool isLeft;
+    [SerializeField] private bool isFire;
+    [SerializeField] private bool isLeft;
     private bool isSpawnedTurret;
 
     void Awake()
@@ -752,10 +752,6 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
     void OnDisable()
     {
         CustomUpdateManager.customUpdates.Remove(this);
-        if (scanner.currentTarget != null)
-        {
-            StageManager.instance.trackedTargets.Remove(scanner.currentTarget);
-        }
     }
 
     public void CustomUpdate()
@@ -763,6 +759,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
         ResetStat();
         AfterStatSetting();
         scanner.radius = realRange;
+        StartCoroutine(MuzzleMove());
 
         for (int i = 0; i < tierOutline.Length; i++)
         {
@@ -795,7 +792,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
 
     private IEnumerator MuzzleMove()
     {
-        if (scanner.currentTarget == null)
+        if (scanner.currentTarget == null && isFire == false)
         {
             if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft)
             {
@@ -808,7 +805,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
                 LeanTween.rotate(gameObject, new Vector3(0, 0, 0), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
         }
-        else
+        else if (scanner.currentTarget != null && isFire == false)
         {
             Vector3 target = scanner.currentTarget.position;
             WeaponSpinning(GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft);
@@ -821,93 +818,96 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
 
     private IEnumerator WheelAttack()
     {
-        bullet.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
+        bool isAttack = IsRangeInTarget(scanner.currentTarget, realRange);
 
-        if (scanner.currentTarget != null)
+        if (isAttack == true)
         {
-            StartCoroutine(MuzzleMove());
-            yield return new WaitForSeconds(0.1f);
+            bullet.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
 
-            Vector3 targetPos = scanner.currentTarget.position;
-            isLeft = targetPos.x < transform.position.x;
-
-            float dis = Vector3.Distance(transform.position, targetPos);
-            float angle = GetAngle(transform.position, targetPos);
-            float duration = 0.014f * dis;
-
-            Vector3 startOffset = Vector3.zero;
-            Vector3 endOffset = Vector3.zero;
-
-            if (isLeft)
+            if (scanner.currentTarget != null)
             {
-                startOffset = GetPositionAtAngle(targetPos, 134, dis / 2f); // Adjust angle and distance as needed
-                endOffset = GetPositionAtAngle(targetPos, -90f, dis / 1.5f); // Adjust angle and distance as needed
+                Vector3 targetPos = scanner.currentTarget.position;
+                StartCoroutine(MuzzleMove());
+                yield return new WaitForSeconds(0.1f);
+
+                isLeft = targetPos.x < transform.position.x;
+                float dis = Vector3.Distance(transform.position, targetPos);
+                float duration = 0.014f * dis;
+
+                Vector3 startOffset = Vector3.zero;
+                Vector3 endOffset = Vector3.zero;
+
+                if (isLeft)
+                {
+                    startOffset = GetPositionAtAngle(targetPos, 134, dis / 2f); // Adjust angle and distance as needed
+                    endOffset = GetPositionAtAngle(targetPos, -90f, dis / 1.5f); // Adjust angle and distance as needed
+                }
+                else
+                {
+                    startOffset = GetPositionAtAngle(targetPos, 46.5f, dis / 2f); // Adjust angle and distance as needed
+                    endOffset = GetPositionAtAngle(targetPos, -90, dis / 1.5f); // Adjust angle and distance as needed
+                }
+
+                startPos.position = transform.position + startOffset;
+                endPos.position = transform.position + endOffset;
+
+                float elapsedTime = 0f;
+                coll.enabled = true;
+                isFire = true;
+                // 첫 번째 구간: startPos -> targetPos
+                while (elapsedTime < duration)
+                {
+                    float t = elapsedTime / duration;
+                    Vector3 point = CalculateQuadraticBezierPoint(t, transform.position, controlPos1.position, startPos.position);
+
+                    baseObj.position = point;
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
+
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                // 두 번째 구간: targetPos -> endPos
+                elapsedTime = 0f;
+                while (elapsedTime < duration)
+                {
+                    float t = elapsedTime / duration;
+                    Vector3 point = CalculateQuadraticBezierPoint(t, startPos.position, controlPos2.position, endPos.position);
+
+                    baseObj.position = point;
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 160), t);
+
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                // 세 번째 구간: endPos -> transform.position
+                yield return new WaitForSeconds(0.05f);
+                elapsedTime = 0f;
+                while (elapsedTime < duration)
+                {
+                    float t = elapsedTime / duration;
+                    Vector3 point = CalculateQuadraticBezierPoint(t, endPos.position, transform.position, transform.position);
+
+                    baseObj.position = point;
+                    baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
+
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                dis = 0;
+                duration = 0;
+                elapsedTime = 0;
             }
-            else
-            {
-                startOffset = GetPositionAtAngle(targetPos, 46.5f, dis / 2f); // Adjust angle and distance as needed
-                endOffset = GetPositionAtAngle(targetPos, -90, dis / 1.5f); // Adjust angle and distance as needed
-            }
 
-            startPos.position = transform.position + startOffset;
-            endPos.position = transform.position + endOffset;
-
-            float elapsedTime = 0f;
-            coll.enabled = true;
-            isFire = true;
-            // 첫 번째 구간: startPos -> targetPos
-            while (elapsedTime < duration)
-            {
-                float t = elapsedTime / duration;
-                Vector3 point = CalculateQuadraticBezierPoint(t, transform.position, controlPos1.position, startPos.position);
-
-                baseObj.position = point;
-                baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, -160), Quaternion.Euler(0, 0, 0), t);
-
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            // 두 번째 구간: targetPos -> endPos
-            elapsedTime = 0f;
-            while (elapsedTime < duration)
-            {
-                float t = elapsedTime / duration;
-                Vector3 point = CalculateQuadraticBezierPoint(t, startPos.position, controlPos2.position, endPos.position);
-
-                baseObj.position = point;
-                baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 160), t);
-
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            // 세 번째 구간: endPos -> transform.position
-            yield return new WaitForSeconds(0.05f);
-            elapsedTime = 0f;
-            while (elapsedTime < duration)
-            {
-                float t = elapsedTime / duration;
-                Vector3 point = CalculateQuadraticBezierPoint(t, endPos.position, transform.position, transform.position);
-
-                baseObj.position = point;
-                baseObj.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 160), Quaternion.Euler(0, 0, 0), t);
-
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            dis = 0;
-            duration = 0;
-            elapsedTime = 0;
+            // Clear currentTarget and reset states
+            StageManager.instance.trackedTargets.Remove(scanner.currentTarget);
+            scanner.currentTarget = null;
+            coll.enabled = false;
+            isFire = false;
+            isLeft = false;
         }
-
-        // Clear currentTarget and reset states
-        StageManager.instance.trackedTargets.Remove(scanner.currentTarget);
-        scanner.currentTarget = null;
-        coll.enabled = false;
-        isFire = false;
-        isLeft = false;
     }
     private IEnumerator SpawnTurret()
     {

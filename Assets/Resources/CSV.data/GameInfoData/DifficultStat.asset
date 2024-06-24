@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   table:
   - difficultName: "0\uB2E8\uACC4"
-    specialEnemySpawn: 0
-    eliteEnemySpawn: 0
+    specialEnemySpawn: 1
+    eliteEnemySpawn: 1
     eliteEnemySpawnCount: 0
     enemyDamageRise: 0
     enemyHpRise: 0
     twinBoss: 0
   - difficultName: "1\uB2E8\uACC4"
     specialEnemySpawn: 1
-    eliteEnemySpawn: 0
+    eliteEnemySpawn: 1
     eliteEnemySpawnCount: 0
     enemyDamageRise: 0
     enemyHpRise: 0
@@ -30,28 +30,28 @@ MonoBehaviour:
   - difficultName: "2\uB2E8\uACC4"
     specialEnemySpawn: 1
     eliteEnemySpawn: 1
-    eliteEnemySpawnCount: 1
+    eliteEnemySpawnCount: 0
     enemyDamageRise: 0
     enemyHpRise: 0
     twinBoss: 0
   - difficultName: "3\uB2E8\uACC4"
     specialEnemySpawn: 1
     eliteEnemySpawn: 1
-    eliteEnemySpawnCount: 1
+    eliteEnemySpawnCount: 0
     enemyDamageRise: 12
-    enemyHpRise: 6
+    enemyHpRise: 12
     twinBoss: 0
   - difficultName: "4\uB2E8\uACC4"
     specialEnemySpawn: 1
     eliteEnemySpawn: 1
-    eliteEnemySpawnCount: 3
-    enemyDamageRise: 15
-    enemyHpRise: 7
+    eliteEnemySpawnCount: 0
+    enemyDamageRise: 26
+    enemyHpRise: 26
     twinBoss: 0
   - difficultName: "5\uB2E8\uACC4"
     specialEnemySpawn: 1
     eliteEnemySpawn: 1
-    eliteEnemySpawnCount: 3
-    enemyDamageRise: 20
-    enemyHpRise: 10
+    eliteEnemySpawnCount: 0
+    enemyDamageRise: 40
+    enemyHpRise: 40
     twinBoss: 1

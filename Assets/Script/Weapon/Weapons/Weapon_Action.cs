@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Weapon_Action : Weapon
 {
@@ -31,14 +32,23 @@ public class Weapon_Action : Weapon
     /// <returns></returns>
     public virtual bool IsRangeInTarget(Transform target, float range)
     {
-        float trueRange = Vector3.Distance(transform.position, target.position);
-        if(trueRange <= range)
+        bool isTrue = false;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, range, 1 << 6);
+        for(int i = 0; i < colliders.Length; i++)
         {
-            return true;
+            if (colliders[i] == null || colliders[i].gameObject.activeSelf == false)
+            {
+                continue;
+            }
+
+            if (colliders[i].transform == target)
+            {
+                isTrue = true;
+            }
         }
-        else
-        {
-            return false;
-        }
+
+        return isTrue;
+
     }
 }

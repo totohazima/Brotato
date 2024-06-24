@@ -5309,6 +5309,8 @@ MonoBehaviour:
   baseObj: {fileID: 4245991934153760112}
   coll: {fileID: 4245991934039231394}
   timer: 0
+  isFire: 0
+  isLeft: 0
 --- !u!114 &4245991933172224597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5322,7 +5324,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
+  lastDetectedPosition: {x: 0, y: 0, z: 0}
   radius: 13.54
+  detectedTargets: []
 --- !u!1 &4245991934039231395
 GameObject:
   m_ObjectHideFlags: 0

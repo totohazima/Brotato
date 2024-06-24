@@ -15,7 +15,7 @@ MonoBehaviour:
   isDie: 0
   doNotSpawnRange: 15
   maxHealth: 15
-  playerHealth: 11
+  playerHealth: 15
   regeneration: 0
   bloodSucking: 0
   persentDamage: 0
@@ -73,19 +73,19 @@ MonoBehaviour:
   playerLevel: 0
   levelUpChance: 0
   lootChance: 0
-  curExp: 31
+  curExp: 18
   maxExp: 50
   overExp: 0
-  money: 16
-  interest: 0
-  engineerBuildingPos: {x: 2.9438438, y: 15.05002}
+  money: 42
+  interest: 6
+  engineerBuildingPos: {x: -18.046812, y: 2.8833313}
   unArmed_Set: 0
-  tool_Set: 1
+  tool_Set: 0
   gun_Set: 0
   explosive_Set: 0
-  precision_Set: 1
-  native_Set: 0
-  elemental_Set: 0
+  precision_Set: 0
+  native_Set: 1
+  elemental_Set: 1
   itemGroup_Scriptable: {fileID: 11400000, guid: 69a923a15a77efa4498bef803cc39095, type: 2}
   invenItem: {fileID: 4012523125829970869, guid: 05d210546179917498008d12b3719e05, type: 3}
   isUglyTooth: 0
