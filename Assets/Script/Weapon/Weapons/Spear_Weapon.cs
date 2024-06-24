@@ -14,7 +14,6 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
     [SerializeField] private CapsuleCollider coll;
     [SerializeField] private Transform imageGroup;
     [SerializeField] private float targetLockTime = 0.8f; // 타겟 유지 시간
-    [SerializeField] private Transform currentTarget;
 
     void Awake()
     {
@@ -45,79 +44,79 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
         timer += Time.deltaTime;
         targetLockTimer += Time.deltaTime;
 
-        // 타겟이 죽었을 경우 타겟 제거
-        if (currentTarget != null)
-        {
-            if (currentTarget.parent.gameObject.activeSelf == false)
-            {
-                currentTarget = null;
-                targetLockTimer = 0;
-            }
-        }
+        //// 타겟이 죽었을 경우 타겟 제거
+        //if (currentTarget != null)
+        //{
+        //    if (currentTarget.parent.gameObject.activeSelf == false)
+        //    {
+        //        currentTarget = null;
+        //        targetLockTimer = 0;
+        //    }
+        //}
 
-        // 타겟 재설정
-        if (targetLockTimer >= targetLockTime && scanner.detectedTargets != null && scanner.detectedTargets.Count > 0)
-        {
-            if (currentTarget == null || !scanner.detectedTargets.Contains(currentTarget))
-            {
-                currentTarget = GetClosestTarget(scanner.detectedTargets);
-                targetLockTimer = 0; // 타겟을 변경했으므로 타이머 초기화
-            }
-        }
+        //// 타겟 재설정
+        //if (targetLockTimer >= targetLockTime && scanner.detectedTargets != null && scanner.detectedTargets.Count > 0)
+        //{
+        //    if (currentTarget == null || !scanner.detectedTargets.Contains(currentTarget))
+        //    {
+        //        currentTarget = GetClosestTarget(scanner.detectedTargets);
+        //        targetLockTimer = 0; // 타겟을 변경했으므로 타이머 초기화
+        //    }
+        //}
 
         // 군인 캐릭터의 경우 이동 중에는 공격 불가능
         if (GameManager.instance.character == Player.Character.SOLDIER)
         {
-            if (GameManager.instance.player_Info.isStand && currentTarget != null && IsInAttackRange(currentTarget))
+            if (GameManager.instance.player_Info.isStand && scanner.currentTarget != null )
             {
-                TryFire();
+                if (timer >= afterCoolTime)
+                {
+                    StartCoroutine(Fire());
+                    timer = 0;
+                }
             }
         }
         else
         {
-            if (currentTarget != null && IsInAttackRange(currentTarget))
+            if (scanner.currentTarget != null )
             {
-                TryFire();
-            }
-        }
-    }
-
-    void TryFire()
-    {
-        if (timer >= afterCoolTime)
-        {
-            StartCoroutine(Fire());
-            timer = 0;
-        }
-    }
-
-    Transform GetClosestTarget(List<Transform> targets)
-    {
-        Transform closestTarget = null;
-        float closestDistance = float.MaxValue;
-        Vector3 currentPosition = transform.position;
-
-        foreach (Transform target in targets)
-        {
-            if (IsInAttackRange(target))
-            {
-                float distance = Vector3.Distance(currentPosition, target.position);
-                if (distance < closestDistance)
+                if (timer >= afterCoolTime)
                 {
-                    closestDistance = distance;
-                    closestTarget = target;
+                    StartCoroutine(Fire());
+                    timer = 0;
                 }
             }
         }
-
-        return closestTarget;
     }
 
-    bool IsInAttackRange(Transform target)
-    {
-        float distance = Vector3.Distance(transform.position, target.position);
-        return distance <= realRange;
-    }
+
+    //Transform GetClosestTarget(List<Transform> targets)
+    //{
+    //    Transform closestTarget = null;
+    //    float closestDistance = float.MaxValue;
+    //    Vector3 currentPosition = transform.position;
+
+    //    foreach (Transform target in targets)
+    //    {
+    //        if (IsInAttackRange(target))
+    //        {
+    //            float distance = Vector3.Distance(currentPosition, target.position);
+    //            if (distance < closestDistance)
+    //            {
+    //                closestDistance = distance;
+    //                closestTarget = target;
+    //            }
+    //        }
+    //    }
+
+    //    return closestTarget;
+    //}
+
+    //bool IsInAttackRange(Transform target)
+    //{
+    //    float distance = Vector3.Distance(transform.position, target.position);
+    //    return distance <= realRange;
+    //}
 
     void ResetStat()
     {
@@ -126,7 +125,7 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
 
     IEnumerator MuzzleMove()
     {
-        if (currentTarget == null && isFire == false)
+        if (scanner.currentTarget == null && isFire == false)
         {
             if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft)
             {
@@ -141,7 +140,7 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
         }
         else
         {
-            Vector3 target = currentTarget.position;
+            Vector3 target = scanner.currentTarget.position;
             if (target.x < transform.position.x)
             {
                 WeaponSpinning(true);
@@ -164,9 +163,9 @@ public class Spear_Weapon : Weapon_Action, ICustomUpdateMono
 
         bullet.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
 
-        if (currentTarget != null)
+        if (scanner.currentTarget != null)
         {
-            Vector3 targetPos = currentTarget.position;
+            Vector3 targetPos = scanner.currentTarget.position;
             Vector3 originalPos = transform.position;
             float realRanges = realRange - Vector3.Distance(baseObj.position, meleeMuzzle.position);
             StartCoroutine(MuzzleMove());

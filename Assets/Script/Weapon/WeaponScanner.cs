@@ -23,12 +23,12 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-        timer += Time.deltaTime;
-        if (timer >= timeInterval)
-        {
-            Scan();
-            timer = 0;
-        }
+        //timer += Time.deltaTime;
+        //if (timer >= timeInterval)
+        //{
+        Scan();
+        //    timer = 0;
+        //}
     }
 
     private void Scan()
@@ -55,8 +55,8 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
             Transform targetTransform = col.transform;
             float dis = Vector3.Distance(transform.position, targetTransform.position);
 
-            // 이미 추적 중인 타겟이 아니고, 가장 가까운 타겟일 경우
-            if (dis < shortestDistance && !detectedTargets.Contains(targetTransform))
+            // 가장 가까운 타겟일 경우
+            if (dis < shortestDistance)
             {
                 shortestDistance = dis;
                 nearestTarget = targetTransform;
@@ -128,4 +128,3 @@ public class WeaponScanner : MonoBehaviour, ICustomUpdateMono
     }
 #endif
 }
-

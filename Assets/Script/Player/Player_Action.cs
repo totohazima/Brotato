@@ -183,25 +183,32 @@ public class Player_Action : Player, ICustomUpdateMono
     private void WeaponAngleSetting()
     {
         float[] deg = new float[0];
+        float dis = 0;
         switch (weapons.Count)
         {
             case 1:
                 deg = new float[] { 90 };
+                dis = 2;
                 break;
             case 2:
                 deg = new float[] { 45, 135 };
+                dis = 5;
                 break;
             case 3:
                 deg = new float[] { 45, 135, 270 };
+                dis = 5;
                 break;
             case 4:
                 deg = new float[] { 45, 135, 225, 315 };
+                dis = 5;
                 break;
             case 5:
                 deg = new float[] { 45, 135, 200, 270, 340 };
+                dis = 5;
                 break;
             case 6:
                 deg = new float[] { 45, 135, 180, 225, 315, 360 };
+                dis = 5;
                 break;
             default:
                 deg = new float[weapons.Count];
@@ -209,19 +216,14 @@ public class Player_Action : Player, ICustomUpdateMono
                 {
                     deg[i] = i * 360f / weapons.Count;
                 }
+                dis = 5;
                 break;
         }
         for (int i = 0; i < deg.Length; i++)
         {
-            Vector3 pos = ConvertAngleToVector(-deg[i]);
+            Vector3 pos = ConvertAngleToVector(-deg[i], dis);
             weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
         }
-        //for (int i = 0; i < weapons.Count; i++)
-        //{
-        //    float deg = 360 * i / weapons.Count - 90;
-        //    Vector3 pos = ConvertAngleToVector(deg);
-        //    weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
-        //}
     }
 
     private void StatApply()
@@ -278,10 +280,10 @@ public class Player_Action : Player, ICustomUpdateMono
         magnet.radius = magnetRanges * (1 + (magnetRange / 100));
     }
 
-    private Vector3 ConvertAngleToVector(float _deg)//각도로 좌표 구하기
+    private Vector3 ConvertAngleToVector(float _deg, float dis)//각도로 좌표 구하기
     {
         var rad = _deg * Mathf.Deg2Rad;
-        return new Vector3(Mathf.Cos(rad) * 5f, Mathf.Sin(rad) * 5f, 0);
+        return new Vector3(Mathf.Cos(rad) * dis, Mathf.Sin(rad) * dis, 0);
     }
 
     //private void OnTriggerStay(Collider other)
