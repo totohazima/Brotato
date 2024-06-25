@@ -362,7 +362,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 277385842}
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 7127267712730304939}
   - component: {fileID: 2207610320651263965}
   m_Layer: 0
-  m_Name: MeleeMuzzle_Right
+  m_Name: MeleeMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -397,7 +397,7 @@ Transform:
   m_GameObject: {fileID: 604421895535750089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.162, y: 0, z: -2}
+  m_LocalPosition: {x: 3.48, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -618,7 +618,8 @@ MonoBehaviour:
   afterCriticalDamage: 0
   afterCoolTime: 0
   afterRange: 0
-  realRange: 0
+  realRange_Detected: 0
+  realRange_Attack: 0
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
@@ -651,8 +652,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b170e3e7a9554fd45af3ad856c19c8db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTarget: {fileID: 0}
-  radius: 0
+  detectedTarget: {fileID: 0}
+  attackTarget: {fileID: 0}
+  detectedRaius: 0
+  attackRadius: 0
   detectedTargets: []
 --- !u!1 &6184014379273246908
 GameObject:
@@ -680,7 +683,7 @@ Transform:
   m_GameObject: {fileID: 6184014379273246908}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.76, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -705,7 +708,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.23675442
-  m_Height: 4.40184
+  m_Radius: 0.40123177
+  m_Height: 6.418888
   m_Direction: 0
-  m_Center: {x: 0.36668015, y: -0.07676411, z: 0}
+  m_Center: {x: 1.2107258, y: -0.07676411, z: 0}

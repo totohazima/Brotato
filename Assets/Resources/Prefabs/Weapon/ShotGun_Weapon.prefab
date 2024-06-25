@@ -407,7 +407,8 @@ MonoBehaviour:
   afterCriticalDamage: 0
   afterCoolTime: 0
   afterRange: 0
-  realRange: 0
+  realRange_Detected: 0
+  realRange_Attack: 0
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
@@ -426,8 +427,7 @@ MonoBehaviour:
   muzzle: {fileID: 5320370906372444140}
   imageGroup: {fileID: 8296648509211649870}
   targetLockTime: 0.5
-  currentTarget: {fileID: 0}
-  isAttacking: 0
+  isFire: 0
 --- !u!114 &3144384355240958855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,8 +440,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b170e3e7a9554fd45af3ad856c19c8db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTarget: {fileID: 0}
-  radius: 0
+  detectedTarget: {fileID: 0}
+  attackTarget: {fileID: 0}
+  detectedRaius: 0
+  attackRadius: 0
   detectedTargets: []
 --- !u!1 &1258481179034430753
 GameObject:
@@ -468,7 +470,7 @@ Transform:
   m_GameObject: {fileID: 1258481179034430753}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.08, y: 0.46, z: 0}
+  m_LocalPosition: {x: 3.69, y: 0.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

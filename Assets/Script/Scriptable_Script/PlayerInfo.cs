@@ -114,14 +114,14 @@ public class PlayerInfo : ScriptableObject
     {
         float damages = damage;
         float hit, dodge;
-        if (GameManager.instance.player_Info.evasion >= 60)
+        if (GameManager.instance.playerAct.evasion >= 60)
         {
             dodge = 60;
             hit = 100 - dodge;
         }
         else
         {
-            dodge = GameManager.instance.player_Info.evasion;
+            dodge = GameManager.instance.playerAct.evasion;
             hit = 100 - dodge;
         }
         float[] chance = { hit, dodge };
@@ -129,16 +129,16 @@ public class PlayerInfo : ScriptableObject
         if (index == 0)
         {
             //방어력이 0 초과
-            if (GameManager.instance.player_Info.armor > 0)
+            if (GameManager.instance.playerAct.armor > 0)
             {
-                float enduce = 1 / (1 + (GameManager.instance.player_Info.armor / 15));
+                float enduce = 1 / (1 + (GameManager.instance.playerAct.armor / 15));
                 enduce = 1 - enduce;
                 damages -= damages * enduce;
             }
             //방어력이 0 미만
-            else if (GameManager.instance.player_Info.armor < 0)
+            else if (GameManager.instance.playerAct.armor < 0)
             {
-                float armor = Mathf.Abs(GameManager.instance.player_Info.armor);
+                float armor = Mathf.Abs(GameManager.instance.playerAct.armor);
                 float enduce = 1 / (1 + (armor / 15));
                 enduce = 1 + (1 - enduce);
                 damages = (damages * enduce);
@@ -152,7 +152,7 @@ public class PlayerInfo : ScriptableObject
         {
             string dodgeText = "<color=#4CFF52>회피</color>";
             Transform text = DamageTextManager.instance.TextCreate(0, dodgeText).transform;
-            text.position = GameManager.instance.player_Info.transform.position;
+            text.position = GameManager.instance.playerAct.transform.position;
         }
     }
     public void ItemObtain(Item.ItemType itemType)
@@ -176,9 +176,9 @@ public class PlayerInfo : ScriptableObject
 
         Item checkItem = null;
 
-        for (int i = 0; i < GameManager.instance.player_Info.itemInventory.Count; i++)
+        for (int i = 0; i < GameManager.instance.playerAct.itemInventory.Count; i++)
         {
-            Item Item = GameManager.instance.player_Info.itemInventory[i];
+            Item Item = GameManager.instance.playerAct.itemInventory[i];
             if (getItem.itemCode == Item.itemType)
             {
                 checkItem = Item;
@@ -194,14 +194,14 @@ public class PlayerInfo : ScriptableObject
             Item invenItems = objItem.GetComponent<Item>();
             invenItems.Init(item);
             invenItems.curCount++;
-            GameManager.instance.player_Info.itemInventory.Add(invenItems);
+            GameManager.instance.playerAct.itemInventory.Add(invenItems);
 
-            GameManager.instance.player_Info.StatCalculate();
+            GameManager.instance.playerAct.StatCalculate();
         }
         else if (isGet == true)
         {
             checkItem.curCount++;
-            GameManager.instance.player_Info.StatCalculate();
+            GameManager.instance.playerAct.StatCalculate();
         }
 
     }
@@ -272,10 +272,10 @@ public class PlayerInfo : ScriptableObject
     /// </summary>
     public void StatCalculate()
     {
-        if (GameManager.instance.player_Info != null)
+        if (GameManager.instance.playerAct != null)
             ItemSearch();
 
-        Player_Action info = GameManager.instance.player_Info;
+        Player_Action info = GameManager.instance.playerAct;
         //아이템 스탯 계산
         for (int i = 0; i < info.itemInventory.Count; i++)
         {
@@ -708,15 +708,15 @@ public class PlayerInfo : ScriptableObject
 
         if (GameManager.instance.character == Player.Character.MULTITASKER)
         {
-            persentDamage -= 5 * GameManager.instance.player_Info.weapons.Count;
+            persentDamage -= 5 * GameManager.instance.playerAct.weapons.Count;
         }
         if (GameManager.instance.character == Player.Character.GLADIATOR)
         {
             bool isSame = false;
             List<Weapon.Weapons> sortWeapon = new List<Weapon.Weapons>();
-            for (int i = 0; i < GameManager.instance.player_Info.weapons.Count; i++)
+            for (int i = 0; i < GameManager.instance.playerAct.weapons.Count; i++)
             {
-                Weapon_Action myWeapon = GameManager.instance.player_Info.weapons[i].GetComponent<Weapon_Action>();
+                Weapon_Action myWeapon = GameManager.instance.playerAct.weapons[i].GetComponent<Weapon_Action>();
 
                 for (int j = 0; j < sortWeapon.Count; j++)
                 {
@@ -753,7 +753,7 @@ public class PlayerInfo : ScriptableObject
         scaredSausageDamage = 0;
         scaredSausageDamageCount = 0;
 
-        List<Item> item = GameManager.instance.player_Info.itemInventory;
+        List<Item> item = GameManager.instance.playerAct.itemInventory;
 
         for (int i = 0; i < item.Count; i++)
         {
@@ -805,12 +805,12 @@ public class PlayerInfo : ScriptableObject
         native_Set = 0;
         elemental_Set = 0;
 
-        if (GameManager.instance.player_Info != null)
+        if (GameManager.instance.playerAct != null)
         {
-            Weapon_Action[] weapon = new Weapon_Action[GameManager.instance.player_Info.weapons.Count];
+            Weapon_Action[] weapon = new Weapon_Action[GameManager.instance.playerAct.weapons.Count];
             for (int i = 0; i < weapon.Length; i++)
             {
-                weapon[i] = GameManager.instance.player_Info.weapons[i].GetComponent<Weapon_Action>();
+                weapon[i] = GameManager.instance.playerAct.weapons[i].GetComponent<Weapon_Action>();
             }
 
             for (int i = 0; i < weapon.Length; i++)

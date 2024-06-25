@@ -86,7 +86,7 @@ public class ChargerEnemy : EnemyAction
     public override void Move()
     {
         float speed = Random.Range(minSpeed, maxSpeed);
-        moveSpeed = speed / 2500;
+        moveSpeed = speed / 2000;
         if (ugliyToothSlow >= 1)
         {
             moveSpeed = moveSpeed - ((moveSpeed / 100) * (ugliyToothSlow * 10));

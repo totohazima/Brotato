@@ -8,12 +8,8 @@ public class Weapon_Action : Weapon
     public Weapons index;
     public SettType[] setTypes;
     public WeaponScrip scrip;
-
+    public WeaponScanner scanner;
     public SpriteRenderer[] tierOutline;
-    public virtual void ReturnWeapon(Transform baseObject) //근접 전용
-    {
-        baseObject.localPosition = Vector3.zero;
-    }
 
     /// <summary>
     /// 무기 회전

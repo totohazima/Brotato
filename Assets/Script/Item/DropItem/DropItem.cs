@@ -21,7 +21,7 @@ public class DropItem : MonoBehaviour, ICustomUpdateMono
         {
             GameManager game = GameManager.instance;
 
-            float instantMagnet = game.player_Info.instantMagnet / 100;
+            float instantMagnet = game.playerAct.instantMagnet / 100;
             float notInstant = 1 - instantMagnet;
             float[] chanceLise = { instantMagnet, notInstant };
             int index = Judgment(chanceLise);

@@ -115,6 +115,7 @@ public class Bullet : MonoBehaviour
         }
 
         startPos = transform.position;
+        dir = dir * 150;
         if (per >= 0)
         {
             direction = dir;

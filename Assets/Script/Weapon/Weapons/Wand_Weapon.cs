@@ -5,7 +5,6 @@ using UnityEngine;
 public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
 {
     float timer;
-    WeaponScanner scanner;
     [SerializeField] private bool isFire;
     [SerializeField] private Transform muzzle;
     [SerializeField] private Transform imageGroup;
@@ -28,7 +27,8 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
     {
         ResetStat();
         AfterStatSetting();
-        scanner.radius = realRange;
+        scanner.detectedRaius = realRange_Detected;
+        scanner.attackRadius = realRange_Attack;
         StartCoroutine(MuzzleMove());
         for (int i = 0; i < tierOutline.Length; i++)
         {
@@ -46,7 +46,7 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
         //군인: 이동 중 공격 불가
         if (GameManager.instance.character == Player.Character.SOLDIER)
         {
-            if (GameManager.instance.player_Info.isStand == true && scanner.currentTarget != null)
+            if (GameManager.instance.playerAct.isStand == true && scanner.attackTarget != null)
             {
                 if (timer >= afterCoolTime)
                 {
@@ -57,7 +57,7 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
         }
         else
         {
-            if (scanner.currentTarget != null)
+            if (scanner.attackTarget != null)
             {
                 if (timer >= afterCoolTime)
                 {
@@ -74,26 +74,26 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
     }
     private IEnumerator MuzzleMove()
     {
-        if (scanner.currentTarget == null && isFire == false)
+        if (scanner.detectedTarget == null && isFire == false)
         {
-            if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft == true)
+            Vector3 dir = new Vector3(GameManager.instance.playerAct.joyStick.Horizontal, GameManager.instance.playerAct.joyStick.Vertical, 0);
+            dir.Normalize();
+            float angle = GetAngle(Vector2.zero, dir);
+            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
+
+            if (GameManager.instance.playerAct != null && GameManager.instance.playerAct.isLeft)
             {
+
                 WeaponSpinning(true);
-                LeanTween.rotate(gameObject, new Vector3(0, 0, 180), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
             else
             {
                 WeaponSpinning(false);
-                LeanTween.rotate(gameObject, new Vector3(0, 0, 0), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
-            //Vector3 target = Vector3.zero;
-            //Vector3 dir = target - transform.position;
-            //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            //LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
         }
-        else if(scanner.currentTarget != null && isFire == false)
+        else if (scanner.detectedTarget != null && scanner.attackTarget == null && isFire == false)
         {
-            Vector3 target = scanner.currentTarget.position;
+            Vector3 target = scanner.detectedTarget.position;
             if (target.x < transform.position.x)
             {
                 WeaponSpinning(true);
@@ -106,19 +106,33 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
         }
-
-        yield return 0;
+        else if (scanner.attackTarget != null && isFire == false)
+        {
+            Vector3 target = scanner.attackTarget.position;
+            if (target.x < transform.position.x)
+            {
+                WeaponSpinning(true);
+            }
+            else
+            {
+                WeaponSpinning(false);
+            }
+            Vector3 dir = target - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
+        }
+        yield return null;
     }
 
     private IEnumerator Fire()
     {
-        if (scanner.currentTarget != null)
+        if (scanner.attackTarget != null)
         {
             isFire = true;
 
-            Vector3 targetPos = scanner.currentTarget.position;
+            Vector3 targetPos = scanner.attackTarget.position;
             StartCoroutine(MuzzleMove());
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.12f);
 
             Vector3 dir = targetPos - transform.position;
             dir = dir.normalized;
@@ -127,12 +141,12 @@ public class Wand_Weapon : Weapon_Action, ICustomUpdateMono
             bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
 
             Bullet bulletInit = bullet.GetComponent<Bullet>();
-            bulletInit.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dir * 200);
+            bulletInit.Init(afterDamage, afterPenetrate, realRange_Attack, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, dir);
             bulletInit.StatusEffecInit(StatusEffect.EffectType.BURN);
 
             float damage = 0;
             int count = 0;
-            Player_Action player = GameManager.instance.player_Info;
+            Player_Action player = GameManager.instance.playerAct;
             switch (weaponTier)
             {
                 case 0:

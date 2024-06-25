@@ -9,7 +9,7 @@ public class Armor_Info : Stat_Info
         icon.sprite = scriptable.statImage;
         title.text = scriptable.statName;
 
-        float armor = Mathf.Abs(GameManager.instance.player_Info.armor);
+        float armor = Mathf.Abs(GameManager.instance.playerAct.armor);
         float enduce = 1 / (1 + (armor / 15));
         enduce = 100 - (enduce * 100);
         if (StageManager.instance.playerInfo.armor >= 0)

@@ -40,10 +40,10 @@ public class SaveLoadExample : MonoBehaviour, UI_Upadte
         /// <summary>
         /// 무기 데이터 저장
         /// </summary>
-        ES3.Save("WeaponCount", GameManager.instance.player_Info.weapons.Count, saveFilePath);
-        for (int i = 0; i < GameManager.instance.player_Info.weapons.Count; i++)
+        ES3.Save("WeaponCount", GameManager.instance.playerAct.weapons.Count, saveFilePath);
+        for (int i = 0; i < GameManager.instance.playerAct.weapons.Count; i++)
         {
-            Weapon_Action weapon = GameManager.instance.player_Info.weapons[i].GetComponent<Weapon_Action>();
+            Weapon_Action weapon = GameManager.instance.playerAct.weapons[i].GetComponent<Weapon_Action>();
 
             ES3.Save($"Weapon_{i}_Code", weapon.index, saveFilePath);
             ES3.Save($"Weapon_{i}_Tier", weapon.weaponTier, saveFilePath);
@@ -52,10 +52,10 @@ public class SaveLoadExample : MonoBehaviour, UI_Upadte
         /// <summary>
         /// 아이템 데이터 저장
         /// </summary>
-        ES3.Save("ItemCount", GameManager.instance.player_Info.itemInventory.Count, saveFilePath);
-        for (int i = 0; i < GameManager.instance.player_Info.itemInventory.Count; i++)
+        ES3.Save("ItemCount", GameManager.instance.playerAct.itemInventory.Count, saveFilePath);
+        for (int i = 0; i < GameManager.instance.playerAct.itemInventory.Count; i++)
         {
-            Item item = GameManager.instance.player_Info.itemInventory[i];
+            Item item = GameManager.instance.playerAct.itemInventory[i];
 
             ES3.Save($"Item_{i}_Code", item.itemType, saveFilePath);
             ES3.Save($"Item_{i}_Count", item.curCount, saveFilePath);

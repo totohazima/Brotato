@@ -443,7 +443,8 @@ MonoBehaviour:
   afterCriticalDamage: 0
   afterCoolTime: 0
   afterRange: 0
-  realRange: 0
+  realRange_Detected: 0
+  realRange_Attack: 0
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
@@ -480,8 +481,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b170e3e7a9554fd45af3ad856c19c8db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
-  target: {fileID: 0}
+  detectedTarget: {fileID: 0}
+  attackTarget: {fileID: 0}
+  detectedRaius: 0
+  attackRadius: 0
+  detectedTargets: []
 --- !u!1 &4245991934039231395
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,10 +537,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.49852866
-  m_Height: 6.1135654
+  m_Radius: 0.9223509
+  m_Height: 6.3743787
   m_Direction: 1
-  m_Center: {x: -0.07427138, y: 0.069986105, z: 0}
+  m_Center: {x: 0.023533821, y: 1.5370636, z: 0}
 --- !u!1 &4245991934153760113
 GameObject:
   m_ObjectHideFlags: 0

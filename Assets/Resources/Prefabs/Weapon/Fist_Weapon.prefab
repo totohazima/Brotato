@@ -407,7 +407,8 @@ MonoBehaviour:
   afterCriticalDamage: 0
   afterCoolTime: 0
   afterRange: 0
-  realRange: 0
+  realRange_Detected: 0
+  realRange_Attack: 0
   afterPenetrate: 0
   afterPenetrateDamage: 0
   afterBloodSucking: 0
@@ -440,8 +441,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b170e3e7a9554fd45af3ad856c19c8db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTarget: {fileID: 0}
-  radius: 0
+  detectedTarget: {fileID: 0}
+  attackTarget: {fileID: 0}
+  detectedRaius: 0
+  attackRadius: 0
   detectedTargets: []
 --- !u!1 &230209932486574872
 GameObject:
@@ -494,10 +497,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.0825917
-  m_Height: 2.1651833
-  m_Direction: 1
-  m_Center: {x: -0.39233172, y: 0.13761234, z: 0}
+  m_Radius: 1.2026477
+  m_Height: 4.52032
+  m_Direction: 0
+  m_Center: {x: 0.50010395, y: -0.027464628, z: 0}
 --- !u!1 &230209932599530954
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,7 +619,7 @@ Transform:
   m_GameObject: {fileID: 2788002623014954691}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.27, y: 0, z: -2}
+  m_LocalPosition: {x: 2.67, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -700,7 +703,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -2}
-  m_LocalScale: {x: 8, y: 8, z: 1}
+  m_LocalScale: {x: 9, y: 9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 512108531}

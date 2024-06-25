@@ -61,7 +61,7 @@ public class StageManager : MonoBehaviour, ICustomUpdateMono, UI_Upadte
         mainPlayer = Instantiate(playerPrefab);
         main = mainPlayer.transform;
         playerInfo = mainPlayer.GetComponent<Player_Action>();
-        GameManager.instance.player_Info = playerInfo;
+        GameManager.instance.playerAct = playerInfo;
         GameManager.instance.playerTrans = playerInfo.weaponMainPos;
         //curHp = 1; //»ç¸Á ¹æÁö
         

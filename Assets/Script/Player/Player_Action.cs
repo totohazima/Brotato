@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Player_Action : Player, ICustomUpdateMono
 {
@@ -24,6 +25,7 @@ public class Player_Action : Player, ICustomUpdateMono
     public JoyStick joyStick;
     public WhiteFlash whiteFlash;
     public PlayerSprite playerSprite;
+    public WeaponPostion weaponPostion;
 
     void Start()
     {
@@ -136,19 +138,7 @@ public class Player_Action : Player, ICustomUpdateMono
         }
 
     }
-    //private void Move(Vector3 dir)
-    //{
-    //    anim.SetBool("Move", true);
-    //    //Vector3 dirVec = joy.moveTarget.position - rigid.position;
-    //    Vector3 nextVec = dir.normalized * moveSpeed;
-    //    rigid.MovePosition(rigid.position + nextVec);
-    //    rigid.velocity = Vector3.zero;
 
-    //    ///이동 제한 
-    //    float x = Mathf.Clamp(transform.position.x, stage.xMin, stage.xMax);
-    //    float y = Mathf.Clamp(transform.position.y, stage.yMin, stage.yMax);
-    //    transform.position = new Vector3(x, y, transform.position.z);
-    //}
     private void Move(Vector3 dir)
     {
         anim.SetBool("Move", true);
@@ -182,47 +172,88 @@ public class Player_Action : Player, ICustomUpdateMono
     /// </summary>
     private void WeaponAngleSetting()
     {
-        float[] deg = new float[0];
-        float dis = 0;
+        //float[] deg = new float[0];
+        //float dis = 0;
+        //switch (weapons.Count)
+        //{
+        //    case 1:
+        //        deg = new float[] { 90 };
+        //        dis = 0;
+        //        break;
+        //    case 2:
+        //        deg = new float[] { 0, 180 };
+        //        dis = 5;
+        //        break;
+        //    case 3:
+        //        deg = new float[] { 45, 135, 270 };
+        //        dis = 5;
+        //        break;
+        //    case 4:
+        //        deg = new float[] { 45, 135, 225, 315 };
+        //        dis = 5;
+        //        break;
+        //    case 5:
+        //        deg = new float[] { 45, 135, 200, 270, 340 };
+        //        dis = 5;
+        //        break;
+        //    case 6:
+        //        deg = new float[] { 45, 135, 180, 225, 315, 360 };
+        //        dis = 5;
+        //        break;
+        //    default:
+        //        deg = new float[weapons.Count];
+        //        for (int i = 0; i < weapons.Count; i++)
+        //        {
+        //            deg[i] = i * 360f / weapons.Count;
+        //        }
+        //        dis = 5;
+        //        break;
+        //}
+        //for (int i = 0; i < deg.Length; i++)
+        //{
+        //    Vector3 pos = ConvertAngleToVector(-deg[i], dis);
+        //    weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
+        //}
+        Vector3[] weaponPos = new Vector3[0];
+        Vector3[] scannerPos = new Vector3[0];
+        Vector3[] wPos = weaponPostion.weaponPos;
+        Vector3[] sPos = weaponPostion.weaponScannerPos;
         switch (weapons.Count)
         {
             case 1:
-                deg = new float[] { 90 };
-                dis = 2;
+                weaponPos = new Vector3[] { weaponPostion.firstWeaponPos };
+                scannerPos = new Vector3[] { transform.position };
                 break;
             case 2:
-                deg = new float[] { 45, 135 };
-                dis = 5;
+                weaponPos = new Vector3[] { wPos[0], wPos[8] };
+                scannerPos = new Vector3[] { sPos[0], sPos[8] };
                 break;
             case 3:
-                deg = new float[] { 45, 135, 270 };
-                dis = 5;
+                weaponPos = new Vector3[] { wPos[2], wPos[6], wPos[12] };
+                scannerPos = new Vector3[] { sPos[2], sPos[6], sPos[12] };
                 break;
             case 4:
-                deg = new float[] { 45, 135, 225, 315 };
-                dis = 5;
+                weaponPos = new Vector3[] { wPos[14], wPos[2], wPos[6], wPos[10] };
+                scannerPos = new Vector3[] { sPos[14], sPos[2], sPos[6], sPos[10] };
                 break;
             case 5:
-                deg = new float[] { 45, 135, 200, 270, 340 };
-                dis = 5;
+                weaponPos = new Vector3[] { wPos[2], wPos[6], wPos[9], wPos[12], wPos[15] };
+                scannerPos = new Vector3[] { sPos[2], sPos[6], sPos[9], sPos[12], sPos[15] };
                 break;
             case 6:
-                deg = new float[] { 45, 135, 180, 225, 315, 360 };
-                dis = 5;
-                break;
-            default:
-                deg = new float[weapons.Count];
-                for (int i = 0; i < weapons.Count; i++)
-                {
-                    deg[i] = i * 360f / weapons.Count;
-                }
-                dis = 5;
+                weaponPos = new Vector3[] { wPos[14], wPos[0], wPos[2], wPos[6], wPos[8], wPos[10] };
+                scannerPos = new Vector3[] { sPos[14], sPos[0], sPos[2], sPos[6], sPos[8], sPos[10] };
                 break;
         }
-        for (int i = 0; i < deg.Length; i++)
+        for(int i = 0; i < weaponPos.Length; i++)
         {
-            Vector3 pos = ConvertAngleToVector(-deg[i], dis);
-            weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
+            Vector3 pos = weaponPos[i];
+            weapons[i].transform.position = Vector3.Lerp(weapons[i].transform.position, new Vector3(pos.x, pos.y, pos.z), 5 * Time.deltaTime);
+        }
+        for (int i = 0; i < scannerPos.Length; i++)
+        {
+            Vector3 pos = scannerPos[i];
+            weapons[i].scanner.scannerPos = new Vector3(pos.x, pos.y, pos.z);
         }
     }
 
@@ -275,11 +306,18 @@ public class Player_Action : Player, ICustomUpdateMono
                 }
             }
         }
-        moveSpeed = 1 * (1 + (speed / 100));
-        moveSpeed = moveSpeed / 2;
+        moveSpeed = 1300;
+        moveSpeed = moveSpeed * (1 + (speed / 100));
+        moveSpeed = moveSpeed / 2000;
         magnet.radius = magnetRanges * (1 + (magnetRange / 100));
     }
 
+
+    public float GetAngle(Vector2 start, Vector2 end)//각도구하기
+    {
+        Vector2 vectorPos = end - start;
+        return Mathf.Atan2(vectorPos.y, vectorPos.x) * Mathf.Rad2Deg;
+    }
     private Vector3 ConvertAngleToVector(float _deg, float dis)//각도로 좌표 구하기
     {
         var rad = _deg * Mathf.Deg2Rad;
@@ -303,7 +341,7 @@ public class Player_Action : Player, ICustomUpdateMono
         if (game.isStart == true && drawWhenSelected)
         {
             Gizmos.color = gizmoColor;
-            DrawHollowCircle(game.player_Info.weaponMainPos.position, game.playerInfo.doNotSpawnRange, segments);
+            DrawHollowCircle(game.playerAct.weaponMainPos.position, game.playerInfo.doNotSpawnRange, segments);
         }
     }
     void DrawHollowCircle(Vector3 center, float radius, int segments)

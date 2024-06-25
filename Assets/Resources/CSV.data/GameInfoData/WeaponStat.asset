@@ -245,10 +245,10 @@ MonoBehaviour:
     - 15
     - 15
     baseRange:
-    - 150
-    - 150
-    - 150
-    - 150
+    - 165
+    - 165
+    - 165
+    - 165
     penetration: 0
     penetrationDamage: 0
     attackType: MELEE
@@ -346,10 +346,10 @@ MonoBehaviour:
     - 3
     - 3
     baseRange:
-    - 125
-    - 125
-    - 125
-    - 125
+    - 150
+    - 150
+    - 150
+    - 150
     penetration: 0
     penetrationDamage: 0
     attackType: MELEE

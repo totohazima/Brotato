@@ -57,6 +57,6 @@ public class Turret : MonoBehaviour, ICustomUpdateMono
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.zero, dir);
         float penDamage = -50 + game.playerInfo.penetrateDamage;
-        bullet.GetComponent<Bullet>().Init(damage, penetrate, scan.radius, 100, 0, 0, 0, 0, penDamage,  dir * 200);
+        bullet.GetComponent<Bullet>().Init(damage, penetrate, scan.radius, 100, 0, 0, 0, 0, penDamage,  dir);
     }
 }

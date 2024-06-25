@@ -38,9 +38,9 @@ public class MainSceneManager : MonoBehaviour
     }
     void Start()
     {
-        if (GameManager.instance.IsSceneLoaded("TitleScene") == true)
+        if (GameManager.instance.IsSceneLoaded("Title") == true)
         {
-            SceneManager.UnloadSceneAsync("TitleScene");
+            SceneManager.UnloadSceneAsync("Title");
         }
     }
     public void StartBtn() //게임 시작

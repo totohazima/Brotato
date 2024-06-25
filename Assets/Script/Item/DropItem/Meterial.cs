@@ -15,7 +15,7 @@ public class Meterial : DropItem
             if (GameManager.instance.isEnd == false)
             {
                 game.playerInfo.money += moneyValue;
-                game.playerInfo.curExp += (expValue * (1 + (game.player_Info.expGain / 100)));
+                game.playerInfo.curExp += (expValue * (1 + (game.playerAct.expGain / 100)));
                 if (game.playerInfo.interest > 0)
                 {
                     if (game.playerInfo.interest < moneyValue)
@@ -35,12 +35,12 @@ public class Meterial : DropItem
             else if(GameManager.instance.isEnd == true)
             {
                 game.playerInfo.interest += moneyValue;
-                game.playerInfo.curExp += (expValue * (1 + (game.player_Info.expGain / 100)));
+                game.playerInfo.curExp += (expValue * (1 + (game.playerAct.expGain / 100)));
             }
 
             if (GameManager.instance.playerInfo.playerHealth < StageManager.instance.maxHp)
             {
-                float monkeyChance = (game.player_Info.meterialHeal / 100);
+                float monkeyChance = (game.playerAct.meterialHeal / 100);
                 float failure = 1 - monkeyChance;
                 float[] chanceLise = { monkeyChance, failure };
                 int index = StageManager.instance.Judgment(chanceLise);

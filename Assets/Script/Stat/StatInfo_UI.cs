@@ -102,7 +102,7 @@ public class StatInfo_UI : MonoBehaviour, UI_Upadte
     }
     private void ViewBasicStats()
     {
-        player = GameManager.instance.player_Info;
+        player = GameManager.instance.playerAct;
 
         if (player != null)
         {

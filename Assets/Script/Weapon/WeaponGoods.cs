@@ -419,22 +419,22 @@ public class WeaponGoods : Weapon, UI_Upadte
                     switch (weaponTier)
                     {
                         case (0):
-                            damageTxt = (scriptable.tier1_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier1_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            damageTxt = (scriptable.tier1_InfoStat[0] + (game.playerAct.elementalDamage * (scriptable.tier1_InfoStat[2] / 100)) * (1 + (game.playerAct.persentDamage / 100))).ToString("F0");
                             infoUI.text = "<color=#4CFF52>" + damageTxt + "</color>x<color=#4CFF52>" + scriptable.tier1_InfoStat[1] + "</color>";
                             infoUI.text += "(<sprite=2>)" + scriptable.tier1_Info[0];
                             break;
                         case (1):
-                            damageTxt = (scriptable.tier2_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier2_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            damageTxt = (scriptable.tier2_InfoStat[0] + (game.playerAct.elementalDamage * (scriptable.tier2_InfoStat[2] / 100)) * (1 + (game.playerAct.persentDamage / 100))).ToString("F0");
                             infoUI.text = "<color=#4CFF52>" + damageTxt + "</color>x<color=#4CFF52>" + scriptable.tier2_InfoStat[1] + "</color>";
                             infoUI.text += "(<sprite=2>)" + scriptable.tier2_Info[0];
                             break;
                         case (2):
-                            damageTxt = (scriptable.tier3_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier3_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            damageTxt = (scriptable.tier3_InfoStat[0] + (game.playerAct.elementalDamage * (scriptable.tier3_InfoStat[2] / 100)) * (1 + (game.playerAct.persentDamage / 100))).ToString("F0");
                             infoUI.text = "<color=#4CFF52>" + damageTxt + "</color>x<color=#4CFF52>" + scriptable.tier3_InfoStat[1] + "</color>";
                             infoUI.text += "(<sprite=2>)" + scriptable.tier3_Info[0];
                             break;
                         case (3):
-                            damageTxt = (scriptable.tier4_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier4_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            damageTxt = (scriptable.tier4_InfoStat[0] + (game.playerAct.elementalDamage * (scriptable.tier4_InfoStat[2] / 100)) * (1 + (game.playerAct.persentDamage / 100))).ToString("F0");
                             infoUI.text = "<color=#4CFF52>" + damageTxt + "</color>x<color=#4CFF52>" + scriptable.tier4_InfoStat[1] + "</color>";
                             infoUI.text += "(<sprite=2>)" + scriptable.tier4_Info[0];
                             break;
@@ -445,22 +445,22 @@ public class WeaponGoods : Weapon, UI_Upadte
                     switch (weaponTier)
                     {
                         case (0):
-                            damageTxt2 = (scriptable.tier1_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier1_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            damageTxt2 = (scriptable.tier1_InfoStat[0] + (game.playerAct.elementalDamage * (scriptable.tier1_InfoStat[2] / 100)) * (1 + (game.playerAct.persentDamage / 100))).ToString("F0");
                             infoUI.text = "<color=#4CFF52>" + damageTxt2 + "</color>x<color=#4CFF52>" + scriptable.tier1_InfoStat[1] + "</color>";
                             infoUI.text += "(<sprite=2>)" + scriptable.tier1_Info[0];
                             break;
                         case (1):
-                            damageTxt2 = (scriptable.tier2_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier2_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            damageTxt2 = (scriptable.tier2_InfoStat[0] + (game.playerAct.elementalDamage * (scriptable.tier2_InfoStat[2] / 100)) * (1 + (game.playerAct.persentDamage / 100))).ToString("F0");
                             infoUI.text = "<color=#4CFF52>" + damageTxt2 + "</color>x<color=#4CFF52>" + scriptable.tier2_InfoStat[1] + "</color>";
                             infoUI.text += "(<sprite=2>)" + scriptable.tier2_Info[0];
                             break;
                         case (2):
-                            damageTxt2 = (scriptable.tier3_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier3_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            damageTxt2 = (scriptable.tier3_InfoStat[0] + (game.playerAct.elementalDamage * (scriptable.tier3_InfoStat[2] / 100)) * (1 + (game.playerAct.persentDamage / 100))).ToString("F0");
                             infoUI.text = "<color=#4CFF52>" + damageTxt2 + "</color>x<color=#4CFF52>" + scriptable.tier3_InfoStat[1] + "</color>";
                             infoUI.text += "(<sprite=2>)" + scriptable.tier3_Info[0];
                             break;
                         case (3):
-                            damageTxt2 = (scriptable.tier4_InfoStat[0] + (game.player_Info.elementalDamage * (scriptable.tier4_InfoStat[2] / 100)) * (1 + (game.player_Info.persentDamage / 100))).ToString("F0");
+                            damageTxt2 = (scriptable.tier4_InfoStat[0] + (game.playerAct.elementalDamage * (scriptable.tier4_InfoStat[2] / 100)) * (1 + (game.playerAct.persentDamage / 100))).ToString("F0");
                             infoUI.text = "<color=#4CFF52>" + damageTxt2 + "</color>x<color=#4CFF52>" + scriptable.tier4_InfoStat[1] + "</color>";
                             infoUI.text += "(<sprite=2>)" + scriptable.tier4_Info[0];
                             break;
@@ -544,7 +544,7 @@ public class WeaponGoods : Weapon, UI_Upadte
             weaponInfo.weaponTier = weaponTier;
             weapon.transform.SetParent(StageManager.instance.playerInfo.weaponMainPos);
 
-            GameManager.instance.player_Info.weapons.Add(weapon);
+            GameManager.instance.playerAct.weapons.Add(weapon.GetComponent<Weapon_Action>());
             UnLockIng();
             ShopManager.instance.goodsList.Remove(gameObject);
             ItemManager.instance.WeaponListUp();
@@ -554,10 +554,10 @@ public class WeaponGoods : Weapon, UI_Upadte
         }
         else if(GameManager.instance.playerInfo.money >= weaponPrice)
         {
-            List<GameObject> weapons = GameManager.instance.player_Info.weapons;
+            List<Weapon_Action> weapons = GameManager.instance.playerAct.weapons;
             for (int i = 0; i < weapons.Count; i++)
             {
-                Weapon_Action weapon = weapons[i].GetComponent<Weapon_Action>();
+                Weapon_Action weapon = weapons[i];//.GetComponent<Weapon_Action>();
                 if(weapon.index == index)
                 {
                     if(weapon.weaponTier == weaponTier && weapon.weaponTier < 3)

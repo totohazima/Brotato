@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
 
     [Header("Inventory")]
     public List<Item> itemInventory;
-    public List<GameObject> weapons;
+    public List<Weapon_Action> weapons;
     public enum Character
     {
         WELLROUNDED, //다재다능
@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
 
     public void StatCalculate()
     {
-        if (GameManager.instance.player_Info != null)
+        if (GameManager.instance.playerAct != null)
             GameManager.instance.playerInfo.ItemSearch();
 
         //스탯 초기화

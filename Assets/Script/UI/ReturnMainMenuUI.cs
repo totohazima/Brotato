@@ -19,7 +19,7 @@ public class ReturnMainMenuUI : MonoBehaviour
     public void ReturnMainMenu()
     {
         GameManager.instance.GameManagerClear();
-        SceneManager.LoadSceneAsync("MainScene",LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync("MainMenu",LoadSceneMode.Single);
         //SceneManager.UnloadSceneAsync("Stage",UnloadSceneOptions.None);
         
     }

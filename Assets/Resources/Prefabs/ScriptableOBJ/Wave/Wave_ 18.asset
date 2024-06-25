@@ -18,8 +18,8 @@ MonoBehaviour:
   - {fileID: 3416201615854339148, guid: c6a7b6ee2a01f434d925a3693d660ef9, type: 3}
   - {fileID: 3416201615854339148, guid: 4693b54f36cd9bf46a3a420a6f3cb48f, type: 3}
   enemyPersentage:
-  - 0
-  - 35
-  - 35
-  - 30
+  - 34
+  - 26
+  - 24
+  - 16
   isBossSpawn: 0

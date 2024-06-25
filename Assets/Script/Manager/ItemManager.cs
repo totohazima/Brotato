@@ -83,10 +83,10 @@ public class ItemManager : MonoBehaviour
             ListUpUI_Weapon.ReturnObject_Pause(ListUpUI_Weapon.instance.poolingObject_Pause[i]);
         }
         
-        List<GameObject> inventory = GameManager.instance.player_Info.weapons;
+        List<Weapon_Action> inventory = GameManager.instance.playerAct.weapons;
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
-            Weapon_Action info = inventory[i].GetComponent<Weapon_Action>();
+            Weapon_Action info = inventory[i];//.GetComponent<Weapon_Action>();
             invenWeapon.weapon_Object = info;
 
             Weapon_Object weapon_Object1 = ListUpUI_Weapon.GetWeaponObj();
@@ -146,7 +146,7 @@ public class ItemManager : MonoBehaviour
             Destroy(item3);
         }
 
-        List<Item> inventory = GameManager.instance.player_Info.itemInventory;
+        List<Item> inventory = GameManager.instance.playerAct.itemInventory;
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
 

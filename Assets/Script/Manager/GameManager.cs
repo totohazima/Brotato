@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
     [HideInInspector] public GameObject difficult_Obj;
     [HideInInspector] public int maxWeaponCount; //최대 무기 갯수
     public PlayerInfo playerInfo;
-    public Player_Action player_Info;
+    public Player_Action playerAct;
     public Player.Character character;
     public GameObject weaponPrefab;
     public GameObject optionUI;
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
                 playerInfo.playerLevel++;
                 playerInfo.levelUpChance++;
 
-                player_Info.StatCalculate();
+                playerAct.StatCalculate();
             }
         }
 
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
     }
     private void GameStart() //Title에서 Main으로
     {
-        LoadingSceneManager.LoadScene("MainScene");
+        LoadingSceneManager.LoadScene("MainMenu");
     }
     private IEnumerator Died()
     {
@@ -138,8 +138,8 @@ public class GameManager : MonoBehaviour, UI_Upadte
         if (weaponPrefab != null)
         {
             GameObject startWeapon = Instantiate(weaponPrefab);
-            startWeapon.transform.SetParent(player_Info.weaponMainPos);
-            player_Info.weapons.Add(startWeapon);
+            startWeapon.transform.SetParent(playerAct.weaponMainPos);
+            playerAct.weapons.Add(startWeapon.GetComponent<Weapon_Action>());
         }
 
         //레인저 권총 추가
@@ -149,8 +149,8 @@ public class GameManager : MonoBehaviour, UI_Upadte
             if (plusWeapon != null)
             {
                 GameObject weapon = Instantiate(plusWeapon);
-                weapon.transform.SetParent(player_Info.weaponMainPos);
-                player_Info.weapons.Add(weapon);
+                weapon.transform.SetParent(playerAct.weaponMainPos);
+                playerAct.weapons.Add(weapon.GetComponent<Weapon_Action>());
             }
         }
         //엔지니어 렌치 추가
@@ -160,8 +160,8 @@ public class GameManager : MonoBehaviour, UI_Upadte
             if (plusWeapon != null)
             {
                 GameObject weapon = Instantiate(plusWeapon);
-                weapon.transform.SetParent(player_Info.weaponMainPos);
-                player_Info.weapons.Add(weapon);
+                weapon.transform.SetParent(playerAct.weaponMainPos);
+                playerAct.weapons.Add(weapon.GetComponent<Weapon_Action>());
             }
         }
         //평화주의자 럼버잭 셔츠 추가
@@ -183,14 +183,14 @@ public class GameManager : MonoBehaviour, UI_Upadte
             Item item = itemObj.GetComponent<Item>();
             item.Init(getItem);
             item.curCount++;
-            player_Info.itemInventory.Add(item);
+            playerAct.itemInventory.Add(item);
         }
 
         playerInfo.EngineerTurretPosSetting();
 
         playerInfo.WeaponSetSearch();
-        player_Info.StatCalculate();
-        LoadingSceneManager.CloseScene("MainScene");
+        playerAct.StatCalculate();
+        LoadingSceneManager.CloseScene("MainMenu");
     }
 
     public IEnumerator GameLoad()
@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         {
             maxWeaponCount = 6;
         }
-        playerInfo.playerHealth = player_Info.maxHealth_Origin;
+        playerInfo.playerHealth = playerAct.maxHealth_Origin;
         StageManager.instance.waveLevel = ES3.Load<int>("Wave",easySave.saveFilePath);
 
         //무기 로드
@@ -251,8 +251,8 @@ public class GameManager : MonoBehaviour, UI_Upadte
             {
                 saveWeapon.GetComponent<Weapon>().weaponTier = saveWeaponTier;
                 GameObject weapon = Instantiate(saveWeapon);
-                weapon.transform.SetParent(player_Info.weaponMainPos);
-                player_Info.weapons.Add(weapon);
+                weapon.transform.SetParent(playerAct.weaponMainPos);
+                playerAct.weapons.Add(weapon.GetComponent<Weapon_Action>());
             }
         }
 
@@ -278,15 +278,15 @@ public class GameManager : MonoBehaviour, UI_Upadte
             Item item = itemObj.GetComponent<Item>();
             item.Init(getItem);
             item.curCount = item_Count;
-            player_Info.itemInventory.Add(item);
+            playerAct.itemInventory.Add(item);
         }
 
         //StageManager.instance.ShopOpen();
 
         playerInfo.WeaponSetSearch();
-        player_Info.StatCalculate();
+        playerAct.StatCalculate();                                  
         easySave.isLoaded = false;
-        LoadingSceneManager.CloseScene("MainScene");
+        LoadingSceneManager.CloseScene("MainMenu");
     }
 
     /// <summary>
@@ -313,7 +313,7 @@ public class GameManager : MonoBehaviour, UI_Upadte
         isStart = false;
         harvestVariance_Amount = 0;
         player = null;
-        player_Info = null;
+        playerAct = null;
         weapon = null;
         weapon_Obj = null;
         weaponPrefab = null;

@@ -180,9 +180,9 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
         List<Weapon.Weapons> weaponTypes = new List<Weapon.Weapons>();
         List<Weapon.SettType> weaponClasses = new List<Weapon.SettType>();
 
-        for (int j = 0; j < GameManager.instance.player_Info.weapons.Count; j++)
+        for (int j = 0; j < GameManager.instance.playerAct.weapons.Count; j++)
         {
-            Weapon_Action weapon = GameManager.instance.player_Info.weapons[j].GetComponent<Weapon_Action>();
+            Weapon_Action weapon = GameManager.instance.playerAct.weapons[j].GetComponent<Weapon_Action>();
             bool isSameType = false;
             bool isSameClass = false;
             //같은 무기 구분
@@ -288,7 +288,7 @@ public class ShopManager : MonoBehaviour, ICustomUpdateMono
                 float sameWeaponPool, sameClassWeaponPool, allWeaponPool;
                 int nums = 0;
                 //무기가 없는 경우
-                if (GameManager.instance.player_Info.weapons.Count == 0)
+                if (GameManager.instance.playerAct.weapons.Count == 0)
                 {
                     nums = Random.Range(0, weapon.Length);
 

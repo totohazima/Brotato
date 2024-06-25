@@ -17,7 +17,7 @@ public class LoadingSceneManager : MonoBehaviour
     public static void LoadScene(string sceneName)
     {
         nextScene = sceneName;
-        SceneManager.LoadScene("LoadingScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Loading", LoadSceneMode.Additive);
     }
 
     public static void CloseScene(string sceneName)
@@ -51,7 +51,7 @@ public class LoadingSceneManager : MonoBehaviour
                 if (progressBar.fillAmount == 1.0f) 
                 { 
                     op.allowSceneActivation = true;
-                    CloseScene("LoadingScene");
+                    CloseScene("Loading");
                     yield break; 
                 } 
             }

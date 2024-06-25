@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 3416201615854339148, guid: 4693b54f36cd9bf46a3a420a6f3cb48f, type: 3}
   enemyPersentage:
   - 80
-  - 10
-  - 10
+  - 20
+  - 0
   - 0
   isBossSpawn: 0

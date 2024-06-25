@@ -72,7 +72,8 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float afterCriticalDamage;
     [HideInInspector] public float afterCoolTime;
     [HideInInspector] public float afterRange;
-    public float realRange; //실제 사거리
+    public float realRange_Detected; //실제 탐지 사거리
+    public float realRange_Attack; //실제 공격 사거리 
     [HideInInspector] public int afterPenetrate;
     [HideInInspector] public float afterPenetrateDamage;
     [HideInInspector] public float afterBloodSucking;
@@ -225,13 +226,18 @@ public class Weapon : MonoBehaviour
         if(attackType == WeaponType.MELEE.ToString()) //근접은 스탯 사거리 효과 절반만 받음
         {
             preRange = range + (player.range / 2);
+            afterRange = preRange;
+            realRange_Detected = afterRange / 10f;
+            realRange_Attack = afterRange / 17f;
         }
         else
         {
             preRange = range + player.range;
+            afterRange = preRange;
+            realRange_Detected = afterRange / 10f;
+            realRange_Attack = afterRange / 13f;
         }
-        afterRange = preRange;
-        realRange = afterRange / 20;
+        
         afterPenetrateDamage = -penetrateDamage + player.penetrateDamage;
         afterBloodSucking = bloodSucking + player.bloodSucking;
         afterKnockBack = knockBack + player.knockBack;

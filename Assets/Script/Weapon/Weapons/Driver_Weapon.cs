@@ -7,7 +7,6 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
     private float timer;
     private float mineTimer;
     private float targetLockTimer; // 타겟을 유지하는 시간 타이머
-    private WeaponScanner scanner;
     private Melee_Bullet bullet;
     private bool isFire;
     private bool isTimerReset;
@@ -51,37 +50,17 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
 
         ResetStat();
         AfterStatSetting();
-        scanner.radius = realRange;
+        scanner.detectedRaius = realRange_Detected;
+        scanner.attackRadius = realRange_Attack;
         StartCoroutine(MuzzleMove());
         UpdateTierOutline();
 
         timer += Time.deltaTime;
-        //targetLockTimer += Time.deltaTime;
-
-        //// 타겟이 죽었을 경우 타겟 제거
-        //if (currentTarget != null)
-        //{
-        //    if (currentTarget.parent.gameObject.activeSelf == false)
-        //    {
-        //        currentTarget = null;
-        //        targetLockTimer = 0;
-        //    }
-        //}
-
-        //// 타겟 재설정
-        //if (targetLockTimer >= targetLockTime && scanner.detectedTargets != null && scanner.detectedTargets.Count > 0)
-        //{
-        //    if (currentTarget == null || !scanner.detectedTargets.Contains(currentTarget))
-        //    {
-        //        currentTarget = GetClosestTarget(scanner.detectedTargets);
-        //        targetLockTimer = 0; // 타겟을 변경했으므로 타이머 초기화
-        //    }
-        //}
 
         // 군인 캐릭터의 경우 이동 중에는 공격 불가능
         if (GameManager.instance.character == Player.Character.SOLDIER)
         {
-            if (GameManager.instance.player_Info.isStand && scanner.currentTarget != null)
+            if (GameManager.instance.playerAct.isStand && scanner.attackTarget != null)
             {
                 if (timer >= afterCoolTime)
                 {
@@ -93,7 +72,7 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
         
         else
         {
-            if (scanner.currentTarget != null)
+            if (scanner.attackTarget != null)
             {
                 if (timer >= afterCoolTime)
                 {
@@ -149,22 +128,26 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
 
     IEnumerator MuzzleMove()
     {
-        if (scanner.currentTarget == null && isFire == false)
+        if (scanner.detectedTarget == null && isFire == false)
         {
-            if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft)
+            Vector3 dir = new Vector3(GameManager.instance.playerAct.joyStick.Horizontal, GameManager.instance.playerAct.joyStick.Vertical, 0);
+            dir.Normalize();
+            float angle = GetAngle(Vector2.zero, dir);
+            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
+
+            if (GameManager.instance.playerAct != null && GameManager.instance.playerAct.isLeft)
             {
-                LeanTween.rotate(gameObject, new Vector3(0, 0, 180), 0.1f).setEase(LeanTweenType.easeInOutQuad);
+
                 WeaponSpinning(true);
             }
             else
             {
-                LeanTween.rotate(gameObject, new Vector3(0, 0, 0), 0.1f).setEase(LeanTweenType.easeInOutQuad);
                 WeaponSpinning(false);
             }
         }
-        else if(scanner.currentTarget != null && isFire == false)
+        else if (scanner.detectedTarget != null && scanner.attackTarget == null && isFire == false)
         {
-            Vector3 target = scanner.currentTarget.position;
+            Vector3 target = scanner.detectedTarget.position;
             if (target.x < transform.position.x)
             {
                 WeaponSpinning(true);
@@ -177,7 +160,21 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
         }
-
+        else if (scanner.attackTarget != null && isFire == false)
+        {
+            Vector3 target = scanner.attackTarget.position;
+            if (target.x < transform.position.x)
+            {
+                WeaponSpinning(true);
+            }
+            else
+            {
+                WeaponSpinning(false);
+            }
+            Vector3 dir = target - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
+        }
         yield return null;
     }
 
@@ -185,19 +182,19 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
     {
         isFire = true;
 
-        bullet.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
+        bullet.Init(afterDamage, afterPenetrate, realRange_Attack, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
 
-        if (scanner.currentTarget != null)
+        if (scanner.attackTarget != null)
         {
-            Vector3 targetPos = scanner.currentTarget.position;
+            Vector3 targetPos = scanner.attackTarget.position;
             Vector3 originalPos = transform.position;
-            float realRanges = realRange - Vector3.Distance(baseObj.position, meleeMuzzle.position);
+            float realRanges = realRange_Attack - Vector3.Distance(baseObj.position, meleeMuzzle.position);
             StartCoroutine(MuzzleMove());
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.12f);
 
             Vector3 moveDir = (targetPos - originalPos).normalized;
             Vector3 destination = originalPos + moveDir * realRanges;
-            float moveDuration = realRange / 160; // 속도 조정
+            float moveDuration = realRange_Attack / 160; // 속도 조정
 
             LeanTween.move(baseObj.gameObject, destination, moveDuration).setEase(LeanTweenType.easeInOutQuad);
             coll.enabled = true;
@@ -205,12 +202,12 @@ public class Driver_Weapon : Weapon_Action, ICustomUpdateMono
             yield return new WaitForSeconds(moveDuration);
             bullet.knockBack = 0;
 
-            yield return new WaitForSeconds(realRange / 160);
-
-            LeanTween.moveLocal(baseObj.gameObject, Vector3.zero, moveDuration).setEase(LeanTweenType.easeInOutQuad);
             yield return new WaitForSeconds(moveDuration);
 
             coll.enabled = false;
+            LeanTween.moveLocal(baseObj.gameObject, Vector3.zero, moveDuration).setEase(LeanTweenType.easeInOutQuad);
+            yield return new WaitForSeconds(moveDuration);
+            
             isFire = false;
         }
     }

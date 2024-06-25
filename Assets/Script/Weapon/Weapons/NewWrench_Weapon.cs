@@ -728,7 +728,6 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
     [SerializeField] private Transform baseObj;
     [SerializeField] private CapsuleCollider coll;
     [SerializeField] private float timer;
-    private WeaponScanner scanner;
     private StageManager stage;
     private Melee_Bullet bullet;
     [SerializeField] private bool isFire;
@@ -758,7 +757,8 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
     {
         ResetStat();
         AfterStatSetting();
-        scanner.radius = realRange;
+        scanner.detectedRaius = realRange_Detected;
+        scanner.attackRadius = realRange_Attack;
         StartCoroutine(MuzzleMove());
 
         for (int i = 0; i < tierOutline.Length; i++)
@@ -766,7 +766,7 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             tierOutline[i].gameObject.SetActive(i == weaponTier);
         }
 
-        if (!isFire && scanner.currentTarget != null && timer >= afterCoolTime)
+        if (!isFire && scanner.attackTarget != null && timer >= afterCoolTime)
         {
             StartCoroutine(WheelAttack());
             timer = 0;
@@ -792,23 +792,49 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
 
     private IEnumerator MuzzleMove()
     {
-        if (scanner.currentTarget == null && isFire == false)
+       if (scanner.detectedTarget == null && isFire == false)
         {
-            if (GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft)
+            Vector3 dir = new Vector3(GameManager.instance.playerAct.joyStick.Horizontal, GameManager.instance.playerAct.joyStick.Vertical, 0);
+            dir.Normalize();
+            float angle = GetAngle(Vector2.zero, dir);
+            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.01f).setEase(LeanTweenType.easeInOutQuad);
+
+            if (GameManager.instance.playerAct != null && GameManager.instance.playerAct.isLeft)
             {
+
                 WeaponSpinning(true);
-                LeanTween.rotate(gameObject, new Vector3(0, 0, 180), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
             else
             {
                 WeaponSpinning(false);
-                LeanTween.rotate(gameObject, new Vector3(0, 0, 0), 0.01f).setEase(LeanTweenType.easeInOutQuad);
             }
         }
-        else if (scanner.currentTarget != null && isFire == false)
+        else if(scanner.detectedTarget != null && scanner.attackTarget == null && isFire == false)
         {
-            Vector3 target = scanner.currentTarget.position;
-            WeaponSpinning(GameManager.instance.player_Info != null && GameManager.instance.player_Info.isLeft);
+            Vector3 target = scanner.detectedTarget.position;
+            if (target.x < transform.position.x)
+            {
+                WeaponSpinning(true);
+            }
+            else
+            {
+                WeaponSpinning(false);
+            }
+            Vector3 dir = target - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
+        }
+        else if(scanner.attackTarget != null && isFire == false)
+        {
+            Vector3 target = scanner.attackTarget.position;
+            if (target.x < transform.position.x)
+            {
+                WeaponSpinning(true);
+            }
+            else
+            {
+                WeaponSpinning(false);
+            }
             Vector3 dir = target - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             LeanTween.rotate(gameObject, new Vector3(0, 0, angle), 0.1f).setEase(LeanTweenType.easeInOutQuad);
@@ -818,17 +844,17 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
 
     private IEnumerator WheelAttack()
     {
-        bool isAttack = IsRangeInTarget(scanner.currentTarget, realRange);
+        bool isAttack = IsRangeInTarget(scanner.attackTarget, realRange_Attack);
 
         if (isAttack == true)
         {
-            bullet.Init(afterDamage, afterPenetrate, realRange, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
+            bullet.Init(afterDamage, afterPenetrate, realRange_Attack, 100, afterBloodSucking, afterCriticalChance, afterCriticalDamage, afterKnockBack, afterPenetrateDamage, Vector3.zero);
 
-            if (scanner.currentTarget != null)
+            if (scanner.attackTarget != null)
             {
-                Vector3 targetPos = scanner.currentTarget.position;
+                Vector3 targetPos = scanner.attackTarget.position;
                 StartCoroutine(MuzzleMove());
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.12f);
 
                 isLeft = targetPos.x < transform.position.x;
                 float dis = Vector3.Distance(transform.position, targetPos);
@@ -902,8 +928,8 @@ public class NewWrench_Weapon : Weapon_Action, ICustomUpdateMono
             }
 
             // Clear currentTarget and reset states
-            StageManager.instance.trackedTargets.Remove(scanner.currentTarget);
-            scanner.currentTarget = null;
+            StageManager.instance.trackedTargets.Remove(scanner.attackTarget);
+            scanner.attackTarget = null;
             coll.enabled = false;
             isFire = false;
             isLeft = false;

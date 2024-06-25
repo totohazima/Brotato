@@ -78,7 +78,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        stickTrans.position = joyTrans.position;
+        //stickTrans.position = joyTrans.position;
         joyStick.SetActive(false);
         isMove = false;
     }

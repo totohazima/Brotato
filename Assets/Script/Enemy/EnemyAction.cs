@@ -74,7 +74,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
     public virtual void Move()
     {
         float speed = Random.Range(minSpeed, maxSpeed);
-        moveSpeed = speed / 2500;
+        moveSpeed = speed / 2000;
         if (ugliyToothSlow >= 1)
         {
             moveSpeed = moveSpeed - ((moveSpeed / 100) * (ugliyToothSlow * 10));
@@ -131,7 +131,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
             GameManager.instance.playerInfo.playerHealth++;
             string txt = "<color=#4CFF52>1</color>";
             Transform texts = DamageTextManager.instance.TextCreate(0, txt).transform;
-            texts.position = GameManager.instance.player_Info.transform.position;
+            texts.position = GameManager.instance.playerAct.transform.position;
         }
 
         float finalDamage = 0;
@@ -168,7 +168,7 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
         {
             GameManager game = GameManager.instance;
 
-            float damage = (game.playerInfo.scaredSausageDamage + game.player_Info.elementalDamage) * (1 + (game.player_Info.persentDamage / 100));
+            float damage = (game.playerInfo.scaredSausageDamage + game.playerAct.elementalDamage) * (1 + (game.playerAct.persentDamage / 100));
             ScaredSausage(game.playerInfo.snakeCount, damage, game.playerInfo.scaredSausageDamageCount);
         }
 
@@ -239,8 +239,8 @@ public class EnemyAction : Enemy, ICustomUpdateMono, IDamageCalculate
                         booms.transform.position = other.transform.position;
 
                         Bullet bullet = booms.GetComponent<Bullet>();
-                        float damage = (30 + (GameManager.instance.player_Info.meleeDamage * 3) + (GameManager.instance.player_Info.rangeDamage * 3) + (GameManager.instance.player_Info.elementalDamage * 3))
-                            * (1 + (GameManager.instance.player_Info.persentDamage / 100) * (1 + (GameManager.instance.player_Info.explosiveDamage / 100)));
+                        float damage = (30 + (GameManager.instance.playerAct.meleeDamage * 3) + (GameManager.instance.playerAct.rangeDamage * 3) + (GameManager.instance.playerAct.elementalDamage * 3))
+                            * (1 + (GameManager.instance.playerAct.persentDamage / 100) * (1 + (GameManager.instance.playerAct.explosiveDamage / 100)));
                         bullet.Init(damage, 10000, -1000, 100, 0, 0, 0, 0, 0, Vector3.zero);
                     }
                 }
