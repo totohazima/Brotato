@@ -11,6 +11,7 @@ public class Player_Action : Player, ICustomUpdateMono
     private float timer; //체력 재생 타이머
     private float regenTime; //체력 재생 시간
     private float invincibleTime = 0.5f; //피격 후 무적 시간
+    private bool isWeaponPosSetting; //무기가 제 위치로 갔는지 체크하는 함수
     [SerializeField] private float moveSpeed; //캐릭터 이동속도
     [SerializeField] private float hitTimer;
     public Animator anim;
@@ -63,6 +64,7 @@ public class Player_Action : Player, ICustomUpdateMono
 
         if (game.playerInfo.isDie == true || game.isEnd == true)
         {
+            isWeaponPosSetting = false;
             isStand = false;
             anim.SetBool("Move", false);
             return;
@@ -172,6 +174,63 @@ public class Player_Action : Player, ICustomUpdateMono
     /// </summary>
     private void WeaponAngleSetting()
     {
+        Vector3[] weaponPos = new Vector3[0];
+        Vector3[] scannerPos = new Vector3[0];
+        Vector3[] wPos = weaponPostion.weaponPos;
+        Vector3[] sPos = weaponPostion.weaponScannerPos;
+        switch (weapons.Count)
+        {
+            case 1:
+                weaponPos = new Vector3[] { weaponPostion.firstWeaponPos };
+                scannerPos = new Vector3[] { transform.position };
+                break;
+            case 2:
+                weaponPos = new Vector3[] { wPos[0], wPos[8] };
+                scannerPos = new Vector3[] { sPos[0], sPos[8] };
+                break;
+            case 3:
+                weaponPos = new Vector3[] { wPos[2], wPos[6], wPos[12] };
+                scannerPos = new Vector3[] { sPos[2], sPos[6], sPos[12] };
+                break;
+            case 4:
+                weaponPos = new Vector3[] { wPos[14], wPos[2], wPos[6], wPos[10] };
+                scannerPos = new Vector3[] { sPos[14], sPos[2], sPos[6], sPos[10] };
+                break;
+            case 5:
+                weaponPos = new Vector3[] { wPos[2], wPos[6], wPos[9], wPos[12], wPos[15] };
+                scannerPos = new Vector3[] { sPos[2], sPos[6], sPos[9], sPos[12], sPos[15] };
+                break;
+            case 6:
+                weaponPos = new Vector3[] { wPos[14], wPos[0], wPos[2], wPos[6], wPos[8], wPos[10] };
+                scannerPos = new Vector3[] { sPos[14], sPos[0], sPos[2], sPos[6], sPos[8], sPos[10] };
+                break;
+            default:
+                weaponPos = new Vector3[wPos.Length];
+                weaponPos = wPos;
+                scannerPos = new Vector3[sPos.Length];
+                scannerPos = sPos;
+                break;
+        }
+        for (int i = 0; i < weaponPos.Length; i++)
+        {
+            if (isWeaponPosSetting == false)
+            {
+                weapons[i].transform.position = weaponPos[i];
+                isWeaponPosSetting = true;
+            }
+            else
+            {
+                weapons[i].transform.position = Vector3.Lerp(weapons[i].transform.position, weaponPos[i], 10 * Time.deltaTime);
+            }
+        }
+        for (int i = 0; i < scannerPos.Length; i++)
+        {
+            weapons[i].scanner.scannerPos = scannerPos[i];
+        }
+        
+    }
+    //private void WeaponAngleSetting()
+    //{
         //float[] deg = new float[0];
         //float dis = 0;
         //switch (weapons.Count)
@@ -214,48 +273,8 @@ public class Player_Action : Player, ICustomUpdateMono
         //    Vector3 pos = ConvertAngleToVector(-deg[i], dis);
         //    weapons[i].transform.position = new Vector3(weaponMainPos.position.x + pos.x, weaponMainPos.position.y + pos.y, weaponMainPos.position.z + pos.z);
         //}
-        Vector3[] weaponPos = new Vector3[0];
-        Vector3[] scannerPos = new Vector3[0];
-        Vector3[] wPos = weaponPostion.weaponPos;
-        Vector3[] sPos = weaponPostion.weaponScannerPos;
-        switch (weapons.Count)
-        {
-            case 1:
-                weaponPos = new Vector3[] { weaponPostion.firstWeaponPos };
-                scannerPos = new Vector3[] { transform.position };
-                break;
-            case 2:
-                weaponPos = new Vector3[] { wPos[0], wPos[8] };
-                scannerPos = new Vector3[] { sPos[0], sPos[8] };
-                break;
-            case 3:
-                weaponPos = new Vector3[] { wPos[2], wPos[6], wPos[12] };
-                scannerPos = new Vector3[] { sPos[2], sPos[6], sPos[12] };
-                break;
-            case 4:
-                weaponPos = new Vector3[] { wPos[14], wPos[2], wPos[6], wPos[10] };
-                scannerPos = new Vector3[] { sPos[14], sPos[2], sPos[6], sPos[10] };
-                break;
-            case 5:
-                weaponPos = new Vector3[] { wPos[2], wPos[6], wPos[9], wPos[12], wPos[15] };
-                scannerPos = new Vector3[] { sPos[2], sPos[6], sPos[9], sPos[12], sPos[15] };
-                break;
-            case 6:
-                weaponPos = new Vector3[] { wPos[14], wPos[0], wPos[2], wPos[6], wPos[8], wPos[10] };
-                scannerPos = new Vector3[] { sPos[14], sPos[0], sPos[2], sPos[6], sPos[8], sPos[10] };
-                break;
-        }
-        for(int i = 0; i < weaponPos.Length; i++)
-        {
-            Vector3 pos = weaponPos[i];
-            weapons[i].transform.position = Vector3.Lerp(weapons[i].transform.position, new Vector3(pos.x, pos.y, pos.z), 5 * Time.deltaTime);
-        }
-        for (int i = 0; i < scannerPos.Length; i++)
-        {
-            Vector3 pos = scannerPos[i];
-            weapons[i].scanner.scannerPos = new Vector3(pos.x, pos.y, pos.z);
-        }
-    }
+        
+    //}
 
     private void StatApply()
     {
