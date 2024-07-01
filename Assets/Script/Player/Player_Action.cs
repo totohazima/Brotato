@@ -180,6 +180,10 @@ public class Player_Action : Player, ICustomUpdateMono
         Vector3[] sPos = weaponPostion.weaponScannerPos;
         switch (weapons.Count)
         {
+            case 0:
+                weaponPos = new Vector3[0];
+                scannerPos = new Vector3[0];
+                break;
             case 1:
                 weaponPos = new Vector3[] { weaponPostion.firstWeaponPos };
                 scannerPos = new Vector3[] { transform.position };
@@ -211,18 +215,23 @@ public class Player_Action : Player, ICustomUpdateMono
                 scannerPos = sPos;
                 break;
         }
+        //게임 시작 후 0.1초 뒤에 true값으로 바꿈
+        if(stage.timer <= stage.waveTime[stage.waveLevel] - 0.1f)
+        {
+            isWeaponPosSetting = true;
+        }
         for (int i = 0; i < weaponPos.Length; i++)
         {
             if (isWeaponPosSetting == false)
             {
                 weapons[i].transform.position = weaponPos[i];
-                isWeaponPosSetting = true;
             }
-            else
+            else if(isWeaponPosSetting == true)
             {
                 weapons[i].transform.position = Vector3.Lerp(weapons[i].transform.position, weaponPos[i], 10 * Time.deltaTime);
             }
         }
+        
         for (int i = 0; i < scannerPos.Length; i++)
         {
             weapons[i].scanner.scannerPos = scannerPos[i];
