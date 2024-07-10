@@ -3,24 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Magnet
-  - Meterial
-  - Consum
-  - Loot
-  - Enemy
-  - Wall
-  - Bullet
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
-  - Enemy
-  - DropItem
-  - Player
   - 
   - 
   - 
@@ -35,6 +25,9 @@ TagManager:
   - 
   - 
   - 
+  - Layer 1
+  - Layer 2
+  - Layer 3
   - 
   - 
   - 
@@ -48,12 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
-    uniqueID: 2384639305
+  - name: Layer 1
+    uniqueID: 2425651459
     locked: 0
-  - name: Player
-    uniqueID: 4068435181
+  - name: Layer 2
+    uniqueID: 4250941897
     locked: 0
-  - name: Weapon
-    uniqueID: 266894783
+  - name: Layer 3
+    uniqueID: 4189426099
     locked: 0
